@@ -1,0 +1,53 @@
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-11 10:55:58
+project --topLevelPackage com.djavafactory.pttech.rrm --projectName pttech-rrm --java 6
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-11 10:55:59
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-11 10:56:06
+hint
+persistence setup --provider HIBERNATE --database H2_IN_MEMORY 
+hint
+ent --class ~.domain.Terminal --testAutomatically 
+hint
+field string --fieldName name
+field string --fieldName location
+field string --fieldName status
+field date --fieldName createdTime --type java.util.Date
+field date --fieldName modifiedTime --type java.util.Date
+field string --fieldName createdBy
+field string --fieldName modifiedBy
+ent --class ~.domain.Firmware
+test integration --entity Firmware
+field string --fieldName terminalId
+field string --fieldName firmwareFile
+field string --fieldName status
+field string --fieldName createdBy
+field date --fieldName createdTime --type java.util.Date
+// [failed] ent --class ~.domain.Parameter
+ent --class ~.domain.Param
+test integration --entity Param
+field string --fieldName terminalId
+field string --fieldName parameterFile
+field string --fieldName status
+field string --fieldName createdBy
+field date --fieldName createdTime --type java.util.Date
+ent --class ~.domain.Configuration --testAutomatically 
+field string --fieldName configKey --notNull --unique
+field string --fieldName configValue
+field number --fieldName ordering --type java.lang.Integer --notNull 
+ent --class ~.domain.ReloadRequest
+test integration --entity ReloadRequest
+field string --fieldName transId --unique --notNull
+field string --fieldName status
+field number --fieldName mfgNumber --type java.lang.Long
+field number --fieldName reloadAmount --type java.math.BigDecimal
+field string --fieldName serviceProviderId
+field number --fieldName transCode --type java.lang.Integer
+field date --fieldName requestedTime --type java.util.Date
+field string --fieldName tngKey
+hint
+hint gwt
+gwt setup
+hint
+hint gwt
+hint
+logging setup --level DEBUG --package ALL_SPRING 
+security setup
