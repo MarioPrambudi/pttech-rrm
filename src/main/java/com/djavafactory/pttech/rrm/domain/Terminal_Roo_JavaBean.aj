@@ -3,25 +3,18 @@
 
 package com.djavafactory.pttech.rrm.domain;
 
+import com.djavafactory.pttech.rrm.domain.Acquirer;
 import java.lang.String;
 import java.util.Date;
 
 privileged aspect Terminal_Roo_JavaBean {
     
-    public String Terminal.getName() {
-        return this.name;
+    public String Terminal.getTerminalId() {
+        return this.terminalId;
     }
     
-    public void Terminal.setName(String name) {
-        this.name = name;
-    }
-    
-    public String Terminal.getLocation() {
-        return this.location;
-    }
-    
-    public void Terminal.setLocation(String location) {
-        this.location = location;
+    public void Terminal.setTerminalId(String terminalId) {
+        this.terminalId = terminalId;
     }
     
     public String Terminal.getStatus() {
@@ -62,6 +55,14 @@ privileged aspect Terminal_Roo_JavaBean {
     
     public void Terminal.setModifiedBy(String modifiedBy) {
         this.modifiedBy = modifiedBy;
+    }
+    
+    public Acquirer Terminal.getAcquirer() {
+        return this.acquirer;
+    }
+    
+    public void Terminal.setAcquirer(Acquirer acquirer) {
+        this.acquirer = acquirer;
     }
     
 }

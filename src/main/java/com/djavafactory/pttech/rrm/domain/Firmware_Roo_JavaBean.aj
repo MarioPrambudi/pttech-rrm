@@ -3,49 +3,42 @@
 
 package com.djavafactory.pttech.rrm.domain;
 
+import com.djavafactory.pttech.rrm.domain.Acquirer;
+import java.lang.Boolean;
 import java.lang.String;
-import java.util.Date;
 
 privileged aspect Firmware_Roo_JavaBean {
     
-    public String Firmware.getTerminalId() {
-        return this.terminalId;
+    public String Firmware.getName() {
+        return this.name;
     }
     
-    public void Firmware.setTerminalId(String terminalId) {
-        this.terminalId = terminalId;
+    public void Firmware.setName(String name) {
+        this.name = name;
     }
     
-    public String Firmware.getFirmwareFile() {
+    public byte[] Firmware.getFirmwareFile() {
         return this.firmwareFile;
     }
     
-    public void Firmware.setFirmwareFile(String firmwareFile) {
+    public void Firmware.setFirmwareFile(byte[] firmwareFile) {
         this.firmwareFile = firmwareFile;
     }
     
-    public String Firmware.getStatus() {
-        return this.status;
+    public Boolean Firmware.getActive() {
+        return this.active;
     }
     
-    public void Firmware.setStatus(String status) {
-        this.status = status;
+    public void Firmware.setActive(Boolean active) {
+        this.active = active;
     }
     
-    public String Firmware.getCreatedBy() {
-        return this.createdBy;
+    public Acquirer Firmware.getAcquirer() {
+        return this.acquirer;
     }
     
-    public void Firmware.setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-    
-    public Date Firmware.getCreatedTime() {
-        return this.createdTime;
-    }
-    
-    public void Firmware.setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
+    public void Firmware.setAcquirer(Acquirer acquirer) {
+        this.acquirer = acquirer;
     }
     
 }

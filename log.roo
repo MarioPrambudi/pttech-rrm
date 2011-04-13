@@ -52,3 +52,55 @@ hint
 logging setup --level DEBUG --package ALL_SPRING 
 security setup
 // Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-11 12:12:30
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-12 21:02:27
+ent --class ~.domain.Acquirer
+test integration --entity Acquirer
+field string --fieldName name
+field string --fieldName registrationNo
+field string --fieldName street1
+field string --fieldName street2
+// [failed] field string --fieldName state
+field string --fieldName acquirerState
+field string --fieldName city
+field string --fieldName postCode
+// [failed] field string --fieldName email
+field string --fieldName email
+field string --fieldName hotline
+field string --fieldName createdBy
+field string --fieldName modifiedBy
+field date --fieldName createdTime --type java.util.Date
+field date --fieldName modifiedTime --type java.util.Date
+hint relationship
+hint relationships
+field set --fieldName firmwares --class Acquirer --type Firmware --mappedBy acquirer
+field reference --fieldName acquirer --class Firmware --type Acquirer --notNull
+hint
+hint gwt
+hint relationships
+field set --fieldName terminals --class Acquirer --type Terminal --mappedBy acquirer
+// [failed] field reference --fieldName acquirer --class Terminal --type Acquirer --notNull
+field reference --fieldName acquirer --class Terminal --type Acquirer --notNull
+help
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-13 09:35:32
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-13 15:15:20
+hint
+perform tests
+hint test
+hint
+perform tests
+hint controller
+hint controllers
+controller all --package ~.web
+// [failed] selenium test --controller all
+hint selenium
+selenium test --controller ~.web.AcquirerController
+selenium test --controller ~.web.ConfigurationController
+selenium test --controller ~.web.FirmwareController
+selenium test --controller ~.web.ParamController
+selenium test --controller ~.web.ReloadRequestController
+selenium test --controller ~.web.TerminalController
+perform test
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-13 16:04:03
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-13 16:24:45
+controller all --package ~.web
+perform test

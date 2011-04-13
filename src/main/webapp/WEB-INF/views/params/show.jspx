@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_djavafactory_pttech_rrm_domain_Param" object="${param}" path="/params" z="xJqR/pLeT0Flmm+Xl3DzEbwFL6E=">
+        <field:display date="true" dateTimePattern="${param_createdtime_date_format}" field="createdTime" id="s_com_djavafactory_pttech_rrm_domain_Param_createdTime" object="${param}" z="mD9DwWOW6xcWmXF4DaM8LGRav90="/>
+        <field:display field="createdBy" id="s_com_djavafactory_pttech_rrm_domain_Param_createdBy" object="${param}" z="fABG/poeIyzU+SFULWhNNBEyQ+s="/>
+        <field:display field="parameterFile" id="s_com_djavafactory_pttech_rrm_domain_Param_parameterFile" object="${param}" z="KVp40JWHzrVRhtgGduolYpKwUiU="/>
+    </page:show>
+</div>

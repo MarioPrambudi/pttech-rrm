@@ -1,25 +1,27 @@
 package com.djavafactory.pttech.rrm.domain;
 
+import java.util.Date;
+
+import javax.persistence.Basic;
+import javax.persistence.Lob;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
-import java.util.Date;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @RooJavaBean
 @RooToString
 @RooEntity
 public class Param {
 
-    private String terminalId;
+	@Lob
+	@Basic(fetch=javax.persistence.FetchType.LAZY)
+    private byte[] parameterFile;
 
-    private String parameterFile;
-
-    private String status;
-
-    private String createdBy;
+	private String createdBy;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")

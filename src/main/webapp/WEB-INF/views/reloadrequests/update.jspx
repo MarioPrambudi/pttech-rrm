@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_djavafactory_pttech_rrm_domain_ReloadRequest" modelAttribute="reloadRequest" path="/reloadrequests" versionField="Version" z="Wwd6fW4t6jGN7WrklTq9NC7uYIk=">
+        <field:input field="transCode" id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_transCode" validationMessageCode="field_invalid_integer" z="3KD+OzFb2TKLhoZZjMMbMAdQ07M="/>
+        <field:input field="status" id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_status" z="cl46x03nKfUzTFfIZPrnCBzREHY="/>
+        <field:input field="tngKey" id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_tngKey" z="SgLAPOIooJWiGka3zqYhwuUWsKs="/>
+        <field:input field="serviceProviderId" id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_serviceProviderId" z="Z37HC9sh/YojdM8xBBtMzCcM1Kc="/>
+        <field:input field="transId" id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_transId" required="true" z="QdyLf0Cpglqh0eI7kAL4giBlD54="/>
+        <field:input field="reloadAmount" id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_reloadAmount" validationMessageCode="field_invalid_number" z="QEbSuktuunPfG2kST0z4HWzaILc="/>
+        <field:datetime dateTimePattern="${reloadRequest_requestedtime_date_format}" field="requestedTime" id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_requestedTime" z="Kqfzdrlc9pxTi18cOWusOZKKbaI="/>
+        <field:input field="mfgNumber" id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_mfgNumber" validationMessageCode="field_invalid_integer" z="6auxI4zrvJ8o/hFGJmhNZYQZ+4I="/>
+    </form:update>
+</div>

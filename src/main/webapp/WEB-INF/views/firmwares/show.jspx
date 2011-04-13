@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_djavafactory_pttech_rrm_domain_Firmware" object="${firmware}" path="/firmwares" z="5AUSQ5tnzZ5qSaiShxn4I3yfn+M=">
+        <field:display field="name" id="s_com_djavafactory_pttech_rrm_domain_Firmware_name" object="${firmware}" z="yUAKC7K45+dqqq3yU1Pf6sXXneU="/>
+        <field:display field="active" id="s_com_djavafactory_pttech_rrm_domain_Firmware_active" object="${firmware}" z="BYFgnJLxTUnhTWhXehZOXJrjjG0="/>
+        <field:display field="firmwareFile" id="s_com_djavafactory_pttech_rrm_domain_Firmware_firmwareFile" object="${firmware}" z="0wcmlj7nKdVQL8G5JCB8roBHTP8="/>
+        <field:display field="acquirer" id="s_com_djavafactory_pttech_rrm_domain_Firmware_acquirer" object="${firmware}" z="RMBuFEpWjdmxldTOIJAKAbADJCI="/>
+    </page:show>
+</div>

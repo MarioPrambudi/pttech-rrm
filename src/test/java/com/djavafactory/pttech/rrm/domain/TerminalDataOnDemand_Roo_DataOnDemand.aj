@@ -3,9 +3,11 @@
 
 package com.djavafactory.pttech.rrm.domain;
 
+import com.djavafactory.pttech.rrm.domain.AcquirerDataOnDemand;
 import com.djavafactory.pttech.rrm.domain.Terminal;
 import java.util.List;
 import java.util.Random;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 privileged aspect TerminalDataOnDemand_Roo_DataOnDemand {
@@ -16,15 +18,18 @@ privileged aspect TerminalDataOnDemand_Roo_DataOnDemand {
     
     private List<Terminal> TerminalDataOnDemand.data;
     
+    @Autowired
+    private AcquirerDataOnDemand TerminalDataOnDemand.acquirerDataOnDemand;
+    
     public Terminal TerminalDataOnDemand.getNewTransientTerminal(int index) {
         com.djavafactory.pttech.rrm.domain.Terminal obj = new com.djavafactory.pttech.rrm.domain.Terminal();
-        obj.setName("name_" + index);
-        obj.setLocation("location_" + index);
+        obj.setTerminalId("terminalId_" + index);
         obj.setStatus("status_" + index);
         obj.setCreatedTime(new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY), java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE), java.util.Calendar.getInstance().get(java.util.Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime());
         obj.setModifiedTime(new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY), java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE), java.util.Calendar.getInstance().get(java.util.Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime());
         obj.setCreatedBy("createdBy_" + index);
         obj.setModifiedBy("modifiedBy_" + index);
+        obj.setAcquirer(acquirerDataOnDemand.getRandomAcquirer());
         return obj;
     }
     

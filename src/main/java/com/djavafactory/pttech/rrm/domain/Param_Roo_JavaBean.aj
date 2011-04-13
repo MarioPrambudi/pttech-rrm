@@ -8,28 +8,12 @@ import java.util.Date;
 
 privileged aspect Param_Roo_JavaBean {
     
-    public String Param.getTerminalId() {
-        return this.terminalId;
-    }
-    
-    public void Param.setTerminalId(String terminalId) {
-        this.terminalId = terminalId;
-    }
-    
-    public String Param.getParameterFile() {
+    public byte[] Param.getParameterFile() {
         return this.parameterFile;
     }
     
-    public void Param.setParameterFile(String parameterFile) {
+    public void Param.setParameterFile(byte[] parameterFile) {
         this.parameterFile = parameterFile;
-    }
-    
-    public String Param.getStatus() {
-        return this.status;
-    }
-    
-    public void Param.setStatus(String status) {
-        this.status = status;
     }
     
     public String Param.getCreatedBy() {
