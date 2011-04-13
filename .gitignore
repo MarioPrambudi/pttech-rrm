@@ -37,5 +37,5 @@ Thumbs.db
 /.settings
 .classpath
 .project
-
+*.swp
 
