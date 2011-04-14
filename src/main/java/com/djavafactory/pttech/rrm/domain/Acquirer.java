@@ -17,7 +17,7 @@ import com.djavafactory.pttech.rrm.domain.Terminal;
 @RooToString
 @RooEntity
 public class Acquirer {
-	
+
     private String name;
 
     private String registrationNo;

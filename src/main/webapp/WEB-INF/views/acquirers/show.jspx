@@ -18,7 +18,5 @@
         <field:display field="firmwares" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_firmwares" object="${acquirer}" z="F9ta35h4uKz0O3g+xSnI3KW1xOo="/>
         <field:display field="street2" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_street2" object="${acquirer}" z="5mK5aNs0FrI6uUnpB8pVwZqaBfg="/>
         <field:display field="street1" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_street1" object="${acquirer}" z="qIBeswe0O18ZLPATAS30MFezp1Y="/>
-    
-    
     </page:show>
 </div>

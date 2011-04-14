@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 @RooToString
 @RooEntity
 public class Terminal {
-	
+
     private String terminalId;
 
     private String status;
