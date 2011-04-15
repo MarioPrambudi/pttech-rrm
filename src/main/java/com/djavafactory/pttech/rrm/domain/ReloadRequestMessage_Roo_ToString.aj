@@ -12,7 +12,7 @@ privileged aspect ReloadRequestMessage_Roo_ToString {
         sb.append("TransId: ").append(getTransId()).append(", ");
         sb.append("MfgNo: ").append(getMfgNo()).append(", ");
         sb.append("Amount: ").append(getAmount()).append(", ");
-        sb.append("SPID: ").append(getSPID()).append(", ");
+        sb.append("SpId: ").append(getSpId()).append(", ");
         sb.append("TransCode: ").append(getTransCode()).append(", ");
         sb.append("RequestTime: ").append(getRequestTime()).append(", ");
         sb.append("EncryptedMsg: ").append(getEncryptedMsg()).append(", ");

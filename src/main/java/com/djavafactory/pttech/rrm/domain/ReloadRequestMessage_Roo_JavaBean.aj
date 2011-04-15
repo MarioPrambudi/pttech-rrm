@@ -33,12 +33,12 @@ privileged aspect ReloadRequestMessage_Roo_JavaBean {
         this.amount = amount;
     }
     
-    public String ReloadRequestMessage.getSPID() {
-        return this.SPID;
+    public String ReloadRequestMessage.getSpId() {
+        return this.spId;
     }
     
-    public void ReloadRequestMessage.setSPID(String SPID) {
-        this.SPID = SPID;
+    public void ReloadRequestMessage.setSpId(String spId) {
+        this.spId = spId;
     }
     
     public String ReloadRequestMessage.getTransCode() {

@@ -21,7 +21,7 @@ public class ReloadRequestMessage {
 
     private BigDecimal amount;
 
-    private String SPID;
+    private String spId;
 
     private String transCode;
 
