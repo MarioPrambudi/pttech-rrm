@@ -15,21 +15,21 @@ import java.util.Date;
 @RooJson
 public class ReloadRequestMessage {
 
-    private String trans_id;
+    private String transId;
 
-    private String mfg_no;
+    private String mfgNo;
 
     private BigDecimal amount;
 
     private String SPID;
 
-    private String trans_code;
+    private String transCode;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
-    private Date request_datetime;
+    private Date requestTime;
 
-    private String encrypted_msg;
+    private String encryptedMsg;
 
-    private String msg_type;
+    private String msgType;
 }

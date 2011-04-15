@@ -9,20 +9,20 @@ import java.util.Date;
 
 privileged aspect ReloadRequestMessage_Roo_JavaBean {
     
-    public String ReloadRequestMessage.getTrans_id() {
-        return this.trans_id;
+    public String ReloadRequestMessage.getTransId() {
+        return this.transId;
     }
     
-    public void ReloadRequestMessage.setTrans_id(String trans_id) {
-        this.trans_id = trans_id;
+    public void ReloadRequestMessage.setTransId(String transId) {
+        this.transId = transId;
     }
     
-    public String ReloadRequestMessage.getMfg_no() {
-        return this.mfg_no;
+    public String ReloadRequestMessage.getMfgNo() {
+        return this.mfgNo;
     }
     
-    public void ReloadRequestMessage.setMfg_no(String mfg_no) {
-        this.mfg_no = mfg_no;
+    public void ReloadRequestMessage.setMfgNo(String mfgNo) {
+        this.mfgNo = mfgNo;
     }
     
     public BigDecimal ReloadRequestMessage.getAmount() {
@@ -41,36 +41,36 @@ privileged aspect ReloadRequestMessage_Roo_JavaBean {
         this.SPID = SPID;
     }
     
-    public String ReloadRequestMessage.getTrans_code() {
-        return this.trans_code;
+    public String ReloadRequestMessage.getTransCode() {
+        return this.transCode;
     }
     
-    public void ReloadRequestMessage.setTrans_code(String trans_code) {
-        this.trans_code = trans_code;
+    public void ReloadRequestMessage.setTransCode(String transCode) {
+        this.transCode = transCode;
     }
     
-    public Date ReloadRequestMessage.getRequest_datetime() {
-        return this.request_datetime;
+    public Date ReloadRequestMessage.getRequestTime() {
+        return this.requestTime;
     }
     
-    public void ReloadRequestMessage.setRequest_datetime(Date request_datetime) {
-        this.request_datetime = request_datetime;
+    public void ReloadRequestMessage.setRequestTime(Date requestTime) {
+        this.requestTime = requestTime;
     }
     
-    public String ReloadRequestMessage.getEncrypted_msg() {
-        return this.encrypted_msg;
+    public String ReloadRequestMessage.getEncryptedMsg() {
+        return this.encryptedMsg;
     }
     
-    public void ReloadRequestMessage.setEncrypted_msg(String encrypted_msg) {
-        this.encrypted_msg = encrypted_msg;
+    public void ReloadRequestMessage.setEncryptedMsg(String encryptedMsg) {
+        this.encryptedMsg = encryptedMsg;
     }
     
-    public String ReloadRequestMessage.getMsg_type() {
-        return this.msg_type;
+    public String ReloadRequestMessage.getMsgType() {
+        return this.msgType;
     }
     
-    public void ReloadRequestMessage.setMsg_type(String msg_type) {
-        this.msg_type = msg_type;
+    public void ReloadRequestMessage.setMsgType(String msgType) {
+        this.msgType = msgType;
     }
     
 }
