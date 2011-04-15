@@ -24,6 +24,22 @@ privileged aspect SyncTerminalMessage_Roo_JavaBean {
         this.acquirerRegistrationNo = acquirerRegistrationNo;
     }
     
+    public String SyncTerminalMessage.getAcquirerEmail() {
+        return this.acquirerEmail;
+    }
+    
+    public void SyncTerminalMessage.setAcquirerEmail(String acquirerEmail) {
+        this.acquirerEmail = acquirerEmail;
+    }
+    
+    public String SyncTerminalMessage.getAcquirerHotline() {
+        return this.acquirerHotline;
+    }
+    
+    public void SyncTerminalMessage.setAcquirerHotline(String acquirerHotline) {
+        this.acquirerHotline = acquirerHotline;
+    }
+    
     public String SyncTerminalMessage.getTerminalId() {
         return this.terminalId;
     }

@@ -11,6 +11,8 @@ privileged aspect SyncTerminalMessage_Roo_ToString {
         StringBuilder sb = new StringBuilder();
         sb.append("AcquirerName: ").append(getAcquirerName()).append(", ");
         sb.append("AcquirerRegistrationNo: ").append(getAcquirerRegistrationNo()).append(", ");
+        sb.append("AcquirerEmail: ").append(getAcquirerEmail()).append(", ");
+        sb.append("AcquirerHotline: ").append(getAcquirerHotline()).append(", ");
         sb.append("TerminalId: ").append(getTerminalId()).append(", ");
         sb.append("TerminalStatus: ").append(getTerminalStatus()).append(", ");
         sb.append("RequestTime: ").append(getRequestTime()).append(", ");

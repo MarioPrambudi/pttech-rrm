@@ -19,6 +19,10 @@ public class SyncTerminalMessage {
 
     private String acquirerRegistrationNo;
 
+    private String acquirerEmail;
+
+    private String acquirerHotline;
+
     private String terminalId;
 
     private String terminalStatus;
