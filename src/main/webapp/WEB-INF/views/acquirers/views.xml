@@ -13,4 +13,7 @@
 <definition extends="default" name="acquirers/update">
         <put-attribute name="body" value="/WEB-INF/views/acquirers/update.jspx"/>
     </definition>
+<definition extends="default" name="acquirers/findAcquirersByCreatedTimeBetween">
+        <put-attribute name="body" value="/WEB-INF/views/acquirers/findAcquirersByCreatedTimeBetween.jspx"/>
+    </definition>
 </tiles-definitions>
