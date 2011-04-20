@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="default" name="terminaltypes/list">
+        <put-attribute name="body" value="/WEB-INF/views/terminaltypes/list.jspx"/>
+    </definition>
+<definition extends="default" name="terminaltypes/show">
+        <put-attribute name="body" value="/WEB-INF/views/terminaltypes/show.jspx"/>
+    </definition>
+<definition extends="default" name="terminaltypes/create">
+        <put-attribute name="body" value="/WEB-INF/views/terminaltypes/create.jspx"/>
+    </definition>
+<definition extends="default" name="terminaltypes/update">
+        <put-attribute name="body" value="/WEB-INF/views/terminaltypes/update.jspx"/>
+    </definition>
+</tiles-definitions>
