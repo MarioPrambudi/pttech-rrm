@@ -15,11 +15,11 @@ public class MessageRouter {
     private static final Log logger = LogFactory.getLog(MessageRouter.class);
 
     public String routeReloadRequest(ReloadRequestMessage message) {
-        if(StringUtils.equalsIgnoreCase(message.getMsgType(), Constants.newReloadRequest)) {
+        if(StringUtils.equalsIgnoreCase(message.getMsgType(), Constants.NEW_RELOAD_REQUEST)) {
             return (message.getEncryptedMsg() == null || StringUtils.equalsIgnoreCase(message.getEncryptedMsg(), "")) ? "newReloadReqPersistChannel" : "tngKeyInboundChannel";
-        } else if(StringUtils.equalsIgnoreCase(message.getMsgType(), Constants.failedReloadRequest)) {
+        } else if(StringUtils.equalsIgnoreCase(message.getMsgType(), Constants.FAILED_RELOAD_REQUEST)) {
             return "failedReloadReqPersistChannel";
-        } else if(StringUtils.equalsIgnoreCase(message.getMsgType(), Constants.expiredReloadRequest)) {
+        } else if(StringUtils.equalsIgnoreCase(message.getMsgType(), Constants.EXPIRED_RELOAD_REQUEST)) {
             return "expiredReloadReqPersistChannel";
         } else {
             return "successReloadReqPersistChannel";
@@ -30,9 +30,9 @@ public class MessageRouter {
         List<ReloadRequest> reloadRecord = new ReloadRequest().findReloadRequestsByTransId(message.getTransId()).getResultList();
         if(reloadRecord != null && !reloadRecord.isEmpty()) {
             ReloadRequest reloadRequest = reloadRecord.get(0);
-            if(StringUtils.equalsIgnoreCase(reloadRequest.getStatus(), Constants.newRequestStatus)) {
+            if(StringUtils.equalsIgnoreCase(reloadRequest.getStatus(), Constants.NEW_REQUEST_STATUS)) {
                 return "tngResponsePersistChannel";
-            } else if(StringUtils.equalsIgnoreCase(reloadRequest.getStatus(), Constants.pendingRequestStatus)) {
+            } else if(StringUtils.equalsIgnoreCase(reloadRequest.getStatus(), Constants.PENDING_REQUEST_STATUS)) {
                 return null; //TODO for response returned by RTM for manual cancellation response
             }
         }
