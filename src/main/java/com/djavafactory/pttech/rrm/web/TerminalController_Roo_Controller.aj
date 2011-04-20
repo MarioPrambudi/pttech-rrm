@@ -11,13 +11,12 @@ import java.lang.Long;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import org.joda.time.format.DateTimeFormat;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,18 +26,6 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 privileged aspect TerminalController_Roo_Controller {
-    
-    @RequestMapping(method = RequestMethod.POST)
-    public String TerminalController.create(@Valid Terminal terminal, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("terminal", terminal);
-            addDateTimeFormatPatterns(uiModel);
-            return "terminals/create";
-        }
-        uiModel.asMap().clear();
-        terminal.persist();
-        return "redirect:/terminals/" + encodeUrlPathSegment(terminal.getId().toString(), httpServletRequest);
-    }
     
     @RequestMapping(params = "form", method = RequestMethod.GET)
     public String TerminalController.createForm(Model uiModel) {
@@ -74,18 +61,6 @@ privileged aspect TerminalController_Roo_Controller {
         return "terminals/list";
     }
     
-    @RequestMapping(method = RequestMethod.PUT)
-    public String TerminalController.update(@Valid Terminal terminal, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("terminal", terminal);
-            addDateTimeFormatPatterns(uiModel);
-            return "terminals/update";
-        }
-        uiModel.asMap().clear();
-        terminal.merge();
-        return "redirect:/terminals/" + encodeUrlPathSegment(terminal.getId().toString(), httpServletRequest);
-    }
-    
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
     public String TerminalController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         uiModel.addAttribute("terminal", Terminal.findTerminal(id));
@@ -93,13 +68,17 @@ privileged aspect TerminalController_Roo_Controller {
         return "terminals/update";
     }
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public String TerminalController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        Terminal.findTerminal(id).remove();
-        uiModel.asMap().clear();
-        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
-        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/terminals";
+    @RequestMapping(params = { "find=ByTerminalIdLikeOrCreatedTimeBetween", "form" }, method = RequestMethod.GET)
+    public String TerminalController.findTerminalsByTerminalIdLikeOrCreatedTimeBetweenForm(Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
+        return "terminals/findTerminalsByTerminalIdLikeOrCreatedTimeBetween";
+    }
+    
+    @RequestMapping(params = "find=ByTerminalIdLikeOrCreatedTimeBetween", method = RequestMethod.GET)
+    public String TerminalController.findTerminalsByTerminalIdLikeOrCreatedTimeBetween(@RequestParam("terminalId") String terminalId, @RequestParam("minCreatedTime") @DateTimeFormat(style = "S-") Date minCreatedTime, @RequestParam("maxCreatedTime") @DateTimeFormat(style = "S-") Date maxCreatedTime, Model uiModel) {
+        uiModel.addAttribute("terminals", Terminal.findTerminalsByTerminalIdLikeOrCreatedTimeBetween(terminalId, minCreatedTime, maxCreatedTime).getResultList());
+        addDateTimeFormatPatterns(uiModel);
+        return "terminals/list";
     }
     
     @ModelAttribute("acquirers")
@@ -113,8 +92,10 @@ privileged aspect TerminalController_Roo_Controller {
     }
     
     void TerminalController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("terminal_createdtime_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("terminal_modifiedtime_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("terminal_createdtime_date_format", org.joda.time.format.DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("terminal_modifiedtime_date_format", org.joda.time.format.DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("terminal_maxcreatedtime_date_format", org.joda.time.format.DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("terminal_mincreatedtime_date_format", org.joda.time.format.DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
     }
     
     String TerminalController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

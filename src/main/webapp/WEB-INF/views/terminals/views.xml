@@ -13,4 +13,7 @@
 <definition extends="default" name="terminals/update">
         <put-attribute name="body" value="/WEB-INF/views/terminals/update.jspx"/>
     </definition>
+<definition extends="default" name="terminals/findTerminalsByTerminalIdLikeOrCreatedTimeBetween">
+        <put-attribute name="body" value="/WEB-INF/views/terminals/findTerminalsByTerminalIdLikeOrCreatedTimeBetween.jspx"/>
+    </definition>
 </tiles-definitions>

@@ -10,19 +10,20 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 import com.djavafactory.pttech.rrm.domain.Acquirer;
 import javax.persistence.ManyToOne;
+import org.springframework.beans.factory.annotation.Value;
 
 @RooJavaBean
 @RooToString
-@RooEntity
+@RooEntity(finders = { "findTerminalsByTerminalIdLikeOrCreatedTimeBetween" })
 public class Terminal {
 
+    @NotNull
     private String terminalId;
 
     private String status;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
-    @NotNull
     private Date createdTime;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -36,4 +37,7 @@ public class Terminal {
     @NotNull
     @ManyToOne
     private Acquirer acquirer;
+
+    @Value("a")
+    private String deletedStatus;
 }

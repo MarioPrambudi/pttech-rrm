@@ -7,6 +7,7 @@
         <menu:category id="c_acquirer" z="RCLIYxauLoii7/DR/p3Nb0/KCB0=">
             <menu:item id="i_acquirer_new" messageCode="global_menu_new" url="/acquirers?form" z="On6F2Z+MPtf/eCCwDsd5WRiJ3Uw="/>
         <menu:item id="i_acquirer_list" messageCode="global_menu_list" url="/acquirers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="VMznesqcjWywp+Prv1XRfmyFQio="/>
+        <menu:item id="fi_acquirer_createdtimebetween" messageCode="global_menu_find" url="/acquirers?find=ByCreatedTimeBetween&amp;form" z="7J66T3hNupRlNhJr29io3qz0LgI="/>
         </menu:category>
     <menu:category id="c_firmware" z="cf8SNRIfyDUsPN5R41RRm5jtHE0=">
             <menu:item id="i_firmware_new" messageCode="global_menu_new" url="/firmwares?form" z="r3a6COLXRooa9hc7VK3V8Lcdk0w="/>
@@ -15,6 +16,8 @@
     <menu:category id="c_terminal" z="fUqe/4RD5XXmXs3AlZSvn+A7qbU=">
             <menu:item id="i_terminal_new" messageCode="global_menu_new" url="/terminals?form" z="sRcSLq2zPV9S3mdpnj6HUCgYigQ="/>
         <menu:item id="i_terminal_list" messageCode="global_menu_list" url="/terminals?page=1&amp;size=${empty param.size ? 10 : param.size}" z="gljexIqfX22dWEi/Q05J/waVgaE="/>
+        
+        <menu:item id="fi_terminal_terminalidlikeorcreatedtimebetween" messageCode="global_menu_find" url="/terminals?find=ByTerminalIdLikeOrCreatedTimeBetween&amp;form" z="uRjw8+wMBLg1kgW/qpw/E1/kUl0="/>
         </menu:category>
     <menu:category id="c_param" z="zWq6W+gDrJI4jNllHKl2MLmN7aw=">
             <menu:item id="i_param_new" messageCode="global_menu_new" url="/params?form" z="/Mix+W4C35ReTse5ZxV/tu8FyTY="/>
@@ -27,6 +30,10 @@
     <menu:category id="c_reloadrequest" z="edJxZmKgMmBJjB9CZD+6VnF/ufQ=">
             <menu:item id="i_reloadrequest_new" messageCode="global_menu_new" url="/reloadrequests?form" z="gCp9n4oCOlGSoWCCLhqo/3BO3Gc="/>
         <menu:item id="i_reloadrequest_list" messageCode="global_menu_list" url="/reloadrequests?page=1&amp;size=${empty param.size ? 10 : param.size}" z="dObqRnXTskprfRdAeUTJf9dydWo="/>
+        </menu:category>
+    <menu:category id="c_terminaltype" z="JACOsLZLgyswNWemsA+IEwyEMnc=">
+            <menu:item id="i_terminaltype_new" messageCode="global_menu_new" url="/terminaltypes?form" z="UptivpplXCaiHWX8uYthKpDHMy4="/>
+        <menu:item id="i_terminaltype_list" messageCode="global_menu_list" url="/terminaltypes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="HnyN2FxT4rN6fIaZGJQZWipBcwk="/>
         </menu:category>
     </menu:menu>
 </div>
