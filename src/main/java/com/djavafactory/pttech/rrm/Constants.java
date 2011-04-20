@@ -5,20 +5,20 @@ public final class Constants {
 
     public Constants() {}
 
-    public static final String newReloadRequest = "N";
-    public static final String failedReloadRequest = "F";
-    public static final String expiredReloadRequest = "E";
-    public static final String manualCancellationRequest = "M";
-    public static final String successReloadRequest = "S";
+    public static final String NEW_RELOAD_REQUEST = "N";
+    public static final String FAILED_RELOAD_REQUEST = "F";
+    public static final String EXPIRED_RELOAD_REQUEST = "E";
+    public static final String MANUAL_CANCELLATION_REQUEST = "M";
+    public static final String SUCCESS_RELOAD_REQUEST = "S";
 
-    public static final String newRequestStatus = "N";
-    public static final String pendingRequestStatus = "P";
-    public static final String failedRequestStatus = "F";
-    public static final String expiredRequestStatus = "E";
-    public static final String cancelledRequestStatus = "C";
-    public static final String successRequestStatus = "S";
+    public static final String NEW_REQUEST_STATUS = "N";
+    public static final String PENDING_REQUEST_STATUS = "P";
+    public static final String FAILED_REQUEST_STATUS = "F";
+    public static final String EXPIRED_REQUEST_STATUS = "E";
+    public static final String CANCELLATION_REQUEST_STATUS = "C";
+    public static final String SUCCESS_REQUEST_STATUS = "S";
 
-    public static final String successResponseCode = "00";
+    public static final String SUCCESS_RESPONSE_CODE = "00";
 
-    public static final String timeOutKey = "config.tng.timeout";
+    public static final String TIMEOUT_KEY = "config.tng.timeout";
 }
