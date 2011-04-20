@@ -2,18 +2,10 @@
 <beans:beans xmlns="http://www.springframework.org/schema/integration"
        xmlns:beans="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:amqp="http://www.springframework.org/schema/integration/amqp"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 							http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 							http://www.springframework.org/schema/integration
-			                http://www.springframework.org/schema/integration/spring-integration-2.0.xsd
-                            http://www.springframework.org/schema/integration/amqp
-                            http://www.springframework.org/schema/integration/amqp/spring-integration-amqp-2.0.xsd">
-
-        <beans:import resource="classpath:/META-INF/spring/applicationContext-si-request.xml" />
-
-        <amqp:inbound-channel-adapter channel="rrmResponseInboundChannel"
-                queue-name="#{amqp['queue.rrm.reload.status']}" connection-factory="singleConnectionFactory" />
+			                http://www.springframework.org/schema/integration/spring-integration-2.0.xsd">
 
         <service-activator input-channel="rrmResponseInboundChannel"
 		        ref="messageHandler" method="reloadRequestHandler" output-channel="rrmResponseOutputChannel"/>
@@ -37,8 +29,4 @@
         </channel>
         <transformer input-channel="transformResponseChannel" ref="transformerBean" method="transformMessageToJson" output-channel="rmiReloadResponseChannel" />
 
-        <channel id="rmiReloadResponseChannel" />
-        <amqp:outbound-channel-adapter channel="rmiReloadResponseChannel" routing-key="#{amqp['queue.rmi.reload.status']}" amqp-template="rabbitTemplate"/>
-
-        <poller id="defaultPoller" default="true" fixed-rate="3000"/>
 </beans:beans>

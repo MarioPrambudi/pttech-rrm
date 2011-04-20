@@ -16,7 +16,7 @@ import org.springframework.context.annotation.ImportResource;
  * @author Carine Leong
  */
 @Configuration
-@ImportResource("classpath:/META-INF/spring/applicationContext-si-request.xml")
+@ImportResource("classpath:/META-INF/spring/applicationContext-si-amqp.xml")
 public class AmqpConfiguration {
     @Value("#{amqp['broker.url']}")
     private String brokerUrl;
@@ -50,6 +50,12 @@ public class AmqpConfiguration {
 
     @Value("#{amqp['queue.rtm.terminal']}")
     private String rtmTerminalQ;
+
+    @Value("#{amqp['queue.tng.reload.req']}")
+    private String tngReloadReqQ;
+
+    @Value("#{amqp['queue.tng.reload.status']}")
+    private String tngReloadStatusQ;
 
     @Bean
     public RabbitTemplate rabbitTemplate() {
@@ -132,6 +138,20 @@ public class AmqpConfiguration {
     }
 
     @Bean
+    public Queue tngReloadReqQueue() {
+        Queue q = new Queue(this.tngReloadReqQ);
+        amqpAdmin().declareQueue(q);
+        return q;
+    }
+
+    @Bean
+    public Queue tngReloadStatusQueue() {
+        Queue q = new Queue(this.tngReloadStatusQ);
+        amqpAdmin().declareQueue(q);
+        return q;
+    }
+
+    @Bean
     public DirectExchange rmiReloadStatusExchange() {
         DirectExchange directExchange = new DirectExchange(this.rmiReloadStatusQ);
         this.amqpAdmin().declareExchange(directExchange);
@@ -188,6 +208,20 @@ public class AmqpConfiguration {
     }
 
     @Bean
+    public DirectExchange tngReloadReqExchange() {
+        DirectExchange directExchange = new DirectExchange(this.tngReloadReqQ);
+        this.amqpAdmin().declareExchange(directExchange);
+        return directExchange ;
+    }
+
+    @Bean
+    public DirectExchange tngReloadStatusExchange() {
+        DirectExchange directExchange = new DirectExchange(this.tngReloadStatusQ);
+        this.amqpAdmin().declareExchange(directExchange);
+        return directExchange ;
+    }
+
+    @Bean
     public Binding rmiReloadStatusDataBinding() {
         return BindingBuilder.from(rmiReloadStatusQueue()).to(rmiReloadStatusExchange()).with(this.rmiReloadStatusQ);
     }
@@ -225,6 +259,16 @@ public class AmqpConfiguration {
     @Bean
     public Binding rtmTerminalDataBinding() {
         return BindingBuilder.from(rtmTerminalQueue()).to(rtmTerminalExchange()).with(this.rtmTerminalQ);
+    }
+
+    @Bean
+    public Binding tngReloadRequestDataBinding() {
+        return BindingBuilder.from(tngReloadReqQueue()).to(tngReloadReqExchange()).with(this.tngReloadReqQ);
+    }
+
+    @Bean
+    public Binding tngReloadStatusDataBinding() {
+        return BindingBuilder.from(tngReloadStatusQueue()).to(tngReloadStatusExchange()).with(this.tngReloadStatusQ);
     }
 
     @Override

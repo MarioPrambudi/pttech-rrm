@@ -19,17 +19,16 @@ public class MessageTransformer {
         return new ReloadResponseMessage().fromJsonToMessage(content);
     }
 
-    public String transformRejectedResponse(ReloadRequestMessage message) {
-        ReloadResponseMessage reloadResponseMessage = new ReloadResponseMessage();
-        reloadResponseMessage.setTransId(message.getTransId());
-        reloadResponseMessage.setResponseTime(new Date());
-        //TODO customize status code and message
-        reloadResponseMessage.setStatusCode("99");
-        reloadResponseMessage.setStatusMsg("Invalid reload request message.");
+    public String transformInvalidMessage(ReloadRequestMessage message) {
+		return transformResponse(message, "99", "Invalid reload request message.");
+	}
 
-        logger.info("[transformRejectedResponse - New ReloadResponseMessage json string] >> " + reloadResponseMessage);
+    public String transformTimeoutMessage(ReloadRequestMessage message) {
+		return transformResponse(message, "98", "Message timeout.");
+	}
 
-		return reloadResponseMessage.toJsonString();
+    public String transformSuccessMessage(ReloadRequestMessage message) {
+		return transformResponse(message, "00", "Success");
 	}
 
     public String transformMessageToJson(Object message) {
@@ -43,5 +42,17 @@ public class MessageTransformer {
             return ((ReloadResponseMessage)message).toJsonString();
         }
         return null;
+	}
+
+    private String transformResponse(ReloadRequestMessage message, String statusCode, String statusMsg) {
+        ReloadResponseMessage reloadResponseMessage = new ReloadResponseMessage();
+        reloadResponseMessage.setTransId(message.getTransId());
+        reloadResponseMessage.setResponseTime(new Date());
+        reloadResponseMessage.setStatusCode(statusCode);
+        reloadResponseMessage.setStatusMsg(statusMsg);
+
+        logger.info("[transformResponse - New ReloadResponseMessage json string] >> " + reloadResponseMessage);
+
+		return reloadResponseMessage.toJsonString();
 	}
 }

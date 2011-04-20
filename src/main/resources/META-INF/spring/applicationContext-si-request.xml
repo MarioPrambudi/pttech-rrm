@@ -2,29 +2,10 @@
 <beans:beans xmlns="http://www.springframework.org/schema/integration"
        xmlns:beans="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:amqp="http://www.springframework.org/schema/integration/amqp"
-       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 							http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 							http://www.springframework.org/schema/integration
-			                http://www.springframework.org/schema/integration/spring-integration-2.0.xsd
-                            http://www.springframework.org/schema/integration/amqp
-                            http://www.springframework.org/schema/integration/amqp/spring-integration-amqp-2.0.xsd
-                            http://www.springframework.org/schema/util
-                            http://www.springframework.org/schema/util/spring-util-3.0.xsd">
-
-
-        <util:properties id="amqp" location="classpath:/META-INF/spring/amqp.properties" />
-
-        <beans:bean id="messageHandler" class="com.djavafactory.pttech.rrm.integration.MessageHandler" />
-        <beans:bean id="filterBean" class="com.djavafactory.pttech.rrm.integration.MessageFilter" />
-        <beans:bean id="transformerBean" class="com.djavafactory.pttech.rrm.integration.MessageTransformer" />
-        <beans:bean id="routerBean" class="com.djavafactory.pttech.rrm.integration.MessageRouter" />
-        <beans:bean id="mapperBean" class="com.djavafactory.pttech.rrm.integration.MessageMapper" />
-        <beans:bean id="messagePersistenceBean" class="com.djavafactory.pttech.rrm.integration.MessagePersistence" />
-
-        <amqp:inbound-channel-adapter channel="rrmReloadReqInboundChannel"
-                queue-name="#{amqp['queue.rrm.reload.req']}" connection-factory="singleConnectionFactory" />
+			                http://www.springframework.org/schema/integration/spring-integration-2.0.xsd">
 
         <service-activator input-channel="rrmReloadReqInboundChannel"
 		        ref="messageHandler" method="reloadRequestHandler" output-channel="rrmReloadReqOutputChannel"/>
@@ -32,13 +13,13 @@
         <channel id="rrmReloadReqOutputChannel" />
         <chain input-channel="rrmReloadReqOutputChannel" output-channel="routeMessageChannel">
             <transformer ref="transformerBean" method="transformReloadRequest"  />
-            <filter ref="filterBean" method="reloadRequestFilter" discard-channel="rejectedMessagesChannel" />
+            <filter ref="filterBean" method="reloadRequestFilter" discard-channel="invalidMessagesChannel" />
         </chain>
 
-        <channel id="rejectedMessagesChannel">
+        <channel id="invalidMessagesChannel">
             <queue capacity="100" />
         </channel>
-        <transformer input-channel="rejectedMessagesChannel" ref="transformerBean" method="transformRejectedResponse" output-channel="rmiReloadStatusChannel" />
+        <transformer input-channel="invalidMessagesChannel" ref="transformerBean" method="transformInvalidMessage" output-channel="rmiReloadStatusChannel" />
 
         <channel id="routeMessageChannel">
             <queue capacity="100" />
@@ -77,28 +58,36 @@
             <service-activator ref="messagePersistenceBean" method="mergeReloadRequest" />
         </chain>
 
-        <channel id="tngReloadReqPersistChannel">
-            <queue capacity="100" />
-        </channel>
-        <chain input-channel="tngReloadReqPersistChannel" output-channel="rtmReloadRequestChannel">
-            <transformer ref="mapperBean" method="mapTngReloadRequest" />
-            <service-activator ref="messagePersistenceBean" method="mergeReloadRequest" />
-        </chain>
+        <channel id="tngKeyInboundChannel" />
+        <filter input-channel="tngKeyInboundChannel" ref="filterBean" method="validateTimeoutFilter"
+                    output-channel="tngKeyResponseChannel" discard-channel="tngKeyExceedTimeOutChannel" />
 
         <channel id="tngReloadRequestChannel">
             <queue capacity="100" />
         </channel>
+        <transformer input-channel="tngReloadRequestChannel" ref="transformerBean" method="transformMessageToJson" output-channel="tngReloadReqChannel" />
         <!-- Waiting for confirmation on whether there's proxy for tng. -->
+
+        <channel id="tngKeyExceedTimeOutChannel">
+            <queue capacity="100" />
+        </channel>
+        <transformer input-channel="tngKeyExceedTimeOutChannel" ref="transformerBean" method="transformTimeoutMessage" output-channel="tngReloadStatusChannel" />
+        <!-- Waiting for confirmation on whether there's proxy for tng. -->
+
+        <publish-subscribe-channel id="tngKeyResponseChannel" />
+
+        <transformer input-channel="tngKeyResponseChannel" ref="transformerBean" method="transformSuccessMessage" output-channel="tngReloadStatusChannel" />
+        <!-- Waiting for confirmation on whether there's proxy for tng. -->
+
+        <chain input-channel="tngKeyResponseChannel" output-channel="rtmReloadRequestChannel">
+            <transformer ref="mapperBean" method="mapTngReloadRequest" />
+            <service-activator ref="messagePersistenceBean" method="mergeReloadRequest" />
+        </chain>
 
         <channel id="rtmReloadRequestChannel">
             <queue capacity="100" />
         </channel>
         <transformer input-channel="rtmReloadRequestChannel" ref="transformerBean" method="transformMessageToJson" output-channel="rtmReloadInboundChannel" />
 
-        <channel id="rmiReloadStatusChannel"/>
-        <amqp:outbound-channel-adapter channel="rmiReloadStatusChannel" routing-key="#{amqp['queue.rmi.reload.status']}" amqp-template="rabbitTemplate"/>
-
-        <channel id="rtmReloadInboundChannel"/>
-        <amqp:outbound-channel-adapter channel="rtmReloadInboundChannel" routing-key="#{amqp['queue.rtm.reload.req']}" amqp-template="rabbitTemplate"/>
-
+        <poller id="defaultPoller" default="true" fixed-rate="3000"/>
 </beans:beans>

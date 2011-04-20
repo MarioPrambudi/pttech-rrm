@@ -23,6 +23,7 @@
     <menu:category id="c_configuration" render="false" z="user-managed">
             <menu:item id="i_configuration_new" messageCode="global_menu_new" url="/configurations?form" z="PpKhRYSLF3fMvOlr5J8dEALoaF8="/>
         <menu:item id="i_configuration_list" messageCode="global_menu_list" url="/configurations?page=1&amp;size=${empty param.size ? 10 : param.size}" z="eTnA6q7aRKdliIXm9IDu8P8bUhU="/>
+        <menu:item id="fi_configuration_configkey" messageCode="global_menu_find" url="/configurations?find=ByConfigKey&amp;form" z="lG/3JtglgE2NxhL6lg9R+Yvscdg="/>
         </menu:category>
     <menu:category id="c_reloadrequest" render="false" z="user-managed">
             <menu:item id="i_reloadrequest_new" messageCode="global_menu_new" url="/reloadrequests?form" z="gCp9n4oCOlGSoWCCLhqo/3BO3Gc="/>

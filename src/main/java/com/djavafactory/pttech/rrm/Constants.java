@@ -10,7 +10,6 @@ public final class Constants {
     public static final String expiredReloadRequest = "E";
     public static final String manualCancellationRequest = "M";
     public static final String successReloadRequest = "S";
-    public static final String tngKeyRequest = "T";
 
     public static final String newRequestStatus = "N";
     public static final String pendingRequestStatus = "P";
@@ -20,4 +19,6 @@ public final class Constants {
     public static final String successRequestStatus = "S";
 
     public static final String successResponseCode = "00";
+
+    public static final String timeOutKey = "config.tng.timeout";
 }

@@ -16,15 +16,13 @@ public class MessageRouter {
 
     public String routeReloadRequest(ReloadRequestMessage message) {
         if(StringUtils.equalsIgnoreCase(message.getMsgType(), Constants.newReloadRequest)) {
-            return "newReloadReqPersistChannel";
+            return (message.getEncryptedMsg() == null || StringUtils.equalsIgnoreCase(message.getEncryptedMsg(), "")) ? "newReloadReqPersistChannel" : "tngKeyInboundChannel";
         } else if(StringUtils.equalsIgnoreCase(message.getMsgType(), Constants.failedReloadRequest)) {
             return "failedReloadReqPersistChannel";
         } else if(StringUtils.equalsIgnoreCase(message.getMsgType(), Constants.expiredReloadRequest)) {
             return "expiredReloadReqPersistChannel";
-        } else if(StringUtils.equalsIgnoreCase(message.getMsgType(), Constants.successReloadRequest)) {
-            return "successReloadReqPersistChannel";
         } else {
-            return "tngReloadReqPersistChannel";
+            return "successReloadReqPersistChannel";
         }
     }
 
