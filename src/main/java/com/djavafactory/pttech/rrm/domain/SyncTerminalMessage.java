@@ -1,5 +1,8 @@
 package com.djavafactory.pttech.rrm.domain;
 
+import flexjson.JSONDeserializer;
+import flexjson.JSONSerializer;
+import flexjson.transformer.DateTransformer;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.json.RooJson;
@@ -12,7 +15,7 @@ import java.util.Date;
 
 @RooJavaBean
 @RooToString
-@RooJson
+@RooJson(toJsonMethod = "toJsonString", fromJsonMethod = "fromJsonToMessage")
 public class SyncTerminalMessage {
 
     private String acquirerName;
@@ -36,4 +39,12 @@ public class SyncTerminalMessage {
 
     @Lob
     private byte[] parameterFile;
+
+    public String toJsonString() {
+        return new JSONSerializer().exclude("*.class").transform(new DateTransformer("ddMMyyyyHHmmss"), Date.class).serialize(this);
+    }
+
+    public SyncTerminalMessage fromJsonToMessage(String jsonString) {
+        return new JSONDeserializer<SyncTerminalMessage>().use(Date.class, new DateTransformer("ddMMyyyyHHmmss")).use(null, SyncTerminalMessage.class).deserialize(jsonString);
+    }
 }

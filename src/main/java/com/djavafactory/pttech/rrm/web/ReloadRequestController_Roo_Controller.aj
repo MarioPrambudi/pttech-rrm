@@ -94,6 +94,17 @@ privileged aspect ReloadRequestController_Roo_Controller {
         return "redirect:/reloadrequests";
     }
     
+    @RequestMapping(params = { "find=ByTransId", "form" }, method = RequestMethod.GET)
+    public String ReloadRequestController.findReloadRequestsByTransIdForm(Model uiModel) {
+        return "reloadrequests/findReloadRequestsByTransId";
+    }
+    
+    @RequestMapping(params = "find=ByTransId", method = RequestMethod.GET)
+    public String ReloadRequestController.findReloadRequestsByTransId(@RequestParam("transId") String transId, Model uiModel) {
+        uiModel.addAttribute("reloadrequests", ReloadRequest.findReloadRequestsByTransId(transId).getResultList());
+        return "reloadrequests/list";
+    }
+    
     @ModelAttribute("reloadrequests")
     public Collection<ReloadRequest> ReloadRequestController.populateReloadRequests() {
         return ReloadRequest.findAllReloadRequests();

@@ -3,6 +3,8 @@
 
 package com.djavafactory.pttech.rrm.domain;
 
+import java.lang.Integer;
+import java.lang.Long;
 import java.lang.String;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -17,11 +19,11 @@ privileged aspect ReloadRequestMessage_Roo_JavaBean {
         this.transId = transId;
     }
     
-    public String ReloadRequestMessage.getMfgNo() {
+    public Long ReloadRequestMessage.getMfgNo() {
         return this.mfgNo;
     }
     
-    public void ReloadRequestMessage.setMfgNo(String mfgNo) {
+    public void ReloadRequestMessage.setMfgNo(Long mfgNo) {
         this.mfgNo = mfgNo;
     }
     
@@ -41,11 +43,11 @@ privileged aspect ReloadRequestMessage_Roo_JavaBean {
         this.spId = spId;
     }
     
-    public String ReloadRequestMessage.getTransCode() {
+    public Integer ReloadRequestMessage.getTransCode() {
         return this.transCode;
     }
     
-    public void ReloadRequestMessage.setTransCode(String transCode) {
+    public void ReloadRequestMessage.setTransCode(Integer transCode) {
         this.transCode = transCode;
     }
     

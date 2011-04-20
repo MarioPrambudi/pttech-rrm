@@ -13,11 +13,7 @@ import java.util.List;
 
 privileged aspect ReloadRequestMessage_Roo_Json {
     
-    public String ReloadRequestMessage.toJson() {
-        return new JSONSerializer().exclude("*.class").serialize(this);
-    }
-    
-    public static ReloadRequestMessage ReloadRequestMessage.fromJsonToReloadRequestMessage(String json) {
+    public static ReloadRequestMessage ReloadRequestMessage.ReloadRequestMessage(String json) {
         return new JSONDeserializer<ReloadRequestMessage>().use(null, ReloadRequestMessage.class).deserialize(json);
     }
     

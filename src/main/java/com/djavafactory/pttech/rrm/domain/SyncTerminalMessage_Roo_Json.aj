@@ -13,14 +13,6 @@ import java.util.List;
 
 privileged aspect SyncTerminalMessage_Roo_Json {
     
-    public String SyncTerminalMessage.toJson() {
-        return new JSONSerializer().exclude("*.class").serialize(this);
-    }
-    
-    public static SyncTerminalMessage SyncTerminalMessage.fromJsonToSyncTerminalMessage(String json) {
-        return new JSONDeserializer<SyncTerminalMessage>().use(null, SyncTerminalMessage.class).deserialize(json);
-    }
-    
     public static String SyncTerminalMessage.toJsonArray(Collection<SyncTerminalMessage> collection) {
         return new JSONSerializer().exclude("*.class").serialize(collection);
     }
