@@ -4,6 +4,8 @@ import java.util.Date;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -16,13 +18,14 @@ import javax.persistence.ManyToOne;
 @RooEntity
 public class Terminal {
 
+    @NotNull
     private String terminalId;
 
+    @Value("x")
     private String status;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
-    @NotNull
     private Date createdTime;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -36,4 +39,8 @@ public class Terminal {
     @NotNull
     @ManyToOne
     private Acquirer acquirer;
+    
+    
+
+
 }
