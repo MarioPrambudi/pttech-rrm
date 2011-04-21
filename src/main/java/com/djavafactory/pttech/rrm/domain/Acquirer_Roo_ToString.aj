@@ -24,7 +24,7 @@ privileged aspect Acquirer_Roo_ToString {
         sb.append("ModifiedTime: ").append(getModifiedTime()).append(", ");
         sb.append("Firmwares: ").append(getFirmwares() == null ? "null" : getFirmwares().size()).append(", ");
         sb.append("Terminals: ").append(getTerminals() == null ? "null" : getTerminals().size()).append(", ");
-        sb.append("DeletedStatus: ").append(getDeletedStatus());
+        sb.append("Deleted: ").append(getDeleted());
         return sb.toString();
     }
     

@@ -15,8 +15,7 @@ privileged aspect Terminal_Roo_ToString {
         sb.append("ModifiedTime: ").append(getModifiedTime()).append(", ");
         sb.append("CreatedBy: ").append(getCreatedBy()).append(", ");
         sb.append("ModifiedBy: ").append(getModifiedBy()).append(", ");
-        sb.append("Acquirer: ").append(getAcquirer()).append(", ");
-        sb.append("DeletedStatus: ").append(getDeletedStatus());
+        sb.append("Acquirer: ").append(getAcquirer());
         return sb.toString();
     }
     

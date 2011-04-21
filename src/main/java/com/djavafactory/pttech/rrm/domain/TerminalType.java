@@ -17,6 +17,6 @@ public class TerminalType {
     @NotNull
     private String description;
 
-    @Value("a")
-    private String deletedStatus;
+    @Value("false")
+    private Boolean deleted;
 }

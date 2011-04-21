@@ -4,16 +4,13 @@
     <definition extends="default" name="acquirers/list">
         <put-attribute name="body" value="/WEB-INF/views/acquirers/list.jspx"/>
     </definition>
-<definition extends="default" name="acquirers/show">
-        <put-attribute name="body" value="/WEB-INF/views/acquirers/show.jspx"/>
-    </definition>
-<definition extends="default" name="acquirers/create">
-        <put-attribute name="body" value="/WEB-INF/views/acquirers/create.jspx"/>
-    </definition>
-<definition extends="default" name="acquirers/update">
-        <put-attribute name="body" value="/WEB-INF/views/acquirers/update.jspx"/>
-    </definition>
-<definition extends="default" name="acquirers/findAcquirersByCreatedTimeBetween">
-        <put-attribute name="body" value="/WEB-INF/views/acquirers/findAcquirersByCreatedTimeBetween.jspx"/>
+	<definition extends="default" name="acquirers/show">
+	    <put-attribute name="body" value="/WEB-INF/views/acquirers/show.jspx"/>
+	</definition>
+	<definition extends="default" name="acquirers/create">
+	    <put-attribute name="body" value="/WEB-INF/views/acquirers/create.jspx"/>
+	</definition>
+	<definition extends="default" name="acquirers/update">
+	    <put-attribute name="body" value="/WEB-INF/views/acquirers/update.jspx"/>
     </definition>
 </tiles-definitions>

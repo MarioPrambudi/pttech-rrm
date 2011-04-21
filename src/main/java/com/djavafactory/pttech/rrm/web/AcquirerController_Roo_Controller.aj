@@ -11,10 +11,9 @@ import java.lang.Integer;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Collection;
-import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -62,19 +61,6 @@ privileged aspect AcquirerController_Roo_Controller {
         return "acquirers/update";
     }
     
-    @RequestMapping(params = { "find=ByCreatedTimeBetween", "form" }, method = RequestMethod.GET)
-    public String AcquirerController.findAcquirersByCreatedTimeBetweenForm(Model uiModel) {
-        addDateTimeFormatPatterns(uiModel);
-        return "acquirers/findAcquirersByCreatedTimeBetween";
-    }
-    
-    @RequestMapping(params = "find=ByCreatedTimeBetween", method = RequestMethod.GET)
-    public String AcquirerController.findAcquirersByCreatedTimeBetween(@RequestParam("minCreatedTime") @DateTimeFormat(style = "S-") Date minCreatedTime, @RequestParam("maxCreatedTime") @DateTimeFormat(style = "S-") Date maxCreatedTime, Model uiModel) {
-        uiModel.addAttribute("acquirers", Acquirer.findAcquirersByCreatedTimeBetween(minCreatedTime, maxCreatedTime).getResultList());
-        addDateTimeFormatPatterns(uiModel);
-        return "acquirers/list";
-    }
-    
     @ModelAttribute("acquirers")
     public Collection<Acquirer> AcquirerController.populateAcquirers() {
         return Acquirer.findAllAcquirers();
@@ -91,10 +77,8 @@ privileged aspect AcquirerController_Roo_Controller {
     }
     
     void AcquirerController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("acquirer_createdtime_date_format", org.joda.time.format.DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("acquirer_modifiedtime_date_format", org.joda.time.format.DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("acquirer_maxcreatedtime_date_format", org.joda.time.format.DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("acquirer_mincreatedtime_date_format", org.joda.time.format.DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("acquirer_createdtime_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("acquirer_modifiedtime_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
     }
     
     String AcquirerController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

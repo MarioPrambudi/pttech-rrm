@@ -18,9 +18,9 @@ import org.springframework.beans.factory.annotation.Value;
 
 @RooJavaBean
 @RooToString
-@RooEntity(finders = { "findAcquirersByCreatedTimeBetween" })
+@RooEntity
 public class Acquirer {
-
+	
     @NotNull
     private String name;
 
@@ -66,8 +66,8 @@ public class Acquirer {
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "acquirer")
     private Set<Terminal> terminals = new HashSet<Terminal>();
 
-    @Value("0")
-    private Integer deletedStatus;
+    @Value("false")
+    private Boolean deleted;
 
 	
 }

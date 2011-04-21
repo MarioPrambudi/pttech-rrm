@@ -3,6 +3,7 @@
 
 package com.djavafactory.pttech.rrm.domain;
 
+import java.lang.Boolean;
 import java.lang.String;
 
 privileged aspect TerminalType_Roo_JavaBean {
@@ -23,12 +24,12 @@ privileged aspect TerminalType_Roo_JavaBean {
         this.description = description;
     }
     
-    public String TerminalType.getDeletedStatus() {
-        return this.deletedStatus;
+    public Boolean TerminalType.getDeleted() {
+        return this.deleted;
     }
     
-    public void TerminalType.setDeletedStatus(String deletedStatus) {
-        this.deletedStatus = deletedStatus;
+    public void TerminalType.setDeleted(Boolean deleted) {
+        this.deleted = deleted;
     }
     
 }

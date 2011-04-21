@@ -5,8 +5,7 @@
     <page:list id="pl_com_djavafactory_pttech_rrm_domain_TerminalType" items="${terminaltypes}" z="C24lx7E7xkQ4NCLIcEia7vb4EMk=">
         <table:table data="${terminaltypes}" id="l_com_djavafactory_pttech_rrm_domain_TerminalType" path="/terminaltypes" z="WQbdbktBvwJ+7VApStYD7t6DiEg=">
             <table:column id="c_com_djavafactory_pttech_rrm_domain_TerminalType_name" property="name" z="DYGoRKSYr1adgPIRsI+MnBr8iQw="/>           
-        	<table:column id="c_com_djavafactory_pttech_rrm_domain_TerminalType_description" property="description" z="lydn/1HBuvxgojJTzQ7ZgDALbaM="/>
-        <table:column id="c_com_djavafactory_pttech_rrm_domain_TerminalType_deletedStatus" property="deletedStatus" render="false" z="user-managed"/>
+        	<table:column id="c_com_djavafactory_pttech_rrm_domain_TerminalType_description" property="description" z="lydn/1HBuvxgojJTzQ7ZgDALbaM="/>     
         </table:table>
     </page:list>
 </div>

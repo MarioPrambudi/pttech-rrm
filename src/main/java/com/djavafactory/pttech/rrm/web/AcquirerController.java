@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AcquirerController {
 	
+	public static Boolean LDELETED_STATUS = true;
+	
   /**
-   * To delete Terminal by updated deletedStatus to "d"
+   * To delete Terminal by updated deletedStatus to LDELETED_STATUS value
    * @param id The Terminal id
    * @param page Integer
    * @param size Integer
@@ -34,7 +36,7 @@ public class AcquirerController {
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
 		Acquirer acquirer;
 		acquirer = Acquirer.findAcquirer(id);
-		acquirer.setDeletedStatus(1);
+		acquirer.setDeleted(LDELETED_STATUS);
 		uiModel.asMap().clear();
 		acquirer.merge();
         return "redirect:/acquirers";
@@ -57,7 +59,7 @@ public class AcquirerController {
             return "acquirers/create";
         }
         uiModel.asMap().clear();
-        // CreatedBy DEMO
+        // Temporary static
         acquirer.setCreatedBy("System");
         acquirer.setCreatedTime(getCurrentDate());
         acquirer.persist();

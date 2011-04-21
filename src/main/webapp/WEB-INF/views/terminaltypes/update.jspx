@@ -3,9 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_com_djavafactory_pttech_rrm_domain_TerminalType" modelAttribute="terminalType" path="/terminaltypes" versionField="Version" z="+dOkFo3XSIaNN+xpf3jYXWs12fA=">
-        <field:input field="name" id="c_com_djavafactory_pttech_rrm_domain_TerminalType_name" required="true" z="y1WO1JJSUv2zPKeAXLXiYuigVfs="/>
-        
-    <field:input field="description" id="c_com_djavafactory_pttech_rrm_domain_TerminalType_description" required="true" z="K1A5IgF48LqupbYJbCC8qHho8Z0="/>
-    <field:input field="deletedStatus" id="c_com_djavafactory_pttech_rrm_domain_TerminalType_deletedStatus" render="false" validationMessageCode="field_invalid_integer" z="user-managed"/>
+        <field:input field="name" id="c_com_djavafactory_pttech_rrm_domain_TerminalType_name" required="true" z="y1WO1JJSUv2zPKeAXLXiYuigVfs="/>       
+    	<field:input field="description" id="c_com_djavafactory_pttech_rrm_domain_TerminalType_description" required="true" z="K1A5IgF48LqupbYJbCC8qHho8Z0="/>
     </form:update>
 </div>

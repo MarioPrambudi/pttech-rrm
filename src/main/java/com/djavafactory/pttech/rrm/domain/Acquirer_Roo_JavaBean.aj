@@ -5,7 +5,7 @@ package com.djavafactory.pttech.rrm.domain;
 
 import com.djavafactory.pttech.rrm.domain.Firmware;
 import com.djavafactory.pttech.rrm.domain.Terminal;
-import java.lang.Integer;
+import java.lang.Boolean;
 import java.lang.String;
 import java.util.Date;
 import java.util.Set;
@@ -132,12 +132,12 @@ privileged aspect Acquirer_Roo_JavaBean {
         this.terminals = terminals;
     }
     
-    public Integer Acquirer.getDeletedStatus() {
-        return this.deletedStatus;
+    public Boolean Acquirer.getDeleted() {
+        return this.deleted;
     }
     
-    public void Acquirer.setDeletedStatus(Integer deletedStatus) {
-        this.deletedStatus = deletedStatus;
+    public void Acquirer.setDeleted(Boolean deleted) {
+        this.deleted = deleted;
     }
     
 }

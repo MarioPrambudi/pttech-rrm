@@ -67,7 +67,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     org.springframework.core.convert.converter.Converter<TerminalType, String> ApplicationConversionServiceFactoryBean.getTerminalTypeConverter() {
         return new org.springframework.core.convert.converter.Converter<TerminalType, String>() {
             public String convert(TerminalType terminaltype) {
-                return new StringBuilder().append(terminaltype.getName()).append(" ").append(terminaltype.getDescription()).append(" ").append(terminaltype.getDeletedStatus()).toString();
+                return new StringBuilder().append(terminaltype.getName()).append(" ").append(terminaltype.getDescription()).toString();
             }
         };
     }

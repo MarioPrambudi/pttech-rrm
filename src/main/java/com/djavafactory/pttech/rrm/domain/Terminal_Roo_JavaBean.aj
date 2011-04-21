@@ -65,12 +65,4 @@ privileged aspect Terminal_Roo_JavaBean {
         this.acquirer = acquirer;
     }
     
-    public String Terminal.getDeletedStatus() {
-        return this.deletedStatus;
-    }
-    
-    public void Terminal.setDeletedStatus(String deletedStatus) {
-        this.deletedStatus = deletedStatus;
-    }
-    
 }

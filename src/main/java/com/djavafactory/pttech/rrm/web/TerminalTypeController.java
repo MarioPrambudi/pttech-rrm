@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/terminaltypes")
 @Controller
 public class TerminalTypeController {
+	
+	public static Boolean LDELETED_STATUS = true;
 
  /**
-   * To delete terminalType by updated deletedStatus to "d"
+   * To delete terminalType by updated deleted to LDELETED_STATUS value
    * @param id The terminalType id
    * @param page Integer
    * @param size Integer
@@ -27,7 +29,7 @@ public class TerminalTypeController {
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         TerminalType terminaltype;
         terminaltype = TerminalType.findTerminalType(id);
-		terminaltype.setDeletedStatus("d");
+		terminaltype.setDeleted(LDELETED_STATUS);
         uiModel.asMap().clear();
         return "redirect:/terminaltypes";
     }

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class TerminalController {
 
+	public static String TERMINAL_STATUS_DELETED = "d";
  /**
    * To delete Terminal by updated deletedStatus to "d"
    * @param id The Terminal id
@@ -34,7 +35,7 @@ public class TerminalController {
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         Terminal terminal;
         terminal = Terminal.findTerminal(id);
-        terminal.setDeletedStatus("d");
+        terminal.setStatus(TERMINAL_STATUS_DELETED);
         uiModel.asMap().clear();
         return "redirect:/terminals";
     }
@@ -56,7 +57,7 @@ public class TerminalController {
             return "terminals/create";
         }
         uiModel.asMap().clear();
-        // CreatedBy DEMO
+        // Temporary static
         terminal.setCreatedBy("System");
         terminal.setCreatedTime(getCurrentDate());
         terminal.persist();

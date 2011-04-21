@@ -10,11 +10,10 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 import com.djavafactory.pttech.rrm.domain.Acquirer;
 import javax.persistence.ManyToOne;
-import org.springframework.beans.factory.annotation.Value;
 
 @RooJavaBean
 @RooToString
-@RooEntity(finders = { "findTerminalsByTerminalIdLikeOrCreatedTimeBetween" })
+@RooEntity
 public class Terminal {
 
     @NotNull
@@ -38,6 +37,4 @@ public class Terminal {
     @ManyToOne
     private Acquirer acquirer;
 
-    @Value("a")
-    private String deletedStatus;
 }
