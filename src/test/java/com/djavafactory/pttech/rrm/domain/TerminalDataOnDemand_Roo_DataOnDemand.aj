@@ -25,6 +25,7 @@ privileged aspect TerminalDataOnDemand_Roo_DataOnDemand {
         obj.setCreatedBy("createdBy_" + index);
         obj.setModifiedBy("modifiedBy_" + index);
         obj.setAcquirer(null);
+        obj.setTerminalType(null);
         return obj;
     }
     

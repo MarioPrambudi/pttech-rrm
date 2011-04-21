@@ -62,15 +62,7 @@
           <c:forTokens items="${columnProperties}" delims="," var="column" varStatus="num">
             <c:set var="columnMaxLength" value="${lengths[num.count-1]}" scope="request" />
             <td>
-              <c:choose>
-                <c:when test="${columnMaxLength lt 0}">
-                  <spring:eval expression="item[column]" />
-                </c:when>
-                <c:otherwise>
-                  <spring:eval expression="item[column]" var="colTxt" />
-                  <c:out value="${fn:substring(colTxt, 0, columnMaxLength)}" />
-                </c:otherwise>
-              </c:choose>
+              <spring:eval expression="item[column]" />
             </td>
           </c:forTokens>
           <td class="utilbox">

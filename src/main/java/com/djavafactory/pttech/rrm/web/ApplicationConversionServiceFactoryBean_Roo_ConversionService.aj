@@ -10,6 +10,7 @@ import com.djavafactory.pttech.rrm.domain.Param;
 import com.djavafactory.pttech.rrm.domain.Province;
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
 import com.djavafactory.pttech.rrm.domain.Terminal;
+import com.djavafactory.pttech.rrm.domain.TerminalType;
 import java.lang.String;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
@@ -72,6 +73,14 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
+    org.springframework.core.convert.converter.Converter<TerminalType, String> ApplicationConversionServiceFactoryBean.getTerminalTypeConverter() {
+        return new org.springframework.core.convert.converter.Converter<TerminalType, String>() {
+            public String convert(TerminalType terminaltype) {
+                return new StringBuilder().append(terminaltype.getName()).append(" ").append(terminaltype.getDescription()).toString();
+            }
+        };
+    }
+    
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
         registry.addConverter(getAcquirerConverter());
         registry.addConverter(getConfigurationConverter());
@@ -80,6 +89,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getProvinceConverter());
         registry.addConverter(getReloadRequestConverter());
         registry.addConverter(getTerminalConverter());
+        registry.addConverter(getTerminalTypeConverter());
     }
     
     public void ApplicationConversionServiceFactoryBean.afterPropertiesSet() {

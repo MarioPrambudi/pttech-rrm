@@ -4,13 +4,13 @@
     <definition extends="default" name="terminals/list">
         <put-attribute name="body" value="/WEB-INF/views/terminals/list.jspx"/>
     </definition>
-<definition extends="default" name="terminals/show">
+	<definition extends="default" name="terminals/show">
         <put-attribute name="body" value="/WEB-INF/views/terminals/show.jspx"/>
     </definition>
-<definition extends="default" name="terminals/create">
+	<definition extends="default" name="terminals/create">
         <put-attribute name="body" value="/WEB-INF/views/terminals/create.jspx"/>
     </definition>
-<definition extends="default" name="terminals/update">
+	<definition extends="default" name="terminals/update">
         <put-attribute name="body" value="/WEB-INF/views/terminals/update.jspx"/>
     </definition>
 </tiles-definitions>

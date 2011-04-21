@@ -8,39 +8,23 @@ import com.djavafactory.pttech.rrm.domain.Firmware;
 import com.djavafactory.pttech.rrm.domain.Province;
 import com.djavafactory.pttech.rrm.domain.Terminal;
 import java.io.UnsupportedEncodingException;
-import java.lang.Integer;
 import java.lang.Long;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 privileged aspect AcquirerController_Roo_Controller {
-    
-    @RequestMapping(method = RequestMethod.POST)
-    public String AcquirerController.create(@Valid Acquirer acquirer, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("acquirer", acquirer);
-            addDateTimeFormatPatterns(uiModel);
-            return "acquirers/create";
-        }
-        uiModel.asMap().clear();
-        acquirer.persist();
-        return "redirect:/acquirers/" + encodeUrlPathSegment(acquirer.getId().toString(), httpServletRequest);
-    }
     
     @RequestMapping(params = "form", method = RequestMethod.GET)
     public String AcquirerController.createForm(Model uiModel) {
@@ -60,34 +44,6 @@ privileged aspect AcquirerController_Roo_Controller {
         uiModel.addAttribute("acquirer", Acquirer.findAcquirer(id));
         uiModel.addAttribute("itemId", id);
         return "acquirers/show";
-    }
-    
-    @RequestMapping(method = RequestMethod.PUT)
-    public String AcquirerController.update(@Valid Acquirer acquirer, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("acquirer", acquirer);
-            addDateTimeFormatPatterns(uiModel);
-            return "acquirers/update";
-        }
-        uiModel.asMap().clear();
-        acquirer.merge();
-        return "redirect:/acquirers/" + encodeUrlPathSegment(acquirer.getId().toString(), httpServletRequest);
-    }
-    
-    @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
-    public String AcquirerController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("acquirer", Acquirer.findAcquirer(id));
-        addDateTimeFormatPatterns(uiModel);
-        return "acquirers/update";
-    }
-    
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public String AcquirerController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        Acquirer.findAcquirer(id).remove();
-        uiModel.asMap().clear();
-        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
-        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/acquirers";
     }
     
     @ModelAttribute("acquirers")

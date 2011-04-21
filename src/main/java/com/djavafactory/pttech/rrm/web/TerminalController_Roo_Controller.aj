@@ -5,40 +5,25 @@ package com.djavafactory.pttech.rrm.web;
 
 import com.djavafactory.pttech.rrm.domain.Acquirer;
 import com.djavafactory.pttech.rrm.domain.Terminal;
+import com.djavafactory.pttech.rrm.domain.TerminalType;
 import java.io.UnsupportedEncodingException;
-import java.lang.Integer;
 import java.lang.Long;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 privileged aspect TerminalController_Roo_Controller {
-    
-    @RequestMapping(method = RequestMethod.POST)
-    public String TerminalController.create(@Valid Terminal terminal, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("terminal", terminal);
-            addDateTimeFormatPatterns(uiModel);
-            return "terminals/create";
-        }
-        uiModel.asMap().clear();
-        terminal.persist();
-        return "redirect:/terminals/" + encodeUrlPathSegment(terminal.getId().toString(), httpServletRequest);
-    }
     
     @RequestMapping(params = "form", method = RequestMethod.GET)
     public String TerminalController.createForm(Model uiModel) {
@@ -47,6 +32,9 @@ privileged aspect TerminalController_Roo_Controller {
         List dependencies = new ArrayList();
         if (Acquirer.countAcquirers() == 0) {
             dependencies.add(new String[]{"acquirer", "acquirers"});
+        }
+        if (TerminalType.countTerminalTypes() == 0) {
+            dependencies.add(new String[]{"terminaltype", "terminaltypes"});
         }
         uiModel.addAttribute("dependencies", dependencies);
         return "terminals/create";
@@ -60,41 +48,8 @@ privileged aspect TerminalController_Roo_Controller {
         return "terminals/show";
     }
     
-    @RequestMapping(method = RequestMethod.PUT)
-    public String TerminalController.update(@Valid Terminal terminal, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("terminal", terminal);
-            addDateTimeFormatPatterns(uiModel);
-            return "terminals/update";
-        }
-        uiModel.asMap().clear();
-        terminal.merge();
-        return "redirect:/terminals/" + encodeUrlPathSegment(terminal.getId().toString(), httpServletRequest);
-    }
-    
-    @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
-    public String TerminalController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("terminal", Terminal.findTerminal(id));
-        addDateTimeFormatPatterns(uiModel);
-        return "terminals/update";
-    }
-    
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public String TerminalController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        Terminal.findTerminal(id).remove();
-        uiModel.asMap().clear();
-        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
-        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/terminals";
-    }
-    
-    @ModelAttribute("acquirers")
-    public Collection<Acquirer> TerminalController.populateAcquirers() {
-        return Acquirer.findAllAcquirers();
-    }
-    
     @ModelAttribute("terminals")
-    public java.util.Collection<Terminal> TerminalController.populateTerminals() {
+    public Collection<Terminal> TerminalController.populateTerminals() {
         return Terminal.findAllTerminals();
     }
     

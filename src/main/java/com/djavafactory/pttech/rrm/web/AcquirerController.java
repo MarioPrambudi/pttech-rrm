@@ -4,17 +4,35 @@ import com.djavafactory.pttech.rrm.domain.Acquirer;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.persistence.Transient;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 @RooWebScaffold(path = "acquirers", formBackingObject = Acquirer.class)
 @RequestMapping("/acquirers")
 @Controller
 public class AcquirerController {
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+
+    public static Boolean LDELETED_STATUS = true;
+    private Date createdDate; //to hold the createdTime
+
+    /**
+    * To show the list of acquirer with paginate
+    * @param page The page number
+    * @param size The size of the display list for a page
+    * @param uiModel Model
+    * @exception none
+    * @return String the page path to redirect
+    */
+    @RequestMapping(method = RequestMethod.GET)
     public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
@@ -30,10 +48,116 @@ public class AcquirerController {
         return "acquirers/list";
     }
 
+    /**
+    * To search acquirers by parameters
+    * @param name The acquirer name
+    * @param registrationNo The Acquirer registration no
+    * @param uiModel Model
+    * @exception none
+    * @return String the page path to redirect
+    */
     @RequestMapping(value = "/findAcquirersByParam", method = RequestMethod.POST)
     public String findAcquirersByParam(@RequestParam(value = "name", required = false) String name, @RequestParam(value = "registrationNo", required = false) String registrationNo, Model uiModel) {
         uiModel.addAttribute("acquirers", new Acquirer().findAcquirersByParam(name, registrationNo, -1, -1).getResultList());
         addDateTimeFormatPatterns(uiModel);
         return "acquirers/list";
+    }
+	
+    /**
+    * To delete acquirer by updated deletedStatus to LDELETED_STATUS value
+    * @param id The acquirer id
+    * @param page Integer
+    * @param size Integer
+    * @param uiModel Model
+    * @exception none
+    * @return String the page path to redirect
+    */
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+		Acquirer acquirer;
+		acquirer = Acquirer.findAcquirer(id);
+		acquirer.setDeleted(LDELETED_STATUS);
+		uiModel.asMap().clear();
+		acquirer.merge();
+        return "redirect:/acquirers";
+    }
+	
+    /**
+    * insert new acquirer with createdTime and createdBy
+    * @param acquirer the acquirer object
+    * @param bindingResult BindingResult
+    * @param uiModel Model
+    * @param httpServletRequest HttpServletRequest
+    * @exception none
+    * @return String the page path to redirect
+    */
+	@RequestMapping(method = RequestMethod.POST)
+    public String create(@Valid Acquirer acquirer, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+        if (bindingResult.hasErrors()) {
+            uiModel.addAttribute("acquirer", acquirer);
+            addDateTimeFormatPatterns(uiModel);            
+            return "acquirers/create";
+        }
+        uiModel.asMap().clear();
+        // Temporary static
+        acquirer.setCreatedBy("System");
+        acquirer.setCreatedTime(getCurrentDate());
+        acquirer.persist();
+        return "redirect:/acquirers/" + encodeUrlPathSegment(acquirer.getId().toString(), httpServletRequest);
+    }
+	
+	
+    /**
+    * get the current date
+    * @param none
+    * @exception none
+    * @return Date the current date
+    */
+	@Transient
+	public Date getCurrentDate(){
+	    return new Date();
+	}
+	
+    /**
+    * update new acquirer with modifiedTime and modifiedBy
+    * @param acquirer the acquirer object
+    * @param bindingResult BindingResult
+    * @param uiModel Model
+    * @param httpServletRequest HttpServletRequest
+    * @exception none
+    * @return String the page path to redirect
+    */
+	@RequestMapping(method = RequestMethod.PUT)
+    public String update(@Valid Acquirer acquirer, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+        if (bindingResult.hasErrors()) {
+            uiModel.addAttribute("acquirer", acquirer);
+            addDateTimeFormatPatterns(uiModel);
+            return "acquirers/update";
+        }
+        uiModel.asMap().clear();
+        
+        // ModifiedBy DEMO
+        acquirer.setCreatedTime(createdDate);
+        acquirer.setModifiedBy("System");
+        acquirer.setModifiedTime(getCurrentDate());
+        acquirer.merge();
+        return "redirect:/acquirers/" + encodeUrlPathSegment(acquirer.getId().toString(), httpServletRequest);
+    }
+
+    /**
+  	* display update form and save the createdTime into createdDate
+    * @param id The Terminal id
+    * @param uiModel Model
+    * @exception none
+    * @return String the page path to redirect
+  	*/
+    @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
+    public String updateForm(@PathVariable("id") Long id, Model uiModel) {
+        Acquirer objAcquirer;
+        objAcquirer = Acquirer.findAcquirer(id);
+        createdDate = objAcquirer.getCreatedTime();
+        uiModel.addAttribute("acquirer", objAcquirer);
+        addDateTimeFormatPatterns(uiModel);
+        return "acquirers/update";
     }
 }
