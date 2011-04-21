@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="default" name="provinces/list">
+        <put-attribute name="body" value="/WEB-INF/views/provinces/list.jspx"/>
+    </definition>
+<definition extends="default" name="provinces/show">
+        <put-attribute name="body" value="/WEB-INF/views/provinces/show.jspx"/>
+    </definition>
+<definition extends="default" name="provinces/create">
+        <put-attribute name="body" value="/WEB-INF/views/provinces/create.jspx"/>
+    </definition>
+<definition extends="default" name="provinces/update">
+        <put-attribute name="body" value="/WEB-INF/views/provinces/update.jspx"/>
+    </definition>
+</tiles-definitions>

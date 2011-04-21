@@ -2,6 +2,10 @@
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
+    <page:find finderName="ByParam" id="ff_com_djavafactory_pttech_rrm_domain_Terminal" path="/terminals/findTerminalsByParam" z="d+XL0HCAKRTNvONN0hjX+ZAhXSA=">
+        <table:input disableFormBinding="true" field="terminalId" id="c_com_djavafactory_pttech_rrm_domain_Terminal_terminalId" z="user-managed"/>
+        <table:input disableFormBinding="true" field="status" id="c_com_djavafactory_pttech_rrm_domain_Terminal_status" z="user-managed"/>
+    </page:find>
     <page:list id="pl_com_djavafactory_pttech_rrm_domain_Terminal" items="${terminals}" z="uzj8hCskYHsCM++GzTy05z7zzeA=">
         <table:table data="${terminals}" id="l_com_djavafactory_pttech_rrm_domain_Terminal" path="/terminals" z="jP63VtbPFkhk+LRd6a+3R1fdVzc=">
             <table:column id="c_com_djavafactory_pttech_rrm_domain_Terminal_status" property="status" z="olci0rGguDDAoxNE7OvUCllAjvE="/>

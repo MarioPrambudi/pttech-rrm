@@ -1,17 +1,15 @@
 package com.djavafactory.pttech.rrm.domain;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.ManyToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
-import com.djavafactory.pttech.rrm.domain.Terminal;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @RooJavaBean
 @RooToString
@@ -26,7 +24,9 @@ public class Acquirer {
 
     private String street2;
 
-    private String acquirerState;
+    @NotNull
+    @ManyToOne
+    private Province acquirerState;
 
     private String city;
 
@@ -53,4 +53,26 @@ public class Acquirer {
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "acquirer")
     private Set<Terminal> terminals = new HashSet<Terminal>();
+
+    private Boolean deleted;
+
+    public static TypedQuery<Acquirer> findAcquirersByParam(String name, String registrationNo, int firstResult, int maxResults) {
+        EntityManager em = new Acquirer().entityManager();
+        TypedQuery<Acquirer> q = null;
+        String query = "SELECT Acquirer FROM Acquirer AS acquirer WHERE acquirer.deleted = false";
+        if (name != null && !name.equals("")) {
+            query = new StringBuilder(query).append(" AND LOWER(acquirer.name) LIKE LOWER(:name)").toString();
+        }
+        if (registrationNo != null && !registrationNo.equals("")) {
+            query = new StringBuilder(query).append(" AND LOWER(acquirer.registrationNo) LIKE LOWER(:registrationNo)").toString();
+        }
+        q = (firstResult > 0 && maxResults > 0) ? em.createQuery(query, Acquirer.class).setFirstResult(firstResult).setMaxResults(maxResults) : em.createQuery(query, Acquirer.class);
+        if (name != null && !name.equals("")) {
+            q.setParameter("name", "%" + name + "%");
+        }
+        if (registrationNo != null && !registrationNo.equals("")) {
+            q.setParameter("registrationNo", "%" + registrationNo + "%");
+        }
+        return q;
+    }
 }

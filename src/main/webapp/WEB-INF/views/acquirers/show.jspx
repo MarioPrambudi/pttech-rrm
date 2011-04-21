@@ -9,14 +9,18 @@
         <field:display date="true" dateTimePattern="${acquirer_modifiedtime_date_format}" field="modifiedTime" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_modifiedTime" object="${acquirer}" z="UH/p9eHVBigUcDOgb0Qx2M8O1sg="/>
         <field:display field="hotline" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_hotline" object="${acquirer}" z="zhORUYsIe7q3jZ0ECblQsAgg5WE="/>
         <field:display field="registrationNo" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_registrationNo" object="${acquirer}" z="ReFmPsYifWEyXyDziWBATv5vxRM="/>
-        <field:display field="city" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_city" object="${acquirer}" z="sTG8wqOLRXnEOYCvjP27lo4zz9I="/>
+        <field:display field="acquirerState" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_acquirerState" object="${acquirer}" z="p6MtZW7IIeIYCe+gF754aZGXUCw="/>
+        
         <field:display field="name" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_name" object="${acquirer}" z="CDnsh/Vol0FEl9HaxBpHRW+K26Y="/>
         <field:display field="email" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_email" object="${acquirer}" z="Ac+iRdCVHZzRyl31/i0CDahW9qQ="/>
-        <field:display field="acquirerState" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_acquirerState" object="${acquirer}" z="p6MtZW7IIeIYCe+gF754aZGXUCw="/>
+        
         <field:display field="postCode" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_postCode" object="${acquirer}" z="o6Y6ldUL94U776sm77Fk/Yphabs="/>
         <field:display field="createdBy" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_createdBy" object="${acquirer}" z="mfNC9h2D+ti8vUBSVVY/ouAsFhU="/>
         <field:display field="firmwares" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_firmwares" object="${acquirer}" z="F9ta35h4uKz0O3g+xSnI3KW1xOo="/>
         <field:display field="street2" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_street2" object="${acquirer}" z="5mK5aNs0FrI6uUnpB8pVwZqaBfg="/>
         <field:display field="street1" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_street1" object="${acquirer}" z="qIBeswe0O18ZLPATAS30MFezp1Y="/>
+
+    <field:display field="deleted" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_deleted" object="${acquirer}" z="08OTlkw+C2K3YN2Piar8pHi0HwU="/>
+    <field:display field="city" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_city" object="${acquirer}" z="sTG8wqOLRXnEOYCvjP27lo4zz9I="/>
     </page:show>
 </div>

@@ -2,6 +2,10 @@
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
+    <page:find finderName="ByParam" id="ff_com_djavafactory_pttech_rrm_domain_Acquirer" path="/acquirers/findAcquirersByParam" z="d+XL0HCAKRTNvONN0hjX+ZAhXSA=">
+        <table:input disableFormBinding="true" field="name" id="f_com_djavafactory_pttech_rrm_domain_Acquirer_name" z="kn2BXI664iL/BfH5BSAEcgwHhs8="/>
+        <table:input disableFormBinding="true" field="registrationNo" id="c_com_djavafactory_pttech_rrm_domain_Acquirer_registrationNo" z="kn2BXI664iL/BfH5BSAEcgwHhs8="/>
+    </page:find>
     <page:list id="pl_com_djavafactory_pttech_rrm_domain_Acquirer" items="${acquirers}" z="MFQ7IbgMdKlh1RGwE2G6SDpDm4Q=">
         <table:table data="${acquirers}" id="l_com_djavafactory_pttech_rrm_domain_Acquirer" path="/acquirers" z="qIcKpNq8j7FiUp7sK2pRpbTe2gM=">
             <table:column id="c_com_djavafactory_pttech_rrm_domain_Acquirer_terminals" property="terminals" z="y0xUafwSi4e6LKQJN8RDt5pSU4g="/>
@@ -9,7 +13,8 @@
             <table:column id="c_com_djavafactory_pttech_rrm_domain_Acquirer_modifiedBy" property="modifiedBy" z="cSKlrC4LXQOGzoGRhqVKreaHQhc="/>
             <table:column id="c_com_djavafactory_pttech_rrm_domain_Acquirer_modifiedTime" property="modifiedTime" z="9nuvVN1Fnuaf9tnZivlvd0/i+f0="/>
             <table:column id="c_com_djavafactory_pttech_rrm_domain_Acquirer_hotline" property="hotline" z="J1Z/AD+lQqfgi+PHi3baYlM6LJg="/>
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_Acquirer_registrationNo" property="registrationNo" z="VJrwoVxC4ImTXrdvJJdeBVHGOTA="/>
+            
+        <table:column id="c_com_djavafactory_pttech_rrm_domain_Acquirer_deleted" property="deleted" z="FDTKS8CtI4wFYi7R8u5TpJM2pr4="/>
         </table:table>
     </page:list>
 </div>

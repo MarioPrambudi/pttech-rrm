@@ -60,20 +60,6 @@ privileged aspect TerminalController_Roo_Controller {
         return "terminals/show";
     }
     
-    @RequestMapping(method = RequestMethod.GET)
-    public String TerminalController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            uiModel.addAttribute("terminals", Terminal.findTerminalEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
-            float nrOfPages = (float) Terminal.countTerminals() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("terminals", Terminal.findAllTerminals());
-        }
-        addDateTimeFormatPatterns(uiModel);
-        return "terminals/list";
-    }
-    
     @RequestMapping(method = RequestMethod.PUT)
     public String TerminalController.update(@Valid Terminal terminal, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {

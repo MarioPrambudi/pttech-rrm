@@ -13,13 +13,13 @@ import java.util.List;
 public class MessageFilter {
 
     public Boolean reloadRequestFilter(ReloadRequestMessage requestMessage) {
-        if(StringUtils.equalsIgnoreCase(requestMessage.getMsgType(), Constants.NEW_RELOAD_REQUEST)) {
+        if(StringUtils.equalsIgnoreCase(requestMessage.getMsgType(), Constants.RELOAD_REQUEST_NEW)) {
             return true;
-        } else if(StringUtils.equalsIgnoreCase(requestMessage.getMsgType(), Constants.FAILED_RELOAD_REQUEST)) {
+        } else if(StringUtils.equalsIgnoreCase(requestMessage.getMsgType(), Constants.RELOAD_REQUEST_FAILED)) {
             return true;
-        } else if(StringUtils.equalsIgnoreCase(requestMessage.getMsgType(), Constants.EXPIRED_RELOAD_REQUEST)) {
+        } else if(StringUtils.equalsIgnoreCase(requestMessage.getMsgType(), Constants.RELOAD_REQUEST_EXPIRED)) {
             return true;
-        } else if(StringUtils.equalsIgnoreCase(requestMessage.getMsgType(), Constants.SUCCESS_RELOAD_REQUEST)) {
+        } else if(StringUtils.equalsIgnoreCase(requestMessage.getMsgType(), Constants.RELOAD_REQUEST_SUCCESS)) {
             return true;
         }
 
@@ -30,7 +30,7 @@ public class MessageFilter {
         Date tngKeyRequestTime = requestMessage.getRequestTime();
         Long timeOutPeriod = -1L;
 
-        List<Configuration> configList = new Configuration().findConfigurationsByConfigKey(Constants.TIMEOUT_KEY).getResultList();
+        List<Configuration> configList = new Configuration().findConfigurationsByConfigKey(Constants.CONFIG_TNG_TIMEOUT).getResultList();
         if(configList != null && !configList.isEmpty()) {
             timeOutPeriod = Long.valueOf(configList.get(0).getConfigValue());
         }

@@ -7,6 +7,7 @@ import com.djavafactory.pttech.rrm.domain.Acquirer;
 import com.djavafactory.pttech.rrm.domain.Configuration;
 import com.djavafactory.pttech.rrm.domain.Firmware;
 import com.djavafactory.pttech.rrm.domain.Param;
+import com.djavafactory.pttech.rrm.domain.Province;
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
 import com.djavafactory.pttech.rrm.domain.Terminal;
 import java.lang.String;
@@ -47,6 +48,14 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
+    org.springframework.core.convert.converter.Converter<Province, String> ApplicationConversionServiceFactoryBean.getProvinceConverter() {
+        return new org.springframework.core.convert.converter.Converter<Province, String>() {
+            public String convert(Province province) {
+                return new StringBuilder().append(province.getName()).toString();
+            }
+        };
+    }
+    
     org.springframework.core.convert.converter.Converter<ReloadRequest, String> ApplicationConversionServiceFactoryBean.getReloadRequestConverter() {
         return new org.springframework.core.convert.converter.Converter<ReloadRequest, String>() {
             public String convert(ReloadRequest reloadrequest) {
@@ -68,6 +77,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getConfigurationConverter());
         registry.addConverter(getFirmwareConverter());
         registry.addConverter(getParamConverter());
+        registry.addConverter(getProvinceConverter());
         registry.addConverter(getReloadRequestConverter());
         registry.addConverter(getTerminalConverter());
     }

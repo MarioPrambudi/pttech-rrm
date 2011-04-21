@@ -16,7 +16,7 @@
     <spring:message arguments="${fn:escapeXml(label)}" code="entity_find" var="title_msg" htmlEscape="false" />
     <util:panel id="${id}" title="${title_msg}" openPane="${openPane}">
       <spring:url value="${path}" var="form_url" />
-      <form:form action="${fn:escapeXml(form_url)}" method="GET">
+      <form:form action="${fn:escapeXml(form_url)}" method="POST">
         <input type="hidden" name="find" value="${fn:escapeXml(finderName)}" />
         <jsp:doBody />
         <div class="submit" id="${fn:escapeXml(id)}_${fn:escapeXml(finderName)}_submit">

@@ -5,12 +5,15 @@ package com.djavafactory.pttech.rrm.web;
 
 import com.djavafactory.pttech.rrm.domain.Acquirer;
 import com.djavafactory.pttech.rrm.domain.Firmware;
+import com.djavafactory.pttech.rrm.domain.Province;
 import com.djavafactory.pttech.rrm.domain.Terminal;
 import java.io.UnsupportedEncodingException;
 import java.lang.Integer;
 import java.lang.Long;
 import java.lang.String;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
@@ -43,6 +46,11 @@ privileged aspect AcquirerController_Roo_Controller {
     public String AcquirerController.createForm(Model uiModel) {
         uiModel.addAttribute("acquirer", new Acquirer());
         addDateTimeFormatPatterns(uiModel);
+        List dependencies = new ArrayList();
+        if (Province.countProvinces() == 0) {
+            dependencies.add(new String[]{"province", "provinces"});
+        }
+        uiModel.addAttribute("dependencies", dependencies);
         return "acquirers/create";
     }
     
@@ -52,20 +60,6 @@ privileged aspect AcquirerController_Roo_Controller {
         uiModel.addAttribute("acquirer", Acquirer.findAcquirer(id));
         uiModel.addAttribute("itemId", id);
         return "acquirers/show";
-    }
-    
-    @RequestMapping(method = RequestMethod.GET)
-    public String AcquirerController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            uiModel.addAttribute("acquirers", Acquirer.findAcquirerEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
-            float nrOfPages = (float) Acquirer.countAcquirers() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("acquirers", Acquirer.findAllAcquirers());
-        }
-        addDateTimeFormatPatterns(uiModel);
-        return "acquirers/list";
     }
     
     @RequestMapping(method = RequestMethod.PUT)
@@ -104,6 +98,11 @@ privileged aspect AcquirerController_Roo_Controller {
     @ModelAttribute("firmwares")
     public java.util.Collection<Firmware> AcquirerController.populateFirmwares() {
         return Firmware.findAllFirmwares();
+    }
+    
+    @ModelAttribute("provinces")
+    public java.util.Collection<Province> AcquirerController.populateProvinces() {
+        return Province.findAllProvinces();
     }
     
     @ModelAttribute("terminals")
