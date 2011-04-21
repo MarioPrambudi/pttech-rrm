@@ -1,5 +1,7 @@
 package com.djavafactory.pttech.rrm.web;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.djavafactory.pttech.rrm.domain.Acquirer;
@@ -95,6 +97,7 @@ public class AcquirerController {
             return "acquirers/update";
         }
         uiModel.asMap().clear();
+        
         // ModifiedBy DEMO
         acquirer.setModifiedBy("System");
         acquirer.setModifiedTime(getCurrentDate());

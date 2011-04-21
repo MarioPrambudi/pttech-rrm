@@ -17,6 +17,7 @@
     	<field:display field="createdBy" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_createdBy" object="${acquirer}" z="mfNC9h2D+ti8vUBSVVY/ouAsFhU="/>
     	<field:display date="true" dateTimePattern="${acquirer_createdtime_date_format}" field="createdTime" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_createdTime" object="${acquirer}" z="gFfThMo+jqTId+8Bp21whNGP/ng="/>
         <field:display field="firmwares" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_firmwares" object="${acquirer}" render="false" z="user-managed"/>
-        <field:display field="terminals" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_terminals" object="${acquirer}" z="J0YMrTwCT5xhA6N1vmuzOZc7m28="/> 
+        <field:display field="terminals" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_terminals" object="${acquirer}" render="false" z="user-managed"/> 
+    	<field:display field="deleted" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_deleted" object="${acquirer}" render="false" z="user-managed"/>
     </page:show>
 </div>

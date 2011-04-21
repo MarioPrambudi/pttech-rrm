@@ -68,6 +68,7 @@ public class Acquirer {
 
     @Value("false")
     private Boolean deleted;
+    
 
 	
 }
