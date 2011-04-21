@@ -7,16 +7,6 @@
         <menu:category id="c_acquirer" z="RCLIYxauLoii7/DR/p3Nb0/KCB0=">
             <menu:item id="i_acquirer_new" messageCode="global_menu_new" url="/acquirers?form" z="On6F2Z+MPtf/eCCwDsd5WRiJ3Uw="/>
         <menu:item id="i_acquirer_list" messageCode="global_menu_list" url="/acquirers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="VMznesqcjWywp+Prv1XRfmyFQio="/>
-   <!-- Not Available in phase 1   
-        </menu:category>
-    <menu:category id="c_firmware" z="cf8SNRIfyDUsPN5R41RRm5jtHE0=">
-            <menu:item id="i_firmware_new" messageCode="global_menu_new" url="/firmwares?form" z="r3a6COLXRooa9hc7VK3V8Lcdk0w="/>
-        <menu:item id="i_firmware_list" messageCode="global_menu_list" url="/firmwares?page=1&amp;size=${empty param.size ? 10 : param.size}" z="weIN3MnvUK2XVOFzJ/VKhmLcJFI="/>
-        </menu:category>
-    <menu:category id="c_terminal" z="fUqe/4RD5XXmXs3AlZSvn+A7qbU=">
-            <menu:item id="i_terminal_new" messageCode="global_menu_new" url="/terminals?form" z="sRcSLq2zPV9S3mdpnj6HUCgYigQ="/>
-        <menu:item id="i_terminal_list" messageCode="global_menu_list" url="/terminals?page=1&amp;size=${empty param.size ? 10 : param.size}" z="gljexIqfX22dWEi/Q05J/waVgaE="/>
-  -->  
         </menu:category>
     <menu:category id="c_param" z="zWq6W+gDrJI4jNllHKl2MLmN7aw=">
             <menu:item id="i_param_new" messageCode="global_menu_new" url="/params?form" z="/Mix+W4C35ReTse5ZxV/tu8FyTY="/>
@@ -33,6 +23,15 @@
     <menu:category id="c_terminaltype" z="JACOsLZLgyswNWemsA+IEwyEMnc=">
             <menu:item id="i_terminaltype_new" messageCode="global_menu_new" url="/terminaltypes?form" z="UptivpplXCaiHWX8uYthKpDHMy4="/>
         <menu:item id="i_terminaltype_list" messageCode="global_menu_list" url="/terminaltypes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="HnyN2FxT4rN6fIaZGJQZWipBcwk="/>
+        </menu:category>
+    <menu:category id="c_terminal" z="fUqe/4RD5XXmXs3AlZSvn+A7qbU=">
+            <menu:item id="i_terminal_new" messageCode="global_menu_new" url="/terminals?form" z="sRcSLq2zPV9S3mdpnj6HUCgYigQ="/>
+        <menu:item id="i_terminal_list" messageCode="global_menu_list" url="/terminals?page=1&amp;size=${empty param.size ? 10 : param.size}" z="gljexIqfX22dWEi/Q05J/waVgaE="/>
+        </menu:category>
+        <!-- FIRMARE DISABLE in phase 1 -->
+    <menu:category id="c_firmware" render="false" z="user-managed">
+            <menu:item id="i_firmware_new" messageCode="global_menu_new" url="/firmwares?form" z="r3a6COLXRooa9hc7VK3V8Lcdk0w="/>
+        <menu:item id="i_firmware_list" messageCode="global_menu_list" url="/firmwares?page=1&amp;size=${empty param.size ? 10 : param.size}" z="weIN3MnvUK2XVOFzJ/VKhmLcJFI="/>
         </menu:category>
     </menu:menu>
 </div>

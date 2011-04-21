@@ -11,7 +11,8 @@ privileged aspect TerminalType_Roo_ToString {
         StringBuilder sb = new StringBuilder();
         sb.append("Name: ").append(getName()).append(", ");
         sb.append("Description: ").append(getDescription()).append(", ");
-        sb.append("Deleted: ").append(getDeleted());
+        sb.append("Deleted: ").append(getDeleted()).append(", ");
+        sb.append("Terminal: ").append(getTerminal() == null ? "null" : getTerminal().size());
         return sb.toString();
     }
     

@@ -5,5 +5,7 @@
     <page:show id="ps_com_djavafactory_pttech_rrm_domain_TerminalType" object="${terminaltype}" path="/terminaltypes" z="vQVtM5JAJhN0iE2OEKRrY2iUpi8=">
         <field:display field="name" id="s_com_djavafactory_pttech_rrm_domain_TerminalType_name" object="${terminaltype}" z="U9NQbb7RtEzzifR3jZx4B3PWWvk="/>        
     	<field:display field="description" id="s_com_djavafactory_pttech_rrm_domain_TerminalType_description" object="${terminaltype}" z="cMKTCJVRoofmP+tv5bOnSzJxSfM="/>
+	    <field:display field="deleted" render="false" id="s_com_djavafactory_pttech_rrm_domain_TerminalType_deleted" object="${terminaltype}" z="gJqqPRNt+HmpFzRZMGciRD5Pd68="/>    
+	    <field:display field="terminal" render="false" id="s_com_djavafactory_pttech_rrm_domain_TerminalType_terminal" object="${terminaltype}" z="Sdq+2UXU1Ey8a+hEOdXpJc66fjU="/>
     </page:show>
 </div>

@@ -1,7 +1,5 @@
 package com.djavafactory.pttech.rrm.web;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.djavafactory.pttech.rrm.domain.Acquirer;
@@ -24,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AcquirerController {
 	
 	public static Boolean LDELETED_STATUS = true;
+	private Date createdDate; //to hold the createdTime
 	
   /**
    * To delete Terminal by updated deletedStatus to LDELETED_STATUS value
@@ -98,10 +97,30 @@ public class AcquirerController {
         }
         uiModel.asMap().clear();
         
-        // ModifiedBy DEMO
+        // Temporary static
+        acquirer.setCreatedTime(createdDate);
         acquirer.setModifiedBy("System");
         acquirer.setModifiedTime(getCurrentDate());
         acquirer.merge();
         return "redirect:/acquirers/" + encodeUrlPathSegment(acquirer.getId().toString(), httpServletRequest);
     }
+	
+  /**
+   * display update form and save the createdTime into createdDate 
+   * @param id The Terminal id
+   * @param uiModel Model
+   * @exception none 
+   * @return String the page path to redirect
+   */
+	@RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
+    public String updateForm(@PathVariable("id") Long id, Model uiModel) {
+		Acquirer objAcquirer;
+		objAcquirer = Acquirer.findAcquirer(id);		
+		createdDate = objAcquirer.getCreatedTime();
+        uiModel.addAttribute("acquirer", objAcquirer);
+        addDateTimeFormatPatterns(uiModel);
+        return "acquirers/update";
+    }
+
+
 }

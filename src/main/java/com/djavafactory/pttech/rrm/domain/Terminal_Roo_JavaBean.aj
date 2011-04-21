@@ -4,6 +4,7 @@
 package com.djavafactory.pttech.rrm.domain;
 
 import com.djavafactory.pttech.rrm.domain.Acquirer;
+import com.djavafactory.pttech.rrm.domain.TerminalType;
 import java.lang.String;
 import java.util.Date;
 
@@ -63,6 +64,14 @@ privileged aspect Terminal_Roo_JavaBean {
     
     public void Terminal.setAcquirer(Acquirer acquirer) {
         this.acquirer = acquirer;
+    }
+    
+    public TerminalType Terminal.getTerminalType() {
+        return this.terminalType;
+    }
+    
+    public void Terminal.setTerminalType(TerminalType terminalType) {
+        this.terminalType = terminalType;
     }
     
 }

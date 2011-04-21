@@ -54,13 +54,6 @@ privileged aspect AcquirerController_Roo_Controller {
         return "acquirers/list";
     }
     
-    @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
-    public String AcquirerController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("acquirer", Acquirer.findAcquirer(id));
-        addDateTimeFormatPatterns(uiModel);
-        return "acquirers/update";
-    }
-    
     @ModelAttribute("acquirers")
     public Collection<Acquirer> AcquirerController.populateAcquirers() {
         return Acquirer.findAllAcquirers();

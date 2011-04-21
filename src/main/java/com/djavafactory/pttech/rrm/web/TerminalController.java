@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class TerminalController {
 
 	public static String TERMINAL_STATUS_DELETED = "d";
+	private Date createdDate; //to hold the createdTime
+	
  /**
    * To delete Terminal by updated deletedStatus to "d"
    * @param id The Terminal id
@@ -82,21 +84,39 @@ public class TerminalController {
             return "terminals/update";
         }
         uiModel.asMap().clear();
-        // ModifiedBy DEMO
+        // Temporary static
+        terminal.setCreatedTime(createdDate);
         terminal.setModifiedBy("System");
         terminal.setModifiedTime(getCurrentDate());
         terminal.merge();
         return "redirect:/terminals/" + encodeUrlPathSegment(terminal.getId().toString(), httpServletRequest);
     }
 	
-	 /**
-	   * get the current date
-	   * @param none
-	   * @exception none 
-	   * @return Date the current date
-	   */
-		@Transient
-		public Date getCurrentDate(){
-		return new Date();
-		}
+  /**
+   * get the current date
+   * @param none
+   * @exception none 
+   * @return Date the current date
+   */
+	@Transient
+	public Date getCurrentDate(){
+	return new Date();
+	}
+
+  /**
+   * display update form and save the createdTime into createdDate 
+   * @param id The Terminal id
+   * @param uiModel Model
+   * @exception none 
+   * @return String the page path to redirect
+   */
+	@RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
+    public String updateForm(@PathVariable("id") Long id, Model uiModel) {
+		Terminal objTerminal;
+		objTerminal = Terminal.findTerminal(id);
+		createdDate = objTerminal.getCreatedTime();
+        uiModel.addAttribute("terminal", objTerminal);
+        addDateTimeFormatPatterns(uiModel);
+        return "terminals/update";
+    }
 }

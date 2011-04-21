@@ -1,5 +1,9 @@
 package com.djavafactory.pttech.rrm.domain;
 
+import java.util.List;
+
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -19,4 +23,7 @@ public class TerminalType {
 
     @Value("false")
     private Boolean deleted;
+    
+    @ManyToMany
+    private List<Terminal> terminal;
 }

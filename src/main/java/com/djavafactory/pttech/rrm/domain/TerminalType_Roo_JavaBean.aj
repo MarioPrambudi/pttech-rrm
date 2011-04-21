@@ -3,8 +3,10 @@
 
 package com.djavafactory.pttech.rrm.domain;
 
+import com.djavafactory.pttech.rrm.domain.Terminal;
 import java.lang.Boolean;
 import java.lang.String;
+import java.util.List;
 
 privileged aspect TerminalType_Roo_JavaBean {
     
@@ -30,6 +32,14 @@ privileged aspect TerminalType_Roo_JavaBean {
     
     public void TerminalType.setDeleted(Boolean deleted) {
         this.deleted = deleted;
+    }
+    
+    public List<Terminal> TerminalType.getTerminal() {
+        return this.terminal;
+    }
+    
+    public void TerminalType.setTerminal(List<Terminal> terminal) {
+        this.terminal = terminal;
     }
     
 }

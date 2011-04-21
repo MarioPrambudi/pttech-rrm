@@ -4,12 +4,13 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_com_djavafactory_pttech_rrm_domain_Terminal" modelAttribute="terminal" path="/terminals" render="${empty dependencies}" z="bTMCSSXFEhc/doTUcVEK28n02QY=">
         <field:input field="terminalId" id="c_com_djavafactory_pttech_rrm_domain_Terminal_terminalId" required="true" z="b8AZnrZaLjXE/ge8UUBgAfNXyhs="/>
-        <field:input field="status" id="c_com_djavafactory_pttech_rrm_domain_Terminal_status" render="false" z="ul/3hLgMLQCu1Ras6r5VMzuoDTI="/>        
+        <field:select field="terminalType" id="c_com_djavafactory_pttech_rrm_domain_Terminal_terminalType" itemValue="id" items="${terminaltypes}" path="/terminaltypes" z="uImvtseU9HVZfs9ze2vLFAAgXBc="/>
+        <field:input field="status" id="c_com_djavafactory_pttech_rrm_domain_Terminal_status" render="false" z="user-managed"/>        
         <field:datetime dateTimePattern="${terminal_createdtime_date_format}" field="createdTime" id="c_com_djavafactory_pttech_rrm_domain_Terminal_createdTime" render="false" required="true" z="user-managed"/>
         <field:input field="modifiedBy" id="c_com_djavafactory_pttech_rrm_domain_Terminal_modifiedBy" render="false" z="user-managed"/>
         <field:input field="createdBy" id="c_com_djavafactory_pttech_rrm_domain_Terminal_createdBy" render="false" z="user-managed"/>
         <field:datetime dateTimePattern="${terminal_modifiedtime_date_format}" field="modifiedTime" id="c_com_djavafactory_pttech_rrm_domain_Terminal_modifiedTime" render="false" z="user-managed"/>
-        <field:select field="acquirer" id="c_com_djavafactory_pttech_rrm_domain_Terminal_acquirer" itemValue="id" items="${acquirers}" path="/acquirers" required="true" z="3G+BYh3bGscHkrohhOBkFnqFr0E="/>   
+        <field:select field="acquirer" id="c_com_djavafactory_pttech_rrm_domain_Terminal_acquirer" itemValue="id" items="${acquirers}" path="/acquirers" required="true" z="3G+BYh3bGscHkrohhOBkFnqFr0E="/>       	
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_djavafactory_pttech_rrm_domain_Terminal" render="${not empty dependencies}" z="F74jSQ1OvQ1O1YPVG1qm8aJ0kx8="/>
 </div>

@@ -5,6 +5,7 @@ package com.djavafactory.pttech.rrm.web;
 
 import com.djavafactory.pttech.rrm.domain.Acquirer;
 import com.djavafactory.pttech.rrm.domain.Terminal;
+import com.djavafactory.pttech.rrm.domain.TerminalType;
 import java.io.UnsupportedEncodingException;
 import java.lang.Integer;
 import java.lang.Long;
@@ -60,13 +61,6 @@ privileged aspect TerminalController_Roo_Controller {
         return "terminals/list";
     }
     
-    @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
-    public String TerminalController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("terminal", Terminal.findTerminal(id));
-        addDateTimeFormatPatterns(uiModel);
-        return "terminals/update";
-    }
-    
     @ModelAttribute("acquirers")
     public Collection<Acquirer> TerminalController.populateAcquirers() {
         return Acquirer.findAllAcquirers();
@@ -75,6 +69,11 @@ privileged aspect TerminalController_Roo_Controller {
     @ModelAttribute("terminals")
     public java.util.Collection<Terminal> TerminalController.populateTerminals() {
         return Terminal.findAllTerminals();
+    }
+    
+    @ModelAttribute("terminaltypes")
+    public java.util.Collection<TerminalType> TerminalController.populateTerminalTypes() {
+        return TerminalType.findAllTerminalTypes();
     }
     
     void TerminalController.addDateTimeFormatPatterns(Model uiModel) {

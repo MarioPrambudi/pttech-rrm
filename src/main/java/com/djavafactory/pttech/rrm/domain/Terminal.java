@@ -40,6 +40,10 @@ public class Terminal {
     @ManyToOne
     private Acquirer acquirer;
     
+    @ManyToOne
+    private TerminalType terminalType;
+    
+    
     
 
 
