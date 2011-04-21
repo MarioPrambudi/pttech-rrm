@@ -78,7 +78,7 @@ public class Acquirer {
     * @return List of acquirer
     */
     public static TypedQuery<Acquirer> findAcquirersByParam(String name, String registrationNo, int firstResult, int maxResults) {
-        EntityManager em = new Acquirer().entityManager();
+        EntityManager em = Acquirer.entityManager();
         TypedQuery<Acquirer> q = null;
         String query = "SELECT Acquirer FROM Acquirer AS acquirer WHERE acquirer.deleted = false";
         if (name != null && !name.equals("")) {

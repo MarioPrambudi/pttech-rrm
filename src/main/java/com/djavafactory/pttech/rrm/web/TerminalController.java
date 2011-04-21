@@ -4,6 +4,9 @@ import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.Acquirer;
 import com.djavafactory.pttech.rrm.domain.Terminal;
 import com.djavafactory.pttech.rrm.domain.TerminalType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +27,9 @@ public class TerminalController {
 
     private Date createdDate; //to hold the createdTime
 
+    @Autowired
+    private MessageSource messageSource;
+
     /**
     * To show the list of terminal with paginate
     * @param page The page number
@@ -37,12 +43,12 @@ public class TerminalController {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
 
-            List<Terminal> terminalList = new Terminal().findTerminalsByParam(null, null, -1L, -1L, page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo).getResultList();
-            uiModel.addAttribute("terminals", terminalList);
+            List<Terminal> terminalList = Terminal.findTerminalsByParam(null, null, -1L, -1L, page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo).getResultList();
+            uiModel.addAttribute("terminals", regenerateList(terminalList));
             float nrOfPages = (float) terminalList.size() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("terminals", new Terminal().findTerminalsByParam(null, null, -1L, -1L, -1, -1).getResultList());
+            uiModel.addAttribute("terminals", regenerateList(Terminal.findTerminalsByParam(null, null, -1L, -1L, -1, -1).getResultList()));
         }
         addDateTimeFormatPatterns(uiModel);
         return "terminals/list";
@@ -59,7 +65,7 @@ public class TerminalController {
     @RequestMapping(value = "/findTerminalsByParam", method = RequestMethod.POST)
     public String findTerminalsByParam(@RequestParam(value = "terminalId", required = false) String terminalId, @RequestParam(value = "status", required = false) String status,
                                        @RequestParam(value = "terminalType", required = false) Long terminalType, @RequestParam(value = "acquirer", required = false) Long acquirer, Model uiModel) {
-        uiModel.addAttribute("terminals", new Terminal().findTerminalsByParam(terminalId, status, terminalType, acquirer, -1, -1).getResultList());
+        uiModel.addAttribute("terminals", regenerateList(Terminal.findTerminalsByParam(terminalId, status, terminalType, acquirer, -1, -1).getResultList()));
         addDateTimeFormatPatterns(uiModel);
         return "terminals/list";
     }
@@ -167,7 +173,7 @@ public class TerminalController {
     */
     @ModelAttribute("acquirers")
     public Collection<Acquirer> populateAcquirers() {
-        return new Acquirer().findAcquirersByParam(null, null, -1, -1).getResultList();
+        return Acquirer.findAcquirersByParam(null, null, -1, -1).getResultList();
     }
 
     /**
@@ -177,7 +183,7 @@ public class TerminalController {
     */
     @ModelAttribute("allacquirers")
     public Collection<Acquirer> populateAllAcquirers() {
-        return new Acquirer().findAllAcquirers();
+        return Acquirer.findAllAcquirers();
     }
 
     /**
@@ -187,7 +193,7 @@ public class TerminalController {
     */
     @ModelAttribute("terminaltypes")
     public java.util.Collection<TerminalType> populateTerminalTypes() {
-        return new TerminalType().findTerminalTypesByParam(null, -1, -1).getResultList();
+        return TerminalType.findTerminalTypesByParam(null, -1, -1).getResultList();
     }
 
     /**
@@ -197,7 +203,42 @@ public class TerminalController {
     */
     @ModelAttribute("allterminaltypes")
     public java.util.Collection<TerminalType> populateAllTerminalTypes() {
-        return new TerminalType().findAllTerminalTypes();
+        return TerminalType.findAllTerminalTypes();
     }
 
+    /**
+    * display date/time formatting get from resource bundle
+    * @exception none
+    * @return String the page path to redirect
+    */
+    void addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("terminal_createdtime_date_format", messageSource.getMessage("display_date_format", null, LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("terminal_modifiedtime_date_format", messageSource.getMessage("display_date_format", null, LocaleContextHolder.getLocale()));
+    }
+
+    /**
+    * Get the terminal info and format the status
+    * @param id The Terminal id
+    * @param uiModel Model
+    * @exception none
+    * @return String the page path to redirect
+    */
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String show(@PathVariable("id") Long id, Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
+        Terminal terminal = Terminal.findTerminal(id);
+        terminal.setStatus(messageSource.getMessage("terminal_status_code_" + terminal.getStatus(), null, LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("terminal", terminal);
+        uiModel.addAttribute("itemId", id);
+        return "terminals/show";
+    }
+
+    private List<Terminal> regenerateList(List<Terminal> terminalList) {
+        for(int i = 0; i < terminalList.size(); i++) {
+            Terminal terminal = terminalList.get(i);
+            terminal.setStatus(messageSource.getMessage("terminal_status_code_" + terminal.getStatus(), null, LocaleContextHolder.getLocale()));
+            terminalList.set(i, terminal);
+        }
+        return terminalList;
+    }
 }

@@ -7,17 +7,13 @@ import com.djavafactory.pttech.rrm.domain.Acquirer;
 import com.djavafactory.pttech.rrm.domain.Terminal;
 import com.djavafactory.pttech.rrm.domain.TerminalType;
 import java.io.UnsupportedEncodingException;
-import java.lang.Long;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.joda.time.format.DateTimeFormat;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.UriUtils;
@@ -40,22 +36,9 @@ privileged aspect TerminalController_Roo_Controller {
         return "terminals/create";
     }
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String TerminalController.show(@PathVariable("id") Long id, Model uiModel) {
-        addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("terminal", Terminal.findTerminal(id));
-        uiModel.addAttribute("itemId", id);
-        return "terminals/show";
-    }
-    
     @ModelAttribute("terminals")
     public Collection<Terminal> TerminalController.populateTerminals() {
         return Terminal.findAllTerminals();
-    }
-    
-    void TerminalController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("terminal_createdtime_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("terminal_modifiedtime_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
     }
     
     String TerminalController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

@@ -1,6 +1,9 @@
 package com.djavafactory.pttech.rrm.web;
 
 import com.djavafactory.pttech.rrm.domain.Acquirer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +27,9 @@ public class AcquirerController {
     public static Boolean LDELETED_STATUS = true;
     private Date createdDate; //to hold the createdTime
 
+    @Autowired
+    private MessageSource messageSource;
+
     /**
     * To show the list of acquirer with paginate
     * @param page The page number
@@ -37,12 +43,12 @@ public class AcquirerController {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
 
-            List<Acquirer> acquirerList = new Acquirer().findAcquirersByParam(null, null, page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo).getResultList();
+            List<Acquirer> acquirerList = Acquirer.findAcquirersByParam(null, null, page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo).getResultList();
             uiModel.addAttribute("acquirers", acquirerList);
             float nrOfPages = (float) acquirerList.size() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("acquirers", new Acquirer().findAcquirersByParam(null, null, -1, -1).getResultList());
+            uiModel.addAttribute("acquirers", Acquirer.findAcquirersByParam(null, null, -1, -1).getResultList());
         }
         addDateTimeFormatPatterns(uiModel);
         return "acquirers/list";
@@ -58,7 +64,7 @@ public class AcquirerController {
     */
     @RequestMapping(value = "/findAcquirersByParam", method = RequestMethod.POST)
     public String findAcquirersByParam(@RequestParam(value = "name", required = false) String name, @RequestParam(value = "registrationNo", required = false) String registrationNo, Model uiModel) {
-        uiModel.addAttribute("acquirers", new Acquirer().findAcquirersByParam(name, registrationNo, -1, -1).getResultList());
+        uiModel.addAttribute("acquirers", Acquirer.findAcquirersByParam(name, registrationNo, -1, -1).getResultList());
         addDateTimeFormatPatterns(uiModel);
         return "acquirers/list";
     }
@@ -159,5 +165,15 @@ public class AcquirerController {
         uiModel.addAttribute("acquirer", objAcquirer);
         addDateTimeFormatPatterns(uiModel);
         return "acquirers/update";
+    }
+
+    /**
+    * display date/time formatting get from resource bundle
+    * @exception none
+    * @return String the page path to redirect
+    */
+    void addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("acquirer_createdtime_date_format", messageSource.getMessage("display_date_format", null, LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("acquirer_modifiedtime_date_format", messageSource.getMessage("display_date_format", null, LocaleContextHolder.getLocale()));
     }
 }

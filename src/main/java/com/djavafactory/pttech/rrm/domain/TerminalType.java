@@ -5,6 +5,7 @@ import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 
+import javax.persistence.CascadeType;
 import javax.persistence.EntityManager;
 import javax.persistence.ManyToMany;
 import javax.persistence.TypedQuery;
@@ -25,7 +26,7 @@ public class TerminalType {
     @Value("false")
     private Boolean deleted;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "terminalType")
     private List<Terminal> terminal;
 
     /**
@@ -37,7 +38,7 @@ public class TerminalType {
     * @return List of terminal type
     */
     public static TypedQuery<TerminalType> findTerminalTypesByParam(String searchText, int firstResult, int maxResults) {
-        EntityManager em = new TerminalType().entityManager();
+        EntityManager em = TerminalType.entityManager();
         TypedQuery<TerminalType> q = null;
         String query = "SELECT TerminalType FROM TerminalType AS terminalType WHERE terminalType.deleted = false";
         if (searchText != null && !searchText.equals("")) {

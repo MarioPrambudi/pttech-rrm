@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.joda.time.format.DateTimeFormat;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -64,11 +62,6 @@ privileged aspect AcquirerController_Roo_Controller {
     @ModelAttribute("terminals")
     public java.util.Collection<Terminal> AcquirerController.populateTerminals() {
         return Terminal.findAllTerminals();
-    }
-    
-    void AcquirerController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("acquirer_createdtime_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("acquirer_modifiedtime_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
     }
     
     String AcquirerController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

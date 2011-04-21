@@ -51,7 +51,7 @@ public class Terminal {
     * @return List of terminal
     */
     public static TypedQuery<Terminal> findTerminalsByParam(String terminalId, String status, Long terminalType, Long acquirer, int firstResult, int maxResults) {
-        EntityManager em = new Terminal().entityManager();
+        EntityManager em = Terminal.entityManager();
         TypedQuery<Terminal> q = null;
         String query = "SELECT Terminal FROM Terminal AS terminal WHERE terminal.status != 'd'";
         if (status != null && !status.equals("")) {
