@@ -5,12 +5,12 @@ package com.djavafactory.pttech.rrm.domain;
 
 import java.lang.String;
 
-privileged aspect Province_Roo_ToString {
+privileged aspect City_Roo_ToString {
     
-    public String Province.toString() {
+    public String City.toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Name: ").append(getName()).append(", ");
-        sb.append("Cities: ").append(getCities() == null ? "null" : getCities().size());
+        sb.append("CityName: ").append(getCityName()).append(", ");
+        sb.append("AcquirerState: ").append(getAcquirerState());
         return sb.toString();
     }
     
