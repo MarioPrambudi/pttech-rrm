@@ -45,6 +45,7 @@ privileged aspect AcquirerController_Roo_Controller {
     }
     
 <<<<<<< HEAD
+<<<<<<< HEAD
     @RequestMapping(method = RequestMethod.GET)
     public String AcquirerController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         if (page != null || size != null) {
@@ -59,6 +60,8 @@ privileged aspect AcquirerController_Roo_Controller {
         return "acquirers/list";
     }
     
+=======
+>>>>>>> upstream/master
 =======
 >>>>>>> upstream/master
     @ModelAttribute("acquirers")

@@ -54,11 +54,19 @@ public class Terminal {
     @NotNull
     @ManyToOne
     private Acquirer acquirer;
+<<<<<<< HEAD
     
     @NotNull
     @ManyToOne
     private TerminalType terminalType;
 
+=======
+
+    @NotNull
+    @ManyToOne
+    private TerminalType terminalType;
+
+>>>>>>> upstream/master
     /**
     * To search terminals by parameters
     * @param terminalId The terminal id

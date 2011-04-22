@@ -125,5 +125,8 @@ quit
 quit
 // Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-21 17:37:32
 // Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-21 17:37:35
+<<<<<<< HEAD
 // Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-22 19:10:19
 hint
+=======
+>>>>>>> upstream/master

@@ -23,7 +23,10 @@ import java.util.*;
 @Controller
 public class TerminalController {
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> upstream/master
     private Date createdDate; //to hold the createdTime
 
     @Autowired
@@ -69,7 +72,10 @@ public class TerminalController {
         return "terminals/list";
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> upstream/master
  /**
    * To delete Terminal by updated deletedStatus to "d"
    * @param id The Terminal id
@@ -130,7 +136,11 @@ public class TerminalController {
             return "terminals/update";
         }
         uiModel.asMap().clear();
+<<<<<<< HEAD
         // Temporary static
+=======
+        // ModifiedBy DEMO
+>>>>>>> upstream/master
         terminal.setCreatedTime(createdDate);
         terminal.setModifiedBy("System");
         terminal.setModifiedTime(getCurrentDate());

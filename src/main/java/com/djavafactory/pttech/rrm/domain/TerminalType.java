@@ -1,19 +1,32 @@
 package com.djavafactory.pttech.rrm.domain;
 
+<<<<<<< HEAD
 
 import java.util.List;
 
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+=======
+>>>>>>> upstream/master
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
+<<<<<<< HEAD
 import javax.persistence.CascadeType;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+=======
+
+import javax.persistence.CascadeType;
+import javax.persistence.EntityManager;
+import javax.persistence.ManyToMany;
+import javax.persistence.TypedQuery;
+import javax.validation.constraints.NotNull;
+import java.util.List;
+>>>>>>> upstream/master
 
 @RooJavaBean
 @RooToString

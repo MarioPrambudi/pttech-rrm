@@ -5,7 +5,12 @@
     <form:create id="fc_com_djavafactory_pttech_rrm_domain_Terminal" modelAttribute="terminal" path="/terminals" render="${empty dependencies}" z="bTMCSSXFEhc/doTUcVEK28n02QY=">
         <field:input field="terminalId" id="c_com_djavafactory_pttech_rrm_domain_Terminal_terminalId" required="true" z="b8AZnrZaLjXE/ge8UUBgAfNXyhs="/>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <field:select field="terminalType" id="c_com_djavafactory_pttech_rrm_domain_Terminal_terminalType" itemValue="id" items="${terminaltypes}" path="/terminaltypes" z="uImvtseU9HVZfs9ze2vLFAAgXBc="/>
+=======
+        <field:select field="terminalType" id="c_com_djavafactory_pttech_rrm_domain_Terminal_terminalType" itemValue="id" items="${terminaltypes}" path="/terminaltypes" required="true" z="user-managed"/>
+        <field:select field="acquirer" id="c_com_djavafactory_pttech_rrm_domain_Terminal_acquirer" itemValue="id" items="${acquirers}" path="/acquirers" required="true" z="user-managed"/>
+>>>>>>> upstream/master
 =======
         <field:select field="terminalType" id="c_com_djavafactory_pttech_rrm_domain_Terminal_terminalType" itemValue="id" items="${terminaltypes}" path="/terminaltypes" required="true" z="user-managed"/>
         <field:select field="acquirer" id="c_com_djavafactory_pttech_rrm_domain_Terminal_acquirer" itemValue="id" items="${acquirers}" path="/acquirers" required="true" z="user-managed"/>
@@ -16,14 +21,20 @@
         <field:input field="createdBy" id="c_com_djavafactory_pttech_rrm_domain_Terminal_createdBy" render="false" z="user-managed"/>
         <field:datetime dateTimePattern="${terminal_modifiedtime_date_format}" field="modifiedTime" id="c_com_djavafactory_pttech_rrm_domain_Terminal_modifiedTime" render="false" z="user-managed"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <field:select field="acquirer" id="c_com_djavafactory_pttech_rrm_domain_Terminal_acquirer" itemValue="id" items="${acquirers}" path="/acquirers" required="true" z="3G+BYh3bGscHkrohhOBkFnqFr0E="/>       	
 =======
+=======
+>>>>>>> upstream/master
     <field:input field="ip" id="c_com_djavafactory_pttech_rrm_domain_Terminal_ip" required="true" z="DJioxjpBUxdPM642ppN6IX0vGuM="/>
         <field:input field="port" id="c_com_djavafactory_pttech_rrm_domain_Terminal_port" required="true" z="sEwXCIsOx1Z0kxrflZt1pgK+O48="/>
     <field:input field="description" id="c_com_djavafactory_pttech_rrm_domain_Terminal_description" z="t4LJnN5/D58X17uGu2SMkwnAZTY="/>
     <field:input field="city" id="c_com_djavafactory_pttech_rrm_domain_Terminal_city" required="true" z="hasii8MIYTYPxg9O1wK15PLoc0A="/>
         <field:input field="acquirerState" id="c_com_djavafactory_pttech_rrm_domain_Terminal_acquirerState" required="true" z="orj4B1a2R7uc/aLrwgBzxCid5bc="/>
     <field:input field="location" id="c_com_djavafactory_pttech_rrm_domain_Terminal_location" required="true" z="KLPSuEYrNxwixwQ6w8XY/g3pO/w="/>
+<<<<<<< HEAD
+>>>>>>> upstream/master
+=======
 >>>>>>> upstream/master
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_djavafactory_pttech_rrm_domain_Terminal" render="${not empty dependencies}" z="F74jSQ1OvQ1O1YPVG1qm8aJ0kx8="/>
