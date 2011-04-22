@@ -15,6 +15,7 @@ privileged aspect Terminal_Roo_ToString {
         sb.append("Description: ").append(getDescription()).append(", ");
         sb.append("AcquirerState: ").append(getAcquirerState()).append(", ");
         sb.append("City: ").append(getCity()).append(", ");
+        sb.append("Location: ").append(getLocation()).append(", ");
         sb.append("Status: ").append(getStatus()).append(", ");
         sb.append("CreatedTime: ").append(getCreatedTime()).append(", ");
         sb.append("ModifiedTime: ").append(getModifiedTime()).append(", ");

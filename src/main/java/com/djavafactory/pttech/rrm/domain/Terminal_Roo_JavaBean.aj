@@ -59,6 +59,14 @@ privileged aspect Terminal_Roo_JavaBean {
         this.city = city;
     }
     
+    public String Terminal.getLocation() {
+        return this.location;
+    }
+    
+    public void Terminal.setLocation(String location) {
+        this.location = location;
+    }
+    
     public String Terminal.getStatus() {
         return this.status;
     }

@@ -33,6 +33,9 @@ public class Terminal {
     @NotNull
     private String city;
 
+    @NotNull
+    private String location;
+
     @Value("x")
     private String status;
 
