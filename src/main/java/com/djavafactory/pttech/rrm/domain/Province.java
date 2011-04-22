@@ -17,6 +17,6 @@ public class Province {
     private String name;
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "acquirerState")
-    private Set<Acquirer> acquirers = new HashSet<Acquirer>();
+    private Set<City> cities = new HashSet<City>();
 
 }

@@ -18,6 +18,21 @@ public class Terminal {
     @NotNull
     private String terminalId;
 
+    @NotNull
+    private String ip;
+
+    @NotNull
+    private String port;
+
+    private String description;
+
+    @NotNull
+    @ManyToOne
+    private Province acquirerState;
+
+    @NotNull
+    private String city;
+
     @Value("x")
     private String status;
 
@@ -54,7 +69,7 @@ public class Terminal {
         EntityManager em = Terminal.entityManager();
         TypedQuery<Terminal> q = null;
         String query = "SELECT Terminal FROM Terminal AS terminal WHERE terminal.status != 'd'";
-        if (status != null && !status.equals("")) {
+        if (status != null && !status.equals("") && !status.equals("-1")) {
             query = new StringBuilder(query).append(" AND terminal.status = :status").toString();
         }
         if (terminalId != null && !terminalId.equals("")) {
@@ -68,7 +83,7 @@ public class Terminal {
         }
 
         q = (firstResult > 0 && maxResults > 0) ? em.createQuery(query, Terminal.class).setFirstResult(firstResult).setMaxResults(maxResults) : em.createQuery(query, Terminal.class);
-        if (status != null && !status.equals("")) {
+        if (status != null && !status.equals("") && !status.equals("-1")) {
             q.setParameter("status", status);
         }
         if (terminalId != null && !terminalId.equals("")) {

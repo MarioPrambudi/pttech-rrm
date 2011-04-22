@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.Transient;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @RooWebScaffold(path = "terminals", formBackingObject = Terminal.class)
 @RequestMapping("/terminals")
@@ -204,6 +202,36 @@ public class TerminalController {
     @ModelAttribute("allterminaltypes")
     public java.util.Collection<TerminalType> populateAllTerminalTypes() {
         return TerminalType.findAllTerminalTypes();
+    }
+
+    @ModelAttribute("statuscode")
+    public java.util.Collection<Map> populateStatusCodes() {
+        List<Map> list = new ArrayList<Map>();
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("id", "-1");
+        map.put("value", messageSource.getMessage("please_select", null, LocaleContextHolder.getLocale()));
+        list.add(map);
+        map = null;
+
+        map = new HashMap<String, String>();
+        map.put("id", Constants.TERMINAL_STATUS_ACTIVE);
+        map.put("value", messageSource.getMessage("terminal_status_code_" + Constants.TERMINAL_STATUS_ACTIVE, null, LocaleContextHolder.getLocale()));
+        list.add(map);
+        map = null;
+
+        map = new HashMap<String, String>();
+        map.put("id", Constants.TERMINAL_STATUS_INACTIVE);
+        map.put("value", messageSource.getMessage("terminal_status_code_" + Constants.TERMINAL_STATUS_INACTIVE, null, LocaleContextHolder.getLocale()));
+        list.add(map);
+        map = null;
+
+        map = new HashMap<String, String>();
+        map.put("id", Constants.TERMINAL_STATUS_BLOCK);
+        map.put("value", messageSource.getMessage("terminal_status_code_" + Constants.TERMINAL_STATUS_BLOCK, null, LocaleContextHolder.getLocale()));
+        list.add(map);
+        map = null;
+
+        return list;
     }
 
     /**

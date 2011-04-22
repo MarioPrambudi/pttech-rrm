@@ -4,6 +4,7 @@
 package com.djavafactory.pttech.rrm.domain;
 
 import com.djavafactory.pttech.rrm.domain.Acquirer;
+import com.djavafactory.pttech.rrm.domain.Province;
 import com.djavafactory.pttech.rrm.domain.TerminalType;
 import java.lang.String;
 import java.util.Date;
@@ -16,6 +17,46 @@ privileged aspect Terminal_Roo_JavaBean {
     
     public void Terminal.setTerminalId(String terminalId) {
         this.terminalId = terminalId;
+    }
+    
+    public String Terminal.getIp() {
+        return this.ip;
+    }
+    
+    public void Terminal.setIp(String ip) {
+        this.ip = ip;
+    }
+    
+    public String Terminal.getPort() {
+        return this.port;
+    }
+    
+    public void Terminal.setPort(String port) {
+        this.port = port;
+    }
+    
+    public String Terminal.getDescription() {
+        return this.description;
+    }
+    
+    public void Terminal.setDescription(String description) {
+        this.description = description;
+    }
+    
+    public Province Terminal.getAcquirerState() {
+        return this.acquirerState;
+    }
+    
+    public void Terminal.setAcquirerState(Province acquirerState) {
+        this.acquirerState = acquirerState;
+    }
+    
+    public String Terminal.getCity() {
+        return this.city;
+    }
+    
+    public void Terminal.setCity(String city) {
+        this.city = city;
     }
     
     public String Terminal.getStatus() {

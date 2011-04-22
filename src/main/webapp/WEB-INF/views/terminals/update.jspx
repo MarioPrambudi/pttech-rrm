@@ -14,5 +14,10 @@
         <field:input field="modifiedBy" id="c_com_djavafactory_pttech_rrm_domain_Terminal_modifiedBy" render="false" z="user-managed"/>      
         <field:datetime dateTimePattern="${terminal_modifiedtime_date_format}" field="modifiedTime" id="c_com_djavafactory_pttech_rrm_domain_Terminal_modifiedTime" render="false" z="user-managed"/>
         <input id="c_com_djavafactory_pttech_rrm_domain_Terminal_createdBy" name="createdBy" type="hidden" value="${terminal.createdBy}"/>
+    <field:input field="ip" id="c_com_djavafactory_pttech_rrm_domain_Terminal_ip" required="true" z="DJioxjpBUxdPM642ppN6IX0vGuM="/>
+        <field:input field="port" id="c_com_djavafactory_pttech_rrm_domain_Terminal_port" required="true" z="sEwXCIsOx1Z0kxrflZt1pgK+O48="/>
+    <field:input field="description" id="c_com_djavafactory_pttech_rrm_domain_Terminal_description" z="t4LJnN5/D58X17uGu2SMkwnAZTY="/>
+    <field:input field="city" id="c_com_djavafactory_pttech_rrm_domain_Terminal_city" required="true" z="hasii8MIYTYPxg9O1wK15PLoc0A="/>
+        <field:input field="acquirerState" id="c_com_djavafactory_pttech_rrm_domain_Terminal_acquirerState" required="true" z="orj4B1a2R7uc/aLrwgBzxCid5bc="/>
     </form:update>
 </div>

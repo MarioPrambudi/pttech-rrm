@@ -3,7 +3,7 @@
 
 package com.djavafactory.pttech.rrm.domain;
 
-import com.djavafactory.pttech.rrm.domain.Acquirer;
+import com.djavafactory.pttech.rrm.domain.City;
 import java.lang.String;
 import java.util.Set;
 
@@ -17,12 +17,12 @@ privileged aspect Province_Roo_JavaBean {
         this.name = name;
     }
     
-    public Set<Acquirer> Province.getAcquirers() {
-        return this.acquirers;
+    public Set<City> Province.getCities() {
+        return this.cities;
     }
     
-    public void Province.setAcquirers(Set<Acquirer> acquirers) {
-        this.acquirers = acquirers;
+    public void Province.setCities(Set<City> cities) {
+        this.cities = cities;
     }
     
 }

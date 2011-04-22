@@ -4,6 +4,7 @@
 package com.djavafactory.pttech.rrm.web;
 
 import com.djavafactory.pttech.rrm.domain.Acquirer;
+import com.djavafactory.pttech.rrm.domain.Province;
 import com.djavafactory.pttech.rrm.domain.Terminal;
 import com.djavafactory.pttech.rrm.domain.TerminalType;
 import java.io.UnsupportedEncodingException;
@@ -26,6 +27,9 @@ privileged aspect TerminalController_Roo_Controller {
         uiModel.addAttribute("terminal", new Terminal());
         addDateTimeFormatPatterns(uiModel);
         List dependencies = new ArrayList();
+        if (Province.countProvinces() == 0) {
+            dependencies.add(new String[]{"province", "provinces"});
+        }
         if (Acquirer.countAcquirers() == 0) {
             dependencies.add(new String[]{"acquirer", "acquirers"});
         }
@@ -36,8 +40,13 @@ privileged aspect TerminalController_Roo_Controller {
         return "terminals/create";
     }
     
+    @ModelAttribute("provinces")
+    public Collection<Province> TerminalController.populateProvinces() {
+        return Province.findAllProvinces();
+    }
+    
     @ModelAttribute("terminals")
-    public Collection<Terminal> TerminalController.populateTerminals() {
+    public java.util.Collection<Terminal> TerminalController.populateTerminals() {
         return Terminal.findAllTerminals();
     }
     

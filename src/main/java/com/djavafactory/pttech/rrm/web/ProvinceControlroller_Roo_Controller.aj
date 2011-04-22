@@ -3,7 +3,7 @@
 
 package com.djavafactory.pttech.rrm.web;
 
-import com.djavafactory.pttech.rrm.domain.Acquirer;
+import com.djavafactory.pttech.rrm.domain.City;
 import com.djavafactory.pttech.rrm.domain.Province;
 import java.io.UnsupportedEncodingException;
 import java.lang.Integer;
@@ -87,9 +87,9 @@ privileged aspect ProvinceControlroller_Roo_Controller {
         return "redirect:/provinces";
     }
     
-    @ModelAttribute("acquirers")
-    public Collection<Acquirer> ProvinceControlroller.populateAcquirers() {
-        return Acquirer.findAllAcquirers();
+    @ModelAttribute("citys")
+    public Collection<City> ProvinceControlroller.populateCitys() {
+        return City.findAllCitys();
     }
     
     @ModelAttribute("provinces")
