@@ -1,15 +1,15 @@
 package com.djavafactory.pttech.rrm.domain;
 
-import javax.persistence.Column;
-import javax.validation.constraints.NotNull;
-
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 
+import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
+
 @RooJavaBean
 @RooToString
-@RooEntity
+@RooEntity(finders = { "findConfigurationsByConfigKey" })
 public class Configuration {
 
     @NotNull

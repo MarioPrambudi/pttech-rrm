@@ -5,21 +5,20 @@ package com.djavafactory.pttech.rrm.web;
 
 import com.djavafactory.pttech.rrm.domain.Acquirer;
 import com.djavafactory.pttech.rrm.domain.Firmware;
+import com.djavafactory.pttech.rrm.domain.Province;
 import com.djavafactory.pttech.rrm.domain.Terminal;
 import java.io.UnsupportedEncodingException;
-import java.lang.Integer;
 import java.lang.Long;
 import java.lang.String;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.joda.time.format.DateTimeFormat;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
@@ -29,6 +28,11 @@ privileged aspect AcquirerController_Roo_Controller {
     public String AcquirerController.createForm(Model uiModel) {
         uiModel.addAttribute("acquirer", new Acquirer());
         addDateTimeFormatPatterns(uiModel);
+        List dependencies = new ArrayList();
+        if (Province.countProvinces() == 0) {
+            dependencies.add(new String[]{"province", "provinces"});
+        }
+        uiModel.addAttribute("dependencies", dependencies);
         return "acquirers/create";
     }
     
@@ -40,6 +44,7 @@ privileged aspect AcquirerController_Roo_Controller {
         return "acquirers/show";
     }
     
+<<<<<<< HEAD
     @RequestMapping(method = RequestMethod.GET)
     public String AcquirerController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         if (page != null || size != null) {
@@ -54,6 +59,8 @@ privileged aspect AcquirerController_Roo_Controller {
         return "acquirers/list";
     }
     
+=======
+>>>>>>> upstream/master
     @ModelAttribute("acquirers")
     public Collection<Acquirer> AcquirerController.populateAcquirers() {
         return Acquirer.findAllAcquirers();
@@ -64,14 +71,14 @@ privileged aspect AcquirerController_Roo_Controller {
         return Firmware.findAllFirmwares();
     }
     
+    @ModelAttribute("provinces")
+    public java.util.Collection<Province> AcquirerController.populateProvinces() {
+        return Province.findAllProvinces();
+    }
+    
     @ModelAttribute("terminals")
     public java.util.Collection<Terminal> AcquirerController.populateTerminals() {
         return Terminal.findAllTerminals();
-    }
-    
-    void AcquirerController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("acquirer_createdtime_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("acquirer_modifiedtime_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
     }
     
     String AcquirerController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

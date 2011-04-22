@@ -4,6 +4,7 @@
 package com.djavafactory.pttech.rrm.domain;
 
 import com.djavafactory.pttech.rrm.domain.Firmware;
+import com.djavafactory.pttech.rrm.domain.Province;
 import com.djavafactory.pttech.rrm.domain.Terminal;
 import java.lang.Boolean;
 import java.lang.String;
@@ -44,11 +45,11 @@ privileged aspect Acquirer_Roo_JavaBean {
         this.street2 = street2;
     }
     
-    public String Acquirer.getAcquirerState() {
+    public Province Acquirer.getAcquirerState() {
         return this.acquirerState;
     }
     
-    public void Acquirer.setAcquirerState(String acquirerState) {
+    public void Acquirer.setAcquirerState(Province acquirerState) {
         this.acquirerState = acquirerState;
     }
     

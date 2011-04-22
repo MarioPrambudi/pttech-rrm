@@ -3,29 +3,20 @@
 
 package com.djavafactory.pttech.rrm.web;
 
-import com.djavafactory.pttech.rrm.domain.Acquirer;
 import com.djavafactory.pttech.rrm.domain.Configuration;
 import com.djavafactory.pttech.rrm.domain.Firmware;
 import com.djavafactory.pttech.rrm.domain.Param;
+import com.djavafactory.pttech.rrm.domain.Province;
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
 import com.djavafactory.pttech.rrm.domain.Terminal;
-import com.djavafactory.pttech.rrm.domain.TerminalType;
 import java.lang.String;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
 
 privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService {
     
-    Converter<Acquirer, String> ApplicationConversionServiceFactoryBean.getAcquirerConverter() {
-        return new Converter<Acquirer, String>() {
-            public String convert(Acquirer acquirer) {
-                return new StringBuilder().append(acquirer.getName()).append(" ").append(acquirer.getRegistrationNo()).append(" ").append(acquirer.getStreet1()).append(" ").append(acquirer.getStreet2()).toString();
-            }
-        };
-    }
-    
-    org.springframework.core.convert.converter.Converter<Configuration, String> ApplicationConversionServiceFactoryBean.getConfigurationConverter() {
-        return new org.springframework.core.convert.converter.Converter<Configuration, String>() {
+    Converter<Configuration, String> ApplicationConversionServiceFactoryBean.getConfigurationConverter() {
+        return new Converter<Configuration, String>() {
             public String convert(Configuration configuration) {
                 return new StringBuilder().append(configuration.getConfigKey()).append(" ").append(configuration.getConfigValue()).append(" ").append(configuration.getOrdering()).toString();
             }
@@ -48,6 +39,14 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
+    org.springframework.core.convert.converter.Converter<Province, String> ApplicationConversionServiceFactoryBean.getProvinceConverter() {
+        return new org.springframework.core.convert.converter.Converter<Province, String>() {
+            public String convert(Province province) {
+                return new StringBuilder().append(province.getName()).toString();
+            }
+        };
+    }
+    
     org.springframework.core.convert.converter.Converter<ReloadRequest, String> ApplicationConversionServiceFactoryBean.getReloadRequestConverter() {
         return new org.springframework.core.convert.converter.Converter<ReloadRequest, String>() {
             public String convert(ReloadRequest reloadrequest) {
@@ -62,24 +61,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
                 return new StringBuilder().append(terminal.getTerminalId()).append(" ").append(terminal.getStatus()).append(" ").append(terminal.getCreatedTime()).append(" ").append(terminal.getModifiedTime()).toString();
             }
         };
-    }
-    
-    org.springframework.core.convert.converter.Converter<TerminalType, String> ApplicationConversionServiceFactoryBean.getTerminalTypeConverter() {
-        return new org.springframework.core.convert.converter.Converter<TerminalType, String>() {
-            public String convert(TerminalType terminaltype) {
-                return new StringBuilder().append(terminaltype.getName()).append(" ").append(terminaltype.getDescription()).toString();
-            }
-        };
-    }
-    
-    public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
-        registry.addConverter(getAcquirerConverter());
-        registry.addConverter(getConfigurationConverter());
-        registry.addConverter(getFirmwareConverter());
-        registry.addConverter(getParamConverter());
-        registry.addConverter(getReloadRequestConverter());
-        registry.addConverter(getTerminalConverter());
-        registry.addConverter(getTerminalTypeConverter());
     }
     
     public void ApplicationConversionServiceFactoryBean.afterPropertiesSet() {

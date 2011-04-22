@@ -3,9 +3,9 @@
 
 package com.djavafactory.pttech.rrm.web;
 
+import com.djavafactory.pttech.rrm.domain.Terminal;
 import com.djavafactory.pttech.rrm.domain.TerminalType;
 import java.io.UnsupportedEncodingException;
-import java.lang.Integer;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Collection;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
@@ -47,19 +46,6 @@ privileged aspect TerminalTypeController_Roo_Controller {
         return "terminaltypes/show";
     }
     
-    @RequestMapping(method = RequestMethod.GET)
-    public String TerminalTypeController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            uiModel.addAttribute("terminaltypes", TerminalType.findTerminalTypeEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
-            float nrOfPages = (float) TerminalType.countTerminalTypes() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("terminaltypes", TerminalType.findAllTerminalTypes());
-        }
-        return "terminaltypes/list";
-    }
-    
     @RequestMapping(method = RequestMethod.PUT)
     public String TerminalTypeController.update(@Valid TerminalType terminalType, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -77,8 +63,13 @@ privileged aspect TerminalTypeController_Roo_Controller {
         return "terminaltypes/update";
     }
     
+    @ModelAttribute("terminals")
+    public Collection<Terminal> TerminalTypeController.populateTerminals() {
+        return Terminal.findAllTerminals();
+    }
+    
     @ModelAttribute("terminaltypes")
-    public Collection<TerminalType> TerminalTypeController.populateTerminalTypes() {
+    public java.util.Collection<TerminalType> TerminalTypeController.populateTerminalTypes() {
         return TerminalType.findAllTerminalTypes();
     }
     

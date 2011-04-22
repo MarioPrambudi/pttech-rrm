@@ -22,7 +22,7 @@ privileged aspect AcquirerDataOnDemand_Roo_DataOnDemand {
         obj.setRegistrationNo("registrationNo_" + index);
         obj.setStreet1("street1_" + index);
         obj.setStreet2("street2_" + index);
-        obj.setAcquirerState("acquirerState_" + index);
+        obj.setAcquirerState(null);
         obj.setCity("city_" + index);
         obj.setPostCode("postCode_" + index);
         obj.setEmail("email_" + index);
@@ -31,7 +31,7 @@ privileged aspect AcquirerDataOnDemand_Roo_DataOnDemand {
         obj.setModifiedBy("modifiedBy_" + index);
         obj.setCreatedTime(new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY), java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE), java.util.Calendar.getInstance().get(java.util.Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime());
         obj.setModifiedTime(new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY), java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE), java.util.Calendar.getInstance().get(java.util.Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime());
-        obj.setDeletedStatus(new Integer(index));
+        obj.setDeleted(Boolean.TRUE);
         return obj;
     }
     

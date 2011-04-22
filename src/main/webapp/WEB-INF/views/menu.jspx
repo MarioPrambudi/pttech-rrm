@@ -3,33 +3,39 @@
 	<jsp:directive.page contentType="text/html;charset=UTF-8"/>
 	<jsp:output omit-xml-declaration="yes"/>
 
-<menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
+    <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
         <menu:category id="c_acquirer" z="RCLIYxauLoii7/DR/p3Nb0/KCB0=">
             <menu:item id="i_acquirer_new" messageCode="global_menu_new" url="/acquirers?form" z="On6F2Z+MPtf/eCCwDsd5WRiJ3Uw="/>
-        <menu:item id="i_acquirer_list" messageCode="global_menu_list" url="/acquirers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="VMznesqcjWywp+Prv1XRfmyFQio="/>
+            <menu:item id="i_acquirer_list" messageCode="global_menu_list" url="/acquirers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
         </menu:category>
-    <menu:category id="c_param" z="zWq6W+gDrJI4jNllHKl2MLmN7aw=">
+        <menu:category id="c_param" render="false" z="user-managed">
             <menu:item id="i_param_new" messageCode="global_menu_new" url="/params?form" z="/Mix+W4C35ReTse5ZxV/tu8FyTY="/>
-        <menu:item id="i_param_list" messageCode="global_menu_list" url="/params?page=1&amp;size=${empty param.size ? 10 : param.size}" z="M+/Q7/PgXKFv2WapvCDRuqe5e6s="/>
+            <menu:item id="i_param_list" messageCode="global_menu_list" url="/params?page=1&amp;size=${empty param.size ? 10 : param.size}" z="M+/Q7/PgXKFv2WapvCDRuqe5e6s="/>
         </menu:category>
-    <menu:category id="c_configuration" z="ex6zSpCyqSksY2xxo+2yaACAxic=">
+        <menu:category id="c_configuration" render="false" z="user-managed">
             <menu:item id="i_configuration_new" messageCode="global_menu_new" url="/configurations?form" z="PpKhRYSLF3fMvOlr5J8dEALoaF8="/>
-        <menu:item id="i_configuration_list" messageCode="global_menu_list" url="/configurations?page=1&amp;size=${empty param.size ? 10 : param.size}" z="eTnA6q7aRKdliIXm9IDu8P8bUhU="/>
+            <menu:item id="i_configuration_list" messageCode="global_menu_list" url="/configurations?page=1&amp;size=${empty param.size ? 10 : param.size}" z="eTnA6q7aRKdliIXm9IDu8P8bUhU="/>
+            <menu:item id="fi_configuration_configkey" messageCode="global_menu_find" url="/configurations?find=ByConfigKey&amp;form" z="lG/3JtglgE2NxhL6lg9R+Yvscdg="/>
         </menu:category>
-    <menu:category id="c_reloadrequest" z="edJxZmKgMmBJjB9CZD+6VnF/ufQ=">
+        <menu:category id="c_reloadrequest" render="false" z="user-managed">
             <menu:item id="i_reloadrequest_new" messageCode="global_menu_new" url="/reloadrequests?form" z="gCp9n4oCOlGSoWCCLhqo/3BO3Gc="/>
-        <menu:item id="i_reloadrequest_list" messageCode="global_menu_list" url="/reloadrequests?page=1&amp;size=${empty param.size ? 10 : param.size}" z="dObqRnXTskprfRdAeUTJf9dydWo="/>
+            <menu:item id="i_reloadrequest_list" messageCode="global_menu_list" url="/reloadrequests?page=1&amp;size=${empty param.size ? 10 : param.size}" z="dObqRnXTskprfRdAeUTJf9dydWo="/>
+            <menu:item id="fi_reloadrequest_transid" messageCode="global_menu_find" url="/reloadrequests?find=ByTransId&amp;form" z="RUJquqBb4BDGrEDg1OYuBDAiYAY="/>
         </menu:category>
-    <menu:category id="c_terminaltype" z="JACOsLZLgyswNWemsA+IEwyEMnc=">
+        <menu:category id="c_province" render="false" z="user-managed">
+            <menu:item id="i_province_new" messageCode="global_menu_new" url="/provinces?form" z="tQd5zZ0Vd7mRtDwnU8dcyQYNVcs="/>
+            <menu:item id="i_province_list" messageCode="global_menu_list" url="/provinces?page=1&amp;size=${empty param.size ? 10 : param.size}" z="gevUHdxZpJ3lBj5vSG6FjxAHBFM="/>
+        </menu:category>
+        <menu:category id="c_terminaltype" z="JACOsLZLgyswNWemsA+IEwyEMnc=">
             <menu:item id="i_terminaltype_new" messageCode="global_menu_new" url="/terminaltypes?form" z="UptivpplXCaiHWX8uYthKpDHMy4="/>
-        <menu:item id="i_terminaltype_list" messageCode="global_menu_list" url="/terminaltypes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="HnyN2FxT4rN6fIaZGJQZWipBcwk="/>
+            <menu:item id="i_terminaltype_list" messageCode="global_menu_list" url="/terminaltypes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="HnyN2FxT4rN6fIaZGJQZWipBcwk="/>
         </menu:category>
-    <menu:category id="c_terminal" z="fUqe/4RD5XXmXs3AlZSvn+A7qbU=">
+   		<menu:category id="c_terminal" z="fUqe/4RD5XXmXs3AlZSvn+A7qbU=">
             <menu:item id="i_terminal_new" messageCode="global_menu_new" url="/terminals?form" z="sRcSLq2zPV9S3mdpnj6HUCgYigQ="/>
-        <menu:item id="i_terminal_list" messageCode="global_menu_list" url="/terminals?page=1&amp;size=${empty param.size ? 10 : param.size}" z="gljexIqfX22dWEi/Q05J/waVgaE="/>
+        	<menu:item id="i_terminal_list" messageCode="global_menu_list" url="/terminals?page=1&amp;size=${empty param.size ? 10 : param.size}" z="gljexIqfX22dWEi/Q05J/waVgaE="/>
         </menu:category>
         <!-- FIRMARE DISABLE in phase 1 -->
-    <menu:category id="c_firmware" render="false" z="user-managed">
+    	<menu:category id="c_firmware" render="false" z="user-managed">
             <menu:item id="i_firmware_new" messageCode="global_menu_new" url="/firmwares?form" z="r3a6COLXRooa9hc7VK3V8Lcdk0w="/>
         <menu:item id="i_firmware_list" messageCode="global_menu_list" url="/firmwares?page=1&amp;size=${empty param.size ? 10 : param.size}" z="weIN3MnvUK2XVOFzJ/VKhmLcJFI="/>
         </menu:category>

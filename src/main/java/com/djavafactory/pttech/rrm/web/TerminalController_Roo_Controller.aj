@@ -4,24 +4,19 @@
 package com.djavafactory.pttech.rrm.web;
 
 import com.djavafactory.pttech.rrm.domain.Acquirer;
+import com.djavafactory.pttech.rrm.domain.Province;
 import com.djavafactory.pttech.rrm.domain.Terminal;
 import com.djavafactory.pttech.rrm.domain.TerminalType;
 import java.io.UnsupportedEncodingException;
-import java.lang.Integer;
-import java.lang.Long;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.joda.time.format.DateTimeFormat;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
@@ -32,13 +27,20 @@ privileged aspect TerminalController_Roo_Controller {
         uiModel.addAttribute("terminal", new Terminal());
         addDateTimeFormatPatterns(uiModel);
         List dependencies = new ArrayList();
+        if (Province.countProvinces() == 0) {
+            dependencies.add(new String[]{"province", "provinces"});
+        }
         if (Acquirer.countAcquirers() == 0) {
             dependencies.add(new String[]{"acquirer", "acquirers"});
+        }
+        if (TerminalType.countTerminalTypes() == 0) {
+            dependencies.add(new String[]{"terminaltype", "terminaltypes"});
         }
         uiModel.addAttribute("dependencies", dependencies);
         return "terminals/create";
     }
     
+<<<<<<< HEAD
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String TerminalController.show(@PathVariable("id") Long id, Model uiModel) {
         addDateTimeFormatPatterns(uiModel);
@@ -64,6 +66,11 @@ privileged aspect TerminalController_Roo_Controller {
     @ModelAttribute("acquirers")
     public Collection<Acquirer> TerminalController.populateAcquirers() {
         return Acquirer.findAllAcquirers();
+=======
+    @ModelAttribute("provinces")
+    public Collection<Province> TerminalController.populateProvinces() {
+        return Province.findAllProvinces();
+>>>>>>> upstream/master
     }
     
     @ModelAttribute("terminals")
@@ -71,6 +78,7 @@ privileged aspect TerminalController_Roo_Controller {
         return Terminal.findAllTerminals();
     }
     
+<<<<<<< HEAD
     @ModelAttribute("terminaltypes")
     public java.util.Collection<TerminalType> TerminalController.populateTerminalTypes() {
         return TerminalType.findAllTerminalTypes();
@@ -81,6 +89,8 @@ privileged aspect TerminalController_Roo_Controller {
         uiModel.addAttribute("terminal_modifiedtime_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
     }
     
+=======
+>>>>>>> upstream/master
     String TerminalController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
         String enc = httpServletRequest.getCharacterEncoding();
         if (enc == null) {

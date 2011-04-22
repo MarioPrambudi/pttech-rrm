@@ -13,4 +13,7 @@
 <definition extends="default" name="configurations/update">
         <put-attribute name="body" value="/WEB-INF/views/configurations/update.jspx"/>
     </definition>
+<definition extends="default" name="configurations/findConfigurationsByConfigKey">
+        <put-attribute name="body" value="/WEB-INF/views/configurations/findConfigurationsByConfigKey.jspx"/>
+    </definition>
 </tiles-definitions>
