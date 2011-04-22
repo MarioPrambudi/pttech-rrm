@@ -48,6 +48,7 @@
               <c:choose>
                 <c:when test="${disableFormBinding}">
                   <select id="_${sec_field}_id" name="${sec_field}" multiple="${multiple}">
+                    <option value="-1"><spring:message code="please_select"/></option>
                     <c:forEach items="${items}" var="item">
                       <option value="${item}">
                         <spring:eval expression="item" />
@@ -66,6 +67,7 @@
               <c:choose>
                 <c:when test="${disableFormBinding}">
                   <select id="_${sec_field}_id" name="${sec_field}" multiple="${multiple}">
+                    <option value="-1"><spring:message code="please_select"/></option>
                     <c:forEach items="${items}" var="item">
                       <option value="${item[fn:escapeXml(itemValue)]}">
                         <spring:eval expression="item" />

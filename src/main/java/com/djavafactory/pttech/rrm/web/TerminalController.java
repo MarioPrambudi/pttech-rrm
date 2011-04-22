@@ -4,9 +4,6 @@ import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.Acquirer;
 import com.djavafactory.pttech.rrm.domain.Terminal;
 import com.djavafactory.pttech.rrm.domain.TerminalType;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,12 +18,9 @@ import java.util.*;
 @RooWebScaffold(path = "terminals", formBackingObject = Terminal.class)
 @RequestMapping("/terminals")
 @Controller
-public class TerminalController {
+public class TerminalController extends BaseController {
 
     private Date createdDate; //to hold the createdTime
-
-    @Autowired
-    private MessageSource messageSource;
 
     /**
     * To show the list of terminal with paginate
@@ -208,26 +202,20 @@ public class TerminalController {
     public java.util.Collection<Map> populateStatusCodes() {
         List<Map> list = new ArrayList<Map>();
         Map<String, String> map = new HashMap<String, String>();
-        map.put("id", "-1");
-        map.put("value", messageSource.getMessage("please_select", null, LocaleContextHolder.getLocale()));
-        list.add(map);
-        map = null;
-
-        map = new HashMap<String, String>();
         map.put("id", Constants.TERMINAL_STATUS_ACTIVE);
-        map.put("value", messageSource.getMessage("terminal_status_code_" + Constants.TERMINAL_STATUS_ACTIVE, null, LocaleContextHolder.getLocale()));
+        map.put("value", getResourceText("terminal_status_code_" + Constants.TERMINAL_STATUS_ACTIVE));
         list.add(map);
         map = null;
 
         map = new HashMap<String, String>();
         map.put("id", Constants.TERMINAL_STATUS_INACTIVE);
-        map.put("value", messageSource.getMessage("terminal_status_code_" + Constants.TERMINAL_STATUS_INACTIVE, null, LocaleContextHolder.getLocale()));
+        map.put("value", getResourceText("terminal_status_code_" + Constants.TERMINAL_STATUS_INACTIVE));
         list.add(map);
         map = null;
 
         map = new HashMap<String, String>();
         map.put("id", Constants.TERMINAL_STATUS_BLOCK);
-        map.put("value", messageSource.getMessage("terminal_status_code_" + Constants.TERMINAL_STATUS_BLOCK, null, LocaleContextHolder.getLocale()));
+        map.put("value", getResourceText("terminal_status_code_" + Constants.TERMINAL_STATUS_BLOCK));
         list.add(map);
         map = null;
 
@@ -240,8 +228,8 @@ public class TerminalController {
     * @return String the page path to redirect
     */
     void addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("terminal_createdtime_date_format", messageSource.getMessage("display_date_format", null, LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("terminal_modifiedtime_date_format", messageSource.getMessage("display_date_format", null, LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("terminal_createdtime_date_format", getResourceText("display_date_format"));
+        uiModel.addAttribute("terminal_modifiedtime_date_format", getResourceText("display_date_format"));
     }
 
     /**
@@ -255,7 +243,7 @@ public class TerminalController {
     public String show(@PathVariable("id") Long id, Model uiModel) {
         addDateTimeFormatPatterns(uiModel);
         Terminal terminal = Terminal.findTerminal(id);
-        terminal.setStatus(messageSource.getMessage("terminal_status_code_" + terminal.getStatus(), null, LocaleContextHolder.getLocale()));
+        terminal.setStatus(getResourceText("terminal_status_code_" + terminal.getStatus()));
         uiModel.addAttribute("terminal", terminal);
         uiModel.addAttribute("itemId", id);
         return "terminals/show";
@@ -264,7 +252,7 @@ public class TerminalController {
     private List<Terminal> regenerateList(List<Terminal> terminalList) {
         for(int i = 0; i < terminalList.size(); i++) {
             Terminal terminal = terminalList.get(i);
-            terminal.setStatus(messageSource.getMessage("terminal_status_code_" + terminal.getStatus(), null, LocaleContextHolder.getLocale()));
+            terminal.setStatus(getResourceText("terminal_status_code_" + terminal.getStatus()));
             terminalList.set(i, terminal);
         }
         return terminalList;
