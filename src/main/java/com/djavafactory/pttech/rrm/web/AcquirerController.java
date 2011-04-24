@@ -3,7 +3,6 @@ package com.djavafactory.pttech.rrm.web;
 import com.djavafactory.pttech.rrm.domain.Acquirer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +21,7 @@ import java.util.List;
 @RooWebScaffold(path = "acquirers", formBackingObject = Acquirer.class)
 @RequestMapping("/acquirers")
 @Controller
-public class AcquirerController {
+public class AcquirerController extends BaseController {
 
     public static Boolean LDELETED_STATUS = true;
     private Date createdDate; //to hold the createdTime
@@ -173,7 +172,7 @@ public class AcquirerController {
     * @return String the page path to redirect
     */
     void addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("acquirer_createdtime_date_format", messageSource.getMessage("display_date_format", null, LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("acquirer_modifiedtime_date_format", messageSource.getMessage("display_date_format", null, LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("acquirer_createdtime_date_format", getResourceText("display_date_format"));
+        uiModel.addAttribute("acquirer_modifiedtime_date_format", getResourceText("display_date_format"));
     }
 }

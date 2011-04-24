@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.annotation.ExpectedException;
 
 privileged aspect TerminalIntegrationTest_Roo_IntegrationTest {
     
@@ -101,6 +102,7 @@ privileged aspect TerminalIntegrationTest_Roo_IntegrationTest {
     }
     
     @Test
+    @ExpectedException(org.springframework.orm.jpa.JpaSystemException.class)
     public void TerminalIntegrationTest.testRemove() {
         com.djavafactory.pttech.rrm.domain.Terminal obj = dod.getRandomTerminal();
         org.junit.Assert.assertNotNull("Data on demand for 'Terminal' failed to initialize correctly", obj);
