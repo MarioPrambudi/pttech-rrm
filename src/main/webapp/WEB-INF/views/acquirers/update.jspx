@@ -20,6 +20,10 @@
         <field:datetime dateTimePattern="${acquirer_createdtime_date_format}" field="createdTime" id="c_com_djavafactory_pttech_rrm_domain_Acquirer_createdTime" render="false" z="user-managed"/>
         <field:input field="modifiedBy" id="c_com_djavafactory_pttech_rrm_domain_Acquirer_modifiedBy" render="false" z="user-managed"/>
         <field:datetime dateTimePattern="${acquirer_modifiedtime_date_format}" field="modifiedTime" id="c_com_djavafactory_pttech_rrm_domain_Acquirer_modifiedTime" render="false" z="user-managed"/>
+       <!--
+        <input id="c_com_djavafactory_pttech_rrm_domain_Acquirer_createdBy" name="createdBy" type="hidden" value="${acquirer.createdBy}"/>
+    	<input id="c_com_djavafactory_pttech_rrm_domain_Acquirer_createdTime" name="createdTime" type="hidden" value="${acquirer.createdTime}"/>
+    	-->
     	<field:checkbox field="deleted" id="c_com_djavafactory_pttech_rrm_domain_Acquirer_deleted" render="false" z="user-managed"/>
         <input id="c_com_djavafactory_pttech_rrm_domain_Acquirer_createdBy" name="createdBy" type="hidden" value="${acquirer.createdBy}"/>
     </form:update>

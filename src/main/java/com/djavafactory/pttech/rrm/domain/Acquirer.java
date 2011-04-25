@@ -1,12 +1,12 @@
 package com.djavafactory.pttech.rrm.domain;
 
-
 import org.hibernate.validator.constraints.Email;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
