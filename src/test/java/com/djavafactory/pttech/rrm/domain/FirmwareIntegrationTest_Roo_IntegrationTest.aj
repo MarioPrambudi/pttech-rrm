@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.test.annotation.ExpectedException;
 
 privileged aspect FirmwareIntegrationTest_Roo_IntegrationTest {
     
@@ -99,19 +98,6 @@ privileged aspect FirmwareIntegrationTest_Roo_IntegrationTest {
         obj.persist();
         obj.flush();
         org.junit.Assert.assertNotNull("Expected 'Firmware' identifier to no longer be null", obj.getId());
-    }
-    
-    @Test
-    @ExpectedException(org.springframework.orm.jpa.JpaSystemException.class)
-    public void FirmwareIntegrationTest.testRemove() {
-        com.djavafactory.pttech.rrm.domain.Firmware obj = dod.getRandomFirmware();
-        org.junit.Assert.assertNotNull("Data on demand for 'Firmware' failed to initialize correctly", obj);
-        java.lang.Long id = obj.getId();
-        org.junit.Assert.assertNotNull("Data on demand for 'Firmware' failed to provide an identifier", id);
-        obj = com.djavafactory.pttech.rrm.domain.Firmware.findFirmware(id);
-        obj.remove();
-        obj.flush();
-        org.junit.Assert.assertNull("Failed to remove 'Firmware' with identifier '" + id + "'", com.djavafactory.pttech.rrm.domain.Firmware.findFirmware(id));
     }
     
 }
