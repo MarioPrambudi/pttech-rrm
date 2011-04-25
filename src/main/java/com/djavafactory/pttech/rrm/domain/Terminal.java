@@ -55,6 +55,7 @@ public class Terminal {
     @ManyToOne
     private Acquirer acquirer;
 <<<<<<< HEAD
+<<<<<<< HEAD
     
     @NotNull
     @ManyToOne
@@ -67,6 +68,13 @@ public class Terminal {
     private TerminalType terminalType;
 
 >>>>>>> upstream/master
+=======
+
+    @NotNull
+    @ManyToOne
+    private TerminalType terminalType;
+
+>>>>>>> b8dda757f807362c586ef4a3035343fd2c2f1a06
     /**
     * To search terminals by parameters
     * @param terminalId The terminal id

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_djavafactory_pttech_rrm_domain_Province" object="${province}" path="/provinces" z="6O3S00ICj/5xi+Q8BrCinnTH+UA=">
+        
+        
+        
+    <field:display field="name" id="s_com_djavafactory_pttech_rrm_domain_Province_name" object="${province}" z="qsUpAzx7ykXbJnxRv0kfwcLYnrQ="/>
+        
+    <field:display field="cities" id="s_com_djavafactory_pttech_rrm_domain_Province_cities" object="${province}" z="ls2VGs4mU640j2LVG4Po+xnRI8Q="/>
+    </page:show>
+</div>

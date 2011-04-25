@@ -1,6 +1,7 @@
 package com.djavafactory.pttech.rrm.domain;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 import java.util.List;
 
@@ -9,16 +10,21 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 =======
 >>>>>>> upstream/master
+=======
+>>>>>>> b8dda757f807362c586ef4a3035343fd2c2f1a06
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
+<<<<<<< HEAD
 <<<<<<< HEAD
 import javax.persistence.CascadeType;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 =======
+=======
+>>>>>>> b8dda757f807362c586ef4a3035343fd2c2f1a06
 
 import javax.persistence.CascadeType;
 import javax.persistence.EntityManager;
@@ -26,7 +32,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+<<<<<<< HEAD
 >>>>>>> upstream/master
+=======
+>>>>>>> b8dda757f807362c586ef4a3035343fd2c2f1a06
 
 @RooJavaBean
 @RooToString

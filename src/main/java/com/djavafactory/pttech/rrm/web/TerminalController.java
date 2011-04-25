@@ -24,9 +24,12 @@ import java.util.*;
 public class TerminalController {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> upstream/master
+=======
+>>>>>>> b8dda757f807362c586ef4a3035343fd2c2f1a06
     private Date createdDate; //to hold the createdTime
 
     @Autowired
@@ -73,9 +76,12 @@ public class TerminalController {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> upstream/master
+=======
+>>>>>>> b8dda757f807362c586ef4a3035343fd2c2f1a06
  /**
    * To delete Terminal by updated deletedStatus to "d"
    * @param id The Terminal id
@@ -140,7 +146,10 @@ public class TerminalController {
         // Temporary static
 =======
         // ModifiedBy DEMO
+<<<<<<< HEAD
 >>>>>>> upstream/master
+=======
+>>>>>>> b8dda757f807362c586ef4a3035343fd2c2f1a06
         terminal.setCreatedTime(createdDate);
         terminal.setModifiedBy("System");
         terminal.setModifiedTime(getCurrentDate());

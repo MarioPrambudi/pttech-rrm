@@ -42,6 +42,7 @@ privileged aspect TerminalController_Roo_Controller {
     
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String TerminalController.show(@PathVariable("id") Long id, Model uiModel) {
         addDateTimeFormatPatterns(uiModel);
@@ -77,6 +78,11 @@ privileged aspect TerminalController_Roo_Controller {
     public Collection<Province> TerminalController.populateProvinces() {
         return Province.findAllProvinces();
 >>>>>>> upstream/master
+=======
+    @ModelAttribute("provinces")
+    public Collection<Province> TerminalController.populateProvinces() {
+        return Province.findAllProvinces();
+>>>>>>> b8dda757f807362c586ef4a3035343fd2c2f1a06
     }
     
     @ModelAttribute("terminals")
@@ -84,6 +90,7 @@ privileged aspect TerminalController_Roo_Controller {
         return Terminal.findAllTerminals();
     }
     
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     @ModelAttribute("terminaltypes")
@@ -100,6 +107,8 @@ privileged aspect TerminalController_Roo_Controller {
 >>>>>>> upstream/master
 =======
 >>>>>>> upstream/master
+=======
+>>>>>>> b8dda757f807362c586ef4a3035343fd2c2f1a06
     String TerminalController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
         String enc = httpServletRequest.getCharacterEncoding();
         if (enc == null) {

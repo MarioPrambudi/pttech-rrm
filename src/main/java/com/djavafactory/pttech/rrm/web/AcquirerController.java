@@ -1,9 +1,4 @@
 package com.djavafactory.pttech.rrm.web;
-
-<<<<<<< HEAD
-
-=======
->>>>>>> upstream/master
 import com.djavafactory.pttech.rrm.domain.Acquirer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -72,12 +67,7 @@ public class AcquirerController {
         addDateTimeFormatPatterns(uiModel);
         return "acquirers/list";
     }
-	
-<<<<<<< HEAD
-	
 
-=======
->>>>>>> upstream/master
     /**
     * To delete acquirer by updated deletedStatus to LDELETED_STATUS value
     * @param id The acquirer id
@@ -87,10 +77,6 @@ public class AcquirerController {
     * @exception none
     * @return String the page path to redirect
     */
-<<<<<<< HEAD
-
-=======
->>>>>>> upstream/master
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
 		Acquirer acquirer;
@@ -154,12 +140,6 @@ public class AcquirerController {
             return "acquirers/update";
         }
         uiModel.asMap().clear();
-<<<<<<< HEAD
-        // Temporary static
-=======
-        
-        // ModifiedBy DEMO
->>>>>>> upstream/master
         acquirer.setCreatedTime(createdDate);
         acquirer.setModifiedBy("System");
         acquirer.setModifiedTime(getCurrentDate());
@@ -167,17 +147,10 @@ public class AcquirerController {
         return "redirect:/acquirers/" + encodeUrlPathSegment(acquirer.getId().toString(), httpServletRequest);
     }
 
-<<<<<<< HEAD
-	
 
     /**
   	* display update form and save the createdTime into createdDate
-    * @param id The Acquirer id
-=======
-    /**
-  	* display update form and save the createdTime into createdDate
     * @param id The Terminal id
->>>>>>> upstream/master
     * @param uiModel Model
     * @exception none
     * @return String the page path to redirect
@@ -192,10 +165,6 @@ public class AcquirerController {
         return "acquirers/update";
     }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> upstream/master
     /**
     * display date/time formatting get from resource bundle
     * @exception none
