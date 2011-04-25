@@ -3,10 +3,8 @@
 
 package com.djavafactory.pttech.rrm.domain;
 
-import com.djavafactory.pttech.rrm.domain.TerminalDataOnDemand;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,9 +16,6 @@ privileged aspect TerminalIntegrationTest_Roo_IntegrationTest {
     declare @type: TerminalIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext.xml");
     
     declare @type: TerminalIntegrationTest: @Transactional;
-    
-    @Autowired
-    private TerminalDataOnDemand TerminalIntegrationTest.dod;
     
     @Test
     public void TerminalIntegrationTest.testCountTerminals() {

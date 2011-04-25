@@ -1,11 +1,15 @@
 package com.djavafactory.pttech.rrm.domain;
 
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.test.RooIntegrationTest;
 import org.springframework.test.annotation.ExpectedException;
 
 @RooIntegrationTest(entity = Terminal.class)
 public class TerminalIntegrationTest {
+
+    @Autowired
+    private TerminalDataOnDemand dod;
 
     @Test
     public void testMarkerMethod() {

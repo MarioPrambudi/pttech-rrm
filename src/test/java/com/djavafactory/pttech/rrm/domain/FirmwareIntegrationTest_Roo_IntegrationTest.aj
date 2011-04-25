@@ -3,10 +3,8 @@
 
 package com.djavafactory.pttech.rrm.domain;
 
-import com.djavafactory.pttech.rrm.domain.FirmwareDataOnDemand;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,9 +16,6 @@ privileged aspect FirmwareIntegrationTest_Roo_IntegrationTest {
     declare @type: FirmwareIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext.xml");
     
     declare @type: FirmwareIntegrationTest: @Transactional;
-    
-    @Autowired
-    private FirmwareDataOnDemand FirmwareIntegrationTest.dod;
     
     @Test
     public void FirmwareIntegrationTest.testCountFirmwares() {
