@@ -63,6 +63,7 @@
     <bean class="com.djavafactory.pttech.rrm.integration.MessageRouter" id="routerBean"/>
     <bean class="com.djavafactory.pttech.rrm.integration.MessageMapper" id="mapperBean"/>
     <bean class="com.djavafactory.pttech.rrm.integration.MessagePersistence" id="messagePersistenceBean"/>
+    <bean class="org.springframework.context.support.ResourceBundleMessageSource" id="messageSource"/>
     <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="entityManagerFactory">
         <property name="dataSource" ref="dataSource"/>
     </bean>
