@@ -23,7 +23,6 @@ public class TerminalTypeController {
     * @param page The page number
     * @param size The size of the display list for a page
     * @param uiModel Model
-    * @exception none
     * @return String the page path to redirect
     */
     @RequestMapping(method = RequestMethod.GET)
@@ -43,9 +42,8 @@ public class TerminalTypeController {
 
     /**
     * To search terminal types by parameters
-    * @param name The search text
+    * @param searchText The search text
     * @param uiModel Model
-    * @exception none
     * @return String the page path to redirect
     */
     @RequestMapping(value = "/findTerminalTypesByParam", method = RequestMethod.POST)
@@ -60,7 +58,6 @@ public class TerminalTypeController {
    * @param page Integer
    * @param size Integer
    * @param uiModel Model
-   * @exception none 
    * @return String the page path to redirect
    */ 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

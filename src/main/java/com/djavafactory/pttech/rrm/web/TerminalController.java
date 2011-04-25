@@ -27,7 +27,6 @@ public class TerminalController extends BaseController {
     * @param page The page number
     * @param size The size of the display list for a page
     * @param uiModel Model
-    * @exception none
     * @return String the page path to redirect
     */
     @RequestMapping(method = RequestMethod.GET)
@@ -51,7 +50,6 @@ public class TerminalController extends BaseController {
     * @param terminalId The terminal id
     * @param status The terminal status
     * @param uiModel Model
-    * @exception none
     * @return String the page path to redirect
     */
     @RequestMapping(value = "/findTerminalsByParam", method = RequestMethod.POST)
@@ -68,7 +66,6 @@ public class TerminalController extends BaseController {
    * @param page Integer
    * @param size Integer
    * @param uiModel Model
-   * @exception none 
    * @return String the page path to redirect
    */ 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -82,11 +79,10 @@ public class TerminalController extends BaseController {
 	
   /**
    * insert new terminal with createdTime and createdBy 
-   * @param acquirer the terminal object
+   * @param terminal the terminal object
    * @param bindingResult BindingResult
    * @param uiModel Model
-   * @param httpServletRequest HttpServletRequest 
-   * @exception none 
+   * @param httpServletRequest HttpServletRequest
    * @return String the page path to redirect
    */
 	@RequestMapping(method = RequestMethod.POST)
@@ -107,11 +103,10 @@ public class TerminalController extends BaseController {
 
   /**
    * update new terminal with modifiedTime and modifiedBy 
-   * @param acquirer the terminal object
+   * @param terminal the terminal object
    * @param bindingResult BindingResult
    * @param uiModel Model
-   * @param httpServletRequest HttpServletRequest 
-   * @exception none 
+   * @param httpServletRequest HttpServletRequest
    * @return String the page path to redirect
    */
 	@RequestMapping(method = RequestMethod.PUT)
@@ -132,8 +127,6 @@ public class TerminalController extends BaseController {
 	
 	 /**
 	 * get the current date
-	 * @param none
-	 * @exception none
 	 * @return Date the current date
 	 */
 	 @Transient
@@ -145,7 +138,6 @@ public class TerminalController extends BaseController {
     * display update form and save the createdTime into createdDate
     * @param id The Terminal id
     * @param uiModel Model
-    * @exception none
     * @return String the page path to redirect
     */
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
@@ -160,7 +152,6 @@ public class TerminalController extends BaseController {
 
     /**
     * display drop down selection for undeleted acquirers in create terminal form
-    * @exception none
     * @return String the page path to redirect
     */
     @ModelAttribute("acquirers")
@@ -170,7 +161,6 @@ public class TerminalController extends BaseController {
 
     /**
     * display drop down selection for all acquirers in update terminal form
-    * @exception none
     * @return String the page path to redirect
     */
     @ModelAttribute("allacquirers")
@@ -190,7 +180,6 @@ public class TerminalController extends BaseController {
 
     /**
     * display drop down selection for ALL terminal types in update terminal form
-    * @exception none
     * @return String the page path to redirect
     */
     @ModelAttribute("allterminaltypes")
@@ -224,7 +213,6 @@ public class TerminalController extends BaseController {
 
     /**
     * display date/time formatting get from resource bundle
-    * @exception none
     * @return String the page path to redirect
     */
     void addDateTimeFormatPatterns(Model uiModel) {
@@ -236,7 +224,6 @@ public class TerminalController extends BaseController {
     * Get the terminal info and format the status
     * @param id The Terminal id
     * @param uiModel Model
-    * @exception none
     * @return String the page path to redirect
     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
