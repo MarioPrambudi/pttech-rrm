@@ -39,3 +39,6 @@ Thumbs.db
 .project
 *.swp
 log.roo
+*.iml
+*.ipr
+*.iws
