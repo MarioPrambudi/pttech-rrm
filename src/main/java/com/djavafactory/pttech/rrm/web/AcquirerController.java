@@ -23,18 +23,12 @@ import java.util.List;
 @Controller
 public class AcquirerController extends BaseController {
 
-    public static Boolean LDELETED_STATUS = true;
-    private Date createdDate; //to hold the createdTime
-
-    @Autowired
-    private MessageSource messageSource;
-
+    private Date createdDate; //to hold the createdTime   todo from blake: will have trouble in a multithreaded environment
     /**
     * To show the list of acquirer with paginate
     * @param page The page number
     * @param size The size of the display list for a page
     * @param uiModel Model
-    * @exception none
     * @return String the page path to redirect
     */
     @RequestMapping(method = RequestMethod.GET)
@@ -58,7 +52,6 @@ public class AcquirerController extends BaseController {
     * @param name The acquirer name
     * @param registrationNo The Acquirer registration no
     * @param uiModel Model
-    * @exception none
     * @return String the page path to redirect
     */
     @RequestMapping(value = "/findAcquirersByParam", method = RequestMethod.POST)
@@ -74,14 +67,13 @@ public class AcquirerController extends BaseController {
     * @param page Integer
     * @param size Integer
     * @param uiModel Model
-    * @exception none
     * @return String the page path to redirect
     */
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
 		Acquirer acquirer;
 		acquirer = Acquirer.findAcquirer(id);
-		acquirer.setDeleted(LDELETED_STATUS);
+		acquirer.setDeleted(true);
 		uiModel.asMap().clear();
 		acquirer.merge();
         return "redirect:/acquirers";
@@ -93,7 +85,6 @@ public class AcquirerController extends BaseController {
     * @param bindingResult BindingResult
     * @param uiModel Model
     * @param httpServletRequest HttpServletRequest
-    * @exception none
     * @return String the page path to redirect
     */
 	@RequestMapping(method = RequestMethod.POST)
@@ -106,30 +97,17 @@ public class AcquirerController extends BaseController {
         uiModel.asMap().clear();
         // Temporary static
         acquirer.setCreatedBy("System");
-        acquirer.setCreatedTime(getCurrentDate());
+        acquirer.setCreatedTime(new Date());
         acquirer.persist();
         return "redirect:/acquirers/" + encodeUrlPathSegment(acquirer.getId().toString(), httpServletRequest);
     }
-	
-	
-    /**
-    * get the current date
-    * @param none
-    * @exception none
-    * @return Date the current date
-    */
-	@Transient
-	public Date getCurrentDate(){
-	    return new Date();
-	}
-	
+
     /**
     * update new acquirer with modifiedTime and modifiedBy
     * @param acquirer the acquirer object
     * @param bindingResult BindingResult
     * @param uiModel Model
     * @param httpServletRequest HttpServletRequest
-    * @exception none
     * @return String the page path to redirect
     */
 	@RequestMapping(method = RequestMethod.PUT)
@@ -141,10 +119,10 @@ public class AcquirerController extends BaseController {
         }
         uiModel.asMap().clear();
         
-        // ModifiedBy DEMO
+        // ModifiedBy DEMO  // todo from Blake: there must be a better way of doing this!
         acquirer.setCreatedTime(createdDate);
         acquirer.setModifiedBy("System");
-        acquirer.setModifiedTime(getCurrentDate());
+        acquirer.setModifiedTime(new Date());
         acquirer.merge();
         return "redirect:/acquirers/" + encodeUrlPathSegment(acquirer.getId().toString(), httpServletRequest);
     }
@@ -153,7 +131,6 @@ public class AcquirerController extends BaseController {
   	* display update form and save the createdTime into createdDate
     * @param id The Terminal id
     * @param uiModel Model
-    * @exception none
     * @return String the page path to redirect
   	*/
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
@@ -168,7 +145,7 @@ public class AcquirerController extends BaseController {
 
     /**
     * display date/time formatting get from resource bundle
-    * @exception none
+    * @param uiModel
     * @return String the page path to redirect
     */
     void addDateTimeFormatPatterns(Model uiModel) {
