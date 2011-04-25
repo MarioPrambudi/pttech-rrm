@@ -58,14 +58,20 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     org.springframework.core.convert.converter.Converter<Terminal, String> ApplicationConversionServiceFactoryBean.getTerminalConverter() {
         return new org.springframework.core.convert.converter.Converter<Terminal, String>() {
             public String convert(Terminal terminal) {
-                return new StringBuilder().append(terminal.getTerminalId()).append(" ").append(terminal.getStatus()).append(" ").append(terminal.getCreatedTime()).append(" ").append(terminal.getModifiedTime()).toString();
+                return new StringBuilder().append(terminal.getTerminalId()).append(" ").append(terminal.getIp()).append(" ").append(terminal.getPort()).append(" ").append(terminal.getDescription()).toString();
             }
         };
     }
     
-    public void ApplicationConversionServiceFactoryBean.afterPropertiesSet() {
-        super.afterPropertiesSet();
-        installLabelConverters(getObject());
+    public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
+        registry.addConverter(getAcquirerConverter());
+        registry.addConverter(getConfigurationConverter());
+        registry.addConverter(getFirmwareConverter());
+        registry.addConverter(getParamConverter());
+        registry.addConverter(getProvinceConverter());
+        registry.addConverter(getReloadRequestConverter());
+        registry.addConverter(getTerminalConverter());
+        registry.addConverter(getTerminalTypeConverter());
     }
     
 }
