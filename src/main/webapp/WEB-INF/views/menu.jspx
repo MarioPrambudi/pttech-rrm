@@ -38,5 +38,9 @@
             <menu:item id="i_terminaltype_new" messageCode="global_menu_new" url="/terminaltypes?form" z="UptivpplXCaiHWX8uYthKpDHMy4="/>
             <menu:item id="i_terminaltype_list" messageCode="global_menu_list" url="/terminaltypes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="HnyN2FxT4rN6fIaZGJQZWipBcwk="/>
         </menu:category>
+    <menu:category id="c_city" render="false" z="user-managed">
+            <menu:item id="i_city_new" messageCode="global_menu_new" url="/citys?form" z="dbfrmJjWGvOtF7e23trrw/vQnRE="/>
+        <menu:item id="i_city_list" messageCode="global_menu_list" url="/citys?page=1&amp;size=${empty param.size ? 10 : param.size}" z="Yq246nbcmHRrSUSB+sOWkE5wtxQ="/>
+        </menu:category>
     </menu:menu>
 </div>
