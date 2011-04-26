@@ -3,8 +3,10 @@
 
 package com.djavafactory.pttech.rrm.domain;
 
+import com.djavafactory.pttech.rrm.domain.FirmwareDataOnDemand;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +18,9 @@ privileged aspect FirmwareIntegrationTest_Roo_IntegrationTest {
     declare @type: FirmwareIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext.xml");
     
     declare @type: FirmwareIntegrationTest: @Transactional;
+    
+    @Autowired
+    private FirmwareDataOnDemand FirmwareIntegrationTest.dod;
     
     @Test
     public void FirmwareIntegrationTest.testCountFirmwares() {
@@ -93,6 +98,18 @@ privileged aspect FirmwareIntegrationTest_Roo_IntegrationTest {
         obj.persist();
         obj.flush();
         org.junit.Assert.assertNotNull("Expected 'Firmware' identifier to no longer be null", obj.getId());
+    }
+    
+    @Test
+    public void FirmwareIntegrationTest.testRemove() {
+        com.djavafactory.pttech.rrm.domain.Firmware obj = dod.getRandomFirmware();
+        org.junit.Assert.assertNotNull("Data on demand for 'Firmware' failed to initialize correctly", obj);
+        java.lang.Long id = obj.getId();
+        org.junit.Assert.assertNotNull("Data on demand for 'Firmware' failed to provide an identifier", id);
+        obj = com.djavafactory.pttech.rrm.domain.Firmware.findFirmware(id);
+        obj.remove();
+        obj.flush();
+        org.junit.Assert.assertNull("Failed to remove 'Firmware' with identifier '" + id + "'", com.djavafactory.pttech.rrm.domain.Firmware.findFirmware(id));
     }
     
 }

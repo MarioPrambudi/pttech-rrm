@@ -6,6 +6,7 @@ package com.djavafactory.pttech.rrm.domain;
 import com.djavafactory.pttech.rrm.domain.Acquirer;
 import com.djavafactory.pttech.rrm.domain.Province;
 import com.djavafactory.pttech.rrm.domain.TerminalType;
+import java.lang.Long;
 import java.lang.String;
 import java.util.Date;
 
@@ -51,11 +52,11 @@ privileged aspect Terminal_Roo_JavaBean {
         this.acquirerState = acquirerState;
     }
     
-    public String Terminal.getCity() {
+    public Long Terminal.getCity() {
         return this.city;
     }
     
-    public void Terminal.setCity(String city) {
+    public void Terminal.setCity(Long city) {
         this.city = city;
     }
     

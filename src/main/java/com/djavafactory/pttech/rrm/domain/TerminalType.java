@@ -31,21 +31,29 @@ public class TerminalType {
 
     /**
     * To search terminal types by parameters
-    * @param searchText The search text
-    * @param firstResult Start index of the records
-    * @param maxResults  Maximum records to be fetched
-    * @exception none
-    * @return List of terminal type
+    *
+     * @param searchText The search text
+     * @param deleted
+     *@param order
+     * @param firstResult Start index of the records
+     * @param maxResults  Maximum records to be fetched   @return List of terminal type
     */
-    public static TypedQuery<TerminalType> findTerminalTypesByParam(String searchText, int firstResult, int maxResults) {
+    public static TypedQuery<TerminalType> findTerminalTypesByParam(String searchText, Boolean deleted, String order, int firstResult, int maxResults) {
         EntityManager em = TerminalType.entityManager();
         TypedQuery<TerminalType> q = null;
-        String query = "SELECT TerminalType FROM TerminalType AS terminalType WHERE terminalType.deleted = false";
+        String query = "SELECT TerminalType FROM TerminalType AS terminalType";
+        query = (deleted != null && !deleted.equals("") && deleted == true) ? new StringBuilder(query).append(" WHERE (terminalType.deleted = false or terminalType.deleted = :notDeleted)").toString() : new StringBuilder(query).append(" WHERE terminalType.deleted = false").toString();
         if (searchText != null && !searchText.equals("")) {
             query = new StringBuilder(query).append(" AND (LOWER(terminalType.name) LIKE LOWER(:searchText)")
                     .append(" OR LOWER(terminalType.description) LIKE LOWER(:searchText))").toString();
         }
+        if (order != null && !order.equals("")) {
+            query = new StringBuilder(query).append(" ORDER BY ").append(order).toString();
+        }
         q = (firstResult > 0 && maxResults > 0) ? em.createQuery(query, TerminalType.class).setFirstResult(firstResult).setMaxResults(maxResults) : em.createQuery(query, TerminalType.class);
+        if (deleted != null && !deleted.equals("") && deleted == true) {
+            q.setParameter("notDeleted", deleted);
+        }
         if (searchText != null && !searchText.equals("")) {
             q.setParameter("searchText", "%" + searchText + "%");
         }

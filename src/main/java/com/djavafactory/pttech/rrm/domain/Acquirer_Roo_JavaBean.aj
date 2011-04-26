@@ -7,6 +7,7 @@ import com.djavafactory.pttech.rrm.domain.Firmware;
 import com.djavafactory.pttech.rrm.domain.Province;
 import com.djavafactory.pttech.rrm.domain.Terminal;
 import java.lang.Boolean;
+import java.lang.Long;
 import java.lang.String;
 import java.util.Date;
 import java.util.Set;
@@ -53,11 +54,11 @@ privileged aspect Acquirer_Roo_JavaBean {
         this.acquirerState = acquirerState;
     }
     
-    public String Acquirer.getCity() {
+    public Long Acquirer.getCity() {
         return this.city;
     }
     
-    public void Acquirer.setCity(String city) {
+    public void Acquirer.setCity(Long city) {
         this.city = city;
     }
     

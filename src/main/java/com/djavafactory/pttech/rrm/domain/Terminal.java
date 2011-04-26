@@ -1,5 +1,6 @@
 package com.djavafactory.pttech.rrm.domain;
 
+import com.djavafactory.pttech.rrm.Constants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
@@ -31,12 +32,12 @@ public class Terminal {
     private Province acquirerState;
 
     @NotNull
-    private String city;
+    private Long city;
 
     @NotNull
     private String location;
 
-    @Value("x")
+    @Value("X")
     private String status;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -61,21 +62,27 @@ public class Terminal {
     @ManyToOne
     private TerminalType terminalType;
 
+    @Transient
+    public String getCityName() {
+        return City.findCity(this.city).getCityName();
+    }
+
     /**
     * To search terminals by parameters
-    * @param terminalId The terminal id
-    * @param status The terminal status
-    * @param firstResult Start index of the records
-    * @param maxResults  Maximum records to be fetched
-    * @exception none
-    * @return List of terminal
+    *
+     * @param terminalId The terminal id
+     * @param status The terminal status
+     * @param firstResult Start index of the records
+     * @param maxResults  Maximum records to be fetched
+     * @param order
+     * @return List of terminal
     */
-    public static TypedQuery<Terminal> findTerminalsByParam(String terminalId, String status, Long terminalType, Long acquirer, int firstResult, int maxResults) {
+    public static TypedQuery<Terminal> findTerminalsByParam(String terminalId, String status, Long terminalType, Long acquirer, int firstResult, int maxResults, String order) {
         EntityManager em = Terminal.entityManager();
         TypedQuery<Terminal> q = null;
-        String query = "SELECT Terminal FROM Terminal AS terminal WHERE terminal.status != 'd'";
+        String query = "SELECT Terminal FROM Terminal AS terminal WHERE LOWER(terminal.status) != LOWER('" + Constants.TERMINAL_STATUS_DELETED + "')";
         if (status != null && !status.equals("") && !status.equals("-1")) {
-            query = new StringBuilder(query).append(" AND terminal.status = :status").toString();
+            query = new StringBuilder(query).append(" AND LOWER(terminal.status) = LOWER(:status)").toString();
         }
         if (terminalId != null && !terminalId.equals("")) {
             query = new StringBuilder(query).append(" AND LOWER(terminal.terminalId) LIKE LOWER(:terminalId)").toString();
@@ -86,7 +93,9 @@ public class Terminal {
         if (acquirer > 0L) {
             query = new StringBuilder(query).append(" AND LOWER(terminal.acquirer.id) = :acquirer").toString();
         }
-
+        if (order != null && !order.equals("")) {
+            query = new StringBuilder(query).append(" ORDER BY ").append(order).toString();
+        }
         q = (firstResult > 0 && maxResults > 0) ? em.createQuery(query, Terminal.class).setFirstResult(firstResult).setMaxResults(maxResults) : em.createQuery(query, Terminal.class);
         if (status != null && !status.equals("") && !status.equals("-1")) {
             q.setParameter("status", status);
