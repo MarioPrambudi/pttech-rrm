@@ -93,11 +93,11 @@ privileged aspect Param_Roo_Entity {
     }
     
     public static long Param.countParams() {
-        return entityManager().createQuery("SELECT COUNT(o) FROM Param o", Long.class).getSingleResult();
+        return entityManager().createQuery("select count(o) from Param o", Long.class).getSingleResult();
     }
     
     public static List<Param> Param.findAllParams() {
-        return entityManager().createQuery("SELECT o FROM Param o", Param.class).getResultList();
+        return entityManager().createQuery("select o from Param o", Param.class).getResultList();
     }
     
     public static Param Param.findParam(Long id) {
@@ -106,7 +106,7 @@ privileged aspect Param_Roo_Entity {
     }
     
     public static List<Param> Param.findParamEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("SELECT o FROM Param o", Param.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+        return entityManager().createQuery("select o from Param o", Param.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
 }

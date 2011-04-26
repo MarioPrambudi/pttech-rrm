@@ -41,12 +41,14 @@ public class Terminal {
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
+    @Column(updatable=false, insertable=true)
     private Date createdTime;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
     private Date modifiedTime;
 
+    @Column(updatable=false, insertable=true)
     private String createdBy;
 
     private String modifiedBy;

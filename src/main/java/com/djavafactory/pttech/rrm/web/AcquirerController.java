@@ -1,6 +1,9 @@
 package com.djavafactory.pttech.rrm.web;
 
+
+import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.Acquirer;
+import com.djavafactory.pttech.rrm.domain.Terminal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
@@ -16,7 +19,10 @@ import javax.persistence.Transient;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 @RooWebScaffold(path = "acquirers", formBackingObject = Acquirer.class)
 @RequestMapping("/acquirers")
@@ -73,6 +79,19 @@ public class AcquirerController extends BaseController {
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
 		Acquirer acquirer;
 		acquirer = Acquirer.findAcquirer(id);
+		// Delete all terminal that belong to this acquirer
+		Set terminalSet= new HashSet();
+		terminalSet = acquirer.getTerminals();
+		Iterator it = terminalSet.iterator();
+
+		while(it.hasNext())
+		{
+			Terminal terminal;
+			terminal = (Terminal)it.next();
+			terminal.setStatus(Constants.TERMINAL_STATUS_DELETED);
+			terminal.merge();
+
+		}
 		acquirer.setDeleted(true);
 		uiModel.asMap().clear();
 		acquirer.merge();
@@ -94,13 +113,14 @@ public class AcquirerController extends BaseController {
             addDateTimeFormatPatterns(uiModel);            
             return "acquirers/create";
         }
-        uiModel.asMap().clear();
-        // Temporary static
-        acquirer.setCreatedBy("System");
+
+        uiModel.asMap().clear();     
+        acquirer.setCreatedBy("System");  // Temporary static
         acquirer.setCreatedTime(new Date());
         acquirer.persist();
         return "redirect:/acquirers/" + encodeUrlPathSegment(acquirer.getId().toString(), httpServletRequest);
     }
+
 
     /**
     * update new acquirer with modifiedTime and modifiedBy
@@ -118,10 +138,7 @@ public class AcquirerController extends BaseController {
             return "acquirers/update";
         }
         uiModel.asMap().clear();
-        
-        // ModifiedBy DEMO  // todo from Blake: there must be a better way of doing this!
-        acquirer.setCreatedTime(createdDate);
-        acquirer.setModifiedBy("System");
+        acquirer.setModifiedBy("System");  // Temporary Static  
         acquirer.setModifiedTime(new Date());
         acquirer.merge();
         return "redirect:/acquirers/" + encodeUrlPathSegment(acquirer.getId().toString(), httpServletRequest);
@@ -129,16 +146,13 @@ public class AcquirerController extends BaseController {
 
     /**
   	* display update form and save the createdTime into createdDate
-    * @param id The Terminal id
+    * @param id The acquirer id
     * @param uiModel Model
     * @return String the page path to redirect
   	*/
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
     public String updateForm(@PathVariable("id") Long id, Model uiModel) {
-        Acquirer objAcquirer;
-        objAcquirer = Acquirer.findAcquirer(id);
-        createdDate = objAcquirer.getCreatedTime();
-        uiModel.addAttribute("acquirer", objAcquirer);
+        uiModel.addAttribute("acquirer", Acquirer.findAcquirer(id));
         addDateTimeFormatPatterns(uiModel);
         return "acquirers/update";
     }

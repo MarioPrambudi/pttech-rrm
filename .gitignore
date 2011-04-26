@@ -29,7 +29,6 @@
 # OS generated files #
 ######################
 .DS_Store
-ehthumbs.db
 Icon?
 Thumbs.db
 
@@ -39,5 +38,7 @@ Thumbs.db
 .project
 *.swp
 log.roo
-.idea
 *.iml
+*.ipr
+*.iws
+.idea

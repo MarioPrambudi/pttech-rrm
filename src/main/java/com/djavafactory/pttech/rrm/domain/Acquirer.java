@@ -47,12 +47,14 @@ public class Acquirer {
     @NotNull
     private String hotline;
 
+    @Column(updatable=false, insertable=true)
     private String createdBy;
 
     private String modifiedBy;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
+    @Column(updatable=false, insertable=true)
     private Date createdTime;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -74,7 +76,6 @@ public class Acquirer {
     * @param registrationNo The Acquirer registration no
     * @param firstResult Start index of the records
     * @param maxResults  Maximum records to be fetched
-    * @exception none
     * @return List of acquirer
     */
     public static TypedQuery<Acquirer> findAcquirersByParam(String name, String registrationNo, int firstResult, int maxResults) {
