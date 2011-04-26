@@ -27,3 +27,13 @@ function updateCityList(state, cityUrl) {
         }
     });
 }
+
+function isDuplicated(registrationNo){
+    $.getJSON("acquirer/isDuplicatedRegNo", { regNo: registrationNo }, function(isDuplicatedRegNo) {
+        if (isDuplicatedRegNo) {
+        	alert('true-duplicate');
+        } else {
+            alert('false-noduplicate');
+        }
+    });
+}

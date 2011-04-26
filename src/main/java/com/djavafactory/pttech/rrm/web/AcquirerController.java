@@ -23,6 +23,25 @@ import java.util.Set;
 @RequestMapping("/acquirers")
 @Controller
 public class AcquirerController extends BaseController {
+	
+	@RequestMapping(value="/isDuplicatedRegNo", method=RequestMethod.GET)
+	public Boolean isDuplicatedRegNo(@RequestParam(value = "regNo", required = false) String regNo) {
+	   if (regNo != null || regNo != null)
+	   {
+		   List<Acquirer> acquirerList = Acquirer.findAllAcquirers();
+		   Iterator it = acquirerList.iterator();
+		   while(it.hasNext())
+			{
+				Acquirer acquirer;
+				acquirer = (Acquirer)it.next();
+				if (acquirer.getRegistrationNo().equals(regNo))
+				{
+					return true;
+				}
+			}
+	   }
+	   return false;
+	}
 
     /**
     * To show the list of acquirer with paginate
