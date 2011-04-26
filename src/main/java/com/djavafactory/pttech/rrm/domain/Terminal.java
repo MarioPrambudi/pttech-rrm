@@ -42,12 +42,14 @@ public class Terminal {
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
+    @Column(updatable=false, insertable=true)
     private Date createdTime;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
     private Date modifiedTime;
 
+    @Column(updatable=false, insertable=true)
     private String createdBy;
 
     private String modifiedBy;
@@ -71,7 +73,7 @@ public class Terminal {
     public static TypedQuery<Terminal> findTerminalsByParam(String terminalId, String status, Long terminalType, Long acquirer, int firstResult, int maxResults) {
         EntityManager em = Terminal.entityManager();
         TypedQuery<Terminal> q = null;
-        String query = "SELECT Terminal FROM Terminal AS terminal WHERE LOWER(terminal.status) != LOWER('"+ Constants.TERMINAL_STATUS_DELETED+"')";
+        String query = "SELECT Terminal FROM Terminal AS terminal WHERE LOWER(terminal.status) != LOWER('" + Constants.TERMINAL_STATUS_DELETED + "')";
         if (status != null && !status.equals("") && !status.equals("-1")) {
             query = new StringBuilder(query).append(" AND LOWER(terminal.status) = LOWER(:status)").toString();
         }

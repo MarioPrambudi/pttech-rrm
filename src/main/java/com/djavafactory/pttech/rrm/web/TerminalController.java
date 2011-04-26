@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Transient;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.*;
@@ -90,10 +89,9 @@ public class TerminalController extends BaseController {
             addDateTimeFormatPatterns(uiModel);
             return "terminals/create";
         }
-        uiModel.asMap().clear();
-        // Temporary static
-        terminal.setCreatedBy("System");
-        terminal.setCreatedTime(getCurrentDate());
+        uiModel.asMap().clear();       
+        terminal.setCreatedBy("System"); // Temporary static
+        terminal.setCreatedTime(new Date());
         terminal.persist();
         return "redirect:/terminals/" + encodeUrlPathSegment(terminal.getId().toString(), httpServletRequest);
     }
@@ -115,21 +113,11 @@ public class TerminalController extends BaseController {
             return "terminals/update";
         }
         uiModel.asMap().clear();
-        // ModifiedBy DEMO
         terminal.setModifiedBy("System");
-        terminal.setModifiedTime(getCurrentDate());
+        terminal.setModifiedTime(new Date());
         terminal.merge();
         return "redirect:/terminals/" + encodeUrlPathSegment(terminal.getId().toString(), httpServletRequest);
     }
-	
-	 /**
-	 * get the current date
-	 * @return Date the current date
-	 */
-	 @Transient
-     public Date getCurrentDate(){
-		return new Date();
-     }
 
     /**
     * display update form
@@ -139,9 +127,7 @@ public class TerminalController extends BaseController {
     */
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
     public String updateForm(@PathVariable("id") Long id, Model uiModel) {
-        Terminal objTerminal;
-        objTerminal = Terminal.findTerminal(id);
-        uiModel.addAttribute("terminal", objTerminal);
+        uiModel.addAttribute("terminal", Terminal.findTerminal(id));
         addDateTimeFormatPatterns(uiModel);
         return "terminals/update";
     }

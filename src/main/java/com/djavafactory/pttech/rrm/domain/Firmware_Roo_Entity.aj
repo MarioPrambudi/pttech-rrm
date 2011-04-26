@@ -93,11 +93,11 @@ privileged aspect Firmware_Roo_Entity {
     }
     
     public static long Firmware.countFirmwares() {
-        return entityManager().createQuery("SELECT COUNT(o) FROM Firmware o", Long.class).getSingleResult();
+        return entityManager().createQuery("select count(o) from Firmware o", Long.class).getSingleResult();
     }
     
     public static List<Firmware> Firmware.findAllFirmwares() {
-        return entityManager().createQuery("SELECT o FROM Firmware o", Firmware.class).getResultList();
+        return entityManager().createQuery("select o from Firmware o", Firmware.class).getResultList();
     }
     
     public static Firmware Firmware.findFirmware(Long id) {
@@ -106,7 +106,7 @@ privileged aspect Firmware_Roo_Entity {
     }
     
     public static List<Firmware> Firmware.findFirmwareEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("SELECT o FROM Firmware o", Firmware.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+        return entityManager().createQuery("select o from Firmware o", Firmware.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
 }

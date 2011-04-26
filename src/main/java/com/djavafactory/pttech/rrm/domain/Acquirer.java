@@ -47,12 +47,14 @@ public class Acquirer {
     @NotNull
     private String hotline;
 
+    @Column(updatable=false, insertable=true)
     private String createdBy;
 
     private String modifiedBy;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
+    @Column(updatable=false, insertable=true)
     private Date createdTime;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -74,20 +76,20 @@ public class Acquirer {
     }
 
     /**
-    * To search acquirers by parameters
-    *
+     * To search acquirers by parameters
+     *
      * @param name The acquirer name
      * @param registrationNo The Acquirer registration no
-     * @param notDeleted
-     *@param order
+     * @param deleted True to show the deleted records
+     * @param order The order of the search results
      * @param firstResult Start index of the records
      * @param maxResults  Maximum records to be fetched   @return List of acquirer
-    */
-    public static TypedQuery<Acquirer> findAcquirersByParam(String name, String registrationNo, Boolean notDeleted, String order, int firstResult, int maxResults) {
+     */
+    public static TypedQuery<Acquirer> findAcquirersByParam(String name, String registrationNo, Boolean deleted, String order, int firstResult, int maxResults) {
         EntityManager em = Acquirer.entityManager();
         TypedQuery<Acquirer> q = null;
         String query = "SELECT Acquirer FROM Acquirer AS acquirer WHERE acquirer.deleted = false";
-        if (notDeleted != null && !notDeleted.equals("") && notDeleted == true) {
+        if (deleted != null && !deleted.equals("") && deleted == true) {
             query = new StringBuilder(query).append(" AND acquirer.deleted = :notDeleted").toString();
         }
         if (name != null && !name.equals("")) {
@@ -100,8 +102,8 @@ public class Acquirer {
             query = new StringBuilder(query).append(" ORDER BY :order").toString();
         }
         q = (firstResult > 0 && maxResults > 0) ? em.createQuery(query, Acquirer.class).setFirstResult(firstResult).setMaxResults(maxResults) : em.createQuery(query, Acquirer.class);
-        if (notDeleted != null && !notDeleted.equals("")) {
-            q.setParameter("notDeleted", notDeleted);
+        if (deleted != null && !deleted.equals("")) {
+            q.setParameter("notDeleted", deleted);
         }
         if (name != null && !name.equals("")) {
             q.setParameter("name", "%" + name + "%");
