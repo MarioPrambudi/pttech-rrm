@@ -53,6 +53,8 @@ public class TerminalController extends BaseController {
     @RequestMapping(value = "/findTerminalsByParam", method = RequestMethod.POST)
     public String findTerminalsByParam(@RequestParam(value = "terminalId", required = false) String terminalId, @RequestParam(value = "status", required = false) String status,
                                        @RequestParam(value = "terminalType", required = false) Long terminalType, @RequestParam(value = "acquirer", required = false) Long acquirer, Model uiModel) {
+        acquirer = (acquirer == null) ? -1L : acquirer;
+        terminalType = (terminalType == null) ? -1L : terminalType;
         uiModel.addAttribute("terminals", regenerateList(Terminal.findTerminalsByParam(terminalId, status, terminalType, acquirer, -1, -1, "terminal.terminalId").getResultList()));
         addDateTimeFormatPatterns(uiModel);
         return "terminals/list";
@@ -72,6 +74,7 @@ public class TerminalController extends BaseController {
         terminal = Terminal.findTerminal(id);
         terminal.setStatus(Constants.TERMINAL_STATUS_DELETED);
         uiModel.asMap().clear();
+        terminal.merge();
         return "redirect:/terminals";
     }
 	
@@ -118,6 +121,24 @@ public class TerminalController extends BaseController {
         terminal.setModifiedTime(new Date());
         terminal.merge();
         return "redirect:/terminals/" + encodeUrlPathSegment(terminal.getId().toString(), httpServletRequest);
+    }
+
+   /**
+   * update new terminal with new status
+   * @param uiModel Model
+   * @return String the page path to redirect
+   */
+	@RequestMapping(value = "/setstatus", method = RequestMethod.POST)
+    public String updateStatus(@RequestParam(value = "terminalIds") String terminalIds, @RequestParam(value = "code") String code, Model uiModel) {
+        for(String id : terminalIds.split(",")) {
+            Terminal terminal = Terminal.findTerminal(Long.valueOf(id));
+            terminal.setStatus(code);
+            terminal.setModifiedBy("System");
+            terminal.setModifiedTime(new Date());
+            terminal.merge();
+        }
+        uiModel.asMap().clear();
+        return "redirect:/terminals";
     }
 
     /**
