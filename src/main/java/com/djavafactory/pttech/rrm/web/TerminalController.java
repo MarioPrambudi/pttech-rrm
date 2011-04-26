@@ -2,6 +2,7 @@ package com.djavafactory.pttech.rrm.web;
 
 import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.Acquirer;
+import com.djavafactory.pttech.rrm.domain.City;
 import com.djavafactory.pttech.rrm.domain.Terminal;
 import com.djavafactory.pttech.rrm.domain.TerminalType;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
@@ -31,12 +32,12 @@ public class TerminalController extends BaseController {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
 
-            List<Terminal> terminalList = Terminal.findTerminalsByParam(null, null, -1L, -1L, page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo).getResultList();
+            List<Terminal> terminalList = Terminal.findTerminalsByParam(null, null, -1L, -1L, page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo, "terminal.terminalId").getResultList();
             uiModel.addAttribute("terminals", regenerateList(terminalList));
             float nrOfPages = (float) terminalList.size() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("terminals", regenerateList(Terminal.findTerminalsByParam(null, null, -1L, -1L, -1, -1).getResultList()));
+            uiModel.addAttribute("terminals", regenerateList(Terminal.findTerminalsByParam(null, null, -1L, -1L, -1, -1, "terminal.terminalId").getResultList()));
         }
         addDateTimeFormatPatterns(uiModel);
         return "terminals/list";
@@ -52,7 +53,7 @@ public class TerminalController extends BaseController {
     @RequestMapping(value = "/findTerminalsByParam", method = RequestMethod.POST)
     public String findTerminalsByParam(@RequestParam(value = "terminalId", required = false) String terminalId, @RequestParam(value = "status", required = false) String status,
                                        @RequestParam(value = "terminalType", required = false) Long terminalType, @RequestParam(value = "acquirer", required = false) Long acquirer, Model uiModel) {
-        uiModel.addAttribute("terminals", regenerateList(Terminal.findTerminalsByParam(terminalId, status, terminalType, acquirer, -1, -1).getResultList()));
+        uiModel.addAttribute("terminals", regenerateList(Terminal.findTerminalsByParam(terminalId, status, terminalType, acquirer, -1, -1, "terminal.terminalId").getResultList()));
         addDateTimeFormatPatterns(uiModel);
         return "terminals/list";
     }
@@ -138,7 +139,7 @@ public class TerminalController extends BaseController {
     */
     @ModelAttribute("acquirers")
     public Collection<Acquirer> populateAcquirers() {
-        return Acquirer.findAcquirersByParam(null, null, false, "name", -1, -1).getResultList();
+        return Acquirer.findAcquirersByParam(null, null, false, "acquirer.name", -1, -1).getResultList();
     }
 
     /**
@@ -147,7 +148,7 @@ public class TerminalController extends BaseController {
     */
     @ModelAttribute("allacquirers")
     public Collection<Acquirer> populateAllAcquirers() {
-        return Acquirer.findAcquirersByParam(null, null, true, "name", -1, -1).getResultList();
+        return Acquirer.findAcquirersByParam(null, null, true, "acquirer.name", -1, -1).getResultList();
     }
 
     /**
@@ -156,7 +157,7 @@ public class TerminalController extends BaseController {
     */
     @ModelAttribute("terminaltypes")
     public java.util.Collection<TerminalType> populateTerminalTypes() {
-        return TerminalType.findTerminalTypesByParam(null, -1, -1).getResultList();
+        return TerminalType.findTerminalTypesByParam(null, false, "terminalType.name", -1, -1).getResultList();
     }
 
     /**
@@ -165,7 +166,7 @@ public class TerminalController extends BaseController {
     */
     @ModelAttribute("allterminaltypes")
     public java.util.Collection<TerminalType> populateAllTerminalTypes() {
-        return TerminalType.findAllTerminalTypes();
+        return TerminalType.findTerminalTypesByParam(null, true, "terminalType.name", -1, -1).getResultList();
     }
 
     @ModelAttribute("statuscode")
@@ -215,6 +216,15 @@ public class TerminalController extends BaseController {
         uiModel.addAttribute("terminal", terminal);
         uiModel.addAttribute("itemId", id);
         return "terminals/show";
+    }
+
+    /**
+    * display drop down selection for all cities in create/update acquirer form
+    * @return String the page path to redirect
+    */
+    @ModelAttribute("citys")
+    public java.util.Collection<City> populateCitys() {
+        return City.findAllCitys();
     }
 
     private List<Terminal> regenerateList(List<Terminal> terminalList) {

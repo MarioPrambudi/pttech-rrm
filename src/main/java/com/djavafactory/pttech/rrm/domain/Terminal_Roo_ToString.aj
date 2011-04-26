@@ -9,6 +9,7 @@ privileged aspect Terminal_Roo_ToString {
     
     public String Terminal.toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append("CityName: ").append(getCityName()).append(", ");
         sb.append("TerminalId: ").append(getTerminalId()).append(", ");
         sb.append("Ip: ").append(getIp()).append(", ");
         sb.append("Port: ").append(getPort()).append(", ");

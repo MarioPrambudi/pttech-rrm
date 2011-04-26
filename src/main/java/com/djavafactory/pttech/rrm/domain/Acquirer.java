@@ -18,7 +18,7 @@ import java.util.Set;
 @RooToString
 @RooEntity
 public class Acquirer {
-	
+
     @NotNull
     private String name;
 
@@ -80,7 +80,7 @@ public class Acquirer {
      *
      * @param name The acquirer name
      * @param registrationNo The Acquirer registration no
-     * @param deleted True to show the deleted records
+     * @param deleted Weht
      * @param order The order of the search results
      * @param firstResult Start index of the records
      * @param maxResults  Maximum records to be fetched   @return List of acquirer
@@ -88,10 +88,8 @@ public class Acquirer {
     public static TypedQuery<Acquirer> findAcquirersByParam(String name, String registrationNo, Boolean deleted, String order, int firstResult, int maxResults) {
         EntityManager em = Acquirer.entityManager();
         TypedQuery<Acquirer> q = null;
-        String query = "SELECT Acquirer FROM Acquirer AS acquirer WHERE acquirer.deleted = false";
-        if (deleted != null && !deleted.equals("") && deleted == true) {
-            query = new StringBuilder(query).append(" AND acquirer.deleted = :notDeleted").toString();
-        }
+        String query = "SELECT Acquirer FROM Acquirer AS acquirer";
+        query = (deleted != null && !deleted.equals("") && deleted == true) ? new StringBuilder(query).append(" WHERE (acquirer.deleted = false or acquirer.deleted = :notDeleted)").toString() : new StringBuilder(query).append(" WHERE acquirer.deleted = false").toString();
         if (name != null && !name.equals("")) {
             query = new StringBuilder(query).append(" AND LOWER(acquirer.name) LIKE LOWER(:name)").toString();
         }
@@ -99,10 +97,10 @@ public class Acquirer {
             query = new StringBuilder(query).append(" AND LOWER(acquirer.registrationNo) LIKE LOWER(:registrationNo)").toString();
         }
         if (order != null && !order.equals("")) {
-            query = new StringBuilder(query).append(" ORDER BY :order").toString();
+            query = new StringBuilder(query).append(" ORDER BY ").append(order).toString();
         }
         q = (firstResult > 0 && maxResults > 0) ? em.createQuery(query, Acquirer.class).setFirstResult(firstResult).setMaxResults(maxResults) : em.createQuery(query, Acquirer.class);
-        if (deleted != null && !deleted.equals("")) {
+        if (deleted != null && !deleted.equals("") && deleted == true) {
             q.setParameter("notDeleted", deleted);
         }
         if (name != null && !name.equals("")) {
@@ -110,9 +108,6 @@ public class Acquirer {
         }
         if (registrationNo != null && !registrationNo.equals("")) {
             q.setParameter("registrationNo", "%" + registrationNo + "%");
-        }
-        if (order != null && !order.equals("")) {
-            q.setParameter("order", order);
         }
         return q;
     }

@@ -5,6 +5,7 @@ package com.djavafactory.pttech.rrm.domain;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,9 @@ privileged aspect TerminalIntegrationTest_Roo_IntegrationTest {
     declare @type: TerminalIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext.xml");
     
     declare @type: TerminalIntegrationTest: @Transactional;
+    
+    @Autowired
+    private TerminalDataOnDemand TerminalIntegrationTest.dod;
     
     @Test
     public void TerminalIntegrationTest.testCountTerminals() {
@@ -93,6 +97,18 @@ privileged aspect TerminalIntegrationTest_Roo_IntegrationTest {
         obj.persist();
         obj.flush();
         org.junit.Assert.assertNotNull("Expected 'Terminal' identifier to no longer be null", obj.getId());
+    }
+    
+    @Test
+    public void TerminalIntegrationTest.testRemove() {
+        com.djavafactory.pttech.rrm.domain.Terminal obj = dod.getRandomTerminal();
+        org.junit.Assert.assertNotNull("Data on demand for 'Terminal' failed to initialize correctly", obj);
+        java.lang.Long id = obj.getId();
+        org.junit.Assert.assertNotNull("Data on demand for 'Terminal' failed to provide an identifier", id);
+        obj = com.djavafactory.pttech.rrm.domain.Terminal.findTerminal(id);
+        obj.remove();
+        obj.flush();
+        org.junit.Assert.assertNull("Failed to remove 'Terminal' with identifier '" + id + "'", com.djavafactory.pttech.rrm.domain.Terminal.findTerminal(id));
     }
     
 }

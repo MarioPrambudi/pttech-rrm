@@ -12,7 +12,7 @@ public class TerminalDataOnDemand {
         obj.setPort("port_" + index);
         obj.setDescription("description_" + index);
         obj.setAcquirerState(getProvince(index));
-        obj.setCity("city_" + index);
+        obj.setCity(new Long(index));
         obj.setLocation("location_" + index);
         obj.setStatus("status_" + index);
         obj.setCreatedTime(new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY), java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE), java.util.Calendar.getInstance().get(java.util.Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime());

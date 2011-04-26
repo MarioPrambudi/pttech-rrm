@@ -32,12 +32,12 @@ public class Terminal {
     private Province acquirerState;
 
     @NotNull
-    private String city;
+    private Long city;
 
     @NotNull
     private String location;
 
-    @Value("x")
+    @Value("X")
     private String status;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -62,15 +62,22 @@ public class Terminal {
     @ManyToOne
     private TerminalType terminalType;
 
+    @Transient
+    public String getCityName() {
+        return City.findCity(this.city).getCityName();
+    }
+
     /**
     * To search terminals by parameters
-    * @param terminalId The terminal id
-    * @param status The terminal status
-    * @param firstResult Start index of the records
-    * @param maxResults  Maximum records to be fetched
-    * @return List of terminal
+    *
+     * @param terminalId The terminal id
+     * @param status The terminal status
+     * @param firstResult Start index of the records
+     * @param maxResults  Maximum records to be fetched
+     * @param order
+     * @return List of terminal
     */
-    public static TypedQuery<Terminal> findTerminalsByParam(String terminalId, String status, Long terminalType, Long acquirer, int firstResult, int maxResults) {
+    public static TypedQuery<Terminal> findTerminalsByParam(String terminalId, String status, Long terminalType, Long acquirer, int firstResult, int maxResults, String order) {
         EntityManager em = Terminal.entityManager();
         TypedQuery<Terminal> q = null;
         String query = "SELECT Terminal FROM Terminal AS terminal WHERE LOWER(terminal.status) != LOWER('" + Constants.TERMINAL_STATUS_DELETED + "')";
@@ -86,7 +93,9 @@ public class Terminal {
         if (acquirer > 0L) {
             query = new StringBuilder(query).append(" AND LOWER(terminal.acquirer.id) = :acquirer").toString();
         }
-
+        if (order != null && !order.equals("")) {
+            query = new StringBuilder(query).append(" ORDER BY ").append(order).toString();
+        }
         q = (firstResult > 0 && maxResults > 0) ? em.createQuery(query, Terminal.class).setFirstResult(firstResult).setMaxResults(maxResults) : em.createQuery(query, Terminal.class);
         if (status != null && !status.equals("") && !status.equals("-1")) {
             q.setParameter("status", status);

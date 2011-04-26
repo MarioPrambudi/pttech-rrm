@@ -1,6 +1,5 @@
 package com.djavafactory.pttech.rrm.web;
 
-import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.TerminalType;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;
@@ -31,12 +30,12 @@ public class TerminalTypeController {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
 
-            List<TerminalType> terminalTypeList = TerminalType.findTerminalTypesByParam(null, page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo).getResultList();
+            List<TerminalType> terminalTypeList = TerminalType.findTerminalTypesByParam(null, false, "terminalType.name", page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo).getResultList();
             uiModel.addAttribute("terminaltypes", terminalTypeList);
             float nrOfPages = (float) terminalTypeList.size() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("terminaltypes", TerminalType.findTerminalTypesByParam(null, -1, -1).getResultList());
+            uiModel.addAttribute("terminaltypes", TerminalType.findTerminalTypesByParam(null, false, "terminalType.name", -1, -1).getResultList());
         }
         return "terminaltypes/list";
     }
@@ -49,7 +48,7 @@ public class TerminalTypeController {
     */
     @RequestMapping(value = "/findTerminalTypesByParam", method = RequestMethod.POST)
     public String findTerminalTypesByParam(@RequestParam(value = "searchText", required = false) String searchText, Model uiModel) {
-        uiModel.addAttribute("terminaltypes", TerminalType.findTerminalTypesByParam(searchText, -1, -1).getResultList());
+        uiModel.addAttribute("terminaltypes", TerminalType.findTerminalTypesByParam(searchText, false, "terminalType.name", -1, -1).getResultList());
         return "terminaltypes/list";
     }
 
