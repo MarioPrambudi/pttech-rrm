@@ -22,8 +22,8 @@ public final class Constants {
 
     public static final String CONFIG_TNG_TIMEOUT = "config.tng.timeout";
 
-    public static final String TERMINAL_STATUS_ACTIVE = "a";
-    public static final String TERMINAL_STATUS_INACTIVE = "x";
-    public static final String TERMINAL_STATUS_DELETED = "d";
-    public static final String TERMINAL_STATUS_BLOCK = "b";
+    public static final String TERMINAL_STATUS_ACTIVE = "A";
+    public static final String TERMINAL_STATUS_INACTIVE = "X";
+    public static final String TERMINAL_STATUS_DELETED = "D";
+    public static final String TERMINAL_STATUS_BLOCK = "B";
 }

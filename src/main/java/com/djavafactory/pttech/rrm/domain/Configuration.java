@@ -11,6 +11,9 @@ import javax.validation.constraints.NotNull;
 @RooToString
 @RooEntity(finders = { "findConfigurationsByConfigKey" })
 public class Configuration {
+    public static final String CONFIG_CELCOM_PREFIX = "my.com.celcom";
+    public static final String CONFIG_TNG_PREFIX = "my.com.touchngo";
+    public static final String CONFIG_RRM_PREFIX = "com.djavafactory.pttech.rrm";
 
     @NotNull
     @Column(unique = true)
