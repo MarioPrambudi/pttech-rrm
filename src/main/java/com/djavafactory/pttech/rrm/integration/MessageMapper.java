@@ -74,21 +74,25 @@ public class MessageMapper {
         List<ReloadRequest> reloadRecord = new ReloadRequest().findReloadRequestsByTransId(message.getTransId()).getResultList();
         if(reloadRecord != null && !reloadRecord.isEmpty()) {
             reloadRequest = reloadRecord.get(0);
+            reloadRequest.setTransId(reloadRequest.getTransId());
+            reloadRequest.setMfgNumber(reloadRequest.getMfgNumber());
+            reloadRequest.setReloadAmount(reloadRequest.getReloadAmount());
+            reloadRequest.setServiceProviderId(reloadRequest.getServiceProviderId());
+            reloadRequest.setTransCode(reloadRequest.getTransCode());
         } else {
             reloadRequest = new ReloadRequest();
+            reloadRequest.setTransId(message.getTransId());
+            reloadRequest.setMfgNumber(message.getMfgNo());
+            reloadRequest.setReloadAmount(message.getAmount());
+            reloadRequest.setServiceProviderId(message.getSpId());
+            reloadRequest.setTransCode(message.getTransCode());
         }
-
-        reloadRequest.setTransId(message.getTransId());
-        reloadRequest.setStatus(status);
-        reloadRequest.setMfgNumber(message.getMfgNo());
-        reloadRequest.setReloadAmount(message.getAmount());
-        reloadRequest.setServiceProviderId(message.getSpId());
-        reloadRequest.setTransCode(message.getTransCode());
         if(StringUtils.equalsIgnoreCase(Constants.RELOAD_STATUS_PENDING, status)) {
             reloadRequest.setTngKey(message.getEncryptedMsg());
         } else {
             reloadRequest.setTngKey(null);
         }
+        reloadRequest.setStatus(status);
         reloadRequest.setRequestedTime(message.getRequestTime());
 
         logger.info("[convertMessageToReloadRequest - New ReloadRequest object] >> " + reloadRequest);
