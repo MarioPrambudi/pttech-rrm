@@ -45,16 +45,10 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         };
     }
 
-    public void installLabelConverters(FormatterRegistry registry) {
-        registry.addConverter(getAcquirerConverter());
-        registry.addConverter(getConfigurationConverter());
-        registry.addConverter(getFirmwareConverter());
-        registry.addConverter(getParamConverter());
-        registry.addConverter(getProvinceConverter());
-        registry.addConverter(getReloadRequestConverter());
-        registry.addConverter(getTerminalConverter());
-        registry.addConverter(getTerminalTypeConverter());
-        registry.addConverter(getStatusCodeConverter());
+    public void afterPropertiesSet() {
+        super.afterPropertiesSet();
+        installLabelConverters(getObject());
+        getObject().addConverter(getStatusCodeConverter());
     }
 	
 }

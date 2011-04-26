@@ -68,7 +68,7 @@ public class TerminalTypeController {
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         TerminalType terminaltype;
         terminaltype = TerminalType.findTerminalType(id);
-		terminaltype.setDeleted(Constants.LDELETED_STATUS);
+		terminaltype.setDeleted(true);
         uiModel.asMap().clear();
         terminaltype.merge();
         return "redirect:/terminaltypes";
