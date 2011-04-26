@@ -6,6 +6,7 @@ import com.djavafactory.pttech.rrm.domain.Acquirer;
 import com.djavafactory.pttech.rrm.domain.Terminal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.dao.DataAccessException;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -117,7 +118,19 @@ public class AcquirerController extends BaseController {
         uiModel.asMap().clear();     
         acquirer.setCreatedBy("System");  // Temporary static
         acquirer.setCreatedTime(new Date());
-        acquirer.persist();
+        
+        try
+        {
+        	acquirer.persist();
+        }
+        catch (DataAccessException e)
+        {
+        	//1. prompt user msg, enable or disable
+        	//2. disable - redirect a new form
+        	//3. enable - findacquirerbyregistrationno and reload in update form
+        	
+        }
+        
         return "redirect:/acquirers/" + encodeUrlPathSegment(acquirer.getId().toString(), httpServletRequest);
     }
 

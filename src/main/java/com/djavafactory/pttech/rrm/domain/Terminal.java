@@ -36,7 +36,7 @@ public class Terminal {
     @NotNull
     private String location;
 
-    @Value("x")
+    @Value("X")
     private String status;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -73,7 +73,7 @@ public class Terminal {
     public static TypedQuery<Terminal> findTerminalsByParam(String terminalId, String status, Long terminalType, Long acquirer, int firstResult, int maxResults) {
         EntityManager em = Terminal.entityManager();
         TypedQuery<Terminal> q = null;
-        String query = "SELECT Terminal FROM Terminal AS terminal WHERE terminal.status != 'd'";
+        String query = "SELECT Terminal FROM Terminal AS terminal WHERE terminal.status != 'D'";
         if (status != null && !status.equals("") && !status.equals("-1")) {
             query = new StringBuilder(query).append(" AND terminal.status = :status").toString();
         }

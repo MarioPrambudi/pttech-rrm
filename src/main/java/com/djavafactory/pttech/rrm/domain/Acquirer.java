@@ -23,6 +23,7 @@ public class Acquirer {
     private String name;
 
     @NotNull
+    @Column(unique = true)
     private String registrationNo;
 
     @NotNull
