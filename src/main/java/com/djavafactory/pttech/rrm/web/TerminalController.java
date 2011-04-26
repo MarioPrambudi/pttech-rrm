@@ -152,7 +152,7 @@ public class TerminalController extends BaseController {
     */
     @ModelAttribute("acquirers")
     public Collection<Acquirer> populateAcquirers() {
-        return Acquirer.findAcquirersByParam(null, null, -1, -1).getResultList();
+        return Acquirer.findAcquirersByParam(null, null, false, "name", -1, -1).getResultList();
     }
 
     /**
@@ -161,7 +161,7 @@ public class TerminalController extends BaseController {
     */
     @ModelAttribute("allacquirers")
     public Collection<Acquirer> populateAllAcquirers() {
-        return Acquirer.findAllAcquirers();
+        return Acquirer.findAcquirersByParam(null, null, true, "name", -1, -1).getResultList();
     }
 
     /**

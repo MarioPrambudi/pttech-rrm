@@ -31,12 +31,12 @@ public class AcquirerController extends BaseController {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
 
-            List<Acquirer> acquirerList = Acquirer.findAcquirersByParam(null, null, page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo).getResultList();
+            List<Acquirer> acquirerList = Acquirer.findAcquirersByParam(null, null, false, null, page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo).getResultList();
             uiModel.addAttribute("acquirers", acquirerList);
             float nrOfPages = (float) acquirerList.size() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("acquirers", Acquirer.findAcquirersByParam(null, null, -1, -1).getResultList());
+            uiModel.addAttribute("acquirers", Acquirer.findAcquirersByParam(null, null, false, null, -1, -1).getResultList());
         }
         addDateTimeFormatPatterns(uiModel);
         return "acquirers/list";
@@ -51,7 +51,7 @@ public class AcquirerController extends BaseController {
     */
     @RequestMapping(value = "/findAcquirersByParam", method = RequestMethod.POST)
     public String findAcquirersByParam(@RequestParam(value = "name", required = false) String name, @RequestParam(value = "registrationNo", required = false) String registrationNo, Model uiModel) {
-        uiModel.addAttribute("acquirers", Acquirer.findAcquirersByParam(name, registrationNo, -1, -1).getResultList());
+        uiModel.addAttribute("acquirers", Acquirer.findAcquirersByParam(name, registrationNo, false, null, -1, -1).getResultList());
         addDateTimeFormatPatterns(uiModel);
         return "acquirers/list";
     }

@@ -1,5 +1,6 @@
 package com.djavafactory.pttech.rrm.domain;
 
+import com.djavafactory.pttech.rrm.Constants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
@@ -70,9 +71,9 @@ public class Terminal {
     public static TypedQuery<Terminal> findTerminalsByParam(String terminalId, String status, Long terminalType, Long acquirer, int firstResult, int maxResults) {
         EntityManager em = Terminal.entityManager();
         TypedQuery<Terminal> q = null;
-        String query = "SELECT Terminal FROM Terminal AS terminal WHERE terminal.status != 'd'";
+        String query = "SELECT Terminal FROM Terminal AS terminal WHERE LOWER(terminal.status) != LOWER('"+ Constants.TERMINAL_STATUS_DELETED+"')";
         if (status != null && !status.equals("") && !status.equals("-1")) {
-            query = new StringBuilder(query).append(" AND terminal.status = :status").toString();
+            query = new StringBuilder(query).append(" AND LOWER(terminal.status) = LOWER(:status)").toString();
         }
         if (terminalId != null && !terminalId.equals("")) {
             query = new StringBuilder(query).append(" AND LOWER(terminal.terminalId) LIKE LOWER(:terminalId)").toString();
