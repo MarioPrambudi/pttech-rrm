@@ -93,11 +93,11 @@ privileged aspect City_Roo_Entity {
     }
     
     public static long City.countCitys() {
-        return entityManager().createQuery("SELECT COUNT(o) FROM City o", Long.class).getSingleResult();
+        return entityManager().createQuery("select count(o) from City o", Long.class).getSingleResult();
     }
     
     public static List<City> City.findAllCitys() {
-        return entityManager().createQuery("SELECT o FROM City o", City.class).getResultList();
+        return entityManager().createQuery("select o from City o", City.class).getResultList();
     }
     
     public static City City.findCity(Long id) {
@@ -106,7 +106,7 @@ privileged aspect City_Roo_Entity {
     }
     
     public static List<City> City.findCityEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("SELECT o FROM City o", City.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+        return entityManager().createQuery("select o from City o", City.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
 }

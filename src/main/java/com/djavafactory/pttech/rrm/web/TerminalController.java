@@ -20,7 +20,6 @@ import java.util.*;
 @Controller
 public class TerminalController extends BaseController {
 
-    private Date createdDate; //to hold the createdTime
 
     /**
     * To show the list of terminal with paginate
@@ -82,7 +81,7 @@ public class TerminalController extends BaseController {
 	
   /**
    * insert new terminal with createdTime and createdBy 
-   * @param acquirer the terminal object
+   * @param terminal the terminal object
    * @param bindingResult BindingResult
    * @param uiModel Model
    * @param httpServletRequest HttpServletRequest 
@@ -96,10 +95,9 @@ public class TerminalController extends BaseController {
             addDateTimeFormatPatterns(uiModel);
             return "terminals/create";
         }
-        uiModel.asMap().clear();
-        // Temporary static
-        terminal.setCreatedBy("System");
-        terminal.setCreatedTime(getCurrentDate());
+        uiModel.asMap().clear();       
+        terminal.setCreatedBy("System"); // Temporary static
+        terminal.setCreatedTime(new Date());
         terminal.persist();
         return "redirect:/terminals/" + encodeUrlPathSegment(terminal.getId().toString(), httpServletRequest);
     }
@@ -107,7 +105,7 @@ public class TerminalController extends BaseController {
 
   /**
    * update new terminal with modifiedTime and modifiedBy 
-   * @param acquirer the terminal object
+   * @param terminal the terminal object
    * @param bindingResult BindingResult
    * @param uiModel Model
    * @param httpServletRequest HttpServletRequest 
@@ -122,24 +120,14 @@ public class TerminalController extends BaseController {
             return "terminals/update";
         }
         uiModel.asMap().clear();
-        // ModifiedBy DEMO
-        terminal.setCreatedTime(createdDate);
+        // Temporary Static
         terminal.setModifiedBy("System");
-        terminal.setModifiedTime(getCurrentDate());
+        terminal.setModifiedTime(new Date());
         terminal.merge();
         return "redirect:/terminals/" + encodeUrlPathSegment(terminal.getId().toString(), httpServletRequest);
     }
 	
-	 /**
-	 * get the current date
-	 * @param none
-	 * @exception none
-	 * @return Date the current date
-	 */
-	 @Transient
-     public Date getCurrentDate(){
-		return new Date();
-     }
+
 
     /**
     * display update form and save the createdTime into createdDate
@@ -150,10 +138,7 @@ public class TerminalController extends BaseController {
     */
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
     public String updateForm(@PathVariable("id") Long id, Model uiModel) {
-        Terminal objTerminal;
-        objTerminal = Terminal.findTerminal(id);
-        createdDate = objTerminal.getCreatedTime();
-        uiModel.addAttribute("terminal", objTerminal);
+        uiModel.addAttribute("terminal", Terminal.findTerminal(id));
         addDateTimeFormatPatterns(uiModel);
         return "terminals/update";
     }

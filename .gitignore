@@ -39,5 +39,11 @@ Thumbs.db
 .project
 *.swp
 log.roo
+<<<<<<< HEAD
+*.iml
+*.ipr
+*.iws
+=======
 .idea
 *.iml
+>>>>>>> upstream/master
