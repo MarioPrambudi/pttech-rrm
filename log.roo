@@ -125,12 +125,6 @@ quit
 quit
 // Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-21 17:37:32
 // Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-21 17:37:35
-<<<<<<< HEAD
-// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-25 18:59:45
-persistence setup --provider HIBERNATE --database MYSQL
-// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-25 19:53:23
-// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-26 09:38:06
-=======
 // Spring Roo 1.1.3.RELEASE [rev 4404ffb] log opened at 2011-04-25 18:48:52
 // Spring Roo 1.1.3.RELEASE [rev 4404ffb] log opened at 2011-04-25 19:11:32
 // Spring Roo 1.1.3.RELEASE [rev 4404ffb] log opened at 2011-04-25 19:14:39
@@ -147,6 +141,7 @@ hint
 hint controllers
 hint controllers
 controller scaff --class ~.web.ConfigurationController --entity Configuration
+<<<<<<< HEAD
 >>>>>>> upstream/master
 // Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-26 11:31:36
 // Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-26 11:31:39
@@ -155,3 +150,5 @@ controller scaff --class ~.web.ConfigurationController --entity Configuration
 // Spring Roo 1.1.3.RELEASE [rev 4404ffb] log opened at 2011-04-26 11:43:18
 // Spring Roo 1.1.3.RELEASE [rev 4404ffb] log closed at 2011-04-26 13:56:44
 // Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-26 13:56:55
+=======
+>>>>>>> upstream/master

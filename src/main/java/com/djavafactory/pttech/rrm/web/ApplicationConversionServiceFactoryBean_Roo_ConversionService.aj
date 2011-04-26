@@ -3,6 +3,7 @@
 
 package com.djavafactory.pttech.rrm.web;
 
+import com.djavafactory.pttech.rrm.domain.City;
 import com.djavafactory.pttech.rrm.domain.Configuration;
 import com.djavafactory.pttech.rrm.domain.Firmware;
 import com.djavafactory.pttech.rrm.domain.Param;
@@ -15,8 +16,16 @@ import org.springframework.format.FormatterRegistry;
 
 privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService {
     
-    Converter<Configuration, String> ApplicationConversionServiceFactoryBean.getConfigurationConverter() {
-        return new Converter<Configuration, String>() {
+    Converter<City, String> ApplicationConversionServiceFactoryBean.getCityConverter() {
+        return new Converter<City, String>() {
+            public String convert(City city) {
+                return new StringBuilder().append(city.getCityName()).toString();
+            }
+        };
+    }
+    
+    org.springframework.core.convert.converter.Converter<Configuration, String> ApplicationConversionServiceFactoryBean.getConfigurationConverter() {
+        return new org.springframework.core.convert.converter.Converter<Configuration, String>() {
             public String convert(Configuration configuration) {
                 return new StringBuilder().append(configuration.getConfigKey()).append(" ").append(configuration.getConfigValue()).append(" ").append(configuration.getOrdering()).toString();
             }
@@ -64,7 +73,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     }
     
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
-        registry.addConverter(getAcquirerConverter());
+        registry.addConverter(getCityConverter());
         registry.addConverter(getConfigurationConverter());
         registry.addConverter(getFirmwareConverter());
         registry.addConverter(getParamConverter());

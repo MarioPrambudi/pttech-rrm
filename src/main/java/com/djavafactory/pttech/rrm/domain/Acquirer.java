@@ -18,7 +18,7 @@ import java.util.Set;
 @RooToString
 @RooEntity
 public class Acquirer {
-	
+
     @NotNull
     private String name;
 
@@ -36,7 +36,7 @@ public class Acquirer {
     private Province acquirerState;
 
     @NotNull
-    private String city;
+    private Long city;
 
     @NotNull
     private String postCode;
@@ -71,26 +71,39 @@ public class Acquirer {
     @Value("false")
     private Boolean deleted;
 
+    @Transient
+    public String getCityName() {
+        return City.findCity(this.city).getCityName();
+    }
+
     /**
-    * To search acquirers by parameters
-    * @param name The acquirer name
-    * @param registrationNo The Acquirer registration no
-    * @param firstResult Start index of the records
-    * @param maxResults  Maximum records to be fetched
-    * @exception none
-    * @return List of acquirer
-    */
-    public static TypedQuery<Acquirer> findAcquirersByParam(String name, String registrationNo, int firstResult, int maxResults) {
+     * To search acquirers by parameters
+     *
+     * @param name The acquirer name
+     * @param registrationNo The Acquirer registration no
+     * @param deleted Weht
+     * @param order The order of the search results
+     * @param firstResult Start index of the records
+     * @param maxResults  Maximum records to be fetched   @return List of acquirer
+     */
+    public static TypedQuery<Acquirer> findAcquirersByParam(String name, String registrationNo, Boolean deleted, String order, int firstResult, int maxResults) {
         EntityManager em = Acquirer.entityManager();
         TypedQuery<Acquirer> q = null;
-        String query = "SELECT Acquirer FROM Acquirer AS acquirer WHERE acquirer.deleted = false";
+        String query = "SELECT Acquirer FROM Acquirer AS acquirer";
+        query = (deleted != null && !deleted.equals("") && deleted == true) ? new StringBuilder(query).append(" WHERE (acquirer.deleted = false or acquirer.deleted = :notDeleted)").toString() : new StringBuilder(query).append(" WHERE acquirer.deleted = false").toString();
         if (name != null && !name.equals("")) {
             query = new StringBuilder(query).append(" AND LOWER(acquirer.name) LIKE LOWER(:name)").toString();
         }
         if (registrationNo != null && !registrationNo.equals("")) {
             query = new StringBuilder(query).append(" AND LOWER(acquirer.registrationNo) LIKE LOWER(:registrationNo)").toString();
         }
+        if (order != null && !order.equals("")) {
+            query = new StringBuilder(query).append(" ORDER BY ").append(order).toString();
+        }
         q = (firstResult > 0 && maxResults > 0) ? em.createQuery(query, Acquirer.class).setFirstResult(firstResult).setMaxResults(maxResults) : em.createQuery(query, Acquirer.class);
+        if (deleted != null && !deleted.equals("") && deleted == true) {
+            q.setParameter("notDeleted", deleted);
+        }
         if (name != null && !name.equals("")) {
             q.setParameter("name", "%" + name + "%");
         }

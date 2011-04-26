@@ -2,6 +2,7 @@ package com.djavafactory.pttech.rrm.web;
 
 import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.Acquirer;
+import com.djavafactory.pttech.rrm.domain.City;
 import com.djavafactory.pttech.rrm.domain.Terminal;
 import com.djavafactory.pttech.rrm.domain.TerminalType;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
@@ -10,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Transient;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.*;
@@ -20,13 +20,11 @@ import java.util.*;
 @Controller
 public class TerminalController extends BaseController {
 
-
     /**
     * To show the list of terminal with paginate
     * @param page The page number
     * @param size The size of the display list for a page
     * @param uiModel Model
-    * @exception none
     * @return String the page path to redirect
     */
     @RequestMapping(method = RequestMethod.GET)
@@ -34,12 +32,12 @@ public class TerminalController extends BaseController {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
 
-            List<Terminal> terminalList = Terminal.findTerminalsByParam(null, null, -1L, -1L, page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo).getResultList();
+            List<Terminal> terminalList = Terminal.findTerminalsByParam(null, null, -1L, -1L, page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo, "terminal.terminalId").getResultList();
             uiModel.addAttribute("terminals", regenerateList(terminalList));
             float nrOfPages = (float) terminalList.size() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("terminals", regenerateList(Terminal.findTerminalsByParam(null, null, -1L, -1L, -1, -1).getResultList()));
+            uiModel.addAttribute("terminals", regenerateList(Terminal.findTerminalsByParam(null, null, -1L, -1L, -1, -1, "terminal.terminalId").getResultList()));
         }
         addDateTimeFormatPatterns(uiModel);
         return "terminals/list";
@@ -50,13 +48,12 @@ public class TerminalController extends BaseController {
     * @param terminalId The terminal id
     * @param status The terminal status
     * @param uiModel Model
-    * @exception none
     * @return String the page path to redirect
     */
     @RequestMapping(value = "/findTerminalsByParam", method = RequestMethod.POST)
     public String findTerminalsByParam(@RequestParam(value = "terminalId", required = false) String terminalId, @RequestParam(value = "status", required = false) String status,
                                        @RequestParam(value = "terminalType", required = false) Long terminalType, @RequestParam(value = "acquirer", required = false) Long acquirer, Model uiModel) {
-        uiModel.addAttribute("terminals", regenerateList(Terminal.findTerminalsByParam(terminalId, status, terminalType, acquirer, -1, -1).getResultList()));
+        uiModel.addAttribute("terminals", regenerateList(Terminal.findTerminalsByParam(terminalId, status, terminalType, acquirer, -1, -1, "terminal.terminalId").getResultList()));
         addDateTimeFormatPatterns(uiModel);
         return "terminals/list";
     }
@@ -67,7 +64,6 @@ public class TerminalController extends BaseController {
    * @param page Integer
    * @param size Integer
    * @param uiModel Model
-   * @exception none 
    * @return String the page path to redirect
    */ 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -84,8 +80,7 @@ public class TerminalController extends BaseController {
    * @param terminal the terminal object
    * @param bindingResult BindingResult
    * @param uiModel Model
-   * @param httpServletRequest HttpServletRequest 
-   * @exception none 
+   * @param httpServletRequest HttpServletRequest
    * @return String the page path to redirect
    */
 	@RequestMapping(method = RequestMethod.POST)
@@ -108,8 +103,7 @@ public class TerminalController extends BaseController {
    * @param terminal the terminal object
    * @param bindingResult BindingResult
    * @param uiModel Model
-   * @param httpServletRequest HttpServletRequest 
-   * @exception none 
+   * @param httpServletRequest HttpServletRequest
    * @return String the page path to redirect
    */
 	@RequestMapping(method = RequestMethod.PUT)
@@ -120,20 +114,16 @@ public class TerminalController extends BaseController {
             return "terminals/update";
         }
         uiModel.asMap().clear();
-        // Temporary Static
         terminal.setModifiedBy("System");
         terminal.setModifiedTime(new Date());
         terminal.merge();
         return "redirect:/terminals/" + encodeUrlPathSegment(terminal.getId().toString(), httpServletRequest);
     }
-	
-
 
     /**
-    * display update form and save the createdTime into createdDate
+    * display update form
     * @param id The Terminal id
     * @param uiModel Model
-    * @exception none
     * @return String the page path to redirect
     */
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
@@ -145,42 +135,38 @@ public class TerminalController extends BaseController {
 
     /**
     * display drop down selection for undeleted acquirers in create terminal form
-    * @exception none
     * @return String the page path to redirect
     */
     @ModelAttribute("acquirers")
     public Collection<Acquirer> populateAcquirers() {
-        return Acquirer.findAcquirersByParam(null, null, -1, -1).getResultList();
+        return Acquirer.findAcquirersByParam(null, null, false, "acquirer.name", -1, -1).getResultList();
     }
 
     /**
     * display drop down selection for all acquirers in update terminal form
-    * @exception none
     * @return String the page path to redirect
     */
     @ModelAttribute("allacquirers")
     public Collection<Acquirer> populateAllAcquirers() {
-        return Acquirer.findAllAcquirers();
+        return Acquirer.findAcquirersByParam(null, null, true, "acquirer.name", -1, -1).getResultList();
     }
 
     /**
     * display drop down selection for undeleted terminal types in create terminal form and search terminal by terminal type
-    * @exception none
     * @return String the page path to redirect
     */
     @ModelAttribute("terminaltypes")
     public java.util.Collection<TerminalType> populateTerminalTypes() {
-        return TerminalType.findTerminalTypesByParam(null, -1, -1).getResultList();
+        return TerminalType.findTerminalTypesByParam(null, false, "terminalType.name", -1, -1).getResultList();
     }
 
     /**
     * display drop down selection for ALL terminal types in update terminal form
-    * @exception none
     * @return String the page path to redirect
     */
     @ModelAttribute("allterminaltypes")
     public java.util.Collection<TerminalType> populateAllTerminalTypes() {
-        return TerminalType.findAllTerminalTypes();
+        return TerminalType.findTerminalTypesByParam(null, true, "terminalType.name", -1, -1).getResultList();
     }
 
     @ModelAttribute("statuscode")
@@ -193,14 +179,14 @@ public class TerminalController extends BaseController {
         map = null;
 
         map = new HashMap<String, String>();
-        map.put("id", Constants.TERMINAL_STATUS_INACTIVE);
-        map.put("value", getResourceText("terminal_status_code_" + Constants.TERMINAL_STATUS_INACTIVE));
+        map.put("id", Constants.TERMINAL_STATUS_BLOCK);
+        map.put("value", getResourceText("terminal_status_code_" + Constants.TERMINAL_STATUS_BLOCK));
         list.add(map);
         map = null;
 
         map = new HashMap<String, String>();
-        map.put("id", Constants.TERMINAL_STATUS_BLOCK);
-        map.put("value", getResourceText("terminal_status_code_" + Constants.TERMINAL_STATUS_BLOCK));
+        map.put("id", Constants.TERMINAL_STATUS_INACTIVE);
+        map.put("value", getResourceText("terminal_status_code_" + Constants.TERMINAL_STATUS_INACTIVE));
         list.add(map);
         map = null;
 
@@ -209,7 +195,6 @@ public class TerminalController extends BaseController {
 
     /**
     * display date/time formatting get from resource bundle
-    * @exception none
     * @return String the page path to redirect
     */
     void addDateTimeFormatPatterns(Model uiModel) {
@@ -221,7 +206,6 @@ public class TerminalController extends BaseController {
     * Get the terminal info and format the status
     * @param id The Terminal id
     * @param uiModel Model
-    * @exception none
     * @return String the page path to redirect
     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -232,6 +216,15 @@ public class TerminalController extends BaseController {
         uiModel.addAttribute("terminal", terminal);
         uiModel.addAttribute("itemId", id);
         return "terminals/show";
+    }
+
+    /**
+    * display drop down selection for all cities in create/update acquirer form
+    * @return String the page path to redirect
+    */
+    @ModelAttribute("citys")
+    public java.util.Collection<City> populateCitys() {
+        return City.findAllCitys();
     }
 
     private List<Terminal> regenerateList(List<Terminal> terminalList) {

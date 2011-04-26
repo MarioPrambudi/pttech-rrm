@@ -3,20 +3,14 @@ package com.djavafactory.pttech.rrm.web;
 
 import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.Acquirer;
+import com.djavafactory.pttech.rrm.domain.City;
 import com.djavafactory.pttech.rrm.domain.Terminal;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.dao.DataAccessException;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Transient;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Date;
@@ -30,7 +24,6 @@ import java.util.Set;
 @Controller
 public class AcquirerController extends BaseController {
 
-    private Date createdDate; //to hold the createdTime   todo from blake: will have trouble in a multithreaded environment
     /**
     * To show the list of acquirer with paginate
     * @param page The page number
@@ -43,12 +36,12 @@ public class AcquirerController extends BaseController {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
 
-            List<Acquirer> acquirerList = Acquirer.findAcquirersByParam(null, null, page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo).getResultList();
+            List<Acquirer> acquirerList = Acquirer.findAcquirersByParam(null, null, false, "acquirer.name", page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo).getResultList();
             uiModel.addAttribute("acquirers", acquirerList);
             float nrOfPages = (float) acquirerList.size() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("acquirers", Acquirer.findAcquirersByParam(null, null, -1, -1).getResultList());
+            uiModel.addAttribute("acquirers", Acquirer.findAcquirersByParam(null, null, false, "acquirer.name", -1, -1).getResultList());
         }
         addDateTimeFormatPatterns(uiModel);
         return "acquirers/list";
@@ -63,7 +56,7 @@ public class AcquirerController extends BaseController {
     */
     @RequestMapping(value = "/findAcquirersByParam", method = RequestMethod.POST)
     public String findAcquirersByParam(@RequestParam(value = "name", required = false) String name, @RequestParam(value = "registrationNo", required = false) String registrationNo, Model uiModel) {
-        uiModel.addAttribute("acquirers", Acquirer.findAcquirersByParam(name, registrationNo, -1, -1).getResultList());
+        uiModel.addAttribute("acquirers", Acquirer.findAcquirersByParam(name, registrationNo, false, "acquirer.name", -1, -1).getResultList());
         addDateTimeFormatPatterns(uiModel);
         return "acquirers/list";
     }
@@ -118,19 +111,7 @@ public class AcquirerController extends BaseController {
         uiModel.asMap().clear();     
         acquirer.setCreatedBy("System");  // Temporary static
         acquirer.setCreatedTime(new Date());
-        
-        try
-        {
-        	acquirer.persist();
-        }
-        catch (DataAccessException e)
-        {
-        	//1. prompt user msg, enable or disable
-        	//2. disable - redirect a new form
-        	//3. enable - findacquirerbyregistrationno and reload in update form
-        	
-        }
-        
+        acquirer.persist();     
         return "redirect:/acquirers/" + encodeUrlPathSegment(acquirer.getId().toString(), httpServletRequest);
     }
 
@@ -178,5 +159,14 @@ public class AcquirerController extends BaseController {
     void addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("acquirer_createdtime_date_format", getResourceText("display_date_format"));
         uiModel.addAttribute("acquirer_modifiedtime_date_format", getResourceText("display_date_format"));
+    }
+
+    /**
+    * display drop down selection for all cities in create/update acquirer form
+    * @return String the page path to redirect
+    */
+    @ModelAttribute("citys")
+    public java.util.Collection<City> populateCitys() {
+        return City.findAllCitys();
     }
 }

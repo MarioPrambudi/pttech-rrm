@@ -8,7 +8,7 @@
         <field:display field="street1" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_street1" object="${acquirer}" z="qIBeswe0O18ZLPATAS30MFezp1Y="/>
         <field:display field="street2" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_street2" object="${acquirer}" z="5mK5aNs0FrI6uUnpB8pVwZqaBfg="/>
         <field:display field="acquirerState" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_acquirerState" object="${acquirer}" z="p6MtZW7IIeIYCe+gF754aZGXUCw="/>
-        <field:display field="city" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_city" object="${acquirer}" z="sTG8wqOLRXnEOYCvjP27lo4zz9I="/>
+        <field:display field="cityName" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_city" object="${acquirer}" z="user-managed"/>
         <field:display field="postCode" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_postCode" object="${acquirer}" z="o6Y6ldUL94U776sm77Fk/Yphabs="/>
         <field:display field="email" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_email" object="${acquirer}" z="Ac+iRdCVHZzRyl31/i0CDahW9qQ="/>
     	<field:display field="hotline" id="s_com_djavafactory_pttech_rrm_domain_Acquirer_hotline" object="${acquirer}" z="zhORUYsIe7q3jZ0ECblQsAgg5WE="/>
