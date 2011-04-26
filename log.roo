@@ -136,3 +136,8 @@ hint
 quit
 // Spring Roo 1.1.3.RELEASE [rev 4404ffb] log closed at 2011-04-25 19:16:04
 // Spring Roo 1.1.3.RELEASE [rev 4404ffb] log opened at 2011-04-25 19:16:13
+// Spring Roo 1.1.3.RELEASE [rev 4404ffb] log opened at 2011-04-25 20:54:08
+hint
+hint controllers
+hint controllers
+controller scaff --class ~.web.ConfigurationController --entity Configuration

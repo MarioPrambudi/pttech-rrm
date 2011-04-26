@@ -17,7 +17,7 @@ public class AcquirerDataOnDemand {
         obj.setStreet1("street1_" + index);
         obj.setStreet2("street2_" + index);
         obj.setAcquirerState(provinceObj);
-        obj.setCity("city_" + index);
+        obj.setCity(new Long(index));
         obj.setPostCode("postCode_" + index);
         obj.setEmail("testuser@testemail.com");
         obj.setHotline("hotline_" + index);

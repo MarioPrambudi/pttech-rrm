@@ -31,7 +31,7 @@ public class TerminalDataOnDemand {
         acquirerObj.setStreet1("street1_" + index);
         acquirerObj.setStreet2("street2_" + index);
         acquirerObj.setAcquirerState(getProvince(index));
-        acquirerObj.setCity("city_" + index);
+        acquirerObj.setCity(new Long(index));
         acquirerObj.setPostCode("postCode_" + index);
         acquirerObj.setEmail("testuser@testemail.com");
         acquirerObj.setHotline("hotline_" + index);
