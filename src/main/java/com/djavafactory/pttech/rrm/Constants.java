@@ -26,4 +26,6 @@ public final class Constants {
     public static final String TERMINAL_STATUS_INACTIVE = "x";
     public static final String TERMINAL_STATUS_DELETED = "d";
     public static final String TERMINAL_STATUS_BLOCK = "b";
+
+    public static Boolean LDELETED_STATUS = true;
 }

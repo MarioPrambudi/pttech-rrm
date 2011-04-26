@@ -125,3 +125,7 @@ quit
 quit
 // Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-21 17:37:32
 // Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-21 17:37:35
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-25 18:59:45
+persistence setup --provider HIBERNATE --database MYSQL
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-25 19:53:23
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-26 09:38:06

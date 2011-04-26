@@ -47,12 +47,14 @@ public class Acquirer {
     @NotNull
     private String hotline;
 
+    @Column(updatable=false, insertable=true)
     private String createdBy;
 
     private String modifiedBy;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
+    @Column(updatable=false, insertable=true)
     private Date createdTime;
 
     @Temporal(TemporalType.TIMESTAMP)
