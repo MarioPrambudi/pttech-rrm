@@ -78,15 +78,15 @@ public class AcquirerController extends BaseController {
 		terminalSet = acquirer.getTerminals();
 		Iterator it = terminalSet.iterator();
 
-		while(it.hasNext())
-		{
+		while(it.hasNext()) {
 			Terminal terminal;
 			terminal = (Terminal)it.next();
 			terminal.setStatus(Constants.TERMINAL_STATUS_DELETED);
 			terminal.merge();
-
 		}
 		acquirer.setDeleted(true);
+        acquirer.setModifiedBy("System");
+        acquirer.setModifiedTime(new Date());
 		uiModel.asMap().clear();
 		acquirer.merge();
         return "redirect:/acquirers";

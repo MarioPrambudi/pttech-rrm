@@ -11,6 +11,7 @@
   <jsp:directive.attribute name="delete" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Include 'delete' link into table (default true)" />
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
   <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)" />
+  <jsp:directive.attribute name="terminalAction" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Include terminal actions into table (default false)" />
 
   <c:if test="${empty render or render}">
 
@@ -32,11 +33,48 @@
       <c:set var="delete" value="true" />
     </c:if>
 
+    <c:if test="${empty terminalAction}">
+      <c:set var="terminalAction" value="false" />
+    </c:if>
+
     <c:set var="typeName" value="${fn:split(id,'_')[fn:length(fn:split(id,'_')) - 1]}" />
     <c:set var="lengths" value="${fn:split(columnMaxLengths, ',')}" scope="request" />
     
     <spring:eval var="colCounter" expression="1" />
-    
+
+    <spring:url value="${path}/setstatus" var="set_status_url" />
+    <form:form id="actionForm" action="${fn:escapeXml(set_status_url)}" method="POST">
+    <c:if test="${terminalAction}">
+        <input id="terminalIds" name = "terminalIds"/>
+        Terminal Actions:
+        <select id="optionSel" name = "code">
+            <option value="-1"><spring:message code="terminal_action_select" /></option>
+            <option value='A'><spring:message code="terminal_action_activate" /></option>
+            <option value='B'><spring:message code="terminal_action_block" /></option>
+            <option value='X'><spring:message code="terminal_action_deactivate" /></option>
+        </select>
+        <script type="text/javascript">
+        Spring.addDecoration(new Spring.ElementDecoration({elementId : 'terminalIds', widgetType: 'dijit.form.TextBox', widgetAttrs: {type : 'hidden'}}));
+        Spring.addDecoration(new Spring.ElementDecoration({elementId : 'optionSel', widgetType: 'dijit.form.Select', widgetAttrs: {style : 'width: 80px;'}}));
+        dojo.addOnLoad(function() {
+            var actionDropDown = dijit.byId('optionSel');
+            dojo.connect(actionDropDown, "onChange", function() {
+                if(actionDropDown.value != -1) {
+                    if(confirm('<spring:message code="terminal_action_confirm" arguments="'+actionDropDown.attr('displayedValue')+'"/>')) {
+                        var checkedOptions = [];
+                        dojo.query("input[name=terminalCB]").forEach(function(node){
+                            if (node.checked) {
+                                checkedOptions.push(node.value);
+                            }
+                        });
+                        dijit.byId('terminalIds').setValue(checkedOptions);
+                        document.getElementById('actionForm').submit();
+                    }
+                }
+            });
+        });
+        </script>
+    </c:if>
     <table>
       <thead>
         <tr>
@@ -52,6 +90,10 @@
             <spring:eval var="colCounter" expression="colCounter  + 1" />
           </c:if>
           <c:if test="${delete}">
+            <th></th>
+            <spring:eval var="colCounter" expression="colCounter  + 1" />
+          </c:if>
+          <c:if test="${terminalAction}">
             <th></th>
             <spring:eval var="colCounter" expression="colCounter  + 1" />
           </c:if>
@@ -106,6 +148,14 @@
               </form:form>
             </td>
           </c:if>
+          <c:if test="${terminalAction}">
+            <td class="utilbox">
+                <input type="checkbox" id="cb${item[typeIdFieldName]}" name="terminalCB" value="${item[typeIdFieldName]}" />
+                <script type="text/javascript">
+                Spring.addDecoration(new Spring.ElementDecoration({elementId : 'cb{item[typeIdFieldName]}', widgetType: 'dijit.form.Checkbox'}));
+            </script>
+            </td>
+          </c:if>
         </tr>
       </c:forEach>
       <tr class="footer">
@@ -129,7 +179,7 @@
         </td>
       </tr>
     </table>
-
+    </form:form>
   </c:if>
 
 </jsp:root>

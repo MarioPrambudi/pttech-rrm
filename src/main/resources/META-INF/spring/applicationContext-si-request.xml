@@ -37,7 +37,7 @@
         <channel id="failedReloadReqPersistChannel">
             <queue capacity="100" />
         </channel>
-        <chain input-channel="failedReloadReqPersistChannel" output-channel="tngReloadRequestChannel">
+        <chain input-channel="failedReloadReqPersistChannel" output-channel="rtmRequestResponseChannel">
             <transformer ref="mapperBean" method="mapFailedReloadRequest" />
             <service-activator ref="messagePersistenceBean" method="mergeReloadRequest" />
         </chain>
@@ -45,7 +45,7 @@
         <channel id="expiredReloadReqPersistChannel">
             <queue capacity="100" />
         </channel>
-        <chain input-channel="expiredReloadReqPersistChannel" output-channel="tngReloadRequestChannel">
+        <chain input-channel="expiredReloadReqPersistChannel" output-channel="rtmRequestResponseChannel">
             <transformer ref="mapperBean" method="mapExpiredReloadRequest" />
             <service-activator ref="messagePersistenceBean" method="mergeReloadRequest" />
         </chain>
@@ -53,7 +53,7 @@
         <channel id="successReloadReqPersistChannel">
             <queue capacity="100" />
         </channel>
-        <chain input-channel="successReloadReqPersistChannel" output-channel="tngReloadRequestChannel">
+        <chain input-channel="successReloadReqPersistChannel" output-channel="rtmRequestResponseChannel">
             <transformer ref="mapperBean" method="mapSuccessReloadRequest" />
             <service-activator ref="messagePersistenceBean" method="mergeReloadRequest" />
         </chain>
@@ -88,6 +88,10 @@
             <queue capacity="100" />
         </channel>
         <transformer input-channel="rtmReloadRequestChannel" ref="transformerBean" method="transformMessageToJson" output-channel="rtmReloadInboundChannel" />
+
+        <publish-subscribe-channel id="rtmRequestResponseChannel" />
+        <transformer input-channel="rtmRequestResponseChannel" ref="transformerBean" method="transformMessageToJson" output-channel="tngReloadReqChannel" />
+        <transformer input-channel="rtmRequestResponseChannel" ref="transformerBean" method="transformSuccessMessage" output-channel="rtmReloadStatusChannel" />
 
         <poller id="defaultPoller" default="true" fixed-rate="3000"/>
 </beans:beans>
