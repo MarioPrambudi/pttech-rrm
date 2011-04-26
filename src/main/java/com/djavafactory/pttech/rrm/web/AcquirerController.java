@@ -1,18 +1,13 @@
 package com.djavafactory.pttech.rrm.web;
 
 import com.djavafactory.pttech.rrm.domain.Acquirer;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
+import com.djavafactory.pttech.rrm.domain.City;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Transient;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Date;
@@ -151,5 +146,14 @@ public class AcquirerController extends BaseController {
     void addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("acquirer_createdtime_date_format", getResourceText("display_date_format"));
         uiModel.addAttribute("acquirer_modifiedtime_date_format", getResourceText("display_date_format"));
+    }
+
+    /**
+    * display drop down selection for all cities in create/update acquirer form
+    * @return String the page path to redirect
+    */
+    @ModelAttribute("citys")
+    public java.util.Collection<City> populateCitys() {
+        return City.findAllCitys();
     }
 }

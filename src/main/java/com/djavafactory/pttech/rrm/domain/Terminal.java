@@ -65,7 +65,6 @@ public class Terminal {
     * @param status The terminal status
     * @param firstResult Start index of the records
     * @param maxResults  Maximum records to be fetched
-    * @exception none
     * @return List of terminal
     */
     public static TypedQuery<Terminal> findTerminalsByParam(String terminalId, String status, Long terminalType, Long acquirer, int firstResult, int maxResults) {

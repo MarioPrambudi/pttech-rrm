@@ -9,5 +9,8 @@
     <field:display field="name" id="s_com_djavafactory_pttech_rrm_domain_Province_name" object="${province}" z="qsUpAzx7ykXbJnxRv0kfwcLYnrQ="/>
         
     <field:display field="cities" id="s_com_djavafactory_pttech_rrm_domain_Province_cities" object="${province}" z="ls2VGs4mU640j2LVG4Po+xnRI8Q="/>
+    
+        
+    
     </page:show>
 </div>

@@ -22,8 +22,13 @@ public class City {
     @ManyToOne
     private Province acquirerState;
 
+    /**
+    * To get the list of cities by state
+    * @param stateId The state id
+    * @return List of cities by state
+    */
     public static String findCitiesByState(long stateId) {
-        TypedQuery<City> q = entityManager().createQuery("select City from City city where city.acquirerState.id = :stateId", City.class);
+        TypedQuery<City> q = entityManager().createQuery("select City from City city where city.acquirerState.id = :stateId order by city.cityName", City.class);
         q.setParameter("stateId", stateId);
         return toJsonArray(q.getResultList());
     }

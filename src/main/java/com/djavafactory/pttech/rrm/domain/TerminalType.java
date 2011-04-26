@@ -34,7 +34,6 @@ public class TerminalType {
     * @param searchText The search text
     * @param firstResult Start index of the records
     * @param maxResults  Maximum records to be fetched
-    * @exception none
     * @return List of terminal type
     */
     public static TypedQuery<TerminalType> findTerminalTypesByParam(String searchText, int firstResult, int maxResults) {

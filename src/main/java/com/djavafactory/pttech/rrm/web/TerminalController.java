@@ -20,8 +20,6 @@ import java.util.*;
 @Controller
 public class TerminalController extends BaseController {
 
-    private Date createdDate; //to hold the createdTime
-
     /**
     * To show the list of terminal with paginate
     * @param page The page number
@@ -118,7 +116,6 @@ public class TerminalController extends BaseController {
         }
         uiModel.asMap().clear();
         // ModifiedBy DEMO
-        terminal.setCreatedTime(createdDate);
         terminal.setModifiedBy("System");
         terminal.setModifiedTime(getCurrentDate());
         terminal.merge();
@@ -135,7 +132,7 @@ public class TerminalController extends BaseController {
      }
 
     /**
-    * display update form and save the createdTime into createdDate
+    * display update form
     * @param id The Terminal id
     * @param uiModel Model
     * @return String the page path to redirect
@@ -144,7 +141,6 @@ public class TerminalController extends BaseController {
     public String updateForm(@PathVariable("id") Long id, Model uiModel) {
         Terminal objTerminal;
         objTerminal = Terminal.findTerminal(id);
-        createdDate = objTerminal.getCreatedTime();
         uiModel.addAttribute("terminal", objTerminal);
         addDateTimeFormatPatterns(uiModel);
         return "terminals/update";
@@ -170,7 +166,6 @@ public class TerminalController extends BaseController {
 
     /**
     * display drop down selection for undeleted terminal types in create terminal form and search terminal by terminal type
-    * @exception none
     * @return String the page path to redirect
     */
     @ModelAttribute("terminaltypes")
@@ -197,14 +192,14 @@ public class TerminalController extends BaseController {
         map = null;
 
         map = new HashMap<String, String>();
-        map.put("id", Constants.TERMINAL_STATUS_INACTIVE);
-        map.put("value", getResourceText("terminal_status_code_" + Constants.TERMINAL_STATUS_INACTIVE));
+        map.put("id", Constants.TERMINAL_STATUS_BLOCK);
+        map.put("value", getResourceText("terminal_status_code_" + Constants.TERMINAL_STATUS_BLOCK));
         list.add(map);
         map = null;
 
         map = new HashMap<String, String>();
-        map.put("id", Constants.TERMINAL_STATUS_BLOCK);
-        map.put("value", getResourceText("terminal_status_code_" + Constants.TERMINAL_STATUS_BLOCK));
+        map.put("id", Constants.TERMINAL_STATUS_INACTIVE);
+        map.put("value", getResourceText("terminal_status_code_" + Constants.TERMINAL_STATUS_INACTIVE));
         list.add(map);
         map = null;
 

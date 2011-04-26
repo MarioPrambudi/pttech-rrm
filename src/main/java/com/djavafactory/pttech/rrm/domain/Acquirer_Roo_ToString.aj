@@ -9,6 +9,7 @@ privileged aspect Acquirer_Roo_ToString {
     
     public String Acquirer.toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append("CityName: ").append(getCityName()).append(", ");
         sb.append("Name: ").append(getName()).append(", ");
         sb.append("RegistrationNo: ").append(getRegistrationNo()).append(", ");
         sb.append("Street1: ").append(getStreet1()).append(", ");

@@ -35,7 +35,7 @@ public class Acquirer {
     private Province acquirerState;
 
     @NotNull
-    private String city;
+    private Long city;
 
     @NotNull
     private String postCode;
@@ -68,13 +68,17 @@ public class Acquirer {
     @Value("false")
     private Boolean deleted;
 
+    @Transient
+    public String getCityName() {
+        return City.findCity(this.city).getCityName();
+    }
+
     /**
     * To search acquirers by parameters
     * @param name The acquirer name
     * @param registrationNo The Acquirer registration no
     * @param firstResult Start index of the records
     * @param maxResults  Maximum records to be fetched
-    * @exception none
     * @return List of acquirer
     */
     public static TypedQuery<Acquirer> findAcquirersByParam(String name, String registrationNo, int firstResult, int maxResults) {
