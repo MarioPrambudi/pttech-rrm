@@ -93,11 +93,11 @@ privileged aspect Configuration_Roo_Entity {
     }
     
     public static long Configuration.countConfigurations() {
-        return entityManager().createQuery("select count(o) from Configuration o", Long.class).getSingleResult();
+        return entityManager().createQuery("SELECT COUNT(o) FROM Configuration o", Long.class).getSingleResult();
     }
     
     public static List<Configuration> Configuration.findAllConfigurations() {
-        return entityManager().createQuery("select o from Configuration o", Configuration.class).getResultList();
+        return entityManager().createQuery("SELECT o FROM Configuration o", Configuration.class).getResultList();
     }
     
     public static Configuration Configuration.findConfiguration(Long id) {
@@ -106,7 +106,7 @@ privileged aspect Configuration_Roo_Entity {
     }
     
     public static List<Configuration> Configuration.findConfigurationEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("select o from Configuration o", Configuration.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+        return entityManager().createQuery("SELECT o FROM Configuration o", Configuration.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
 }

@@ -93,11 +93,11 @@ privileged aspect Province_Roo_Entity {
     }
     
     public static long Province.countProvinces() {
-        return entityManager().createQuery("select count(o) from Province o", Long.class).getSingleResult();
+        return entityManager().createQuery("SELECT COUNT(o) FROM Province o", Long.class).getSingleResult();
     }
     
     public static List<Province> Province.findAllProvinces() {
-        return entityManager().createQuery("select o from Province o", Province.class).getResultList();
+        return entityManager().createQuery("SELECT o FROM Province o", Province.class).getResultList();
     }
     
     public static Province Province.findProvince(Long id) {
@@ -106,7 +106,7 @@ privileged aspect Province_Roo_Entity {
     }
     
     public static List<Province> Province.findProvinceEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("select o from Province o", Province.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+        return entityManager().createQuery("SELECT o FROM Province o", Province.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
 }
