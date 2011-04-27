@@ -252,7 +252,6 @@ public class TerminalController extends BaseController {
         for(int i = 0; i < terminalList.size(); i++) {
             Terminal terminal = terminalList.get(i);
             terminal.setStatus(getResourceText("terminal_status_code_" + terminal.getStatus()));
-            terminalList.set(i, terminal);
         }
         return terminalList;
     }
