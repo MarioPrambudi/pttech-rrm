@@ -114,9 +114,21 @@ public class Terminal {
         return q;
     }
     
-//    public static List findTerminalIdByAcquirerId(Long acquirerId) {
-//      TypedQuery<List> q = entityManager().createQuery("select terminalId from Terminal where Terminal.Acquirer.id=:acquirerId", List.class);
-//      q.setParameter("acquirerId", acquirerId);
-//      return q.getResultList();
-//  }
+    public static List findTerminalByAcquirerId(Long acquirerId) {
+      TypedQuery<List> q = entityManager().createQuery("select Terminal from Terminal terminal where terminal.acquirer.id=:acquirerId", List.class);
+      q.setParameter("acquirerId", acquirerId);
+      return q.getResultList();
+  }
+    
+    /**
+     * To delete terminal by updated status to TERMINAL_STATUS_DELETED value
+     * @param terminal The terminal object
+     * @return none
+     */
+	public static void deleteTerminalForAcquirer(Terminal terminal) {
+	    	terminal.setStatus(Constants.TERMINAL_STATUS_DELETED);
+	        terminal.setModifiedBy("System");
+	        terminal.setModifiedTime(new Date());
+	        terminal.merge();       	    
+	}
 }

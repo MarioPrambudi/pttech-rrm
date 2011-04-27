@@ -97,6 +97,7 @@ public class AcquirerController extends BaseController {
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
 		Acquirer acquirer;
 		acquirer = Acquirer.findAcquirer(id);
+		
 		// Delete all terminal that belong to this acquirer
 		Set terminalSet= new HashSet();
 		terminalSet = acquirer.getTerminals();
@@ -104,12 +105,9 @@ public class AcquirerController extends BaseController {
 
 		while(it.hasNext())
 		{
-			//call terminal to update (terminalId, status)
-			Terminal terminal;
-			terminal = (Terminal)it.next();
-			terminal.setStatus(Constants.TERMINAL_STATUS_DELETED);
-			terminal.merge();
-
+			//call terminal method to delete terminal
+			Terminal terminal = (Terminal)it.next();
+			Terminal.deleteTerminalForAcquirer(terminal);
 		}
 		acquirer.setDeleted(true);
 		uiModel.asMap().clear();
