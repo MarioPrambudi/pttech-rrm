@@ -23,26 +23,31 @@ import java.util.Set;
 @RequestMapping("/acquirers")
 @Controller
 public class AcquirerController extends BaseController {
-	
-	@RequestMapping(value="/isDuplicatedRegNo", method=RequestMethod.GET)
-	public Boolean isDuplicatedRegNo(@RequestParam(value = "regNo", required = false) String regNo) {
-	   if (regNo != null || regNo != null)
-	   {
-		   List<Acquirer> acquirerList = Acquirer.findAllAcquirers();
-		   Iterator it = acquirerList.iterator();
-		   while(it.hasNext())
-			{
-				Acquirer acquirer;
-				acquirer = (Acquirer)it.next();
-				if (acquirer.getRegistrationNo().equals(regNo))
-				{
-					return true;
+	//0= duplicated 
+	//-1= unique
+	//RegNo= duplicated and deleted
+	@RequestMapping(value = "/isDuplicate/{regNo}", method = RequestMethod.GET)
+    public @ResponseBody String isDuplicate(@PathVariable("regNo") String regNo) {
+	    List listAcquirer = Acquirer.findAllAcquirers();
+	    Iterator it = listAcquirer.iterator();
+	    while(it.hasNext())
+		{	
+			Acquirer acquirer;
+			acquirer = (Acquirer)it.next();
+			if (acquirer.getRegistrationNo().equals(regNo))
+			{	
+				
+				if (acquirer.getDeleted())
+				{					
+					return acquirer.getId().toString();
 				}
-			}
-	   }
-	   return false;
-	}
-
+				return "0";
+	
+			}		
+		}
+        return "-1";
+    }
+	
     /**
     * To show the list of acquirer with paginate
     * @param page The page number
@@ -99,6 +104,7 @@ public class AcquirerController extends BaseController {
 
 		while(it.hasNext())
 		{
+			//call terminal to update (terminalId, status)
 			Terminal terminal;
 			terminal = (Terminal)it.next();
 			terminal.setStatus(Constants.TERMINAL_STATUS_DELETED);
@@ -130,6 +136,7 @@ public class AcquirerController extends BaseController {
         uiModel.asMap().clear();     
         acquirer.setCreatedBy("System");  // Temporary static
         acquirer.setCreatedTime(new Date());
+        acquirer.setDeleted(false);
         acquirer.persist();     
         return "redirect:/acquirers/" + encodeUrlPathSegment(acquirer.getId().toString(), httpServletRequest);
     }
@@ -150,6 +157,14 @@ public class AcquirerController extends BaseController {
             addDateTimeFormatPatterns(uiModel);
             return "acquirers/update";
         }
+        
+        //for enable deleted acquirer
+        if(acquirer.getDeleted())
+        {
+        	acquirer.setDeleted(false);
+        	
+        }
+        
         uiModel.asMap().clear();
         acquirer.setModifiedBy("System");  // Temporary Static  
         acquirer.setModifiedTime(new Date());

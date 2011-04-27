@@ -28,12 +28,45 @@ function updateCityList(state, cityUrl) {
     });
 }
 
-function isDuplicated(registrationNo){
-    $.getJSON("acquirer/isDuplicatedRegNo", { regNo: registrationNo }, function(isDuplicatedRegNo) {
-        if (isDuplicatedRegNo) {
-        	alert('true-duplicate');
-        } else {
-            alert('false-noduplicate');
+function isDuplicateRegNo(regNo, acquirerUrl) {
+    dojo.xhrGet(
+    {
+        url: acquirerUrl+regNo.value,
+        handleAs: "json",
+        load: function(result) {
+        	
+        	if(!(result=="-1"))
+        	{
+        		if(result=="0")
+        		{        			
+        			alert('The registration number is duplicated. Please insert a valid registration number.');
+        			regNo.focus();
+        		}	
+        		else 
+        		{
+        			var reload;
+        			reload = confirm("The registration number is duplicated and deleted. Do you want to enable it?");
+        			if(reload)
+        			{
+        				reloadAcquirerUpdate(result);
+        			}
+        			else
+        			{
+        				reloadAcquirerCreate();
+        			}
+        		}
+        	}
         }
+
     });
 }
+
+function reloadAcquirerCreate() {
+	window.location = "/pttech-rrm/acquirers?form";
+}
+
+function reloadAcquirerUpdate(acquirerId) {
+	window.location = "/pttech-rrm/acquirers/" + acquirerId + "?form";
+}
+
+

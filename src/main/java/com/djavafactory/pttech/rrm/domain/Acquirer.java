@@ -5,24 +5,28 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.roo.addon.json.RooJson;
 import org.springframework.roo.addon.tostring.RooToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
 @RooJavaBean
 @RooToString
 @RooEntity
+@RooJson
 public class Acquirer {
 
     @NotNull
     private String name;
 
     @NotNull
+    @Column(unique = true)
     private String registrationNo;
 
     @NotNull
@@ -67,7 +71,6 @@ public class Acquirer {
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "acquirer")
     private Set<Terminal> terminals = new HashSet<Terminal>();
 
-    @Value("false")
     private Boolean deleted;
 
     @Transient
@@ -111,4 +114,17 @@ public class Acquirer {
         }
         return q;
     }
+    
+    
+//    public static Boolean isAcquirerDeleted(long acquirerId) {
+//        TypedQuery<Boolean> q = entityManager().createQuery("select deleted from Acquirer where acquirerId = :acquirerId", Boolean.class);
+//        q.setParameter("acquirerId", acquirerId);
+//        return q.getSingleResult();
+//    }
+//    
+//    public static List getAllRegNo() {
+//        TypedQuery<List> q = entityManager().createQuery("select registrationNo from Acquirer", List.class);
+//        return q.getResultList();
+//    }
+    
 }

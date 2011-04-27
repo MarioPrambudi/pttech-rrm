@@ -10,6 +10,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @RooJavaBean
 @RooToString
@@ -17,6 +18,7 @@ import java.util.Date;
 public class Terminal {
 
     @NotNull
+    @Column(unique = true)
     private String terminalId;
 
     @NotNull
@@ -111,4 +113,10 @@ public class Terminal {
         }
         return q;
     }
+    
+//    public static List findTerminalIdByAcquirerId(Long acquirerId) {
+//      TypedQuery<List> q = entityManager().createQuery("select terminalId from Terminal where Terminal.Acquirer.id=:acquirerId", List.class);
+//      q.setParameter("acquirerId", acquirerId);
+//      return q.getResultList();
+//  }
 }

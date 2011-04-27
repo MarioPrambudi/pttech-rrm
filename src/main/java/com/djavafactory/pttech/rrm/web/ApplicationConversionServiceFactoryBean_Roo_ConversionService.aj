@@ -73,6 +73,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     }
     
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
+        registry.addConverter(getAcquirerConverter());
         registry.addConverter(getCityConverter());
         registry.addConverter(getConfigurationConverter());
         registry.addConverter(getFirmwareConverter());
