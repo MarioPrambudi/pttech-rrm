@@ -18,4 +18,19 @@ privileged aspect Configuration_Roo_Finder {
         return q;
     }
     
+    public static TypedQuery<Configuration> Configuration.findConfigurationsByConfigKeyLike(String configKey) {
+        if (configKey == null || configKey.length() == 0) throw new IllegalArgumentException("The configKey argument is required");
+        configKey = configKey.replace('*', '%');
+        if (configKey.charAt(0) != '%') {
+            configKey = "%" + configKey;
+        }
+        if (configKey.charAt(configKey.length() - 1) != '%') {
+            configKey = configKey + "%";
+        }
+        EntityManager em = Configuration.entityManager();
+        TypedQuery<Configuration> q = em.createQuery("SELECT Configuration FROM Configuration AS configuration WHERE LOWER(configuration.configKey) LIKE LOWER(:configKey)", Configuration.class);
+        q.setParameter("configKey", configKey);
+        return q;
+    }
+    
 }

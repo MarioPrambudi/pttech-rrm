@@ -16,4 +16,7 @@
 <definition extends="default" name="configurations/findConfigurationsByConfigKey">
         <put-attribute name="body" value="/WEB-INF/views/configurations/findConfigurationsByConfigKey.jspx"/>
     </definition>
+<definition extends="default" name="configurations/findConfigurationsByConfigKeyLike">
+        <put-attribute name="body" value="/WEB-INF/views/configurations/findConfigurationsByConfigKeyLike.jspx"/>
+    </definition>
 </tiles-definitions>

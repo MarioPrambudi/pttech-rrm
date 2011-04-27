@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <table name="province">
+        <column>id</column>
+        <column>name</column>
+        <row>
+            <value description="id">1</value>
+            <value description="name">Johor</value>
+        </row>
+		 <row>
+            <value description="id">2</value>
+            <value description="name">Melaka</value>
+        </row>
+		 <row>
+            <value description="id">3</value>
+            <value description="name">Penang</value>
+        </row>
+        <row>
+            <value description="id">4</value>
+            <value description="name">Selangor</value>
+        </row>
+        <row>
+            <value description="id">5</value>
+            <value description="name">W. P. Kuala Lumpur</value>
+        </row>
+    </table>
+
+    <table name="city">
+        <column>id</column>
+        <column>city_name</column>
+        <column>acquirer_state</column>
+        <row>
+            <value description="id">1</value>
+            <value description="city_name">Johor Bahru</value>
+            <value description="acquirer_state">1</value>
+        </row>
+		 <row>
+            <value description="id">2</value>
+            <value description="city_name">Kluang</value>
+            <value description="acquirer_state">1</value>
+        </row>
+        <row>
+            <value description="id">3</value>
+            <value description="city_name">Alur Gajah</value>
+            <value description="acquirer_state">2</value>
+        </row>
+		 <row>
+            <value description="id">4</value>
+            <value description="city_name">Kampung Bahru</value>
+            <value description="acquirer_state">2</value>
+        </row>
+        <row>
+            <value description="id">5</value>
+            <value description="city_name">George Town</value>
+            <value description="acquirer_state">3</value>
+        </row>
+		 <row>
+            <value description="id">6</value>
+            <value description="city_name">Petaling Jaya</value>
+            <value description="acquirer_state">4</value>
+        </row>
+        <row>
+            <value description="id">7</value>
+            <value description="city_name">Shah Alam</value>
+            <value description="acquirer_state">4</value>
+        </row>
+        <row>
+            <value description="id">8</value>
+            <value description="city_name">Klang</value>
+            <value description="acquirer_state">4</value>
+        </row>
+        <row>
+            <value description="id">9</value>
+            <value description="city_name">Kuala Lumpur</value>
+            <value description="acquirer_state">5</value>
+        </row>
+    </table>
+
+    <table name="configuration">
+        <column>id</column>
+        <column>config_key</column>
+        <column>config_value</column>
+        <column>ordering</column>
+        <row>
+            <value description="id">1</value>
+            <value description="config_key">report.celcom.CE0001</value>
+            <value description="config_value">Daily Details Request Reload Report</value>
+            <value description="ordering">1</value>
+        </row>
+		 <row>
+            <value description="id">2</value>
+            <value description="config_key">report.celcom.CE0002</value>
+            <value description="config_value">Summary Request Reload Report</value>
+             <value description="ordering">2</value>
+        </row>
+        <row>
+            <value description="id">3</value>
+            <value description="config_key">report.celcom.CE0003</value>
+            <value description="config_value">Daily Detailed Reload Report</value>
+            <value description="ordering">3</value>
+        </row>
+        <row>
+            <value description="id">4</value>
+            <value description="config_key">report.celcom.CE0004</value>
+            <value description="config_value">Summary Reload Report</value>
+            <value description="ordering">4</value>
+        </row>
+        <row>
+            <value description="id">5</value>
+            <value description="config_key">report.tng.TG0001</value>
+            <value description="config_value">Telco Reload Server Total Transaction Summary</value>
+            <value description="ordering">1</value>
+        </row>
+        <row>
+            <value description="id">6</value>
+            <value description="config_key">report.tng.TG0002</value>
+            <value description="config_value">Missing Batch Report between Reload Server and EPG</value>
+            <value description="ordering">2</value>
+        </row>
+    </table>
+</dataset>
