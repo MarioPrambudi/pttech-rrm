@@ -18,7 +18,7 @@
   <jsp:directive.attribute name="type" type="java.lang.String" required="false" rtexprvalue="true" description="Set field type (default 'text', or 'password')" />
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
   <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)" />
-  <jsp:directive.attribute name="onBlur" type="java.lang.Boolean" required="false" rtexprvalue="true" description="check for duplicate registration number" />
+  <jsp:directive.attribute name="onUnique" type="java.lang.Boolean" required="false" rtexprvalue="true" description="check for duplicate registration number" />
  
   <c:if test="${empty render or render}">
   
@@ -87,19 +87,19 @@
           <spring:message argumentSeparator="," arguments="${label}, " code="field_simple_validation" var="field_validation" htmlEscape="false" />
         </c:otherwise>
       </c:choose>
-      <!-- check for duplicate registration number -->
       <c:choose>
-        <c:when test="${onBlur == true}">
-          <script type="text/javascript">
+	      <c:when test="${onUnique == true}">
+	        <spring:url value="/acquirers/isDuplicate/" var="getAcquirerUrl" />
+	        <script type="text/javascript">
 	          dojo.addOnLoad(function() {
-	              var registrationNo = dijit.byId('_${sec_field}_id');
-					dojo.connect(registrationNo, "onBlur", function(){
-	                	isDuplicated(registrationNo.value);
-	                });                                   
-	          });
-          </script>
-        </c:when>
-    </c:choose>
+	              var regNo = dijit.byId('_${sec_field}_id');
+	              dojo.connect(regNo, "onBlur", function() {
+	                 isDuplicateRegNo(regNo, '${getAcquirerUrl}');
+	              });	
+	          });	
+	        </script>
+	      </c:when>
+  	  </c:choose>  
       <c:set var="sec_field_validation">
         <spring:escapeBody javaScriptEscape="true">${field_validation}</spring:escapeBody>
       </c:set>
