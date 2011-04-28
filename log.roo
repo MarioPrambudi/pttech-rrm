@@ -169,3 +169,4 @@ help
 // [failed] ent --class ~.domain.Configuration
 finder add --finderName findConfigurationsByConfigKeyLike
 finder add --finderName findConfigurationsByConfigKey
+persistence setup --provider HIBERNATE --database H2_IN_MEMORY 
