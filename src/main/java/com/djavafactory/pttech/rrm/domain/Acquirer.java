@@ -5,24 +5,28 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.roo.addon.json.RooJson;
 import org.springframework.roo.addon.tostring.RooToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
 @RooJavaBean
 @RooToString
 @RooEntity
+@RooJson
 public class Acquirer {
 
     @NotNull
     private String name;
 
     @NotNull
+    @Column(unique = true)
     private String registrationNo;
 
     @NotNull
@@ -111,4 +115,5 @@ public class Acquirer {
         }
         return q;
     }
+    
 }

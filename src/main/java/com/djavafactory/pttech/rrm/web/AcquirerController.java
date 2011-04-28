@@ -23,7 +23,35 @@ import java.util.Set;
 @RequestMapping("/acquirers")
 @Controller
 public class AcquirerController extends BaseController {
-
+	
+   /**
+    * validate for unique registration number 
+    * @param regNo The registraion number
+    * @return -1 = unique, 0 = duplicated, acquirerId = duplicated and deleted
+    */
+	@RequestMapping(value = "/isDuplicate/{regNo}", method = RequestMethod.GET)
+    public @ResponseBody String isDuplicate(@PathVariable("regNo") String regNo) {
+	    List listAcquirer = Acquirer.findAllAcquirers();
+	    Iterator it = listAcquirer.iterator();
+	    while(it.hasNext())
+		{	
+			Acquirer acquirer;
+			acquirer = (Acquirer)it.next();
+			if (acquirer.getRegistrationNo().equals(regNo))
+			{	
+				
+				if (acquirer.getDeleted())
+				{					
+					return acquirer.getId().toString();
+				}
+				return "0";
+	
+			}		
+		}
+        return "-1";
+    }
+	
+	
     /**
     * To show the list of acquirer with paginate
     * @param page The page number
@@ -72,22 +100,23 @@ public class AcquirerController extends BaseController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
 		Acquirer acquirer;
-		acquirer = Acquirer.findAcquirer(id);
+		acquirer = Acquirer.findAcquirer(id);		
 		// Delete all terminal that belong to this acquirer
 		Set terminalSet= new HashSet();
 		terminalSet = acquirer.getTerminals();
 		Iterator it = terminalSet.iterator();
 
-		while(it.hasNext()) {
-			Terminal terminal;
-			terminal = (Terminal)it.next();
-			terminal.setStatus(Constants.TERMINAL_STATUS_DELETED);
-			terminal.merge();
+		while(it.hasNext())
+		{
+			//call terminal method to delete terminal
+			Terminal terminal = (Terminal)it.next();
+			Terminal.deleteTerminalForAcquirer(terminal);
 		}
-		acquirer.setDeleted(true);
-        acquirer.setModifiedBy("System");
-        acquirer.setModifiedTime(new Date());
+		
 		uiModel.asMap().clear();
+		acquirer.setDeleted(true);
+		acquirer.setModifiedBy("System");
+        acquirer.setModifiedTime(new Date());
 		acquirer.merge();
         return "redirect:/acquirers";
     }
@@ -111,7 +140,7 @@ public class AcquirerController extends BaseController {
         uiModel.asMap().clear();     
         acquirer.setCreatedBy("System");  // Temporary static
         acquirer.setCreatedTime(new Date());
-        acquirer.persist();
+        acquirer.persist();     
         return "redirect:/acquirers/" + encodeUrlPathSegment(acquirer.getId().toString(), httpServletRequest);
     }
 
@@ -131,6 +160,7 @@ public class AcquirerController extends BaseController {
             addDateTimeFormatPatterns(uiModel);
             return "acquirers/update";
         }
+
         uiModel.asMap().clear();
         acquirer.setModifiedBy("System");  // Temporary Static  
         acquirer.setModifiedTime(new Date());
