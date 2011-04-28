@@ -40,13 +40,6 @@ privileged aspect ConfigurationController_Roo_Controller {
         return "configurations/create";
     }
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String ConfigurationController.show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("configuration", Configuration.findConfiguration(id));
-        uiModel.addAttribute("itemId", id);
-        return "configurations/show";
-    }
-    
     @RequestMapping(method = RequestMethod.GET)
     public String ConfigurationController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         if (page != null || size != null) {

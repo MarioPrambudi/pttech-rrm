@@ -13,8 +13,14 @@
 <definition extends="default" name="configurations/update">
         <put-attribute name="body" value="/WEB-INF/views/configurations/update.jspx"/>
     </definition>
+<definition extends="default" name="configurations/keys">
+        <put-attribute name="body" value="/WEB-INF/views/configurations/keys.jspx"/>
+    </definition>
 <definition extends="default" name="configurations/findConfigurationsByConfigKey">
         <put-attribute name="body" value="/WEB-INF/views/configurations/findConfigurationsByConfigKey.jspx"/>
+    </definition>
+<definition extends="default" name="configurations/findConfigurationsByConfigKeyAndConfigNameEquals">
+        <put-attribute name="body" value="/WEB-INF/views/configurations/findConfigurationsByConfigKeyAndConfigNameEquals.jspx"/>
     </definition>
 <definition extends="default" name="configurations/findConfigurationsByConfigKeyLike">
         <put-attribute name="body" value="/WEB-INF/views/configurations/findConfigurationsByConfigKeyLike.jspx"/>

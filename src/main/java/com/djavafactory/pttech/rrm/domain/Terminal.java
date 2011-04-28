@@ -10,6 +10,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @RooJavaBean
 @RooToString
@@ -17,6 +18,7 @@ import java.util.Date;
 public class Terminal {
 
     @NotNull
+    @Column(unique = true)
     private String terminalId;
 
     @NotNull
@@ -111,4 +113,22 @@ public class Terminal {
         }
         return q;
     }
+    
+    public static List findTerminalByAcquirerId(Long acquirerId) {
+      TypedQuery<List> q = entityManager().createQuery("select Terminal from Terminal terminal where terminal.acquirer.id=:acquirerId", List.class);
+      q.setParameter("acquirerId", acquirerId);
+      return q.getResultList();
+  }
+    
+    /**
+     * To delete terminal by updated status to TERMINAL_STATUS_DELETED value
+     * @param terminal The terminal object
+     * @return none
+     */
+	public static void deleteTerminalForAcquirer(Terminal terminal) {
+	    	terminal.setStatus(Constants.TERMINAL_STATUS_DELETED);
+	        terminal.setModifiedBy("System");
+	        terminal.setModifiedTime(new Date());
+	        terminal.merge();       	    
+	}
 }

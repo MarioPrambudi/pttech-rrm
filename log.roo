@@ -141,3 +141,31 @@ hint
 hint controllers
 hint controllers
 controller scaff --class ~.web.ConfigurationController --entity Configuration
+<<<<<<< HEAD
+>>>>>>> upstream/master
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-26 11:31:36
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-26 11:31:39
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-26 11:42:51
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-26 11:43:08
+// Spring Roo 1.1.3.RELEASE [rev 4404ffb] log opened at 2011-04-26 11:43:18
+// Spring Roo 1.1.3.RELEASE [rev 4404ffb] log closed at 2011-04-26 13:56:44
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-26 13:56:55
+=======
+>>>>>>> upstream/master
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-27 09:12:15
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-27 09:50:40
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-27 09:54:31
+// [failed] ent --class ~.domain.City
+field boolean --fieldName testeg --value false
+// [failed] ent --class ~.domain.Terminal
+finder list --class ~.domain.Terminal
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-27 21:46:33
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-28 09:15:53
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-28 12:35:47
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-28 12:39:03
+help
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-28 14:36:24
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-28 14:36:46
+// [failed] ent --class ~.domain.Configuration
+finder add --finderName findConfigurationsByConfigKeyLike
+finder add --finderName findConfigurationsByConfigKey

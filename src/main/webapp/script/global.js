@@ -27,3 +27,51 @@ function updateCityList(state, cityUrl) {
         }
     });
 }
+
+//To call Java method and verify the registration number
+//result -1 = unique, 0 = duplicated, acquirerId = duplicated and deleted
+function isDuplicateRegNo(regNo, acquirerUrl, validateUrl) {
+    dojo.xhrGet(
+    {
+        url: validateUrl+regNo.value,
+        handleAs: "json",
+        load: function(result) {
+        	
+        	if(!(result=="-1"))
+        	{
+        		if(result=="0")
+        		{        			
+        			alert('The registration number is duplicated. Please insert a valid registration number.');
+        			regNo.focus();
+        		}	
+        		else 
+        		{
+        			var reload;
+        			var redirectUrl;
+        			reload = confirm("The acquirer is deleted. Click OK to enable it or Cancel to create a new acquirer?");
+        			if(reload)
+        			{	//enable the deleted acquirer
+        				redirectUrl = acquirerUrl+result+"?form";
+        				reloadAcquirerUpdate(redirectUrl);
+        			}
+        			else
+        			{	//create new acquirer
+        				redirectUrl = acquirerUrl+"?form";
+        				reloadAcquirerCreate(redirectUrl);
+        			}
+        		}
+        	}
+        }
+
+    });
+}
+
+//redirect to acquirer create form 
+function reloadAcquirerCreate(redirectUrl) {
+	window.location = redirectUrl;
+}
+
+//redirect to acquirer update form
+function reloadAcquirerUpdate(redirectUrl) {
+	window.location = redirectUrl;
+}

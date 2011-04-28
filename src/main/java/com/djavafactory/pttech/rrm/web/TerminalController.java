@@ -61,7 +61,7 @@ public class TerminalController extends BaseController {
     }
 
  /**
-   * To delete Terminal by updated deletedStatus to "d"
+   * To delete Terminal by updated deletedStatus to "D"
    * @param id The Terminal id
    * @param page Integer
    * @param size Integer
@@ -255,4 +255,6 @@ public class TerminalController extends BaseController {
         }
         return terminalList;
     }
+    
+    
 }

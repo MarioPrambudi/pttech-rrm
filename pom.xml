@@ -76,7 +76,7 @@
 	                <configuration>
 	                    <driver>org.h2.Driver</driver>
 	                    <username>sa</username>
-	                    <password></password>
+	                    <password/>
 	                    <url>jdbc:h2:tcp://localhost/~/pttech-rrm;DB_CLOSE_DELAY=-1</url>
 	                    <src>src/test/resources/test-data.xml</src>
 	                    <type>CLEAN_INSERT</type>
@@ -127,7 +127,7 @@
 	                <configuration>
 	                    <driver>org.h2.Driver</driver>
 	                    <username>sa</username>
-	                    <password></password>
+	                    <password/>
 	                    <url>jdbc:h2:tcp://localhost/~/pttech-rrm;DB_CLOSE_DELAY=-1</url>
                         <src>src/test/resources/test-data.xml</src>
 	                    <type>DELETE_ALL</type>
@@ -544,7 +544,7 @@
             <artifactId>commons-codec</artifactId>
             <version>1.4</version>
         </dependency>
-        <dependency>
+    <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.3.148</version>
