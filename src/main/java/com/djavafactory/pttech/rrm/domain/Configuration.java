@@ -12,7 +12,7 @@ import java.util.*;
 
 @RooJavaBean
 @RooToString
-@RooEntity(finders = { "findConfigurationsByConfigKeyLike" })
+@RooEntity(finders = { "findConfigurationsByConfigKeyLike", "findConfigurationsByConfigKey" })
 public class Configuration implements Comparable<Configuration> {
 
     public enum ConfigPrefix {
