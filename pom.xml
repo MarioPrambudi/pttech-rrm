@@ -63,104 +63,6 @@
         </pluginRepository>
     </pluginRepositories>
 
-    <profiles>
-        <!-- database recreation and populate default data -->
-		<profile>
-	      <id>database</id>
-		  <build>
-		  	<plugins>
-	            <plugin>
-	                <groupId>org.codehaus.mojo</groupId>
-	                <artifactId>dbunit-maven-plugin</artifactId>
-	                <version>1.0-beta-3</version>
-	                <configuration>
-	                    <driver>org.h2.Driver</driver>
-	                    <username>sa</username>
-	                    <password/>
-	                    <url>jdbc:h2:tcp://localhost/~/pttech-rrm;DB_CLOSE_DELAY=-1</url>
-	                    <src>src/test/resources/test-data.xml</src>
-	                    <type>CLEAN_INSERT</type>
-	                </configuration>
-	                <executions>
-	                    <execution>
-	                        <id>test-compile</id>
-	                        <phase>test-compile</phase>
-	                        <goals>
-	                            <goal>operation</goal>
-	                        </goals>
-	                    </execution>
-	                </executions>
-                    <dependencies>
-                        <dependency>
-                            <groupId>com.h2database</groupId>
-                            <artifactId>h2</artifactId>
-                            <version>1.3.148</version>
-                        </dependency>
-                    </dependencies>
-	            </plugin>
-		  	</plugins>
-		  </build>
-	    </profile>
-        <!-- the clean the database for the use of unit testing -->
-		<profile>
-	      <id>unit-test</id>
-		  <build>
-		  	<plugins>
-               <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.7.1</version>
-                    <configuration>
-                        <skip>false</skip>
-                        <forkMode>once</forkMode>
-                        <argLine>-Djava.awt.headless=true -XX:MaxPermSize=128m -Xmx128m</argLine>
-                        <printSummary>false</printSummary>
-                        <excludes>
-                            <exclude>**/*_Roo_*</exclude>
-                        </excludes>
-                    </configuration>
-                </plugin>
-	            <plugin>
-	                <groupId>org.codehaus.mojo</groupId>
-	                <artifactId>dbunit-maven-plugin</artifactId>
-	                <version>1.0-beta-3</version>
-	                <configuration>
-	                    <driver>org.h2.Driver</driver>
-	                    <username>sa</username>
-	                    <password/>
-	                    <url>jdbc:h2:tcp://localhost/~/pttech-rrm;DB_CLOSE_DELAY=-1</url>
-                        <src>src/test/resources/test-data.xml</src>
-	                    <type>DELETE_ALL</type>
-	                    <transaction>true</transaction>
-	                </configuration>
-	                <executions>
-	                    <execution>
-	                        <id>test-compile</id>
-	                        <phase>test-compile</phase>
-	                        <goals>
-	                            <goal>operation</goal>
-	                        </goals>
-	                    </execution>
-	                </executions>
-                    <dependencies>
-                        <dependency>
-                            <groupId>com.h2database</groupId>
-                            <artifactId>h2</artifactId>
-                            <version>1.3.148</version>
-                        </dependency>
-                    </dependencies>
-	            </plugin>
-		  	</plugins>
-		  	<testResources>
-	            <testResource>
-	                <directory>src/test/resources</directory>
-	                <filtering>true</filtering>
-	            </testResource>
-	        </testResources>
-		  </build>
-	    </profile>
-    </profiles>
-
 	<dependencies>
         <!-- General dependencies for standard applications -->
         <dependency>
@@ -702,7 +604,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.7.1</version>
                 <configuration>
-                    <skip>true</skip>
+                    <skip>false</skip>
                     <printSummary>false</printSummary>
                     <excludes>
                         <exclude>**/*_Roo_*</exclude>
