@@ -3,6 +3,7 @@ package com.djavafactory.pttech.rrm.domain;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
+
 import javax.persistence.Column;
 import javax.persistence.EntityManager;
 import javax.persistence.Transient;
@@ -12,12 +13,13 @@ import java.util.*;
 
 @RooJavaBean
 @RooToString
-@RooEntity(finders = { "findConfigurationsByConfigKeyLike", "findConfigurationsByConfigKey" })
+@RooEntity(finders = {"findConfigurationsByConfigKeyLike", "findConfigurationsByConfigKey"})
 public class Configuration implements Comparable<Configuration> {
 
     public enum ConfigPrefix {
 
-        CELCOM("CEL"), TOUCH_N_GO("TNG"), RRM("RRM");
+        CELCOM("CEL"), TOUCH_N_GO("TNG"), RRM("RRM"), REPORT("REPORT"),
+        REPORT_CELCOM("REPORT.CEL"), REPORT_TNG("REPORT.TNG"), REPORT_PTT("REPORT.PTT");
 
         private final String key;
 
@@ -77,7 +79,8 @@ public class Configuration implements Comparable<Configuration> {
     }
 
     public static Configuration findConfigurationByConfigKey(String configKey) {
-        if (configKey == null || configKey.length() == 0) throw new IllegalArgumentException("The configKey argument is required");
+        if (configKey == null || configKey.length() == 0)
+            throw new IllegalArgumentException("The configKey argument is required");
         EntityManager em = Configuration.entityManager();
         TypedQuery<Configuration> q = em.createQuery("SELECT Configuration FROM Configuration AS configuration WHERE configuration.configKey = :configKey", Configuration.class);
         q.setParameter("configKey", configKey);
