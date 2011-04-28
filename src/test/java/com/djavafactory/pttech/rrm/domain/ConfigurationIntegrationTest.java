@@ -9,4 +9,5 @@ public class ConfigurationIntegrationTest {
     @Test
     public void testMarkerMethod() {
     }
+
 }

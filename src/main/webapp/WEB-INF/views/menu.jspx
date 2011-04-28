@@ -20,10 +20,14 @@
             <menu:item id="i_param_new" messageCode="global_menu_new" url="/params?form" z="/Mix+W4C35ReTse5ZxV/tu8FyTY="/>
             <menu:item id="i_param_list" messageCode="global_menu_list" url="/params?page=1&amp;size=${empty param.size ? 10 : param.size}" z="M+/Q7/PgXKFv2WapvCDRuqe5e6s="/>
         </menu:category>
-        <menu:category id="c_configuration" render="false" z="user-managed">
-            <menu:item id="i_configuration_new" messageCode="global_menu_new" url="/configurations?form" z="PpKhRYSLF3fMvOlr5J8dEALoaF8="/>
-            <menu:item id="i_configuration_list" messageCode="global_menu_list" url="/configurations?page=1&amp;size=${empty param.size ? 10 : param.size}" z="eTnA6q7aRKdliIXm9IDu8P8bUhU="/>
-            <menu:item id="fi_configuration_configkey" messageCode="global_menu_find" url="/configurations?find=ByConfigKey&amp;form" z="lG/3JtglgE2NxhL6lg9R+Yvscdg="/>
+        <menu:category id="c_configuration" render="true" z="user-managed">
+            <menu:item id="i_configuration_list_cel" messageCode="global_menu_list" url="/configurations/keys/CEL"/>
+            <menu:item id="i_configuration_list_tng" messageCode="global_menu_list" url="/configurations/keys/TNG"/>
+            <menu:item id="i_configuration_list_rrm" messageCode="global_menu_list" url="/configurations/keys/RRM"/>
+        <menu:item id="i_configuration_new" messageCode="global_menu_new" render="false" url="/configurations?form" z="user-managed"/>
+        <menu:item id="i_configuration_list" messageCode="global_menu_list" render="false" url="/configurations?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+        <menu:item id="fi_configuration_configkey" messageCode="global_menu_find" render="false" url="/configurations?find=ByConfigKey&amp;form" z="user-managed"/>
+        <menu:item id="fi_configuration_configkeylike" messageCode="global_menu_find" render="false" url="/configurations?find=ByConfigKeyLike&amp;form" z="user-managed"/>
         </menu:category>
         <menu:category id="c_reloadrequest" render="false" z="user-managed">
             <menu:item id="i_reloadrequest_new" messageCode="global_menu_new" url="/reloadrequests?form" z="gCp9n4oCOlGSoWCCLhqo/3BO3Gc="/>
