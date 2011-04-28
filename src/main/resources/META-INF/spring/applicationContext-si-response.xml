@@ -27,6 +27,6 @@
         <channel id="transformResponseChannel">
             <queue capacity="100" />
         </channel>
-        <transformer input-channel="transformResponseChannel" ref="transformerBean" method="transformMessageToJson" output-channel="rmiReloadResponseChannel" />
+        <transformer input-channel="transformResponseChannel" ref="transformerBean" method="transformMessageToJson" output-channel="rmiReloadStatusChannel" />
 
 </beans:beans>

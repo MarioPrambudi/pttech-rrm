@@ -48,7 +48,7 @@ function isDuplicateRegNo(regNo, acquirerUrl, validateUrl) {
         		{
         			var reload;
         			var redirectUrl;
-        			reload = confirm("The registration number is duplicated and deleted. Click OK to enable it or Cancel to create a new acquirer?");
+        			reload = confirm("The acquirer is deleted. Click OK to enable it or Cancel to create a new acquirer?");
         			if(reload)
         			{	//enable the deleted acquirer
         				redirectUrl = acquirerUrl+result+"?form";
@@ -75,5 +75,3 @@ function reloadAcquirerCreate(redirectUrl) {
 function reloadAcquirerUpdate(redirectUrl) {
 	window.location = redirectUrl;
 }
-
-

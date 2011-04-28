@@ -159,3 +159,7 @@ controller scaff --class ~.web.ConfigurationController --entity Configuration
 field boolean --fieldName testeg --value false
 // [failed] ent --class ~.domain.Terminal
 finder list --class ~.domain.Terminal
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-27 21:46:33
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-28 09:15:53
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-28 12:35:47
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-28 12:39:03

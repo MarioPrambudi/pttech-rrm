@@ -26,4 +26,7 @@ public final class Constants {
     public static final String TERMINAL_STATUS_INACTIVE = "X";
     public static final String TERMINAL_STATUS_DELETED = "D";
     public static final String TERMINAL_STATUS_BLOCK = "B";
+
+    public static final String REPORT_TYPE_CELCOM = "celcom";
+    public static final String REPORT_TYPE_TNG = "tng";
 }

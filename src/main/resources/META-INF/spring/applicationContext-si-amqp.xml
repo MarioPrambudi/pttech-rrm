@@ -38,6 +38,13 @@
         </channel>
         <amqp:outbound-channel-adapter channel="rtmReloadInboundChannel" routing-key="#{amqp['queue.rtm.reload.req']}" amqp-template="rabbitTemplate"/>
 
+        <channel id="rtmReloadStatusChannel">
+            <interceptors>
+                <wire-tap channel="logger"/>
+            </interceptors>
+        </channel>
+        <amqp:outbound-channel-adapter channel="rtmReloadStatusChannel" routing-key="#{amqp['queue.rtm.reload.status']}" amqp-template="rabbitTemplate"/>
+
         <channel id="tngReloadReqChannel">
             <interceptors>
                 <wire-tap channel="logger"/>
@@ -51,13 +58,6 @@
             </interceptors>
         </channel>
         <amqp:outbound-channel-adapter channel="tngReloadStatusChannel" routing-key="#{amqp['queue.tng.reload.status']}" amqp-template="rabbitTemplate"/>
-
-        <channel id="rmiReloadResponseChannel">
-            <interceptors>
-                <wire-tap channel="logger"/>
-            </interceptors>
-        </channel>
-        <amqp:outbound-channel-adapter channel="rmiReloadResponseChannel" routing-key="#{amqp['queue.rmi.reload.status']}" amqp-template="rabbitTemplate"/>
 
         <logging-channel-adapter id="logger" expression="'[Sending message to queue] >> '.concat(payload)" />
 </beans:beans>

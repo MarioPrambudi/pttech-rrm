@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 @RooJavaBean
 @RooToString
-@RooEntity(finders = { "findConfigurationsByConfigKey" })
+@RooEntity(finders = { "findConfigurationsByConfigKey", "findConfigurationsByConfigKeyLike" })
 public class Configuration {
     public static final String CONFIG_CELCOM_PREFIX = "my.com.celcom";
     public static final String CONFIG_TNG_PREFIX = "my.com.touchngo";
