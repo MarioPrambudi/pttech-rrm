@@ -79,6 +79,17 @@ privileged aspect ConfigurationController_Roo_Controller {
         return "redirect:/configurations";
     }
     
+    @RequestMapping(params = { "find=ByConfigKeyLike", "form" }, method = RequestMethod.GET)
+    public String ConfigurationController.findConfigurationsByConfigKeyLikeForm(Model uiModel) {
+        return "configurations/findConfigurationsByConfigKeyLike";
+    }
+    
+    @RequestMapping(params = "find=ByConfigKeyLike", method = RequestMethod.GET)
+    public String ConfigurationController.findConfigurationsByConfigKeyLike(@RequestParam("configKey") String configKey, Model uiModel) {
+        uiModel.addAttribute("configurations", Configuration.findConfigurationsByConfigKeyLike(configKey).getResultList());
+        return "configurations/list";
+    }
+    
     @ModelAttribute("configurations")
     public Collection<Configuration> ConfigurationController.populateConfigurations() {
         return Configuration.findAllConfigurations();
