@@ -46,5 +46,9 @@
             <menu:item id="i_city_new" messageCode="global_menu_new" url="/citys?form" z="dbfrmJjWGvOtF7e23trrw/vQnRE="/>
         <menu:item id="i_city_list" messageCode="global_menu_list" url="/citys?page=1&amp;size=${empty param.size ? 10 : param.size}" z="Yq246nbcmHRrSUSB+sOWkE5wtxQ="/>
         </menu:category>
+        <menu:category id="c_report" z="user-managed">
+            <menu:item id="i_report_celcom" messageCode="global_menu_celcom_report" url="/reports?type=celcom" z="user-managed"/>
+            <menu:item id="i_report_tng" messageCode="global_menu_tng_report" url="/reports?type=tng"/>
+        </menu:category>
     </menu:menu>
 </div>

@@ -27,6 +27,9 @@ public class AmqpConfiguration {
     @Value("#{amqp['broker.password']}")
     private String password;
 
+    @Value("#{amqp['queue.rmi.reload.req']}")
+    private String rmiReloadReqQ;
+
     @Value("#{amqp['queue.rmi.reload.status']}")
     private String rmiReloadStatusQ;
 
@@ -79,6 +82,13 @@ public class AmqpConfiguration {
     @Bean
     public AmqpAdmin amqpAdmin() {
         return new RabbitAdmin(this.rabbitTemplate());
+    }
+
+    @Bean
+    public Queue rmiReloadReqQueue() {
+        Queue q = new Queue(this.rmiReloadReqQ);
+        amqpAdmin().declareQueue(q);
+        return q;
     }
 
     @Bean
@@ -152,6 +162,13 @@ public class AmqpConfiguration {
     }
 
     @Bean
+    public DirectExchange rmiReloadReqExchange() {
+        DirectExchange directExchange = new DirectExchange(this.rmiReloadReqQ);
+        this.amqpAdmin().declareExchange(directExchange);
+        return directExchange ;
+    }
+
+    @Bean
     public DirectExchange rmiReloadStatusExchange() {
         DirectExchange directExchange = new DirectExchange(this.rmiReloadStatusQ);
         this.amqpAdmin().declareExchange(directExchange);
@@ -222,6 +239,11 @@ public class AmqpConfiguration {
     }
 
     @Bean
+    public Binding rmiReloadReqDataBinding() {
+        return BindingBuilder.from(rmiReloadReqQueue()).to(rmiReloadReqExchange()).with(this.rmiReloadReqQ);
+    }
+
+    @Bean
     public Binding rmiReloadStatusDataBinding() {
         return BindingBuilder.from(rmiReloadStatusQueue()).to(rmiReloadStatusExchange()).with(this.rmiReloadStatusQ);
     }
@@ -277,6 +299,7 @@ public class AmqpConfiguration {
                 "brokerUrl='" + brokerUrl + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", rmiReloadReqQ='" + rmiReloadReqQ + '\'' +
                 ", rmiReloadStatusQ='" + rmiReloadStatusQ + '\'' +
                 ", rrmReloadReqQ='" + rrmReloadReqQ + '\'' +
                 ", rrmReloadStatusQ='" + rrmReloadStatusQ + '\'' +
@@ -285,6 +308,8 @@ public class AmqpConfiguration {
                 ", rtmReloadReqQ='" + rtmReloadReqQ + '\'' +
                 ", rtmReloadStatusQ='" + rtmReloadStatusQ + '\'' +
                 ", rtmTerminalQ='" + rtmTerminalQ + '\'' +
+                ", tngReloadReqQ='" + tngReloadReqQ + '\'' +
+                ", tngReloadStatusQ='" + tngReloadStatusQ + '\'' +
                 '}';
     }
 }

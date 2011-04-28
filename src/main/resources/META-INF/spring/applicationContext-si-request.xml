@@ -90,7 +90,7 @@
         <transformer input-channel="rtmReloadRequestChannel" ref="transformerBean" method="transformMessageToJson" output-channel="rtmReloadInboundChannel" />
 
         <publish-subscribe-channel id="rtmRequestResponseChannel" />
-        <transformer input-channel="rtmRequestResponseChannel" ref="transformerBean" method="transformMessageToJson" output-channel="tngReloadReqChannel" />
+        <transformer input-channel="rtmRequestResponseChannel" ref="transformerBean" method="transformMessageToJson" output-channel="rmiReloadRequestChannel" />
         <transformer input-channel="rtmRequestResponseChannel" ref="transformerBean" method="transformSuccessMessage" output-channel="rtmReloadStatusChannel" />
 
         <poller id="defaultPoller" default="true" fixed-rate="3000"/>
