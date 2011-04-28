@@ -100,7 +100,8 @@ public class AcquirerController extends BaseController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
 		Acquirer acquirer;
-		acquirer = Acquirer.findAcquirer(id);		
+		acquirer = Acquirer.findAcquirer(id);
+
 		// Delete all terminal that belong to this acquirer
 		Set terminalSet= new HashSet();
 		terminalSet = acquirer.getTerminals();

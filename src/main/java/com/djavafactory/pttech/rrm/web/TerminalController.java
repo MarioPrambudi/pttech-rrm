@@ -70,10 +70,10 @@ public class TerminalController extends BaseController {
    */ 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        Terminal terminal;
-        terminal = Terminal.findTerminal(id);
-        terminal.setStatus(Constants.TERMINAL_STATUS_DELETED);
+		Terminal terminal;
+        terminal = Terminal.findTerminal(id);   
         uiModel.asMap().clear();
+        terminal.setStatus(Constants.TERMINAL_STATUS_DELETED);
         terminal.merge();
         return "redirect:/terminals";
     }
@@ -130,7 +130,7 @@ public class TerminalController extends BaseController {
    */
 	@RequestMapping(value = "/setstatus", method = RequestMethod.POST)
     public String updateStatus(@RequestParam(value = "terminalIds") String terminalIds, @RequestParam(value = "code") String code, Model uiModel) {
-        for(String id : terminalIds.split(",")) {
+		for(String id : terminalIds.split(",")) {
             Terminal terminal = Terminal.findTerminal(Long.valueOf(id));
             terminal.setStatus(code);
             terminal.setModifiedBy("System");
