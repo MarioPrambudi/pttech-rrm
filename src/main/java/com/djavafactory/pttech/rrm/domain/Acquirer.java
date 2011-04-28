@@ -71,6 +71,7 @@ public class Acquirer {
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "acquirer")
     private Set<Terminal> terminals = new HashSet<Terminal>();
 
+    @Value("false")
     private Boolean deleted;
 
     @Transient
@@ -114,17 +115,5 @@ public class Acquirer {
         }
         return q;
     }
-    
-    
-//    public static Boolean isAcquirerDeleted(long acquirerId) {
-//        TypedQuery<Boolean> q = entityManager().createQuery("select deleted from Acquirer where acquirerId = :acquirerId", Boolean.class);
-//        q.setParameter("acquirerId", acquirerId);
-//        return q.getSingleResult();
-//    }
-//    
-//    public static List getAllRegNo() {
-//        TypedQuery<List> q = entityManager().createQuery("select registrationNo from Acquirer", List.class);
-//        return q.getResultList();
-//    }
     
 }

@@ -87,14 +87,16 @@
           <spring:message argumentSeparator="," arguments="${label}, " code="field_simple_validation" var="field_validation" htmlEscape="false" />
         </c:otherwise>
       </c:choose>
+      <!-- get the registration number onBlur and pass it to global js function-->
       <c:choose>
 	      <c:when test="${onUnique == true}">
-	        <spring:url value="/acquirers/isDuplicate/" var="getAcquirerUrl" />
+	        <spring:url value="/acquirers/isDuplicate/" var="getValidateDuplicated" />
+	        <spring:url value="/acquirers/" var="getAcquirerUrl" />
 	        <script type="text/javascript">
 	          dojo.addOnLoad(function() {
 	              var regNo = dijit.byId('_${sec_field}_id');
 	              dojo.connect(regNo, "onBlur", function() {
-	                 isDuplicateRegNo(regNo, '${getAcquirerUrl}');
+	                 isDuplicateRegNo(regNo, '${getAcquirerUrl}', '${getValidateDuplicated}');
 	              });	
 	          });	
 	        </script>

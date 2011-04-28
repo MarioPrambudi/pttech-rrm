@@ -28,10 +28,12 @@ function updateCityList(state, cityUrl) {
     });
 }
 
-function isDuplicateRegNo(regNo, acquirerUrl) {
+//To call Java method and verify the registration number
+//result -1 = unique, 0 = duplicated, acquirerId = duplicated and deleted
+function isDuplicateRegNo(regNo, acquirerUrl, validateUrl) {
     dojo.xhrGet(
     {
-        url: acquirerUrl+regNo.value,
+        url: validateUrl+regNo.value,
         handleAs: "json",
         load: function(result) {
         	
@@ -45,14 +47,17 @@ function isDuplicateRegNo(regNo, acquirerUrl) {
         		else 
         		{
         			var reload;
-        			reload = confirm("The registration number is duplicated and deleted. Do you want to enable it?");
+        			var redirectUrl;
+        			reload = confirm("The registration number is duplicated and deleted. Click OK to enable it or Cancel to create a new acquirer?");
         			if(reload)
-        			{
-        				reloadAcquirerUpdate(result);
+        			{	//enable the deleted acquirer
+        				redirectUrl = acquirerUrl+result+"?form";
+        				reloadAcquirerUpdate(redirectUrl);
         			}
         			else
-        			{
-        				reloadAcquirerCreate();
+        			{	//create new acquirer
+        				redirectUrl = acquirerUrl+"?form";
+        				reloadAcquirerCreate(redirectUrl);
         			}
         		}
         	}
@@ -61,12 +66,14 @@ function isDuplicateRegNo(regNo, acquirerUrl) {
     });
 }
 
-function reloadAcquirerCreate() {
-	window.location = "/pttech-rrm/acquirers?form";
+//redirect to acquirer create form 
+function reloadAcquirerCreate(redirectUrl) {
+	window.location = redirectUrl;
 }
 
-function reloadAcquirerUpdate(acquirerId) {
-	window.location = "/pttech-rrm/acquirers/" + acquirerId + "?form";
+//redirect to acquirer update form
+function reloadAcquirerUpdate(redirectUrl) {
+	window.location = redirectUrl;
 }
 
 

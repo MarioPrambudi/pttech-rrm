@@ -23,9 +23,12 @@ import java.util.Set;
 @RequestMapping("/acquirers")
 @Controller
 public class AcquirerController extends BaseController {
-	//0= duplicated 
-	//-1= unique
-	//RegNo= duplicated and deleted
+	
+   /**
+    * validate for unique registration number 
+    * @param regNo The registraion number
+    * @return -1 = unique, 0 = duplicated, acquirerId = duplicated and deleted
+    */
 	@RequestMapping(value = "/isDuplicate/{regNo}", method = RequestMethod.GET)
     public @ResponseBody String isDuplicate(@PathVariable("regNo") String regNo) {
 	    List listAcquirer = Acquirer.findAllAcquirers();
@@ -47,6 +50,7 @@ public class AcquirerController extends BaseController {
 		}
         return "-1";
     }
+	
 	
     /**
     * To show the list of acquirer with paginate
@@ -109,8 +113,9 @@ public class AcquirerController extends BaseController {
 			Terminal terminal = (Terminal)it.next();
 			Terminal.deleteTerminalForAcquirer(terminal);
 		}
-		acquirer.setDeleted(true);
+		
 		uiModel.asMap().clear();
+		acquirer.setDeleted(true);
 		acquirer.merge();
         return "redirect:/acquirers";
     }
@@ -134,7 +139,6 @@ public class AcquirerController extends BaseController {
         uiModel.asMap().clear();     
         acquirer.setCreatedBy("System");  // Temporary static
         acquirer.setCreatedTime(new Date());
-        acquirer.setDeleted(false);
         acquirer.persist();     
         return "redirect:/acquirers/" + encodeUrlPathSegment(acquirer.getId().toString(), httpServletRequest);
     }
@@ -155,14 +159,7 @@ public class AcquirerController extends BaseController {
             addDateTimeFormatPatterns(uiModel);
             return "acquirers/update";
         }
-        
-        //for enable deleted acquirer
-        if(acquirer.getDeleted())
-        {
-        	acquirer.setDeleted(false);
-        	
-        }
-        
+
         uiModel.asMap().clear();
         acquirer.setModifiedBy("System");  // Temporary Static  
         acquirer.setModifiedTime(new Date());
