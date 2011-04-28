@@ -43,16 +43,17 @@
     <spring:eval var="colCounter" expression="1" />
 
     <spring:url value="${path}/setstatus" var="set_status_url" />
-    <form:form id="actionForm" action="${fn:escapeXml(set_status_url)}" method="POST">
     <c:if test="${terminalAction}">
+        <form:form id="actionForm" action="${fn:escapeXml(set_status_url)}" method="POST">
         <input id="terminalIds" name = "terminalIds"/>
-        Terminal Actions:
+        <spring:message code="terminal_actions" htmlEscape="false" />
         <select id="optionSel" name = "code">
             <option value="-1"><spring:message code="terminal_action_select" /></option>
             <option value='A'><spring:message code="terminal_action_activate" /></option>
             <option value='B'><spring:message code="terminal_action_block" /></option>
             <option value='X'><spring:message code="terminal_action_deactivate" /></option>
         </select>
+        </form:form>
         <script type="text/javascript">
         Spring.addDecoration(new Spring.ElementDecoration({elementId : 'terminalIds', widgetType: 'dijit.form.TextBox', widgetAttrs: {type : 'hidden'}}));
         Spring.addDecoration(new Spring.ElementDecoration({elementId : 'optionSel', widgetType: 'dijit.form.Select', widgetAttrs: {style : 'width: 80px;'}}));
@@ -179,7 +180,6 @@
         </td>
       </tr>
     </table>
-    </form:form>
   </c:if>
 
 </jsp:root>
