@@ -3,7 +3,6 @@ package com.djavafactory.pttech.rrm.web;
 import com.djavafactory.pttech.rrm.domain.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,17 +13,9 @@ import java.util.List;
 @Controller
 public class ReportController {
 
-    public static final String REPORT_TYPE_CELCOM = "celcom";
-    public static final String REPORT_TYPE_TNG = "tng";
-
     @RequestMapping(method = RequestMethod.GET)
     public String getReportList(@RequestParam(value = "type") String type, Model uiModel) {
-        List<Configuration> configList = null;
-        if (StringUtils.endsWithIgnoreCase(type, REPORT_TYPE_CELCOM)) {
-            configList = Configuration.findConfigurationsByConfigKeyLike(Configuration.ConfigPrefix.REPORT_CELCOM.getKey()).getResultList();
-        } else if (StringUtils.endsWithIgnoreCase(type, REPORT_TYPE_TNG)) {
-            configList = Configuration.findConfigurationsByConfigKeyLike(Configuration.ConfigPrefix.REPORT_TNG.getKey()).getResultList();
-        }
+        List<Configuration> configList = Configuration.findByConfigKeyPrefix(type);
         if (configList != null && !configList.isEmpty()) {
             for (int i = 0; i < configList.size(); i++) {
                 Configuration config = configList.get(i);
