@@ -21,7 +21,7 @@ public final class Constants {
 
     public static final String RESPONSE_CODE_SUCCESS = "00";
 
-    public static final String CONFIG_TNG_TIMEOUT = "TNG.timeout";
+    public static final String CONFIG_TNG_TIMEOUT = "RRM.timeout";
 
     public static final String TERMINAL_STATUS_ACTIVE = "A";
     public static final String TERMINAL_STATUS_INACTIVE = "X";
