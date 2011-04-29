@@ -3,9 +3,12 @@ insert into configuration ( config_key , config_value , ordering , version ) val
 insert into configuration ( config_key , config_value , ordering , version ) values ('CEL.location', '/home/user/celcom', 1, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('CEL.username', 'celcomuser', 2, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('CEL.password', 'password', 3, 0);
-insert into configuration ( config_key , config_value , ordering , version ) values ('TNG.wsendpoint', 'http://localhost:8080/services/reloadrequest/request?wsdl', 0, 0);
-insert into configuration ( config_key , config_value , ordering , version ) values ('TNG.timeout', '120000', 1, 0);
+insert into configuration ( config_key , config_value , ordering , version ) values ('CEL.uploadschedule', '', 4, 0);
+insert into configuration ( config_key , config_value , ordering , version ) values ('TNG.reloadendpoint', 'http://localhost:8080/services/reloadrequest/request?wsdl', 0, 0);
+insert into configuration ( config_key , config_value , ordering , version ) values ('TNG.batchendpoint', 'http://localhost:8080/services/reloadrequest/request?wsdl', 1, 0);
+insert into configuration ( config_key , config_value , ordering , version ) values ('TNG.uploadschedule', '', 2, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('RRM.retries', '3', 0, 0);
+insert into configuration ( config_key , config_value , ordering , version ) values ('RRM.timeout', '120000', 1, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.TNG.TG0001', 'Daily Details Request Reload Report', 0, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.TNG.TG0002', 'Summary Request Reload Report', 1, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.TNG.TG0003', 'Daily Detailed Reload Report', 2, 0);
@@ -40,3 +43,6 @@ insert into city ( city_name, acquirer_state ) values ('Petaling Jaya', 4);
 insert into city ( city_name, acquirer_state ) values ('Shah Alam', 4);
 insert into city ( city_name, acquirer_state ) values ('Klang', 4);
 insert into city ( city_name, acquirer_state ) values ('Kuala Lumpur', 5);
+
+insert into reload_request  ( mfg_number , reload_amount , service_provider_id , tng_key , trans_code , trans_id , version  ) values ('2211', 50000, 1, 1, 1, 1, 0);
+insert into reload_request  ( mfg_number , reload_amount , service_provider_id , tng_key , trans_code , trans_id , version  ) values ('2222', 94000, 1, 1, 1, 2, 0);

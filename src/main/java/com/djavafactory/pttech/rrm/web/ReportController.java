@@ -30,12 +30,7 @@ public class ReportController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String getReportList(@RequestParam(value = "type") String type, Model uiModel) {
-        List<Configuration> configList = null;
-        if (StringUtils.endsWithIgnoreCase(type, REPORT_TYPE_CELCOM)) {
-            configList = Configuration.findConfigurationsByConfigKeyLike(Configuration.ConfigPrefix.REPORT_CELCOM.getKey()).getResultList();
-        } else if (StringUtils.endsWithIgnoreCase(type, REPORT_TYPE_TNG)) {
-            configList = Configuration.findConfigurationsByConfigKeyLike(Configuration.ConfigPrefix.REPORT_TNG.getKey()).getResultList();
-        }
+        List<Configuration> configList = Configuration.findByConfigKeyPrefix(type);
         if (configList != null && !configList.isEmpty()) {
             for (int i = 0; i < configList.size(); i++) {
                 Configuration config = configList.get(i);
