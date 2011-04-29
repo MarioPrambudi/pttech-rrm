@@ -67,4 +67,8 @@
     <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="entityManagerFactory">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+<bean class="com.djavafactory.pttech.rrm.reports.CustomJasperReportsMultiFormatView" id="jasperReportsMultiFormatView" name="jasperReportsMultiFormatViewBean"/>
+<bean class="org.springframework.web.servlet.view.ResourceBundleViewResolver" id="viewResolver">
+        <property name="basename" value="views"/>
+    </bean>
 </beans>
