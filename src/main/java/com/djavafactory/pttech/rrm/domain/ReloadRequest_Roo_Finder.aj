@@ -13,7 +13,7 @@ privileged aspect ReloadRequest_Roo_Finder {
     public static TypedQuery<ReloadRequest> ReloadRequest.findReloadRequestsByTransId(String transId) {
         if (transId == null || transId.length() == 0) throw new IllegalArgumentException("The transId argument is required");
         EntityManager em = ReloadRequest.entityManager();
-        TypedQuery<ReloadRequest> q = em.createQuery("SELECT ReloadRequest FROM ReloadRequest AS reloadrequest WHERE reloadrequest.transId = :transId", ReloadRequest.class);
+        TypedQuery<ReloadRequest> q = em.createQuery("SELECT o FROM ReloadRequest AS o WHERE o.transId = :transId", ReloadRequest.class);
         q.setParameter("transId", transId);
         return q;
     }
