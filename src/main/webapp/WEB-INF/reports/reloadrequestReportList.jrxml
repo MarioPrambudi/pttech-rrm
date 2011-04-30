@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bottomMargin="20" columnWidth="752" leftMargin="20" name="reloadrequestReportList" orientation="Landscape" pageHeight="612" pageWidth="792" resourceBundle="jasperoo" rightMargin="20" topMargin="20" whenResourceMissingType="Key" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field class="java.lang.Long" name="id"/>
+	<field class="java.lang.String" name="transId"/>
+    <field class="java.lang.String" name="status"/>
+    <field class="java.lang.Long" name="mfgNumber"/>
+    <field class="java.math.BigDecimal" name="reloadAmount"/>
+    <field class="java.lang.String" name="serviceProviderId"/>
+    <field class="java.lang.Integer" name="transCode"/>
+    <field class="java.util.Date" name="requestedTime"/>
+    <field class="java.lang.String" name="tngKey"/>
+    <pageHeader>
+		<band height="101">
+			<image hAlign="Center" scaleImage="RetainShape">
+				<reportElement height="70" width="752" x="0" y="0"/>
+				<imageExpression class="java.lang.String"><![CDATA["../../images/banner-graphic.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement forecolor="#000000" height="31" mode="Opaque" width="752" x="0" y="70"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="FreeSerif" isBold="true" isItalic="false" isPdfEmbedded="true" size="24"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label_com_djavafactory_pttech_rrm_domain_reloadrequest_plural}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<!-- Edit this band with entries for each field that is to be displayed in the report. -->
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement height="20" width="30" x="0" y="0"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String">$R{jasperoo.id}</textFieldExpression>
+			</textField>
+		<textField>
+                <reportElement height="20" width="90" x="30" y="0"/>
+                <textElement/>
+                <textFieldExpression class="java.lang.String">$R{jasperoo.ReloadRequests.transId}</textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement height="20" width="90" x="120" y="0"/>
+                <textElement/>
+                <textFieldExpression class="java.lang.String">$R{jasperoo.ReloadRequests.status}</textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement height="20" width="90" x="210" y="0"/>
+                <textElement/>
+                <textFieldExpression class="java.lang.String">$R{jasperoo.ReloadRequests.mfgNumber}</textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement height="20" width="90" x="300" y="0"/>
+                <textElement/>
+                <textFieldExpression class="java.lang.String">$R{jasperoo.ReloadRequests.reloadAmount}</textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement height="20" width="90" x="390" y="0"/>
+                <textElement/>
+                <textFieldExpression class="java.lang.String">$R{jasperoo.ReloadRequests.serviceProviderId}</textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement height="20" width="90" x="480" y="0"/>
+                <textElement/>
+                <textFieldExpression class="java.lang.String">$R{jasperoo.ReloadRequests.transCode}</textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement height="20" width="90" x="570" y="0"/>
+                <textElement/>
+                <textFieldExpression class="java.lang.String">$R{jasperoo.ReloadRequests.requestedTime}</textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement height="20" width="90" x="660" y="0"/>
+                <textElement/>
+                <textFieldExpression class="java.lang.String">$R{jasperoo.ReloadRequests.tngKey}</textFieldExpression>
+            </textField>
+        </band>
+	</columnHeader>
+	<detail>
+		<!-- Edit this band with entries for each field that is to be displayed in the report. -->
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement height="20" width="30" x="0" y="0"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Long">$F{id}</textFieldExpression>
+			</textField>
+		<textField>
+                <reportElement height="20" width="90" x="30" y="0"/>
+                <textElement/>
+                <textFieldExpression class="java.lang.String">$F{transId}</textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement height="20" width="90" x="120" y="0"/>
+                <textElement/>
+                <textFieldExpression class="java.lang.String">$F{status}</textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement height="20" width="90" x="210" y="0"/>
+                <textElement/>
+                <textFieldExpression class="java.lang.Long">$F{mfgNumber}</textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement height="20" width="90" x="300" y="0"/>
+                <textElement/>
+                <textFieldExpression class="java.math.BigDecimal">$F{reloadAmount}</textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement height="20" width="90" x="390" y="0"/>
+                <textElement/>
+                <textFieldExpression class="java.lang.String">$F{serviceProviderId}</textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement height="20" width="90" x="480" y="0"/>
+                <textElement/>
+                <textFieldExpression class="java.lang.Integer">$F{transCode}</textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement height="20" width="90" x="570" y="0"/>
+                <textElement/>
+                <textFieldExpression class="java.util.Date">$F{requestedTime}</textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement height="20" width="90" x="660" y="0"/>
+                <textElement/>
+                <textFieldExpression class="java.lang.String">$F{tngKey}</textFieldExpression>
+            </textField>
+        </band>
+	</detail>
+	<pageFooter>
+		<band height="25">
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement height="20" width="115" x="0" y="0"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement height="20" width="80" x="632" y="0"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement height="20" width="40" x="712" y="0"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
