@@ -11,53 +11,93 @@ import org.apache.commons.logging.LogFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Spring Integration Mapper class.
+ *
+ * @author Carine Leong
+ */
 public class MessageMapper {
     private static final Log logger = LogFactory.getLog(MessageMapper.class);
 
+    /**
+     * Method to map the New Reload Request Message to List<Object>.
+     *
+     * @param message ReloadRequestMessage object
+     * @return List of Object.
+     */
     public List<Object> mapNewReloadRequest(ReloadRequestMessage message) {
         List<Object> objectList = new ArrayList<Object>();
         objectList.add(convertMessageToReloadRequest(message, Constants.RELOAD_STATUS_NEW));
         objectList.add(message);
-		return objectList;
-	}
+        return objectList;
+    }
 
+    /**
+     * Method to map the Failed Reload Request Message to List<Object>.
+     *
+     * @param message ReloadRequestMessage object
+     * @return List of Object.
+     */
     public List<Object> mapFailedReloadRequest(ReloadRequestMessage message) {
         List<Object> objectList = new ArrayList<Object>();
         objectList.add(convertMessageToReloadRequest(message, Constants.RELOAD_STATUS_FAILED));
         objectList.add(message);
-		return objectList;
-	}
+        return objectList;
+    }
 
+    /**
+     * Method to map the Expired Reload Request Message to List<Object>.
+     *
+     * @param message ReloadRequestMessage object
+     * @return List of Object.
+     */
     public List<Object> mapExpiredReloadRequest(ReloadRequestMessage message) {
         List<Object> objectList = new ArrayList<Object>();
         objectList.add(convertMessageToReloadRequest(message, Constants.RELOAD_STATUS_EXPIRED));
         objectList.add(message);
-		return objectList;
-	}
+        return objectList;
+    }
 
+    /**
+     * Method to map the Success Reload Request Message to List<Object>.
+     *
+     * @param message ReloadRequestMessage object
+     * @return List of Object.
+     */
     public List<Object> mapSuccessReloadRequest(ReloadRequestMessage message) {
         List<Object> objectList = new ArrayList<Object>();
         objectList.add(convertMessageToReloadRequest(message, Constants.RELOAD_STATUS_SUCCESS));
         objectList.add(message);
-		return objectList;
-	}
+        return objectList;
+    }
 
+    /**
+     * Method to map the Pending Reload Request Message to List<Object>.
+     *
+     * @param message ReloadRequestMessage object
+     * @return List of Object.
+     */
     public List<Object> mapTngReloadRequest(ReloadRequestMessage message) {
         List<Object> objectList = new ArrayList<Object>();
         objectList.add(convertMessageToReloadRequest(message, Constants.RELOAD_STATUS_PENDING));
         objectList.add(message);
-		return objectList;
-	}
+        return objectList;
+    }
 
+    /**
+     * Method to map the Reload Request Response to List<Object>.
+     *
+     * @param message ReloadResponseMessage object
+     * @return List of Object.
+     */
     public List<Object> mapTngReloadResponse(ReloadResponseMessage message) {
         List<Object> objectList = new ArrayList<Object>();
-		ReloadRequest reloadRequest = null;
+        ReloadRequest reloadRequest = null;
 
         List<ReloadRequest> reloadRecord = new ReloadRequest().findReloadRequestsByTransId(message.getTransId()).getResultList();
-        if(reloadRecord != null && !reloadRecord.isEmpty()) {
+        if (reloadRecord != null && !reloadRecord.isEmpty()) {
             reloadRequest = reloadRecord.get(0);
-            if(!StringUtils.equalsIgnoreCase(Constants.RESPONSE_CODE_SUCCESS, message.getStatusCode())) {
+            if (!StringUtils.equalsIgnoreCase(Constants.RESPONSE_CODE_SUCCESS, message.getStatusCode())) {
                 reloadRequest.setStatus(Constants.RELOAD_STATUS_FAILED);
             }
         }
@@ -65,14 +105,14 @@ public class MessageMapper {
         logger.info("[mapTngReloadResponse - New ReloadRequest object] >> " + reloadRequest);
         objectList.add(reloadRequest);
         objectList.add(message);
-		return objectList;
-	}
+        return objectList;
+    }
 
     private ReloadRequest convertMessageToReloadRequest(ReloadRequestMessage message, String status) {
         ReloadRequest reloadRequest;
 
         List<ReloadRequest> reloadRecord = new ReloadRequest().findReloadRequestsByTransId(message.getTransId()).getResultList();
-        if(reloadRecord != null && !reloadRecord.isEmpty()) {
+        if (reloadRecord != null && !reloadRecord.isEmpty()) {
             reloadRequest = reloadRecord.get(0);
             reloadRequest.setTransId(reloadRequest.getTransId());
             reloadRequest.setMfgNumber(reloadRequest.getMfgNumber());
@@ -87,7 +127,7 @@ public class MessageMapper {
             reloadRequest.setServiceProviderId(message.getSpId());
             reloadRequest.setTransCode(message.getTransCode());
         }
-        if(StringUtils.equalsIgnoreCase(Constants.RELOAD_STATUS_PENDING, status)) {
+        if (StringUtils.equalsIgnoreCase(Constants.RELOAD_STATUS_PENDING, status)) {
             reloadRequest.setTngKey(message.getEncryptedMsg());
         } else {
             reloadRequest.setTngKey(null);
@@ -96,6 +136,6 @@ public class MessageMapper {
         reloadRequest.setRequestedTime(message.getRequestTime());
 
         logger.info("[convertMessageToReloadRequest - New ReloadRequest object] >> " + reloadRequest);
-		return reloadRequest;
-	}
+        return reloadRequest;
+    }
 }
