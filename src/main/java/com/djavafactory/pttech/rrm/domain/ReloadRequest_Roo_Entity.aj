@@ -93,11 +93,11 @@ privileged aspect ReloadRequest_Roo_Entity {
     }
     
     public static long ReloadRequest.countReloadRequests() {
-        return entityManager().createQuery("SELECT COUNT(o) FROM ReloadRequest o", Long.class).getSingleResult();
+        return entityManager().createQuery("select count(o) from ReloadRequest o", Long.class).getSingleResult();
     }
     
     public static List<ReloadRequest> ReloadRequest.findAllReloadRequests() {
-        return entityManager().createQuery("SELECT o FROM ReloadRequest o", ReloadRequest.class).getResultList();
+        return entityManager().createQuery("select o from ReloadRequest o", ReloadRequest.class).getResultList();
     }
     
     public static ReloadRequest ReloadRequest.findReloadRequest(Long id) {
@@ -106,7 +106,7 @@ privileged aspect ReloadRequest_Roo_Entity {
     }
     
     public static List<ReloadRequest> ReloadRequest.findReloadRequestEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("SELECT o FROM ReloadRequest o", ReloadRequest.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+        return entityManager().createQuery("select o from ReloadRequest o", ReloadRequest.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
 }
