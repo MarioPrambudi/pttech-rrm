@@ -9,8 +9,8 @@ privileged aspect City_Roo_ToString {
     
     public String City.toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("CityName: ").append(getCityName()).append(", ");
-        sb.append("AcquirerState: ").append(getAcquirerState());
+        sb.append("AcquirerState: ").append(getAcquirerState()).append(", ");
+        sb.append("CityName: ").append(getCityName());
         return sb.toString();
     }
     

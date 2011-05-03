@@ -3,11 +3,14 @@
 
 package com.djavafactory.pttech.rrm.domain;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import com.djavafactory.pttech.rrm.domain.City;
+import com.djavafactory.pttech.rrm.domain.ProvinceDataOnDemand;
 
 import java.util.List;
 import java.util.Random;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 privileged aspect CityDataOnDemand_Roo_DataOnDemand {
 

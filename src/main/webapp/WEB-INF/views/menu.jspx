@@ -51,6 +51,8 @@
                        z="dObqRnXTskprfRdAeUTJf9dydWo="/>
             <menu:item id="fi_reloadrequest_transid" messageCode="global_menu_find"
                        url="/reloadrequests?find=ByTransId&amp;form" z="RUJquqBb4BDGrEDg1OYuBDAiYAY="/>
+            <menu:item id="fi_reloadrequest_id" messageCode="global_menu_find" url="/reloadrequests?find=ById&amp;form"
+                       z="lZHESxEX9L3tNPEQTWBvshKoEWQ="/>
         </menu:category>
         <menu:category id="c_province" render="false" z="user-managed">
             <menu:item id="i_province_new" messageCode="global_menu_new" url="/provinces?form"

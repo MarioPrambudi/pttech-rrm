@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd         http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd         http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd    http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
     <!--
         This will automatically locate any and all property files you have
         within your classpath, provided they fall under the META-INF/spring
@@ -63,8 +67,44 @@
     <bean class="com.djavafactory.pttech.rrm.integration.MessageRouter" id="routerBean"/>
     <bean class="com.djavafactory.pttech.rrm.integration.MessageMapper" id="mapperBean"/>
     <bean class="com.djavafactory.pttech.rrm.integration.MessagePersistence" id="messagePersistenceBean"/>
+    <bean class="com.djavafactory.pttech.rrm.service.BatchReportServiceManagerImpl" id="batchReportServiceManager">
+        <constructor-arg ref="ftpClientFactory"/>
+        <constructor-arg ref="batchReportChannel"/>
+    </bean>
     <bean class="org.springframework.context.support.ResourceBundleMessageSource" id="messageSource"/>
     <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="entityManagerFactory">
         <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean class="com.djavafactory.pttech.rrm.reports.CustomJasperReportsMultiFormatView"
+          id="jasperReportsMultiFormatView" name="jasperReportsMultiFormatViewBean"/>
+    <bean class="org.springframework.web.servlet.view.ResourceBundleViewResolver" id="viewResolver">
+        <property name="basename" value="views"/>
+    </bean>
+
+    <!-- Activates scanning of @Scheduled -->
+    <task:annotation-driven/>
+
+    <task:scheduler id="scheduler" pool-size="30"/>
+
+    <bean id="celcomScheduler" class="com.djavafactory.pttech.rrm.service.DynamicScheduler">
+        <constructor-arg ref="scheduler"/>
+        <constructor-arg value="0 0 2 * * ?"/>
+        <constructor-arg>
+            <bean class="org.springframework.scheduling.support.MethodInvokingRunnable">
+                <property name="targetObject" ref="batchReportServiceManager"/>
+                <property name="targetMethod" value="getCelcomBatchReportDetail"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="tngScheduler" class="com.djavafactory.pttech.rrm.service.DynamicScheduler">
+        <constructor-arg ref="scheduler"/>
+        <constructor-arg value="0 15 2 * * ?"/>
+        <constructor-arg>
+            <bean class="org.springframework.scheduling.support.MethodInvokingRunnable">
+                <property name="targetObject" ref="batchReportServiceManager"/>
+                <property name="targetMethod" value="getTngBatchReportDetail"/>
+            </bean>
+        </constructor-arg>
     </bean>
 </beans>

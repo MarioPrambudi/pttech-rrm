@@ -3,10 +3,12 @@
 
 package com.djavafactory.pttech.rrm.domain;
 
-import org.springframework.stereotype.Component;
+import com.djavafactory.pttech.rrm.domain.TerminalType;
 
 import java.util.List;
 import java.util.Random;
+
+import org.springframework.stereotype.Component;
 
 privileged aspect TerminalTypeDataOnDemand_Roo_DataOnDemand {
 

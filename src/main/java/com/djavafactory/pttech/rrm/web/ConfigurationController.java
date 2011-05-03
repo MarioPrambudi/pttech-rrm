@@ -1,7 +1,11 @@
 package com.djavafactory.pttech.rrm.web;
 
+import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.Configuration;
-import com.google.gwt.place.shared.Prefix;
+import com.djavafactory.pttech.rrm.service.DynamicScheduler;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +22,15 @@ import javax.validation.Valid;
 @Controller
 // todo when rendering configKey, get text from i18n
 public class ConfigurationController {
+
+    @Autowired
+    @Qualifier("celcomScheduler")
+    private DynamicScheduler celcomScheduler;
+
+    @Autowired
+    @Qualifier("tngScheduler")
+    private DynamicScheduler tngScheduler;
+
     @RequestMapping(value = "/keys/{prefix}", method = RequestMethod.GET)
     public String keys(@PathVariable("prefix") String configKeyPrefix, Model uiModel) {
         uiModel.addAttribute("configurations", Configuration.findByConfigKeyPrefix(configKeyPrefix));
@@ -32,5 +45,44 @@ public class ConfigurationController {
         uiModel.addAttribute("itemId", id);
         uiModel.addAttribute("configKeyPrefix", configurtion.getConfigPrefix().getKey());
         return "configurations/show";
+    }
+
+    @RequestMapping(value = "/keys/{prefix}/{id}", params = "form", method = RequestMethod.GET)
+    public String updateFormWithKey(@PathVariable("prefix") String configKeyPrefix, @PathVariable("id") Long id, Model uiModel) {
+        uiModel.addAttribute("configuration", Configuration.findConfiguration(id));
+        return "configurations/update";
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String create(@Valid Configuration configuration, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+        if (bindingResult.hasErrors()) {
+            uiModel.addAttribute("configuration", configuration);
+            return "configurations/create";
+        }
+        resetScheduler(configuration);
+        uiModel.asMap().clear();
+        configuration.persist();
+        return "redirect:/configurations/" + encodeUrlPathSegment(configuration.getId().toString(), httpServletRequest);
+    }
+
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public String update(@Valid Configuration configuration, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+        if (bindingResult.hasErrors()) {
+            uiModel.addAttribute("configuration", configuration);
+            return "configurations/update";
+        }
+        resetScheduler(configuration);
+        uiModel.asMap().clear();
+        configuration.merge();
+        return "redirect:/configurations/" + encodeUrlPathSegment(configuration.getId().toString(), httpServletRequest);
+    }
+
+    private void resetScheduler(Configuration configuration) {
+        if (StringUtils.equals(Constants.CONFIG_CEL_BATCH_SCHEDULE, configuration.getConfigKey())) {
+            celcomScheduler.resetScheduler(configuration.getConfigValue());
+        } else if (StringUtils.equals(Constants.CONFIG_TNG_BATCH_SCHEDULE, configuration.getConfigKey())) {
+            tngScheduler.resetScheduler(configuration.getConfigValue());
+        }
     }
 }

@@ -16,4 +16,12 @@ public interface BatchReportServiceManager {
      */
     public void sendCelcomBatchReport(String batchString);
 
+    public void getCelcomBatchReportDetail();
+
+    public void getTngBatchReportDetail();
+
+    public void generateCelcomBatchReport();
+
+    public void generateTngBatchReport();
+
 }

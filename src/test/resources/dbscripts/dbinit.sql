@@ -43,3 +43,6 @@ insert into city ( city_name, acquirer_state ) values ('Petaling Jaya', 4);
 insert into city ( city_name, acquirer_state ) values ('Shah Alam', 4);
 insert into city ( city_name, acquirer_state ) values ('Klang', 4);
 insert into city ( city_name, acquirer_state ) values ('Kuala Lumpur', 5);
+
+insert into reload_request  ( mfg_number , reload_amount , service_provider_id , tng_key , trans_code , trans_id , version  ) values ('2211', 50000, 1, 1, 1, 1, 0);
+insert into reload_request  ( mfg_number , reload_amount , service_provider_id , tng_key , trans_code , trans_id , version  ) values ('2222', 94000, 1, 1, 1, 2, 0);

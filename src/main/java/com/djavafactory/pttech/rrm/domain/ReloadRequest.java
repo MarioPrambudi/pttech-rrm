@@ -1,5 +1,6 @@
 package com.djavafactory.pttech.rrm.domain;
 
+import ca.digitalface.jasperoo.RooJasperoo;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -14,7 +15,8 @@ import java.util.Date;
 
 @RooJavaBean
 @RooToString
-@RooEntity(finders = { "findReloadRequestsByTransId" })
+@RooJasperoo
+@RooEntity(finders = {"findReloadRequestsByTransId", "findReloadRequestsById"})
 public class ReloadRequest {
 
     @NotNull

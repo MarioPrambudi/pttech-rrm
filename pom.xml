@@ -18,7 +18,7 @@
         <spring.integration.version>2.0.3.RELEASE</spring.integration.version>
         <spring.integration.amqp.version>2.0.0.BUILD</spring.integration.amqp.version>
         <commons.lang.version>2.4</commons.lang.version>
-        <spring.integration.sftp.version>2.0.1.RELEASE</spring.integration.sftp.version>
+        <spring.integration.ftp.version>2.0.1.RELEASE</spring.integration.ftp.version>
     </properties>
     <repositories>
         <repository>
@@ -455,8 +455,29 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.integration</groupId>
-            <artifactId>spring-integration-sftp</artifactId>
-            <version>${spring.integration.sftp.version}</version>
+            <artifactId>spring-integration-ftp</artifactId>
+            <version>${spring.integration.ftp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>3.5.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.2-FINAL</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.roo.wrapping</groupId>
+            <artifactId>org.springframework.roo.wrapping.inflector</artifactId>
+            <version>0.7.0.0001</version>
+        </dependency>
+        <dependency>
+            <groupId>ca.digitalface</groupId>
+            <artifactId>ca.digitalface.jasperoo</artifactId>
+            <version>0.1.5</version>
+            <classifier>RELEASE</classifier>
         </dependency>
     </dependencies>
     <build>
@@ -617,6 +638,34 @@
                         <exclude>**/*_Roo_*</exclude>
                     </excludes>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jasperreports-maven-plugin</artifactId>
+                <configuration>
+                    <sourceDirectory>src/main/webapp/WEB-INF/reports</sourceDirectory>
+                    <outputDirectory>src/main/webapp/WEB-INF/reports</outputDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile-reports</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>jasperreports</groupId>
+                        <artifactId>jasperreports</artifactId>
+                        <version>3.5.3</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.apache.log4j</groupId>
+                        <artifactId>com.springsource.org.apache.log4j</artifactId>
+                        <version>1.2.15</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
         <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
