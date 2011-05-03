@@ -22,6 +22,8 @@ public final class Constants {
     public static final String RESPONSE_CODE_SUCCESS = "00";
 
     public static final String CONFIG_TNG_TIMEOUT = "RRM.timeout";
+    public static final String CONFIG_CEL_BATCH_SCHEDULE = "CEL.uploadschedule";
+    public static final String CONFIG_TNG_BATCH_SCHEDULE = "TNG.uploadschedule";
 
     public static final String TERMINAL_STATUS_ACTIVE = "A";
     public static final String TERMINAL_STATUS_INACTIVE = "X";

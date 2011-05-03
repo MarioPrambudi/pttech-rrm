@@ -6,7 +6,7 @@ package com.djavafactory.pttech.rrm.domain;
 import java.lang.String;
 
 privileged aspect Report_Roo_ToString {
-    
+
     public String Report.toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("SofRequestedDatetime: ").append(getSofRequestedDatetime()).append(", ");
@@ -38,5 +38,5 @@ privileged aspect Report_Roo_ToString {
         sb.append("TotalPaymentToTngRm: ").append(getTotalPaymentToTngRm());
         return sb.toString();
     }
-    
+
 }

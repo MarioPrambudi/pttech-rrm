@@ -6,7 +6,7 @@ package com.djavafactory.pttech.rrm.domain;
 import java.lang.String;
 
 privileged aspect Configuration_Roo_ToString {
-    
+
     public String Configuration.toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("ConfigPrefix: ").append(getConfigPrefix()).append(", ");
@@ -15,5 +15,5 @@ privileged aspect Configuration_Roo_ToString {
         sb.append("Ordering: ").append(getOrdering());
         return sb.toString();
     }
-    
+
 }

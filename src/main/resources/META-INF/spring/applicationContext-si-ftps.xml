@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/integration"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:ftp="http://www.springframework.org/schema/integration/ftp"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+							http://www.springframework.org/schema/integration
+			                http://www.springframework.org/schema/integration/spring-integration-2.0.xsd
+                            http://www.springframework.org/schema/integration/ftp
+	                        http://www.springframework.org/schema/integration/ftp/spring-integration-ftp-2.0.xsd">
+
+    <beans:bean id="ftpClientFactory" class="org.springframework.integration.ftp.session.DefaultFtpsSessionFactory">
+        <beans:property name="protocol" value="SSL"/>
+        <!--  <beans:property name="clientMode" value="1"/>
+  <beans:property name="fileType" value="2"/>
+  <beans:property name="useClientMode" value="true"/>
+  <beans:property name="keyManager" ref="keyManager"/>
+  <beans:property name="trustManager" ref="trustManager"/>
+  <beans:property name="prot" value="P"/>
+  <beans:property name="needClientAuth" value="true"/>
+  <beans:property name="authValue" value="oleg"/>
+  <beans:property name="sessionCreation" value="true"/>
+  <beans:property name="protocols" value="SSL, TLS"/>
+  <beans:property name="implicit" value="true"/>    -->
+    </beans:bean>
+
+    <channel id="batchReportChannel"/>
+    <ftp:outbound-channel-adapter id="ftpsOutboundAdapter"
+                                  session-factory="ftpClientFactory"
+                                  channel="batchReportChannel"
+                                  charset="UTF-8"
+                                  remote-directory="foo/bar"
+                                  remote-filename-generator-expression="payload.getName() + '-foo'"/>
+
+</beans:beans>

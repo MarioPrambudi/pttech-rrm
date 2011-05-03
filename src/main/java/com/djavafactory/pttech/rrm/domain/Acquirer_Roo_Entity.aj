@@ -4,6 +4,7 @@
 package com.djavafactory.pttech.rrm.domain;
 
 import com.djavafactory.pttech.rrm.domain.Acquirer;
+
 import java.lang.Integer;
 import java.lang.Long;
 import java.util.List;
@@ -15,46 +16,47 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Version;
+
 import org.springframework.transaction.annotation.Transactional;
 
 privileged aspect Acquirer_Roo_Entity {
-    
-    declare @type: Acquirer: @Entity;
-    
+
+    declare @type: Acquirer:@Entity;
+
     @PersistenceContext
     transient EntityManager Acquirer.entityManager;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long Acquirer.id;
-    
+
     @Version
     @Column(name = "version")
     private Integer Acquirer.version;
-    
+
     public Long Acquirer.getId() {
         return this.id;
     }
-    
+
     public void Acquirer.setId(Long id) {
         this.id = id;
     }
-    
+
     public Integer Acquirer.getVersion() {
         return this.version;
     }
-    
+
     public void Acquirer.setVersion(Integer version) {
         this.version = version;
     }
-    
+
     @Transactional
     public void Acquirer.persist() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.persist(this);
     }
-    
+
     @Transactional
     public void Acquirer.remove() {
         if (this.entityManager == null) this.entityManager = entityManager();
@@ -65,19 +67,19 @@ privileged aspect Acquirer_Roo_Entity {
             this.entityManager.remove(attached);
         }
     }
-    
+
     @Transactional
     public void Acquirer.flush() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.flush();
     }
-    
+
     @Transactional
     public void Acquirer.clear() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.clear();
     }
-    
+
     @Transactional
     public Acquirer Acquirer.merge() {
         if (this.entityManager == null) this.entityManager = entityManager();
@@ -85,28 +87,29 @@ privileged aspect Acquirer_Roo_Entity {
         this.entityManager.flush();
         return merged;
     }
-    
+
     public static final EntityManager Acquirer.entityManager() {
         EntityManager em = new Acquirer().entityManager;
-        if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
+        if (em == null)
+            throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
         return em;
     }
-    
+
     public static long Acquirer.countAcquirers() {
         return entityManager().createQuery("select count(o) from Acquirer o", Long.class).getSingleResult();
     }
-    
+
     public static List<Acquirer> Acquirer.findAllAcquirers() {
         return entityManager().createQuery("select o from Acquirer o", Acquirer.class).getResultList();
     }
-    
+
     public static Acquirer Acquirer.findAcquirer(Long id) {
         if (id == null) return null;
         return entityManager().find(Acquirer.class, id);
     }
-    
+
     public static List<Acquirer> Acquirer.findAcquirerEntries(int firstResult, int maxResults) {
         return entityManager().createQuery("select o from Acquirer o", Acquirer.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
-    
+
 }

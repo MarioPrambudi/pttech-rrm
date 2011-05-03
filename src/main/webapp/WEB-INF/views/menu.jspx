@@ -5,50 +5,79 @@
 
     <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
         <menu:category id="c_acquirer" z="RCLIYxauLoii7/DR/p3Nb0/KCB0=">
-            <menu:item id="i_acquirer_new" messageCode="global_menu_new" url="/acquirers?form" z="On6F2Z+MPtf/eCCwDsd5WRiJ3Uw="/>
-            <menu:item id="i_acquirer_list" messageCode="global_menu_list" url="/acquirers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+            <menu:item id="i_acquirer_new" messageCode="global_menu_new" url="/acquirers?form"
+                       z="On6F2Z+MPtf/eCCwDsd5WRiJ3Uw="/>
+            <menu:item id="i_acquirer_list" messageCode="global_menu_list"
+                       url="/acquirers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
         </menu:category>
         <menu:category id="c_firmware" render="false" z="user-managed">
-            <menu:item id="i_firmware_new" messageCode="global_menu_new" url="/firmwares?form" z="r3a6COLXRooa9hc7VK3V8Lcdk0w="/>
-            <menu:item id="i_firmware_list" messageCode="global_menu_list" url="/firmwares?page=1&amp;size=${empty param.size ? 10 : param.size}" z="weIN3MnvUK2XVOFzJ/VKhmLcJFI="/>
+            <menu:item id="i_firmware_new" messageCode="global_menu_new" url="/firmwares?form"
+                       z="r3a6COLXRooa9hc7VK3V8Lcdk0w="/>
+            <menu:item id="i_firmware_list" messageCode="global_menu_list"
+                       url="/firmwares?page=1&amp;size=${empty param.size ? 10 : param.size}"
+                       z="weIN3MnvUK2XVOFzJ/VKhmLcJFI="/>
         </menu:category>
         <menu:category id="c_terminal" z="fUqe/4RD5XXmXs3AlZSvn+A7qbU=">
-            <menu:item id="i_terminal_new" messageCode="global_menu_new" url="/terminals?form" z="sRcSLq2zPV9S3mdpnj6HUCgYigQ="/>
-            <menu:item id="i_terminal_list" messageCode="global_menu_list" url="/terminals?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+            <menu:item id="i_terminal_new" messageCode="global_menu_new" url="/terminals?form"
+                       z="sRcSLq2zPV9S3mdpnj6HUCgYigQ="/>
+            <menu:item id="i_terminal_list" messageCode="global_menu_list"
+                       url="/terminals?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
         </menu:category>
         <menu:category id="c_param" render="false" z="user-managed">
-            <menu:item id="i_param_new" messageCode="global_menu_new" url="/params?form" z="/Mix+W4C35ReTse5ZxV/tu8FyTY="/>
-            <menu:item id="i_param_list" messageCode="global_menu_list" url="/params?page=1&amp;size=${empty param.size ? 10 : param.size}" z="M+/Q7/PgXKFv2WapvCDRuqe5e6s="/>
+            <menu:item id="i_param_new" messageCode="global_menu_new" url="/params?form"
+                       z="/Mix+W4C35ReTse5ZxV/tu8FyTY="/>
+            <menu:item id="i_param_list" messageCode="global_menu_list"
+                       url="/params?page=1&amp;size=${empty param.size ? 10 : param.size}"
+                       z="M+/Q7/PgXKFv2WapvCDRuqe5e6s="/>
         </menu:category>
         <menu:category id="c_configuration" render="true" z="user-managed">
             <menu:item id="i_configuration_list_cel" messageCode="global_menu_list" url="/configurations/keys/CEL"/>
             <menu:item id="i_configuration_list_tng" messageCode="global_menu_list" url="/configurations/keys/TNG"/>
             <menu:item id="i_configuration_list_rrm" messageCode="global_menu_list" url="/configurations/keys/RRM"/>
-            <menu:item id="i_configuration_new" messageCode="global_menu_new" render="false" url="/configurations?form" z="user-managed"/>
-            <menu:item id="i_configuration_list" messageCode="global_menu_list" render="false" url="/configurations?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
-            <menu:item id="fi_configuration_configkey" messageCode="global_menu_find" render="false" url="/configurations?find=ByConfigKey&amp;form" z="user-managed"/>
-            <menu:item id="fi_configuration_configkeylike" messageCode="global_menu_find" render="false" url="/configurations?find=ByConfigKeyLike&amp;form" z="user-managed"/>
+            <menu:item id="i_configuration_new" messageCode="global_menu_new" render="false" url="/configurations?form"
+                       z="user-managed"/>
+            <menu:item id="i_configuration_list" messageCode="global_menu_list" render="false"
+                       url="/configurations?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+            <menu:item id="fi_configuration_configkey" messageCode="global_menu_find" render="false"
+                       url="/configurations?find=ByConfigKey&amp;form" z="user-managed"/>
+            <menu:item id="fi_configuration_configkeylike" messageCode="global_menu_find" render="false"
+                       url="/configurations?find=ByConfigKeyLike&amp;form" z="user-managed"/>
         </menu:category>
         <menu:category id="c_reloadrequest" render="false" z="user-managed">
-            <menu:item id="i_reloadrequest_new" messageCode="global_menu_new" url="/reloadrequests?form" z="gCp9n4oCOlGSoWCCLhqo/3BO3Gc="/>
-            <menu:item id="i_reloadrequest_list" messageCode="global_menu_list" url="/reloadrequests?page=1&amp;size=${empty param.size ? 10 : param.size}" z="dObqRnXTskprfRdAeUTJf9dydWo="/>
-            <menu:item id="fi_reloadrequest_transid" messageCode="global_menu_find" url="/reloadrequests?find=ByTransId&amp;form" z="RUJquqBb4BDGrEDg1OYuBDAiYAY="/>
-        <menu:item id="fi_reloadrequest_id" messageCode="global_menu_find" url="/reloadrequests?find=ById&amp;form" z="lZHESxEX9L3tNPEQTWBvshKoEWQ="/>
+            <menu:item id="i_reloadrequest_new" messageCode="global_menu_new" url="/reloadrequests?form"
+                       z="gCp9n4oCOlGSoWCCLhqo/3BO3Gc="/>
+            <menu:item id="i_reloadrequest_list" messageCode="global_menu_list"
+                       url="/reloadrequests?page=1&amp;size=${empty param.size ? 10 : param.size}"
+                       z="dObqRnXTskprfRdAeUTJf9dydWo="/>
+            <menu:item id="fi_reloadrequest_transid" messageCode="global_menu_find"
+                       url="/reloadrequests?find=ByTransId&amp;form" z="RUJquqBb4BDGrEDg1OYuBDAiYAY="/>
+            <menu:item id="fi_reloadrequest_id" messageCode="global_menu_find" url="/reloadrequests?find=ById&amp;form"
+                       z="lZHESxEX9L3tNPEQTWBvshKoEWQ="/>
         </menu:category>
         <menu:category id="c_province" render="false" z="user-managed">
-            <menu:item id="i_province_new" messageCode="global_menu_new" url="/provinces?form" z="tQd5zZ0Vd7mRtDwnU8dcyQYNVcs="/>
-            <menu:item id="i_province_list" messageCode="global_menu_list" url="/provinces?page=1&amp;size=${empty param.size ? 10 : param.size}" z="gevUHdxZpJ3lBj5vSG6FjxAHBFM="/>
+            <menu:item id="i_province_new" messageCode="global_menu_new" url="/provinces?form"
+                       z="tQd5zZ0Vd7mRtDwnU8dcyQYNVcs="/>
+            <menu:item id="i_province_list" messageCode="global_menu_list"
+                       url="/provinces?page=1&amp;size=${empty param.size ? 10 : param.size}"
+                       z="gevUHdxZpJ3lBj5vSG6FjxAHBFM="/>
         </menu:category>
         <menu:category id="c_terminaltype" z="JACOsLZLgyswNWemsA+IEwyEMnc=">
-            <menu:item id="i_terminaltype_new" messageCode="global_menu_new" url="/terminaltypes?form" z="UptivpplXCaiHWX8uYthKpDHMy4="/>
-            <menu:item id="i_terminaltype_list" messageCode="global_menu_list" url="/terminaltypes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="HnyN2FxT4rN6fIaZGJQZWipBcwk="/>
+            <menu:item id="i_terminaltype_new" messageCode="global_menu_new" url="/terminaltypes?form"
+                       z="UptivpplXCaiHWX8uYthKpDHMy4="/>
+            <menu:item id="i_terminaltype_list" messageCode="global_menu_list"
+                       url="/terminaltypes?page=1&amp;size=${empty param.size ? 10 : param.size}"
+                       z="HnyN2FxT4rN6fIaZGJQZWipBcwk="/>
         </menu:category>
         <menu:category id="c_city" render="false" z="user-managed">
-            <menu:item id="i_city_new" messageCode="global_menu_new" url="/citys?form" z="dbfrmJjWGvOtF7e23trrw/vQnRE="/>
-            <menu:item id="i_city_list" messageCode="global_menu_list" url="/citys?page=1&amp;size=${empty param.size ? 10 : param.size}" z="Yq246nbcmHRrSUSB+sOWkE5wtxQ="/>
+            <menu:item id="i_city_new" messageCode="global_menu_new" url="/citys?form"
+                       z="dbfrmJjWGvOtF7e23trrw/vQnRE="/>
+            <menu:item id="i_city_list" messageCode="global_menu_list"
+                       url="/citys?page=1&amp;size=${empty param.size ? 10 : param.size}"
+                       z="Yq246nbcmHRrSUSB+sOWkE5wtxQ="/>
         </menu:category>
         <menu:category id="c_report" z="user-managed">
-            <menu:item id="i_report_celcom" messageCode="global_menu_celcom_report" url="/reports?type=REPORT.CEL" z="user-managed"/>
+            <menu:item id="i_report_celcom" messageCode="global_menu_celcom_report" url="/reports?type=REPORT.CEL"
+                       z="user-managed"/>
             <menu:item id="i_report_tng" messageCode="global_menu_tng_report" url="/reports?type=REPORT.TNG"/>
         </menu:category>
     </menu:menu>
