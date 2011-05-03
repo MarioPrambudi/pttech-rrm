@@ -4,10 +4,7 @@
 package com.djavafactory.pttech.rrm.domain;
 
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
-<<<<<<< HEAD
 
-=======
->>>>>>> upstream/master
 import java.lang.Long;
 import java.lang.String;
 import javax.persistence.EntityManager;
