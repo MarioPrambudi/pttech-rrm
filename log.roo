@@ -170,3 +170,42 @@ help
 finder add --finderName findConfigurationsByConfigKeyLike
 finder add --finderName findConfigurationsByConfigKey
 persistence setup --provider HIBERNATE --database H2_IN_MEMORY 
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-28 17:06:03
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-28 17:09:26
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-28 17:13:28
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-28 17:14:24
+// [failed] en --class ~.domain.ReloadRequest
+finder list
+quit
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-28 18:26:42
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-29 10:44:39
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-03 09:46:28
+ent --class ~.domain.Report
+test integration --entity Report
+field date --fieldName sofRequestedDatetime --type java.util.Date
+field number --fieldName mfgNo --type java.lang.Long
+field number --fieldName requestedReloadAmtRm --type java.lang.Float
+field number --fieldName fees --type java.lang.Float
+field number --fieldName totalChargeToCustomer --type fjava.lang.Float
+field number --fieldName commissionAmountDeductedBySof --type java.lang.Float
+field number --fieldName netPaymentToTng --type java.lang.Float
+field number --fieldName totalReloadQty --type java.lang.Float
+field number --fieldName totalAmountRequestRm --type javaa.lang.Float
+field number --fieldName totalFees --type java.lang.Float
+field date --fieldName reloadDate --type java.util.Date
+field number --fieldName reloadAmountRm --type java.lang.Float
+field number --fieldName totalReloadAmountRm --type java.lang.Float
+field number --fieldName amountRefundedToCustomer --type java.lang.Float
+field date --fieldName dateRefundedCustomer --type java.util.Date
+field string --fieldName cancellationStatus
+field date --fieldName dateCancelRequest --type java.util.Date
+field date --fieldName dateReloadRequest --type java.util.Date
+field number --fieldName totalCancellationQty --type java.lang.Long
+field number --fieldName totalAmountCancelledRm --type java.lang.Float
+field number --fieldName totalRefundToCustomerRm --type java.langFloat
+field date --fieldName transactionDate --type java.util.Date
+field number --fieldName grossPaymentToTngRm --type java.lang.Float
+field number --fieldName totalCancellationRm --type java.lang.Float
+field number --fieldName amountCreditedToTngRm --type java.lang.Float
+field date --fieldName dateCreditedToTngAccount --type java.util.Date
+field number --fieldName totalPaymentToTngRm --type java.lang.Float

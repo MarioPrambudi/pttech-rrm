@@ -31,6 +31,13 @@
         </channel>
         <amqp:outbound-channel-adapter channel="rmiReloadStatusChannel" routing-key="#{amqp['queue.rmi.reload.status']}" amqp-template="rabbitTemplate"/>
 
+        <channel id="rmiReloadRequestChannel">
+            <interceptors>
+                <wire-tap channel="logger"/>
+            </interceptors>
+        </channel>
+        <amqp:outbound-channel-adapter channel="rmiReloadRequestChannel" routing-key="#{amqp['queue.rmi.reload.req']}" amqp-template="rabbitTemplate"/>
+
         <channel id="rtmReloadInboundChannel">
             <interceptors>
                 <wire-tap channel="logger"/>

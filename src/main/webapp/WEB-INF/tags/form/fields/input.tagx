@@ -93,12 +93,68 @@
 	        <spring:url value="/acquirers/isDuplicate/" var="getValidateDuplicated" />
 	        <spring:url value="/acquirers/" var="getAcquirerUrl" />
 	        <script type="text/javascript">
-	          dojo.addOnLoad(function() {
+              dojo.addOnLoad(function() {
 	              var regNo = dijit.byId('_${sec_field}_id');
 	              dojo.connect(regNo, "onBlur", function() {
-	                 isDuplicateRegNo(regNo, '${getAcquirerUrl}', '${getValidateDuplicated}');
-	              });	
-	          });	
+                        isDuplicateRegNo(regNo, '${getAcquirerUrl}', '${getValidateDuplicated}');
+	              });
+
+
+                //To call Java method and verify the registration number
+                //result -1 = unique, 0 = duplicated, acquirerId = duplicated and deleted
+                  function isDuplicateRegNo(regNo, acquirerUrl, validateUrl) {
+                      dojo.xhrGet(
+                      {
+                          url: validateUrl+regNo.value,
+                          handleAs: "json",
+                          load: function(result) {
+
+                              if(!(result=="-1"))
+                              {
+                                  if(result=="0")
+                                  {
+                                      alert('The registration number is duplicated. Please insert a valid registration number.');
+                                      regNo.focus();
+                                  }
+                                  else
+                                  {
+                                      var redirectUrl;
+                                       dijit.byId("terms").show();
+
+                                       // button no onclick
+                                        var btnNo = dijit.byId('btnNo');
+                                        dojo.connect(btnNo, "onClick", function() {
+                                                //create new acquirer
+                                				redirectUrl = acquirerUrl+"?form";
+                                				reloadAcquirerCreate(redirectUrl);
+                                        });
+
+                                        // button yes onclick
+                                        var btnYes = dijit.byId('btnYes');
+                                        dojo.connect(btnYes, "onClick", function() {
+                                                //enable acquirer
+                                                redirectUrl = acquirerUrl+result+"?form";
+                                				reloadAcquirerUpdate(redirectUrl);
+                                        });
+
+                                  }
+                              }
+                          }
+
+                      });
+                  }
+
+                    //redirect to acquirer create form
+                  function reloadAcquirerCreate(redirectUrl) {
+                      window.location = redirectUrl;
+                  }
+
+                    //redirect to acquirer update form
+                  function reloadAcquirerUpdate(redirectUrl) {
+                      window.location = redirectUrl;
+                  }
+
+	          });
 	        </script>
 	      </c:when>
   	  </c:choose>  
