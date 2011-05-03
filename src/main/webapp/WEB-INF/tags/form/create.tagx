@@ -24,7 +24,25 @@
           <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
           <input id="proceed" type="submit" value="${fn:escapeXml(save_button)}"/>
         </div>
+        <!-- dojo dialog box-->
+        <div class="dijitHidden">
+            <div id="terms">
+                <spring:message code="dialog_title" var="title_dialog" htmlEscape="false" />
+                <spring:message code="dialog_message" var="message_dialog" htmlEscape="false" />
+                <p>${fn:escapeXml(message_dialog)}</p>
+                <spring:message code="dialog_button_yes" var="yes_button" htmlEscape="false" />
+                <input id="btnYes" type="button" value="${fn:escapeXml(yes_button)}"/>
+                <spring:message code="dialog_button_no" var="no_button" htmlEscape="false" />
+                <input id="btnNo" type="button" value="${fn:escapeXml(no_button)}"/>
+            </div>
+        </div>
+        <script type="text/javascript">
+            Spring.addDecoration(new Spring.ElementDecoration({elementId : 'terms', widgetType: 'dijit.Dialog', widgetAttrs: {title:'${fn:escapeXml(title_dialog)}'}}));
+            Spring.addDecoration(new Spring.ElementDecoration({elementId : 'btnYes', widgetType: 'dijit.form.Button', widgetAttrs: {label: '${fn:escapeXml(yes_button)}'}}));
+            Spring.addDecoration(new Spring.ElementDecoration({elementId : 'btnNo', widgetType: 'dijit.form.Button', widgetAttrs: {label: '${fn:escapeXml(no_button)}'}}));
+        </script>
       </form:form>
+
     </util:panel>
   </c:if>
 </jsp:root>

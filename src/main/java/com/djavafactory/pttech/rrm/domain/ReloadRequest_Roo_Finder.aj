@@ -4,16 +4,25 @@
 package com.djavafactory.pttech.rrm.domain;
 
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
+import java.lang.Long;
 import java.lang.String;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 privileged aspect ReloadRequest_Roo_Finder {
     
+    public static TypedQuery<ReloadRequest> ReloadRequest.findReloadRequestsById(Long id) {
+        if (id == null) throw new IllegalArgumentException("The id argument is required");
+        EntityManager em = ReloadRequest.entityManager();
+        TypedQuery<ReloadRequest> q = em.createQuery("SELECT ReloadRequest FROM ReloadRequest AS reloadrequest WHERE reloadrequest.id = :id", ReloadRequest.class);
+        q.setParameter("id", id);
+        return q;
+    }
+    
     public static TypedQuery<ReloadRequest> ReloadRequest.findReloadRequestsByTransId(String transId) {
         if (transId == null || transId.length() == 0) throw new IllegalArgumentException("The transId argument is required");
         EntityManager em = ReloadRequest.entityManager();
-        TypedQuery<ReloadRequest> q = em.createQuery("SELECT o FROM ReloadRequest AS o WHERE o.transId = :transId", ReloadRequest.class);
+        TypedQuery<ReloadRequest> q = em.createQuery("SELECT ReloadRequest FROM ReloadRequest AS reloadrequest WHERE reloadrequest.transId = :transId", ReloadRequest.class);
         q.setParameter("transId", transId);
         return q;
     }

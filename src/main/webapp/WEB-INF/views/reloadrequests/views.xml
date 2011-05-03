@@ -16,4 +16,7 @@
 <definition extends="default" name="reloadrequests/findReloadRequestsByTransId">
         <put-attribute name="body" value="/WEB-INF/views/reloadrequests/findReloadRequestsByTransId.jspx"/>
     </definition>
+<definition extends="default" name="reloadrequests/findReloadRequestsById">
+        <put-attribute name="body" value="/WEB-INF/views/reloadrequests/findReloadRequestsById.jspx"/>
+    </definition>
 </tiles-definitions>
