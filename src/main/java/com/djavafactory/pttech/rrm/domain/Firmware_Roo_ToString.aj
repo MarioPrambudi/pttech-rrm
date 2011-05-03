@@ -9,10 +9,10 @@ privileged aspect Firmware_Roo_ToString {
     
     public String Firmware.toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Name: ").append(getName()).append(", ");
-        sb.append("FirmwareFile: ").append(java.util.Arrays.toString(getFirmwareFile())).append(", ");
+        sb.append("Acquirer: ").append(getAcquirer()).append(", ");
         sb.append("Active: ").append(getActive()).append(", ");
-        sb.append("Acquirer: ").append(getAcquirer());
+        sb.append("FirmwareFile: ").append(java.util.Arrays.toString(getFirmwareFile())).append(", ");
+        sb.append("Name: ").append(getName());
         return sb.toString();
     }
     

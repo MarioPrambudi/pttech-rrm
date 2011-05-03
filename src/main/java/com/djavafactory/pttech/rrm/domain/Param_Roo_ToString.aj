@@ -9,9 +9,9 @@ privileged aspect Param_Roo_ToString {
     
     public String Param.toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("ParameterFile: ").append(java.util.Arrays.toString(getParameterFile())).append(", ");
         sb.append("CreatedBy: ").append(getCreatedBy()).append(", ");
-        sb.append("CreatedTime: ").append(getCreatedTime());
+        sb.append("CreatedTime: ").append(getCreatedTime()).append(", ");
+        sb.append("ParameterFile: ").append(java.util.Arrays.toString(getParameterFile()));
         return sb.toString();
     }
     
