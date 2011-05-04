@@ -6,6 +6,7 @@
   <jsp:directive.attribute name="data" type="java.util.Collection" required="true" rtexprvalue="true" description="The collection to be displayed in the table" />
   <jsp:directive.attribute name="path" type="java.lang.String" required="true" rtexprvalue="true" description="Specify the URL path" />
   <jsp:directive.attribute name="typeIdFieldName" type="java.lang.String" required="false" rtexprvalue="true" description="The identifier field name for the type (defaults to 'id')" />
+  <jsp:directive.attribute name="show" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Include 'show' link into table (default true)" />
   <jsp:directive.attribute name="create" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Include 'create' link into table (default true)" />
   <jsp:directive.attribute name="update" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Include 'update' link into table (default true)" />
   <jsp:directive.attribute name="delete" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Include 'delete' link into table (default true)" />
@@ -13,6 +14,8 @@
   <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)" />
   <jsp:directive.attribute name="terminalAction" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Include terminal actions into table (default false)" />
 
+  <jsp:directive.attribute name="pdf_report" type="java.lang.Boolean" required="false" rtexprvalue="true" description="show pdf report (default false)" />
+  <jsp:directive.attribute name="html_report" type="java.lang.Boolean" required="false" rtexprvalue="true" description="show html report (default false)" />
   <c:if test="${empty render or render}">
 
     <c:set var="columnProperties" scope="request" />
@@ -20,10 +23,13 @@
     <c:set var="columnMaxLengths" scope="request" />
 
     <jsp:doBody />
-
     <c:if test="${empty typeIdFieldName}">
       <c:set var="typeIdFieldName" value="id" />
     </c:if>
+
+	<c:if test="${empty show}">
+	  <c:set var="show" value="true"/>
+	</c:if>
 
     <c:if test="${empty update}">
       <c:set var="update" value="true" />
@@ -31,6 +37,13 @@
 
     <c:if test="${empty delete}">
       <c:set var="delete" value="true" />
+    </c:if>
+    
+    <c:if test="${empty html_report}">
+      <c:set var="html_report" value="false"/>
+    </c:if>
+    <c:if test="${empty pdf_report}">
+      <c:set var="pdf_report" value="false"/>
     </c:if>
 
     <c:if test="${empty terminalAction}">
@@ -86,6 +99,10 @@
             </th>
           </c:forTokens>
           <th></th>
+          <c:if test="${show}">
+            <th></th>
+            <spring:eval var="colCounter" expression="colCounter  + 1" />
+          </c:if>
           <c:if test="${update}">
             <th></th>
             <spring:eval var="colCounter" expression="colCounter  + 1" />
@@ -95,6 +112,15 @@
             <spring:eval var="colCounter" expression="colCounter  + 1" />
           </c:if>
           <c:if test="${terminalAction}">
+            <th></th>
+            <spring:eval var="colCounter" expression="colCounter  + 1" />
+          </c:if>
+          
+          <c:if test="${html_report}">
+            <th></th>
+            <spring:eval var="colCounter" expression="colCounter  + 1" />
+          </c:if>
+          <c:if test="${pdf_report}">
             <th></th>
             <spring:eval var="colCounter" expression="colCounter  + 1" />
           </c:if>
@@ -108,6 +134,8 @@
               <spring:eval expression="item[column]" />
             </td>
           </c:forTokens>
+          
+          <c:if test="${show}">
           <td class="utilbox">
             <spring:url value="${path}/${item[typeIdFieldName]}" var="show_form_url" />
             <spring:url value="/resources/images/show.png" var="show_image_url" />
@@ -116,6 +144,33 @@
               <img alt="${fn:escapeXml(show_label)}" class="image" src="${fn:escapeXml(show_image_url)}" title="${fn:escapeXml(show_label)}" />
             </a>
           </td>
+          </c:if>
+          
+          <c:if test="${html_report}">
+          <td class="utilbox">
+          	<spring:url value="/reports/${item[typeIdFieldName]}-Report/html" var="report_url"/>
+          	<spring:url value="/resources/images/report-html.png" var="report_image_url" />
+          	<spring:message arguments="${typeName}" code="entity_list_report" htmlEscape="false" var="report_label"/>
+          	<a alt="" href="${fn:escapeXml(report_url)}" title="${fn:escapeXml(report_label)}" >
+          		<img alt="${fn:escapeXml(report_label)}" class="image" 
+          			 src="${fn:escapeXml(report_image_url)}" 
+          			 title="${fn:escapeXml(report_label)}"/>
+          	</a>
+          </td>
+          </c:if>
+          <c:if test="${pdf_report}">
+          <td class="utilbox">
+          	<spring:url value="/reports/${item[typeIdFieldName]}-Report/pdf" var="report_url"/>
+          	<spring:url value="/resources/images/report-pdf.png" var="report_image_url" />
+          	<spring:message arguments="${typeName}" code="entity_list_report" htmlEscape="false" var="report_label"/>
+          	<a alt="" href="${fn:escapeXml(report_url)}" title="${fn:escapeXml(report_label)}" >
+          		<img alt="${fn:escapeXml(report_label)}" class="image" 
+          			 src="${fn:escapeXml(report_image_url)}" 
+          			 title="${fn:escapeXml(report_label)}"/>
+          	</a>
+          </td>
+          </c:if>
+          
           <c:if test="${update}">
             <td class="utilbox">
               <spring:url value="${path}/${item[typeIdFieldName]}" var="update_form_url">
