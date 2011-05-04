@@ -19,7 +19,7 @@ public class CityController {
      * @param id The terminal id
      * @return String json string for cities
      */
-    @RequestMapping(value = "/getCitiesByState/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
+    @RequestMapping(value = "/getCitiesByState/{id}", method = RequestMethod.GET)
     public
     @ResponseBody
     String getCitiesByState(@PathVariable("id") Long id) {
