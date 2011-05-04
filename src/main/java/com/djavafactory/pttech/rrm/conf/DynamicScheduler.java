@@ -1,4 +1,4 @@
-package com.djavafactory.pttech.rrm.service;
+package com.djavafactory.pttech.rrm.conf;
 
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.Trigger;
@@ -30,6 +30,12 @@ public class DynamicScheduler extends CronTrigger implements Trigger {
 
     public void resetScheduler(String cronExpr) {
         new DynamicScheduler(scheduler, cronExpr, runnableTask, batchTask);
+    }
+
+    public void stopScheduler() {
+        if (batchTask != null) {
+            batchTask.cancel(true);
+        }
     }
 
     private void reset(String cronExpr) {

@@ -1,11 +1,12 @@
 package com.djavafactory.pttech.rrm.web;
 
 import com.djavafactory.pttech.rrm.Constants;
+import com.djavafactory.pttech.rrm.conf.DynamicScheduler;
 import com.djavafactory.pttech.rrm.domain.Configuration;
-import com.djavafactory.pttech.rrm.service.DynamicScheduler;
+import com.djavafactory.pttech.rrm.service.BatchReportServiceManager;
+import com.djavafactory.pttech.rrm.service.JmxReloadContextManager;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,12 +25,7 @@ import javax.validation.Valid;
 public class ConfigurationController {
 
     @Autowired
-    @Qualifier("celcomScheduler")
-    private DynamicScheduler celcomScheduler;
-
-    @Autowired
-    @Qualifier("tngScheduler")
-    private DynamicScheduler tngScheduler;
+    private BatchReportServiceManager batchReportServiceManager;
 
     @RequestMapping(value = "/keys/{prefix}", method = RequestMethod.GET)
     public String keys(@PathVariable("prefix") String configKeyPrefix, Model uiModel) {
@@ -59,12 +55,11 @@ public class ConfigurationController {
             uiModel.addAttribute("configuration", configuration);
             return "configurations/create";
         }
-        resetScheduler(configuration);
         uiModel.asMap().clear();
         configuration.persist();
+        resetScheduler(configuration);
         return "redirect:/configurations/" + encodeUrlPathSegment(configuration.getId().toString(), httpServletRequest);
     }
-
 
     @RequestMapping(method = RequestMethod.PUT)
     public String update(@Valid Configuration configuration, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -72,17 +67,24 @@ public class ConfigurationController {
             uiModel.addAttribute("configuration", configuration);
             return "configurations/update";
         }
-        resetScheduler(configuration);
         uiModel.asMap().clear();
         configuration.merge();
+        resetScheduler(configuration);
         return "redirect:/configurations/" + encodeUrlPathSegment(configuration.getId().toString(), httpServletRequest);
     }
 
+    @Autowired
+    private JmxReloadContextManager jmxReloadContextManager;
+
     private void resetScheduler(Configuration configuration) {
         if (StringUtils.equals(Constants.CONFIG_CEL_BATCH_SCHEDULE, configuration.getConfigKey())) {
+            DynamicScheduler celcomScheduler = jmxReloadContextManager.getContext().getBean("celcomScheduler", DynamicScheduler.class);
             celcomScheduler.resetScheduler(configuration.getConfigValue());
         } else if (StringUtils.equals(Constants.CONFIG_TNG_BATCH_SCHEDULE, configuration.getConfigKey())) {
+            DynamicScheduler tngScheduler = jmxReloadContextManager.getContext().getBean("tngScheduler", DynamicScheduler.class);
             tngScheduler.resetScheduler(configuration.getConfigValue());
+        } else if (StringUtils.equals(Constants.CONFIG_CEL_LOCATION, configuration.getConfigKey())) {
+            jmxReloadContextManager.reloadContext();
         }
     }
 }

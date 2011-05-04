@@ -62,10 +62,6 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    <listener>
-        <listener-class>com.djavafactory.pttech.rrm.listener.StartupListener</listener-class>
-    </listener>
-
     <!-- Handles Spring requests -->
     <servlet>
         <servlet-name>pttech-rrm</servlet-name>

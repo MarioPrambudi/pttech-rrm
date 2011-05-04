@@ -3,10 +3,10 @@ insert into configuration ( config_key , config_value , ordering , version ) val
 insert into configuration ( config_key , config_value , ordering , version ) values ('CEL.location', '/home/user/celcom', 1, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('CEL.username', 'celcomuser', 2, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('CEL.password', 'password', 3, 0);
-insert into configuration ( config_key , config_value , ordering , version ) values ('CEL.uploadschedule', '', 4, 0);
+insert into configuration ( config_key , config_value , ordering , version ) values ('CEL.uploadschedule', '* * 2 * * ?', 4, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('TNG.reloadendpoint', 'http://localhost:8080/services/reloadrequest/request?wsdl', 0, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('TNG.batchendpoint', 'http://localhost:8080/services/reloadrequest/request?wsdl', 1, 0);
-insert into configuration ( config_key , config_value , ordering , version ) values ('TNG.uploadschedule', '', 2, 0);
+insert into configuration ( config_key , config_value , ordering , version ) values ('TNG.uploadschedule', '* * 2 * * ?', 2, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('RRM.retries', '3', 0, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('RRM.timeout', '120000', 1, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.TNG.TG0001', 'Daily Details Request Reload Report', 0, 0);
