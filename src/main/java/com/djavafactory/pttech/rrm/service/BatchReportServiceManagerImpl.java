@@ -5,7 +5,6 @@ import com.djavafactory.pttech.rrm.domain.Configuration;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.Message;
 import org.springframework.integration.MessageChannel;
 import org.springframework.integration.ftp.session.DefaultFtpsSessionFactory;
@@ -23,7 +22,6 @@ public class BatchReportServiceManagerImpl implements BatchReportServiceManager 
     public BatchReportServiceManagerImpl() {
     }
 
-    @Autowired
     public BatchReportServiceManagerImpl(DefaultFtpsSessionFactory ftpsSessionFactory, MessageChannel sftpChannel) {
         this.ftpsSessionFactory = ftpsSessionFactory;
         this.ftpsChannel = sftpChannel;
