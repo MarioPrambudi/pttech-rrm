@@ -76,7 +76,7 @@ public class ReportController {
 	/*
 	 * TnG Report
 	 */
-	@RequestMapping(value ="/171-Report/{format}", method = RequestMethod.GET)
+	@RequestMapping(value ="/TG0001-Report/{format}", method = RequestMethod.GET)
 	public String dailyDetailsRequestReloadFfmCelcomReport(ModelMap modelMap,
 														   Model uiModel,
 														   @PathVariable("format") String format) {
@@ -97,7 +97,7 @@ public class ReportController {
 		
 	}
 	
-	@RequestMapping(value = "/172-Report/{format}", method = RequestMethod.GET)
+	@RequestMapping(value = "/TG0002-Report/{format}", method = RequestMethod.GET)
 	public String summaryRequestReloadFrmCelcomReport(ModelMap modelMap,
 													  Model uiModel,
 													  @PathVariable("format") String format) {
@@ -116,7 +116,7 @@ public class ReportController {
 		}
 	}
 	
-	@RequestMapping(value = "/173-Report/{format}", method = RequestMethod.GET)
+	@RequestMapping(value = "/TG0003-Report/{format}", method = RequestMethod.GET)
 	public String dailyDetailedReloadFrmCelcomReport(ModelMap modelMap,
 												     Model uiModel,
 													 @PathVariable("format") String format) {
@@ -135,7 +135,7 @@ public class ReportController {
 		}
 	}
 	
-	@RequestMapping(value = "/174-Report/{format}", method = RequestMethod.GET)
+	@RequestMapping(value = "/TG0004-Report/{format}", method = RequestMethod.GET)
 	public String summaryReloadFrmCelcomReport(ModelMap modelMap, 
 											   Model uiModel,
 											   @PathVariable("format") String format) {
@@ -154,7 +154,7 @@ public class ReportController {
 		}
 	}
 	
-	@RequestMapping(value = "/175-Report/{format}", method = RequestMethod.GET)
+	@RequestMapping(value = "/TG0005-Report/{format}", method = RequestMethod.GET)
 	public String dailyDetailsCancellationReloadReqFrmCelcomReport(ModelMap modelMap,
 																   Model uiModel,
 																   @PathVariable("format") String format) {
@@ -173,7 +173,7 @@ public class ReportController {
 		}
 	}
 	
-	@RequestMapping(value = "/176-Report/{format}", method = RequestMethod.GET)
+	@RequestMapping(value = "/TG0006-Report/{format}", method = RequestMethod.GET)
 	public String summaryCancellationReloadFrmCelcomReport(ModelMap modelMap,
 														   Model uiModel,
 														   @PathVariable("format") String format) {
@@ -192,7 +192,7 @@ public class ReportController {
 		}
 	}
 	
-	@RequestMapping(value ="/177-Report/{format}", method = RequestMethod.GET)
+	@RequestMapping(value ="/TG0007-Report/{format}", method = RequestMethod.GET)
 	public String dailySettlementReloadFrmCelcomReport(ModelMap modelMap,
 													   Model uiModel,
 													   @PathVariable("format") String format) {
@@ -212,7 +212,7 @@ public class ReportController {
 	}
 	
 	
-	@RequestMapping(value = "/178-Report/{format}", method = RequestMethod.GET)
+	@RequestMapping(value = "/TG0008-Report/{format}", method = RequestMethod.GET)
 	public String monthlySettlementReloadFrmCelcomReport(ModelMap modelMap,
 														 Model uiModel,
 														 @PathVariable("format") String format) {
@@ -234,7 +234,7 @@ public class ReportController {
 	/*
 	 * Celcom Report
 	 */
-	@RequestMapping(value = "/179-Report/{format}", method = RequestMethod.GET)
+	@RequestMapping(value = "/CE0001-Report/{format}", method = RequestMethod.GET)
 	public String dailyTrxDetailsReport(ModelMap modelMap,
 										Model uiModel,
 										@PathVariable("format") String format) {
@@ -253,7 +253,7 @@ public class ReportController {
 		}
 	}
 	
-	@RequestMapping(value = "/180-Report/{format}", method = RequestMethod.GET)
+	@RequestMapping(value = "/CE0002-Report/{format}", method = RequestMethod.GET)
 	public String dailyTrxDetailsByRangeDateReport(ModelMap modelMap, Model uiModel,
 												   @PathVariable("format") String format,
 												   @RequestParam(value = "startDate", required = false) String startDate,
@@ -273,7 +273,7 @@ public class ReportController {
 		}
 	}
 	
-	@RequestMapping(value = "/181-Report/{format}", method = RequestMethod.GET)
+	@RequestMapping(value = "/CE0003-Report/{format}", method = RequestMethod.GET)
 	public String dailyTrxFeeDetailsReport(ModelMap modelMap, Model uiModel,
 										   @PathVariable("format") String format) {
 
@@ -291,7 +291,7 @@ public class ReportController {
 		}
 	}
 	
-	@RequestMapping(value = "/182-Report/{format}", method = RequestMethod.GET)
+	@RequestMapping(value = "/CE0004-Report/{format}", method = RequestMethod.GET)
 	public String dailyTrxFeeDetailsByRangeDateReport(ModelMap modelMap, Model uiModel,
 			 										  @PathVariable("format") String format,
 													   @RequestParam(value = "startDate", required = false) String startDate,
@@ -311,7 +311,7 @@ public class ReportController {
 		}
 	}
 	
-	@RequestMapping(value = "/183-Report/{format}", method = RequestMethod.GET)
+	@RequestMapping(value = "/CE0005-Report/{format}", method = RequestMethod.GET)
 	public String summaryDailyTrxReport(ModelMap modelMap, Model uiModel,
 										@PathVariable("format") String format) {
 
@@ -329,7 +329,7 @@ public class ReportController {
 		}
 	}
 	
-	@RequestMapping(value = "/184-Report/{format}", method = RequestMethod.GET)
+	@RequestMapping(value = "/CE0006-Report/{format}", method = RequestMethod.GET)
 	public String summaryDailyTrxByRangeDateReport(ModelMap modelMap, Model uiModel,
 												   @PathVariable("format") String format,
 												   @RequestParam(value = "startDate", required = false) String startDate,
