@@ -4,21 +4,27 @@
 package com.djavafactory.pttech.rrm.web;
 
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
+import java.io.UnsupportedEncodingException;
+import java.lang.Integer;
+import java.lang.Long;
+import java.lang.String;
+import java.util.Collection;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.io.UnsupportedEncodingException;
-import java.util.Collection;
-
 privileged aspect ReloadRequestController_Roo_Controller {
-
+    
     @RequestMapping(method = RequestMethod.POST)
     public String ReloadRequestController.create(@Valid ReloadRequest reloadRequest, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -30,14 +36,14 @@ privileged aspect ReloadRequestController_Roo_Controller {
         reloadRequest.persist();
         return "redirect:/reloadrequests/" + encodeUrlPathSegment(reloadRequest.getId().toString(), httpServletRequest);
     }
-
+    
     @RequestMapping(params = "form", method = RequestMethod.GET)
     public String ReloadRequestController.createForm(Model uiModel) {
         uiModel.addAttribute("reloadRequest", new ReloadRequest());
         addDateTimeFormatPatterns(uiModel);
         return "reloadrequests/create";
     }
-
+    
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String ReloadRequestController.show(@PathVariable("id") Long id, Model uiModel) {
         addDateTimeFormatPatterns(uiModel);
@@ -45,21 +51,7 @@ privileged aspect ReloadRequestController_Roo_Controller {
         uiModel.addAttribute("itemId", id);
         return "reloadrequests/show";
     }
-
-    @RequestMapping(method = RequestMethod.GET)
-    public String ReloadRequestController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            uiModel.addAttribute("reloadrequests", ReloadRequest.findReloadRequestEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
-            float nrOfPages = (float) ReloadRequest.countReloadRequests() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("reloadrequests", ReloadRequest.findAllReloadRequests());
-        }
-        addDateTimeFormatPatterns(uiModel);
-        return "reloadrequests/list";
-    }
-
+    
     @RequestMapping(method = RequestMethod.PUT)
     public String ReloadRequestController.update(@Valid ReloadRequest reloadRequest, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -71,14 +63,14 @@ privileged aspect ReloadRequestController_Roo_Controller {
         reloadRequest.merge();
         return "redirect:/reloadrequests/" + encodeUrlPathSegment(reloadRequest.getId().toString(), httpServletRequest);
     }
-
+    
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
     public String ReloadRequestController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         uiModel.addAttribute("reloadRequest", ReloadRequest.findReloadRequest(id));
         addDateTimeFormatPatterns(uiModel);
         return "reloadrequests/update";
     }
-
+    
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public String ReloadRequestController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         ReloadRequest.findReloadRequest(id).remove();
@@ -87,38 +79,16 @@ privileged aspect ReloadRequestController_Roo_Controller {
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
         return "redirect:/reloadrequests";
     }
-
-    @RequestMapping(params = {"find=ById", "form"}, method = RequestMethod.GET)
-    public String ReloadRequestController.findReloadRequestsByIdForm(Model uiModel) {
-        return "reloadrequests/findReloadRequestsById";
-    }
-
-    @RequestMapping(params = "find=ById", method = RequestMethod.GET)
-    public String ReloadRequestController.findReloadRequestsById(@RequestParam("id") Long id, Model uiModel) {
-        uiModel.addAttribute("reloadrequests", ReloadRequest.findReloadRequestsById(id).getResultList());
-        return "reloadrequests/list";
-    }
-
-    @RequestMapping(params = {"find=ByTransId", "form"}, method = RequestMethod.GET)
-    public String ReloadRequestController.findReloadRequestsByTransIdForm(Model uiModel) {
-        return "reloadrequests/findReloadRequestsByTransId";
-    }
-
-    @RequestMapping(params = "find=ByTransId", method = RequestMethod.GET)
-    public String ReloadRequestController.findReloadRequestsByTransId(@RequestParam("transId") String transId, Model uiModel) {
-        uiModel.addAttribute("reloadrequests", ReloadRequest.findReloadRequestsByTransId(transId).getResultList());
-        return "reloadrequests/list";
-    }
-
+    
     @ModelAttribute("reloadrequests")
     public Collection<ReloadRequest> ReloadRequestController.populateReloadRequests() {
         return ReloadRequest.findAllReloadRequests();
     }
-
+    
     void ReloadRequestController.addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("reloadRequest_requestedtime_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
     }
-
+    
     String ReloadRequestController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
         String enc = httpServletRequest.getCharacterEncoding();
         if (enc == null) {
@@ -126,9 +96,9 @@ privileged aspect ReloadRequestController_Roo_Controller {
         }
         try {
             pathSegment = UriUtils.encodePathSegment(pathSegment, enc);
-        } catch (UnsupportedEncodingException uee) {
         }
+        catch (UnsupportedEncodingException uee) {}
         return pathSegment;
     }
-
+    
 }
