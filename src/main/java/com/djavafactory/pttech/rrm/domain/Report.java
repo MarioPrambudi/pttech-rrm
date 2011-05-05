@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.List;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 @RooJavaBean
@@ -20,9 +19,9 @@ public class Report {
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
     private Date sofRequestedDatetime;
-    
+
     private Long id;
-    
+
     private String transId;
 
     private String status;
@@ -52,8 +51,6 @@ public class Report {
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
     private Date reloadDate;
-
-    private BigDecimal reloadAmountRm;
 
     private BigDecimal totalReloadAmountRm;
 
@@ -95,8 +92,5 @@ public class Report {
 
     private BigDecimal totalPaymentToTngRm;
 
-
-
-
-
+    private String tngKey;
 }

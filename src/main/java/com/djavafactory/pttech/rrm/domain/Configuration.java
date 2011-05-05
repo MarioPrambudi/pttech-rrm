@@ -88,7 +88,11 @@ public class Configuration implements Comparable<Configuration> {
         return (configurations != null && !configurations.isEmpty()) ? configurations.get(0) : null;
     }
 
-    //to get a specific configure value
+    /**
+     * To get a specific config value
+     * @param valueName Config Key eg: REPORT.FEE
+     * @return String Config value
+     */
      public static String getReportConfigValue(String valueName){
            Configuration config = findConfigurationByConfigKey(valueName);
            return config.getConfigValue().toString();

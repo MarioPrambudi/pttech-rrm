@@ -6,7 +6,7 @@ package com.djavafactory.pttech.rrm.domain;
 import java.lang.String;
 
 privileged aspect Firmware_Roo_ToString {
-
+    
     public String Firmware.toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Name: ").append(getName()).append(", ");
@@ -15,5 +15,5 @@ privileged aspect Firmware_Roo_ToString {
         sb.append("Acquirer: ").append(getAcquirer());
         return sb.toString();
     }
-
+    
 }

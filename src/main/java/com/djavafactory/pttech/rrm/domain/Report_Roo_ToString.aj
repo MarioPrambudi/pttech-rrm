@@ -25,7 +25,6 @@ privileged aspect Report_Roo_ToString {
         sb.append("TotalAmountRequestRm: ").append(getTotalAmountRequestRm()).append(", ");
         sb.append("TotalFees: ").append(getTotalFees()).append(", ");
         sb.append("ReloadDate: ").append(getReloadDate()).append(", ");
-        sb.append("ReloadAmountRm: ").append(getReloadAmountRm()).append(", ");
         sb.append("TotalReloadAmountRm: ").append(getTotalReloadAmountRm()).append(", ");
         sb.append("AmountRefundedToCustomer: ").append(getAmountRefundedToCustomer()).append(", ");
         sb.append("DateRefundedCustomer: ").append(getDateRefundedCustomer()).append(", ");
@@ -40,7 +39,8 @@ privileged aspect Report_Roo_ToString {
         sb.append("TotalCancellationRm: ").append(getTotalCancellationRm()).append(", ");
         sb.append("AmountCreditedToTngRm: ").append(getAmountCreditedToTngRm()).append(", ");
         sb.append("DateCreditedToTngAccount: ").append(getDateCreditedToTngAccount()).append(", ");
-        sb.append("TotalPaymentToTngRm: ").append(getTotalPaymentToTngRm());
+        sb.append("TotalPaymentToTngRm: ").append(getTotalPaymentToTngRm()).append(", ");
+        sb.append("TngKey: ").append(getTngKey());
         return sb.toString();
     }
     

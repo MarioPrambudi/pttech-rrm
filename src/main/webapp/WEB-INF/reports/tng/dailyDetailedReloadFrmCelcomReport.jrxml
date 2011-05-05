@@ -37,42 +37,42 @@
 			<textField>
 				<reportElement x="30" y="0" width="90" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.ReloadRequests.transId}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.transId}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="120" y="0" width="90" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.ReloadRequests.status}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.status}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="210" y="0" width="90" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.ReloadRequests.mfgNumber}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.mfgNumber}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="300" y="0" width="90" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.ReloadRequests.reloadAmount}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.reloadAmount}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="390" y="0" width="90" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.ReloadRequests.serviceProviderId}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.serviceProviderId}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="480" y="0" width="90" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.ReloadRequests.transCode}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.transCode}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="570" y="0" width="90" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.ReloadRequests.requestedTime}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.requestedTime}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="660" y="0" width="90" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.ReloadRequests.tngKey}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.tngKey}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
