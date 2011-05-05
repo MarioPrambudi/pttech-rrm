@@ -40,9 +40,9 @@
             <menu:item id="i_reloadrequest_list" messageCode="global_menu_list" url="/reloadrequests?page=1&amp;size=${empty param.size ? 10 : param.size}" z="dObqRnXTskprfRdAeUTJf9dydWo="/>
 
 
-        <menu:item id="fi_reloadrequest_requestedtimebetween" messageCode="global_menu_find" url="/reloadrequests?find=ByRequestedTimeBetween&amp;form" z="QCLGqQufuMQrS2zzmQKAL/4heiY="/>
-        <menu:item id="fi_reloadrequest_transid" messageCode="global_menu_find" url="/reloadrequests?find=ByTransId&amp;form" z="RUJquqBb4BDGrEDg1OYuBDAiYAY="/>
-        <menu:item id="fi_reloadrequest_id" messageCode="global_menu_find" url="/reloadrequests?find=ById&amp;form" z="lZHESxEX9L3tNPEQTWBvshKoEWQ="/>
+        <menu:item id="fi_reloadrequest_requestedtimebetween" messageCode="global_menu_find" render="false" url="/reloadrequests?find=ByRequestedTimeBetween&amp;form" z="user-managed"/>
+        <menu:item id="fi_reloadrequest_transid" messageCode="global_menu_find" render="false" url="/reloadrequests?find=ByTransId&amp;form" z="user-managed"/>
+        <menu:item id="fi_reloadrequest_id" messageCode="global_menu_find" render="false" url="/reloadrequests?find=ById&amp;form" z="user-managed"/>
         </menu:category>
         <menu:category id="c_province" render="false" z="user-managed">
             <menu:item id="i_province_new" messageCode="global_menu_new" url="/provinces?form" z="tQd5zZ0Vd7mRtDwnU8dcyQYNVcs="/>
