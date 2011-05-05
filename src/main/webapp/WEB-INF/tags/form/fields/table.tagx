@@ -16,6 +16,7 @@
 
   <jsp:directive.attribute name="reportType" type="java.lang.String" required="false" rtexprvalue="true" description="The identifier field for the report type (defaults to 'configKey')" />
   <jsp:directive.attribute name="pdf_report" type="java.lang.Boolean" required="false" rtexprvalue="true" description="show pdf report (default false)" />
+  <jsp:directive.attribute name="xls_report" type="java.lang.Boolean" required="false" rtexprvalue="true" description="show xls report (default false)" />
   <jsp:directive.attribute name="html_report" type="java.lang.Boolean" required="false" rtexprvalue="true" description="show html report (default false)" />
   <c:if test="${empty render or render}">
 
@@ -49,7 +50,10 @@
     <c:if test="${empty pdf_report}">
       <c:set var="pdf_report" value="false"/>
     </c:if>
-
+	<c:if test="${empty xls_report}">
+      <c:set var="xls_report" value="false"/>
+    </c:if>
+    
     <c:if test="${empty terminalAction}">
       <c:set var="terminalAction" value="false" />
     </c:if>
@@ -128,6 +132,10 @@
             <th></th>
             <spring:eval var="colCounter" expression="colCounter  + 1" />
           </c:if>
+          <c:if test="${xls_report}">
+            <th></th>
+            <spring:eval var="colCounter" expression="colCounter  + 1" />
+          </c:if>
         </tr>
       </thead>
       <c:forEach items="${data}" var="item">
@@ -166,6 +174,18 @@
           <td class="utilbox">
           	<spring:url value="/reports/${item[reportType]}-Report/pdf" var="report_url"/>
           	<spring:url value="/resources/images/report-pdf.png" var="report_image_url" />
+          	<spring:message arguments="${typeName}" code="entity_list_report" htmlEscape="false" var="report_label"/>
+          	<a alt="" href="${fn:escapeXml(report_url)}" title="${fn:escapeXml(report_label)}" >
+          		<img alt="${fn:escapeXml(report_label)}" class="image" 
+          			 src="${fn:escapeXml(report_image_url)}" 
+          			 title="${fn:escapeXml(report_label)}"/>
+          	</a>
+          </td>
+          </c:if>
+          <c:if test="${xls_report}">
+          <td class="utilbox">
+          	<spring:url value="/reports/${item[reportType]}-Report/xls" var="report_url"/>
+          	<spring:url value="/resources/images/report-xls.png" var="report_image_url" />
           	<spring:message arguments="${typeName}" code="entity_list_report" htmlEscape="false" var="report_label"/>
           	<a alt="" href="${fn:escapeXml(report_url)}" title="${fn:escapeXml(report_label)}" >
           		<img alt="${fn:escapeXml(report_label)}" class="image" 
