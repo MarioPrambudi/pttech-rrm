@@ -10,29 +10,45 @@ import org.apache.commons.logging.LogFactory;
 
 import java.util.List;
 
-
+/**
+ * Spring Integration Router class to route the messages to appropriate channel.
+ *
+ * @author Carine Leong
+ */
 public class MessageRouter {
     private static final Log logger = LogFactory.getLog(MessageRouter.class);
 
+    /**
+     * Method to route the ReloadRequestMessage to the appropriate channel based on message type.
+     *
+     * @param message ReloadRequestMessage object
+     * @return Channel in string
+     */
     public String routeReloadRequest(ReloadRequestMessage message) {
-        if(StringUtils.equalsIgnoreCase(message.getMsgType(), Constants.RELOAD_REQUEST_NEW)) {
+        if (StringUtils.equalsIgnoreCase(message.getMsgType(), Constants.RELOAD_REQUEST_NEW)) {
             return (message.getEncryptedMsg() == null || StringUtils.equalsIgnoreCase(message.getEncryptedMsg(), "")) ? "newReloadReqPersistChannel" : "tngKeyInboundChannel";
-        } else if(StringUtils.equalsIgnoreCase(message.getMsgType(), Constants.RELOAD_REQUEST_FAILED)) {
+        } else if (StringUtils.equalsIgnoreCase(message.getMsgType(), Constants.RELOAD_REQUEST_FAILED)) {
             return "failedReloadReqPersistChannel";
-        } else if(StringUtils.equalsIgnoreCase(message.getMsgType(), Constants.RELOAD_REQUEST_EXPIRED)) {
+        } else if (StringUtils.equalsIgnoreCase(message.getMsgType(), Constants.RELOAD_REQUEST_EXPIRED)) {
             return "expiredReloadReqPersistChannel";
         } else {
             return "successReloadReqPersistChannel";
         }
     }
 
+    /**
+     * Method to route the ReloadResponseMessage to the appropriate channel based on message type.
+     *
+     * @param message ReloadResponseMessage object
+     * @return Channel in string
+     */
     public String routeReloadResponse(ReloadResponseMessage message) {
         List<ReloadRequest> reloadRecord = new ReloadRequest().findReloadRequestsByTransId(message.getTransId()).getResultList();
-        if(reloadRecord != null && !reloadRecord.isEmpty()) {
+        if (reloadRecord != null && !reloadRecord.isEmpty()) {
             ReloadRequest reloadRequest = reloadRecord.get(0);
-            if(StringUtils.equalsIgnoreCase(reloadRequest.getStatus(), Constants.RELOAD_STATUS_NEW)) {
+            if (StringUtils.equalsIgnoreCase(reloadRequest.getStatus(), Constants.RELOAD_STATUS_NEW)) {
                 return "tngResponsePersistChannel";
-            } else if(StringUtils.equalsIgnoreCase(reloadRequest.getStatus(), Constants.RELOAD_STATUS_PENDING)) {
+            } else if (StringUtils.equalsIgnoreCase(reloadRequest.getStatus(), Constants.RELOAD_STATUS_PENDING)) {
                 return null; //TODO for response returned by RTM for manual cancellation response
             }
         }

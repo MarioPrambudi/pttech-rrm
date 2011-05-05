@@ -2,10 +2,19 @@
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:list id="pl_com_djavafactory_pttech_rrm_domain_ReloadRequest" items="${reloadrequests}" z="vdfIkKqE0aVdNMpR8LSUm94KsLg=">
+	<page:find finderName="ByParam"
+		id="ff_com_djavafactory_pttech_rrm_domain_ReloadRequest"
+		path="/reloadrequests/findReloadRequestsByParam"
+		z="GVYHVsbQmrNZQ3RXNd3NGUumfic=">
+		<table:select disableFormBinding="true" field="status"
+			id="f_com_djavafactory_pttech_rrm_domain_ReloadRequest_status"
+			itemValue="id" items="${statuscode}" path="/statuscode"
+			z="user-managed" />
+	</page:find>
+	<page:list id="pl_com_djavafactory_pttech_rrm_domain_ReloadRequest" items="${reloadrequests}" z="vdfIkKqE0aVdNMpR8LSUm94KsLg=">
         <table:table data="${reloadrequests}" id="l_com_djavafactory_pttech_rrm_domain_ReloadRequest" path="/reloadrequests" z="0HkhBMkhBIX6xkDSxUqQtE4KTGA=">
             <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_transCode" property="transCode" z="uvD+EpJuKRMOEfQK/zhTVNwSZVk="/>
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_status" property="status" z="Rn4fXQVMqEIPTup7+0mPdtmFVYE="/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_status" property="status" z="user-managed"/>
             <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_tngKey" property="tngKey" z="vfPg0ZVCvUvZI3sLgfIh880Xb8I="/>
             <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_serviceProviderId" property="serviceProviderId" z="zi8gJWwUPd7pR4NgiC7Q0iV5Pq0="/>
             <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_transId" property="transId" z="I2SOBlUCJ8CgorEahkRlU1Px+X4="/>

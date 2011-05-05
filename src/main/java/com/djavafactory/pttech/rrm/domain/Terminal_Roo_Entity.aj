@@ -4,6 +4,7 @@
 package com.djavafactory.pttech.rrm.domain;
 
 import com.djavafactory.pttech.rrm.domain.Terminal;
+
 import java.lang.Integer;
 import java.lang.Long;
 import java.util.List;
@@ -15,46 +16,47 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Version;
+
 import org.springframework.transaction.annotation.Transactional;
 
 privileged aspect Terminal_Roo_Entity {
-    
-    declare @type: Terminal: @Entity;
-    
+
+    declare @type: Terminal:@Entity;
+
     @PersistenceContext
     transient EntityManager Terminal.entityManager;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long Terminal.id;
-    
+
     @Version
     @Column(name = "version")
     private Integer Terminal.version;
-    
+
     public Long Terminal.getId() {
         return this.id;
     }
-    
+
     public void Terminal.setId(Long id) {
         this.id = id;
     }
-    
+
     public Integer Terminal.getVersion() {
         return this.version;
     }
-    
+
     public void Terminal.setVersion(Integer version) {
         this.version = version;
     }
-    
+
     @Transactional
     public void Terminal.persist() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.persist(this);
     }
-    
+
     @Transactional
     public void Terminal.remove() {
         if (this.entityManager == null) this.entityManager = entityManager();
@@ -65,19 +67,19 @@ privileged aspect Terminal_Roo_Entity {
             this.entityManager.remove(attached);
         }
     }
-    
+
     @Transactional
     public void Terminal.flush() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.flush();
     }
-    
+
     @Transactional
     public void Terminal.clear() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.clear();
     }
-    
+
     @Transactional
     public Terminal Terminal.merge() {
         if (this.entityManager == null) this.entityManager = entityManager();
@@ -85,28 +87,29 @@ privileged aspect Terminal_Roo_Entity {
         this.entityManager.flush();
         return merged;
     }
-    
+
     public static final EntityManager Terminal.entityManager() {
         EntityManager em = new Terminal().entityManager;
-        if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
+        if (em == null)
+            throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
         return em;
     }
-    
+
     public static long Terminal.countTerminals() {
-        return entityManager().createQuery("SELECT COUNT(o) FROM Terminal o", Long.class).getSingleResult();
+        return entityManager().createQuery("select count(o) from Terminal o", Long.class).getSingleResult();
     }
-    
+
     public static List<Terminal> Terminal.findAllTerminals() {
-        return entityManager().createQuery("SELECT o FROM Terminal o", Terminal.class).getResultList();
+        return entityManager().createQuery("select o from Terminal o", Terminal.class).getResultList();
     }
-    
+
     public static Terminal Terminal.findTerminal(Long id) {
         if (id == null) return null;
         return entityManager().find(Terminal.class, id);
     }
-    
+
     public static List<Terminal> Terminal.findTerminalEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("SELECT o FROM Terminal o", Terminal.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+        return entityManager().createQuery("select o from Terminal o", Terminal.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
-    
+
 }

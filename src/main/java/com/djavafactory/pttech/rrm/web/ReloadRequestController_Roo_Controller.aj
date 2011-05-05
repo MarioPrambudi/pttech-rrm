@@ -52,20 +52,6 @@ privileged aspect ReloadRequestController_Roo_Controller {
         return "reloadrequests/show";
     }
     
-    @RequestMapping(method = RequestMethod.GET)
-    public String ReloadRequestController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            uiModel.addAttribute("reloadrequests", ReloadRequest.findReloadRequestEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
-            float nrOfPages = (float) ReloadRequest.countReloadRequests() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("reloadrequests", ReloadRequest.findAllReloadRequests());
-        }
-        addDateTimeFormatPatterns(uiModel);
-        return "reloadrequests/list";
-    }
-    
     @RequestMapping(method = RequestMethod.PUT)
     public String ReloadRequestController.update(@Valid ReloadRequest reloadRequest, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -92,17 +78,6 @@ privileged aspect ReloadRequestController_Roo_Controller {
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
         return "redirect:/reloadrequests";
-    }
-    
-    @RequestMapping(params = { "find=ByTransId", "form" }, method = RequestMethod.GET)
-    public String ReloadRequestController.findReloadRequestsByTransIdForm(Model uiModel) {
-        return "reloadrequests/findReloadRequestsByTransId";
-    }
-    
-    @RequestMapping(params = "find=ByTransId", method = RequestMethod.GET)
-    public String ReloadRequestController.findReloadRequestsByTransId(@RequestParam("transId") String transId, Model uiModel) {
-        uiModel.addAttribute("reloadrequests", ReloadRequest.findReloadRequestsByTransId(transId).getResultList());
-        return "reloadrequests/list";
     }
     
     @ModelAttribute("reloadrequests")
