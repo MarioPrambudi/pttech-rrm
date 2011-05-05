@@ -6,7 +6,7 @@ package com.djavafactory.pttech.rrm.domain;
 import org.springframework.beans.factory.annotation.Configurable;
 
 privileged aspect CityIntegrationTest_Roo_Configurable {
-
-    declare @type: CityIntegrationTest:@Configurable;
-
+    
+    declare @type: CityIntegrationTest: @Configurable;
+    
 }

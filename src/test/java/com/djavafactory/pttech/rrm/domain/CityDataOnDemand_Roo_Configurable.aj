@@ -6,7 +6,7 @@ package com.djavafactory.pttech.rrm.domain;
 import org.springframework.beans.factory.annotation.Configurable;
 
 privileged aspect CityDataOnDemand_Roo_Configurable {
-
-    declare @type: CityDataOnDemand:@Configurable;
-
+    
+    declare @type: CityDataOnDemand: @Configurable;
+    
 }
