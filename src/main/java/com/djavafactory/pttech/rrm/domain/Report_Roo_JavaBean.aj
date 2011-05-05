@@ -3,10 +3,9 @@
 
 package com.djavafactory.pttech.rrm.domain;
 
-import java.lang.Integer;
+import java.lang.Float;
 import java.lang.Long;
 import java.lang.String;
-import java.math.BigDecimal;
 import java.util.Date;
 
 privileged aspect Report_Roo_JavaBean {
@@ -19,91 +18,51 @@ privileged aspect Report_Roo_JavaBean {
         this.sofRequestedDatetime = sofRequestedDatetime;
     }
     
-    public Long Report.getId() {
-        return this.id;
+    public Long Report.getMfgNo() {
+        return this.mfgNo;
     }
     
-    public void Report.setId(Long id) {
-        this.id = id;
+    public void Report.setMfgNo(Long mfgNo) {
+        this.mfgNo = mfgNo;
     }
     
-    public String Report.getTransId() {
-        return this.transId;
+    public Float Report.getRequestedReloadAmtRm() {
+        return this.requestedReloadAmtRm;
     }
     
-    public void Report.setTransId(String transId) {
-        this.transId = transId;
+    public void Report.setRequestedReloadAmtRm(Float requestedReloadAmtRm) {
+        this.requestedReloadAmtRm = requestedReloadAmtRm;
     }
     
-    public String Report.getStatus() {
-        return this.status;
-    }
-    
-    public void Report.setStatus(String status) {
-        this.status = status;
-    }
-    
-    public Long Report.getMfgNumber() {
-        return this.mfgNumber;
-    }
-    
-    public void Report.setMfgNumber(Long mfgNumber) {
-        this.mfgNumber = mfgNumber;
-    }
-    
-    public String Report.getServiceProviderId() {
-        return this.serviceProviderId;
-    }
-    
-    public void Report.setServiceProviderId(String serviceProviderId) {
-        this.serviceProviderId = serviceProviderId;
-    }
-    
-    public Integer Report.getTransCode() {
-        return this.transCode;
-    }
-    
-    public void Report.setTransCode(Integer transCode) {
-        this.transCode = transCode;
-    }
-    
-    public BigDecimal Report.getReloadAmount() {
-        return this.reloadAmount;
-    }
-    
-    public void Report.setReloadAmount(BigDecimal reloadAmount) {
-        this.reloadAmount = reloadAmount;
-    }
-    
-    public BigDecimal Report.getFees() {
+    public Float Report.getFees() {
         return this.fees;
     }
     
-    public void Report.setFees(BigDecimal fees) {
+    public void Report.setFees(Float fees) {
         this.fees = fees;
     }
     
-    public BigDecimal Report.getTotalChargeToCustomer() {
+    public Float Report.getTotalChargeToCustomer() {
         return this.totalChargeToCustomer;
     }
     
-    public void Report.setTotalChargeToCustomer(BigDecimal totalChargeToCustomer) {
+    public void Report.setTotalChargeToCustomer(Float totalChargeToCustomer) {
         this.totalChargeToCustomer = totalChargeToCustomer;
     }
     
-    public BigDecimal Report.getCommissionAmountDeductedBySof() {
+    public Float Report.getCommissionAmountDeductedBySof() {
         return this.commissionAmountDeductedBySof;
     }
     
-    public void Report.setCommissionAmountDeductedBySof(BigDecimal commissionAmountDeductedBySof) {
+    public void Report.setCommissionAmountDeductedBySof(Float commissionAmountDeductedBySof) {
         this.commissionAmountDeductedBySof = commissionAmountDeductedBySof;
     }
     
-    public BigDecimal Report.getNetPaymentToTng() {
+    public Float Report.getNetPaymentToTng() {
         return this.netPaymentToTng;
     }
     
-    public void Report.setNetPaymentToTng(BigDecimal netPaymentToTng) {
+    public void Report.setNetPaymentToTng(Float netPaymentToTng) {
         this.netPaymentToTng = netPaymentToTng;
     }
     
@@ -115,19 +74,19 @@ privileged aspect Report_Roo_JavaBean {
         this.totalReloadQty = totalReloadQty;
     }
     
-    public BigDecimal Report.getTotalAmountRequestRm() {
+    public Float Report.getTotalAmountRequestRm() {
         return this.totalAmountRequestRm;
     }
     
-    public void Report.setTotalAmountRequestRm(BigDecimal totalAmountRequestRm) {
+    public void Report.setTotalAmountRequestRm(Float totalAmountRequestRm) {
         this.totalAmountRequestRm = totalAmountRequestRm;
     }
     
-    public BigDecimal Report.getTotalFees() {
+    public Float Report.getTotalFees() {
         return this.totalFees;
     }
     
-    public void Report.setTotalFees(BigDecimal totalFees) {
+    public void Report.setTotalFees(Float totalFees) {
         this.totalFees = totalFees;
     }
     
@@ -139,27 +98,27 @@ privileged aspect Report_Roo_JavaBean {
         this.reloadDate = reloadDate;
     }
     
-    public BigDecimal Report.getReloadAmountRm() {
+    public Float Report.getReloadAmountRm() {
         return this.reloadAmountRm;
     }
     
-    public void Report.setReloadAmountRm(BigDecimal reloadAmountRm) {
+    public void Report.setReloadAmountRm(Float reloadAmountRm) {
         this.reloadAmountRm = reloadAmountRm;
     }
     
-    public BigDecimal Report.getTotalReloadAmountRm() {
+    public Float Report.getTotalReloadAmountRm() {
         return this.totalReloadAmountRm;
     }
     
-    public void Report.setTotalReloadAmountRm(BigDecimal totalReloadAmountRm) {
+    public void Report.setTotalReloadAmountRm(Float totalReloadAmountRm) {
         this.totalReloadAmountRm = totalReloadAmountRm;
     }
     
-    public BigDecimal Report.getAmountRefundedToCustomer() {
+    public Float Report.getAmountRefundedToCustomer() {
         return this.amountRefundedToCustomer;
     }
     
-    public void Report.setAmountRefundedToCustomer(BigDecimal amountRefundedToCustomer) {
+    public void Report.setAmountRefundedToCustomer(Float amountRefundedToCustomer) {
         this.amountRefundedToCustomer = amountRefundedToCustomer;
     }
     
@@ -187,12 +146,12 @@ privileged aspect Report_Roo_JavaBean {
         this.dateCancelRequest = dateCancelRequest;
     }
     
-    public Date Report.getRequestedTime() {
-        return this.requestedTime;
+    public Date Report.getDateReloadRequest() {
+        return this.dateReloadRequest;
     }
     
-    public void Report.setRequestedTime(Date requestedTime) {
-        this.requestedTime = requestedTime;
+    public void Report.setDateReloadRequest(Date dateReloadRequest) {
+        this.dateReloadRequest = dateReloadRequest;
     }
     
     public Long Report.getTotalCancellationQty() {
@@ -203,19 +162,19 @@ privileged aspect Report_Roo_JavaBean {
         this.totalCancellationQty = totalCancellationQty;
     }
     
-    public BigDecimal Report.getTotalAmountCancelledRm() {
+    public Float Report.getTotalAmountCancelledRm() {
         return this.totalAmountCancelledRm;
     }
     
-    public void Report.setTotalAmountCancelledRm(BigDecimal totalAmountCancelledRm) {
+    public void Report.setTotalAmountCancelledRm(Float totalAmountCancelledRm) {
         this.totalAmountCancelledRm = totalAmountCancelledRm;
     }
     
-    public BigDecimal Report.getTotalRefundToCustomerRm() {
+    public Float Report.getTotalRefundToCustomerRm() {
         return this.totalRefundToCustomerRm;
     }
     
-    public void Report.setTotalRefundToCustomerRm(BigDecimal totalRefundToCustomerRm) {
+    public void Report.setTotalRefundToCustomerRm(Float totalRefundToCustomerRm) {
         this.totalRefundToCustomerRm = totalRefundToCustomerRm;
     }
     
@@ -227,27 +186,27 @@ privileged aspect Report_Roo_JavaBean {
         this.transactionDate = transactionDate;
     }
     
-    public BigDecimal Report.getGrossPaymentToTngRm() {
+    public Float Report.getGrossPaymentToTngRm() {
         return this.grossPaymentToTngRm;
     }
     
-    public void Report.setGrossPaymentToTngRm(BigDecimal grossPaymentToTngRm) {
+    public void Report.setGrossPaymentToTngRm(Float grossPaymentToTngRm) {
         this.grossPaymentToTngRm = grossPaymentToTngRm;
     }
     
-    public BigDecimal Report.getTotalCancellationRm() {
+    public Float Report.getTotalCancellationRm() {
         return this.totalCancellationRm;
     }
     
-    public void Report.setTotalCancellationRm(BigDecimal totalCancellationRm) {
+    public void Report.setTotalCancellationRm(Float totalCancellationRm) {
         this.totalCancellationRm = totalCancellationRm;
     }
     
-    public BigDecimal Report.getAmountCreditedToTngRm() {
+    public Float Report.getAmountCreditedToTngRm() {
         return this.amountCreditedToTngRm;
     }
     
-    public void Report.setAmountCreditedToTngRm(BigDecimal amountCreditedToTngRm) {
+    public void Report.setAmountCreditedToTngRm(Float amountCreditedToTngRm) {
         this.amountCreditedToTngRm = amountCreditedToTngRm;
     }
     
@@ -259,11 +218,11 @@ privileged aspect Report_Roo_JavaBean {
         this.dateCreditedToTngAccount = dateCreditedToTngAccount;
     }
     
-    public BigDecimal Report.getTotalPaymentToTngRm() {
+    public Float Report.getTotalPaymentToTngRm() {
         return this.totalPaymentToTngRm;
     }
     
-    public void Report.setTotalPaymentToTngRm(BigDecimal totalPaymentToTngRm) {
+    public void Report.setTotalPaymentToTngRm(Float totalPaymentToTngRm) {
         this.totalPaymentToTngRm = totalPaymentToTngRm;
     }
     

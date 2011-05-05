@@ -19,7 +19,7 @@ public class Configuration implements Comparable<Configuration> {
     public enum ConfigPrefix {
 
         CELCOM("CEL"), TOUCH_N_GO("TNG"), RRM("RRM"), REPORT("REPORT"),
-        REPORT_CELCOM("REPORT.CEL"), REPORT_TNG("REPORT.TNG"), REPORT_PTT("REPORT.PTT");
+        REPORT_CELCOM("REPORT.CEL."), REPORT_TNG("REPORT.TNG."), REPORT_PTT("REPORT.PTT.");
 
         private final String key;
 
@@ -84,7 +84,8 @@ public class Configuration implements Comparable<Configuration> {
         EntityManager em = Configuration.entityManager();
         TypedQuery<Configuration> q = em.createQuery("SELECT Configuration FROM Configuration AS configuration WHERE configuration.configKey = :configKey", Configuration.class);
         q.setParameter("configKey", configKey);
-        return q.getSingleResult();
+        List<Configuration> configurations = q.getResultList();
+        return (configurations != null && !configurations.isEmpty()) ? configurations.get(0) : null;
     }
 
     //to get a specific configure value

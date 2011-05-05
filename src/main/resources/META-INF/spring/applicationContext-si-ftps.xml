@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/integration"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:ftp="http://www.springframework.org/schema/integration/ftp"
+             xmlns:task="http://www.springframework.org/schema/task"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+							http://www.springframework.org/schema/integration
+			                http://www.springframework.org/schema/integration/spring-integration-2.0.xsd
+                            http://www.springframework.org/schema/integration/ftp
+	                        http://www.springframework.org/schema/integration/ftp/spring-integration-ftp-2.0.xsd
+	                        http://www.springframework.org/schema/task
+	                        http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+
+    <beans:bean id="jdbcPropertyPlaceHolderConfigurer"
+                class="com.djavafactory.pttech.rrm.conf.JdbcPropertyPlaceHolderConfigurer">
+        <beans:property name="configKey">
+            <beans:list>
+                <beans:value>CEL.location</beans:value>
+                <beans:value>CEL.uploadschedule</beans:value>
+                <beans:value>TNG.uploadschedule</beans:value>
+            </beans:list>
+        </beans:property>
+        <beans:property name="dataSource" ref="dataSource"/>
+    </beans:bean>
+
+    <!-- Activates scanning of @Scheduled -->
+    <task:annotation-driven/>
+
+    <task:scheduler id="scheduler" pool-size="30"/>
+
+    <beans:bean id="celcomScheduler" class="com.djavafactory.pttech.rrm.conf.DynamicScheduler">
+        <beans:constructor-arg ref="scheduler"/>
+        <beans:constructor-arg value="${CEL.uploadschedule}"/>
+        <beans:constructor-arg>
+            <beans:bean class="org.springframework.scheduling.support.MethodInvokingRunnable">
+                <beans:property name="targetObject" ref="batchReportServiceManager"/>
+                <beans:property name="targetMethod" value="getCelcomBatchReportDetail"/>
+            </beans:bean>
+        </beans:constructor-arg>
+    </beans:bean>
+
+    <beans:bean id="tngScheduler" class="com.djavafactory.pttech.rrm.conf.DynamicScheduler">
+        <beans:constructor-arg ref="scheduler"/>
+        <beans:constructor-arg value="${TNG.uploadschedule}"/>
+        <beans:constructor-arg>
+            <beans:bean class="org.springframework.scheduling.support.MethodInvokingRunnable">
+                <beans:property name="targetObject" ref="batchReportServiceManager"/>
+                <beans:property name="targetMethod" value="getTngBatchReportDetail"/>
+            </beans:bean>
+        </beans:constructor-arg>
+    </beans:bean>
+
+    <beans:bean id="ftpClientFactory" class="org.springframework.integration.ftp.session.DefaultFtpsSessionFactory">
+        <beans:property name="protocol" value="SSL"/>
+        <beans:property name="clientMode" value="2"/>
+        <!-- 2 is for Passive mode -->
+        <!--<beans:property name="fileType" value="2"/>
+  <beans:property name="keyManager" ref="keyManager"/>
+  <beans:property name="trustManager" ref="trustManager"/>
+  <beans:property name="prot" value="P"/>
+  <beans:property name="needClientAuth" value="true"/>
+  <beans:property name="authValue" value="oleg"/>
+  <beans:property name="sessionCreation" value="true"/>
+  <beans:property name="protocols" value="SSL, TLS"/>
+  <beans:property name="implicit" value="true"/>    -->
+    </beans:bean>
+
+    <beans:bean id="remoteFilenameGenerator" class="com.djavafactory.pttech.rrm.util.RemoteFilenameGenerator">
+        <beans:property name="fileExtension" value="txt"/>
+    </beans:bean>
+    <channel id="batchReportChannel"/>
+    <ftp:outbound-channel-adapter id="ftpsOutboundAdapter"
+                                  session-factory="ftpClientFactory"
+                                  channel="batchReportChannel"
+                                  charset="UTF-8"
+                                  remote-directory="${CEL.location}"
+                                  remote-filename-generator="remoteFilenameGenerator"/>
+
+</beans:beans>

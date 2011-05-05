@@ -6,7 +6,7 @@ package com.djavafactory.pttech.rrm.domain;
 import java.lang.String;
 
 privileged aspect Acquirer_Roo_ToString {
-    
+
     public String Acquirer.toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("CityName: ").append(getCityName()).append(", ");
@@ -28,5 +28,5 @@ privileged aspect Acquirer_Roo_ToString {
         sb.append("Deleted: ").append(getDeleted());
         return sb.toString();
     }
-    
+
 }

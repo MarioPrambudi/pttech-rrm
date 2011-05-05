@@ -13,8 +13,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class CityController {
 
+    /**
+     * To generate the list of cities in json format.
+     *
+     * @param id The terminal id
+     * @return String json string for cities
+     */
     @RequestMapping(value = "/getCitiesByState/{id}", method = RequestMethod.GET)
-    public @ResponseBody String getCitiesByState(@PathVariable("id") Long id) {
+    public
+    @ResponseBody
+    String getCitiesByState(@PathVariable("id") Long id) {
         return City.findCitiesByState(id);
     }
 }

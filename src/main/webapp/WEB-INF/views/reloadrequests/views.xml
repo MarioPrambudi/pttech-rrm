@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
     <definition extends="default" name="reloadrequests/list">
         <put-attribute name="body" value="/WEB-INF/views/reloadrequests/list.jspx"/>
     </definition>
-<definition extends="default" name="reloadrequests/show">
+    <definition extends="default" name="reloadrequests/show">
         <put-attribute name="body" value="/WEB-INF/views/reloadrequests/show.jspx"/>
     </definition>
-<definition extends="default" name="reloadrequests/create">
+    <definition extends="default" name="reloadrequests/create">
         <put-attribute name="body" value="/WEB-INF/views/reloadrequests/create.jspx"/>
     </definition>
-<definition extends="default" name="reloadrequests/update">
+    <definition extends="default" name="reloadrequests/update">
         <put-attribute name="body" value="/WEB-INF/views/reloadrequests/update.jspx"/>
     </definition>
-<definition extends="default" name="reloadrequests/findReloadRequestsByTransId">
+    <definition extends="default" name="reloadrequests/findReloadRequestsByTransId">
         <put-attribute name="body" value="/WEB-INF/views/reloadrequests/findReloadRequestsByTransId.jspx"/>
     </definition>
-<definition extends="default" name="reloadrequests/findReloadRequestsById">
+    <definition extends="default" name="reloadrequests/findReloadRequestsById">
         <put-attribute name="body" value="/WEB-INF/views/reloadrequests/findReloadRequestsById.jspx"/>
     </definition>
 <definition extends="default" name="reloadrequests/findReloadRequestsByRequestedTimeBetween">

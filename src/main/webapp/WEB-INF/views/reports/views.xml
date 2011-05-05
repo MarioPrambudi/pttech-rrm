@@ -4,4 +4,52 @@
     <definition extends="default" name="reports/reportList">
         <put-attribute name="body" value="/WEB-INF/views/reports/reportList.jspx"/>
     </definition>
+    
+    <!-- TnG Report -->
+    <definition extends="default" name="dailyDetailsRequestReloadFrmCelcomList">
+     	<put-attribute name="body" value="/WEB-INF/views/reports/tng/dailyDetailsRequestReloadFrmCelcomList.jspx"/> 
+    </definition>
+    <definition extends="default" name="summaryRequestReloadFrmCelcomList">
+     	<put-attribute name="body" value="/WEB-INF/views/reports/tng/summaryRequestReloadFrmCelcomList.jspx"/> 
+    </definition>
+    <definition extends="default" name="dailyDetailedReloadFrmCelcomList">
+     	<put-attribute name="body" value="/WEB-INF/views/reports/tng/dailyDetailedReloadFrmCelcomList.jspx"/> 
+    </definition>
+    <definition extends="default" name="summaryReloadFrmCelcomList">
+     	<put-attribute name="body" value="/WEB-INF/views/reports/tng/summaryReloadFrmCelcomList.jspx"/> 
+    </definition>
+    <definition extends="default" name="dailyDetailsCancellationReloadReqFrmCelcomList">
+     	<put-attribute name="body" value="/WEB-INF/views/reports/tng/dailyDetailsCancellationReloadReqFrmCelcomList.jspx"/> 
+    </definition>
+    <definition extends="default" name="summaryCancellationReloadFrmCelcomList">
+     	<put-attribute name="body" value="/WEB-INF/views/reports/tng/summaryCancellationReloadFrmCelcomList.jspx"/> 
+    </definition>
+    <definition extends="default" name="dailySettlementReloadFrmCelcomList">
+     	<put-attribute name="body" value="/WEB-INF/views/reports/tng/dailySettlementReloadFrmCelcomList.jspx"/> 
+    </definition>
+    <definition extends="default" name="monthlySettlementReloadFrmCelcomList">
+     	<put-attribute name="body" value="/WEB-INF/views/reports/tng/monthlySettlementReloadFrmCelcomList.jspx"/> 
+    </definition>
+    
+    
+    <!-- Celcom Report -->
+    <definition extends="default" name="dailyTrxDetailsList">
+     	<put-attribute name="body" value="/WEB-INF/views/reports/celcom/dailyTrxDetailsList.jspx"/> 
+    </definition>
+    <definition extends="default" name="dailyTrxDetailsByRangeDateList">
+     	<put-attribute name="body" value="/WEB-INF/views/reports/celcom/dailyTrxDetailsByRangeDateList.jspx"/> 
+    </definition>
+    <definition extends="default" name="dailyTrxFeeDetailsList">
+     	<put-attribute name="body" value="/WEB-INF/views/reports/celcom/dailyTrxFeeDetailsList.jspx"/> 
+    </definition>
+    <definition extends="default" name="dailyTrxFeeDetailsByRangeDateList">
+     	<put-attribute name="body" value="/WEB-INF/views/reports/celcom/dailyTrxFeeDetailsByRangeDateList.jspx"/> 
+    </definition>
+    <definition extends="default" name="summaryDailyTrxList">
+     	<put-attribute name="body" value="/WEB-INF/views/reports/celcom/summaryDailyTrxList.jspx"/> 
+    </definition>
+    <definition extends="default" name="summaryDailyTrxByRangeDateList">
+     	<put-attribute name="body" value="/WEB-INF/views/reports/celcom/summaryDailyTrxByRangeDateList.jspx"/> 
+    </definition>
+    
 </tiles-definitions>
