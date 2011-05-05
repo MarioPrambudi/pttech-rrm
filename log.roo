@@ -212,3 +212,44 @@ jasperoo add --type com.djavafactory.pttech.rrm.domain.ReloadRequest
 exit
 // Spring Roo 1.1.3.RELEASE [rev 4404ffb] log closed at 2011-04-29 00:34:11
 
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-04 09:42:37
+ent --class ~.domain.AuditLog
+test integration --entity AuditLog
+// [failed] field string --fieldName action
+field string --fieldName actionLog
+// [failed] field string --fieldName module
+field string --fieldName moduleLog
+field date --fieldName createdTime --type java.util.Date
+field string --fieldName createdBy
+controller all --package ~.web
+// [failed] ent --class ~.domain.AuditLog
+finder list
+finder list --depth 2
+// [failed] ent --class ~.domain
+quit
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-04 16:37:38
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-04 16:37:43
+// [failed] ent --class ~.domain.ReloadRequest
+finder list
+finder add findReloadRequestsByRequestedTime
+quit
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-04 16:41:57
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-04 16:42:01
+quit
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-04 16:44:11
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-04 16:44:47
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-04 16:49:57
+// [failed] ent --class ~.domain.ReloadRequest
+finder list
+finder add findReloadRequestsByRequestedTime
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-04 16:55:25
+// [failed] ent --class ~.domain.ReloadRequest
+finder list
+finder add findReloadRequestsByRequestedTimeBetween
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-04 18:05:25
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-04 18:07:28
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-04 21:35:40
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-04 21:42:38
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-04 21:53:12
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-04 21:53:47
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-05 09:29:35

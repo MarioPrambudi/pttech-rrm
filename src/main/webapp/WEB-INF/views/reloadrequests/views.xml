@@ -19,4 +19,7 @@
 <definition extends="default" name="reloadrequests/findReloadRequestsById">
         <put-attribute name="body" value="/WEB-INF/views/reloadrequests/findReloadRequestsById.jspx"/>
     </definition>
+<definition extends="default" name="reloadrequests/findReloadRequestsByRequestedTimeBetween">
+        <put-attribute name="body" value="/WEB-INF/views/reloadrequests/findReloadRequestsByRequestedTimeBetween.jspx"/>
+    </definition>
 </tiles-definitions>
