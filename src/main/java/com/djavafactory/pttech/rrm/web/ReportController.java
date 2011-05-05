@@ -5,6 +5,8 @@ import java.util.List;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import com.djavafactory.pttech.rrm.domain.Configuration;
+import com.djavafactory.pttech.rrm.domain.ReloadRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -74,150 +76,277 @@ public class ReportController {
 	/*
 	 * TnG Report
 	 */
-	@RequestMapping(value ="/dailyDetailsRequestReloadFrmCelcomReport/{format}", method = RequestMethod.GET)
+	@RequestMapping(value ="/171-Report/{format}", method = RequestMethod.GET)
 	public String dailyDetailsRequestReloadFfmCelcomReport(ModelMap modelMap,
+														   Model uiModel,
 														   @PathVariable("format") String format) {
 	
-		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests(),false);
-		modelMap.put("reportData", jrDataSource);
-		modelMap.put("format", format);
-		return "dailyDetailsRequestReloadFrmCelcomReport";
+		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
+		
+		if(format.equalsIgnoreCase("html")) {
+	        uiModel.addAttribute("reports", reloadRequestList);
+			
+	        return "dailyDetailsRequestReloadFrmCelcomList";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList,false);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			
+			return "dailyDetailsRequestReloadFrmCelcomReport";
+		}
+		
 	}
 	
-	@RequestMapping(value = "/summaryRequestReloadFrmCelcomReport/{format}", method = RequestMethod.GET)
+	@RequestMapping(value = "/172-Report/{format}", method = RequestMethod.GET)
 	public String summaryRequestReloadFrmCelcomReport(ModelMap modelMap,
+													  Model uiModel,
 													  @PathVariable("format") String format) {
 		
-		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests(),false);
-		modelMap.put("reportData", jrDataSource);
-		modelMap.put("format", format);
-		return "summaryRequestReloadFrmCelcomReport";
+		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
+		
+		if(format.equalsIgnoreCase("html")) {
+	        uiModel.addAttribute("reports", reloadRequestList);
+			
+	        return "summaryRequestReloadFrmCelcomList";
+		} else {
+	        JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+	        modelMap.put("reportData", jrDataSource);
+	        modelMap.put("format", format);
+	        return "summaryRequestReloadFrmCelcomReport";
+		}
 	}
 	
-	@RequestMapping(value = "/dailyDetailedReloadFrmCelcomReport/{format}", method = RequestMethod.GET)
+	@RequestMapping(value = "/173-Report/{format}", method = RequestMethod.GET)
 	public String dailyDetailedReloadFrmCelcomReport(ModelMap modelMap,
+												     Model uiModel,
 													 @PathVariable("format") String format) {
 		
-		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests(),false);
-		modelMap.put("reportData", jrDataSource);
-		modelMap.put("format", format);
-		return "dailyDetailedReloadFrmCelcomReport";
+		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
+		
+		if(format.equalsIgnoreCase("html")) {
+	        uiModel.addAttribute("reports", reloadRequestList);
+			
+	        return "dailyDetailedReloadFrmCelcomList";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "dailyDetailedReloadFrmCelcomReport";
+		}
 	}
 	
-	@RequestMapping(value = "/summaryReloadFrmCelcomReport/{format}", method = RequestMethod.GET)
-	public String summaryReloadFrmCelcomReport(ModelMap modelMap,
+	@RequestMapping(value = "/174-Report/{format}", method = RequestMethod.GET)
+	public String summaryReloadFrmCelcomReport(ModelMap modelMap, 
+											   Model uiModel,
 											   @PathVariable("format") String format) {
 		
-		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests(),false);
-		modelMap.put("reportData", jrDataSource);
-		modelMap.put("format", format);
-		return "summaryReloadFrmCelcomReport";
+		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
+		
+		if(format.equalsIgnoreCase("html")) {
+	        uiModel.addAttribute("reports", reloadRequestList);
+			
+	        return "summaryReloadFrmCelcomList";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "summaryReloadFrmCelcomReport";
+		}
 	}
 	
-	@RequestMapping(value = "/dailyDetailsCancellationReloadReqFrmCelcomReport/{format}", method = RequestMethod.GET)
+	@RequestMapping(value = "/175-Report/{format}", method = RequestMethod.GET)
 	public String dailyDetailsCancellationReloadReqFrmCelcomReport(ModelMap modelMap,
+																   Model uiModel,
 																   @PathVariable("format") String format) {
 		
-		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests(),false);
-		modelMap.put("reportData", jrDataSource);
-		modelMap.put("format", format);
-		return "dailyDetailsCancellationReloadReqFrmCelcomReport";
+		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
+		
+		if(format.equalsIgnoreCase("html")) {
+	        uiModel.addAttribute("reports", reloadRequestList);
+			
+	        return "dailyDetailsCancellationReloadReqFrmCelcomList";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "dailyDetailsCancellationReloadReqFrmCelcomReport";
+		}
 	}
 	
-	@RequestMapping(value = "/summaryCancellationReloadFrmCelcomReport/{format}", method = RequestMethod.GET)
-	public String summaryCancellationReloadFrmCelcomReport(ModelMap modelMap, 
+	@RequestMapping(value = "/176-Report/{format}", method = RequestMethod.GET)
+	public String summaryCancellationReloadFrmCelcomReport(ModelMap modelMap,
+														   Model uiModel,
 														   @PathVariable("format") String format) {
 		
-		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests(),false);
-		modelMap.put("reportData", jrDataSource);
-		modelMap.put("format", format);
-		return "summaryCancellationReloadFrmCelcomReport";
+		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
+		
+		if(format.equalsIgnoreCase("html")) {
+	        uiModel.addAttribute("reports", reloadRequestList);
+			
+	        return "summaryCancellationReloadFrmCelcomList";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "summaryCancellationReloadFrmCelcomReport";
+		}
 	}
 	
-	@RequestMapping(value ="/dailySettlementReloadFrmCelcomReport/{format}", method = RequestMethod.GET)
-	public String dailySettlementReloadFrmCelcomReport(ModelMap modelMap, 
+	@RequestMapping(value ="/177-Report/{format}", method = RequestMethod.GET)
+	public String dailySettlementReloadFrmCelcomReport(ModelMap modelMap,
+													   Model uiModel,
 													   @PathVariable("format") String format) {
 		
-		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests(),false);
-		modelMap.put("reportData", jrDataSource);
-		modelMap.put("format", format);
-		return "dailySettlementReloadFrmCelcomReport";
+		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
+		
+		if(format.equalsIgnoreCase("html")) {
+	        uiModel.addAttribute("reports", reloadRequestList);
+			
+	        return "dailySettlementReloadFrmCelcomList";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "dailySettlementReloadFrmCelcomReport";
+		}
 	}
 	
-	@RequestMapping(value = "/monthlySettlementReloadFrmCelcomReport/{format}", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/178-Report/{format}", method = RequestMethod.GET)
 	public String monthlySettlementReloadFrmCelcomReport(ModelMap modelMap,
+														 Model uiModel,
 														 @PathVariable("format") String format) {
 		
-		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests(),false);
-		modelMap.put("reportData", jrDataSource);
-		modelMap.put("format", format);
-		return "monthlySettlementReloadFrmCelcomReport";
+		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
+		
+		if(format.equalsIgnoreCase("html")) {
+	        uiModel.addAttribute("reports", reloadRequestList);
+			
+	        return "monthlySettlementReloadFrmCelcomList";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "monthlySettlementReloadFrmCelcomReport";
+		}
 	}
 	
-	@RequestMapping(value = "/dailyTrxDetailsReport/{format}", method = RequestMethod.GET)
+	/*
+	 * Celcom Report
+	 */
+	@RequestMapping(value = "/179-Report/{format}", method = RequestMethod.GET)
 	public String dailyTrxDetailsReport(ModelMap modelMap,
+										Model uiModel,
 										@PathVariable("format") String format) {
+
+		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
 		
-		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests(),false);
-		modelMap.put("reportData", jrDataSource);
-		modelMap.put("format", format);
-		return "dailyTrxDetailsReport";
+		if(format.equalsIgnoreCase("html")) {
+	        uiModel.addAttribute("reports", reloadRequestList);
+			
+	        return "dailyTrxDetailsList";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "dailyTrxDetailsReport";
+		}
 	}
 	
-	@RequestMapping(value = "/dailyTrxDetailsByRangeDateReport/{format}", method = RequestMethod.GET)
-	public String dailyTrxDetailsByRangeDateReport(ModelMap modelMap,
+	@RequestMapping(value = "/180-Report/{format}", method = RequestMethod.GET)
+	public String dailyTrxDetailsByRangeDateReport(ModelMap modelMap, Model uiModel,
 												   @PathVariable("format") String format,
-												   @RequestParam("startDate") String startDate,
-												   @RequestParam("endDate") String endDate) {
+												   @RequestParam(value = "startDate", required = false) String startDate,
+												   @RequestParam(value = "endDate", required = false) String endDate) {
+
+		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
 		
-		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests(),false);
-		modelMap.put("reportData", jrDataSource);
-		modelMap.put("format", format);
-		return "dailyTrxDetailsByRangeDateReport";
+		if(format.equalsIgnoreCase("html")) {
+	        uiModel.addAttribute("reports", reloadRequestList);
+			
+	        return "dailyTrxDetailsByRangeDateList";
+		} else {		
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "dailyTrxDetailsByRangeDateReport";
+		}
 	}
 	
-	@RequestMapping(value = "/dailyTrxFeeDetailsReport/{format}", method = RequestMethod.GET)
-	public String dailyTrxFeeDetailsReport(ModelMap modelMap,
+	@RequestMapping(value = "/181-Report/{format}", method = RequestMethod.GET)
+	public String dailyTrxFeeDetailsReport(ModelMap modelMap, Model uiModel,
 										   @PathVariable("format") String format) {
+
+		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
 		
-		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests(),false);
-		modelMap.put("reportData", jrDataSource);
-		modelMap.put("format", format);
-		return "dailyTrxFeeDetailsReport";
+		if(format.equalsIgnoreCase("html")) {
+	        uiModel.addAttribute("reports", reloadRequestList);
+			
+	        return "dailyTrxFeeDetailsList";
+		} else {		
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "dailyTrxFeeDetailsReport";
+		}
 	}
 	
-	@RequestMapping(value = "/dailyTrxFeeDetailsByRangeDateReport/{format}", method = RequestMethod.GET)
-	public String dailyTrxFeeDetailsByRangeDateReport(ModelMap modelMap,
+	@RequestMapping(value = "/182-Report/{format}", method = RequestMethod.GET)
+	public String dailyTrxFeeDetailsByRangeDateReport(ModelMap modelMap, Model uiModel,
 			 										  @PathVariable("format") String format,
-			 										  @RequestParam("startDate") String startDate,
-													  @RequestParam("endDate") String endDate) {
+													   @RequestParam(value = "startDate", required = false) String startDate,
+													   @RequestParam(value = "endDate", required = false) String endDate) {
+
+		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
 		
-		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests(),false);
-		modelMap.put("reportData", jrDataSource);
-		modelMap.put("format", format);
-		return "dailyTrxFeeDetailsByRangeDateReport";
+		if(format.equalsIgnoreCase("html")) {
+	        uiModel.addAttribute("reports", reloadRequestList);
+			
+	        return "dailyTrxFeeDetailsByRangeDateList";
+		} else {	
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "dailyTrxFeeDetailsByRangeDateReport";
+		}
 	}
 	
-	@RequestMapping(value = "/summaryDailyTrxReport/{format}", method = RequestMethod.GET)
-	public String summaryDailyTrxReport(ModelMap modelMap,
+	@RequestMapping(value = "/183-Report/{format}", method = RequestMethod.GET)
+	public String summaryDailyTrxReport(ModelMap modelMap, Model uiModel,
 										@PathVariable("format") String format) {
+
+		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
 		
-		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests(),false);
-		modelMap.put("reportData", jrDataSource);
-		modelMap.put("format", format);
-		return "summaryDailyTrxReport";
+		if(format.equalsIgnoreCase("html")) {
+	        uiModel.addAttribute("reports", reloadRequestList);
+			
+	        return "summaryDailyTrxList";
+		} else {	
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "summaryDailyTrxReport";
+		}
 	}
 	
-	@RequestMapping(value = "/summaryDailyTrxByRangeDateReport/{format}", method = RequestMethod.GET)
-	public String summaryDailyTrxByRangeDateReport(ModelMap modelMap,
+	@RequestMapping(value = "/184-Report/{format}", method = RequestMethod.GET)
+	public String summaryDailyTrxByRangeDateReport(ModelMap modelMap, Model uiModel,
 												   @PathVariable("format") String format,
-												   @RequestParam("startDate") String startDate,
-												   @RequestParam("endDate") String endDate) {
+												   @RequestParam(value = "startDate", required = false) String startDate,
+												   @RequestParam(value = "endDate", required = false) String endDate) {
+
+		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
 		
-		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests(),false);
-		modelMap.put("reportData", jrDataSource);
-		modelMap.put("format", format);
-		return "summaryDailyTrxByRangeDateReport";
+		if(format.equalsIgnoreCase("html")) {
+	        uiModel.addAttribute("reports", reloadRequestList);
+			
+	        return "summaryDailyTrxByRangeDateList";
+		} else {	
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "summaryDailyTrxByRangeDateReport";
+		}
 	}
 	
 
