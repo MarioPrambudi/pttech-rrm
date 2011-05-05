@@ -1,8 +1,11 @@
 package com.djavafactory.pttech.rrm.domain;
 
 import com.djavafactory.pttech.rrm.Constants;
+import com.djavafactory.pttech.rrm.util.DateUtil;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -26,9 +29,11 @@ public class ReportGenerator {
      */
     public static List getDetailsRequestReloadFrmCelcomReport()
     {
-        //get reloadrequest list
-    	List listReloadRequest = ReloadRequest.findListReloadRequestsByRequestedTimeBetween(new Date(), new Date());
-    	
+    	Date dateMin = getMinDate();
+    	Date dateMax = getMaxDate(dateMin);
+		
+		//get reloadrequest list
+    	List listReloadRequest = ReloadRequest.findListReloadRequestsByRequestedTimeBetween(dateMin, dateMax);
 
         List <Report> listReport = new ArrayList<Report>();
         
@@ -121,6 +126,56 @@ public class ReportGenerator {
      	 String reportTngComm = Configuration.getReportConfigValue(Constants.REPORT_CONFIG_TNGCOMM);
      	 BigDecimal decimalTngComm= new BigDecimal(reportTngComm); 
      	 return decimalTngComm; 
+    }
+    
+    /**
+	 * Get TotalChargeToCustomer (reload amount + fee)
+	 * @param reloadAmount 
+	 * @return BigDecimal TotalChargeToCustomer
+	 */ 
+    public static BigDecimal getTotalChargeToCustomer(BigDecimal reloadAmount)
+    {	
+     	BigDecimal fee = getReportFee();
+     	BigDecimal sumForReloadAmountAndFee = fee.add(reloadAmount);
+     	 
+     	 return sumForReloadAmountAndFee; 
+    }
+    
+    
+    /**
+	 * get minimum date - for daily report minDate is current date
+	 * @param none
+	 * @return Date Current date with short format
+	 */
+    public static Date getMinDate()
+    {	
+    	Date dateMin = null;      
+    	try {	
+			dateMin = DateUtil.getCurrentDate("dd/MM/yyyy");
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}     	 
+     	 return dateMin; 
+    }
+  
+    /**
+	 * get max date - for daily report the maxDate 
+	 * @param dateMin The minimum date
+	 * @return Date dateMin + 1 day
+	 */
+    public static Date getMaxDate(Date dateMin)
+    {	
+    	Date dateMax = null;      
+    	try {
+			dateMax =  DateUtil.add(dateMin, 5, 1);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}     	 
+     	 return dateMax; 
     }
      
 }
