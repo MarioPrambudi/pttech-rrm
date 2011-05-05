@@ -2,6 +2,7 @@ package com.djavafactory.pttech.rrm.web;
 
 import java.util.List;
 
+import com.djavafactory.pttech.rrm.domain.Report;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import com.djavafactory.pttech.rrm.domain.Configuration;
@@ -75,10 +76,10 @@ public class ReportController {
 	 * TnG Report
 	 */
 	@RequestMapping(value ="/dailyDetailsRequestReloadFrmCelcomReport/{format}", method = RequestMethod.GET)
-	public String dailyDetailsRequestReloadFfmCelcomReport(ModelMap modelMap,
+	public String dailyDetailsRequestReloadFrmCelcomReport(ModelMap modelMap,
 														   @PathVariable("format") String format) {
 	
-		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests(),false);
+		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(com.djavafactory.pttech.rrm.domain.ReportGenerator.getDetailsRequestReloadFrmCelcomReport(),false);
 		modelMap.put("reportData", jrDataSource);
 		modelMap.put("format", format);
 		return "dailyDetailsRequestReloadFrmCelcomReport";

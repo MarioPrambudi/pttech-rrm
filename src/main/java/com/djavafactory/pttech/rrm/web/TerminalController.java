@@ -123,7 +123,7 @@ public class TerminalController extends BaseController {
         return "redirect:/terminals/" + encodeUrlPathSegment(terminal.getId().toString(), httpServletRequest);
     }
 
-   /**
+  /**
    * update new terminal with new status
    * @param uiModel Model
    * @return String the page path to redirect

@@ -10,8 +10,13 @@ privileged aspect Report_Roo_ToString {
     public String Report.toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("SofRequestedDatetime: ").append(getSofRequestedDatetime()).append(", ");
-        sb.append("MfgNo: ").append(getMfgNo()).append(", ");
-        sb.append("RequestedReloadAmtRm: ").append(getRequestedReloadAmtRm()).append(", ");
+        sb.append("Id: ").append(getId()).append(", ");
+        sb.append("TransId: ").append(getTransId()).append(", ");
+        sb.append("Status: ").append(getStatus()).append(", ");
+        sb.append("MfgNumber: ").append(getMfgNumber()).append(", ");
+        sb.append("ServiceProviderId: ").append(getServiceProviderId()).append(", ");
+        sb.append("TransCode: ").append(getTransCode()).append(", ");
+        sb.append("ReloadAmount: ").append(getReloadAmount()).append(", ");
         sb.append("Fees: ").append(getFees()).append(", ");
         sb.append("TotalChargeToCustomer: ").append(getTotalChargeToCustomer()).append(", ");
         sb.append("CommissionAmountDeductedBySof: ").append(getCommissionAmountDeductedBySof()).append(", ");
@@ -26,7 +31,7 @@ privileged aspect Report_Roo_ToString {
         sb.append("DateRefundedCustomer: ").append(getDateRefundedCustomer()).append(", ");
         sb.append("CancellationStatus: ").append(getCancellationStatus()).append(", ");
         sb.append("DateCancelRequest: ").append(getDateCancelRequest()).append(", ");
-        sb.append("DateReloadRequest: ").append(getDateReloadRequest()).append(", ");
+        sb.append("RequestedTime: ").append(getRequestedTime()).append(", ");
         sb.append("TotalCancellationQty: ").append(getTotalCancellationQty()).append(", ");
         sb.append("TotalAmountCancelledRm: ").append(getTotalAmountCancelledRm()).append(", ");
         sb.append("TotalRefundToCustomerRm: ").append(getTotalRefundToCustomerRm()).append(", ");

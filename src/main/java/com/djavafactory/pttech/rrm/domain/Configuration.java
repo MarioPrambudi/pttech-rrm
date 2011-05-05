@@ -86,4 +86,11 @@ public class Configuration implements Comparable<Configuration> {
         q.setParameter("configKey", configKey);
         return q.getSingleResult();
     }
+
+    //to get a specific configure value
+     public static String getReportConfigValue(String valueName){
+           Configuration config = findConfigurationByConfigKey(valueName);
+           return config.getConfigValue().toString();
+     }
+
 }

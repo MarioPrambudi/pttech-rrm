@@ -28,4 +28,9 @@ public final class Constants {
     public static final String TERMINAL_STATUS_DELETED = "D";
     public static final String TERMINAL_STATUS_BLOCK = "B";
 
+    public static final String REPORT_CONFIG_FEE = "REPORT.FEES";
+    public static final String REPORT_CONFIG_CELCOMM = "REPORT.CELCOMM";
+    public static final String REPORT_CONFIG_TNGCOMM = "REPORT.TNGCOMM";
+
+
 }
