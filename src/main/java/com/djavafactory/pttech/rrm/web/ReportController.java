@@ -81,9 +81,9 @@ public class ReportController {
 	@RequestMapping(value ="/TG0001-Report/{format}", method = RequestMethod.GET)
 	public String dailyDetailsRequestReloadFfmCelcomReport(ModelMap modelMap,
 														   Model uiModel,
-														   @PathVariable("format") String format) {
+														   @PathVariable("format") String format) throws Exception {
 	
-		List<Report> reportList = ReportGenerator.getDetailsRequestReloadFrmCelcomReport();
+		List<Report> reportList = ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport();
 		
 		if(format.equalsIgnoreCase("html")) {
 	        uiModel.addAttribute("reports", reportList);

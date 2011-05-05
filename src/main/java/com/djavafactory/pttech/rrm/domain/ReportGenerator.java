@@ -23,17 +23,15 @@ import org.apache.commons.beanutils.BeanUtils;
 public class ReportGenerator {
 
    /**
-     * get result for report dailyDetailsRequestReloadFfmCelcomReport
+     * get result for report dailyDetailsRequestReloadFrmCelcomReport/TG0001-Report
      * @param none
      * @return List A report list
+     * @throws Exception 
      */
-    public static List getDetailsRequestReloadFrmCelcomReport()
+    public static List getDailyDetailsRequestReloadFrmCelcomReport() throws Exception
     {
-    	Date dateMin = getMinDate();
-    	Date dateMax = getMaxDate(dateMin);
-		
 		//get reloadrequest list
-    	List listReloadRequest = ReloadRequest.findListReloadRequestsByRequestedTimeBetween(dateMin, dateMax);
+    	List listReloadRequest = ReloadRequest.findDailyReloadRequestsByRequestedTimeBetween(Constants.RELOAD_REQUEST_ALL);
 
         List <Report> listReport = new ArrayList<Report>();
         
@@ -51,7 +49,102 @@ public class ReportGenerator {
 
             	Report report = (Report)it.next();
             	//manually set value into report fields
-            	report.setReloadAmount(getReportFee());
+            	report.setFees(getReportFee());
+            	report.setTotalChargeToCustomer(getTotalChargeToCustomer(report.getReloadAmount()));
+            	report.setCommissionAmountDeductedBySof(getCommAmountDeductedBySOF());
+            	report.setNetPaymentToTng(getNetPaymentToTnG(report.getCommissionAmountDeductedBySof()));
+            	listCompleteReport.add(report);
+
+            } catch (Exception e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+
+        }
+        return listCompleteReport;
+    }
+    
+    /**
+     * get result for report dailyDetailedReloadFrmCelcomReport/TG0003
+     * @param none
+     * @return List A report list
+     * @throws Exception 
+     */
+    public static List getDailyDetailedReloadFrmCelcomReport() throws Exception
+    {
+    	List listReloadRequest = ReloadRequest.findDailyReloadRequestsByRequestedTimeBetween(Constants.RELOAD_STATUS_SUCCESS);
+        List <Report> listReport = new ArrayList<Report>();
+        
+        //call method to copy reload request list to report list
+        listReport = copyReloadRequestToReport(listReloadRequest);
+        
+        //declare report list to hold complete report data
+        List <Report> listCompleteReport = new ArrayList<Report>();
+        
+		Iterator it = listReport.iterator();
+
+        while(it.hasNext())
+		{        
+            try {
+
+            	Report report = (Report)it.next();
+            	//manually set value into report fields
+            	report.setFees(getReportFee());
+            	report.setTotalChargeToCustomer(getTotalChargeToCustomer(report.getReloadAmount()));
+            	report.setCommissionAmountDeductedBySof(getCommAmountDeductedBySOF());
+            	report.setNetPaymentToTng(getNetPaymentToTnG(report.getCommissionAmountDeductedBySof()));
+            	listCompleteReport.add(report);
+
+            } catch (Exception e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+
+        }
+        return listCompleteReport;
+    }
+    
+    /**
+     * get result for report dailyDetailsCancellationReloadReqFrmCelcomReport/TG0005
+     * @param none
+     * @return List A report list
+     * @throws Exception 
+     */
+    public static List getDailyDetailsCancellationReloadReqFrmCelcomReport() throws Exception
+    {
+    	List listReloadRequest = ReloadRequest.findDailyReloadRequestsByRequestedTimeBetween(Constants.RELOAD_REQUEST_ALLFAIL);
+        List <Report> listReport = new ArrayList<Report>();
+        
+        //call method to copy reload request list to report list
+        listReport = copyReloadRequestToReport(listReloadRequest);
+        
+        //declare report list to hold complete report data
+        List <Report> listCompleteReport = new ArrayList<Report>();
+        
+		Iterator it = listReport.iterator();
+
+        while(it.hasNext())
+		{        
+            try {
+
+            	Report report = (Report)it.next();
+            	//manually set value into report fields
+            	report.setFees(getReportFee());
+            	report.setTotalChargeToCustomer(getTotalChargeToCustomer(report.getReloadAmount()));
+            	report.setCommissionAmountDeductedBySof(getCommAmountDeductedBySOF());
+            	report.setNetPaymentToTng(getNetPaymentToTnG(report.getCommissionAmountDeductedBySof()));
+            	report.setAmountRefundedToCustomer(report.getReloadAmount());
+            	//report.setDateRefundedCustomer(); TO BE CONTINUE
+            	if(Constants.RELOAD_REQUEST_FAILED.equals(report.getStatus()))
+        		{
+            		report.setCancellationStatus(Constants.REPORT_RELOAD_REQUEST_FAILED);
+        		}
+            	if(Constants.RELOAD_REQUEST_EXPIRED.equals(report.getStatus()))
+        		{
+            		report.setCancellationStatus(Constants.REPORT_RELOAD_REQUEST_EXPIRED);
+        		}
+            	if(Constants.RELOAD_REQUEST_MANUALCANCEL.equals(report.getStatus()))
+        		{
+            		report.setCancellationStatus(Constants.REPORT_RELOAD_REQUEST_CANCELLED);
+        		}
             	listCompleteReport.add(report);
 
             } catch (Exception e) {
@@ -129,7 +222,7 @@ public class ReportGenerator {
     }
     
     /**
-	 * Get TotalChargeToCustomer (reload amount + fee)
+	 * Get totalChargeToCustomer (reload amount + fee)
 	 * @param reloadAmount 
 	 * @return BigDecimal TotalChargeToCustomer
 	 */ 
@@ -141,41 +234,32 @@ public class ReportGenerator {
      	 return sumForReloadAmountAndFee; 
     }
     
+    /**
+	 * Get commission amount deducted by SOF (fee x celcomm)
+	 * @param none
+	 * @return BigDecimal commAmount
+	 */ 
+    public static BigDecimal getCommAmountDeductedBySOF()
+    {	           	     	 
+     	 BigDecimal celComm = getReportCelComm(); 
+     	 BigDecimal fee = getReportFee();
+     	 BigDecimal commAmount = fee.multiply(celComm);
+     	 
+     	 return commAmount; 
+    }    
     
     /**
-	 * get minimum date - for daily report minDate is current date
-	 * @param none
-	 * @return Date Current date with short format
-	 */
-    public static Date getMinDate()
+	 * Get net payment TnG
+	 * @param totalChargeToCust
+	 * @return BigDecimal TotalChargeToCustomer
+	 */ 
+    public static BigDecimal getNetPaymentToTnG(BigDecimal totalChargeToCust)
     {	
-    	Date dateMin = null;      
-    	try {	
-			dateMin = DateUtil.getCurrentDate("dd/MM/yyyy");
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}     	 
-     	 return dateMin; 
+     	BigDecimal commAmount = getCommAmountDeductedBySOF();
+     	BigDecimal netPayment = totalChargeToCust.subtract(commAmount);
+     	 
+     	 return netPayment; 
     }
-  
-    /**
-	 * get max date - for daily report the maxDate 
-	 * @param dateMin The minimum date
-	 * @return Date dateMin + 1 day
-	 */
-    public static Date getMaxDate(Date dateMin)
-    {	
-    	Date dateMax = null;      
-    	try {
-			dateMax =  DateUtil.add(dateMin, 5, 1);
+    
 
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}     	 
-     	 return dateMax; 
-    }
-     
 }
