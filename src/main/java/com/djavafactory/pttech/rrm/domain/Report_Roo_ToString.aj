@@ -6,12 +6,17 @@ package com.djavafactory.pttech.rrm.domain;
 import java.lang.String;
 
 privileged aspect Report_Roo_ToString {
-
+    
     public String Report.toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("SofRequestedDatetime: ").append(getSofRequestedDatetime()).append(", ");
-        sb.append("MfgNo: ").append(getMfgNo()).append(", ");
-        sb.append("RequestedReloadAmtRm: ").append(getRequestedReloadAmtRm()).append(", ");
+        sb.append("Id: ").append(getId()).append(", ");
+        sb.append("TransId: ").append(getTransId()).append(", ");
+        sb.append("Status: ").append(getStatus()).append(", ");
+        sb.append("MfgNumber: ").append(getMfgNumber()).append(", ");
+        sb.append("ServiceProviderId: ").append(getServiceProviderId()).append(", ");
+        sb.append("TransCode: ").append(getTransCode()).append(", ");
+        sb.append("ReloadAmount: ").append(getReloadAmount()).append(", ");
         sb.append("Fees: ").append(getFees()).append(", ");
         sb.append("TotalChargeToCustomer: ").append(getTotalChargeToCustomer()).append(", ");
         sb.append("CommissionAmountDeductedBySof: ").append(getCommissionAmountDeductedBySof()).append(", ");
@@ -20,13 +25,12 @@ privileged aspect Report_Roo_ToString {
         sb.append("TotalAmountRequestRm: ").append(getTotalAmountRequestRm()).append(", ");
         sb.append("TotalFees: ").append(getTotalFees()).append(", ");
         sb.append("ReloadDate: ").append(getReloadDate()).append(", ");
-        sb.append("ReloadAmountRm: ").append(getReloadAmountRm()).append(", ");
         sb.append("TotalReloadAmountRm: ").append(getTotalReloadAmountRm()).append(", ");
         sb.append("AmountRefundedToCustomer: ").append(getAmountRefundedToCustomer()).append(", ");
         sb.append("DateRefundedCustomer: ").append(getDateRefundedCustomer()).append(", ");
         sb.append("CancellationStatus: ").append(getCancellationStatus()).append(", ");
         sb.append("DateCancelRequest: ").append(getDateCancelRequest()).append(", ");
-        sb.append("DateReloadRequest: ").append(getDateReloadRequest()).append(", ");
+        sb.append("RequestedTime: ").append(getRequestedTime()).append(", ");
         sb.append("TotalCancellationQty: ").append(getTotalCancellationQty()).append(", ");
         sb.append("TotalAmountCancelledRm: ").append(getTotalAmountCancelledRm()).append(", ");
         sb.append("TotalRefundToCustomerRm: ").append(getTotalRefundToCustomerRm()).append(", ");
@@ -35,8 +39,9 @@ privileged aspect Report_Roo_ToString {
         sb.append("TotalCancellationRm: ").append(getTotalCancellationRm()).append(", ");
         sb.append("AmountCreditedToTngRm: ").append(getAmountCreditedToTngRm()).append(", ");
         sb.append("DateCreditedToTngAccount: ").append(getDateCreditedToTngAccount()).append(", ");
-        sb.append("TotalPaymentToTngRm: ").append(getTotalPaymentToTngRm());
+        sb.append("TotalPaymentToTngRm: ").append(getTotalPaymentToTngRm()).append(", ");
+        sb.append("TngKey: ").append(getTngKey());
         return sb.toString();
     }
-
+    
 }

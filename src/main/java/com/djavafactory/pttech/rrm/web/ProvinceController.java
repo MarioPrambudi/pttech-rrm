@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RooWebScaffold(path = "provinces", formBackingObject = Province.class)
 @RequestMapping("/provinces")
 @Controller
-public class ProvinceControlroller {
+public class ProvinceController {
 }

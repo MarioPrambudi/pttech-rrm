@@ -6,7 +6,7 @@ package com.djavafactory.pttech.rrm.domain;
 import java.lang.String;
 
 privileged aspect TerminalType_Roo_ToString {
-
+    
     public String TerminalType.toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Name: ").append(getName()).append(", ");
@@ -15,5 +15,5 @@ privileged aspect TerminalType_Roo_ToString {
         sb.append("Terminal: ").append(getTerminal() == null ? "null" : getTerminal().size());
         return sb.toString();
     }
-
+    
 }

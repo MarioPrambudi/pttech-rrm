@@ -22,10 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
-privileged aspect ProvinceControlroller_Roo_Controller {
+privileged aspect ProvinceController_Roo_Controller {
     
     @RequestMapping(method = RequestMethod.POST)
-    public String ProvinceControlroller.create(@Valid Province province, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+    public String ProvinceController.create(@Valid Province province, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             uiModel.addAttribute("province", province);
             return "provinces/create";
@@ -36,20 +36,20 @@ privileged aspect ProvinceControlroller_Roo_Controller {
     }
     
     @RequestMapping(params = "form", method = RequestMethod.GET)
-    public String ProvinceControlroller.createForm(Model uiModel) {
+    public String ProvinceController.createForm(Model uiModel) {
         uiModel.addAttribute("province", new Province());
         return "provinces/create";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String ProvinceControlroller.show(@PathVariable("id") Long id, Model uiModel) {
+    public String ProvinceController.show(@PathVariable("id") Long id, Model uiModel) {
         uiModel.addAttribute("province", Province.findProvince(id));
         uiModel.addAttribute("itemId", id);
         return "provinces/show";
     }
     
     @RequestMapping(method = RequestMethod.GET)
-    public String ProvinceControlroller.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+    public String ProvinceController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             uiModel.addAttribute("provinces", Province.findProvinceEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
@@ -62,7 +62,7 @@ privileged aspect ProvinceControlroller_Roo_Controller {
     }
     
     @RequestMapping(method = RequestMethod.PUT)
-    public String ProvinceControlroller.update(@Valid Province province, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+    public String ProvinceController.update(@Valid Province province, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             uiModel.addAttribute("province", province);
             return "provinces/update";
@@ -73,13 +73,13 @@ privileged aspect ProvinceControlroller_Roo_Controller {
     }
     
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
-    public String ProvinceControlroller.updateForm(@PathVariable("id") Long id, Model uiModel) {
+    public String ProvinceController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         uiModel.addAttribute("province", Province.findProvince(id));
         return "provinces/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public String ProvinceControlroller.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+    public String ProvinceController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         Province.findProvince(id).remove();
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
@@ -88,16 +88,16 @@ privileged aspect ProvinceControlroller_Roo_Controller {
     }
     
     @ModelAttribute("citys")
-    public Collection<City> ProvinceControlroller.populateCitys() {
+    public Collection<City> ProvinceController.populateCitys() {
         return City.findAllCitys();
     }
     
     @ModelAttribute("provinces")
-    public java.util.Collection<Province> ProvinceControlroller.populateProvinces() {
+    public java.util.Collection<Province> ProvinceController.populateProvinces() {
         return Province.findAllProvinces();
     }
     
-    String ProvinceControlroller.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
+    String ProvinceController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
         String enc = httpServletRequest.getCharacterEncoding();
         if (enc == null) {
             enc = WebUtils.DEFAULT_CHARACTER_ENCODING;

@@ -4,9 +4,9 @@
 package com.djavafactory.pttech.rrm.domain;
 
 privileged aspect ReloadRequest_Roo_Jasperoo {
-
+    
     public boolean ReloadRequest.isReportable() {
         return true;
     }
-
+    
 }

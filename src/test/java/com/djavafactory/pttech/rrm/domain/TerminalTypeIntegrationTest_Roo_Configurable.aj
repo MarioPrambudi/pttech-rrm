@@ -6,7 +6,7 @@ package com.djavafactory.pttech.rrm.domain;
 import org.springframework.beans.factory.annotation.Configurable;
 
 privileged aspect TerminalTypeIntegrationTest_Roo_Configurable {
-
-    declare @type: TerminalTypeIntegrationTest:@Configurable;
-
+    
+    declare @type: TerminalTypeIntegrationTest: @Configurable;
+    
 }

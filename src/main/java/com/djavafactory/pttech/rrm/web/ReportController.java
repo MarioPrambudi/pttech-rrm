@@ -6,6 +6,8 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import com.djavafactory.pttech.rrm.domain.Configuration;
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
+import com.djavafactory.pttech.rrm.domain.Report;
+import com.djavafactory.pttech.rrm.domain.ReportGenerator;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -79,16 +81,16 @@ public class ReportController {
 	@RequestMapping(value ="/TG0001-Report/{format}", method = RequestMethod.GET)
 	public String dailyDetailsRequestReloadFfmCelcomReport(ModelMap modelMap,
 														   Model uiModel,
-														   @PathVariable("format") String format) {
+														   @PathVariable("format") String format) throws Exception {
 	
-		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
+		List<Report> reportList = ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport();
 		
 		if(format.equalsIgnoreCase("html")) {
-	        uiModel.addAttribute("reports", reloadRequestList);
+	        uiModel.addAttribute("reports", reportList);
 			
 	        return "dailyDetailsRequestReloadFrmCelcomList";
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList,false);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			

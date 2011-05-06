@@ -1,13 +1,15 @@
 package com.djavafactory.pttech.rrm.domain;
 
+import com.djavafactory.pttech.rrm.Constants;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
-
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 @RooJavaBean
@@ -18,33 +20,41 @@ public class Report {
     @DateTimeFormat(style = "S-")
     private Date sofRequestedDatetime;
 
-    private Long mfgNo;
+    private Long id;
 
-    private Float requestedReloadAmtRm;
+    private String transId;
 
-    private Float fees;
+    private String status;
 
-    private Float totalChargeToCustomer;
+    private Long mfgNumber;
 
-    private Float commissionAmountDeductedBySof;
+    private String serviceProviderId;
 
-    private Float netPaymentToTng;
+    private Integer transCode;
+
+    private BigDecimal reloadAmount;
+
+    private BigDecimal fees;
+
+    private BigDecimal totalChargeToCustomer;
+
+    private BigDecimal commissionAmountDeductedBySof;
+
+    private BigDecimal netPaymentToTng;
 
     private long totalReloadQty;
 
-    private Float totalAmountRequestRm;
+    private BigDecimal totalAmountRequestRm;
 
-    private Float totalFees;
+    private BigDecimal totalFees;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
     private Date reloadDate;
 
-    private Float reloadAmountRm;
+    private BigDecimal totalReloadAmountRm;
 
-    private Float totalReloadAmountRm;
-
-    private Float amountRefundedToCustomer;
+    private BigDecimal amountRefundedToCustomer;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
@@ -58,27 +68,29 @@ public class Report {
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
-    private Date dateReloadRequest;
+    private Date requestedTime;
 
     private Long totalCancellationQty;
 
-    private Float totalAmountCancelledRm;
+    private BigDecimal totalAmountCancelledRm;
 
-    private Float totalRefundToCustomerRm;
+    private BigDecimal totalRefundToCustomerRm;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
     private Date transactionDate;
 
-    private Float grossPaymentToTngRm;
+    private BigDecimal grossPaymentToTngRm;
 
-    private Float totalCancellationRm;
+    private BigDecimal totalCancellationRm;
 
-    private Float amountCreditedToTngRm;
+    private BigDecimal amountCreditedToTngRm;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
     private Date dateCreditedToTngAccount;
 
-    private Float totalPaymentToTngRm;
+    private BigDecimal totalPaymentToTngRm;
+
+    private String tngKey;
 }

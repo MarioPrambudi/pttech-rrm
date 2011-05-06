@@ -4,20 +4,18 @@
 package com.djavafactory.pttech.rrm.domain;
 
 import com.djavafactory.pttech.rrm.domain.TerminalType;
-
 import java.util.List;
 import java.util.Random;
-
 import org.springframework.stereotype.Component;
 
 privileged aspect TerminalTypeDataOnDemand_Roo_DataOnDemand {
-
-    declare @type: TerminalTypeDataOnDemand:@Component;
-
+    
+    declare @type: TerminalTypeDataOnDemand: @Component;
+    
     private Random TerminalTypeDataOnDemand.rnd = new java.security.SecureRandom();
-
+    
     private List<TerminalType> TerminalTypeDataOnDemand.data;
-
+    
     public TerminalType TerminalTypeDataOnDemand.getNewTransientTerminalType(int index) {
         com.djavafactory.pttech.rrm.domain.TerminalType obj = new com.djavafactory.pttech.rrm.domain.TerminalType();
         obj.setName("name_" + index);
@@ -25,7 +23,7 @@ privileged aspect TerminalTypeDataOnDemand_Roo_DataOnDemand {
         obj.setDeleted(Boolean.TRUE);
         return obj;
     }
-
+    
     public TerminalType TerminalTypeDataOnDemand.getSpecificTerminalType(int index) {
         init();
         if (index < 0) index = 0;
@@ -33,25 +31,24 @@ privileged aspect TerminalTypeDataOnDemand_Roo_DataOnDemand {
         TerminalType obj = data.get(index);
         return TerminalType.findTerminalType(obj.getId());
     }
-
+    
     public TerminalType TerminalTypeDataOnDemand.getRandomTerminalType() {
         init();
         TerminalType obj = data.get(rnd.nextInt(data.size()));
         return TerminalType.findTerminalType(obj.getId());
     }
-
+    
     public boolean TerminalTypeDataOnDemand.modifyTerminalType(TerminalType obj) {
         return false;
     }
-
+    
     public void TerminalTypeDataOnDemand.init() {
         data = com.djavafactory.pttech.rrm.domain.TerminalType.findTerminalTypeEntries(0, 10);
-        if (data == null)
-            throw new IllegalStateException("Find entries implementation for 'TerminalType' illegally returned null");
+        if (data == null) throw new IllegalStateException("Find entries implementation for 'TerminalType' illegally returned null");
         if (!data.isEmpty()) {
             return;
         }
-
+        
         data = new java.util.ArrayList<com.djavafactory.pttech.rrm.domain.TerminalType>();
         for (int i = 0; i < 10; i++) {
             com.djavafactory.pttech.rrm.domain.TerminalType obj = getNewTransientTerminalType(i);
@@ -60,5 +57,5 @@ privileged aspect TerminalTypeDataOnDemand_Roo_DataOnDemand {
             data.add(obj);
         }
     }
-
+    
 }

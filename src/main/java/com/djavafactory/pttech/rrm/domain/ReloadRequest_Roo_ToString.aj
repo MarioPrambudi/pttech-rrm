@@ -6,7 +6,7 @@ package com.djavafactory.pttech.rrm.domain;
 import java.lang.String;
 
 privileged aspect ReloadRequest_Roo_ToString {
-
+    
     public String ReloadRequest.toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Reportable: ").append(isReportable()).append(", ");
@@ -20,5 +20,5 @@ privileged aspect ReloadRequest_Roo_ToString {
         sb.append("TngKey: ").append(getTngKey());
         return sb.toString();
     }
-
+    
 }

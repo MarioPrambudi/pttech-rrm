@@ -1,5 +1,7 @@
 package com.djavafactory.pttech.rrm;
 
+import java.util.TimeZone;
+
 
 public final class Constants {
 
@@ -42,5 +44,27 @@ public final class Constants {
     public static final String TERMINAL_STATUS_INACTIVE = "X";
     public static final String TERMINAL_STATUS_DELETED = "D";
     public static final String TERMINAL_STATUS_BLOCK = "B";
+
+    public static final String REPORT_CONFIG_FEE = "REPORT.FEES";
+    public static final String REPORT_CONFIG_CELCOMM = "REPORT.CELCOMM";
+    public static final String REPORT_CONFIG_TNGCOMM = "REPORT.TNGCOMM";
+
+    /**
+     * Constants for DataUtil 
+     */
+    public static final TimeZone TIMEZONE_GMT  = TimeZone.getTimeZone("GMT+8:00");
+    
+    /**
+     * Constants for report select reload request query
+     */
+    public static final String RELOAD_REQUEST_ALL = "ALL";
+    public static final String RELOAD_REQUEST_ALLFAIL = "ALLFAIL";
+    
+    /**
+     * Constants for report displayed fields
+     */
+    public static final String REPORT_RELOAD_REQUEST_FAILED = "FAILED";
+    public static final String REPORT_RELOAD_REQUEST_EXPIRED = "EXPIRED";
+    public static final String REPORT_RELOAD_REQUEST_CANCELLED = "CANCELLED";
 
 }

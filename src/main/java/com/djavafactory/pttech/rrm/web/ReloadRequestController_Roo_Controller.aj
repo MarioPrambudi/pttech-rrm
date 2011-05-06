@@ -9,10 +9,11 @@ import java.lang.Integer;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Collection;
+import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import org.joda.time.format.DateTimeFormat;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -80,13 +81,50 @@ privileged aspect ReloadRequestController_Roo_Controller {
         return "redirect:/reloadrequests";
     }
     
+    @RequestMapping(params = { "find=ById", "form" }, method = RequestMethod.GET)
+    public String ReloadRequestController.findReloadRequestsByIdForm(Model uiModel) {
+        return "reloadrequests/findReloadRequestsById";
+    }
+    
+    @RequestMapping(params = "find=ById", method = RequestMethod.GET)
+    public String ReloadRequestController.findReloadRequestsById(@RequestParam("id") Long id, Model uiModel) {
+        uiModel.addAttribute("reloadrequests", ReloadRequest.findReloadRequestsById(id).getResultList());
+        return "reloadrequests/list";
+    }
+    
+    @RequestMapping(params = { "find=ByRequestedTimeBetween", "form" }, method = RequestMethod.GET)
+    public String ReloadRequestController.findReloadRequestsByRequestedTimeBetweenForm(Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
+        return "reloadrequests/findReloadRequestsByRequestedTimeBetween";
+    }
+    
+    @RequestMapping(params = "find=ByRequestedTimeBetween", method = RequestMethod.GET)
+    public String ReloadRequestController.findReloadRequestsByRequestedTimeBetween(@RequestParam("minRequestedTime") @DateTimeFormat(style = "S-") Date minRequestedTime, @RequestParam("maxRequestedTime") @DateTimeFormat(style = "S-") Date maxRequestedTime, Model uiModel) {
+        uiModel.addAttribute("reloadrequests", ReloadRequest.findReloadRequestsByRequestedTimeBetween(minRequestedTime, maxRequestedTime).getResultList());
+        addDateTimeFormatPatterns(uiModel);
+        return "reloadrequests/list";
+    }
+    
+    @RequestMapping(params = { "find=ByTransId", "form" }, method = RequestMethod.GET)
+    public String ReloadRequestController.findReloadRequestsByTransIdForm(Model uiModel) {
+        return "reloadrequests/findReloadRequestsByTransId";
+    }
+    
+    @RequestMapping(params = "find=ByTransId", method = RequestMethod.GET)
+    public String ReloadRequestController.findReloadRequestsByTransId(@RequestParam("transId") String transId, Model uiModel) {
+        uiModel.addAttribute("reloadrequests", ReloadRequest.findReloadRequestsByTransId(transId).getResultList());
+        return "reloadrequests/list";
+    }
+    
     @ModelAttribute("reloadrequests")
     public Collection<ReloadRequest> ReloadRequestController.populateReloadRequests() {
         return ReloadRequest.findAllReloadRequests();
     }
     
     void ReloadRequestController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("reloadRequest_requestedtime_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("reloadRequest_minrequestedtime_date_format", org.joda.time.format.DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("reloadRequest_requestedtime_date_format", org.joda.time.format.DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("reloadRequest_maxrequestedtime_date_format", org.joda.time.format.DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
     }
     
     String ReloadRequestController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
