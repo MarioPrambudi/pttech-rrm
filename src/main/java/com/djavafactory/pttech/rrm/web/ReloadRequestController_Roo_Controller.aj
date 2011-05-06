@@ -80,18 +80,7 @@ privileged aspect ReloadRequestController_Roo_Controller {
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
         return "redirect:/reloadrequests";
     }
-//    
-//    @RequestMapping(params = { "find=ById", "form" }, method = RequestMethod.GET)
-//    public String ReloadRequestController.findReloadRequestsByIdForm(Model uiModel) {
-//        return "reloadrequests/findReloadRequestsById";
-//    }
-//    
-//    @RequestMapping(params = "find=ById", method = RequestMethod.GET)
-//    public String ReloadRequestController.findReloadRequestsById(@RequestParam("id") Long id, Model uiModel) {
-//        uiModel.addAttribute("reloadrequests", ReloadRequest.findReloadRequestsById(id).getResultList());
-//        return "reloadrequests/list";
-//    }
-//    
+    
     @RequestMapping(params = { "find=ByRequestedTimeBetween", "form" }, method = RequestMethod.GET)
     public String ReloadRequestController.findReloadRequestsByRequestedTimeBetweenForm(Model uiModel) {
         addDateTimeFormatPatterns(uiModel);

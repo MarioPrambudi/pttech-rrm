@@ -1,8 +1,11 @@
 package com.djavafactory.pttech.rrm.domain;
 
 import com.djavafactory.pttech.rrm.Constants;
+import com.djavafactory.pttech.rrm.util.DateUtil;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -20,15 +23,15 @@ import org.apache.commons.beanutils.BeanUtils;
 public class ReportGenerator {
 
    /**
-     * get result for report dailyDetailsRequestReloadFfmCelcomReport
+     * get result for report dailyDetailsRequestReloadFrmCelcomReport/TG0001-Report
      * @param none
      * @return List A report list
+     * @throws Exception 
      */
-    public static List getDetailsRequestReloadFrmCelcomReport()
+    public static List getDailyDetailsRequestReloadFrmCelcomReport() throws Exception
     {
-        //get reloadrequest list
-    	List listReloadRequest = ReloadRequest.findListReloadRequestsByRequestedTimeBetween(new Date(), new Date());
-    	
+		//get reloadrequest list
+    	List listReloadRequest = ReloadRequest.findDailyReloadRequestsByRequestedTimeBetween(Constants.RELOAD_REQUEST_ALL);
 
         List <Report> listReport = new ArrayList<Report>();
         
@@ -46,7 +49,102 @@ public class ReportGenerator {
 
             	Report report = (Report)it.next();
             	//manually set value into report fields
-            	report.setReloadAmount(getReportFee());
+            	report.setFees(getReportFee());
+            	report.setTotalChargeToCustomer(getTotalChargeToCustomer(report.getReloadAmount()));
+            	report.setCommissionAmountDeductedBySof(getCommAmountDeductedBySOF());
+            	report.setNetPaymentToTng(getNetPaymentToTnG(report.getCommissionAmountDeductedBySof()));
+            	listCompleteReport.add(report);
+
+            } catch (Exception e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+
+        }
+        return listCompleteReport;
+    }
+    
+    /**
+     * get result for report dailyDetailedReloadFrmCelcomReport/TG0003
+     * @param none
+     * @return List A report list
+     * @throws Exception 
+     */
+    public static List<Report> getDailyDetailedReloadFrmCelcomReport() throws Exception
+    {
+    	List<ReloadRequest> listReloadRequest = ReloadRequest.findDailyReloadRequestsByRequestedTimeBetween(Constants.RELOAD_STATUS_SUCCESS);
+        List <Report> listReport = new ArrayList<Report>();
+        
+        //call method to copy reload request list to report list
+        listReport = copyReloadRequestToReport(listReloadRequest);
+        
+        //declare report list to hold complete report data
+        List <Report> listCompleteReport = new ArrayList<Report>();
+        
+		Iterator it = listReport.iterator();
+
+        while(it.hasNext())
+		{        
+            try {
+
+            	Report report = (Report)it.next();
+            	//manually set value into report fields
+            	report.setFees(getReportFee());
+            	report.setTotalChargeToCustomer(getTotalChargeToCustomer(report.getReloadAmount()));
+            	report.setCommissionAmountDeductedBySof(getCommAmountDeductedBySOF());
+            	report.setNetPaymentToTng(getNetPaymentToTnG(report.getCommissionAmountDeductedBySof()));
+            	listCompleteReport.add(report);
+
+            } catch (Exception e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+
+        }
+        return listCompleteReport;
+    }
+    
+    /**
+     * get result for report dailyDetailsCancellationReloadReqFrmCelcomReport/TG0005
+     * @param none
+     * @return List A report list
+     * @throws Exception 
+     */
+    public static List getDailyDetailsCancellationReloadReqFrmCelcomReport() throws Exception
+    {
+    	List listReloadRequest = ReloadRequest.findDailyReloadRequestsByRequestedTimeBetween(Constants.RELOAD_REQUEST_ALLFAIL);
+        List <Report> listReport = new ArrayList<Report>();
+        
+        //call method to copy reload request list to report list
+        listReport = copyReloadRequestToReport(listReloadRequest);
+        
+        //declare report list to hold complete report data
+        List <Report> listCompleteReport = new ArrayList<Report>();
+        
+		Iterator it = listReport.iterator();
+
+        while(it.hasNext())
+		{        
+            try {
+
+            	Report report = (Report)it.next();
+            	//manually set value into report fields
+            	report.setFees(getReportFee());
+            	report.setTotalChargeToCustomer(getTotalChargeToCustomer(report.getReloadAmount()));
+            	report.setCommissionAmountDeductedBySof(getCommAmountDeductedBySOF());
+            	report.setNetPaymentToTng(getNetPaymentToTnG(report.getCommissionAmountDeductedBySof()));
+            	report.setAmountRefundedToCustomer(report.getReloadAmount());
+            	//report.setDateRefundedCustomer(); TO BE CONTINUE
+            	if(Constants.RELOAD_REQUEST_FAILED.equals(report.getStatus()))
+        		{
+            		report.setCancellationStatus(Constants.REPORT_RELOAD_REQUEST_FAILED);
+        		}
+            	if(Constants.RELOAD_REQUEST_EXPIRED.equals(report.getStatus()))
+        		{
+            		report.setCancellationStatus(Constants.REPORT_RELOAD_REQUEST_EXPIRED);
+        		}
+            	if(Constants.RELOAD_REQUEST_MANUALCANCEL.equals(report.getStatus()))
+        		{
+            		report.setCancellationStatus(Constants.REPORT_RELOAD_REQUEST_CANCELLED);
+        		}
             	listCompleteReport.add(report);
 
             } catch (Exception e) {
@@ -122,32 +220,44 @@ public class ReportGenerator {
      	 BigDecimal decimalTngComm= new BigDecimal(reportTngComm); 
      	 return decimalTngComm; 
     }
- 
-    /*
-     * firman
-     */
-    public static List<Report> getDailyDetailedReloadFrmCelcomReport() {
-        List <Report> listReport = new ArrayList<Report>();
-        List <Report> listCompleteReport = new ArrayList<Report>();
-        
-    	List<ReloadRequest> listReloadRequest = ReloadRequest.findListReloadRequestsByRequestedTimeBetween(new Date(), new Date());
-        listReport = copyReloadRequestToReport(listReloadRequest);
-        
-		Iterator it = listReport.iterator();
-		while(it.hasNext()) {        
-            try {
-            	Report report = (Report)it.next();
-            	//manually set value into report fields
-            	report.setReloadAmount(getReportFee());
-            	report.setFees(getReportFee());
-            	report.setTotalChargeToCustomer(getReportFee());
-            	report.setCommissionAmountDeductedBySof(getReportFee());
-            	report.setNetPaymentToTng(getReportFee());
-            	listCompleteReport.add(report);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return listCompleteReport;
+    
+    /**
+	 * Get totalChargeToCustomer (reload amount + fee)
+	 * @param reloadAmount 
+	 * @return BigDecimal TotalChargeToCustomer
+	 */ 
+    public static BigDecimal getTotalChargeToCustomer(BigDecimal reloadAmount)
+    {	
+     	BigDecimal fee = getReportFee();
+     	BigDecimal sumForReloadAmountAndFee = fee.add(reloadAmount);
+     	 
+     	 return sumForReloadAmountAndFee; 
+    }
+    
+    /**
+	 * Get commission amount deducted by SOF (fee x celcomm)
+	 * @param none
+	 * @return BigDecimal commAmount
+	 */ 
+    public static BigDecimal getCommAmountDeductedBySOF()
+    {	           	     	 
+     	 BigDecimal celComm = getReportCelComm(); 
+     	 BigDecimal fee = getReportFee();
+     	 BigDecimal commAmount = fee.multiply(celComm);
+     	 
+     	 return commAmount; 
+    }    
+    
+    /**
+	 * Get net payment TnG
+	 * @param totalChargeToCust
+	 * @return BigDecimal TotalChargeToCustomer
+	 */ 
+    public static BigDecimal getNetPaymentToTnG(BigDecimal totalChargeToCust)
+    {	
+     	BigDecimal commAmount = getCommAmountDeductedBySOF();
+     	BigDecimal netPayment = totalChargeToCust.subtract(commAmount);
+     	 
+     	 return netPayment; 
     }
 }

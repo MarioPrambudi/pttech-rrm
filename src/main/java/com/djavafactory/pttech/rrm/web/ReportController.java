@@ -81,9 +81,9 @@ public class ReportController {
 	@RequestMapping(value ="/TG0001-Report/{format}", method = RequestMethod.GET)
 	public String dailyDetailsRequestReloadFfmCelcomReport(ModelMap modelMap,
 														   Model uiModel,
-														   @PathVariable("format") String format) {
+														   @PathVariable("format") String format) throws Exception {
 	
-		List<Report> reportList = ReportGenerator.getDetailsRequestReloadFrmCelcomReport();
+		List<Report> reportList = ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport();
 		
 		if(format.equalsIgnoreCase("html")) {
 	        uiModel.addAttribute("reports", reportList);
@@ -123,7 +123,6 @@ public class ReportController {
 												     Model uiModel,
 													 @PathVariable("format") String format) {
 		
-		List<Report> reportList = ReportGenerator.getDailyDetailedReloadFrmCelcomReport();
 		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
 		
 		if(format.equalsIgnoreCase("html")) {
@@ -131,7 +130,7 @@ public class ReportController {
 			
 	        return "dailyDetailedReloadFrmCelcomList";
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "dailyDetailedReloadFrmCelcomReport";
