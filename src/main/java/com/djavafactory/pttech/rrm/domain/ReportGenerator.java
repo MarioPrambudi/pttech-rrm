@@ -28,7 +28,7 @@ public class ReportGenerator {
      * @return List A report list
      * @throws Exception 
      */
-    public static List getDetailsRequestReloadFrmCelcomReport() throws Exception
+    public static List getDailyDetailsRequestReloadFrmCelcomReport() throws Exception
     {
     	Date dateMin = null;
     	Date dateMax = null;
@@ -113,8 +113,9 @@ public class ReportGenerator {
      * @return List A report list
      * @throws Exception 
      */
-    public static List getDailyDetailedReloadFrmCelcomReport() throws Exception
+    public static List<Report> getDailyDetailedReloadFrmCelcomReport() throws Exception
     {
+
     	//all reload request status
     	List listStatus = new ArrayList();
     	listStatus.add(Constants.RELOAD_REQUEST_SUCCESS.toLowerCase()); 
@@ -124,8 +125,9 @@ public class ReportGenerator {
     	Date dateMax = null;   	 
 		dateMin = DateUtil.getCurrentDate("dd/MM/yyyy");
 		dateMax = DateUtil.add(dateMin, 5, 1);
-		
-		List listReloadRequest = ReloadRequest.findReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMax, listStatus);
+
+    	List<ReloadRequest> listReloadRequest = ReloadRequest.findReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMax, listStatus);
+
         List <Report> listReport = new ArrayList<Report>();
         
         //call method to copy reload request list to report list
@@ -262,7 +264,7 @@ public class ReportGenerator {
 	 * @param listReloadRequest A list of reload request
 	 * @return List Report list
 	 */
-    public static List copyReloadRequestToReport(List listReloadRequest)
+    public static List<Report> copyReloadRequestToReport(List<ReloadRequest> listReloadRequest)
     {
     	Iterator it = listReloadRequest.iterator();
         List <Report> listReport = new ArrayList<Report>();
@@ -360,6 +362,4 @@ public class ReportGenerator {
      	return netPayment; 
     }
 
-    
-    
 }

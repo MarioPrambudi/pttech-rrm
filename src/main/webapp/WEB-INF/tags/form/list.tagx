@@ -24,6 +24,8 @@
             description="Used for checking if element has been modified (to recalculate simply provide empty string value)"
             name="z" required="false" type="java.lang.String"/>
 
+	<jsp:directive.attribute name="pdf_report" type="java.lang.Boolean" required="false" rtexprvalue="true" description="show pdf report (default false)" />
+	<jsp:directive.attribute name="xls_report" type="java.lang.Boolean" required="false" rtexprvalue="true" description="show pdf report (default false)" />
     <c:if test="${empty render or render}">
         <c:if test="${empty label}">
             <spring:message code="label_${fn:toLowerCase(fn:substringAfter(id,'_'))}" htmlEscape="false" var="label"/>
@@ -32,13 +34,20 @@
             <spring:message code="label_${fn:toLowerCase(fn:substringAfter(id,'_'))}_plural" htmlEscape="false"
                             var="labelPlural"/>
         </c:if>
+        
+        <c:if test="${empty pdf_report}">
+          	<c:set var="pdf_report" value="false"/>
+        </c:if>
+        <c:if test="${empty xls_report}">
+          	<c:set var="xls_report" value="false"/>
+        </c:if>
         <spring:message arguments="${labelPlural}" code="entity_list_all" htmlEscape="false" var="title_msg"/>
         <util:panel id="${id}" openPane="${openPane}" title="${title_msg}">
             <c:choose>
                 <c:when test="${not empty items}">
                     <jsp:doBody/>
                     <c:catch>
-                        <c:if test="${not empty items[0].reportable}">
+                        <c:if test="${pdf_report}">
                             <spring:message code="jasperoo_reports" htmlEscape="false" var="reports_label"/>
                             <b>
                                 <c:out value="${reports_label} "/>
@@ -46,7 +55,7 @@
                         </c:if>
                     </c:catch>
                     <c:catch>
-                        <c:if test="${not empty items[0].reportable}">
+                        <c:if test="${pdf_report}">
                             <span style="text-align:right;"/>
                             <spring:url value="/reports/${fn:toLowerCase(label)}List/pdf" var="report_url"/>
                             <spring:url value="/resources/images/report-pdf.png" var="report_image_url"/>
@@ -60,7 +69,7 @@
                         </c:if>
                     </c:catch>
                     <c:catch>
-                        <c:if test="${not empty items[0].reportable}">
+                        <c:if test="${xls_report}">
                             <span style="text-align:right;"/>
                             <spring:url value="/reports/${fn:toLowerCase(label)}List/xls" var="report_url"/>
                             <spring:url value="/resources/images/report-xls.png" var="report_image_url"/>

@@ -3,15 +3,13 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<field name="id" class="java.lang.Long"/>
-	<field name="transId" class="java.lang.String"/>
-	<field name="status" class="java.lang.String"/>
+	<field name="reloadDate" class="java.util.Date"/>
 	<field name="mfgNumber" class="java.lang.Long"/>
 	<field name="reloadAmount" class="java.math.BigDecimal"/>
-	<field name="serviceProviderId" class="java.lang.String"/>
-	<field name="transCode" class="java.lang.Integer"/>
-	<field name="requestedTime" class="java.util.Date"/>
-	<field name="tngKey" class="java.lang.String"/>
+	<field name="fees" class="java.math.BigDecimal"/>
+	<field name="totalChargeToCustomer" class="java.math.BigDecimal"/>
+	<field name="commissionAmountDeductedBySof" class="java.math.BigDecimal"/>
+	<field name="netPaymentToTng" class="java.math.BigDecimal"/>
 	<pageHeader>
 		<band height="101">
 			<image scaleImage="RetainShape" hAlign="Center">
@@ -28,100 +26,94 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="20" splitType="Stretch">
+		<band height="50" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="30" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.id}]]></textFieldExpression>
+				<reportElement x="0" y="0" width="100" height="40"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.reloadDate}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="30" y="0" width="90" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.transId}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="120" y="0" width="90" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.status}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="210" y="0" width="90" height="20"/>
-				<textElement/>
+				<reportElement x="100" y="0" width="100" height="40"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.mfgNumber}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="300" y="0" width="90" height="20"/>
-				<textElement/>
+				<reportElement x="200" y="0" width="110" height="40"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.reloadAmount}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="390" y="0" width="90" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.serviceProviderId}]]></textFieldExpression>
+				<reportElement x="312" y="0" width="110" height="40"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.fees}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="480" y="0" width="90" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.transCode}]]></textFieldExpression>
+				<reportElement x="422" y="0" width="100" height="40"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.totalChargeToCustomer}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="570" y="0" width="90" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.requestedTime}]]></textFieldExpression>
+				<reportElement x="522" y="0" width="110" height="40"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.commissionAmountDeductedBySof}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="660" y="0" width="90" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.tngKey}]]></textFieldExpression>
+				<reportElement x="632" y="0" width="120" height="40"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.netPaymentToTng}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="24" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="30" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.Long"><![CDATA[$F{id}]]></textFieldExpression>
+				<reportElement x="0" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{reloadDate}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="30" y="0" width="90" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{transId}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="120" y="0" width="90" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{status}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="210" y="0" width="90" height="20"/>
-				<textElement/>
+				<reportElement x="100" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{mfgNumber}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="300" y="0" width="90" height="20"/>
-				<textElement/>
+				<reportElement x="200" y="0" width="110" height="20"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{reloadAmount}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="390" y="0" width="90" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{serviceProviderId}]]></textFieldExpression>
+				<reportElement x="312" y="0" width="110" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{fees}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="480" y="0" width="90" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{transCode}]]></textFieldExpression>
+				<reportElement x="422" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{totalChargeToCustomer}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="570" y="0" width="90" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.util.Date"><![CDATA[$F{requestedTime}]]></textFieldExpression>
+				<reportElement x="522" y="0" width="110" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{commissionAmountDeductedBySof}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="660" y="0" width="90" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{tngKey}]]></textFieldExpression>
+				<reportElement x="632" y="0" width="120" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{netPaymentToTng}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
