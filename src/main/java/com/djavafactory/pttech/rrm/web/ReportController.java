@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
+import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.Configuration;
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
 import com.djavafactory.pttech.rrm.domain.Report;

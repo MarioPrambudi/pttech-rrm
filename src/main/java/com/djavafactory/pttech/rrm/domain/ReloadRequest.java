@@ -5,10 +5,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
-
-import com.djavafactory.pttech.rrm.Constants;
-import com.djavafactory.pttech.rrm.util.DateUtil;
-
 import javax.persistence.Column;
 import javax.persistence.EntityManager;
 import javax.persistence.Temporal;
@@ -18,7 +14,6 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.security.PublicKey;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -47,6 +42,10 @@ public class ReloadRequest {
 	private Date requestedTime;
 
 	private String tngKey;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(style = "S-")
+	private Date modifiedTime;
 
 	public static TypedQuery<ReloadRequest> findReloadRequestsByTransId(String transId) {
 		if (transId == null || transId.length() == 0)
@@ -92,54 +91,18 @@ public class ReloadRequest {
 	}
 
 
-
-     
-     
-
  	/**
       * To get the reload request between requested time
       * @param status The reload request status
       * @return List Reload request in list
  	  * @throws ParseException 
       */
-     public static List<ReloadRequest>findDailyReloadRequestsByRequestedTimeBetween(String status) throws ParseException {		
- 		
-    	Date dateMin = null;
-    	Date dateMax = null;   	 
-		dateMin = DateUtil.getCurrentDate("dd/MM/yyyy");
-		dateMax = DateUtil.add(dateMin, 5, 1); 
-		String query = "SELECT ReloadRequest FROM ReloadRequest reloadrequest WHERE reloadrequest.requestedTime BETWEEN :minRequestedTime AND :maxRequestedTime";		
-		
-		if (!(Constants.RELOAD_REQUEST_ALL.equals(status)))
-		{
-			if(Constants.RELOAD_REQUEST_ALLFAIL.equals(status))
-			{
-				query = new StringBuilder(query).append(" AND LOWER(reloadrequest.status) = LOWER(:statusFail)").toString();
-				query = new StringBuilder(query).append(" OR LOWER(reloadrequest.status) = LOWER(:statusExpire)").toString();
-				query = new StringBuilder(query).append(" OR LOWER(reloadrequest.status) = LOWER(:statusCancel)").toString();
-			}			
-			if(Constants.RELOAD_STATUS_SUCCESS.equals(status))
-			{
-				query = new StringBuilder(query).append(" AND LOWER(reloadrequest.status) = LOWER(:status)").toString();
-			}					
-		}
-		
+     public static List<ReloadRequest>findReloadRequestsByRequestedTimeBetweenAndStatus (Date minRequestedTime, Date maxRequestedTime, List listStatus) throws ParseException {		
+		String query = "SELECT ReloadRequest FROM ReloadRequest reloadrequest WHERE reloadrequest.requestedTime BETWEEN :minRequestedTime AND :maxRequestedTime AND LOWER(reloadrequest.status) IN (:statusList)";			
 		TypedQuery<ReloadRequest> q = entityManager().createQuery(query, ReloadRequest.class);
-		q.setParameter("minRequestedTime",  dateMin);
-		q.setParameter("maxRequestedTime",  dateMax);			
-		if (!(Constants.RELOAD_REQUEST_ALL.equals(status)))
-		{
-			if(Constants.RELOAD_REQUEST_ALLFAIL.equals(status))
-			{
-				q.setParameter(":statusFail",  Constants.RELOAD_REQUEST_FAILED);
-				q.setParameter(":statusExpire",  Constants.RELOAD_REQUEST_EXPIRED);
-				q.setParameter(":statusCancel",  Constants.RELOAD_REQUEST_MANUALCANCEL);				
-			}			
-			if(Constants.RELOAD_STATUS_SUCCESS.equals(status))
-			{
-				q.setParameter(":status",  status);
-			}
-		}
+		q.setParameter("minRequestedTime",  minRequestedTime);
+		q.setParameter("maxRequestedTime",  maxRequestedTime);
+		q.setParameter("statusList", listStatus);
 	   return q.getResultList();        
      } 
 
@@ -152,8 +115,6 @@ public class ReloadRequest {
 	 *            To date
 	 * @return List Reload request in list
 	 */
-
-
 	public static TypedQuery<ReloadRequest> findReloadRequestsByRequestedTimeBetween(Date minRequestedTime,
 			Date maxRequestedTime) {
 		if (minRequestedTime == null)
