@@ -55,16 +55,14 @@ public final class Constants {
     public static final TimeZone TIMEZONE_GMT  = TimeZone.getTimeZone("GMT+8:00");
     
     /**
-     * Constants for report select reload request query
-     */
-    public static final String RELOAD_REQUEST_ALL = "ALL";
-    public static final String RELOAD_REQUEST_ALLFAIL = "ALLFAIL";
-    
-    /**
      * Constants for report displayed fields
      */
     public static final String REPORT_RELOAD_REQUEST_FAILED = "FAILED";
     public static final String REPORT_RELOAD_REQUEST_EXPIRED = "EXPIRED";
     public static final String REPORT_RELOAD_REQUEST_CANCELLED = "CANCELLED";
+    
+    public static final String REPORT_STATUS_DAILY = "DAILY";
+    public static final String REPORT_STATUS_MONTHLY= "MONTHLY";
+    
 
 }

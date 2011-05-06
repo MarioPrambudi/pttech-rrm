@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
+import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.Configuration;
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
 import com.djavafactory.pttech.rrm.domain.Report;
@@ -83,7 +84,7 @@ public class ReportController {
 														   Model uiModel,
 														   @PathVariable("format") String format) throws Exception {
 	
-		List<Report> reportList = ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport();
+		List<Report> reportList = ReportGenerator.getDetailsRequestReloadFrmCelcomReport();
 		
 		if(format.equalsIgnoreCase("html")) {
 	        uiModel.addAttribute("reports", reportList);

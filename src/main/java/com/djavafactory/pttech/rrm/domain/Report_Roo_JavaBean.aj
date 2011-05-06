@@ -267,4 +267,36 @@ privileged aspect Report_Roo_JavaBean {
         this.tngKey = tngKey;
     }
     
+    public BigDecimal Report.getSumTotalChargeToCustomer() {
+        return this.sumTotalChargeToCustomer;
+    }
+    
+    public void Report.setSumTotalChargeToCustomer(BigDecimal sumTotalChargeToCustomer) {
+        this.sumTotalChargeToCustomer = sumTotalChargeToCustomer;
+    }
+    
+    public BigDecimal Report.getSumCommissionAmountDeductedBySof() {
+        return this.sumCommissionAmountDeductedBySof;
+    }
+    
+    public void Report.setSumCommissionAmountDeductedBySof(BigDecimal sumCommissionAmountDeductedBySof) {
+        this.sumCommissionAmountDeductedBySof = sumCommissionAmountDeductedBySof;
+    }
+    
+    public BigDecimal Report.getSumNetPaymentToTng() {
+        return this.sumNetPaymentToTng;
+    }
+    
+    public void Report.setSumNetPaymentToTng(BigDecimal sumNetPaymentToTng) {
+        this.sumNetPaymentToTng = sumNetPaymentToTng;
+    }
+    
+    public Date Report.getModifiedTime() {
+        return this.modifiedTime;
+    }
+    
+    public void Report.setModifiedTime(Date modifiedTime) {
+        this.modifiedTime = modifiedTime;
+    }
+    
 }
