@@ -6,12 +6,12 @@ package com.djavafactory.pttech.rrm.domain;
 import java.lang.String;
 
 privileged aspect City_Roo_ToString {
-
+    
     public String City.toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("CityName: ").append(getCityName()).append(", ");
         sb.append("AcquirerState: ").append(getAcquirerState());
         return sb.toString();
     }
-
+    
 }

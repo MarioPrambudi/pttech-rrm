@@ -1,5 +1,7 @@
 package com.djavafactory.pttech.rrm;
 
+import java.util.TimeZone;
+
 
 public final class Constants {
 
@@ -42,5 +44,14 @@ public final class Constants {
     public static final String TERMINAL_STATUS_INACTIVE = "X";
     public static final String TERMINAL_STATUS_DELETED = "D";
     public static final String TERMINAL_STATUS_BLOCK = "B";
+
+    public static final String REPORT_CONFIG_FEE = "REPORT.FEES";
+    public static final String REPORT_CONFIG_CELCOMM = "REPORT.CELCOMM";
+    public static final String REPORT_CONFIG_TNGCOMM = "REPORT.TNGCOMM";
+
+    /**
+     * Constants for DataUtil 
+     */
+    public static final TimeZone TIMEZONE_GMT  = TimeZone.getTimeZone("GMT+8:00");
 
 }

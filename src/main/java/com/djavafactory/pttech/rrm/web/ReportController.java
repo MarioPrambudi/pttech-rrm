@@ -6,6 +6,8 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import com.djavafactory.pttech.rrm.domain.Configuration;
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
+import com.djavafactory.pttech.rrm.domain.Report;
+import com.djavafactory.pttech.rrm.domain.ReportGenerator;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -81,14 +83,14 @@ public class ReportController {
 														   Model uiModel,
 														   @PathVariable("format") String format) {
 	
-		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
+		List<Report> reportList = ReportGenerator.getDetailsRequestReloadFrmCelcomReport();
 		
 		if(format.equalsIgnoreCase("html")) {
-	        uiModel.addAttribute("reports", reloadRequestList);
+	        uiModel.addAttribute("reports", reportList);
 			
 	        return "dailyDetailsRequestReloadFrmCelcomList";
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList,false);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			
@@ -121,6 +123,7 @@ public class ReportController {
 												     Model uiModel,
 													 @PathVariable("format") String format) {
 		
+		List<Report> reportList = ReportGenerator.getDailyDetailedReloadFrmCelcomReport();
 		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
 		
 		if(format.equalsIgnoreCase("html")) {
@@ -128,7 +131,7 @@ public class ReportController {
 			
 	        return "dailyDetailedReloadFrmCelcomList";
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "dailyDetailedReloadFrmCelcomReport";

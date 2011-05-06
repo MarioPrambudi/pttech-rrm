@@ -5,31 +5,29 @@ package com.djavafactory.pttech.rrm.domain;
 
 import com.djavafactory.pttech.rrm.domain.City;
 import com.djavafactory.pttech.rrm.domain.ProvinceDataOnDemand;
-
 import java.util.List;
 import java.util.Random;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 privileged aspect CityDataOnDemand_Roo_DataOnDemand {
-
-    declare @type: CityDataOnDemand:@Component;
-
+    
+    declare @type: CityDataOnDemand: @Component;
+    
     private Random CityDataOnDemand.rnd = new java.security.SecureRandom();
-
+    
     private List<City> CityDataOnDemand.data;
-
+    
     @Autowired
     private ProvinceDataOnDemand CityDataOnDemand.provinceDataOnDemand;
-
+    
     public City CityDataOnDemand.getNewTransientCity(int index) {
         com.djavafactory.pttech.rrm.domain.City obj = new com.djavafactory.pttech.rrm.domain.City();
         obj.setCityName("cityName_" + index);
         obj.setAcquirerState(provinceDataOnDemand.getRandomProvince());
         return obj;
     }
-
+    
     public City CityDataOnDemand.getSpecificCity(int index) {
         init();
         if (index < 0) index = 0;
@@ -37,25 +35,24 @@ privileged aspect CityDataOnDemand_Roo_DataOnDemand {
         City obj = data.get(index);
         return City.findCity(obj.getId());
     }
-
+    
     public City CityDataOnDemand.getRandomCity() {
         init();
         City obj = data.get(rnd.nextInt(data.size()));
         return City.findCity(obj.getId());
     }
-
+    
     public boolean CityDataOnDemand.modifyCity(City obj) {
         return false;
     }
-
+    
     public void CityDataOnDemand.init() {
         data = com.djavafactory.pttech.rrm.domain.City.findCityEntries(0, 10);
-        if (data == null)
-            throw new IllegalStateException("Find entries implementation for 'City' illegally returned null");
+        if (data == null) throw new IllegalStateException("Find entries implementation for 'City' illegally returned null");
         if (!data.isEmpty()) {
             return;
         }
-
+        
         data = new java.util.ArrayList<com.djavafactory.pttech.rrm.domain.City>();
         for (int i = 0; i < 10; i++) {
             com.djavafactory.pttech.rrm.domain.City obj = getNewTransientCity(i);
@@ -64,5 +61,5 @@ privileged aspect CityDataOnDemand_Roo_DataOnDemand {
             data.add(obj);
         }
     }
-
+    
 }

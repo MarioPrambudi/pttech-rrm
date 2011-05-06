@@ -128,13 +128,12 @@ public class TerminalController extends BaseController {
         return "redirect:/terminals/" + encodeUrlPathSegment(terminal.getId().toString(), httpServletRequest);
     }
 
-    /**
-     * update new terminal with new status
-     *
-     * @param uiModel Model
-     * @return String the page path to redirect
-     */
-    @RequestMapping(value = "/setstatus", method = RequestMethod.POST)
+  /**
+   * update new terminal with new status
+   * @param uiModel Model
+   * @return String the page path to redirect
+   */
+	@RequestMapping(value = "/setstatus", method = RequestMethod.POST)
     public String updateStatus(@RequestParam(value = "terminalIds") String terminalIds, @RequestParam(value = "code") String code, Model uiModel) {
         for (String id : terminalIds.split(",")) {
             Terminal terminal = Terminal.findTerminal(Long.valueOf(id));
