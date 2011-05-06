@@ -69,9 +69,9 @@ public class ReportGenerator {
      * @return List A report list
      * @throws Exception 
      */
-    public static List getDailyDetailedReloadFrmCelcomReport() throws Exception
+    public static List<Report> getDailyDetailedReloadFrmCelcomReport() throws Exception
     {
-    	List listReloadRequest = ReloadRequest.findDailyReloadRequestsByRequestedTimeBetween(Constants.RELOAD_STATUS_SUCCESS);
+    	List<ReloadRequest> listReloadRequest = ReloadRequest.findDailyReloadRequestsByRequestedTimeBetween(Constants.RELOAD_STATUS_SUCCESS);
         List <Report> listReport = new ArrayList<Report>();
         
         //call method to copy reload request list to report list
@@ -161,7 +161,7 @@ public class ReportGenerator {
 	 * @param listReloadRequest A list of reload request
 	 * @return List Report list
 	 */
-    public static List copyReloadRequestToReport(List listReloadRequest)
+    public static List<Report> copyReloadRequestToReport(List<ReloadRequest> listReloadRequest)
     {
     	Iterator it = listReloadRequest.iterator();
         List <Report> listReport = new ArrayList<Report>();
@@ -260,6 +260,4 @@ public class ReportGenerator {
      	 
      	 return netPayment; 
     }
-    
-
 }

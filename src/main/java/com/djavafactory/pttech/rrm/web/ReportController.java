@@ -67,14 +67,6 @@ public class ReportController {
         return "reloadrequestReportList";
     }
 
-//	@RequestMapping(value ="/reloadrequestDetail/{id}/{format}", method = RequestMethod.GET)
-//	public String reportReloadRequestDetail(ModelMap modelMap, @PathVariable("id") Long id, @PathVariable("format") String format) {
-//		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(com.djavafactory.pttech.rrm.domain.ReloadRequest.findReloadRequestsById(id).getResultList(),false);
-//		modelMap.put("reportData", jrDataSource);
-//		modelMap.put("format", format);
-//		return "reloadrequestReportDetail";
-//	}
-
 	/*
 	 * TnG Report
 	 */
@@ -102,16 +94,16 @@ public class ReportController {
 	@RequestMapping(value = "/TG0002-Report/{format}", method = RequestMethod.GET)
 	public String summaryRequestReloadFrmCelcomReport(ModelMap modelMap,
 													  Model uiModel,
-													  @PathVariable("format") String format) {
+													  @PathVariable("format") String format) throws Exception {
 		
-		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
+		List<Report> reportList = ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport();
 		
 		if(format.equalsIgnoreCase("html")) {
-	        uiModel.addAttribute("reports", reloadRequestList);
+	        uiModel.addAttribute("reports", reportList);
 			
 	        return "summaryRequestReloadFrmCelcomList";
 		} else {
-	        JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+	        JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
 	        modelMap.put("reportData", jrDataSource);
 	        modelMap.put("format", format);
 	        return "summaryRequestReloadFrmCelcomReport";
@@ -121,16 +113,16 @@ public class ReportController {
 	@RequestMapping(value = "/TG0003-Report/{format}", method = RequestMethod.GET)
 	public String dailyDetailedReloadFrmCelcomReport(ModelMap modelMap,
 												     Model uiModel,
-													 @PathVariable("format") String format) {
+													 @PathVariable("format") String format) throws Exception {
 		
-		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
+		List<Report> reportList = ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport();
 		
 		if(format.equalsIgnoreCase("html")) {
-	        uiModel.addAttribute("reports", reloadRequestList);
+	        uiModel.addAttribute("reports", reportList);
 			
 	        return "dailyDetailedReloadFrmCelcomList";
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "dailyDetailedReloadFrmCelcomReport";
@@ -140,16 +132,16 @@ public class ReportController {
 	@RequestMapping(value = "/TG0004-Report/{format}", method = RequestMethod.GET)
 	public String summaryReloadFrmCelcomReport(ModelMap modelMap, 
 											   Model uiModel,
-											   @PathVariable("format") String format) {
+											   @PathVariable("format") String format) throws Exception {
 		
-		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
+		List<Report> reportList = ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport();
 		
 		if(format.equalsIgnoreCase("html")) {
-	        uiModel.addAttribute("reports", reloadRequestList);
+	        uiModel.addAttribute("reports", reportList);
 			
 	        return "summaryReloadFrmCelcomList";
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "summaryReloadFrmCelcomReport";
@@ -159,16 +151,16 @@ public class ReportController {
 	@RequestMapping(value = "/TG0005-Report/{format}", method = RequestMethod.GET)
 	public String dailyDetailsCancellationReloadReqFrmCelcomReport(ModelMap modelMap,
 																   Model uiModel,
-																   @PathVariable("format") String format) {
+																   @PathVariable("format") String format) throws Exception {
 		
-		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
+		List<Report> reportList = ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport();
 		
 		if(format.equalsIgnoreCase("html")) {
-	        uiModel.addAttribute("reports", reloadRequestList);
+	        uiModel.addAttribute("reports", reportList);
 			
 	        return "dailyDetailsCancellationReloadReqFrmCelcomList";
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "dailyDetailsCancellationReloadReqFrmCelcomReport";
@@ -178,16 +170,16 @@ public class ReportController {
 	@RequestMapping(value = "/TG0006-Report/{format}", method = RequestMethod.GET)
 	public String summaryCancellationReloadFrmCelcomReport(ModelMap modelMap,
 														   Model uiModel,
-														   @PathVariable("format") String format) {
+														   @PathVariable("format") String format) throws Exception {
 		
-		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
+		List<Report> reportList = ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport();
 		
 		if(format.equalsIgnoreCase("html")) {
-	        uiModel.addAttribute("reports", reloadRequestList);
+	        uiModel.addAttribute("reports", reportList);
 			
 	        return "summaryCancellationReloadFrmCelcomList";
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "summaryCancellationReloadFrmCelcomReport";
@@ -197,16 +189,16 @@ public class ReportController {
 	@RequestMapping(value ="/TG0007-Report/{format}", method = RequestMethod.GET)
 	public String dailySettlementReloadFrmCelcomReport(ModelMap modelMap,
 													   Model uiModel,
-													   @PathVariable("format") String format) {
+													   @PathVariable("format") String format) throws Exception {
 		
-		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
+		List<Report> reportList = ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport();
 		
 		if(format.equalsIgnoreCase("html")) {
-	        uiModel.addAttribute("reports", reloadRequestList);
+	        uiModel.addAttribute("reports", reportList);
 			
 	        return "dailySettlementReloadFrmCelcomList";
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "dailySettlementReloadFrmCelcomReport";
@@ -217,16 +209,16 @@ public class ReportController {
 	@RequestMapping(value = "/TG0008-Report/{format}", method = RequestMethod.GET)
 	public String monthlySettlementReloadFrmCelcomReport(ModelMap modelMap,
 														 Model uiModel,
-														 @PathVariable("format") String format) {
+														 @PathVariable("format") String format) throws Exception {
 		
-		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
+		List<Report> reportList = ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport();
 		
 		if(format.equalsIgnoreCase("html")) {
-	        uiModel.addAttribute("reports", reloadRequestList);
+	        uiModel.addAttribute("reports", reportList);
 			
 	        return "monthlySettlementReloadFrmCelcomList";
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "monthlySettlementReloadFrmCelcomReport";

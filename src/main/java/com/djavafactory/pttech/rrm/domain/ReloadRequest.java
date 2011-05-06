@@ -25,7 +25,7 @@ import java.util.List;
 @RooJavaBean
 @RooToString
 @RooJasperoo
-@RooEntity(finders = { "findReloadRequestsByTransId", "findReloadRequestsById", "findReloadRequestsByRequestedTimeBetween" })
+@RooEntity(finders = { "findReloadRequestsByTransId", "findReloadRequestsByRequestedTimeBetween" })
 public class ReloadRequest {
 
 	@NotNull
