@@ -83,7 +83,7 @@
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.dateRefundCustomer}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.dateRefundedCustomer}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="660" y="0" width="90" height="40"/>
@@ -98,47 +98,47 @@
 		<band height="20" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="50" height="20"/>
-				<textElement/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{sofRequestedDatetime}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="50" y="0" width="70" height="20"/>
-				<textElement/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{mfgNumber}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="120" y="0" width="90" height="20"/>
-				<textElement/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{reloadAmount}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="210" y="0" width="90" height="20"/>
-				<textElement/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{fees}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="300" y="0" width="90" height="20"/>
-				<textElement/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{totalChargeToCustomer}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="390" y="0" width="90" height="20"/>
-				<textElement/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{commissionAmountDeductedBySof}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="480" y="0" width="90" height="20"/>
-				<textElement/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{netPaymentToTng}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="570" y="0" width="90" height="20"/>
-				<textElement/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{dateRefundedCustomer}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="660" y="0" width="90" height="20"/>
-				<textElement/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{cancellationStatus}]]></textFieldExpression>
 			</textField>
 		</band>

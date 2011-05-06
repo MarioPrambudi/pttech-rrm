@@ -31,7 +31,7 @@
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Report.reloadDate}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.reloadDate}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="100" y="0" width="100" height="40"/>
@@ -41,28 +41,28 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.totalReloadQty}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="200" y="0" width="100" height="40"/>
+				<reportElement x="200" y="0" width="130" height="40"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.totalPaymentToTngRm}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="300" y="0" width="100" height="40"/>
+				<reportElement x="330" y="0" width="150" height="40"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.totalCancellationRm}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="400" y="0" width="110" height="40"/>
+				<reportElement x="480" y="0" width="130" height="40"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.netPaymentToTng}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="510" y="0" width="110" height="40"/>
+				<reportElement x="610" y="0" width="130" height="40"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
@@ -71,35 +71,35 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="24" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="100" height="20"/>
-				<textElement/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{reloadDate}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="100" y="0" width="100" height="20"/>
-				<textElement/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{totalReloadQty}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="200" y="0" width="100" height="20"/>
-				<textElement/>
+				<reportElement x="200" y="0" width="130" height="20"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{totalPaymentToTngRm}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="300" y="0" width="100" height="20"/>
-				<textElement/>
+				<reportElement x="330" y="0" width="150" height="20"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{totalCancellationRm}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="400" y="0" width="110" height="20"/>
-				<textElement/>
+				<reportElement x="480" y="0" width="130" height="20"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{netPaymentToTng}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="510" y="0" width="110" height="20"/>
-				<textElement/>
+				<reportElement x="610" y="0" width="130" height="20"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{dateCreditedToTngAccount}]]></textFieldExpression>
 			</textField>
 		</band>
