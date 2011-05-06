@@ -75,4 +75,12 @@ privileged aspect ReloadRequest_Roo_JavaBean {
         this.tngKey = tngKey;
     }
     
+    public Date ReloadRequest.getModifiedTime() {
+        return this.modifiedTime;
+    }
+    
+    public void ReloadRequest.setModifiedTime(Date modifiedTime) {
+        this.modifiedTime = modifiedTime;
+    }
+    
 }

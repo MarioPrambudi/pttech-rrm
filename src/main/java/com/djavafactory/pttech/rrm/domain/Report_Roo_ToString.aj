@@ -40,7 +40,11 @@ privileged aspect Report_Roo_ToString {
         sb.append("AmountCreditedToTngRm: ").append(getAmountCreditedToTngRm()).append(", ");
         sb.append("DateCreditedToTngAccount: ").append(getDateCreditedToTngAccount()).append(", ");
         sb.append("TotalPaymentToTngRm: ").append(getTotalPaymentToTngRm()).append(", ");
-        sb.append("TngKey: ").append(getTngKey());
+        sb.append("TngKey: ").append(getTngKey()).append(", ");
+        sb.append("SumTotalChargeToCustomer: ").append(getSumTotalChargeToCustomer()).append(", ");
+        sb.append("SumCommissionAmountDeductedBySof: ").append(getSumCommissionAmountDeductedBySof()).append(", ");
+        sb.append("SumNetPaymentToTng: ").append(getSumNetPaymentToTng()).append(", ");
+        sb.append("ModifiedTime: ").append(getModifiedTime());
         return sb.toString();
     }
     

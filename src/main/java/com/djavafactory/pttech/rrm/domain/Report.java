@@ -93,4 +93,16 @@ public class Report {
     private BigDecimal totalPaymentToTngRm;
 
     private String tngKey;
+    
+    //Added
+    private BigDecimal sumTotalChargeToCustomer;
+    
+    private BigDecimal sumCommissionAmountDeductedBySof;
+    
+    private BigDecimal sumNetPaymentToTng;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(style = "S-")
+	private Date modifiedTime;
+    
 }
