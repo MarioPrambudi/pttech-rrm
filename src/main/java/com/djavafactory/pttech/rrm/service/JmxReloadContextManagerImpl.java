@@ -21,6 +21,10 @@ public class JmxReloadContextManagerImpl implements JmxReloadContextManager, App
     @Qualifier("celcomScheduler")
     private DynamicScheduler celcomScheduler;
 
+    @Autowired
+    @Qualifier("tngScheduler")
+    private DynamicScheduler tngScheduler;
+
     @ManagedAttribute
     public ConfigurableApplicationContext getContext() {
         return context;
@@ -49,6 +53,7 @@ public class JmxReloadContextManagerImpl implements JmxReloadContextManager, App
     @ManagedOperation
     public void reloadContext() {
         celcomScheduler.stopScheduler();
+        tngScheduler.stopScheduler();
         this.context.refresh();
     }
 

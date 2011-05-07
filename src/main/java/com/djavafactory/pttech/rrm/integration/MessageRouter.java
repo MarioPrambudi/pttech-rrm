@@ -25,15 +25,11 @@ public class MessageRouter {
      * @return Channel in string
      */
     public String routeReloadRequest(ReloadRequestMessage message) {
-        if (StringUtils.equalsIgnoreCase(message.getMsgType(), Constants.RELOAD_REQUEST_NEW)) {
-            return (message.getEncryptedMsg() == null || StringUtils.equalsIgnoreCase(message.getEncryptedMsg(), "")) ? "newReloadReqPersistChannel" : "tngKeyInboundChannel";
-        } else if (StringUtils.equalsIgnoreCase(message.getMsgType(), Constants.RELOAD_REQUEST_FAILED)) {
-            return "failedReloadReqPersistChannel";
-        } else if (StringUtils.equalsIgnoreCase(message.getMsgType(), Constants.RELOAD_REQUEST_EXPIRED)) {
-            return "expiredReloadReqPersistChannel";
-        } else {
-            return "successReloadReqPersistChannel";
-        }
+        return (StringUtils.equalsIgnoreCase(message.getMsgType(), Constants.RELOAD_REQUEST_NEW) && (message.getEncryptedMsg() != null && !StringUtils.equalsIgnoreCase(message.getEncryptedMsg(), "")))
+                ? "tngKeyInboundChannel"
+                : ((StringUtils.equalsIgnoreCase(message.getMsgType(), Constants.RELOAD_REQUEST_NEW) && (message.getEncryptedMsg() == null || StringUtils.equalsIgnoreCase(message.getEncryptedMsg(), "")))
+                ? "newReloadReqPersistChannel" : "rtmReloadReqPersistChannel");
+        //TODO add manual cancellation router in phase 2
     }
 
     /**
