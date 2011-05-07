@@ -3,10 +3,12 @@ package com.djavafactory.pttech.rrm.domain;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.test.RooIntegrationTest;
+import org.springframework.test.context.ContextConfiguration;
 
 import static junit.framework.Assert.assertNotNull;
 
 @RooIntegrationTest(entity = City.class)
+@ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext*.xml")
 public class CityIntegrationTest {
 
     @Autowired

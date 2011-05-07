@@ -5,25 +5,22 @@ package com.djavafactory.pttech.rrm.domain;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 privileged aspect CityIntegrationTest_Roo_IntegrationTest {
-    
-    declare @type: CityIntegrationTest: @RunWith(SpringJUnit4ClassRunner.class);
-    
-    declare @type: CityIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext.xml");
-    
-    declare @type: CityIntegrationTest: @Transactional;
-    
+
+    declare @type: CityIntegrationTest:@RunWith(SpringJUnit4ClassRunner.class);
+
+    declare @type: CityIntegrationTest:@Transactional;
+
     @Test
     public void CityIntegrationTest.testCountCitys() {
         org.junit.Assert.assertNotNull("Data on demand for 'City' failed to initialize correctly", dod.getRandomCity());
         long count = com.djavafactory.pttech.rrm.domain.City.countCitys();
         org.junit.Assert.assertTrue("Counter for 'City' incorrectly reported there were no entries", count > 0);
     }
-    
+
     @Test
     public void CityIntegrationTest.testFindCity() {
         com.djavafactory.pttech.rrm.domain.City obj = dod.getRandomCity();
@@ -34,7 +31,7 @@ privileged aspect CityIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Find method for 'City' illegally returned null for id '" + id + "'", obj);
         org.junit.Assert.assertEquals("Find method for 'City' returned the incorrect identifier", id, obj.getId());
     }
-    
+
     @Test
     public void CityIntegrationTest.testFindAllCitys() {
         org.junit.Assert.assertNotNull("Data on demand for 'City' failed to initialize correctly", dod.getRandomCity());
@@ -44,7 +41,7 @@ privileged aspect CityIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Find all method for 'City' illegally returned null", result);
         org.junit.Assert.assertTrue("Find all method for 'City' failed to return any data", result.size() > 0);
     }
-    
+
     @Test
     public void CityIntegrationTest.testFindCityEntries() {
         org.junit.Assert.assertNotNull("Data on demand for 'City' failed to initialize correctly", dod.getRandomCity());
@@ -54,7 +51,7 @@ privileged aspect CityIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Find entries method for 'City' illegally returned null", result);
         org.junit.Assert.assertEquals("Find entries method for 'City' returned an incorrect number of entries", count, result.size());
     }
-    
+
     @Test
     public void CityIntegrationTest.testFlush() {
         com.djavafactory.pttech.rrm.domain.City obj = dod.getRandomCity();
@@ -63,12 +60,12 @@ privileged aspect CityIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Data on demand for 'City' failed to provide an identifier", id);
         obj = com.djavafactory.pttech.rrm.domain.City.findCity(id);
         org.junit.Assert.assertNotNull("Find method for 'City' illegally returned null for id '" + id + "'", obj);
-        boolean modified =  dod.modifyCity(obj);
+        boolean modified = dod.modifyCity(obj);
         java.lang.Integer currentVersion = obj.getVersion();
         obj.flush();
         org.junit.Assert.assertTrue("Version for 'City' failed to increment on flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
-    
+
     @Test
     public void CityIntegrationTest.testMerge() {
         com.djavafactory.pttech.rrm.domain.City obj = dod.getRandomCity();
@@ -76,14 +73,14 @@ privileged aspect CityIntegrationTest_Roo_IntegrationTest {
         java.lang.Long id = obj.getId();
         org.junit.Assert.assertNotNull("Data on demand for 'City' failed to provide an identifier", id);
         obj = com.djavafactory.pttech.rrm.domain.City.findCity(id);
-        boolean modified =  dod.modifyCity(obj);
+        boolean modified = dod.modifyCity(obj);
         java.lang.Integer currentVersion = obj.getVersion();
         com.djavafactory.pttech.rrm.domain.City merged = (com.djavafactory.pttech.rrm.domain.City) obj.merge();
         obj.flush();
         org.junit.Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId(), id);
         org.junit.Assert.assertTrue("Version for 'City' failed to increment on merge and flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
-    
+
     @Test
     public void CityIntegrationTest.testPersist() {
         org.junit.Assert.assertNotNull("Data on demand for 'City' failed to initialize correctly", dod.getRandomCity());
@@ -94,7 +91,7 @@ privileged aspect CityIntegrationTest_Roo_IntegrationTest {
         obj.flush();
         org.junit.Assert.assertNotNull("Expected 'City' identifier to no longer be null", obj.getId());
     }
-    
+
     @Test
     public void CityIntegrationTest.testRemove() {
         com.djavafactory.pttech.rrm.domain.City obj = dod.getRandomCity();
@@ -106,5 +103,5 @@ privileged aspect CityIntegrationTest_Roo_IntegrationTest {
         obj.flush();
         org.junit.Assert.assertNull("Failed to remove 'City' with identifier '" + id + "'", com.djavafactory.pttech.rrm.domain.City.findCity(id));
     }
-    
+
 }

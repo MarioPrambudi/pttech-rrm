@@ -7,28 +7,25 @@ import com.djavafactory.pttech.rrm.domain.ParamDataOnDemand;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 privileged aspect ParamIntegrationTest_Roo_IntegrationTest {
-    
-    declare @type: ParamIntegrationTest: @RunWith(SpringJUnit4ClassRunner.class);
-    
-    declare @type: ParamIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext.xml");
-    
-    declare @type: ParamIntegrationTest: @Transactional;
-    
+
+    declare @type: ParamIntegrationTest:@RunWith(SpringJUnit4ClassRunner.class);
+
+    declare @type: ParamIntegrationTest:@Transactional;
+
     @Autowired
     private ParamDataOnDemand ParamIntegrationTest.dod;
-    
+
     @Test
     public void ParamIntegrationTest.testCountParams() {
         org.junit.Assert.assertNotNull("Data on demand for 'Param' failed to initialize correctly", dod.getRandomParam());
         long count = com.djavafactory.pttech.rrm.domain.Param.countParams();
         org.junit.Assert.assertTrue("Counter for 'Param' incorrectly reported there were no entries", count > 0);
     }
-    
+
     @Test
     public void ParamIntegrationTest.testFindParam() {
         com.djavafactory.pttech.rrm.domain.Param obj = dod.getRandomParam();
@@ -39,7 +36,7 @@ privileged aspect ParamIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Find method for 'Param' illegally returned null for id '" + id + "'", obj);
         org.junit.Assert.assertEquals("Find method for 'Param' returned the incorrect identifier", id, obj.getId());
     }
-    
+
     @Test
     public void ParamIntegrationTest.testFindAllParams() {
         org.junit.Assert.assertNotNull("Data on demand for 'Param' failed to initialize correctly", dod.getRandomParam());
@@ -49,7 +46,7 @@ privileged aspect ParamIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Find all method for 'Param' illegally returned null", result);
         org.junit.Assert.assertTrue("Find all method for 'Param' failed to return any data", result.size() > 0);
     }
-    
+
     @Test
     public void ParamIntegrationTest.testFindParamEntries() {
         org.junit.Assert.assertNotNull("Data on demand for 'Param' failed to initialize correctly", dod.getRandomParam());
@@ -59,7 +56,7 @@ privileged aspect ParamIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Find entries method for 'Param' illegally returned null", result);
         org.junit.Assert.assertEquals("Find entries method for 'Param' returned an incorrect number of entries", count, result.size());
     }
-    
+
     @Test
     public void ParamIntegrationTest.testFlush() {
         com.djavafactory.pttech.rrm.domain.Param obj = dod.getRandomParam();
@@ -68,12 +65,12 @@ privileged aspect ParamIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Data on demand for 'Param' failed to provide an identifier", id);
         obj = com.djavafactory.pttech.rrm.domain.Param.findParam(id);
         org.junit.Assert.assertNotNull("Find method for 'Param' illegally returned null for id '" + id + "'", obj);
-        boolean modified =  dod.modifyParam(obj);
+        boolean modified = dod.modifyParam(obj);
         java.lang.Integer currentVersion = obj.getVersion();
         obj.flush();
         org.junit.Assert.assertTrue("Version for 'Param' failed to increment on flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
-    
+
     @Test
     public void ParamIntegrationTest.testMerge() {
         com.djavafactory.pttech.rrm.domain.Param obj = dod.getRandomParam();
@@ -81,14 +78,14 @@ privileged aspect ParamIntegrationTest_Roo_IntegrationTest {
         java.lang.Long id = obj.getId();
         org.junit.Assert.assertNotNull("Data on demand for 'Param' failed to provide an identifier", id);
         obj = com.djavafactory.pttech.rrm.domain.Param.findParam(id);
-        boolean modified =  dod.modifyParam(obj);
+        boolean modified = dod.modifyParam(obj);
         java.lang.Integer currentVersion = obj.getVersion();
         com.djavafactory.pttech.rrm.domain.Param merged = (com.djavafactory.pttech.rrm.domain.Param) obj.merge();
         obj.flush();
         org.junit.Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId(), id);
         org.junit.Assert.assertTrue("Version for 'Param' failed to increment on merge and flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
-    
+
     @Test
     public void ParamIntegrationTest.testPersist() {
         org.junit.Assert.assertNotNull("Data on demand for 'Param' failed to initialize correctly", dod.getRandomParam());
@@ -99,7 +96,7 @@ privileged aspect ParamIntegrationTest_Roo_IntegrationTest {
         obj.flush();
         org.junit.Assert.assertNotNull("Expected 'Param' identifier to no longer be null", obj.getId());
     }
-    
+
     @Test
     public void ParamIntegrationTest.testRemove() {
         com.djavafactory.pttech.rrm.domain.Param obj = dod.getRandomParam();
@@ -111,5 +108,5 @@ privileged aspect ParamIntegrationTest_Roo_IntegrationTest {
         obj.flush();
         org.junit.Assert.assertNull("Failed to remove 'Param' with identifier '" + id + "'", com.djavafactory.pttech.rrm.domain.Param.findParam(id));
     }
-    
+
 }

@@ -7,28 +7,25 @@ import com.djavafactory.pttech.rrm.domain.ConfigurationDataOnDemand;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 privileged aspect ConfigurationIntegrationTest_Roo_IntegrationTest {
-    
-    declare @type: ConfigurationIntegrationTest: @RunWith(SpringJUnit4ClassRunner.class);
-    
-    declare @type: ConfigurationIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext.xml");
-    
-    declare @type: ConfigurationIntegrationTest: @Transactional;
-    
+
+    declare @type: ConfigurationIntegrationTest:@RunWith(SpringJUnit4ClassRunner.class);
+
+    declare @type: ConfigurationIntegrationTest:@Transactional;
+
     @Autowired
     private ConfigurationDataOnDemand ConfigurationIntegrationTest.dod;
-    
+
     @Test
     public void ConfigurationIntegrationTest.testCountConfigurations() {
         org.junit.Assert.assertNotNull("Data on demand for 'Configuration' failed to initialize correctly", dod.getRandomConfiguration());
         long count = com.djavafactory.pttech.rrm.domain.Configuration.countConfigurations();
         org.junit.Assert.assertTrue("Counter for 'Configuration' incorrectly reported there were no entries", count > 0);
     }
-    
+
     @Test
     public void ConfigurationIntegrationTest.testFindConfiguration() {
         com.djavafactory.pttech.rrm.domain.Configuration obj = dod.getRandomConfiguration();
@@ -39,7 +36,7 @@ privileged aspect ConfigurationIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Find method for 'Configuration' illegally returned null for id '" + id + "'", obj);
         org.junit.Assert.assertEquals("Find method for 'Configuration' returned the incorrect identifier", id, obj.getId());
     }
-    
+
     @Test
     public void ConfigurationIntegrationTest.testFindAllConfigurations() {
         org.junit.Assert.assertNotNull("Data on demand for 'Configuration' failed to initialize correctly", dod.getRandomConfiguration());
@@ -49,7 +46,7 @@ privileged aspect ConfigurationIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Find all method for 'Configuration' illegally returned null", result);
         org.junit.Assert.assertTrue("Find all method for 'Configuration' failed to return any data", result.size() > 0);
     }
-    
+
     @Test
     public void ConfigurationIntegrationTest.testFindConfigurationEntries() {
         org.junit.Assert.assertNotNull("Data on demand for 'Configuration' failed to initialize correctly", dod.getRandomConfiguration());
@@ -59,7 +56,7 @@ privileged aspect ConfigurationIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Find entries method for 'Configuration' illegally returned null", result);
         org.junit.Assert.assertEquals("Find entries method for 'Configuration' returned an incorrect number of entries", count, result.size());
     }
-    
+
     @Test
     public void ConfigurationIntegrationTest.testFlush() {
         com.djavafactory.pttech.rrm.domain.Configuration obj = dod.getRandomConfiguration();
@@ -68,12 +65,12 @@ privileged aspect ConfigurationIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Data on demand for 'Configuration' failed to provide an identifier", id);
         obj = com.djavafactory.pttech.rrm.domain.Configuration.findConfiguration(id);
         org.junit.Assert.assertNotNull("Find method for 'Configuration' illegally returned null for id '" + id + "'", obj);
-        boolean modified =  dod.modifyConfiguration(obj);
+        boolean modified = dod.modifyConfiguration(obj);
         java.lang.Integer currentVersion = obj.getVersion();
         obj.flush();
         org.junit.Assert.assertTrue("Version for 'Configuration' failed to increment on flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
-    
+
     @Test
     public void ConfigurationIntegrationTest.testMerge() {
         com.djavafactory.pttech.rrm.domain.Configuration obj = dod.getRandomConfiguration();
@@ -81,14 +78,14 @@ privileged aspect ConfigurationIntegrationTest_Roo_IntegrationTest {
         java.lang.Long id = obj.getId();
         org.junit.Assert.assertNotNull("Data on demand for 'Configuration' failed to provide an identifier", id);
         obj = com.djavafactory.pttech.rrm.domain.Configuration.findConfiguration(id);
-        boolean modified =  dod.modifyConfiguration(obj);
+        boolean modified = dod.modifyConfiguration(obj);
         java.lang.Integer currentVersion = obj.getVersion();
         com.djavafactory.pttech.rrm.domain.Configuration merged = (com.djavafactory.pttech.rrm.domain.Configuration) obj.merge();
         obj.flush();
         org.junit.Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId(), id);
         org.junit.Assert.assertTrue("Version for 'Configuration' failed to increment on merge and flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
-    
+
     @Test
     public void ConfigurationIntegrationTest.testPersist() {
         org.junit.Assert.assertNotNull("Data on demand for 'Configuration' failed to initialize correctly", dod.getRandomConfiguration());
@@ -99,7 +96,7 @@ privileged aspect ConfigurationIntegrationTest_Roo_IntegrationTest {
         obj.flush();
         org.junit.Assert.assertNotNull("Expected 'Configuration' identifier to no longer be null", obj.getId());
     }
-    
+
     @Test
     public void ConfigurationIntegrationTest.testRemove() {
         com.djavafactory.pttech.rrm.domain.Configuration obj = dod.getRandomConfiguration();
@@ -111,5 +108,5 @@ privileged aspect ConfigurationIntegrationTest_Roo_IntegrationTest {
         obj.flush();
         org.junit.Assert.assertNull("Failed to remove 'Configuration' with identifier '" + id + "'", com.djavafactory.pttech.rrm.domain.Configuration.findConfiguration(id));
     }
-    
+
 }

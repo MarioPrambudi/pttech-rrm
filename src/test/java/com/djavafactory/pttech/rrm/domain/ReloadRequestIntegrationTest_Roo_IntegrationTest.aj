@@ -7,28 +7,25 @@ import com.djavafactory.pttech.rrm.domain.ReloadRequestDataOnDemand;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 privileged aspect ReloadRequestIntegrationTest_Roo_IntegrationTest {
-    
-    declare @type: ReloadRequestIntegrationTest: @RunWith(SpringJUnit4ClassRunner.class);
-    
-    declare @type: ReloadRequestIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext.xml");
-    
-    declare @type: ReloadRequestIntegrationTest: @Transactional;
-    
+
+    declare @type: ReloadRequestIntegrationTest:@RunWith(SpringJUnit4ClassRunner.class);
+
+    declare @type: ReloadRequestIntegrationTest:@Transactional;
+
     @Autowired
     private ReloadRequestDataOnDemand ReloadRequestIntegrationTest.dod;
-    
+
     @Test
     public void ReloadRequestIntegrationTest.testCountReloadRequests() {
         org.junit.Assert.assertNotNull("Data on demand for 'ReloadRequest' failed to initialize correctly", dod.getRandomReloadRequest());
         long count = com.djavafactory.pttech.rrm.domain.ReloadRequest.countReloadRequests();
         org.junit.Assert.assertTrue("Counter for 'ReloadRequest' incorrectly reported there were no entries", count > 0);
     }
-    
+
     @Test
     public void ReloadRequestIntegrationTest.testFindReloadRequest() {
         com.djavafactory.pttech.rrm.domain.ReloadRequest obj = dod.getRandomReloadRequest();
@@ -39,7 +36,7 @@ privileged aspect ReloadRequestIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Find method for 'ReloadRequest' illegally returned null for id '" + id + "'", obj);
         org.junit.Assert.assertEquals("Find method for 'ReloadRequest' returned the incorrect identifier", id, obj.getId());
     }
-    
+
     @Test
     public void ReloadRequestIntegrationTest.testFindAllReloadRequests() {
         org.junit.Assert.assertNotNull("Data on demand for 'ReloadRequest' failed to initialize correctly", dod.getRandomReloadRequest());
@@ -49,7 +46,7 @@ privileged aspect ReloadRequestIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Find all method for 'ReloadRequest' illegally returned null", result);
         org.junit.Assert.assertTrue("Find all method for 'ReloadRequest' failed to return any data", result.size() > 0);
     }
-    
+
     @Test
     public void ReloadRequestIntegrationTest.testFindReloadRequestEntries() {
         org.junit.Assert.assertNotNull("Data on demand for 'ReloadRequest' failed to initialize correctly", dod.getRandomReloadRequest());
@@ -59,7 +56,7 @@ privileged aspect ReloadRequestIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Find entries method for 'ReloadRequest' illegally returned null", result);
         org.junit.Assert.assertEquals("Find entries method for 'ReloadRequest' returned an incorrect number of entries", count, result.size());
     }
-    
+
     @Test
     public void ReloadRequestIntegrationTest.testFlush() {
         com.djavafactory.pttech.rrm.domain.ReloadRequest obj = dod.getRandomReloadRequest();
@@ -68,12 +65,12 @@ privileged aspect ReloadRequestIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Data on demand for 'ReloadRequest' failed to provide an identifier", id);
         obj = com.djavafactory.pttech.rrm.domain.ReloadRequest.findReloadRequest(id);
         org.junit.Assert.assertNotNull("Find method for 'ReloadRequest' illegally returned null for id '" + id + "'", obj);
-        boolean modified =  dod.modifyReloadRequest(obj);
+        boolean modified = dod.modifyReloadRequest(obj);
         java.lang.Integer currentVersion = obj.getVersion();
         obj.flush();
         org.junit.Assert.assertTrue("Version for 'ReloadRequest' failed to increment on flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
-    
+
     @Test
     public void ReloadRequestIntegrationTest.testMerge() {
         com.djavafactory.pttech.rrm.domain.ReloadRequest obj = dod.getRandomReloadRequest();
@@ -81,14 +78,14 @@ privileged aspect ReloadRequestIntegrationTest_Roo_IntegrationTest {
         java.lang.Long id = obj.getId();
         org.junit.Assert.assertNotNull("Data on demand for 'ReloadRequest' failed to provide an identifier", id);
         obj = com.djavafactory.pttech.rrm.domain.ReloadRequest.findReloadRequest(id);
-        boolean modified =  dod.modifyReloadRequest(obj);
+        boolean modified = dod.modifyReloadRequest(obj);
         java.lang.Integer currentVersion = obj.getVersion();
         com.djavafactory.pttech.rrm.domain.ReloadRequest merged = (com.djavafactory.pttech.rrm.domain.ReloadRequest) obj.merge();
         obj.flush();
         org.junit.Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId(), id);
         org.junit.Assert.assertTrue("Version for 'ReloadRequest' failed to increment on merge and flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
-    
+
     @Test
     public void ReloadRequestIntegrationTest.testPersist() {
         org.junit.Assert.assertNotNull("Data on demand for 'ReloadRequest' failed to initialize correctly", dod.getRandomReloadRequest());
@@ -99,7 +96,7 @@ privileged aspect ReloadRequestIntegrationTest_Roo_IntegrationTest {
         obj.flush();
         org.junit.Assert.assertNotNull("Expected 'ReloadRequest' identifier to no longer be null", obj.getId());
     }
-    
+
     @Test
     public void ReloadRequestIntegrationTest.testRemove() {
         com.djavafactory.pttech.rrm.domain.ReloadRequest obj = dod.getRandomReloadRequest();
@@ -111,5 +108,5 @@ privileged aspect ReloadRequestIntegrationTest_Roo_IntegrationTest {
         obj.flush();
         org.junit.Assert.assertNull("Failed to remove 'ReloadRequest' with identifier '" + id + "'", com.djavafactory.pttech.rrm.domain.ReloadRequest.findReloadRequest(id));
     }
-    
+
 }

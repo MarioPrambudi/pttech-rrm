@@ -7,28 +7,25 @@ import com.djavafactory.pttech.rrm.domain.ProvinceDataOnDemand;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 privileged aspect ProvinceIntegrationTest_Roo_IntegrationTest {
-    
-    declare @type: ProvinceIntegrationTest: @RunWith(SpringJUnit4ClassRunner.class);
-    
-    declare @type: ProvinceIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext.xml");
-    
-    declare @type: ProvinceIntegrationTest: @Transactional;
-    
+
+    declare @type: ProvinceIntegrationTest:@RunWith(SpringJUnit4ClassRunner.class);
+
+    declare @type: ProvinceIntegrationTest:@Transactional;
+
     @Autowired
     private ProvinceDataOnDemand ProvinceIntegrationTest.dod;
-    
+
     @Test
     public void ProvinceIntegrationTest.testCountProvinces() {
         org.junit.Assert.assertNotNull("Data on demand for 'Province' failed to initialize correctly", dod.getRandomProvince());
         long count = com.djavafactory.pttech.rrm.domain.Province.countProvinces();
         org.junit.Assert.assertTrue("Counter for 'Province' incorrectly reported there were no entries", count > 0);
     }
-    
+
     @Test
     public void ProvinceIntegrationTest.testFindProvince() {
         com.djavafactory.pttech.rrm.domain.Province obj = dod.getRandomProvince();
@@ -39,7 +36,7 @@ privileged aspect ProvinceIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Find method for 'Province' illegally returned null for id '" + id + "'", obj);
         org.junit.Assert.assertEquals("Find method for 'Province' returned the incorrect identifier", id, obj.getId());
     }
-    
+
     @Test
     public void ProvinceIntegrationTest.testFindAllProvinces() {
         org.junit.Assert.assertNotNull("Data on demand for 'Province' failed to initialize correctly", dod.getRandomProvince());
@@ -49,7 +46,7 @@ privileged aspect ProvinceIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Find all method for 'Province' illegally returned null", result);
         org.junit.Assert.assertTrue("Find all method for 'Province' failed to return any data", result.size() > 0);
     }
-    
+
     @Test
     public void ProvinceIntegrationTest.testFindProvinceEntries() {
         org.junit.Assert.assertNotNull("Data on demand for 'Province' failed to initialize correctly", dod.getRandomProvince());
@@ -59,7 +56,7 @@ privileged aspect ProvinceIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Find entries method for 'Province' illegally returned null", result);
         org.junit.Assert.assertEquals("Find entries method for 'Province' returned an incorrect number of entries", count, result.size());
     }
-    
+
     @Test
     public void ProvinceIntegrationTest.testFlush() {
         com.djavafactory.pttech.rrm.domain.Province obj = dod.getRandomProvince();
@@ -68,12 +65,12 @@ privileged aspect ProvinceIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Data on demand for 'Province' failed to provide an identifier", id);
         obj = com.djavafactory.pttech.rrm.domain.Province.findProvince(id);
         org.junit.Assert.assertNotNull("Find method for 'Province' illegally returned null for id '" + id + "'", obj);
-        boolean modified =  dod.modifyProvince(obj);
+        boolean modified = dod.modifyProvince(obj);
         java.lang.Integer currentVersion = obj.getVersion();
         obj.flush();
         org.junit.Assert.assertTrue("Version for 'Province' failed to increment on flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
-    
+
     @Test
     public void ProvinceIntegrationTest.testMerge() {
         com.djavafactory.pttech.rrm.domain.Province obj = dod.getRandomProvince();
@@ -81,14 +78,14 @@ privileged aspect ProvinceIntegrationTest_Roo_IntegrationTest {
         java.lang.Long id = obj.getId();
         org.junit.Assert.assertNotNull("Data on demand for 'Province' failed to provide an identifier", id);
         obj = com.djavafactory.pttech.rrm.domain.Province.findProvince(id);
-        boolean modified =  dod.modifyProvince(obj);
+        boolean modified = dod.modifyProvince(obj);
         java.lang.Integer currentVersion = obj.getVersion();
         com.djavafactory.pttech.rrm.domain.Province merged = (com.djavafactory.pttech.rrm.domain.Province) obj.merge();
         obj.flush();
         org.junit.Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId(), id);
         org.junit.Assert.assertTrue("Version for 'Province' failed to increment on merge and flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
-    
+
     @Test
     public void ProvinceIntegrationTest.testPersist() {
         org.junit.Assert.assertNotNull("Data on demand for 'Province' failed to initialize correctly", dod.getRandomProvince());
@@ -99,7 +96,7 @@ privileged aspect ProvinceIntegrationTest_Roo_IntegrationTest {
         obj.flush();
         org.junit.Assert.assertNotNull("Expected 'Province' identifier to no longer be null", obj.getId());
     }
-    
+
     @Test
     public void ProvinceIntegrationTest.testRemove() {
         com.djavafactory.pttech.rrm.domain.Province obj = dod.getRandomProvince();
@@ -111,5 +108,5 @@ privileged aspect ProvinceIntegrationTest_Roo_IntegrationTest {
         obj.flush();
         org.junit.Assert.assertNull("Failed to remove 'Province' with identifier '" + id + "'", com.djavafactory.pttech.rrm.domain.Province.findProvince(id));
     }
-    
+
 }

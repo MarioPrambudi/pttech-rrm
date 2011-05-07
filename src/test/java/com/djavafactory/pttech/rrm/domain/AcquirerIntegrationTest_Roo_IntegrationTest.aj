@@ -5,25 +5,22 @@ package com.djavafactory.pttech.rrm.domain;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 privileged aspect AcquirerIntegrationTest_Roo_IntegrationTest {
-    
-    declare @type: AcquirerIntegrationTest: @RunWith(SpringJUnit4ClassRunner.class);
-    
-    declare @type: AcquirerIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext.xml");
-    
-    declare @type: AcquirerIntegrationTest: @Transactional;
-    
+
+    declare @type: AcquirerIntegrationTest:@RunWith(SpringJUnit4ClassRunner.class);
+
+    declare @type: AcquirerIntegrationTest:@Transactional;
+
     @Test
     public void AcquirerIntegrationTest.testCountAcquirers() {
         org.junit.Assert.assertNotNull("Data on demand for 'Acquirer' failed to initialize correctly", dod.getRandomAcquirer());
         long count = com.djavafactory.pttech.rrm.domain.Acquirer.countAcquirers();
         org.junit.Assert.assertTrue("Counter for 'Acquirer' incorrectly reported there were no entries", count > 0);
     }
-    
+
     @Test
     public void AcquirerIntegrationTest.testFindAcquirer() {
         com.djavafactory.pttech.rrm.domain.Acquirer obj = dod.getRandomAcquirer();
@@ -34,7 +31,7 @@ privileged aspect AcquirerIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Find method for 'Acquirer' illegally returned null for id '" + id + "'", obj);
         org.junit.Assert.assertEquals("Find method for 'Acquirer' returned the incorrect identifier", id, obj.getId());
     }
-    
+
     @Test
     public void AcquirerIntegrationTest.testFindAllAcquirers() {
         org.junit.Assert.assertNotNull("Data on demand for 'Acquirer' failed to initialize correctly", dod.getRandomAcquirer());
@@ -44,7 +41,7 @@ privileged aspect AcquirerIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Find all method for 'Acquirer' illegally returned null", result);
         org.junit.Assert.assertTrue("Find all method for 'Acquirer' failed to return any data", result.size() > 0);
     }
-    
+
     @Test
     public void AcquirerIntegrationTest.testFindAcquirerEntries() {
         org.junit.Assert.assertNotNull("Data on demand for 'Acquirer' failed to initialize correctly", dod.getRandomAcquirer());
@@ -54,7 +51,7 @@ privileged aspect AcquirerIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Find entries method for 'Acquirer' illegally returned null", result);
         org.junit.Assert.assertEquals("Find entries method for 'Acquirer' returned an incorrect number of entries", count, result.size());
     }
-    
+
     @Test
     public void AcquirerIntegrationTest.testFlush() {
         com.djavafactory.pttech.rrm.domain.Acquirer obj = dod.getRandomAcquirer();
@@ -63,12 +60,12 @@ privileged aspect AcquirerIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Data on demand for 'Acquirer' failed to provide an identifier", id);
         obj = com.djavafactory.pttech.rrm.domain.Acquirer.findAcquirer(id);
         org.junit.Assert.assertNotNull("Find method for 'Acquirer' illegally returned null for id '" + id + "'", obj);
-        boolean modified =  dod.modifyAcquirer(obj);
+        boolean modified = dod.modifyAcquirer(obj);
         java.lang.Integer currentVersion = obj.getVersion();
         obj.flush();
         org.junit.Assert.assertTrue("Version for 'Acquirer' failed to increment on flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
-    
+
     @Test
     public void AcquirerIntegrationTest.testMerge() {
         com.djavafactory.pttech.rrm.domain.Acquirer obj = dod.getRandomAcquirer();
@@ -76,14 +73,14 @@ privileged aspect AcquirerIntegrationTest_Roo_IntegrationTest {
         java.lang.Long id = obj.getId();
         org.junit.Assert.assertNotNull("Data on demand for 'Acquirer' failed to provide an identifier", id);
         obj = com.djavafactory.pttech.rrm.domain.Acquirer.findAcquirer(id);
-        boolean modified =  dod.modifyAcquirer(obj);
+        boolean modified = dod.modifyAcquirer(obj);
         java.lang.Integer currentVersion = obj.getVersion();
         com.djavafactory.pttech.rrm.domain.Acquirer merged = (com.djavafactory.pttech.rrm.domain.Acquirer) obj.merge();
         obj.flush();
         org.junit.Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId(), id);
         org.junit.Assert.assertTrue("Version for 'Acquirer' failed to increment on merge and flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
-    
+
     @Test
     public void AcquirerIntegrationTest.testPersist() {
         org.junit.Assert.assertNotNull("Data on demand for 'Acquirer' failed to initialize correctly", dod.getRandomAcquirer());
@@ -94,7 +91,7 @@ privileged aspect AcquirerIntegrationTest_Roo_IntegrationTest {
         obj.flush();
         org.junit.Assert.assertNotNull("Expected 'Acquirer' identifier to no longer be null", obj.getId());
     }
-    
+
     @Test
     public void AcquirerIntegrationTest.testRemove() {
         com.djavafactory.pttech.rrm.domain.Acquirer obj = dod.getRandomAcquirer();
@@ -106,5 +103,5 @@ privileged aspect AcquirerIntegrationTest_Roo_IntegrationTest {
         obj.flush();
         org.junit.Assert.assertNull("Failed to remove 'Acquirer' with identifier '" + id + "'", com.djavafactory.pttech.rrm.domain.Acquirer.findAcquirer(id));
     }
-    
+
 }

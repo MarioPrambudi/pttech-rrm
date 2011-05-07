@@ -41,6 +41,24 @@ public class MessageFilter {
     }
 
     /**
+     * Method to validate whether the Success/Failed/Expired reload request from RTM is allow to proceed based on the current status in RRM.
+     *
+     * @param requestMessage ReloadRequestMessage object
+     * @return true/false
+     */
+    public Boolean rtmReloadRequestFilter(ReloadRequestMessage requestMessage) {
+        List<ReloadRequest> reloadRecord = new ReloadRequest().findReloadRequestsByTransId(requestMessage.getTransId()).getResultList();
+        if (reloadRecord == null || reloadRecord.isEmpty()) {
+            return false;
+        } else if (!StringUtils.equalsIgnoreCase(requestMessage.getMsgType(), Constants.RELOAD_REQUEST_SUCCESS)
+                && !StringUtils.equalsIgnoreCase(reloadRecord.get(0).getStatus(), Constants.RELOAD_STATUS_PENDING)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Method to validate whether the incoming TnG key message has exceeded the configured time-out period.
      *
      * @param requestMessage ReloadRequestMessage object

@@ -67,6 +67,16 @@ public class MessageTransformer {
     }
 
     /**
+     * Method to transform the ReloadRequestMessage to a response string in JSON format.
+     *
+     * @param message ReloadRequestMessage object
+     * @return Response JSON string
+     */
+    public String transformInvalidStatusMessage(ReloadRequestMessage message) {
+        return transformResponse(message, "97", "Unable to proceed the request due to the record is not found or the record is not in a correct status.");         //TODO
+    }
+
+    /**
      * Method to transform the ReloadRequestMessage or ReloadResponseMessage to JSON format.
      *
      * @param message Object message object
