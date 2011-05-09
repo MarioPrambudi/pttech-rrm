@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/integration"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:ws="http://www.springframework.org/schema/integration/ws"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+							http://www.springframework.org/schema/integration
+			                http://www.springframework.org/schema/integration/spring-integration-2.0.xsd
+			                http://www.springframework.org/schema/integration/ws http://www.springframework.org/schema/integration/ws/spring-integration-ws-2.0.xsd">
+
+    <channel id="tngRequestWsChannel">
+        <queue capacity="100"/>
+    </channel>
+    <ws:outbound-gateway id="tngRequestWsGateway"
+                         request-channel="tngRequestWsChannel" uri="${TNG.reloadendpoint}"
+                         marshaller="jaxbMarshaller" unmarshaller="jaxbMarshaller"
+                         reply-channel="tngRequestReplyChannel"/>
+
+    <channel id="tngRequestReplyChannel">
+        <queue capacity="100"/>
+    </channel>
+    <!-- TODO: get response from TnG and process the response content -->
+
+    <beans:bean id="jaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <beans:property name="contextPath" value="com.djavafactory.pttech.rrm.wsclient"/>
+    </beans:bean>
+
+</beans:beans>

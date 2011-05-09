@@ -57,8 +57,8 @@
     <channel id="tngReloadRequestChannel">
         <queue capacity="100"/>
     </channel>
-    <transformer input-channel="tngReloadRequestChannel" ref="transformerBean" method="transformMessageToJson"
-                 output-channel="tngReloadReqChannel"/>
+    <transformer input-channel="tngReloadRequestChannel" ref="transformerBean" method="transformMessageToReloadReq"
+                 output-channel="tngRequestWsChannel"/>
     <!-- Waiting for confirmation on whether there's proxy for tng. -->
 
     <channel id="tngKeyExceedTimeOutChannel">

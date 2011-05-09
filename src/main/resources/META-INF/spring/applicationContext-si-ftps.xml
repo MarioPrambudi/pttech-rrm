@@ -16,13 +16,6 @@
 
     <beans:bean id="jdbcPropertyPlaceHolderConfigurer"
                 class="com.djavafactory.pttech.rrm.conf.JdbcPropertyPlaceHolderConfigurer">
-        <beans:property name="configKey">
-            <beans:list>
-                <beans:value>CEL.location</beans:value>
-                <beans:value>CEL.uploadschedule</beans:value>
-                <beans:value>TNG.uploadschedule</beans:value>
-            </beans:list>
-        </beans:property>
         <beans:property name="dataSource" ref="dataSource"/>
     </beans:bean>
 

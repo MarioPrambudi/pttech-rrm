@@ -96,7 +96,7 @@ public class MessageMapper {
             }
         }
 
-        logger.info("[mapTngReloadResponse - New ReloadRequest object] >> " + reloadRequest);
+        logger.info("[mapTngReloadResponse - New ReloadReq object] >> " + reloadRequest);
         objectList.add(reloadRequest);
         objectList.add(message);
         return objectList;
@@ -126,7 +126,7 @@ public class MessageMapper {
         }
         reloadRequest.setStatus(status);
 
-        logger.info("[convertMessageToReloadRequest - New ReloadRequest object] >> " + reloadRequest);
+        logger.info("[convertMessageToReloadRequest - New ReloadReq object] >> " + reloadRequest);
         return reloadRequest;
     }
 }

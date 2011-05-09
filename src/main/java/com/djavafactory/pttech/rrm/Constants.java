@@ -36,6 +36,8 @@ public final class Constants {
     public static final String CONFIG_CEL_BATCH_SCHEDULE = "CEL.uploadschedule";
     public static final String CONFIG_TNG_BATCH_SCHEDULE = "TNG.uploadschedule";
     public static final String CONFIG_CEL_LOCATION = "CEL.location";
+    public static final String CONFIG_TNG_REQUESTWS = "TNG.reloadendpoint";
+    public static final String CONFIG_TNG_BATCHWS = "TNG.batchendpoint";
 
     /**
      * Constants to be used in database logging to identify the status of the terminal.
@@ -50,26 +52,26 @@ public final class Constants {
     public static final String REPORT_CONFIG_TNGCOMM = "REPORT.TNGCOMM";
 
     /**
-     * Constants for DataUtil 
+     * Constants for DataUtil
      */
-    public static final TimeZone TIMEZONE_GMT  = TimeZone.getTimeZone("GMT+8:00");
-    
+    public static final TimeZone TIMEZONE_GMT = TimeZone.getTimeZone("GMT+8:00");
+
     /**
      * Constants for report displayed fields
      */
     public static final String REPORT_RELOAD_REQUEST_FAILED = "FAILED";
     public static final String REPORT_RELOAD_REQUEST_EXPIRED = "EXPIRED";
     public static final String REPORT_RELOAD_REQUEST_CANCELLED = "MANUAL CANCEL";
-    
+
     public static final String REPORT_STATUS_DAILY = "DAILY";
     public static final String REPORT_STATUS_MONTHLY = "MONTHLY";
-        
+
     /**
      * Constants for Audit Trail
      */
     public static final String AUDIT_TRAIL_MONGODB_COLLECTION_NAME = "AuditTrail";
     public static final String AUDIT_TRAIL_ACTION_PERSIST = "P";
     public static final String AUDIT_TRAIL_ACTION_MERGE = "M";
-    public static final String AUDIT_TRAIL_ACTION_REMOVE = "R";    
+    public static final String AUDIT_TRAIL_ACTION_REMOVE = "R";
 
 }
