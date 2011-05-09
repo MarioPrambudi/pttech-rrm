@@ -344,4 +344,15 @@ public class DateUtil {
 		cal.add(field, value);
 		return cal.getTime();
 	}
+	
+	public static int getDayOfMonth(int year, int month, int date){
+		int days = 0;
+		Calendar cal = Calendar.getInstance();
+		if(year > 0 && month > 0 && date > 0)
+		{
+			cal = new GregorianCalendar(year, month, date);
+			days = cal.getActualMaximum(Calendar.DAY_OF_MONTH); 
+		}
+		return days;
+	}
 }

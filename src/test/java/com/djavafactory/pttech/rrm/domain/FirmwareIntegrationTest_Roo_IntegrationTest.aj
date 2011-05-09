@@ -11,21 +11,21 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 privileged aspect FirmwareIntegrationTest_Roo_IntegrationTest {
-
-    declare @type: FirmwareIntegrationTest:@RunWith(SpringJUnit4ClassRunner.class);
-
-    declare @type: FirmwareIntegrationTest:@Transactional;
-
+    
+    declare @type: FirmwareIntegrationTest: @RunWith(SpringJUnit4ClassRunner.class);
+    
+    declare @type: FirmwareIntegrationTest: @Transactional;
+    
     @Autowired
     private FirmwareDataOnDemand FirmwareIntegrationTest.dod;
-
+    
     @Test
     public void FirmwareIntegrationTest.testCountFirmwares() {
         org.junit.Assert.assertNotNull("Data on demand for 'Firmware' failed to initialize correctly", dod.getRandomFirmware());
         long count = com.djavafactory.pttech.rrm.domain.Firmware.countFirmwares();
         org.junit.Assert.assertTrue("Counter for 'Firmware' incorrectly reported there were no entries", count > 0);
     }
-
+    
     @Test
     public void FirmwareIntegrationTest.testFindFirmware() {
         com.djavafactory.pttech.rrm.domain.Firmware obj = dod.getRandomFirmware();
@@ -36,7 +36,7 @@ privileged aspect FirmwareIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Find method for 'Firmware' illegally returned null for id '" + id + "'", obj);
         org.junit.Assert.assertEquals("Find method for 'Firmware' returned the incorrect identifier", id, obj.getId());
     }
-
+    
     @Test
     public void FirmwareIntegrationTest.testFindAllFirmwares() {
         org.junit.Assert.assertNotNull("Data on demand for 'Firmware' failed to initialize correctly", dod.getRandomFirmware());
@@ -46,7 +46,7 @@ privileged aspect FirmwareIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Find all method for 'Firmware' illegally returned null", result);
         org.junit.Assert.assertTrue("Find all method for 'Firmware' failed to return any data", result.size() > 0);
     }
-
+    
     @Test
     public void FirmwareIntegrationTest.testFindFirmwareEntries() {
         org.junit.Assert.assertNotNull("Data on demand for 'Firmware' failed to initialize correctly", dod.getRandomFirmware());
@@ -56,7 +56,7 @@ privileged aspect FirmwareIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Find entries method for 'Firmware' illegally returned null", result);
         org.junit.Assert.assertEquals("Find entries method for 'Firmware' returned an incorrect number of entries", count, result.size());
     }
-
+    
     @Test
     public void FirmwareIntegrationTest.testFlush() {
         com.djavafactory.pttech.rrm.domain.Firmware obj = dod.getRandomFirmware();
@@ -65,12 +65,12 @@ privileged aspect FirmwareIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Data on demand for 'Firmware' failed to provide an identifier", id);
         obj = com.djavafactory.pttech.rrm.domain.Firmware.findFirmware(id);
         org.junit.Assert.assertNotNull("Find method for 'Firmware' illegally returned null for id '" + id + "'", obj);
-        boolean modified = dod.modifyFirmware(obj);
+        boolean modified =  dod.modifyFirmware(obj);
         java.lang.Integer currentVersion = obj.getVersion();
         obj.flush();
         org.junit.Assert.assertTrue("Version for 'Firmware' failed to increment on flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
-
+    
     @Test
     public void FirmwareIntegrationTest.testMerge() {
         com.djavafactory.pttech.rrm.domain.Firmware obj = dod.getRandomFirmware();
@@ -78,14 +78,14 @@ privileged aspect FirmwareIntegrationTest_Roo_IntegrationTest {
         java.lang.Long id = obj.getId();
         org.junit.Assert.assertNotNull("Data on demand for 'Firmware' failed to provide an identifier", id);
         obj = com.djavafactory.pttech.rrm.domain.Firmware.findFirmware(id);
-        boolean modified = dod.modifyFirmware(obj);
+        boolean modified =  dod.modifyFirmware(obj);
         java.lang.Integer currentVersion = obj.getVersion();
         com.djavafactory.pttech.rrm.domain.Firmware merged = (com.djavafactory.pttech.rrm.domain.Firmware) obj.merge();
         obj.flush();
         org.junit.Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId(), id);
         org.junit.Assert.assertTrue("Version for 'Firmware' failed to increment on merge and flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
-
+    
     @Test
     public void FirmwareIntegrationTest.testPersist() {
         org.junit.Assert.assertNotNull("Data on demand for 'Firmware' failed to initialize correctly", dod.getRandomFirmware());
@@ -96,7 +96,7 @@ privileged aspect FirmwareIntegrationTest_Roo_IntegrationTest {
         obj.flush();
         org.junit.Assert.assertNotNull("Expected 'Firmware' identifier to no longer be null", obj.getId());
     }
-
+    
     @Test
     public void FirmwareIntegrationTest.testRemove() {
         com.djavafactory.pttech.rrm.domain.Firmware obj = dod.getRandomFirmware();
@@ -108,5 +108,5 @@ privileged aspect FirmwareIntegrationTest_Roo_IntegrationTest {
         obj.flush();
         org.junit.Assert.assertNull("Failed to remove 'Firmware' with identifier '" + id + "'", com.djavafactory.pttech.rrm.domain.Firmware.findFirmware(id));
     }
-
+    
 }

@@ -291,12 +291,12 @@ privileged aspect Report_Roo_JavaBean {
         this.sumNetPaymentToTng = sumNetPaymentToTng;
     }
     
-    public Date Report.getModifiedTime() {
-        return this.modifiedTime;
+    public Date Report.getModifiedDate() {
+        return this.modifiedDate;
     }
     
-    public void Report.setModifiedTime(Date modifiedTime) {
-        this.modifiedTime = modifiedTime;
+    public void Report.setModifiedDate(Date modifiedDate) {
+        this.modifiedDate = modifiedDate;
     }
     
 }

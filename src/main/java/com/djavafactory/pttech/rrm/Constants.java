@@ -24,7 +24,7 @@ public final class Constants {
     public static final String RELOAD_STATUS_PENDING = "P";
     public static final String RELOAD_STATUS_FAILED = "F";
     public static final String RELOAD_STATUS_EXPIRED = "E";
-    public static final String RELOAD_STATUS_MANUALCANCEL = "C";
+    public static final String RELOAD_STATUS_MANUALCANCEL = "M";
     public static final String RELOAD_STATUS_SUCCESS = "S";
 
     public static final String RESPONSE_CODE_SUCCESS = "00";
@@ -59,7 +59,7 @@ public final class Constants {
      */
     public static final String REPORT_RELOAD_REQUEST_FAILED = "FAILED";
     public static final String REPORT_RELOAD_REQUEST_EXPIRED = "EXPIRED";
-    public static final String REPORT_RELOAD_REQUEST_CANCELLED = "CANCELLED";
+    public static final String REPORT_RELOAD_REQUEST_CANCELLED = "MANUAL CANCEL";
     
     public static final String REPORT_STATUS_DAILY = "DAILY";
     public static final String REPORT_STATUS_MONTHLY = "MONTHLY";
