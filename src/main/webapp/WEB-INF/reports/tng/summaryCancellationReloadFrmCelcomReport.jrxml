@@ -9,7 +9,7 @@
 	<field name="totalAmountCancelledRm" class="java.math.BigDecimal"/>
 	<field name="totalFees" class="java.math.BigDecimal"/>
 	<field name="totalRefundToCustomerRm" class="java.math.BigDecimal"/>
-	<field name="commissionAmountDeductedBySof" class="java.math.BigDecimal"/>
+	<field name="sumCommissionAmountDeductedBySof" class="java.math.BigDecimal"/>
 	<pageHeader>
 		<band height="101">
 			<image scaleImage="RetainShape" hAlign="Center">
@@ -74,7 +74,7 @@
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.commissionAmountDeductedBySof}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.sumCommissionAmountDeductedBySof}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
@@ -113,7 +113,7 @@
 			<textField>
 				<reportElement x="620" y="0" width="130" height="20"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{commissionAmountDeductedBySof}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{sumCommissionAmountDeductedBySof}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

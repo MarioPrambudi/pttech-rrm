@@ -44,7 +44,7 @@ privileged aspect Report_Roo_ToString {
         sb.append("SumTotalChargeToCustomer: ").append(getSumTotalChargeToCustomer()).append(", ");
         sb.append("SumCommissionAmountDeductedBySof: ").append(getSumCommissionAmountDeductedBySof()).append(", ");
         sb.append("SumNetPaymentToTng: ").append(getSumNetPaymentToTng()).append(", ");
-        sb.append("ModifiedTime: ").append(getModifiedTime());
+        sb.append("ModifiedDate: ").append(getModifiedDate());
         return sb.toString();
     }
     

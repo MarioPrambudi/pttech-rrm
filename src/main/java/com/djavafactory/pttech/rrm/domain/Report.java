@@ -8,6 +8,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -103,7 +105,7 @@ public class Report {
     
     @Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(style = "S-")
-	private Date modifiedTime;
+	private Date modifiedDate;
     
     
 }

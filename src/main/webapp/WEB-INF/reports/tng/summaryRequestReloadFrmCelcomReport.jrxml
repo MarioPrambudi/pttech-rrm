@@ -7,9 +7,9 @@
 	<field name="totalReloadQty" class="java.lang.Long"/>
 	<field name="totalAmountRequestRm" class="java.math.BigDecimal"/>
 	<field name="totalFees" class="java.math.BigDecimal"/>
-	<field name="totalChargeToCustomer" class="java.math.BigDecimal"/>
-	<field name="commissionAmountDeductedBySof" class="java.math.BigDecimal"/>
-	<field name="netPaymentToTng" class="java.math.BigDecimal"/>
+	<field name="sumTotalChargeToCustomer" class="java.math.BigDecimal"/>
+	<field name="sumCommissionAmountDeductedBySof" class="java.math.BigDecimal"/>
+	<field name="sumNetPaymentToTng" class="java.math.BigDecimal"/>
 	<pageHeader>
 		<band height="101">
 			<image scaleImage="RetainShape" hAlign="Center">
@@ -60,21 +60,21 @@
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.totalChargeToCustomer}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.sumTotalChargeToCustomer}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="510" y="0" width="110" height="40"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.commissionAmountDeductedBySof}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.sumCommissionAmountDeductedBySof}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="620" y="0" width="130" height="40"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.netPaymentToTng}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.sumNetPaymentToTng}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
@@ -103,17 +103,17 @@
 			<textField>
 				<reportElement x="400" y="0" width="110" height="20"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{totalChargeToCustomer}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{sumTotalChargeToCustomer}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="510" y="0" width="110" height="20"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{commissionAmountDeductedBySof}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{sumCommissionAmountDeductedBySof}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="620" y="0" width="130" height="20"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{netPaymentToTng}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{sumNetPaymentToTng}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

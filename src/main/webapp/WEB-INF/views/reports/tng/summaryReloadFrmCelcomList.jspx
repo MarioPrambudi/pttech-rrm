@@ -6,12 +6,12 @@
         <table:table data="${reports}" id="l_com_djavafactory_pttech_rrm_domain_Report" path="/reports" z="user-managed"
         			 show="false" create="false" delete="false" update="false">
         
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_transCode" property="transCode" z="user-managed"/>
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_status" property="status" z="user-managed"/>
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_tngKey" property="tngKey" z="user-managed"/>
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_serviceProviderId" property="serviceProviderId" z="user-managed="/>
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_transId" property="transId" z="user-managed"/>
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_reloadAmount" property="reloadAmount" z="user-managed"/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_Report_reloadDate" property="reloadDate" z="user-managed"/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_Report_totalReloadAmountRm" property="totalReloadAmountRm" z="user-managed"/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_Report_totalFees" property="totalFees" z="user-managed"/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_Report_sumTotalChargeToCustomer" property="sumTotalChargeToCustomer" z="user-managed="/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_Report_sumCommissionAmountDeductedBySof" property="sumCommissionAmountDeductedBySof" z="user-managed"/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_Report_sumNetPaymentToTng" property="sumNetPaymentToTng" z="user-managed"/>
         </table:table>
     </page:list>
 </div>

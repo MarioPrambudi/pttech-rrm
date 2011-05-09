@@ -117,7 +117,7 @@ public class ReportController {
 												     Model uiModel,
 													 @PathVariable("format") String format) throws Exception {
 		
-		List<Report> reportList = ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport();
+		List<Report> reportList = ReportGenerator.getDailyDetailedReloadFrmCelcomReport();
 		
 		if(format.equalsIgnoreCase("html")) {
 	        uiModel.addAttribute("reports", reportList);
@@ -155,7 +155,7 @@ public class ReportController {
 																   Model uiModel,
 																   @PathVariable("format") String format) throws Exception {
 		
-		List<Report> reportList = ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport();
+		List<Report> reportList = ReportGenerator.getDailyDetailsCancellationReloadReqFrmCelcomReport();
 		
 		if(format.equalsIgnoreCase("html")) {
 	        uiModel.addAttribute("reports", reportList);
