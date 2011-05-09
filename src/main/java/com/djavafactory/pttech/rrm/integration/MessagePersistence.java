@@ -18,7 +18,7 @@ public class MessagePersistence {
     /**
      * Method to log the queue messages into database
      *
-     * @param requestList List of object. First item in the list contains ReloadRequest object whereas second item in the list contains either ReloadRequestMessage or ReloadResponseMessage.
+     * @param requestList List of object. First item in the list contains ReloadReq object whereas second item in the list contains either ReloadRequestMessage or ReloadResponseMessage.
      * @return ReloadRequestMessage or ReloadResponseMessage object
      */
     public Object mergeReloadRequest(List<Object> requestList) {

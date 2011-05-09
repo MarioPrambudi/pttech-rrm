@@ -16,13 +16,6 @@
 
     <beans:bean id="jdbcPropertyPlaceHolderConfigurer"
                 class="com.djavafactory.pttech.rrm.conf.JdbcPropertyPlaceHolderConfigurer">
-        <beans:property name="configKey">
-            <beans:list>
-                <beans:value>CEL.location</beans:value>
-                <beans:value>CEL.uploadschedule</beans:value>
-                <beans:value>TNG.uploadschedule</beans:value>
-            </beans:list>
-        </beans:property>
         <beans:property name="dataSource" ref="dataSource"/>
     </beans:bean>
 
@@ -45,11 +38,5 @@
         <beans:property name="fileExtension" value="txt"/>
     </beans:bean>
     <channel id="batchReportChannel"/>
-    <ftp:outbound-channel-adapter id="ftpsOutboundAdapter"
-                                  session-factory="ftpClientFactory"
-                                  channel="batchReportChannel"
-                                  charset="UTF-8"
-                                  remote-directory="${CEL.location}"
-                                  remote-filename-generator="remoteFilenameGenerator"/>
 
 </beans:beans>

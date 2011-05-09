@@ -3,6 +3,7 @@ package com.djavafactory.pttech.rrm.integration;
 
 import com.djavafactory.pttech.rrm.domain.ReloadRequestMessage;
 import com.djavafactory.pttech.rrm.domain.ReloadResponseMessage;
+import com.djavafactory.pttech.rrm.wsclient.ReloadReq;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -93,6 +94,25 @@ public class MessageTransformer {
             return ((ReloadResponseMessage) message).toJsonString();
         }
         return null;
+    }
+
+    /**
+     * Method to transform the ReloadRequestMessage to TnG WS ReloadReq format.
+     *
+     * @param message Object message object
+     * @return Object
+     */
+    public ReloadReq transformMessageToReloadReq(Object message) {
+        ReloadReq reloadReq = new ReloadReq();
+        if (message != null && message instanceof ReloadRequestMessage) {
+            reloadReq.setAmount(((ReloadRequestMessage) message).getAmount());
+            reloadReq.setMfgNo(((ReloadRequestMessage) message).getMfgNo());
+            reloadReq.setRequestDateTime(new Date());
+            reloadReq.setServiceProviderId(((ReloadRequestMessage) message).getSpId());
+            reloadReq.setTransactionCode(((ReloadRequestMessage) message).getTransCode());
+            reloadReq.setTransactionId(((ReloadRequestMessage) message).getTransId());
+        }
+        return reloadReq;
     }
 
     private String transformResponse(ReloadRequestMessage message, String statusCode, String statusMsg) {

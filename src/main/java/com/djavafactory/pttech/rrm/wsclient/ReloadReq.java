@@ -21,10 +21,10 @@ import java.util.Date;
 
 })
 @XmlRootElement(name = "reloadReq")
-public class ReloadRequest {
+public class ReloadReq {
 
     @XmlElement(name = "TransactionId", required = true)
-    protected Long transactionId;
+    protected String transactionId;
     @XmlElement(name = "MfgNo", required = true)
     protected Long mfgNo;
     @XmlElement(name = "Amount", required = true)
@@ -32,15 +32,15 @@ public class ReloadRequest {
     @XmlElement(name = "ServiceProviderId", required = true)
     protected String serviceProviderId;
     @XmlElement(name = "TransactionCode", required = true)
-    protected String transactionCode;
+    protected Integer transactionCode;
     @XmlElement(name = "RequestDateTime", required = true)
     protected Date requestDateTime;
 
-    public Long getTransactionId() {
+    public String getTransactionId() {
         return transactionId;
     }
 
-    public void setTransactionId(Long transactionId) {
+    public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
     }
 
@@ -68,11 +68,11 @@ public class ReloadRequest {
         this.serviceProviderId = serviceProviderId;
     }
 
-    public String getTransactionCode() {
+    public Integer getTransactionCode() {
         return transactionCode;
     }
 
-    public void setTransactionCode(String transactionCode) {
+    public void setTransactionCode(Integer transactionCode) {
         this.transactionCode = transactionCode;
     }
 

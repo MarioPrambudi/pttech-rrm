@@ -22,17 +22,17 @@ import javax.xml.bind.annotation.*;
 public class ReloadReqResponse {
 
     @XmlElement(name = "TransactionId", required = true)
-    protected Long transactionId;
+    protected String transactionId;
     @XmlElement(name = "StatusCode", required = true)
     protected String statusCode;
     @XmlElement(name = "StatusMessage")
     protected String statusMsg;
 
-    public Long getTransactionId() {
+    public String getTransactionId() {
         return transactionId;
     }
 
-    public void setTransactionId(Long transactionId) {
+    public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
     }
 

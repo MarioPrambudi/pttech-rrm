@@ -35,10 +35,10 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ReloadRequest }
+     * Create an instance of {@link ReloadReq }
      */
-    public ReloadRequest createReloadReq() {
-        return new ReloadRequest();
+    public ReloadReq createReloadReq() {
+        return new ReloadReq();
     }
 
     /**
