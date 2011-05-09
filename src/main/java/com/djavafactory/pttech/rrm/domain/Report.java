@@ -105,4 +105,5 @@ public class Report {
 	@DateTimeFormat(style = "S-")
 	private Date modifiedTime;
     
+    
 }

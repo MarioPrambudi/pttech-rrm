@@ -5,17 +5,26 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
+
+import com.djavafactory.pttech.rrm.util.DateUtil;
+
+import javassist.bytecode.Descriptor.Iterator;
+
 import javax.persistence.Column;
 import javax.persistence.EntityManager;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.security.PublicKey;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RooJavaBean
 @RooToString
@@ -43,6 +52,7 @@ public class ReloadRequest {
 
 	private String tngKey;
 	
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(style = "S-")
 	private Date modifiedTime;
@@ -59,10 +69,14 @@ public class ReloadRequest {
 	}
 
 	public static TypedQuery<ReloadRequest> findReloadRequestsByParam(String status, String serviceProviderId,
-			Date requestedTimeFrom, Date requestedTimeTo, int firstResult, int maxResults, String order) {
+																	  Date requestedTimeFrom, Date requestedTimeTo, 
+																	  int firstResult, int maxResults, String order) {
+		
 		EntityManager em = ReloadRequest.entityManager();
 		TypedQuery<ReloadRequest> typedQuery = null;
+		
 		StringBuilder queryBuilder = new StringBuilder("SELECT ReloadRequest FROM ReloadRequest AS reloadrequest WHERE 1=1 ");
+		
 		if (status != null && !status.isEmpty() && !status.equalsIgnoreCase("-1"))
 			queryBuilder.append("AND LOWER(reloadrequest.status) = LOWER(:status)");
 		if (serviceProviderId != null && !serviceProviderId.isEmpty())
@@ -76,9 +90,12 @@ public class ReloadRequest {
 
 		if (order != null && !order.isEmpty())
 			queryBuilder.append(" ORDER BY " + order);
+		
 		String stringQuery = queryBuilder.toString();
+		
 		typedQuery = (firstResult > 0 && maxResults > 0) ? em.createQuery(stringQuery, ReloadRequest.class)
 				.setFirstResult(firstResult).setMaxResults(maxResults) : em.createQuery(stringQuery, ReloadRequest.class);
+				
 		if (status != null && !status.isEmpty() && !status.equalsIgnoreCase("-1"))
 			typedQuery.setParameter("status", status);
 		if (serviceProviderId != null && !serviceProviderId.isEmpty())
@@ -97,8 +114,11 @@ public class ReloadRequest {
       * @return List Reload request in list
  	  * @throws ParseException 
       */
-     public static List<ReloadRequest>findReloadRequestsByRequestedTimeBetweenAndStatus (Date minRequestedTime, Date maxRequestedTime, List listStatus) throws ParseException {		
-		String query = "SELECT ReloadRequest FROM ReloadRequest reloadrequest WHERE reloadrequest.requestedTime BETWEEN :minRequestedTime AND :maxRequestedTime AND LOWER(reloadrequest.status) IN (:statusList)";			
+     public static List<ReloadRequest>findReloadRequestsByRequestedTimeBetweenAndStatus (Date minRequestedTime, Date maxRequestedTime, List<String> listStatus) throws ParseException {		
+    	String query = "SELECT ReloadRequest " +
+    				   "FROM ReloadRequest reloadrequest " +
+    				   "WHERE reloadrequest.requestedTime BETWEEN :minRequestedTime AND :maxRequestedTime " +
+    				   "AND LOWER(reloadrequest.status) IN (:statusList)";			
 		TypedQuery<ReloadRequest> q = entityManager().createQuery(query, ReloadRequest.class);
 		q.setParameter("minRequestedTime",  minRequestedTime);
 		q.setParameter("maxRequestedTime",  maxRequestedTime);
@@ -131,4 +151,43 @@ public class ReloadRequest {
 		return q;
 	}
 
+	/** 
+	 * firman: for summary Reload Request
+    */
+   public static List<ReloadRequest> findSummaryReloadRequestsByRequestedTimeBetweenAndStatus(Date minRequestedTime, Date maxRequestedTime, 
+		   																					  List listStatus) throws ParseException {		
+		 
+	   List<ReloadRequest> listRR = findReloadRequestsByRequestedTimeBetweenAndStatus(minRequestedTime, maxRequestedTime, listStatus);
+	   return summarizeReloadRequest(listRR);
+
+   } 
+   
+   public static List<ReloadRequest> summarizeReloadRequest(List<ReloadRequest> reloadRequests) throws ParseException {
+	   Map<String, ReloadRequest> mapSummary = new HashMap<String, ReloadRequest>();
+	   
+	   if(reloadRequests != null && reloadRequests.size() > 0) {
+		   for(ReloadRequest rr : reloadRequests) {
+			   if(rr.getRequestedTime() != null) {
+				   String dateKey = DateUtil.getDateTime("dd/MM/yyyy", rr.requestedTime);
+				   BigDecimal amount = rr.getReloadAmount();
+				   
+				   ReloadRequest groupRR = null;
+				   if(mapSummary.containsKey(dateKey)) {
+					   groupRR = mapSummary.get(dateKey);
+					   groupRR.setReloadAmount(groupRR.getReloadAmount().add(amount));			   
+					   groupRR.setMfgNumber(groupRR.getMfgNumber() + (new Long(1)));
+				   } else {
+					   groupRR = new ReloadRequest();
+					   groupRR.setReloadAmount(amount);
+					   groupRR.setMfgNumber(new Long(1));
+				   }
+				   groupRR.setRequestedTime(DateUtil.convertStringToDate("dd/MM/yyyy", dateKey));
+				   groupRR.setModifiedTime(DateUtil.convertStringToDate("dd/MM/yyyy", dateKey));
+				   mapSummary.put(dateKey, groupRR);
+			   }
+		   }
+	   }
+
+	   return new ArrayList<ReloadRequest>(mapSummary.values());
+   }
 }
