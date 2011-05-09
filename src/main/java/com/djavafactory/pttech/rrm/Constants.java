@@ -62,7 +62,11 @@ public final class Constants {
     public static final String REPORT_RELOAD_REQUEST_CANCELLED = "CANCELLED";
     
     public static final String REPORT_STATUS_DAILY = "DAILY";
-    public static final String REPORT_STATUS_MONTHLY= "MONTHLY";
-    
+    public static final String REPORT_STATUS_MONTHLY = "MONTHLY";
+        
+    /**
+     * Constant for MongoDB
+     */
+    public static final String MONGODB_AUDIT_TRAIL_COLLECTION_NAME = "AuditTrail";
 
 }

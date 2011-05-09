@@ -12,7 +12,6 @@ import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.security.PublicKey;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;

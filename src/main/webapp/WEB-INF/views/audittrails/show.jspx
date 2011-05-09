@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_djavafactory_pttech_rrm_domain_AuditTrail" object="${audittrail}" path="/audittrails" z="UhLP5vkf+DF9YaP8/RkQvVumh5o=">
+        <field:display field="description" id="s_com_djavafactory_pttech_rrm_domain_AuditTrail_description" object="${audittrail}" z="LuQIlUifE1PXGttaBsKM9RUNkLc="/>
+        <field:display field="performedBy" id="s_com_djavafactory_pttech_rrm_domain_AuditTrail_performedBy" object="${audittrail}" z="eXVDtG7V0P1PmTrKlIvECF2So18="/>
+        <field:display field="action" id="s_com_djavafactory_pttech_rrm_domain_AuditTrail_action" object="${audittrail}" z="63cp9Uni15eY9iURc0qpoFsD9Uc="/>
+        <field:display date="true" dateTimePattern="${auditTrail_performedat_date_format}" field="performedAt" id="s_com_djavafactory_pttech_rrm_domain_AuditTrail_performedAt" object="${audittrail}" z="XcqdSEk0IOzpP5Loe42hJ2WfoaY="/>
+        <field:display field="id" id="s_com_djavafactory_pttech_rrm_domain_AuditTrail_id" object="${audittrail}" z="Lp7hSoSTtjhlZr4ywmgBsmO00WE="/>
+        <field:display field="entity" id="s_com_djavafactory_pttech_rrm_domain_AuditTrail_entity" object="${audittrail}" z="PjAeJiwqicNbgagF1TwoBpEMFZg="/>
+    </page:show>
+</div>

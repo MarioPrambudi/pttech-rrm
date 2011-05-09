@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_djavafactory_pttech_rrm_domain_AuditTrail" items="${audittrails}" z="QVQixGzrpa49KJlvUES0lIKAq94=">
+        <table:table data="${audittrails}" id="l_com_djavafactory_pttech_rrm_domain_AuditTrail" show="false" create="false" update="false" delete="false" path="/audittrails" typeIdFieldName="id" z="4LlKVXBmmaWgUC1/Yr+Aw+n5+/A=">
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_AuditTrail_id" property="id" render="false" z="uzqW3+Ee//uJtEmc2vNQz1MnAPw="/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_AuditTrail_entity" property="entity" z="hvxl30wQgQaUUyDmJ8/BTj+CXJA="/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_AuditTrail_action" property="action" z="CvJpIP578EfnQ53pg3CBH7vQoqg="/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_AuditTrail_performedAt" property="performedAt" z="T19r5qD9chuI4cMynNIa0LQJlSI="/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_AuditTrail_performedBy" property="performedBy" z="uDsZUDft82WaEzjXdlrrYqhR4vg="/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_AuditTrail_description" property="description" z="etXvqhtE1Y5HZh4bZBUQ5eSFSxI="/>
+        </table:table>
+    </page:list>
+</div>

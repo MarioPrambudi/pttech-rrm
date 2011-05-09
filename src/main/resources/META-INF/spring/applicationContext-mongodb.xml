@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-3.0.xsd
+          http://www.springframework.org/schema/data/mongo
+          http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- Default bean name is 'mongo' -->
+	<mongo:mongo id="mongo" host="localhost" port="27017" />
+
+	<!-- To translate any MongoExceptions thrown in @Repository annotated classes -->
+	<context:annotation-config />
+
+	<bean id="mongoTemplate" class="org.springframework.data.document.mongodb.MongoTemplate">
+		<constructor-arg ref="mongo" />
+		<constructor-arg name="databaseName" value="pttech-rrm" />
+		<constructor-arg name="defaultCollectionName" value="default" />
+		<constructor-arg>
+			<mongo:mapping-converter />
+		</constructor-arg>
+	</bean>
+
+	<mongo:repositories
+		base-package="com.djavafactory.pttech.rrm.domain.mongorepository"
+		mongo-template-ref="mongoTemplate" />
+</beans>
