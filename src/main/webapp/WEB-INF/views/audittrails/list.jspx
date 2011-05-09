@@ -2,6 +2,12 @@
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
+	<page:find finderName="ByParam" id="ff_com_djavafactory_pttech_rrm_domain_AuditTrail" path="/audittrails/findAuditTrailsByParam?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed">
+		<table:select disableFormBinding="true" field="action" id="f_com_djavafactory_pttech_rrm_domain_AuditTrail_action" itemValue="id" items="${action}" path="/action" z="user-managed"/>
+		<table:input disableFormBinding="true" field="entity" id="f_com_djavafactory_pttech_rrm_domain_AuditTrail_entity" z="user-managed"/>
+		<table:datetime dateTimePattern="dd/MM/yyyy" disableFormBinding="true" field="dateFrom" id="f_com_djavafactory_pttech_rrm_domain_AuditTrail_dateFrom" z="user-managed"/>
+		<table:datetime dateTimePattern="dd/MM/yyyy" disableFormBinding="true" field="dateTo" id="f_com_djavafactory_pttech_rrm_domain_AuditTrail_dateTo" z="user-managed"/>
+	</page:find>
     <page:list id="pl_com_djavafactory_pttech_rrm_domain_AuditTrail" items="${audittrails}" z="QVQixGzrpa49KJlvUES0lIKAq94=">
         <table:table data="${audittrails}" id="l_com_djavafactory_pttech_rrm_domain_AuditTrail" show="false" create="false" update="false" delete="false" path="/audittrails" typeIdFieldName="id" z="4LlKVXBmmaWgUC1/Yr+Aw+n5+/A=">
             <table:column id="c_com_djavafactory_pttech_rrm_domain_AuditTrail_id" property="id" render="false" z="uzqW3+Ee//uJtEmc2vNQz1MnAPw="/>

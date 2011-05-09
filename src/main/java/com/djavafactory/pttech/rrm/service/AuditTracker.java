@@ -31,14 +31,14 @@ public class AuditTracker {
 		// Entity class name
 		auditTrail.setEntity(jp.getTarget().getClass().getSimpleName());
 		// Action performed
-		auditTrail.setAction(jp.getSignature().getName().toUpperCase());
+		auditTrail.setAction(jp.getSignature().getName().toUpperCase().substring(0, 1));
 		// Datetime performed
 		auditTrail.setPerformedAt(new Date());
 		// TODO: set user here
 		auditTrail.setPerformedBy("Mario");
 		// TODO: set description here
 		auditTrail.setDescription(jp.getSourceLocation() == null ? "N/A" : jp.getSourceLocation().toString());
-		mongoOps.save(Constants.MONGODB_AUDIT_TRAIL_COLLECTION_NAME, auditTrail);
+		mongoOps.save(Constants.AUDIT_TRAIL_MONGODB_COLLECTION_NAME, auditTrail);
 	}
 
 	@Pointcut("execution(* com.djavafactory.pttech.rrm.domain.*.persist*(..))")

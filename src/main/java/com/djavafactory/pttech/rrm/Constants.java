@@ -65,8 +65,11 @@ public final class Constants {
     public static final String REPORT_STATUS_MONTHLY = "MONTHLY";
         
     /**
-     * Constant for MongoDB
+     * Constants for Audit Trail
      */
-    public static final String MONGODB_AUDIT_TRAIL_COLLECTION_NAME = "AuditTrail";
+    public static final String AUDIT_TRAIL_MONGODB_COLLECTION_NAME = "AuditTrail";
+    public static final String AUDIT_TRAIL_ACTION_PERSIST = "P";
+    public static final String AUDIT_TRAIL_ACTION_MERGE = "M";
+    public static final String AUDIT_TRAIL_ACTION_REMOVE = "R";    
 
 }
