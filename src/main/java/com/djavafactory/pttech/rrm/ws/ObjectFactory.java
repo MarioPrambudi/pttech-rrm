@@ -48,4 +48,18 @@ public class ObjectFactory {
         return new ReloadReqResponse();
     }
 
+    /**
+     * Create an instance of {@link KeyRequest }
+     */
+    public KeyRequest createTngKeyRequest() {
+        return new KeyRequest();
+    }
+
+    /**
+     * Create an instance of {@link KeyResponse }
+     */
+    public KeyResponse createTngKeyResponse() {
+        return new KeyResponse();
+    }
+
 }

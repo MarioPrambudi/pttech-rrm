@@ -3,6 +3,7 @@ package com.djavafactory.pttech.rrm.integration;
 
 import com.djavafactory.pttech.rrm.domain.ReloadRequestMessage;
 import com.djavafactory.pttech.rrm.domain.ReloadResponseMessage;
+import com.djavafactory.pttech.rrm.ws.KeyResponse;
 import com.djavafactory.pttech.rrm.ws.ReloadReq;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -48,23 +49,23 @@ public class MessageTransformer {
     }
 
     /**
-     * Method to transform the ReloadRequestMessage to a response string in JSON format.
+     * Method to transform the ReloadRequestMessage to a KeyResponse object.
      *
      * @param message ReloadRequestMessage object
-     * @return Response JSON string
+     * @return TngKeyResponse
      */
-    public String transformTimeoutMessage(ReloadRequestMessage message) {
-        return transformResponse(message, "98", "Message timeout.");      //TODO
+    public KeyResponse transformTimeoutMessage(ReloadRequestMessage message) {
+        return transformKeyResponse("98", "Message Timeout", message.getTransId());    //TODO
     }
 
     /**
-     * Method to transform the ReloadRequestMessage to a response string in JSON format.
+     * Method to transform the ReloadRequestMessage to a KeyResponse object.
      *
      * @param message ReloadRequestMessage object
-     * @return Response JSON string
+     * @return KeyResponse
      */
-    public String transformSuccessMessage(ReloadRequestMessage message) {
-        return transformResponse(message, "00", "Success");         //TODO
+    public KeyResponse transformSuccessMessage(ReloadRequestMessage message) {
+        return transformKeyResponse("00", "Success", message.getTransId());    //TODO
     }
 
     /**
@@ -75,6 +76,16 @@ public class MessageTransformer {
      */
     public String transformInvalidStatusMessage(ReloadRequestMessage message) {
         return transformResponse(message, "97", "Unable to proceed the request due to the record is not found or the record is not in a correct status.");         //TODO
+    }
+
+    /**
+     * Method to transform the ReloadRequestMessage to a KeyResponse object.
+     *
+     * @param message ReloadRequestMessage object
+     * @return KeyResponse
+     */
+    public KeyResponse transformKeyInvalidStatusMessage(ReloadRequestMessage message) {
+        return transformKeyResponse("97", "Unable to proceed the request due to the record is not found or the record is not in a correct status.", message.getTransId());         //TODO
     }
 
     /**
@@ -125,5 +136,15 @@ public class MessageTransformer {
         logger.info("[transformResponse - New ReloadResponseMessage json string] >> " + reloadResponseMessage);
 
         return reloadResponseMessage.toJsonString();
+    }
+
+    private KeyResponse transformKeyResponse(String statusCode, String statusMsg, String transId) {
+        KeyResponse keyResponse = new KeyResponse();
+        keyResponse.setStatusCode(statusCode);
+        keyResponse.setStatusMsg(statusMsg);
+        keyResponse.setTransactionId(transId);
+
+        logger.info("[transformKeyResponse - New KeyResponse object] >> " + keyResponse);
+        return keyResponse;
     }
 }

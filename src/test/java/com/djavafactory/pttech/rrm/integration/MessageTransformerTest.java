@@ -37,6 +37,11 @@ public class MessageTransformerTest extends BaseManagerTestCase {
     }
 
     @Test
+    public void testTransformKeyInvalidStatusMessage() {
+        assert (new MessageTransformer().transformKeyInvalidStatusMessage(getReloadRequestMessage()) != null);
+    }
+
+    @Test
     public void testTransformSuccessMessage() {
         assert (new MessageTransformer().transformSuccessMessage(getReloadRequestMessage()) != null);
     }
@@ -47,9 +52,14 @@ public class MessageTransformerTest extends BaseManagerTestCase {
     }
 
     @Test
+    public void testTransformMessageToReloadReq() {
+        assert (new MessageTransformer().transformMessageToReloadReq(getReloadRequestMessage()) != null);
+    }
+
+
+    @Test
     public void testTransformReloadResponse() {
         String msg = "{\"transId\":\"00000000001\", \"statusMsg\":\"Success\", \"statusCode\":\"00\", \"responsetTime\":\"28042011120100\"}";
-        ;
         ReloadResponseMessage responseMessage = new MessageTransformer().transformReloadResponse(msg);
         assert (responseMessage != null);
         assertEquals(responseMessage.getTransId(), "00000000001");

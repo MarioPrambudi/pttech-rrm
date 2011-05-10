@@ -50,11 +50,25 @@ public class MessageFilter {
         List<ReloadRequest> reloadRecord = new ReloadRequest().findReloadRequestsByTransId(requestMessage.getTransId()).getResultList();
         if (reloadRecord == null || reloadRecord.isEmpty()) {
             return false;
-        } else if (!StringUtils.equalsIgnoreCase(requestMessage.getMsgType(), Constants.RELOAD_REQUEST_SUCCESS)
-                && !StringUtils.equalsIgnoreCase(reloadRecord.get(0).getStatus(), Constants.RELOAD_STATUS_PENDING)) {
+        } else if (!StringUtils.equalsIgnoreCase(reloadRecord.get(0).getStatus(), Constants.RELOAD_STATUS_PENDING)) {
             return false;
         }
+        return true;
+    }
 
+    /**
+     * Method to validate whether the key request from TnG is allow to proceed based on the current status in RRM.
+     *
+     * @param requestMessage ReloadRequestMessage object
+     * @return true/false
+     */
+    public Boolean keyRequestFilter(ReloadRequestMessage requestMessage) {
+        List<ReloadRequest> reloadRecord = new ReloadRequest().findReloadRequestsByTransId(requestMessage.getTransId()).getResultList();
+        if (reloadRecord == null || reloadRecord.isEmpty()) {
+            return false;
+        } else if (!StringUtils.equalsIgnoreCase(reloadRecord.get(0).getStatus(), Constants.RELOAD_STATUS_NEW)) {
+            return false;
+        }
         return true;
     }
 
