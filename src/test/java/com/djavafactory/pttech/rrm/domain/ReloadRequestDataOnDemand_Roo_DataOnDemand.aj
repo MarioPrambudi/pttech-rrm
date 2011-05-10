@@ -53,7 +53,7 @@ privileged aspect ReloadRequestDataOnDemand_Roo_DataOnDemand {
     public void ReloadRequestDataOnDemand.init() {
         data = com.djavafactory.pttech.rrm.domain.ReloadRequest.findReloadRequestEntries(0, 10);
         if (data == null)
-            throw new IllegalStateException("Find entries implementation for 'ReloadReq' illegally returned null");
+            throw new IllegalStateException("Find entries implementation for 'ReloadRequest' illegally returned null");
         if (!data.isEmpty()) {
             return;
         }
