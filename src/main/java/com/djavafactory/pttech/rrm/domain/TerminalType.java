@@ -30,14 +30,14 @@ public class TerminalType {
     private List<Terminal> terminal;
 
     /**
-    * To search terminal types by parameters
-    *
-     * @param searchText The search text
+     * To search terminal types by parameters
+     *
+     * @param searchText  The search text
      * @param deleted
-     *@param order
+     * @param order
      * @param firstResult Start index of the records
      * @param maxResults  Maximum records to be fetched   @return List of terminal type
-    */
+     */
     public static TypedQuery<TerminalType> findTerminalTypesByParam(String searchText, Boolean deleted, String order, int firstResult, int maxResults) {
         EntityManager em = TerminalType.entityManager();
         TypedQuery<TerminalType> q = null;
@@ -50,7 +50,7 @@ public class TerminalType {
         if (order != null && !order.equals("")) {
             query = new StringBuilder(query).append(" ORDER BY ").append(order).toString();
         }
-        q = (firstResult > 0 && maxResults > 0) ? em.createQuery(query, TerminalType.class).setFirstResult(firstResult).setMaxResults(maxResults) : em.createQuery(query, TerminalType.class);
+        q = (firstResult > -1 && maxResults > 0) ? em.createQuery(query, TerminalType.class).setFirstResult(firstResult).setMaxResults(maxResults) : em.createQuery(query, TerminalType.class);
         if (deleted != null && !deleted.equals("") && deleted == true) {
             q.setParameter("notDeleted", deleted);
         }
@@ -58,5 +58,14 @@ public class TerminalType {
             q.setParameter("searchText", "%" + searchText + "%");
         }
         return q;
+    }
+
+    /**
+     * Get total non deleted terminal types count.
+     *
+     * @return Long total count
+     */
+    public static long totalTerminalTypes() {
+        return entityManager().createQuery("select count(o) from TerminalType o where o.deleted = false", Long.class).getSingleResult();
     }
 }

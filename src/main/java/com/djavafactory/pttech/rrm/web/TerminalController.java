@@ -33,9 +33,9 @@ public class TerminalController extends BaseController {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
 
-            List<Terminal> terminalList = Terminal.findTerminalsByParam(null, null, -1L, -1L, page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo, "terminal.terminalId").getResultList();
+            List<Terminal> terminalList = Terminal.findTerminalsByParam(null, null, -1L, -1L, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo, "terminal.terminalId").getResultList();
             uiModel.addAttribute("terminals", regenerateList(terminalList));
-            float nrOfPages = (float) terminalList.size() / sizeNo;
+            float nrOfPages = (float) Terminal.totalTerminals() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
             uiModel.addAttribute("terminals", regenerateList(Terminal.findTerminalsByParam(null, null, -1L, -1L, -1, -1, "terminal.terminalId").getResultList()));
@@ -128,12 +128,13 @@ public class TerminalController extends BaseController {
         return "redirect:/terminals/" + encodeUrlPathSegment(terminal.getId().toString(), httpServletRequest);
     }
 
-  /**
-   * update new terminal with new status
-   * @param uiModel Model
-   * @return String the page path to redirect
-   */
-	@RequestMapping(value = "/setstatus", method = RequestMethod.POST)
+    /**
+     * update new terminal with new status
+     *
+     * @param uiModel Model
+     * @return String the page path to redirect
+     */
+    @RequestMapping(value = "/setstatus", method = RequestMethod.POST)
     public String updateStatus(@RequestParam(value = "terminalIds") String terminalIds, @RequestParam(value = "code") String code, Model uiModel) {
         for (String id : terminalIds.split(",")) {
             Terminal terminal = Terminal.findTerminal(Long.valueOf(id));
