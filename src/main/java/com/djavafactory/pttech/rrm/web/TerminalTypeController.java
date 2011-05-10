@@ -46,9 +46,24 @@ public class TerminalTypeController {
      * @param uiModel    Model
      * @return String the page path to redirect
      */
-    @RequestMapping(value = "/findTerminalTypesByParam", method = RequestMethod.POST)
-    public String findTerminalTypesByParam(@RequestParam(value = "searchText", required = false) String searchText, Model uiModel) {
-        uiModel.addAttribute("terminaltypes", TerminalType.findTerminalTypesByParam(searchText, false, "terminalType.name", -1, -1).getResultList());
+    @RequestMapping(value = "/findTerminalTypesByParam", method = {RequestMethod.POST, RequestMethod.GET})
+    public String findTerminalTypesByParam(@RequestParam(value = "searchText", required = false) String searchText,
+                                           @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size,
+                                           Model uiModel) {
+
+        if (page != null || size != null) {
+            int sizeNo = size == null ? 10 : size.intValue();
+            List<TerminalType> terminalTypeList = TerminalType.findTerminalTypesByParam(searchText, false, "terminalType.name", (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo).getResultList();
+            uiModel.addAttribute("terminaltypes", terminalTypeList);
+
+            int totalSize = TerminalType.findTerminalTypesByParam(searchText, false, "terminalType.name", -1, -1).getResultList().size();
+            float nrOfPages = (float) totalSize / sizeNo;
+            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+            uiModel.addAttribute("params", "&searchText=" + searchText);
+        } else {
+            uiModel.addAttribute("terminaltypes", TerminalType.findTerminalTypesByParam(searchText, false, "terminalType.name", -1, -1).getResultList());
+        }
+
         return "terminaltypes/list";
     }
 
