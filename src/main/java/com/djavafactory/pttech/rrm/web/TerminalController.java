@@ -52,12 +52,24 @@ public class TerminalController extends BaseController {
      * @param uiModel    Model
      * @return String the page path to redirect
      */
-    @RequestMapping(value = "/findTerminalsByParam", method = RequestMethod.POST)
+    @RequestMapping(value = "/findTerminalsByParam", method = {RequestMethod.POST, RequestMethod.GET})
     public String findTerminalsByParam(@RequestParam(value = "terminalId", required = false) String terminalId, @RequestParam(value = "status", required = false) String status,
-                                       @RequestParam(value = "terminalType", required = false) Long terminalType, @RequestParam(value = "acquirer", required = false) Long acquirer, Model uiModel) {
+                                       @RequestParam(value = "terminalType", required = false) Long terminalType, @RequestParam(value = "acquirer", required = false) Long acquirer,
+                                       @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         acquirer = (acquirer == null) ? -1L : acquirer;
         terminalType = (terminalType == null) ? -1L : terminalType;
-        uiModel.addAttribute("terminals", regenerateList(Terminal.findTerminalsByParam(terminalId, status, terminalType, acquirer, -1, -1, "terminal.terminalId").getResultList()));
+
+        if (page != null || size != null) {
+            int sizeNo = size == null ? 10 : size.intValue();
+
+            List<Terminal> terminalList = Terminal.findTerminalsByParam(terminalId, status, terminalType, acquirer, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo, "terminal.terminalId").getResultList();
+            uiModel.addAttribute("terminals", regenerateList(terminalList));
+            float nrOfPages = (float) Terminal.totalTerminals() / sizeNo;
+            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+            uiModel.addAttribute("params", "&terminalId=" + terminalId + "&status=" + status + "&terminalType=" + terminalType + "&acquirer=" + acquirer);
+        } else {
+            uiModel.addAttribute("terminals", regenerateList(Terminal.findTerminalsByParam(terminalId, status, terminalType, acquirer, -1, -1, "terminal.terminalId").getResultList()));
+        }
         addDateTimeFormatPatterns(uiModel);
         return "terminals/list";
     }

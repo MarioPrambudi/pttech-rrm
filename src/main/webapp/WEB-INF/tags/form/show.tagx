@@ -112,7 +112,8 @@
                   <spring:url value="${path}" var="list_form_url"/>
                   <spring:url value="/resources/images/list.png" var="list_image_url"/>
                   <spring:message arguments="${typeName}" code="entity_list_all" htmlEscape="false" var="list_label"/>
-                  <a alt="${fn:escapeXml(list_label)}" href="${fn:escapeXml(list_form_url)}"
+                  <a alt="${fn:escapeXml(list_label)}"
+                     href="${fn:escapeXml(list_form_url)}?page=1&amp;size=${empty param.size ? 10 : param.size}"
                      title="${fn:escapeXml(list_label)}">
                       <img alt="${fn:escapeXml(list_label)}" class="image" src="${fn:escapeXml(list_image_url)}"
                            title="${fn:escapeXml(list_label)}"/>
