@@ -6,7 +6,7 @@
 //
 
 
-package com.djavafactory.pttech.rrm.wsclient;
+package com.djavafactory.pttech.rrm.ws;
 
 import javax.xml.bind.annotation.*;
 

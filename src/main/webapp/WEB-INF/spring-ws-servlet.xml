@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:sws="http://www.springframework.org/schema/web-services"
+       xmlns:oxm="http://www.springframework.org/schema/oxm"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/web-services http://www.springframework.org/schema/web-services/web-services-2.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+    <context:component-scan base-package="com.djavafactory.pttech.rrm"/>
+
+    <bean class="org.springframework.ws.server.endpoint.mapping.PayloadRootAnnotationMethodEndpointMapping"/>
+
+    <oxm:jaxb2-marshaller id="marshaller" contextPath="com.djavafactory.pttech.rrm.ws"/>
+
+    <bean class="org.springframework.ws.server.endpoint.adapter.GenericMarshallingMethodEndpointAdapter">
+        <constructor-arg ref="marshaller"/>
+    </bean>
+
+    <bean id="request" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+        <property name="schema" ref="requestSchema"/>
+        <property name="portTypeName" value="reloadReq"/>
+        <property name="locationUri" value="/RequestService/"/>
+        <property name="targetNamespace" value="http://service/"/>
+    </bean>
+
+    <bean id="requestSchema" class="org.springframework.xml.xsd.SimpleXsdSchema">
+        <property name="xsd" value="/WEB-INF/request.xsd"/>
+    </bean>
+
+    <sws:annotation-driven/>
+
+    <sws:dynamic-wsdl id="requestService" portTypeName="reloadReq" locationUri="/RequestService/"
+                      targetNamespace="http://server/">
+        <sws:xsd location="/WEB-INF/request.xsd"/>
+    </sws:dynamic-wsdl>
+
+    <bean class="org.springframework.ws.soap.addressing.server.AnnotationActionEndpointMapping"/>
+</beans>

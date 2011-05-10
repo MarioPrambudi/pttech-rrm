@@ -3,7 +3,7 @@ package com.djavafactory.pttech.rrm.integration;
 
 import com.djavafactory.pttech.rrm.domain.ReloadRequestMessage;
 import com.djavafactory.pttech.rrm.domain.ReloadResponseMessage;
-import com.djavafactory.pttech.rrm.wsclient.ReloadReq;
+import com.djavafactory.pttech.rrm.ws.ReloadReq;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

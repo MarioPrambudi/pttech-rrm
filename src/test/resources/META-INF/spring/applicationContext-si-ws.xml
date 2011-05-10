@@ -13,7 +13,8 @@
         <queue capacity="100"/>
     </channel>
     <ws:outbound-gateway id="tngRequestWsGateway"
-                         request-channel="tngRequestWsChannel" uri="${TNG.reloadendpoint}"
+                         request-channel="tngRequestWsChannel"
+                         uri="http://localhost:8080/services/RequestService/request.wsdl"
                          marshaller="jaxbMarshaller" unmarshaller="jaxbMarshaller"
                          reply-channel="tngRequestReplyChannel"/>
 

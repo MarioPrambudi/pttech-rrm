@@ -4,6 +4,7 @@ import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
 import com.djavafactory.pttech.rrm.domain.ReloadRequestMessage;
 import com.djavafactory.pttech.rrm.domain.ReloadResponseMessage;
+import com.djavafactory.pttech.rrm.ws.ReloadReqResponse;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -100,6 +101,22 @@ public class MessageMapper {
         objectList.add(reloadRequest);
         objectList.add(message);
         return objectList;
+    }
+
+    /**
+     * Method to map the TnG Response Message to ReloadResponseMessage.
+     *
+     * @param message ReloadReqResponse object
+     * @return ReloadResponseMessage.
+     */
+    public ReloadResponseMessage mapTngResponseToReloadResponse(ReloadReqResponse message) {
+        ReloadResponseMessage responseMessage = new ReloadResponseMessage();
+        responseMessage.setTransId(message.getTransactionId());
+        responseMessage.setStatusCode(message.getStatusCode());
+        responseMessage.setStatusMsg(message.getStatusMsg());
+        responseMessage.setResponseTime(new Date());
+        logger.info("[mapTngResponseToReloadResponse - New ResponseMessage object] >> " + responseMessage);
+        return responseMessage;
     }
 
     private ReloadRequest convertMessageToReloadRequest(ReloadRequestMessage message, String status) {
