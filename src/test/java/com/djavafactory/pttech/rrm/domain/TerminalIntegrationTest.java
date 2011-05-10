@@ -26,4 +26,11 @@ public class TerminalIntegrationTest {
         assertNotNull(Terminal.findTerminalsByParam(obj.getTerminalId(), obj.getStatus(), -1L, -1L, -1, -1, null));
         assertEquals(1, Terminal.findTerminalsByParam(obj.getTerminalId(), obj.getStatus(), -1L, -1L, -1, -1, null).getResultList().size());
     }
+
+    @Test
+    public void testTotalTerminals() {
+        Terminal obj = dod.getRandomTerminal();
+        obj.merge();
+        assert (Terminal.totalTerminals() > 0);
+    }
 }

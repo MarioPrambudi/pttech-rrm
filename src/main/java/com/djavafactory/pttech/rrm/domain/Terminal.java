@@ -44,14 +44,14 @@ public class Terminal {
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
-    @Column(updatable=false, insertable=true)
+    @Column(updatable = false, insertable = true)
     private Date createdTime;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
     private Date modifiedTime;
 
-    @Column(updatable=false, insertable=true)
+    @Column(updatable = false, insertable = true)
     private String createdBy;
 
     private String modifiedBy;
@@ -70,15 +70,15 @@ public class Terminal {
     }
 
     /**
-    * To search terminals by parameters
-    *
-     * @param terminalId The terminal id
-     * @param status The terminal status
+     * To search terminals by parameters
+     *
+     * @param terminalId  The terminal id
+     * @param status      The terminal status
      * @param firstResult Start index of the records
      * @param maxResults  Maximum records to be fetched
      * @param order
      * @return List of terminal
-    */
+     */
     public static TypedQuery<Terminal> findTerminalsByParam(String terminalId, String status, Long terminalType, Long acquirer, int firstResult, int maxResults, String order) {
         EntityManager em = Terminal.entityManager();
         TypedQuery<Terminal> q = null;
@@ -98,7 +98,7 @@ public class Terminal {
         if (order != null && !order.equals("")) {
             query = new StringBuilder(query).append(" ORDER BY ").append(order).toString();
         }
-        q = (firstResult > 0 && maxResults > 0) ? em.createQuery(query, Terminal.class).setFirstResult(firstResult).setMaxResults(maxResults) : em.createQuery(query, Terminal.class);
+        q = (firstResult > -1 && maxResults > 0) ? em.createQuery(query, Terminal.class).setFirstResult(firstResult).setMaxResults(maxResults) : em.createQuery(query, Terminal.class);
         if (status != null && !status.equals("") && !status.equals("-1")) {
             q.setParameter("status", status);
         }
@@ -113,22 +113,32 @@ public class Terminal {
         }
         return q;
     }
-    
+
     public static List findTerminalByAcquirerId(Long acquirerId) {
-      TypedQuery<List> q = entityManager().createQuery("select Terminal from Terminal terminal where terminal.acquirer.id=:acquirerId", List.class);
-      q.setParameter("acquirerId", acquirerId);
-      return q.getResultList();
-  }
-    
+        TypedQuery<List> q = entityManager().createQuery("select Terminal from Terminal terminal where terminal.acquirer.id=:acquirerId", List.class);
+        q.setParameter("acquirerId", acquirerId);
+        return q.getResultList();
+    }
+
     /**
      * To delete terminal by updated status to TERMINAL_STATUS_DELETED value
+     *
      * @param terminal The terminal object
      * @return none
      */
-	public static void deleteTerminalForAcquirer(Terminal terminal) {
-	    	terminal.setStatus(Constants.TERMINAL_STATUS_DELETED);
-	        terminal.setModifiedBy("System");
-	        terminal.setModifiedTime(new Date());
-	        terminal.merge();       	    
-	}
+    public static void deleteTerminalForAcquirer(Terminal terminal) {
+        terminal.setStatus(Constants.TERMINAL_STATUS_DELETED);
+        terminal.setModifiedBy("System");
+        terminal.setModifiedTime(new Date());
+        terminal.merge();
+    }
+
+    /**
+     * Get total non deleted terminals count.
+     *
+     * @return Long total count
+     */
+    public static long totalTerminals() {
+        return entityManager().createQuery("select count(o) from Terminal o WHERE LOWER(o.status) != LOWER('" + Constants.TERMINAL_STATUS_DELETED + "')", Long.class).getSingleResult();
+    }
 }
