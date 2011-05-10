@@ -88,8 +88,7 @@ public class AcquirerController extends BaseController {
             List<Acquirer> acquirerList = Acquirer.findAcquirersByParam(name, registrationNo, false, "acquirer.name", (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo).getResultList();
             uiModel.addAttribute("acquirers", acquirerList);
 
-            int totalSize = Acquirer.findAcquirersByParam(name, registrationNo, false, "acquirer.name", -1, -1).getResultList().size();
-            float nrOfPages = (float) totalSize / sizeNo;
+            float nrOfPages = (float) Acquirer.totalAcquirersByParam(name, registrationNo, false) / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
             uiModel.addAttribute("params", "&name=" + name + "&registrationNo=" + registrationNo);
         } else {

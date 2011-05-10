@@ -141,4 +141,42 @@ public class Terminal {
     public static long totalTerminals() {
         return entityManager().createQuery("select count(o) from Terminal o WHERE LOWER(o.status) != LOWER('" + Constants.TERMINAL_STATUS_DELETED + "')", Long.class).getSingleResult();
     }
+
+    /**
+     * Get total non deleted terminals count based on parameters.
+     *
+     * @return Long total count
+     */
+    public static long totalTerminalsByParam(String terminalId, String status, Long terminalType, Long acquirer) {
+        EntityManager em = Terminal.entityManager();
+        TypedQuery<Long> q = null;
+        String query = "SELECT count(terminal) FROM Terminal AS terminal WHERE LOWER(terminal.status) != LOWER('" + Constants.TERMINAL_STATUS_DELETED + "')";
+        if (status != null && !status.equals("") && !status.equals("-1")) {
+            query = new StringBuilder(query).append(" AND LOWER(terminal.status) = LOWER(:status)").toString();
+        }
+        if (terminalId != null && !terminalId.equals("")) {
+            query = new StringBuilder(query).append(" AND LOWER(terminal.terminalId) LIKE LOWER(:terminalId)").toString();
+        }
+        if (terminalType > 0L) {
+            query = new StringBuilder(query).append(" AND LOWER(terminal.terminalType.id) = :terminalType").toString();
+        }
+        if (acquirer > 0L) {
+            query = new StringBuilder(query).append(" AND LOWER(terminal.acquirer.id) = :acquirer").toString();
+        }
+
+        q = em.createQuery(query, Long.class);
+        if (status != null && !status.equals("") && !status.equals("-1")) {
+            q.setParameter("status", status);
+        }
+        if (terminalId != null && !terminalId.equals("")) {
+            q.setParameter("terminalId", "%" + terminalId + "%");
+        }
+        if (terminalType > 0L) {
+            q.setParameter("terminalType", terminalType);
+        }
+        if (acquirer > 0L) {
+            q.setParameter("acquirer", acquirer);
+        }
+        return q.getSingleResult();
+    }
 }
