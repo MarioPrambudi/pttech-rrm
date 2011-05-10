@@ -6,7 +6,7 @@
 //
 
 
-package com.djavafactory.pttech.rrm.wsclient;
+package com.djavafactory.pttech.rrm.ws;
 
 import javax.xml.bind.annotation.*;
 
@@ -18,8 +18,8 @@ import javax.xml.bind.annotation.*;
 @XmlType(name = "", propOrder = {
 
 })
-@XmlRootElement(name = "reloadReqResponse")
-public class ReloadReqResponse {
+@XmlRootElement(name = "KeyResponse")
+public class KeyResponse {
 
     @XmlElement(name = "TransactionId", required = true)
     protected String transactionId;

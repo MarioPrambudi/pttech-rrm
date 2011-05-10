@@ -1,264 +1,297 @@
-<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:spring="http://www.springframework.org/tags" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
-  <jsp:directive.tag import="java.util.ArrayList" />
-  <jsp:output omit-xml-declaration="yes" />
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+          xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:spring="http://www.springframework.org/tags"
+          xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<jsp:directive.tag import="java.util.ArrayList"/>
+<jsp:output omit-xml-declaration="yes"/>
 
-  <jsp:directive.attribute name="id" type="java.lang.String" required="true" rtexprvalue="true" description="The identifier for this tag (do not change!)" />
-  <jsp:directive.attribute name="data" type="java.util.Collection" required="true" rtexprvalue="true" description="The collection to be displayed in the table" />
-  <jsp:directive.attribute name="path" type="java.lang.String" required="true" rtexprvalue="true" description="Specify the URL path" />
-  <jsp:directive.attribute name="typeIdFieldName" type="java.lang.String" required="false" rtexprvalue="true" description="The identifier field name for the type (defaults to 'id')" />
-  <jsp:directive.attribute name="show" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Include 'show' link into table (default true)" />
-  <jsp:directive.attribute name="create" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Include 'create' link into table (default true)" />
-  <jsp:directive.attribute name="update" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Include 'update' link into table (default true)" />
-  <jsp:directive.attribute name="delete" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Include 'delete' link into table (default true)" />
-  <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
-  <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)" />
-  <jsp:directive.attribute name="terminalAction" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Include terminal actions into table (default false)" />
+<jsp:directive.attribute name="id" type="java.lang.String" required="true" rtexprvalue="true"
+                         description="The identifier for this tag (do not change!)"/>
+<jsp:directive.attribute name="data" type="java.util.Collection" required="true" rtexprvalue="true"
+                         description="The collection to be displayed in the table"/>
+<jsp:directive.attribute name="path" type="java.lang.String" required="true" rtexprvalue="true"
+                         description="Specify the URL path"/>
+<jsp:directive.attribute name="typeIdFieldName" type="java.lang.String" required="false" rtexprvalue="true"
+                         description="The identifier field name for the type (defaults to 'id')"/>
+<jsp:directive.attribute name="show" type="java.lang.Boolean" required="false" rtexprvalue="true"
+                         description="Include 'show' link into table (default true)"/>
+<jsp:directive.attribute name="create" type="java.lang.Boolean" required="false" rtexprvalue="true"
+                         description="Include 'create' link into table (default true)"/>
+<jsp:directive.attribute name="update" type="java.lang.Boolean" required="false" rtexprvalue="true"
+                         description="Include 'update' link into table (default true)"/>
+<jsp:directive.attribute name="delete" type="java.lang.Boolean" required="false" rtexprvalue="true"
+                         description="Include 'delete' link into table (default true)"/>
+<jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true"
+                         description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')"/>
+<jsp:directive.attribute name="z" type="java.lang.String" required="false"
+                         description="Used for checking if element has been modified (to recalculate simply provide empty string value)"/>
+<jsp:directive.attribute name="terminalAction" type="java.lang.Boolean" required="false" rtexprvalue="true"
+                         description="Include terminal actions into table (default false)"/>
 
-  <jsp:directive.attribute name="reportType" type="java.lang.String" required="false" rtexprvalue="true" description="The identifier field for the report type (defaults to 'configKey')" />
-  <jsp:directive.attribute name="pdf_report" type="java.lang.Boolean" required="false" rtexprvalue="true" description="show pdf report (default false)" />
-  <jsp:directive.attribute name="xls_report" type="java.lang.Boolean" required="false" rtexprvalue="true" description="show xls report (default false)" />
-  <jsp:directive.attribute name="html_report" type="java.lang.Boolean" required="false" rtexprvalue="true" description="show html report (default false)" />
-  <c:if test="${empty render or render}">
+<jsp:directive.attribute name="reportType" type="java.lang.String" required="false" rtexprvalue="true"
+                         description="The identifier field for the report type (defaults to 'configKey')"/>
+<jsp:directive.attribute name="pdf_report" type="java.lang.Boolean" required="false" rtexprvalue="true"
+                         description="show pdf report (default false)"/>
+<jsp:directive.attribute name="xls_report" type="java.lang.Boolean" required="false" rtexprvalue="true"
+                         description="show xls report (default false)"/>
+<jsp:directive.attribute name="html_report" type="java.lang.Boolean" required="false" rtexprvalue="true"
+                         description="show html report (default false)"/>
+<c:if test="${empty render or render}">
 
-    <c:set var="columnProperties" scope="request" />
-    <c:set var="columnLabels" scope="request" />
-    <c:set var="columnMaxLengths" scope="request" />
+<c:set var="columnProperties" scope="request"/>
+<c:set var="columnLabels" scope="request"/>
+<c:set var="columnMaxLengths" scope="request"/>
 
-    <jsp:doBody />
-    <c:if test="${empty typeIdFieldName}">
-      <c:set var="typeIdFieldName" value="id" />
-    </c:if>
-    <c:if test="${empty reportType}">
-      <c:set var="reportType" value="configKey" />
-    </c:if>
+<jsp:doBody/>
+<c:if test="${empty typeIdFieldName}">
+    <c:set var="typeIdFieldName" value="id"/>
+</c:if>
+<c:if test="${empty reportType}">
+    <c:set var="reportType" value="configKey"/>
+</c:if>
 
-	<c:if test="${empty show}">
-	  <c:set var="show" value="true"/>
-	</c:if>
+<c:if test="${empty show}">
+    <c:set var="show" value="true"/>
+</c:if>
 
-    <c:if test="${empty update}">
-      <c:set var="update" value="true" />
-    </c:if>
+<c:if test="${empty update}">
+    <c:set var="update" value="true"/>
+</c:if>
 
-    <c:if test="${empty delete}">
-      <c:set var="delete" value="true" />
-    </c:if>
-    
-    <c:if test="${empty html_report}">
-      <c:set var="html_report" value="false"/>
-    </c:if>
-    <c:if test="${empty pdf_report}">
-      <c:set var="pdf_report" value="false"/>
-    </c:if>
-	<c:if test="${empty xls_report}">
-      <c:set var="xls_report" value="false"/>
-    </c:if>
-    
-    <c:if test="${empty terminalAction}">
-      <c:set var="terminalAction" value="false" />
-    </c:if>
+<c:if test="${empty delete}">
+    <c:set var="delete" value="true"/>
+</c:if>
 
-    <c:set var="typeName" value="${fn:split(id,'_')[fn:length(fn:split(id,'_')) - 1]}" />
-    <c:set var="lengths" value="${fn:split(columnMaxLengths, ',')}" scope="request" />
-    
-    <spring:eval var="colCounter" expression="1" />
+<c:if test="${empty html_report}">
+    <c:set var="html_report" value="false"/>
+</c:if>
+<c:if test="${empty pdf_report}">
+    <c:set var="pdf_report" value="false"/>
+</c:if>
+<c:if test="${empty xls_report}">
+    <c:set var="xls_report" value="false"/>
+</c:if>
 
-    <spring:url value="${path}/setstatus" var="set_status_url" />
-    <c:if test="${terminalAction}">
-        <form:form id="actionForm" action="${fn:escapeXml(set_status_url)}" method="POST">
-        <input id="terminalIds" name = "terminalIds"/>
-        <spring:message code="terminal_actions" htmlEscape="false" />
-        <select id="optionSel" name = "code">
-            <option value="-1"><spring:message code="terminal_action_select" /></option>
-            <option value='A'><spring:message code="terminal_action_activate" /></option>
-            <option value='B'><spring:message code="terminal_action_block" /></option>
-            <option value='X'><spring:message code="terminal_action_deactivate" /></option>
+<c:if test="${empty terminalAction}">
+    <c:set var="terminalAction" value="false"/>
+</c:if>
+
+<c:set var="typeName" value="${fn:split(id,'_')[fn:length(fn:split(id,'_')) - 1]}"/>
+<c:set var="lengths" value="${fn:split(columnMaxLengths, ',')}" scope="request"/>
+
+<spring:eval var="colCounter" expression="1"/>
+
+<spring:url value="${path}/setstatus" var="set_status_url"/>
+<c:if test="${terminalAction}">
+    <form:form id="actionForm" action="${fn:escapeXml(set_status_url)}" method="POST">
+        <input id="terminalIds" name="terminalIds"/>
+        <spring:message code="terminal_actions" htmlEscape="false"/>
+        <select id="optionSel" name="code">
+            <option value="-1"><spring:message code="terminal_action_select"/></option>
+            <option value='A'><spring:message code="terminal_action_activate"/></option>
+            <option value='B'><spring:message code="terminal_action_block"/></option>
+            <option value='X'><spring:message code="terminal_action_deactivate"/></option>
         </select>
-        </form:form>
-        <script type="text/javascript">
+    </form:form>
+    <script type="text/javascript">
         Spring.addDecoration(new Spring.ElementDecoration({elementId : 'terminalIds', widgetType: 'dijit.form.TextBox', widgetAttrs: {type : 'hidden'}}));
         Spring.addDecoration(new Spring.ElementDecoration({elementId : 'optionSel', widgetType: 'dijit.form.Select', widgetAttrs: {style : 'width: 80px;'}}));
         dojo.addOnLoad(function() {
             var actionDropDown = dijit.byId('optionSel');
             dojo.connect(actionDropDown, "onChange", function() {
-                if(actionDropDown.value != -1) {
-                    if(confirm('<spring:message code="terminal_action_confirm" arguments="'+actionDropDown.attr('displayedValue')+'"/>')) {
+                if (actionDropDown.value != -1) {
+                    if (confirm('<spring:message code="terminal_action_confirm" arguments="' + actionDropDown.attr('displayedValue') + '"/>')) {
                         var checkedOptions = [];
-                        dojo.query("input[name=terminalCB]").forEach(function(node){
+                        dojo.query("input[name=terminalCB]").forEach(function(node) {
                             if (node.checked) {
                                 checkedOptions.push(node.value);
                             }
                         });
-                        dijit.byId('terminalIds').setValue(checkedOptions);
-                        document.getElementById('actionForm').submit();
+                        if (checkedOptions.length > 0) {
+                            dijit.byId('terminalIds').setValue(checkedOptions);
+                            document.getElementById('actionForm').submit();
+                        } else {
+                            alert('<spring:message code="terminal_action_norecord_selected" />');
+                        }
                     }
                 }
             });
         });
-        </script>
-    </c:if>
-    <table>
-      <thead>
-        <tr>
-          <c:forTokens items="${columnLabels}" delims="," var="columnHeading">
+    </script>
+</c:if>
+<table>
+    <thead>
+    <tr>
+        <c:forTokens items="${columnLabels}" delims="," var="columnHeading">
             <th>
-              <c:out value="${columnHeading}" />
-              <spring:eval var="colCounter" expression="colCounter  + 1" />
+                <c:out value="${columnHeading}"/>
+                <spring:eval var="colCounter" expression="colCounter  + 1"/>
             </th>
-          </c:forTokens>
-          <th></th>
-          <c:if test="${show}">
+        </c:forTokens>
+        <th></th>
+        <c:if test="${show}">
             <th></th>
-            <spring:eval var="colCounter" expression="colCounter  + 1" />
-          </c:if>
-          <c:if test="${update}">
+            <spring:eval var="colCounter" expression="colCounter  + 1"/>
+        </c:if>
+        <c:if test="${update}">
             <th></th>
-            <spring:eval var="colCounter" expression="colCounter  + 1" />
-          </c:if>
-          <c:if test="${delete}">
+            <spring:eval var="colCounter" expression="colCounter  + 1"/>
+        </c:if>
+        <c:if test="${delete}">
             <th></th>
-            <spring:eval var="colCounter" expression="colCounter  + 1" />
-          </c:if>
-          <c:if test="${terminalAction}">
+            <spring:eval var="colCounter" expression="colCounter  + 1"/>
+        </c:if>
+        <c:if test="${terminalAction}">
             <th></th>
-            <spring:eval var="colCounter" expression="colCounter  + 1" />
-          </c:if>
-          
-          <c:if test="${html_report}">
+            <spring:eval var="colCounter" expression="colCounter  + 1"/>
+        </c:if>
+
+        <c:if test="${html_report}">
             <th></th>
-            <spring:eval var="colCounter" expression="colCounter  + 1" />
-          </c:if>
-          <c:if test="${pdf_report}">
+            <spring:eval var="colCounter" expression="colCounter  + 1"/>
+        </c:if>
+        <c:if test="${pdf_report}">
             <th></th>
-            <spring:eval var="colCounter" expression="colCounter  + 1" />
-          </c:if>
-          <c:if test="${xls_report}">
+            <spring:eval var="colCounter" expression="colCounter  + 1"/>
+        </c:if>
+        <c:if test="${xls_report}">
             <th></th>
-            <spring:eval var="colCounter" expression="colCounter  + 1" />
-          </c:if>
-        </tr>
-      </thead>
-      <c:forEach items="${data}" var="item">
+            <spring:eval var="colCounter" expression="colCounter  + 1"/>
+        </c:if>
+    </tr>
+    </thead>
+    <c:forEach items="${data}" var="item">
         <tr>
-          <c:forTokens items="${columnProperties}" delims="," var="column" varStatus="num">
-            <c:set var="columnMaxLength" value="${lengths[num.count-1]}" scope="request" />
-            <td>
-              <spring:eval expression="item[column]" />
-            </td>
-          </c:forTokens>
-          
-          <c:if test="${show}">
-          <td class="utilbox">
-            <spring:url value="${path}/${item[typeIdFieldName]}" var="show_form_url" />
-            <spring:url value="/resources/images/show.png" var="show_image_url" />
-            <spring:message arguments="${typeName}" code="entity_show" var="show_label" htmlEscape="false" />
-            <a href="${fn:escapeXml(show_form_url)}" alt="${fn:escapeXml(show_label)}" title="${fn:escapeXml(show_label)}">
-              <img alt="${fn:escapeXml(show_label)}" class="image" src="${fn:escapeXml(show_image_url)}" title="${fn:escapeXml(show_label)}" />
-            </a>
-          </td>
-          </c:if>
-          
-          <c:if test="${html_report}">
-          <td class="utilbox">
-          	<spring:url value="/reports/${item[reportType]}-Report/html" var="report_url"/>
-          	<spring:url value="/resources/images/report-html.png" var="report_image_url" />
-          	<spring:message arguments="${typeName}" code="entity_list_report" htmlEscape="false" var="report_label"/>
-          	<a alt="" href="${fn:escapeXml(report_url)}" title="${fn:escapeXml(report_label)}" >
-          		<img alt="${fn:escapeXml(report_label)}" class="image" 
-          			 src="${fn:escapeXml(report_image_url)}" 
-          			 title="${fn:escapeXml(report_label)}"/>
-          	</a>
-          </td>
-          </c:if>
-          <c:if test="${pdf_report}">
-          <td class="utilbox">
-          	<spring:url value="/reports/${item[reportType]}-Report/pdf" var="report_url"/>
-          	<spring:url value="/resources/images/report-pdf.png" var="report_image_url" />
-          	<spring:message arguments="${typeName}" code="entity_list_report" htmlEscape="false" var="report_label"/>
-          	<a alt="" href="${fn:escapeXml(report_url)}" title="${fn:escapeXml(report_label)}" >
-          		<img alt="${fn:escapeXml(report_label)}" class="image" 
-          			 src="${fn:escapeXml(report_image_url)}" 
-          			 title="${fn:escapeXml(report_label)}"/>
-          	</a>
-          </td>
-          </c:if>
-          <c:if test="${xls_report}">
-          <td class="utilbox">
-          	<spring:url value="/reports/${item[reportType]}-Report/xls" var="report_url"/>
-          	<spring:url value="/resources/images/report-xls.png" var="report_image_url" />
-          	<spring:message arguments="${typeName}" code="entity_list_report" htmlEscape="false" var="report_label"/>
-          	<a alt="" href="${fn:escapeXml(report_url)}" title="${fn:escapeXml(report_label)}" >
-          		<img alt="${fn:escapeXml(report_label)}" class="image" 
-          			 src="${fn:escapeXml(report_image_url)}" 
-          			 title="${fn:escapeXml(report_label)}"/>
-          	</a>
-          </td>
-          </c:if>
-          
-          <c:if test="${update}">
-            <td class="utilbox">
-              <spring:url value="${path}/${item[typeIdFieldName]}" var="update_form_url">
-                <spring:param name="form" />
-              </spring:url>
-              <spring:url value="/resources/images/update.png" var="update_image_url" />
-              <spring:message arguments="${typeName}" code="entity_update" var="update_label" htmlEscape="false" />
-              <a href="${fn:escapeXml(update_form_url)}" alt="${fn:escapeXml(update_label)}" title="${fn:escapeXml(update_label)}">
-                <img alt="${fn:escapeXml(update_label)}" class="image" src="${fn:escapeXml(update_image_url)}" title="${fn:escapeXml(update_label)}" />
-              </a>
-            </td>
-          </c:if>
-          <c:if test="${delete}">
-            <td class="utilbox">
-              <spring:url value="${path}/${item[typeIdFieldName]}" var="delete_form_url" />
-              <spring:url value="/resources/images/delete.png" var="delete_image_url" />
-              <form:form action="${fn:escapeXml(delete_form_url)}" method="DELETE">
-                <spring:message arguments="${typeName}" code="entity_delete" var="delete_label" htmlEscape="false" />
-                <c:set var="delete_confirm_msg">
-                  <spring:escapeBody javaScriptEscape="true">
-                    <spring:message code="entity_delete_confirm" />
-                  </spring:escapeBody>
-                </c:set>
-                <input alt="${fn:escapeXml(delete_label)}" class="image" src="${fn:escapeXml(delete_image_url)}" title="${fn:escapeXml(delete_label)}" type="image" value="${fn:escapeXml(delete_label)}" onclick="return confirm('${delete_confirm_msg}');" />
-                <c:if test="${not empty param.page}">
-                  <input name="page" type="hidden" value="${fn:escapeXml(param.page)}" />
-                </c:if>
-                <c:if test="${not empty param.size}">
-                  <input name="size" type="hidden" value="${fn:escapeXml(param.size)}" />
-                </c:if>
-              </form:form>
-            </td>
-          </c:if>
-          <c:if test="${terminalAction}">
-            <td class="utilbox">
-                <input type="checkbox" id="cb${item[typeIdFieldName]}" name="terminalCB" value="${item[typeIdFieldName]}" />
-                <script type="text/javascript">
-                Spring.addDecoration(new Spring.ElementDecoration({elementId : 'cb{item[typeIdFieldName]}', widgetType: 'dijit.form.Checkbox'}));
-            </script>
-            </td>
-          </c:if>
+            <c:forTokens items="${columnProperties}" delims="," var="column" varStatus="num">
+                <c:set var="columnMaxLength" value="${lengths[num.count-1]}" scope="request"/>
+                <td>
+                    <spring:eval expression="item[column]"/>
+                </td>
+            </c:forTokens>
+
+            <c:if test="${show}">
+                <td class="utilbox">
+                    <spring:url value="${path}/${item[typeIdFieldName]}" var="show_form_url"/>
+                    <spring:url value="/resources/images/show.png" var="show_image_url"/>
+                    <spring:message arguments="${typeName}" code="entity_show" var="show_label" htmlEscape="false"/>
+                    <a href="${fn:escapeXml(show_form_url)}" alt="${fn:escapeXml(show_label)}"
+                       title="${fn:escapeXml(show_label)}">
+                        <img alt="${fn:escapeXml(show_label)}" class="image" src="${fn:escapeXml(show_image_url)}"
+                             title="${fn:escapeXml(show_label)}"/>
+                    </a>
+                </td>
+            </c:if>
+
+            <c:if test="${html_report}">
+                <td class="utilbox">
+                    <spring:url value="/reports/${item[reportType]}-Report/html" var="report_url"/>
+                    <spring:url value="/resources/images/report-html.png" var="report_image_url"/>
+                    <spring:message arguments="${typeName}" code="entity_list_report" htmlEscape="false"
+                                    var="report_label"/>
+                    <a alt="" href="${fn:escapeXml(report_url)}" title="${fn:escapeXml(report_label)}">
+                        <img alt="${fn:escapeXml(report_label)}" class="image"
+                             src="${fn:escapeXml(report_image_url)}"
+                             title="${fn:escapeXml(report_label)}"/>
+                    </a>
+                </td>
+            </c:if>
+            <c:if test="${pdf_report}">
+                <td class="utilbox">
+                    <spring:url value="/reports/${item[reportType]}-Report/pdf" var="report_url"/>
+                    <spring:url value="/resources/images/report-pdf.png" var="report_image_url"/>
+                    <spring:message arguments="${typeName}" code="entity_list_report" htmlEscape="false"
+                                    var="report_label"/>
+                    <a alt="" href="${fn:escapeXml(report_url)}" title="${fn:escapeXml(report_label)}">
+                        <img alt="${fn:escapeXml(report_label)}" class="image"
+                             src="${fn:escapeXml(report_image_url)}"
+                             title="${fn:escapeXml(report_label)}"/>
+                    </a>
+                </td>
+            </c:if>
+            <c:if test="${xls_report}">
+                <td class="utilbox">
+                    <spring:url value="/reports/${item[reportType]}-Report/xls" var="report_url"/>
+                    <spring:url value="/resources/images/report-xls.png" var="report_image_url"/>
+                    <spring:message arguments="${typeName}" code="entity_list_report" htmlEscape="false"
+                                    var="report_label"/>
+                    <a alt="" href="${fn:escapeXml(report_url)}" title="${fn:escapeXml(report_label)}">
+                        <img alt="${fn:escapeXml(report_label)}" class="image"
+                             src="${fn:escapeXml(report_image_url)}"
+                             title="${fn:escapeXml(report_label)}"/>
+                    </a>
+                </td>
+            </c:if>
+
+            <c:if test="${update}">
+                <td class="utilbox">
+                    <spring:url value="${path}/${item[typeIdFieldName]}" var="update_form_url">
+                        <spring:param name="form"/>
+                    </spring:url>
+                    <spring:url value="/resources/images/update.png" var="update_image_url"/>
+                    <spring:message arguments="${typeName}" code="entity_update" var="update_label" htmlEscape="false"/>
+                    <a href="${fn:escapeXml(update_form_url)}" alt="${fn:escapeXml(update_label)}"
+                       title="${fn:escapeXml(update_label)}">
+                        <img alt="${fn:escapeXml(update_label)}" class="image" src="${fn:escapeXml(update_image_url)}"
+                             title="${fn:escapeXml(update_label)}"/>
+                    </a>
+                </td>
+            </c:if>
+            <c:if test="${delete}">
+                <td class="utilbox">
+                    <spring:url value="${path}/${item[typeIdFieldName]}" var="delete_form_url"/>
+                    <spring:url value="/resources/images/delete.png" var="delete_image_url"/>
+                    <form:form action="${fn:escapeXml(delete_form_url)}" method="DELETE">
+                        <spring:message arguments="${typeName}" code="entity_delete" var="delete_label"
+                                        htmlEscape="false"/>
+                        <c:set var="delete_confirm_msg">
+                            <spring:escapeBody javaScriptEscape="true">
+                                <spring:message code="entity_delete_confirm"/>
+                            </spring:escapeBody>
+                        </c:set>
+                        <input alt="${fn:escapeXml(delete_label)}" class="image" src="${fn:escapeXml(delete_image_url)}"
+                               title="${fn:escapeXml(delete_label)}" type="image" value="${fn:escapeXml(delete_label)}"
+                               onclick="return confirm('${delete_confirm_msg}');"/>
+                        <c:if test="${not empty param.page}">
+                            <input name="page" type="hidden" value="${fn:escapeXml(param.page)}"/>
+                        </c:if>
+                        <c:if test="${not empty param.size}">
+                            <input name="size" type="hidden" value="${fn:escapeXml(param.size)}"/>
+                        </c:if>
+                    </form:form>
+                </td>
+            </c:if>
+            <c:if test="${terminalAction}">
+                <td class="utilbox">
+                    <input type="checkbox" id="cb${item[typeIdFieldName]}" name="terminalCB"
+                           value="${item[typeIdFieldName]}"/>
+                    <script type="text/javascript">
+                        Spring.addDecoration(new Spring.ElementDecoration({elementId : 'cb{item[typeIdFieldName]}', widgetType: 'dijit.form.Checkbox'}));
+                    </script>
+                </td>
+            </c:if>
         </tr>
-      </c:forEach>
-      <tr class="footer">
+    </c:forEach>
+    <tr class="footer">
         <td colspan="${colCounter}">
-          <c:if test="${empty create or create}">
+            <c:if test="${empty create or create}">
             <span class="new">
               <spring:url value="/${path}" var="create_url">
-                <spring:param name="form" />
+                  <spring:param name="form"/>
               </spring:url>
               <a href="${fn:escapeXml(create_url)}">
-                <spring:url value="/resources/images/add.png" var="create_img_url" />
-                <spring:message arguments="${typeName}" code="global_menu_new" var="add_message" htmlEscape="false" />
-                <img alt="${fn:escapeXml(add_message)}" src="${fn:escapeXml(create_img_url)}" title="${fn:escapeXml(add_message)}" />
+                  <spring:url value="/resources/images/add.png" var="create_img_url"/>
+                  <spring:message arguments="${typeName}" code="global_menu_new" var="add_message" htmlEscape="false"/>
+                  <img alt="${fn:escapeXml(add_message)}" src="${fn:escapeXml(create_img_url)}"
+                       title="${fn:escapeXml(add_message)}"/>
               </a>
             </span>
-            <c:out value=" " />
-          </c:if>
-          <c:if test="${not empty maxPages}">
-            <util:pagination maxPages="${maxPages}" page="${param.page}" size="${param.size}" />
-          </c:if>
+                <c:out value=" "/>
+            </c:if>
+            <c:if test="${not empty maxPages}">
+                <util:pagination maxPages="${maxPages}" page="${param.page}" size="${param.size}"/>
+            </c:if>
         </td>
-      </tr>
-    </table>
-  </c:if>
+    </tr>
+</table>
+</c:if>
 
 </jsp:root>

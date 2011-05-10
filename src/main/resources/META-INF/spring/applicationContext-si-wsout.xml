@@ -20,10 +20,27 @@
     <channel id="tngRequestReplyChannel">
         <queue capacity="100"/>
     </channel>
-    <!-- TODO: get response from TnG and process the response content -->
+    <chain input-channel="tngRequestReplyChannel">
+        <transformer ref="mapperBean" method="mapTngResponseToReloadResponse"/>
+        <router ref="routerBean" method="routeReloadResponse"/>
+    </chain>
+
+    <channel id="tngResponsePersistChannel">
+        <queue capacity="100"/>
+    </channel>
+    <chain input-channel="tngResponsePersistChannel" output-channel="transformResponseChannel">
+        <transformer ref="mapperBean" method="mapTngReloadResponse"/>
+        <service-activator ref="messagePersistenceBean" method="mergeReloadRequest"/>
+    </chain>
+
+    <channel id="transformResponseChannel">
+        <queue capacity="100"/>
+    </channel>
+    <transformer input-channel="transformResponseChannel" ref="transformerBean" method="transformMessageToJson"
+                 output-channel="rmiReloadStatusChannel"/>
 
     <beans:bean id="jaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
-        <beans:property name="contextPath" value="com.djavafactory.pttech.rrm.wsclient"/>
+        <beans:property name="contextPath" value="com.djavafactory.pttech.rrm.ws"/>
     </beans:bean>
 
 </beans:beans>

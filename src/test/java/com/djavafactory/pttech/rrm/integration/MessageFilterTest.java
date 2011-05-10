@@ -29,10 +29,19 @@ public class MessageFilterTest extends BaseManagerTestCase {
         assert (new MessageFilter().validateTimeoutFilter(getReloadRequestMessage(cal.getTime())) == false);
     }
 
+    @Test
+    public void testKeyRequestFilter() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.MINUTE, 5);
+
+        assert (new MessageFilter().keyRequestFilter(getReloadRequestMessage(cal.getTime())) == false);
+    }
+
     private ReloadRequestMessage getReloadRequestMessage(Date date) {
         ReloadRequestMessage reloadRequestMessage = new ReloadRequestMessage();
         reloadRequestMessage.setAmount(new BigDecimal("10.00"));
-        reloadRequestMessage.setEncryptedMsg(null);
+        reloadRequestMessage.setEncryptedMsg("FDsfjksdf&#874293");
         reloadRequestMessage.setMfgNo(101010019L);
         reloadRequestMessage.setMsgType("N");
         reloadRequestMessage.setRequestTime(date);
