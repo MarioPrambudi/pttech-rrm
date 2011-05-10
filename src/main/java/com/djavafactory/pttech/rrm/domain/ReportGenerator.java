@@ -154,7 +154,7 @@ public class ReportGenerator {
      * @return List A report list
      * @throws Exception 
      */
-    public static List getDailyDetailsRequestReloadFrmCelcomReport() throws Exception {
+    public static List<Report> getDailyDetailsRequestReloadFrmCelcomReport() throws Exception {
     	Date dateMin = null;
     	Date dateMax = null;
     	dateMin = DateUtil.getCurrentDate("dd/MM/yyyy");
@@ -663,6 +663,163 @@ public class ReportGenerator {
 		dateMin = dateMax;
 	}
     return listCompleteReport;
-
   }
+    
+    
+    
+// <<<<<<<<<<<<<<<<<<<<<<<<< CELCOM REPORT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    
+    /** 
+     * TO DO
+     * get result for report dailyTransactionDetailsReport/CE0001
+     * @param none
+     * @return List A report list
+     * @throws Exception 
+     */
+    public static List<Report> getDailyTransactionDetailsReport() throws Exception {
+    	return getDailyTransactionDetailsReport(null, null);
+    }
+    
+    /** 
+     * TO DO
+     * get result for report dailyTransactionDetailsByRangeOfDatesReport/CE0002
+     * @param dateMin, dateMax
+     * @return List A report list
+     * @throws Exception 
+     */
+    public static List<Report> getDailyTransactionDetailsReport(Date dateMin, Date dateMax) throws Exception {
+    	List<Report> listReport = new ArrayList<Report>();
+        List<Report> listCompleteReport = new ArrayList<Report>();
+        
+    	List listStatus = new ArrayList();
+    	listStatus.add(Constants.RELOAD_REQUEST_NEW.toLowerCase());
+    	listStatus.add(Constants.RELOAD_REQUEST_FAILED.toLowerCase());
+    	listStatus.add(Constants.RELOAD_REQUEST_EXPIRED.toLowerCase());
+    	listStatus.add(Constants.RELOAD_REQUEST_MANUALCANCEL.toLowerCase());
+    	listStatus.add(Constants.RELOAD_REQUEST_SUCCESS.toLowerCase()); 
+
+    	List listReloadRequest = ReloadRequest.findReloadRequestsByParam2(dateMin, dateMax, listStatus);
+    	listReport = copyReloadRequestToReport(listReloadRequest);
+
+		for (Report report : listReport) {
+			try {
+				// TODO :set attribute for daily transaction details report
+				
+            	report.setSofRequestedDatetime(report.getRequestedTime());
+            	report.setFees(getReportFee());
+            	report.setTotalChargeToCustomer(getTotalChargeToCustomer(report.getReloadAmount()));
+            	report.setCommissionAmountDeductedBySof(getCommAmountDeductedBySOF());
+            	report.setNetPaymentToTng(getNetPaymentToTnG(report.getTotalChargeToCustomer(), report.getCommissionAmountDeductedBySof()));
+            	
+            	listCompleteReport.add(report);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+		}
+		          
+        return listCompleteReport;
+    }
+    
+        
+    /** 
+     * TO DO
+     * get result for report dailyTransactionFeeDetailsReport/CE0003
+     * @param none
+     * @return List A report list
+     * @throws Exception 
+     */
+    public static List<Report> getDailyTransactionFeeDetailsReport() throws Exception {
+    	return getDailyTransactionFeeDetailsReport(null, null);
+    }
+    
+    /** 
+     * TO DO
+     * get result for report dailyTransactionFeeDetailsByRangeOfDatesReport/CE0004
+     * @param dateMin, dateMax
+     * @return List A report list
+     * @throws Exception 
+     */
+    public static List<Report> getDailyTransactionFeeDetailsReport(Date dateMin, Date dateMax) throws Exception {
+    	List<Report> listReport = new ArrayList<Report>();
+        List<Report> listCompleteReport = new ArrayList<Report>();
+        
+    	List listStatus = new ArrayList();
+    	listStatus.add(Constants.RELOAD_REQUEST_NEW.toLowerCase());
+    	listStatus.add(Constants.RELOAD_REQUEST_FAILED.toLowerCase());
+    	listStatus.add(Constants.RELOAD_REQUEST_EXPIRED.toLowerCase());
+    	listStatus.add(Constants.RELOAD_REQUEST_MANUALCANCEL.toLowerCase());
+    	listStatus.add(Constants.RELOAD_REQUEST_SUCCESS.toLowerCase()); 
+
+    	List listReloadRequest = ReloadRequest.findReloadRequestsByParam2(dateMin, dateMax, listStatus);
+    	listReport = copyReloadRequestToReport(listReloadRequest);
+
+		for (Report report : listReport) {
+			try {
+				// TODO :set attribute for daily transaction fee details report
+				
+            	report.setSofRequestedDatetime(report.getRequestedTime());
+            	report.setFees(getReportFee());
+            	report.setTotalChargeToCustomer(getTotalChargeToCustomer(report.getReloadAmount()));
+            	report.setCommissionAmountDeductedBySof(getCommAmountDeductedBySOF());
+            	report.setNetPaymentToTng(getNetPaymentToTnG(report.getTotalChargeToCustomer(), report.getCommissionAmountDeductedBySof()));
+            	
+            	listCompleteReport.add(report);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+		}
+		          
+        return listCompleteReport;
+    }
+    
+    /** 
+     * TODO
+     * get result for report summaryDailyTransactionDetailsReport/CE0005
+     * @param none
+     * @return List A report list
+     * @throws Exception 
+     */
+    public static List<Report> summaryDailyTransactionDetailsReport() throws Exception {
+    	return getSummaryDailyTransactionDetailsReport(null, null);
+    }
+    
+    /** 
+     * TODO
+     * get result for report ummaryDailyTransactionDetailsReportByRangeOfDatesReport/CE0006
+     * @param dateMin, dateMax
+     * @return List A report list
+     * @throws Exception 
+     */
+    public static List<Report> getSummaryDailyTransactionDetailsReport(Date dateMin, Date dateMax) throws Exception {
+    	List<Report> listReport = new ArrayList<Report>();
+        List<Report> listCompleteReport = new ArrayList<Report>();
+        
+    	List listStatus = new ArrayList();
+    	listStatus.add(Constants.RELOAD_REQUEST_NEW.toLowerCase());
+    	listStatus.add(Constants.RELOAD_REQUEST_FAILED.toLowerCase());
+    	listStatus.add(Constants.RELOAD_REQUEST_EXPIRED.toLowerCase());
+    	listStatus.add(Constants.RELOAD_REQUEST_MANUALCANCEL.toLowerCase());
+    	listStatus.add(Constants.RELOAD_REQUEST_SUCCESS.toLowerCase()); 
+
+    	List listReloadRequest = ReloadRequest.findReloadRequestsByParam2(dateMin, dateMax, listStatus);
+    	listReport = copyReloadRequestToReport(listReloadRequest);
+
+		for (Report report : listReport) {
+			try {
+				// TODO :set attribute for summary daily transaction details report
+				
+            	report.setSofRequestedDatetime(report.getRequestedTime());
+            	report.setFees(getReportFee());
+            	report.setTotalChargeToCustomer(getTotalChargeToCustomer(report.getReloadAmount()));
+            	report.setCommissionAmountDeductedBySof(getCommAmountDeductedBySOF());
+            	report.setNetPaymentToTng(getNetPaymentToTnG(report.getTotalChargeToCustomer(), report.getCommissionAmountDeductedBySof()));
+            	
+            	listCompleteReport.add(report);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+		}
+		          
+        return listCompleteReport;
+    }
 }
