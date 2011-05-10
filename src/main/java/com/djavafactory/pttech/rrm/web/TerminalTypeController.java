@@ -56,8 +56,7 @@ public class TerminalTypeController {
             List<TerminalType> terminalTypeList = TerminalType.findTerminalTypesByParam(searchText, false, "terminalType.name", (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo).getResultList();
             uiModel.addAttribute("terminaltypes", terminalTypeList);
 
-            int totalSize = TerminalType.findTerminalTypesByParam(searchText, false, "terminalType.name", -1, -1).getResultList().size();
-            float nrOfPages = (float) totalSize / sizeNo;
+            float nrOfPages = (float) TerminalType.totalTerminalTypesByParam(searchText, false) / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
             uiModel.addAttribute("params", "&searchText=" + searchText);
         } else {

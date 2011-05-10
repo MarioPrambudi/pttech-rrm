@@ -68,4 +68,23 @@ public class TerminalType {
     public static long totalTerminalTypes() {
         return entityManager().createQuery("select count(o) from TerminalType o where o.deleted = false", Long.class).getSingleResult();
     }
+
+    public static Long totalTerminalTypesByParam(String searchText, Boolean deleted) {
+        EntityManager em = TerminalType.entityManager();
+        TypedQuery<Long> q = null;
+        String query = "SELECT count(terminalType) FROM TerminalType AS terminalType";
+        query = (deleted != null && !deleted.equals("") && deleted == true) ? new StringBuilder(query).append(" WHERE (terminalType.deleted = false or terminalType.deleted = :notDeleted)").toString() : new StringBuilder(query).append(" WHERE terminalType.deleted = false").toString();
+        if (searchText != null && !searchText.equals("")) {
+            query = new StringBuilder(query).append(" AND (LOWER(terminalType.name) LIKE LOWER(:searchText)")
+                    .append(" OR LOWER(terminalType.description) LIKE LOWER(:searchText))").toString();
+        }
+        q = em.createQuery(query, Long.class);
+        if (deleted != null && !deleted.equals("") && deleted == true) {
+            q.setParameter("notDeleted", deleted);
+        }
+        if (searchText != null && !searchText.equals("")) {
+            q.setParameter("searchText", "%" + searchText + "%");
+        }
+        return q.getSingleResult();
+    }
 }

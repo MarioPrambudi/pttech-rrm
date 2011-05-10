@@ -125,4 +125,28 @@ public class Acquirer {
         return entityManager().createQuery("select count(o) from Acquirer o where o.deleted = false", Long.class).getSingleResult();
     }
 
+    public static long totalAcquirersByParam(String name, String registrationNo, Boolean deleted) {
+        EntityManager em = Acquirer.entityManager();
+        TypedQuery<Long> q = null;
+        String query = "SELECT count(acquirer) FROM Acquirer AS acquirer";
+        query = (deleted != null && !deleted.equals("") && deleted == true) ? new StringBuilder(query).append(" WHERE (acquirer.deleted = false or acquirer.deleted = :notDeleted)").toString() : new StringBuilder(query).append(" WHERE acquirer.deleted = false").toString();
+        if (name != null && !name.equals("")) {
+            query = new StringBuilder(query).append(" AND LOWER(acquirer.name) LIKE LOWER(:name)").toString();
+        }
+        if (registrationNo != null && !registrationNo.equals("")) {
+            query = new StringBuilder(query).append(" AND LOWER(acquirer.registrationNo) LIKE LOWER(:registrationNo)").toString();
+        }
+        q = em.createQuery(query, Long.class);
+        if (deleted != null && !deleted.equals("") && deleted == true) {
+            q.setParameter("notDeleted", deleted);
+        }
+        if (name != null && !name.equals("")) {
+            q.setParameter("name", "%" + name + "%");
+        }
+        if (registrationNo != null && !registrationNo.equals("")) {
+            q.setParameter("registrationNo", "%" + registrationNo + "%");
+        }
+        return q.getSingleResult();
+    }
+
 }
