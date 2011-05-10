@@ -64,7 +64,9 @@ public class TerminalController extends BaseController {
 
             List<Terminal> terminalList = Terminal.findTerminalsByParam(terminalId, status, terminalType, acquirer, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo, "terminal.terminalId").getResultList();
             uiModel.addAttribute("terminals", regenerateList(terminalList));
-            float nrOfPages = (float) Terminal.totalTerminals() / sizeNo;
+
+            int totalSize = Terminal.findTerminalsByParam(terminalId, status, terminalType, acquirer, -1, -1, "terminal.terminalId").getResultList().size();
+            float nrOfPages = (float) totalSize / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
             uiModel.addAttribute("params", "&terminalId=" + terminalId + "&status=" + status + "&terminalType=" + terminalType + "&acquirer=" + acquirer);
         } else {
