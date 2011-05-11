@@ -17,7 +17,8 @@ privileged aspect ReloadRequest_Roo_ToString {
         sb.append("TransCode: ").append(getTransCode()).append(", ");
         sb.append("RequestedTime: ").append(getRequestedTime()).append(", ");
         sb.append("TngKey: ").append(getTngKey()).append(", ");
-        sb.append("ModifiedTime: ").append(getModifiedTime());
+        sb.append("ModifiedTime: ").append(getModifiedTime()).append(", ");
+        sb.append("TotalReloadQty: ").append(getTotalReloadQty());
         return sb.toString();
     }
     
