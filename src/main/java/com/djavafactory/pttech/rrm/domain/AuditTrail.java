@@ -32,14 +32,17 @@ public class AuditTrail implements Serializable {
 	private Date performedAt;
 	private Object performedBy;
 	private String description;
+	private String debugInfo;
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((action == null) ? 0 : action.hashCode());
+		result = prime * result + ((debugInfo == null) ? 0 : debugInfo.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((entity == null) ? 0 : entity.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((performedAt == null) ? 0 : performedAt.hashCode());
 		result = prime * result + ((performedBy == null) ? 0 : performedBy.hashCode());
 		return result;
@@ -59,6 +62,11 @@ public class AuditTrail implements Serializable {
 				return false;
 		} else if (!action.equals(other.action))
 			return false;
+		if (debugInfo == null) {
+			if (other.debugInfo != null)
+				return false;
+		} else if (!debugInfo.equals(other.debugInfo))
+			return false;
 		if (description == null) {
 			if (other.description != null)
 				return false;
@@ -68,6 +76,11 @@ public class AuditTrail implements Serializable {
 			if (other.entity != null)
 				return false;
 		} else if (!entity.equals(other.entity))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (performedAt == null) {
 			if (other.performedAt != null)
@@ -81,5 +94,7 @@ public class AuditTrail implements Serializable {
 			return false;
 		return true;
 	}
+	
+	
 
 }
