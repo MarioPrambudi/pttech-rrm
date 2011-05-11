@@ -21,11 +21,6 @@
                                   connection-factory="singleConnectionFactory"/>
 
 
-    <amqp:inbound-channel-adapter channel="rrmResponseInboundChannel"
-                                  queue-name="#{amqp['queue.rrm.reload.status']}"
-                                  connection-factory="singleConnectionFactory"/>
-
-
     <channel id="rmiReloadStatusChannel">
         <interceptors>
             <wire-tap channel="logger"/>

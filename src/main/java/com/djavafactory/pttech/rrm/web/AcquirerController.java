@@ -1,7 +1,6 @@
 package com.djavafactory.pttech.rrm.web;
 
 
-import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.Acquirer;
 import com.djavafactory.pttech.rrm.domain.City;
 import com.djavafactory.pttech.rrm.domain.Terminal;
@@ -13,11 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @RooWebScaffold(path = "acquirers", formBackingObject = Acquirer.class)
 @RequestMapping("/acquirers")
@@ -65,9 +60,9 @@ public class AcquirerController extends BaseController {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
 
-            List<Acquirer> acquirerList = Acquirer.findAcquirersByParam(null, null, false, "acquirer.name", page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo).getResultList();
+            List<Acquirer> acquirerList = Acquirer.findAcquirersByParam(null, null, false, "acquirer.name", (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo).getResultList();
             uiModel.addAttribute("acquirers", acquirerList);
-            float nrOfPages = (float) acquirerList.size() / sizeNo;
+            float nrOfPages = (float) Acquirer.totalAcquirers() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
             uiModel.addAttribute("acquirers", Acquirer.findAcquirersByParam(null, null, false, "acquirer.name", -1, -1).getResultList());
@@ -84,9 +79,22 @@ public class AcquirerController extends BaseController {
      * @param uiModel        Model
      * @return String the page path to redirect
      */
-    @RequestMapping(value = "/findAcquirersByParam", method = RequestMethod.POST)
-    public String findAcquirersByParam(@RequestParam(value = "name", required = false) String name, @RequestParam(value = "registrationNo", required = false) String registrationNo, Model uiModel) {
-        uiModel.addAttribute("acquirers", Acquirer.findAcquirersByParam(name, registrationNo, false, "acquirer.name", -1, -1).getResultList());
+    @RequestMapping(value = "/findAcquirersByParam", method = {RequestMethod.POST, RequestMethod.GET})
+    public String findAcquirersByParam(@RequestParam(value = "name", required = false) String name, @RequestParam(value = "registrationNo", required = false) String registrationNo,
+                                       @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+        if (page != null || size != null) {
+            int sizeNo = size == null ? 10 : size.intValue();
+
+            List<Acquirer> acquirerList = Acquirer.findAcquirersByParam(name, registrationNo, false, "acquirer.name", (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo).getResultList();
+            uiModel.addAttribute("acquirers", acquirerList);
+
+            float nrOfPages = (float) Acquirer.totalAcquirersByParam(name, registrationNo, false) / sizeNo;
+            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+            uiModel.addAttribute("params", "&name=" + name + "&registrationNo=" + registrationNo);
+        } else {
+            uiModel.addAttribute("acquirers", Acquirer.findAcquirersByParam(name, registrationNo, false, "acquirer.name", -1, -1).getResultList());
+        }
+
         addDateTimeFormatPatterns(uiModel);
         return "acquirers/list";
     }

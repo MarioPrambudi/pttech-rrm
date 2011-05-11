@@ -26,4 +26,11 @@ public class AcquirerIntegrationTest {
         assertNotNull(Acquirer.findAcquirersByParam(obj.getName(), null, true, null, -1, -1));
         assertEquals(1, Acquirer.findAcquirersByParam(obj.getName(), null, true, null, -1, -1).getResultList().size());
     }
+
+    @Test
+    public void testTotalAcquirers() {
+        Acquirer obj = dod.getRandomAcquirer();
+        obj.merge();
+        assertEquals(0, Acquirer.totalAcquirers());
+    }
 }

@@ -6,7 +6,7 @@
 //
 
 
-package com.djavafactory.pttech.rrm.wsclient;
+package com.djavafactory.pttech.rrm.ws;
 
 import javax.xml.bind.annotation.*;
 import java.math.BigDecimal;
@@ -20,8 +20,8 @@ import java.util.Date;
 @XmlType(name = "", propOrder = {
 
 })
-@XmlRootElement(name = "reloadReq")
-public class ReloadReq {
+@XmlRootElement(name = "KeyRequest")
+public class KeyRequest {
 
     @XmlElement(name = "TransactionId", required = true)
     protected String transactionId;
@@ -29,10 +29,8 @@ public class ReloadReq {
     protected Long mfgNo;
     @XmlElement(name = "Amount", required = true)
     protected BigDecimal amount;
-    @XmlElement(name = "ServiceProviderId", required = true)
-    protected String serviceProviderId;
-    @XmlElement(name = "TransactionCode", required = true)
-    protected Integer transactionCode;
+    @XmlElement(name = "EncryptedMessage", required = true)
+    protected String encryptedMessage;
     @XmlElement(name = "RequestDateTime", required = true)
     protected Date requestDateTime;
 
@@ -60,20 +58,12 @@ public class ReloadReq {
         this.amount = amount;
     }
 
-    public String getServiceProviderId() {
-        return serviceProviderId;
+    public String getEncryptedMessage() {
+        return encryptedMessage;
     }
 
-    public void setServiceProviderId(String serviceProviderId) {
-        this.serviceProviderId = serviceProviderId;
-    }
-
-    public Integer getTransactionCode() {
-        return transactionCode;
-    }
-
-    public void setTransactionCode(Integer transactionCode) {
-        this.transactionCode = transactionCode;
+    public void setEncryptedMessage(String encryptedMessage) {
+        this.encryptedMessage = encryptedMessage;
     }
 
     public Date getRequestDateTime() {

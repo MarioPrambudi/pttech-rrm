@@ -51,14 +51,14 @@ public class Acquirer {
     @NotNull
     private String hotline;
 
-    @Column(updatable=false, insertable=true)
+    @Column(updatable = false, insertable = true)
     private String createdBy;
 
     private String modifiedBy;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
-    @Column(updatable=false, insertable=true)
+    @Column(updatable = false, insertable = true)
     private Date createdTime;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -82,12 +82,12 @@ public class Acquirer {
     /**
      * To search acquirers by parameters
      *
-     * @param name The acquirer name
+     * @param name           The acquirer name
      * @param registrationNo The Acquirer registration no
-     * @param deleted Weht
-     * @param order The order of the search results
-     * @param firstResult Start index of the records
-     * @param maxResults  Maximum records to be fetched   @return List of acquirer
+     * @param deleted        Weht
+     * @param order          The order of the search results
+     * @param firstResult    Start index of the records
+     * @param maxResults     Maximum records to be fetched   @return List of acquirer
      */
     public static TypedQuery<Acquirer> findAcquirersByParam(String name, String registrationNo, Boolean deleted, String order, int firstResult, int maxResults) {
         EntityManager em = Acquirer.entityManager();
@@ -103,7 +103,7 @@ public class Acquirer {
         if (order != null && !order.equals("")) {
             query = new StringBuilder(query).append(" ORDER BY ").append(order).toString();
         }
-        q = (firstResult > 0 && maxResults > 0) ? em.createQuery(query, Acquirer.class).setFirstResult(firstResult).setMaxResults(maxResults) : em.createQuery(query, Acquirer.class);
+        q = (firstResult > -1 && maxResults > 0) ? em.createQuery(query, Acquirer.class).setFirstResult(firstResult).setMaxResults(maxResults) : em.createQuery(query, Acquirer.class);
         if (deleted != null && !deleted.equals("") && deleted == true) {
             q.setParameter("notDeleted", deleted);
         }
@@ -115,5 +115,38 @@ public class Acquirer {
         }
         return q;
     }
-    
+
+    /**
+     * Get total non deleted acquirers count.
+     *
+     * @return Long total count
+     */
+    public static long totalAcquirers() {
+        return entityManager().createQuery("select count(o) from Acquirer o where o.deleted = false", Long.class).getSingleResult();
+    }
+
+    public static long totalAcquirersByParam(String name, String registrationNo, Boolean deleted) {
+        EntityManager em = Acquirer.entityManager();
+        TypedQuery<Long> q = null;
+        String query = "SELECT count(acquirer) FROM Acquirer AS acquirer";
+        query = (deleted != null && !deleted.equals("") && deleted == true) ? new StringBuilder(query).append(" WHERE (acquirer.deleted = false or acquirer.deleted = :notDeleted)").toString() : new StringBuilder(query).append(" WHERE acquirer.deleted = false").toString();
+        if (name != null && !name.equals("")) {
+            query = new StringBuilder(query).append(" AND LOWER(acquirer.name) LIKE LOWER(:name)").toString();
+        }
+        if (registrationNo != null && !registrationNo.equals("")) {
+            query = new StringBuilder(query).append(" AND LOWER(acquirer.registrationNo) LIKE LOWER(:registrationNo)").toString();
+        }
+        q = em.createQuery(query, Long.class);
+        if (deleted != null && !deleted.equals("") && deleted == true) {
+            q.setParameter("notDeleted", deleted);
+        }
+        if (name != null && !name.equals("")) {
+            q.setParameter("name", "%" + name + "%");
+        }
+        if (registrationNo != null && !registrationNo.equals("")) {
+            q.setParameter("registrationNo", "%" + registrationNo + "%");
+        }
+        return q.getSingleResult();
+    }
+
 }

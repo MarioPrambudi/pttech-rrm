@@ -26,4 +26,11 @@ public class TerminalTypeIntegrationTest {
         assertNotNull(TerminalType.findTerminalTypesByParam(obj.getName(), true, null, -1, -1));
         assertEquals(1, TerminalType.findTerminalTypesByParam(obj.getName(), true, null, -1, -1).getResultList().size());
     }
+
+    @Test
+    public void testTotalTerminalTypes() {
+        TerminalType obj = dod.getRandomTerminalType();
+        obj.merge();
+        assertEquals(0, TerminalType.totalTerminalTypes());
+    }
 }

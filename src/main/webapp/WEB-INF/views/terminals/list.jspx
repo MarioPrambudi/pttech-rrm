@@ -1,26 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:find finderName="ByParam" id="ff_com_djavafactory_pttech_rrm_domain_Terminal" path="/terminals/findTerminalsByParam" z="d+XL0HCAKRTNvONN0hjX+ZAhXSA=">
-        <table:input disableFormBinding="true" field="terminalId" id="c_com_djavafactory_pttech_rrm_domain_Terminal_terminalId" z="user-managed"/>
-        <table:select disableFormBinding="true" field="terminalType" id="c_com_djavafactory_pttech_rrm_domain_Terminal_terminalType" itemValue="id" items="${terminaltypes}" path="/terminaltypes" z="user-managed"/>
-        <table:select disableFormBinding="true" field="acquirer" id="c_com_djavafactory_pttech_rrm_domain_Terminal_acquirer" itemValue="id" items="${acquirers}" path="/acquirers" z="user-managed"/>
-        <table:select disableFormBinding="true" field="status" id="c_com_djavafactory_pttech_rrm_domain_Terminal_status" itemValue="id" items="${statuscode}" path="/statuscode" z="user-managed"/>
+    <page:find finderName="ByParam" id="ff_com_djavafactory_pttech_rrm_domain_Terminal"
+               path="/terminals/findTerminalsByParam" z="d+XL0HCAKRTNvONN0hjX+ZAhXSA=">
+        <table:input disableFormBinding="true" field="terminalId"
+                     id="c_com_djavafactory_pttech_rrm_domain_Terminal_terminalId" z="user-managed"/>
+        <table:select disableFormBinding="true" field="terminalType"
+                      id="c_com_djavafactory_pttech_rrm_domain_Terminal_terminalType" itemValue="id"
+                      items="${terminaltypes}" path="/terminaltypes" z="user-managed"/>
+        <table:select disableFormBinding="true" field="acquirer"
+                      id="c_com_djavafactory_pttech_rrm_domain_Terminal_acquirer" itemValue="id" items="${acquirers}"
+                      path="/acquirers" z="user-managed"/>
+        <table:select disableFormBinding="true" field="status" id="c_com_djavafactory_pttech_rrm_domain_Terminal_status"
+                      itemValue="id" items="${statuscode}" path="/statuscode" z="user-managed"/>
     </page:find>
-    <page:list id="pl_com_djavafactory_pttech_rrm_domain_Terminal" items="${terminals}" z="uzj8hCskYHsCM++GzTy05z7zzeA=">
-        <table:table data="${terminals}" delete="false" id="l_com_djavafactory_pttech_rrm_domain_Terminal" path="/terminals" terminalAction="true" z="user-managed">
-        <table:column id="c_com_djavafactory_pttech_rrm_domain_Terminal_terminalId" property="terminalId" z="user-managed"/>
-        <table:column id="c_com_djavafactory_pttech_rrm_domain_Terminal_acquirer" property="acquirer" z="user-managed"/>
-        <table:column id="c_com_djavafactory_pttech_rrm_domain_Terminal_terminalType" property="terminalType" z="user-managed"/>
-        <table:column id="c_com_djavafactory_pttech_rrm_domain_Terminal_status" property="status" z="user-managed"/>
-        <table:column id="c_com_djavafactory_pttech_rrm_domain_Terminal_createdBy" property="createdBy" render="false" z="user-managed"/>
-        <table:column id="c_com_djavafactory_pttech_rrm_domain_Terminal_createdTime" property="createdTime" render="false" z="user-managed"/>
-        <table:column id="c_com_djavafactory_pttech_rrm_domain_Terminal_modifiedBy" property="modifiedBy" render="false" z="user-managed"/>
-        <table:column id="c_com_djavafactory_pttech_rrm_domain_Terminal_modifiedTime" property="modifiedTime" render="false" z="user-managed"/>
-        <table:column id="c_com_djavafactory_pttech_rrm_domain_Terminal_ip" property="ip" render="false" z="user-managed"/>
-        <table:column id="c_com_djavafactory_pttech_rrm_domain_Terminal_description" property="description" render="false" z="user-managed"/>
-        <table:column id="c_com_djavafactory_pttech_rrm_domain_Terminal_location" property="location" render="false" z="user-managed"/>
+    <page:list id="pl_com_djavafactory_pttech_rrm_domain_Terminal" items="${terminals}"
+               z="uzj8hCskYHsCM++GzTy05z7zzeA=">
+        <table:table data="${terminals}" delete="false" id="l_com_djavafactory_pttech_rrm_domain_Terminal"
+                     path="/terminals" terminalAction="true" z="user-managed">
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_Terminal_terminalId" property="terminalId"
+                          z="user-managed"/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_Terminal_acquirer" property="acquirer"
+                          z="user-managed"/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_Terminal_terminalType" property="terminalType"
+                          z="user-managed"/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_Terminal_status" property="status" z="user-managed"/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_Terminal_createdBy" property="createdBy"
+                          render="false" z="user-managed"/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_Terminal_createdTime" property="createdTime"
+                          render="false" z="user-managed"/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_Terminal_modifiedBy" property="modifiedBy"
+                          render="false" z="user-managed"/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_Terminal_modifiedTime" property="modifiedTime"
+                          render="false" z="user-managed"/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_Terminal_ip" property="ip" render="false"
+                          z="user-managed"/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_Terminal_description" property="description"
+                          render="false" z="user-managed"/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_Terminal_location" property="location" render="false"
+                          z="user-managed"/>
         </table:table>
     </page:list>
 </div>

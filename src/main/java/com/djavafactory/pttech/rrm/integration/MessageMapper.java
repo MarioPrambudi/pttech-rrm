@@ -4,6 +4,8 @@ import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
 import com.djavafactory.pttech.rrm.domain.ReloadRequestMessage;
 import com.djavafactory.pttech.rrm.domain.ReloadResponseMessage;
+import com.djavafactory.pttech.rrm.ws.KeyRequest;
+import com.djavafactory.pttech.rrm.ws.ReloadReqResponse;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -100,6 +102,40 @@ public class MessageMapper {
         objectList.add(reloadRequest);
         objectList.add(message);
         return objectList;
+    }
+
+    /**
+     * Method to map the TnG Response Message to ReloadResponseMessage.
+     *
+     * @param message ReloadReqResponse object
+     * @return ReloadResponseMessage.
+     */
+    public ReloadResponseMessage mapTngResponseToReloadResponse(ReloadReqResponse message) {
+        ReloadResponseMessage responseMessage = new ReloadResponseMessage();
+        responseMessage.setTransId(message.getTransactionId());
+        responseMessage.setStatusCode(message.getStatusCode());
+        responseMessage.setStatusMsg(message.getStatusMsg());
+        responseMessage.setResponseTime(new Date());
+        logger.info("[mapTngResponseToReloadResponse - New ReloadResponseMessage object] >> " + responseMessage);
+        return responseMessage;
+    }
+
+    /**
+     * Method to map the TnG Key Request Message to ReloadRequestMessage.
+     *
+     * @param message KeyRequest object
+     * @return ReloadRequestMessage.
+     */
+    public ReloadRequestMessage mapTngKeyReqToReloadReq(KeyRequest message) {
+        ReloadRequestMessage requestMessage = new ReloadRequestMessage();
+        requestMessage.setAmount(message.getAmount());
+        requestMessage.setMfgNo(message.getMfgNo());
+        requestMessage.setEncryptedMsg(message.getEncryptedMessage());
+        requestMessage.setTransId(message.getTransactionId());
+        requestMessage.setRequestTime(message.getRequestDateTime());
+        requestMessage.setMsgType(Constants.RELOAD_REQUEST_NEW);
+        logger.info("[mapTngKeyReqToReloadReq - New ReloadRequestMessage object] >> " + requestMessage);
+        return requestMessage;
     }
 
     private ReloadRequest convertMessageToReloadRequest(ReloadRequestMessage message, String status) {

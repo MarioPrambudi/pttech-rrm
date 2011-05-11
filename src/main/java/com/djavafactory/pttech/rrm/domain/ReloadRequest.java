@@ -8,8 +8,6 @@ import org.springframework.roo.addon.tostring.RooToString;
 
 import com.djavafactory.pttech.rrm.util.DateUtil;
 
-import javassist.bytecode.Descriptor.Iterator;
-
 import javax.persistence.Column;
 import javax.persistence.EntityManager;
 import javax.persistence.Temporal;
@@ -55,7 +53,7 @@ public class ReloadRequest {
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(style = "S-")
 	private Date modifiedTime;
-	
+
 	@Transient
 	private Long totalReloadQty;
 
@@ -157,7 +155,7 @@ public class ReloadRequest {
 	 * firman: for summary Reload Request
     */
    public static List<ReloadRequest> findSummaryReloadRequestsByRequestedTimeBetweenAndStatus(Date minRequestedTime, Date maxRequestedTime, 
-		   																					  List listStatus) throws ParseException {		
+		   																					  List<String> listStatus) throws ParseException {		
 		 
 	   List<ReloadRequest> listRR = findReloadRequestsByRequestedTimeBetweenAndStatus(minRequestedTime, maxRequestedTime, listStatus);
 	   return summarizeReloadRequest(listRR);
@@ -192,4 +190,42 @@ public class ReloadRequest {
 
 	   return new ArrayList<ReloadRequest>(mapSummary.values());
    }
+   
+   
+   public static List<ReloadRequest> findReloadRequestsByParam2(Date minRequestedTime, Date maxRequestedTime, List<String> listStatus) throws ParseException {	
+	   			int firstResult = -1;
+	   			int maxResults = -1;
+	   			
+				EntityManager em = ReloadRequest.entityManager();
+				TypedQuery<ReloadRequest> typedQuery = null;
+				
+				StringBuilder queryBuilder = new StringBuilder("SELECT ReloadRequest FROM ReloadRequest AS reloadrequest WHERE 1=1 ");
+				
+				if (listStatus != null && listStatus.size()  != 0)
+					queryBuilder.append("AND LOWER(reloadrequest.status) IN (:listStatus)");
+				if (minRequestedTime != null && maxRequestedTime == null)
+					queryBuilder.append("AND reloadrequest.requestedTime >= :minRequestedTime");
+				else if (minRequestedTime == null && maxRequestedTime != null)
+					queryBuilder.append("AND reloadrequest.requestedTime <= :maxRequestedTime");
+				else if (minRequestedTime != null && maxRequestedTime != null) 
+					queryBuilder.append("AND reloadrequest.requestedTime BETWEEN :minRequestedTime AND :maxRequestedTime");
+				
+//				if (order != null && !order.isEmpty())
+//				queryBuilder.append(" ORDER BY " + order);
+				
+				String stringQuery = queryBuilder.toString();
+				
+				typedQuery = (firstResult > 0 && maxResults > 0) ? em.createQuery(stringQuery, ReloadRequest.class)
+																			.setFirstResult(firstResult).setMaxResults(maxResults) 
+																 : em.createQuery(stringQuery, ReloadRequest.class);
+				
+                if(listStatus != null && listStatus.size() != 0)
+                	typedQuery.setParameter("listStatus", listStatus);
+				if(minRequestedTime != null)
+					typedQuery.setParameter("minRequestedTime", minRequestedTime);
+				if(maxRequestedTime != null)
+					typedQuery.setParameter("maxRequestedTime", maxRequestedTime);
+				
+				return typedQuery.getResultList();
+		}
 }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/integration"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:ws="http://www.springframework.org/schema/integration/ws"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+							http://www.springframework.org/schema/integration
+			                http://www.springframework.org/schema/integration/spring-integration-2.0.xsd
+			                http://www.springframework.org/schema/integration/ws http://www.springframework.org/schema/integration/ws/spring-integration-ws-2.0.xsd">
+
+    <channel id="keyRequestWsChannel">
+        <queue capacity="100"/>
+    </channel>
+    <ws:inbound-gateway id="keyRequestWsGateway"
+                        request-channel="keyRequestWsChannel"
+                        marshaller="jaxbMarshaller" unmarshaller="jaxbMarshaller"
+                        reply-channel="keyRequestReplyChannel"/>
+
+    <chain input-channel="keyRequestWsChannel" output-channel="tngKeyResponseChannel">
+        <transformer ref="mapperBean" method="mapTngKeyReqToReloadReq"/>
+        <filter ref="filterBean" method="keyRequestFilter" discard-channel="tngKeyInvalidStatusChannel"/>
+        <filter ref="filterBean" method="validateTimeoutFilter" discard-channel="timeOutPersistChannel"/>
+    </chain>
+
+    <channel id="keyRequestReplyChannel"/>
+
+    <channel id="timeOutPersistChannel">
+        <queue capacity="100"/>
+    </channel>
+    <chain input-channel="timeOutPersistChannel" output-channel="tngKeyExceedTimeOutChannel">
+        <transformer ref="mapperBean" method="mapTimeoutReloadRequest"/>
+        <service-activator ref="messagePersistenceBean" method="mergeReloadRequest"/>
+    </chain>
+    <transformer input-channel="tngKeyExceedTimeOutChannel" ref="transformerBean" method="transformTimeoutMessage"
+                 output-channel="keyRequestReplyChannel"/>
+
+    <channel id="tngKeyInvalidStatusChannel">
+        <queue capacity="100"/>
+    </channel>
+    <transformer input-channel="tngKeyInvalidStatusChannel" ref="transformerBean"
+                 method="transformKeyInvalidStatusMessage"
+                 output-channel="keyRequestReplyChannel"/>
+
+    <publish-subscribe-channel id="tngKeyResponseChannel"/>
+
+    <transformer input-channel="tngKeyResponseChannel" ref="transformerBean" method="transformSuccessMessage"
+                 output-channel="keyRequestReplyChannel"/>
+
+    <chain input-channel="tngKeyResponseChannel" output-channel="rtmReloadRequestChannel">
+        <transformer ref="mapperBean" method="mapTngReloadRequest"/>
+        <service-activator ref="messagePersistenceBean" method="mergeReloadRequest"/>
+    </chain>
+
+</beans:beans>

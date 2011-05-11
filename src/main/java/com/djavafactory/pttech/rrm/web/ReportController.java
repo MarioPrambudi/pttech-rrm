@@ -267,16 +267,16 @@ public class ReportController extends BaseController {
 	@RequestMapping(value = "/CE0001-Report/{format}", method = RequestMethod.GET)
 	public String dailyTrxDetailsReport(ModelMap modelMap,
 										Model uiModel,
-										@PathVariable("format") String format) {
+										@PathVariable("format") String format) throws Exception {
 
-		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
+		List<Report> reportList = ReportGenerator.getDailyTransactionDetailsReport();
 		
 		if(format.equalsIgnoreCase("html")) {
-	        uiModel.addAttribute("reports", reloadRequestList);
+	        uiModel.addAttribute("reports", reportList);
 			
 	        return "dailyTrxDetailsList";
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "dailyTrxDetailsReport";
@@ -287,16 +287,16 @@ public class ReportController extends BaseController {
 	public String dailyTrxDetailsByRangeDateReport(ModelMap modelMap, Model uiModel,
 												   @PathVariable("format") String format,
 												   @RequestParam(value = "startDate", required = false) String startDate,
-												   @RequestParam(value = "endDate", required = false) String endDate) {
+												   @RequestParam(value = "endDate", required = false) String endDate) throws Exception {
 
-		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
+		List<Report> reportList = ReportGenerator.getDailyTransactionDetailsReport();
 		
 		if(format.equalsIgnoreCase("html")) {
-	        uiModel.addAttribute("reports", reloadRequestList);
+	        uiModel.addAttribute("reports", reportList);
 			
 	        return "dailyTrxDetailsByRangeDateList";
 		} else {		
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "dailyTrxDetailsByRangeDateReport";
@@ -305,16 +305,16 @@ public class ReportController extends BaseController {
 	
 	@RequestMapping(value = "/CE0003-Report/{format}", method = RequestMethod.GET)
 	public String dailyTrxFeeDetailsReport(ModelMap modelMap, Model uiModel,
-										   @PathVariable("format") String format) {
+										   @PathVariable("format") String format) throws Exception {
 
-		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
+		List<Report> reportList = ReportGenerator.getDailyTransactionFeeDetailsReport();
 		
 		if(format.equalsIgnoreCase("html")) {
-	        uiModel.addAttribute("reports", reloadRequestList);
+	        uiModel.addAttribute("reports", reportList);
 			
 	        return "dailyTrxFeeDetailsList";
 		} else {		
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "dailyTrxFeeDetailsReport";
@@ -325,16 +325,16 @@ public class ReportController extends BaseController {
 	public String dailyTrxFeeDetailsByRangeDateReport(ModelMap modelMap, Model uiModel,
 			 										  @PathVariable("format") String format,
 													   @RequestParam(value = "startDate", required = false) String startDate,
-													   @RequestParam(value = "endDate", required = false) String endDate) {
+													   @RequestParam(value = "endDate", required = false) String endDate) throws Exception {
 
-		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
+		List<Report> reportList = ReportGenerator.getDailyTransactionFeeDetailsReport();
 		
 		if(format.equalsIgnoreCase("html")) {
-	        uiModel.addAttribute("reports", reloadRequestList);
+	        uiModel.addAttribute("reports", reportList);
 			
 	        return "dailyTrxFeeDetailsByRangeDateList";
 		} else {	
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "dailyTrxFeeDetailsByRangeDateReport";
@@ -343,16 +343,16 @@ public class ReportController extends BaseController {
 	
 	@RequestMapping(value = "/CE0005-Report/{format}", method = RequestMethod.GET)
 	public String summaryDailyTrxReport(ModelMap modelMap, Model uiModel,
-										@PathVariable("format") String format) {
+										@PathVariable("format") String format) throws Exception {
 
-		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
+		List<Report> reportList = ReportGenerator.summaryDailyTransactionDetailsReport();
 		
 		if(format.equalsIgnoreCase("html")) {
-	        uiModel.addAttribute("reports", reloadRequestList);
+	        uiModel.addAttribute("reports", reportList);
 			
 	        return "summaryDailyTrxList";
 		} else {	
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "summaryDailyTrxReport";
@@ -363,16 +363,16 @@ public class ReportController extends BaseController {
 	public String summaryDailyTrxByRangeDateReport(ModelMap modelMap, Model uiModel,
 												   @PathVariable("format") String format,
 												   @RequestParam(value = "startDate", required = false) String startDate,
-												   @RequestParam(value = "endDate", required = false) String endDate) {
+												   @RequestParam(value = "endDate", required = false) String endDate) throws Exception {
 
-		List<ReloadRequest> reloadRequestList = com.djavafactory.pttech.rrm.domain.ReloadRequest.findAllReloadRequests();
+		List<Report> reportList = ReportGenerator.summaryDailyTransactionDetailsReport();
 		
 		if(format.equalsIgnoreCase("html")) {
-	        uiModel.addAttribute("reports", reloadRequestList);
+	        uiModel.addAttribute("reports", reportList);
 			
 	        return "summaryDailyTrxByRangeDateList";
 		} else {	
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reloadRequestList ,false);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "summaryDailyTrxByRangeDateReport";
