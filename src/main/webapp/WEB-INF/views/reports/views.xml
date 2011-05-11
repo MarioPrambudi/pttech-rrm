@@ -3,8 +3,7 @@
 <tiles-definitions>
     <definition extends="default" name="reports/reportList">
         <put-attribute name="body" value="/WEB-INF/views/reports/reportList.jspx"/>
-    </definition>
-    
+    </definition>    
     <!-- TnG Report -->
     <definition extends="default" name="dailyDetailsRequestReloadFrmCelcomList">
      	<put-attribute name="body" value="/WEB-INF/views/reports/tng/dailyDetailsRequestReloadFrmCelcomList.jspx"/> 

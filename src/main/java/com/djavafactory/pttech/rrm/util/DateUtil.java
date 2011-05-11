@@ -345,6 +345,15 @@ public class DateUtil {
 		return cal.getTime();
 	}
 	
+
+	/**
+	 * To get the days of the month
+	 * 
+	 * @param year int
+	 * @param month int
+	 * @param date int
+	 * @return days of the month in int
+	 */
 	public static int getDayOfMonth(int year, int month, int date){
 		int days = 0;
 		Calendar cal = Calendar.getInstance();

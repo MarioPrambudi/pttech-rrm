@@ -83,4 +83,12 @@ privileged aspect ReloadRequest_Roo_JavaBean {
         this.modifiedTime = modifiedTime;
     }
     
+    public Long ReloadRequest.getTotalReloadQty() {
+        return this.totalReloadQty;
+    }
+    
+    public void ReloadRequest.setTotalReloadQty(Long totalReloadQty) {
+        this.totalReloadQty = totalReloadQty;
+    }
+    
 }

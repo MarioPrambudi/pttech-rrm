@@ -1,7 +1,14 @@
 package com.djavafactory.pttech.rrm.web;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
@@ -9,12 +16,14 @@ import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.Configuration;
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
 import com.djavafactory.pttech.rrm.domain.Report;
-import com.djavafactory.pttech.rrm.domain.ReportGenerator;
+import com.djavafactory.pttech.rrm.reports.ReportGenerator;
 
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,7 +38,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @RequestMapping("/reports")
 @Controller
-public class ReportController {
+public class ReportController extends BaseController {
 
     public static final String REPORT_TYPE_CELCOM = "celcom";
     public static final String REPORT_TYPE_TNG = "tng";
@@ -75,9 +84,12 @@ public class ReportController {
 	@RequestMapping(value ="/TG0001-Report/{format}", method = RequestMethod.GET)
 	public String dailyDetailsRequestReloadFfmCelcomReport(ModelMap modelMap,
 														   Model uiModel,
-														   @PathVariable("format") String format) throws Exception {
+														   @PathVariable("format") String format,
+														   @RequestParam(value = "dateMin", required = false)String dateMin,
+														   @RequestParam(value = "dateMax", required = false)String dateMax											   
+														  ) throws Exception {
 
-		List<Report> reportList = ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport();
+		List<Report> reportList = ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport(dateMin, dateMax);
 		
 		if(format.equalsIgnoreCase("html")) {
 	        uiModel.addAttribute("reports", reportList);
@@ -96,9 +108,12 @@ public class ReportController {
 	@RequestMapping(value = "/TG0002-Report/{format}", method = RequestMethod.GET)
 	public String summaryRequestReloadFrmCelcomReport(ModelMap modelMap,
 													  Model uiModel,
-													  @PathVariable("format") String format) throws Exception {
+													  @PathVariable("format") String format,
+													  @RequestParam(value = "dateMin", required = false)String dateMin,
+													  @RequestParam(value = "dateMax", required = false)String dateMax											   
+													  ) throws Exception {
 		
-		List<Report> reportList = ReportGenerator.getSummaryRequestReloadFrmCelcomReport();
+		List<Report> reportList = ReportGenerator.getSummaryRequestReloadFrmCelcomReport(dateMin, dateMax);
 		
 		if(format.equalsIgnoreCase("html")) {
 	        uiModel.addAttribute("reports", reportList);
@@ -114,10 +129,13 @@ public class ReportController {
 	
 	@RequestMapping(value = "/TG0003-Report/{format}", method = RequestMethod.GET)
 	public String dailyDetailedReloadFrmCelcomReport(ModelMap modelMap,
-												     Model uiModel,
-													 @PathVariable("format") String format) throws Exception {
+													   Model uiModel,
+													   @PathVariable("format") String format,
+													   @RequestParam(value = "dateMin", required = false)String dateMin,
+													   @RequestParam(value = "dateMax", required = false)String dateMax											   
+													  ) throws Exception {
 		
-		List<Report> reportList = ReportGenerator.getDailyDetailedReloadFrmCelcomReport();
+		List<Report> reportList = ReportGenerator.getDailyDetailedReloadFrmCelcomReport(dateMin, dateMax);
 		
 		if(format.equalsIgnoreCase("html")) {
 	        uiModel.addAttribute("reports", reportList);
@@ -134,9 +152,12 @@ public class ReportController {
 	@RequestMapping(value = "/TG0004-Report/{format}", method = RequestMethod.GET)
 	public String summaryReloadFrmCelcomReport(ModelMap modelMap, 
 											   Model uiModel,
-											   @PathVariable("format") String format) throws Exception {
+											   @PathVariable("format") String format,
+											   @RequestParam(value = "dateMin", required = false)String dateMin,
+											   @RequestParam(value = "dateMax", required = false)String dateMax											   
+											  ) throws Exception {
 		
-		List<Report> reportList = ReportGenerator.getSummaryReloadReport();
+		List<Report> reportList = ReportGenerator.getSummaryReloadReport(dateMin, dateMax);
 
 		if(format.equalsIgnoreCase("html")) {
 	        uiModel.addAttribute("reports", reportList);
@@ -153,9 +174,12 @@ public class ReportController {
 	@RequestMapping(value = "/TG0005-Report/{format}", method = RequestMethod.GET)
 	public String dailyDetailsCancellationReloadReqFrmCelcomReport(ModelMap modelMap,
 																   Model uiModel,
-																   @PathVariable("format") String format) throws Exception {
+																   @PathVariable("format") String format,
+																   @RequestParam(value = "dateMin", required = false)String dateMin,
+																   @RequestParam(value = "dateMax", required = false)String dateMax											   
+																  ) throws Exception {
 		
-		List<Report> reportList = ReportGenerator.getDailyDetailsCancellationReloadReqFrmCelcomReport();
+		List<Report> reportList = ReportGenerator.getDailyDetailsCancellationReloadReqFrmCelcomReport(dateMin, dateMax);
 		
 		if(format.equalsIgnoreCase("html")) {
 	        uiModel.addAttribute("reports", reportList);
@@ -172,9 +196,12 @@ public class ReportController {
 	@RequestMapping(value = "/TG0006-Report/{format}", method = RequestMethod.GET)
 	public String summaryCancellationReloadFrmCelcomReport(ModelMap modelMap,
 														   Model uiModel,
-														   @PathVariable("format") String format) throws Exception {
+														   @PathVariable("format") String format,
+														   @RequestParam(value = "dateMin", required = false)String dateMin,
+														   @RequestParam(value = "dateMax", required = false)String dateMax										
+														   ) throws Exception {
 		
-		List<Report> reportList = ReportGenerator.getSummaryCancellationReloadReqFrmCelcomReport();
+		List<Report> reportList = ReportGenerator.getSummaryCancellationReloadReqFrmCelcomReport(dateMin, dateMax);
 		
 		if(format.equalsIgnoreCase("html")) {
 	        uiModel.addAttribute("reports", reportList);
@@ -191,9 +218,12 @@ public class ReportController {
 	@RequestMapping(value ="/TG0007-Report/{format}", method = RequestMethod.GET)
 	public String dailySettlementReloadFrmCelcomReport(ModelMap modelMap,
 													   Model uiModel,
-													   @PathVariable("format") String format) throws Exception {
+													   @PathVariable("format") String format,
+													   @RequestParam(value = "dateMin", required = false)String dateMin,
+													   @RequestParam(value = "dateMax", required = false)String dateMax											   
+													  ) throws Exception {
 		
-		List<Report> reportList = ReportGenerator.getDailySettlementReloadFrmCelcomReport();
+		List<Report> reportList = ReportGenerator.getDailySettlementReloadFrmCelcomReport(dateMin, dateMax);
 		
 		if(format.equalsIgnoreCase("html")) {
 	        uiModel.addAttribute("reports", reportList);
@@ -211,9 +241,13 @@ public class ReportController {
 	@RequestMapping(value = "/TG0008-Report/{format}", method = RequestMethod.GET)
 	public String monthlySettlementReloadFrmCelcomReport(ModelMap modelMap,
 														 Model uiModel,
-														 @PathVariable("format") String format) throws Exception {
+														 @PathVariable("format") String format,
+														 @RequestParam(value = "dateMin", required = false)String dateMin,
+														 @RequestParam(value = "dateMax", required = false)String dateMax											   
+														  ) throws Exception {
+			
 		
-		List<Report> reportList = ReportGenerator.getSummarySettlementReloadFrmCelcomReport();
+		List<Report> reportList = ReportGenerator.getSummarySettlementReloadFrmCelcomReport(dateMin, dateMax);
 		
 		if(format.equalsIgnoreCase("html")) {
 	        uiModel.addAttribute("reports", reportList);
@@ -344,6 +378,68 @@ public class ReportController {
 			return "summaryDailyTrxByRangeDateReport";
 		}
 	}
+	
+
+//	@RequestMapping(value = "/findReportByParam", method = RequestMethod.POST)
+//	public String findReloadRequestsByParam(
+//			@RequestParam(value = "status", required = false) String status,
+//			@RequestParam(value = "minRequestedTime", required = false) String dateMinStr,
+//			@RequestParam(value = "maxRequestedTime", required = false) String dateMaxStr, Model uiModel) throws Exception {
+//		Date dateMin = null;
+//		Date dateMax = null;
+//		SimpleDateFormat dateFormat = new SimpleDateFormat(getResourceText("date_display_format"));
+//		try {
+//			dateMin = dateMinStr == null || dateMinStr.isEmpty() ? null : dateFormat
+//					.parse(dateMinStr);
+//			dateMax = dateMaxStr == null || dateMaxStr.isEmpty() ? null : dateFormat
+//					.parse(dateMaxStr);
+//		} catch (ParseException x) {
+//			x.printStackTrace();
+//		}
+//		
+//		List<Report> reportList = ReportGenerator.getSummaryRequestReloadFrmCelcomReport();
+//	    uiModel.addAttribute("reports", reportList);
+//			
+//	    return "summaryRequestReloadFrmCelcomList";
+//	
+//	}
+//	
+//	@ModelAttribute("reportType")
+//	public Collection<Map<String, String>> populateStatusCodes() {
+//		List<Map<String, String>> statusList = new ArrayList<Map<String, String>>();
+//		Map<String, String> statusMap = new TreeMap<String, String>();
+//		statusMap.put("id", Constants.RELOAD_STATUS_NEW);
+//		statusMap.put("value", getResourceText(resourcePrefix + Constants.RELOAD_STATUS_NEW));
+//		statusList.add(statusMap);
+//
+//		statusMap = new TreeMap<String, String>();
+//		statusMap.put("id", Constants.RELOAD_STATUS_PENDING);
+//		statusMap.put("value", getResourceText(resourcePrefix + Constants.RELOAD_STATUS_PENDING));
+//		statusList.add(statusMap);
+//
+//		statusMap = new TreeMap<String, String>();
+//		statusMap.put("id", Constants.RELOAD_STATUS_FAILED);
+//		statusMap.put("value", getResourceText(resourcePrefix + Constants.RELOAD_STATUS_FAILED));
+//		statusList.add(statusMap);
+//
+//		statusMap = new TreeMap<String, String>();
+//		statusMap.put("id", Constants.RELOAD_STATUS_EXPIRED);
+//		statusMap.put("value", getResourceText(resourcePrefix + Constants.RELOAD_STATUS_EXPIRED));
+//		statusList.add(statusMap);
+//
+//		statusMap = new TreeMap<String, String>();
+//		statusMap.put("id", Constants.RELOAD_STATUS_MANUALCANCEL);
+//		statusMap.put("value", getResourceText(resourcePrefix + Constants.RELOAD_STATUS_MANUALCANCEL));
+//		statusList.add(statusMap);
+//
+//		statusMap = new TreeMap<String, String>();
+//		statusMap.put("id", Constants.RELOAD_STATUS_SUCCESS);
+//		statusMap.put("value", getResourceText(resourcePrefix + Constants.RELOAD_STATUS_SUCCESS));
+//		statusList.add(statusMap);
+//		return statusList;
+//	}
+//
+//	
 
 
 }

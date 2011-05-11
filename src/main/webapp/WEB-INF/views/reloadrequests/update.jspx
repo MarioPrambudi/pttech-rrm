@@ -12,5 +12,6 @@
         <field:datetime dateTimePattern="${reloadRequest_requestedtime_date_format}" field="requestedTime" id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_requestedTime" z="Kqfzdrlc9pxTi18cOWusOZKKbaI="/>
         <field:input field="mfgNumber" id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_mfgNumber" validationMessageCode="field_invalid_integer" z="6auxI4zrvJ8o/hFGJmhNZYQZ+4I="/>
     <field:datetime dateTimePattern="${reloadRequest_modifiedtime_date_format}" field="modifiedTime" id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_modifiedTime" z="3K3bkaDRif1x4AIaAgmvdPvbPMg="/>
+    <field:input field="totalReloadQty" id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_totalReloadQty" validationMessageCode="field_invalid_integer" z="qLaJWx647Wb77bB7LFzzKbQQnoE="/>
     </form:update>
 </div>

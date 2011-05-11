@@ -4,20 +4,18 @@
 package com.djavafactory.pttech.rrm.domain;
 
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
-
 import java.util.List;
 import java.util.Random;
-
 import org.springframework.stereotype.Component;
 
 privileged aspect ReloadRequestDataOnDemand_Roo_DataOnDemand {
-
-    declare @type: ReloadRequestDataOnDemand:@Component;
-
+    
+    declare @type: ReloadRequestDataOnDemand: @Component;
+    
     private Random ReloadRequestDataOnDemand.rnd = new java.security.SecureRandom();
-
+    
     private List<ReloadRequest> ReloadRequestDataOnDemand.data;
-
+    
     public ReloadRequest ReloadRequestDataOnDemand.getNewTransientReloadRequest(int index) {
         com.djavafactory.pttech.rrm.domain.ReloadRequest obj = new com.djavafactory.pttech.rrm.domain.ReloadRequest();
         obj.setTransId("transId_" + index);
@@ -31,7 +29,7 @@ privileged aspect ReloadRequestDataOnDemand_Roo_DataOnDemand {
         obj.setModifiedTime(new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY), java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE), java.util.Calendar.getInstance().get(java.util.Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime());
         return obj;
     }
-
+    
     public ReloadRequest ReloadRequestDataOnDemand.getSpecificReloadRequest(int index) {
         init();
         if (index < 0) index = 0;
@@ -39,25 +37,24 @@ privileged aspect ReloadRequestDataOnDemand_Roo_DataOnDemand {
         ReloadRequest obj = data.get(index);
         return ReloadRequest.findReloadRequest(obj.getId());
     }
-
+    
     public ReloadRequest ReloadRequestDataOnDemand.getRandomReloadRequest() {
         init();
         ReloadRequest obj = data.get(rnd.nextInt(data.size()));
         return ReloadRequest.findReloadRequest(obj.getId());
     }
-
+    
     public boolean ReloadRequestDataOnDemand.modifyReloadRequest(ReloadRequest obj) {
         return false;
     }
-
+    
     public void ReloadRequestDataOnDemand.init() {
         data = com.djavafactory.pttech.rrm.domain.ReloadRequest.findReloadRequestEntries(0, 10);
-        if (data == null)
-            throw new IllegalStateException("Find entries implementation for 'ReloadRequest' illegally returned null");
+        if (data == null) throw new IllegalStateException("Find entries implementation for 'ReloadRequest' illegally returned null");
         if (!data.isEmpty()) {
             return;
         }
-
+        
         data = new java.util.ArrayList<com.djavafactory.pttech.rrm.domain.ReloadRequest>();
         for (int i = 0; i < 10; i++) {
             com.djavafactory.pttech.rrm.domain.ReloadRequest obj = getNewTransientReloadRequest(i);
@@ -66,5 +63,5 @@ privileged aspect ReloadRequestDataOnDemand_Roo_DataOnDemand {
             data.add(obj);
         }
     }
-
+    
 }

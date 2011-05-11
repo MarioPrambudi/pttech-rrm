@@ -12,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.EntityManager;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -52,6 +53,9 @@ public class ReloadRequest {
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(style = "S-")
 	private Date modifiedTime;
+
+	@Transient
+	private Long totalReloadQty;
 
 	public static TypedQuery<ReloadRequest> findReloadRequestsByTransId(String transId) {
 		if (transId == null || transId.length() == 0)
@@ -171,11 +175,11 @@ public class ReloadRequest {
 				   if(mapSummary.containsKey(dateKey)) {
 					   groupRR = mapSummary.get(dateKey);
 					   groupRR.setReloadAmount(groupRR.getReloadAmount().add(amount));			   
-					   groupRR.setMfgNumber(groupRR.getMfgNumber() + (new Long(1)));
+					   groupRR.setTotalReloadQty(groupRR.getTotalReloadQty() + (new Long(1)));
 				   } else {
 					   groupRR = new ReloadRequest();
 					   groupRR.setReloadAmount(amount);
-					   groupRR.setMfgNumber(new Long(1));
+					   groupRR.setTotalReloadQty(new Long(1));
 				   }
 				   groupRR.setRequestedTime(DateUtil.convertStringToDate("dd/MM/yyyy", dateKey));
 				   groupRR.setModifiedTime(DateUtil.convertStringToDate("dd/MM/yyyy", dateKey));
