@@ -1,7 +1,5 @@
 package com.djavafactory.pttech.rrm.web;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -12,6 +10,8 @@ import java.util.TreeMap;
 
 import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
+import com.djavafactory.pttech.rrm.util.DateUtil;
+
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,46 +27,35 @@ public class ReloadRequestController extends BaseController {
 
 	private final String resourcePrefix = "reload_request_status_";
 
-	@RequestMapping(value = "/findReloadRequestsByParam", method = RequestMethod.POST)
-	public String findReloadRequestsByParam(@RequestParam(value = "status", required = false) String status,
-			@RequestParam(value = "serviceProviderId", required = false) String serviceProviderId,
-			@RequestParam(value = "requestedTimeFrom", required = false) String requestedTimeFromStr,
-			@RequestParam(value = "requestedTimeTo", required = false) String requestedTimeToStr, Model uiModel) {
-		Date requestedTimeFrom = null;
-		Date requestedTimeTo = null;
-		SimpleDateFormat dateFormat = new SimpleDateFormat(getResourceText("date_display_format"));
-		try {
-			requestedTimeFrom = requestedTimeFromStr == null || requestedTimeFromStr.isEmpty() ? null : dateFormat
-					.parse(requestedTimeFromStr);
-			requestedTimeTo = requestedTimeToStr == null || requestedTimeToStr.isEmpty() ? null : dateFormat
-					.parse(requestedTimeToStr);
-		} catch (ParseException x) {
-			x.printStackTrace();
-		}
-		uiModel.addAttribute(
-				"reloadrequests",
-				regenerateList(ReloadRequest.findReloadRequestsByParam(status, serviceProviderId, requestedTimeFrom,
-						requestedTimeTo, -1, -1, "reloadrequest.transId").getResultList()));
-		addDateTimeFormatPatterns(uiModel);
-		return "reloadrequests/list";
-	}
-
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+		return findReloadRequestsByParam(page, size, null, null, null, null, uiModel);
+	}
+
+	@RequestMapping(value = "/findReloadRequestsByParam", method = { RequestMethod.GET, RequestMethod.POST })
+	public String findReloadRequestsByParam(@RequestParam(value = "page", required = false) Integer page,
+			@RequestParam(value = "size", required = false) Integer size,
+			@RequestParam(value = "status", required = false) String status,
+			@RequestParam(value = "serviceProviderId", required = false) String serviceProviderId,
+			@RequestParam(value = "requestedTimeFrom", required = false) String requestedTimeFromStr,
+			@RequestParam(value = "requestedTimeTo", required = false) String requestedTimeToStr, Model uiModel) {
+		int sizeNo = size == null ? 10 : size.intValue();
+		Date requestedTimeFrom = DateUtil.smartConvertStringToDate(requestedTimeFromStr);
+		Date requestedTimeTo = DateUtil.smartConvertStringToDate(requestedTimeToStr);
+		requestedTimeFrom = requestedTimeFrom == null ? null : DateUtil.resetTimeToMinimum(requestedTimeFrom);
+		requestedTimeTo = requestedTimeTo == null ? null : DateUtil.resetTimeToMaximum(requestedTimeTo);
+		List<ReloadRequest> reloadRequests = ReloadRequest.findReloadRequestsByParam(status, serviceProviderId,
+				requestedTimeFrom, requestedTimeTo, page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo,
+				"reloadrequest.transId").getResultList();
+		uiModel.addAttribute("reloadrequests", regenerateList(reloadRequests));
 		if (page != null || size != null) {
-			int sizeNo = size == null ? 10 : size.intValue();
-			List<ReloadRequest> reloadRequestList = ReloadRequest.findReloadRequestsByParam(null, null, null, null,
-					page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo, "reloadrequest.transId").getResultList();
-			uiModel.addAttribute("reloadrequests", regenerateList(reloadRequestList));
-			float nrOfPages = (float) ReloadRequest.countReloadRequests() / sizeNo;
+			float nrOfPages = (float) ReloadRequest.countReloadRequestsByParam(status, serviceProviderId, requestedTimeFrom,
+					requestedTimeTo) / sizeNo;
 			uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1
 					: nrOfPages));
-		} else {
-			uiModel.addAttribute(
-					"reloadrequests",
-					regenerateList(ReloadRequest.findReloadRequestsByParam(null, null, null, null, -1, -1,
-							"reloadrequest.transId").getResultList()));
+			uiModel.addAttribute("params", "&status=" + status + "&serviceProviderId=" + serviceProviderId
+					+ "&requestedTimeFrom=" + requestedTimeFromStr + "&requestedTimeTo=" + requestedTimeToStr);
 		}
 		addDateTimeFormatPatterns(uiModel);
 		return "reloadrequests/list";

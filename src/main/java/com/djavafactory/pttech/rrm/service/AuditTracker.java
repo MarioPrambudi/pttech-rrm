@@ -29,7 +29,8 @@ public class AuditTracker {
 		// 5. description -> jp.getTarget()
 		AuditTrail auditTrail = new AuditTrail();
 		// Entity class name
-		auditTrail.setEntity(jp.getTarget().getClass().getSimpleName());
+		Object joinPoint = jp.getTarget();
+		auditTrail.setEntity(joinPoint.getClass().getSimpleName());
 		// Action performed
 		auditTrail.setAction(jp.getSignature().getName().toUpperCase().substring(0, 1));
 		// Datetime performed
@@ -37,7 +38,8 @@ public class AuditTracker {
 		// TODO: set user here
 		auditTrail.setPerformedBy("Mario");
 		// TODO: set description here
-		auditTrail.setDescription(jp.getSourceLocation() == null ? "N/A" : jp.getSourceLocation().toString());
+		auditTrail.setDescription(joinPoint.toString());
+		auditTrail.setDebugInfo(jp.getSourceLocation() == null ? "N/A" : jp.getSourceLocation().toString());
 		mongoOps.save(Constants.AUDIT_TRAIL_MONGODB_COLLECTION_NAME, auditTrail);
 	}
 

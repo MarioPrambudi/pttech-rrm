@@ -58,4 +58,12 @@ privileged aspect AuditTrail_Roo_JavaBean {
         this.description = description;
     }
     
+    public String AuditTrail.getDebugInfo() {
+        return this.debugInfo;
+    }
+    
+    public void AuditTrail.setDebugInfo(String debugInfo) {
+        this.debugInfo = debugInfo;
+    }
+    
 }

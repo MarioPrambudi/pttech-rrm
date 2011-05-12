@@ -12,13 +12,13 @@ import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.AuditTrail;
 import com.djavafactory.pttech.rrm.mongorepository.AuditTrailRepository;
 import com.djavafactory.pttech.rrm.util.DateUtil;
-import com.djavafactory.pttech.rrm.util.PageableImpl;
+
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,46 +32,44 @@ public class AuditTrailController extends BaseController {
 
 	private final String resourcePrefix = "audit_trail_action_";
 
-	@RequestMapping(value = "/findAuditTrailsByParam", method = RequestMethod.POST)
-	public String findAuditTrailsByParam(@RequestParam(value = "page", required = false) Integer page,
-			@RequestParam(value = "size", required = false) Integer size,
-			@RequestParam(value = "dateFrom", required = false) String dateFromStr,
-			@RequestParam(value = "dateTo", required = false) String dateToStr,
-			@RequestParam(value = "entity", required = false) String entity,
-			@RequestParam(value = "action", required = false) String action, Model uiModel) {
-		Date dateFrom = DateUtil.smartConvertStringToDate(dateFromStr);
-		Date dateTo = DateUtil.smartConvertStringToDate(dateToStr);
-		List<AuditTrail> auditTrailList = regenerateList(auditTrailRepository.findByParam(
-				dateFrom == null ? null : DateUtil.resetTimeToMinimum(dateFrom),
-				dateTo == null ? null : DateUtil.resetTimeToMaximum(dateTo), entity, action));
-		uiModel.addAttribute("audittrails", auditTrailList);
-		if (page != null || size != null) {
-			int sizeNo = size == null ? 10 : size.intValue();
-			float nrOfPages = (float) auditTrailList.size() / sizeNo;
-			uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1
-					: nrOfPages));
-		}
-		return "audittrails/list";
-	}
-
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-		Pageable pageable = new PageableImpl(page, size, 0, null);
-		Page<AuditTrail> auditTrailPage = auditTrailRepository.findAll(pageable);
-		List<AuditTrail> auditTrailList = new ArrayList<AuditTrail>();
-		Iterator<AuditTrail> iter = auditTrailPage.iterator();
-		while (iter.hasNext()) {
-			auditTrailList.add(iter.next());
-		}
+		return findAuditTrailsByParam(page, size, null, null, null, null, uiModel);
+	}
+
+	@RequestMapping(value = "/findAuditTrailsByParam", method = { RequestMethod.GET, RequestMethod.POST })
+	public String findAuditTrailsByParam(@RequestParam(value = "page", required = false) Integer page,
+			@RequestParam(value = "size", required = false) Integer size,
+			@RequestParam(value = "action", required = false) String action,
+			@RequestParam(value = "entity", required = false) String entity,
+			@RequestParam(value = "dateFrom", required = false) String dateFromStr,
+			@RequestParam(value = "dateTo", required = false) String dateToStr, Model uiModel) {
+		Date dateFrom = DateUtil.smartConvertStringToDate(dateFromStr);
+		Date dateTo = DateUtil.smartConvertStringToDate(dateToStr);
+		dateFrom = dateFrom == null ? null : DateUtil.resetTimeToMinimum(dateFrom);
+		dateTo = dateTo == null ? null : DateUtil.resetTimeToMaximum(dateTo);
+		List<AuditTrail> auditTrailList = regenerateList(auditTrailRepository.findByParam(dateFrom, dateTo, entity, action,
+				page == null ? 1 : page, size == null ? 10 : size));
 		uiModel.addAttribute("audittrails", auditTrailList);
 		if (page != null || size != null) {
 			int sizeNo = size == null ? 10 : size.intValue();
-			float nrOfPages = (float) auditTrailRepository.count() / sizeNo;
+			float nrOfPages = (float) auditTrailRepository.countByParam(dateFrom, dateTo, entity, action) / sizeNo;
 			uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1
 					: nrOfPages));
+			uiModel.addAttribute("params", "&action=" + action + "&entity=" + entity + "&dateFrom=" + dateFromStr + "&dateTo="
+					+ dateToStr);
 		}
+		addDateTimeFormatPatterns(uiModel);
 		return "audittrails/list";
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public String show(@PathVariable("id") ObjectId id, Model uiModel) {
+		addDateTimeFormatPatterns(uiModel);
+		uiModel.addAttribute("audittrail", auditTrailRepository.findOne(id));
+		uiModel.addAttribute("itemId", id);
+		return "audittrails/show";
 	}
 
 	@ModelAttribute("action")
@@ -109,6 +107,10 @@ public class AuditTrailController extends BaseController {
 			}
 		}
 		return auditTrailList;
+	}
+
+	void addDateTimeFormatPatterns(Model uiModel) {
+		uiModel.addAttribute("auditTrail_performedat_date_format", getResourceText("date_display_format"));
 	}
 
 }
