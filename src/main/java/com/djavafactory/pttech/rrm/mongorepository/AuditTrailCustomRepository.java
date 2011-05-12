@@ -13,6 +13,8 @@ import com.djavafactory.pttech.rrm.domain.AuditTrail;
  */
 public interface AuditTrailCustomRepository {
 
-	public List<AuditTrail> findByParam(Date dateFrom, Date dateTo, String entity, String action);
+	public List<AuditTrail> findByParam(Date dateFrom, Date dateTo, String entity, String action, Integer page, Integer size);
+
+	public Long countByParam(Date dateFrom, Date dateTo, String entity, String action);
 
 }

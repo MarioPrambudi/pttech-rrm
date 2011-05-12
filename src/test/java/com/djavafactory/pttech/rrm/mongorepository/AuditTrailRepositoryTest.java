@@ -29,7 +29,7 @@ public class AuditTrailRepositoryTest {
 	@Test
 	@Ignore
 	public void testFindByParam() {
-		List<AuditTrail> auditTrailList = auditTrailRepository.findByParam(null, null, "aCquirer", null);
+		List<AuditTrail> auditTrailList = auditTrailRepository.findByParam(null, null, "aCquirer", null, 0, 0);
 		assertNotNull(auditTrailList);
 		assertFalse(auditTrailList.isEmpty());
 	}

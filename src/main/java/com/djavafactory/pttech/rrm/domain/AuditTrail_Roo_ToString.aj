@@ -14,7 +14,8 @@ privileged aspect AuditTrail_Roo_ToString {
         sb.append("Action: ").append(getAction()).append(", ");
         sb.append("PerformedAt: ").append(getPerformedAt()).append(", ");
         sb.append("PerformedBy: ").append(getPerformedBy()).append(", ");
-        sb.append("Description: ").append(getDescription());
+        sb.append("Description: ").append(getDescription()).append(", ");
+        sb.append("DebugInfo: ").append(getDebugInfo());
         return sb.toString();
     }
     
