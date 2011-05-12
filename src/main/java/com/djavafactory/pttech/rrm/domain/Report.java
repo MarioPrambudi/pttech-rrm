@@ -113,7 +113,19 @@ public class Report {
 	@DateTimeFormat(style = "S-")
 	private Date modifiedDate;
 
-   
+//    /**
+//
+//     */
+//    public static TypedQuery<ReloadRequest> findReloadRequestsByRequestedTimeBetweenAndStatus(String name, String registrationNo, Boolean deleted, String order, int firstResult, int maxResults) {
+//        EntityManager em = ReloadRequest.entityManager();
+//        TypedQuery<ReloadRequest> q = null;
+//        String query = "SELECT ReloadRequest " +
+//					   "FROM ReloadRequest reloadrequest " +
+//					   "WHERE reloadrequest.requestedTime BETWEEN :minRequestedTime AND :maxRequestedTime " +
+//					   "AND LOWER(reloadrequest.status) IN (:statusList)";		
+//        q = (firstResult > -1 && maxResults > 0) ? em.createQuery(query, ReloadRequest.class).setFirstResult(firstResult).setMaxResults(maxResults) : em.createQuery(query, ReloadRequest.class);
+//        return q;
+//    }
 
     
 }
