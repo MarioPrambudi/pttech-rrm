@@ -179,7 +179,7 @@
           </td>
           </c:if>
        <script type="text/javascript">
-          function getDateRange(rurl)
+          function getDateRange(rurl, page, size)
 		  {
 			  var dateMin = document.getElementById('_dateFrom_id');
 			  var dateMax = document.getElementById('_dateTo_id');
@@ -201,7 +201,7 @@
 					}
 				}
 			  }
-			 window.location = reporturl + '?dateMin=' + dateMinValue + '&amp;' + 'dateMax=' + dateMaxValue;		  
+			 window.location = reporturl + '?page=' + page + '&amp;size=' + size + '&amp;dateMin=' + dateMinValue + '&amp;dateMax=' + dateMaxValue;
 		  }	  	   
           </script>
           <c:if test="${html_report}">
@@ -209,7 +209,7 @@
           	<spring:url value="/reports/${item[reportType]}-Report/html" var="report_url"/>      		             
           	<spring:url value="/resources/images/report-html.png" var="report_image_url" />
           	<spring:message arguments="${typeName}" code="entity_list_report" htmlEscape="false" var="report_label"/>
-          	<a alt="" href="javascript:getDateRange('${fn:escapeXml(report_url)}')" title="${fn:escapeXml(report_label)}" >
+          	<a alt="" href="javascript:getDateRange('${fn:escapeXml(report_url)}','1','${empty param.size ? 10 : param.size}')" title="${fn:escapeXml(report_label)}" >
           		<img alt="${fn:escapeXml(report_label)}" class="image" 
           			 src="${fn:escapeXml(report_image_url)}" 
           			 title="${fn:escapeXml(report_label)}"/>

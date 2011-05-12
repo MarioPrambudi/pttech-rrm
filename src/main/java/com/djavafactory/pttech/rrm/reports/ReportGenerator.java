@@ -34,7 +34,7 @@ public class ReportGenerator {
     /**
 	 * Get fee value from configuration
 	 * @param none
-	 * @return BigDecimal Fee in BigDecimal
+	 * @return BigDecimal - Fee 
 	 */
     public static BigDecimal getReportFee() {    	 
     	 String reportfee =  Configuration.getReportConfigValue(Constants.REPORT_CONFIG_FEE);
@@ -45,7 +45,7 @@ public class ReportGenerator {
     /**
 	 * Get celcom commission value from configuration
 	 * @param none
-	 * @return BigDecimal Celcom commission in BigDecimal
+	 * @return BigDecimal - Celcom commission in BigDecimal
 	 */ 
     public static BigDecimal getReportCelComm() {	      
     	 String reportCelComm = Configuration.getReportConfigValue(Constants.REPORT_CONFIG_CELCOMM);
@@ -56,7 +56,7 @@ public class ReportGenerator {
     /**
 	 * Get Tng commission value from configuration
 	 * @param none
-	 * @return BigDecimal Tng commission commission in BigDecimal
+	 * @return BigDecimal - Tng commission commission in BigDecimal
 	 */ 
     public static BigDecimal getReportTngComm() {	      
      	 String reportTngComm = Configuration.getReportConfigValue(Constants.REPORT_CONFIG_TNGCOMM);
@@ -67,7 +67,7 @@ public class ReportGenerator {
     /**
 	 * Get totalChargeToCustomer (reload amount + fee)
 	 * @param reloadAmount BigDecimal
-	 * @return BigDecimal TotalChargeToCustomer
+	 * @return BigDecimal - TotalChargeToCustomer
 	 */ 
     public static BigDecimal getTotalChargeToCustomer(BigDecimal reloadAmount) {	
      	BigDecimal fee = getReportFee();
@@ -79,7 +79,7 @@ public class ReportGenerator {
     /**
 	 * Get commission amount deducted by SOF (fee x celcomm)
 	 * @param none
-	 * @return BigDecimal commAmount
+	 * @return BigDecimal - Commission Amount
 	 */ 
     public static BigDecimal getCommAmountDeductedBySOF() {	           	     	 
      	 BigDecimal celComm = getReportCelComm(); 
@@ -92,19 +92,18 @@ public class ReportGenerator {
     /**
 	 * Get net payment TnG
 	 * @param totalChargeToCust BigDecimal
-	 * @return BigDecimal TotalChargeToCustomer
+	 * @return BigDecimal - TotalChargeToCustomer
 	 */ 
     public static BigDecimal getNetPaymentToTnG(BigDecimal totalChargeToCust, BigDecimal commAmountSof) {	
      	BigDecimal netPayment = totalChargeToCust.subtract(commAmountSof);
      	return netPayment; 
     }
-
     
     /**
 	 * Get sumTotalChargeToCustomer (total reload amount + total fee)
 	 * @param totalreloadAmount BigDecimal
 	 * @param totalFee BigDecimal
-	 * @return BigDecimal sumTotalChargeToCustomer
+	 * @return BigDecimal - sumTotalChargeToCustomer
 	 */ 
     public static BigDecimal getSumTotalChargeToCustomer(BigDecimal totalReloadAmount, BigDecimal totalFee) {	
      	BigDecimal sumTotalChargeToCustomer = totalReloadAmount.add(totalFee);
@@ -114,7 +113,7 @@ public class ReportGenerator {
     /**
 	 * Get SumCommissionAmountDeductedBySof (CommAmountDeductedBySOF x totalReloadQty)
 	 * @param totalReloadQty long
-	 * @return BigDecimal SumCommissionAmountDeductedBySof
+	 * @return BigDecimal - SumCommissionAmountDeductedBySof
 	 */ 
     public static BigDecimal getSumCommissionAmountDeductedBySof(long totalReloadQty) {	
      	BigDecimal sumCommissionAmountDeductedBySof = getCommAmountDeductedBySOF().multiply(new BigDecimal(totalReloadQty));
@@ -125,7 +124,7 @@ public class ReportGenerator {
 	 * Get SumNetPaymentToTng (sumTotalChargeToCustomer - sumCommissionAmountDeductedBySof)
 	 * @param sumTotalChargeToCustomer BigDecimal
 	 * @param sumCommissionAmountDeductedBySof BigDecimal
-	 * @return BigDecimal SumNetPaymentToTng
+	 * @return BigDecimal - SumNetPaymentToTng
 	 */
     public static BigDecimal getSumNetPaymentToTng(BigDecimal sumTotalChargeToCustomer, BigDecimal sumCommissionAmountDeductedBySof) {	
      	BigDecimal sumNetPaymentToTng = sumTotalChargeToCustomer.subtract(sumCommissionAmountDeductedBySof);
@@ -135,32 +134,17 @@ public class ReportGenerator {
     /**
 	 * Get totalFees (ReportFee x totalReloadQty)
 	 * @param totalReloadQty long
-	 * @return BigDecimal totalFees 
+	 * @return BigDecimal - totalFees 
 	 */ 
     public static BigDecimal getTotalFee(long totalReloadQty) {	
      	BigDecimal totalFees= getReportFee().multiply(new BigDecimal(totalReloadQty));
      	 return totalFees; 
     } 
     
-//    /**
-//	 * Get getCurrentDayOfMonth
-//	 * @param none
-//	 * @return days of month in int
-//	 */ 
-//    public static int getCurrentDayOfMonth()
-//    {
-//    	Calendar cal = Calendar.getInstance();
-//		int year = cal.get(Calendar.YEAR);
-//		int month = cal.get(Calendar.MONTH);
-//		int date = 1;
-//
-//    	return DateUtil.getDayOfMonth(year, month, date);
-//    }
-    
     /**
 	 * Get get initial date value
 	 * @param none
-	 * @return date in 01/MM/yyyy
+	 * @return Date - 01/MM/yyyy
 	 */
     public static Date getInitDateMin()
     {
@@ -177,7 +161,7 @@ public class ReportGenerator {
     /**
 	 * To copy reload request list to report list
 	 * @param listReloadRequest A list of reload request
-	 * @return List Report list
+	 * @return List<Report> - list of report
 	 */
     public static List<Report> copyReloadRequestToReport(List<ReloadRequest> listReloadRequest) {
     	Iterator it = listReloadRequest.iterator();
@@ -200,45 +184,198 @@ public class ReportGenerator {
         }
         return listReport;   	
     }
-
-   
     
-    
+    /**
+	 * get list of all status
+	 * @param none
+	 * @return List<String> - list of status
+	 */
+	  public static List<String> getListAllStatus(){
+		  List<String> listStatus = new ArrayList<String>();
+		  listStatus.add(Constants.RELOAD_REQUEST_NEW.toLowerCase());
+		  listStatus.add(Constants.RELOAD_REQUEST_FAILED.toLowerCase());			
+		  listStatus.add(Constants.RELOAD_REQUEST_EXPIRED.toLowerCase());			
+		  listStatus.add(Constants.RELOAD_REQUEST_MANUALCANCEL.toLowerCase());
+		  listStatus.add(Constants.RELOAD_REQUEST_SUCCESS.toLowerCase()); 
+		  return listStatus;		
+	  }
+	  
+	/**
+	 * get list of all cancellation status
+	 * @param none
+	 * @return List<String> - list cancellation status
+	 */
+	  public static List<String> getListAllCancel(){
+		  List<String> listStatus = new ArrayList<String>();
+		  listStatus.add(Constants.RELOAD_REQUEST_FAILED.toLowerCase());
+		  listStatus.add(Constants.RELOAD_REQUEST_EXPIRED.toLowerCase());
+		  listStatus.add(Constants.RELOAD_REQUEST_MANUALCANCEL.toLowerCase());
+		  return listStatus;
+	  }
+	  
+    /**
+	 * get list of all success status
+	 * @param none
+	 * @return List<String> - list of success status
+	 */
+	  public static List<String> getListAllSuccess(){
+		  List<String> listStatus = new ArrayList<String>();
+		  listStatus.add(Constants.RELOAD_REQUEST_SUCCESS.toLowerCase()); 
+		  return listStatus;
+	  }
+	  
+	/**
+	 * get the formated start date for finder
+	 * @param dateMinStr String 
+	 * @return Date - dateMin
+	 */
+	  public static Date getDateMin(String dateMinStr) throws ParseException{
+		  Date dateMin = null;
+		  if("null".equals(dateMinStr))
+		  {
+		    dateMin = DateUtil.getCurrentDate("dd/MM/yyyy");
+		  }
+		  else
+		  {
+			dateMin = DateUtil.convertStringToDate(dateMinStr);
+		  }  	
+		  return dateMin;	  
+	  }
+	  
+	/**
+	 * get the formated end date for finder
+	 * @param dateMin Date
+	 * @param dateMaxStr String 
+	 * @return Date - dateMax
+	 */ 
+	  public static Date getDateMax(Date dateMin, String dateMaxStr) throws ParseException{
+		  Date dateMax = null;
+		  if("null".equals(dateMaxStr))
+		  {
+			 dateMax = DateUtil.add(dateMin, 5, 1);
+		  }
+		  else
+		  {
+			dateMax = DateUtil.convertStringToDate(dateMaxStr);
+		  }  	
+		  return dateMax;	  
+	  }
+	  	  
+    /**
+	 * get the formated start date for summary report finder
+	 * @param dateMinStr String 
+	 * @return Date - dateMin
+	 */  
+	  public static Date getSummaryDateMin(String dateMinStr) throws ParseException{
+		  Date dateMin = null;
+		  if("null".equals(dateMinStr))
+		  {
+		    dateMin = getInitDateMin();
+		  }
+		  else
+		  {
+			dateMin = DateUtil.convertStringToDate(dateMinStr);
+		  }  	
+		  return dateMin;	  
+	  }
+	  
+	/**
+	 * get the formated end date for summary report finder
+	 * @param dateMin Date
+	 * @param dateMaxStr String 
+	 * @return Date - dateMax
+	 */
+	  public static Date getSummaryDateMax(Date dateMin, String dateMaxStr) throws ParseException{
+		  Date dateMax = null;
+		  if("null".equals(dateMaxStr))
+		  {
+			dateMax = DateUtil.add(dateMin, 2, 1);
+		  }
+		  else
+		  {
+			dateMax = DateUtil.convertStringToDate(dateMaxStr);
+		  }  	
+		  return dateMax;	  
+	  }
+	  
+	/**
+	 * get total number of report based on requested date between and status
+	 * @param String dateMinStr
+	 * @param String dateMaxStr 
+	 * @param listStatus List<String>  
+	 * @return long - total number of report
+	 */
+	  public static long getTotalReport(String dateMinStr, String dateMaxStr, List<String> listStatus) throws ParseException
+	  {
+		  Date dateMin = getDateMin(dateMinStr);
+		  Date dateMax = getDateMax(dateMin, dateMaxStr);	
+		  long totalReport = ReloadRequest.totalReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMax, listStatus);
+		  return totalReport;
+	  }
+	  
+	/**
+	 * get total number of summary report based on requested date between and status
+	 * @param String dateMinStr
+	 * @param String dateMaxStr 
+	 * @param listStatus List<String>  
+	 * @return long - total number of summary report
+	 */
+	  public static long getTotalSummaryReport(String dateMinStr, String dateMaxStr, List<String> listStatus) throws ParseException
+	  {
+		  Date dateMin = getSummaryDateMin(dateMinStr);
+		  Date dateMax = getSummaryDateMax(dateMin, dateMaxStr);
+		  Date dateMaxSearch = null;
+		  List<Report> listReport = new ArrayList<Report>();
+	      List<Report> listCompleteReport = new ArrayList<Report>();	      
+	      
+	      while(dateMin.before(dateMax))
+	      {	   		
+	    		dateMaxSearch = DateUtil.add(dateMin, 5, 1);   		
+	    		List<ReloadRequest> listReloadRequest = ReloadRequest.findSummaryReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMaxSearch, listStatus, -1, 0);    		
+	    		if (listReloadRequest != null && listReloadRequest.size()>0)
+	    		{
+	    			listReport = copyReloadRequestToReport(listReloadRequest);  
+	        		Iterator it = listReport.iterator();
+	        		Report reportSummary = new Report();
+	                while(it.hasNext()) { 
+	                    try {
+	                      reportSummary = (Report)it.next();
+	                      reportSummary.setSofRequestedDatetime(reportSummary.getRequestedTime());
+	                      reportSummary.setTotalAmountRequestRm(reportSummary.getReloadAmount());
+	                      reportSummary.setTotalFees(getTotalFee(reportSummary.getTotalReloadQty()));
+	                      reportSummary.setSumTotalChargeToCustomer(getSumTotalChargeToCustomer(reportSummary.getTotalAmountRequestRm(), reportSummary.getTotalFees()));
+	                      reportSummary.setSumCommissionAmountDeductedBySof(getSumCommissionAmountDeductedBySof(reportSummary.getTotalReloadQty()));
+	                      reportSummary.setSumNetPaymentToTng(getSumNetPaymentToTng(reportSummary.getSumTotalChargeToCustomer(), reportSummary.getSumCommissionAmountDeductedBySof()));                  
+	                    } catch (Exception e) {
+	                        e.printStackTrace();  
+	                    }
+	                }
+	                listCompleteReport.add(reportSummary);    		
+	    		}  		
+	    		dateMin = dateMaxSearch;
+	      }
+	      return listCompleteReport.size();
+	  }
+	  
     /*
 	 * TNG Report
 	 */
    	/**
      * get result for report dailyDetailsRequestReloadFrmCelcomReport/TG0001-Report
-     * @param none
-     * @return List A report list
+     * @param dateMinStr String
+     * @param dateMaxStr String
+     * @param first int 
+     * @param size int
+     * @return List<Report> listReport
      * @throws Exception 
      */
-    public static List getDailyDetailsRequestReloadFrmCelcomReport(String dateMinStr, String dateMaxStr) throws Exception {
+    public static List<Report> getDailyDetailsRequestReloadFrmCelcomReport(String dateMinStr, String dateMaxStr, int first, int size) throws Exception {
     	List<Report> listReport = new ArrayList<Report>();
         List<Report> listCompleteReport = new ArrayList<Report>();
-      	List<String> listStatus = new ArrayList<String>();
-      	
-      	Date dateMin = null;
-    	Date dateMax = null;
-    	
-		if("null".equals(dateMinStr) | "null".equals(dateMaxStr)){
-	    	dateMin = DateUtil.getCurrentDate("dd/MM/yyyy");
-	    	dateMax = DateUtil.add(dateMin, 5, 1);
-		}
-		else
-		{
-			dateMin = DateUtil.convertStringToDate(dateMinStr);
-			dateMax = DateUtil.convertStringToDate(dateMaxStr);
-		}  	
-    	
-    	listStatus.add(Constants.RELOAD_REQUEST_NEW.toLowerCase());
-    	listStatus.add(Constants.RELOAD_REQUEST_FAILED.toLowerCase());
-    	listStatus.add(Constants.RELOAD_REQUEST_EXPIRED.toLowerCase());
-    	listStatus.add(Constants.RELOAD_REQUEST_MANUALCANCEL.toLowerCase());
-    	listStatus.add(Constants.RELOAD_REQUEST_SUCCESS.toLowerCase()); 
-
-
-    	List listReloadRequest = ReloadRequest.findReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMax, listStatus);
+      	List<String> listStatus = getListAllStatus();
+      	Date dateMin = getDateMin(dateMinStr);
+    	Date dateMax = getDateMax(dateMin, dateMaxStr);	
+    	List<ReloadRequest> listReloadRequest = ReloadRequest.findReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMax, listStatus, first, size).getResultList();
         listReport = copyReloadRequestToReport(listReloadRequest);
 		Iterator it = listReport.iterator();
 
@@ -281,31 +418,20 @@ public class ReportGenerator {
     
     /**
      * get result for report dailyDetailedReloadFrmCelcomReport/TG0003
-     * @param none
-     * @return List A report list
+     * @param dateMinStr String
+     * @param dateMaxStr String
+     * @param first int 
+     * @param size int
+     * @return List<Report> listReport
      * @throws Exception 
      */
-    public static List<Report> getDailyDetailedReloadFrmCelcomReport(String dateMinStr, String dateMaxStr) throws Exception {
+    public static List<Report> getDailyDetailedReloadFrmCelcomReport(String dateMinStr, String dateMaxStr, int first, int size) throws Exception {
     	List<Report> listReport = new ArrayList<Report>();
         List<Report> listCompleteReport = new ArrayList<Report>();
-      	List<String> listStatus = new ArrayList<String>();
-      	
-    	listStatus.add(Constants.RELOAD_REQUEST_SUCCESS.toLowerCase()); 
-    	
-    	Date dateMin = null;
-    	Date dateMax = null;
-    	
-		if("null".equals(dateMinStr) | "null".equals(dateMaxStr)){
-	    	dateMin = DateUtil.getCurrentDate("dd/MM/yyyy");
-	    	dateMax = DateUtil.add(dateMin, 5, 1);
-		}
-		else
-		{
-			dateMin = DateUtil.convertStringToDate(dateMinStr);
-			dateMax = DateUtil.convertStringToDate(dateMaxStr);
-		}  	
-
-    	List<ReloadRequest> listReloadRequest = ReloadRequest.findReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMax, listStatus);
+      	List<String> listStatus = getListAllSuccess();    	
+      	Date dateMin = getDateMin(dateMinStr);
+    	Date dateMax = getDateMax(dateMin, dateMaxStr);		
+    	List<ReloadRequest> listReloadRequest = ReloadRequest.findReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMax, listStatus, first, size).getResultList();
         listReport = copyReloadRequestToReport(listReloadRequest);        
 		Iterator it = listReport.iterator();
 		
@@ -336,9 +462,7 @@ public class ReportGenerator {
 //            	totalQty = totalQty + 1;
 //            	totalChargeCust = totalChargeCust.add(report.getTotalChargeToCustomer());
 //            	totalCommSofDeduct = totalCommSofDeduct.add(report.getCommissionAmountDeductedBySof());
-//            	totalNetPaymentTng = totalNetPaymentTng.add(report.getNetPaymentToTng());
-            	
-
+//            	totalNetPaymentTng = totalNetPaymentTng.add(report.getNetPaymentToTng());            	
             } catch (Exception e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
@@ -349,34 +473,21 @@ public class ReportGenerator {
     
     /**
      * get result for report dailyDetailsCancellationReloadReqFrmCelcomReport/TG0005 
-     * @param none
-     * @return List A report list
-     * @throws Exception 
+     * @param dateMinStr String
+     * @param dateMaxStr String
+     * @param first int 
+     * @param size int
+     * @return List<Report> listReport
+     * @throws Exception  
      */
-    public static List getDailyDetailsCancellationReloadReqFrmCelcomReport(String dateMinStr, String dateMaxStr) throws Exception {
+    public static List<Report> getDailyDetailsCancellationReloadReqFrmCelcomReport(String dateMinStr, String dateMaxStr, int first, int size) throws Exception {
     	//all reload request status
     	List<Report> listReport = new ArrayList<Report>();
         List<Report> listCompleteReport = new ArrayList<Report>();
-      	List<String> listStatus = new ArrayList<String>();
-    	     	 
-    	listStatus.add(Constants.RELOAD_REQUEST_FAILED.toLowerCase());
-    	listStatus.add(Constants.RELOAD_REQUEST_EXPIRED.toLowerCase());
-    	listStatus.add(Constants.RELOAD_REQUEST_MANUALCANCEL.toLowerCase());
-    	
-    	Date dateMin = null;
-    	Date dateMax = null;
-    	
-		if("null".equals(dateMinStr) | "null".equals(dateMaxStr)){
-	    	dateMin = DateUtil.getCurrentDate("dd/MM/yyyy");
-	    	dateMax = DateUtil.add(dateMin, 5, 1);
-		}
-		else
-		{
-			dateMin = DateUtil.convertStringToDate(dateMinStr);
-			dateMax = DateUtil.convertStringToDate(dateMaxStr);
-		}  	
-		
-		List<ReloadRequest> listReloadRequest = ReloadRequest.findReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMax, listStatus);   
+      	List<String> listStatus = getListAllCancel();
+      	Date dateMin = getDateMin(dateMinStr);
+    	Date dateMax = getDateMax(dateMin, dateMaxStr);	 			
+		List<ReloadRequest> listReloadRequest = ReloadRequest.findReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMax, listStatus, first, size).getResultList();
         listReport = copyReloadRequestToReport(listReloadRequest);
 		Iterator it = listReport.iterator();
 
@@ -436,35 +547,22 @@ public class ReportGenerator {
     /**
      * TO DO
      * get result for report dailySettlementReloadReqFrmCelcomReport/TG0007 
-     * @param none
-     * @return List A report list
+     * @param dateMinStr String
+     * @param dateMaxStr String
+     * @param first int 
+     * @param size int
+     * @return List<Report> listReport
      * @throws Exception 
      */
-  public static List<Report> getDailySettlementReloadFrmCelcomReport(String dateMinStr, String dateMaxStr) throws Exception {
+  public static List<Report> getDailySettlementReloadFrmCelcomReport(String dateMinStr, String dateMaxStr, int first, int size) throws Exception {
 	List<Report> listReport = new ArrayList<Report>();
     List<Report> listCompleteReport = new ArrayList<Report>();
-  	List<String> listStatus = new ArrayList<String>();
+  	List<String> listStatus = getListAllStatus();
   	
-	Date dateMin = null;
-	Date dateMax = null;
-	
-	if("null".equals(dateMinStr) | "null".equals(dateMaxStr)){
-    	dateMin = DateUtil.getCurrentDate("dd/MM/yyyy");
-    	dateMax = DateUtil.add(dateMin, 5, 1);
-	}
-	else
-	{
-		dateMin = DateUtil.convertStringToDate(dateMinStr);
-		dateMax = DateUtil.convertStringToDate(dateMaxStr);
-	}  	
-  		
-  	listStatus.add(Constants.RELOAD_REQUEST_NEW.toLowerCase());
-  	listStatus.add(Constants.RELOAD_REQUEST_FAILED.toLowerCase());
-  	listStatus.add(Constants.RELOAD_REQUEST_EXPIRED.toLowerCase());
-  	listStatus.add(Constants.RELOAD_REQUEST_MANUALCANCEL.toLowerCase());
-  	listStatus.add(Constants.RELOAD_REQUEST_SUCCESS.toLowerCase()); 
-	
-  	List<ReloadRequest> listReloadRequest = ReloadRequest.findReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMax, listStatus);
+  	Date dateMin = getDateMin(dateMinStr);
+	Date dateMax = getDateMax(dateMin, dateMaxStr);	
+
+  	List<ReloadRequest> listReloadRequest = ReloadRequest.findReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMax, listStatus, first, size).getResultList();
     listReport = copyReloadRequestToReport(listReloadRequest);
 	Iterator it = listReport.iterator();
 	
@@ -492,39 +590,25 @@ public class ReportGenerator {
   	//Tng Summary Reports
     /**
      * get result for report summaryRequestReloadFrmCelcomReport/TG0002
-     * @param none
-     * @return List A report list
+     * @param dateMinStr String
+     * @param dateMaxStr String
+     * @param first int 
+     * @param size int
+     * @return List<Report> listReport
      * @throws Exception 
      */
-    public static List<Report> getSummaryRequestReloadFrmCelcomReport(String dateMinStr, String dateMaxStr) throws Exception {
+    public static List<Report> getSummaryRequestReloadFrmCelcomReport(String dateMinStr, String dateMaxStr, int first, int size) throws Exception {
     	List<Report> listReport = new ArrayList<Report>();
         List<Report> listCompleteReport = new ArrayList<Report>();
-    	List<String> listStatus = new ArrayList<String>();
-    	
-    	listStatus.add(Constants.RELOAD_REQUEST_NEW.toLowerCase());
-    	listStatus.add(Constants.RELOAD_REQUEST_FAILED.toLowerCase());
-    	listStatus.add(Constants.RELOAD_REQUEST_EXPIRED.toLowerCase());
-    	listStatus.add(Constants.RELOAD_REQUEST_MANUALCANCEL.toLowerCase());
-    	listStatus.add(Constants.RELOAD_REQUEST_SUCCESS.toLowerCase()); 
+    	List<String> listStatus = getListAllStatus();
      	
-    	Date dateMin = null;
-    	Date dateMax = null;
+    	Date dateMin = getSummaryDateMin(dateMinStr);
+    	Date dateMax = getSummaryDateMax(dateMin, dateMaxStr);		
     	Date dateMaxSearch = null;
-    	
-    	if("null".equals(dateMinStr) | "null".equals(dateMaxStr)){
-    		dateMin = getInitDateMin();
-    		dateMax = DateUtil.add(dateMin, 2, 1);
-    	}
-    	else
-    	{
-    		dateMin = DateUtil.convertStringToDate(dateMinStr);
-    		dateMax = DateUtil.convertStringToDate(dateMaxStr);
-    	}  
-
     	while(dateMin.before(dateMax))
     	{	   		
     		dateMaxSearch = DateUtil.add(dateMin, 5, 1);   		
-    		List<ReloadRequest> listReloadRequest = ReloadRequest.findSummaryReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMaxSearch, listStatus);
+    		List<ReloadRequest> listReloadRequest = ReloadRequest.findSummaryReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMaxSearch, listStatus, -1, 0);
     		
     		if (listReloadRequest != null && listReloadRequest.size()>0)
     		{
@@ -548,41 +632,51 @@ public class ReportGenerator {
     		}  		
     		dateMin = dateMaxSearch;
     	}
-        return listCompleteReport;
+
+    	if(first > -1 && size > 0) 
+    	{ 	
+    		 List<Report> listReportPage= new ArrayList<Report>();
+    		 int i = 0;
+    		 while(i<size)
+    		 {
+    			if (first<listCompleteReport.size())
+    			{
+    				listReportPage.add(listCompleteReport.get(first));
+    				first++; 				
+    			}
+    			i++;
+    		  }
+    		 return listReportPage;
+    	}
+    	else
+    	{
+    		return listCompleteReport;
+    	}       
     }
 
 
     /**
      * get result for report summaryReloadFrmCelcomReport/TG0004
-     * @param none
-     * @return List A report list
+     * @param dateMinStr String
+     * @param dateMaxStr String
+     * @param first int 
+     * @param size int
+     * @return List<Report> listReport
      * @throws Exception 
      */
-    public static List<Report> getSummaryReloadReport(String dateMinStr, String dateMaxStr) throws Exception {
+    public static List<Report> getSummaryReloadReport(String dateMinStr, String dateMaxStr, int first, int size) throws Exception {
     	List<Report> listReport = new ArrayList<Report>();
         List<Report> listCompleteReport = new ArrayList<Report>();
-    	List<String> listStatus = new ArrayList<String>();
+    	List<String> listStatus = getListAllSuccess();
     	
-    	listStatus.add(Constants.RELOAD_REQUEST_SUCCESS.toLowerCase()); 
-    	
-    	Date dateMin = null;
-    	Date dateMax = null;
+    	Date dateMin = getSummaryDateMin(dateMinStr);
+    	Date dateMax = getSummaryDateMax(dateMin, dateMaxStr);		
     	Date dateMaxSearch = null;
     	
-    	if("null".equals(dateMinStr) | "null".equals(dateMaxStr)){
-    		dateMin = getInitDateMin();
-    		dateMax = DateUtil.add(dateMin, 2, 1);
-    	}
-    	else
-    	{
-    		dateMin = DateUtil.convertStringToDate(dateMinStr);
-    		dateMax = DateUtil.convertStringToDate(dateMaxStr);
-    	}  
-
     	while(dateMin.before(dateMax))
     	{	   		
     		dateMaxSearch = DateUtil.add(dateMin, 5, 1);   		
-    		List<ReloadRequest> listReloadRequest = ReloadRequest.findSummaryReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMaxSearch, listStatus);
+    		List<ReloadRequest> listReloadRequest = ReloadRequest.findSummaryReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMaxSearch, listStatus, -1, 0);
     		
     		if (listReloadRequest != null && listReloadRequest.size()>0)
     		{
@@ -606,43 +700,51 @@ public class ReportGenerator {
     		}  		
     		dateMin = dateMaxSearch;
     	}
-        return listCompleteReport;
+    	
+    	if(first > -1 && size > 0) 
+    	{ 	
+    		 List<Report> listReportPage= new ArrayList<Report>();
+    		 int i = 0;
+    		 while(i<size)
+    		 {
+    			if (first<listCompleteReport.size())
+    			{
+    				listReportPage.add(listCompleteReport.get(first));
+    				first++; 				
+    			}
+    			i++;
+    		  }
+    		 return listReportPage;
+    	}
+    	else
+    	{
+    		return listCompleteReport;
+    	}   
     }
    
     
     /**
      * get result for report summaryCancellationReloadReqFrmCelcomReport/TG0006
-     * @param none
-     * @return List A report list
+     * @param dateMinStr String
+     * @param dateMaxStr String
+     * @param first int 
+     * @param size int
+     * @return List<Report> listReport
      * @throws Exception 
      */
-    public static List<Report> getSummaryCancellationReloadReqFrmCelcomReport(String dateMinStr, String dateMaxStr) throws Exception {
+    public static List<Report> getSummaryCancellationReloadReqFrmCelcomReport(String dateMinStr, String dateMaxStr, int first, int size) throws Exception {
     	List<Report> listReport = new ArrayList<Report>();
         List<Report> listCompleteReport = new ArrayList<Report>();
-    	List<String> listStatus = new ArrayList();
-    	
-    	listStatus.add(Constants.RELOAD_REQUEST_FAILED.toLowerCase());
-    	listStatus.add(Constants.RELOAD_REQUEST_EXPIRED.toLowerCase());
-    	listStatus.add(Constants.RELOAD_REQUEST_MANUALCANCEL.toLowerCase());
+    	List<String> listStatus = getListAllCancel();
 
-    	Date dateMin = null;
-    	Date dateMax = null;
-    	Date dateMaxSearch = null;
-    	
-    	if("null".equals(dateMinStr) | "null".equals(dateMaxStr)){
-    		dateMin = getInitDateMin();
-    		dateMax = DateUtil.add(dateMin, 2, 1);
-    	}
-    	else
-    	{
-    		dateMin = DateUtil.convertStringToDate(dateMinStr);
-    		dateMax = DateUtil.convertStringToDate(dateMaxStr);
-    	}  
+    	Date dateMin = getSummaryDateMin(dateMinStr);
+    	Date dateMax = getSummaryDateMax(dateMin, dateMaxStr);		
+    	Date dateMaxSearch = null; 
 
     	while(dateMin.before(dateMax))	   		
     	{	   		
     		dateMaxSearch = DateUtil.add(dateMin, 5, 1);   		  		
-    		List<ReloadRequest> listReloadRequest = ReloadRequest.findSummaryReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMaxSearch, listStatus);
+    		List<ReloadRequest> listReloadRequest = ReloadRequest.findSummaryReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMaxSearch, listStatus, -1, 0);
     		
     		if (listReloadRequest != null && listReloadRequest.size()>0)
     		{
@@ -668,70 +770,94 @@ public class ReportGenerator {
     		}  		
     		dateMin = dateMaxSearch;
     	}
-        return listCompleteReport;
+    	
+    	if(first > -1 && size > 0) 
+    	{ 	
+    		 List<Report> listReportPage= new ArrayList<Report>();
+    		 int i = 0;
+    		 while(i<size)
+    		 {
+    			if (first<listCompleteReport.size())
+    			{
+    				listReportPage.add(listCompleteReport.get(first));
+    				first++; 				
+    			}
+    			i++;
+    		  }
+    		 return listReportPage;
+    	}
+    	else
+    	{
+    		return listCompleteReport;
+    	}   
     }
   
     /** 
      * TO DO
      * get result for report summarySettlementReloadReqFrmCelcomReport/TG0008
-     * @param none
-     * @return List A report list
+     * @param dateMinStr String
+     * @param dateMaxStr String
+     * @param first int 
+     * @param size int
+     * @return List<Report> listReport
      * @throws Exception 
      */
-    public static List<Report> getSummarySettlementReloadFrmCelcomReport(String dateMinStr, String dateMaxStr) throws Exception {
+    public static List<Report> getSummarySettlementReloadFrmCelcomReport(String dateMinStr, String dateMaxStr, int first, int size) throws Exception {
 	  List <Report> listReport = new ArrayList<Report>();
 	  List <Report> listCompleteReport = new ArrayList<Report>();
-	  List listStatus = new ArrayList();
+	  List<String> listStatus = getListAllStatus();
 
+	  Date dateMin = getSummaryDateMin(dateMinStr);
+	  Date dateMax = getSummaryDateMax(dateMin, dateMaxStr);		
+	  Date dateMaxSearch = null;
 
-	listStatus.add(Constants.RELOAD_REQUEST_NEW.toLowerCase());
-	listStatus.add(Constants.RELOAD_REQUEST_FAILED.toLowerCase());
-	listStatus.add(Constants.RELOAD_REQUEST_EXPIRED.toLowerCase());
-	listStatus.add(Constants.RELOAD_REQUEST_MANUALCANCEL.toLowerCase());
-	listStatus.add(Constants.RELOAD_REQUEST_SUCCESS.toLowerCase()); 
-
-	Date dateMin = null;
-	Date dateMax = null;
-	Date dateMaxSearch = null;
-	
-	if("null".equals(dateMinStr) | "null".equals(dateMaxStr)){
-		dateMin = getInitDateMin();
-		dateMax = DateUtil.add(dateMin, 2, 1);
-	}
-	else
-	{
-		dateMin = DateUtil.convertStringToDate(dateMinStr);
-		dateMax = DateUtil.convertStringToDate(dateMaxStr);
-	}  
-
-	while(dateMin.before(dateMax))
-	{	   		   		
+	  while(dateMin.before(dateMax))
+	  {	   		   		
 		dateMaxSearch = DateUtil.add(dateMin, 5, 1);   			
-		List<ReloadRequest> listReloadRequest = ReloadRequest.findSummaryReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMaxSearch, listStatus);
+		List<ReloadRequest> listReloadRequest = ReloadRequest.findSummaryReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMaxSearch, listStatus, -1, 0);
 		
 		if (listReloadRequest != null && listReloadRequest.size()>0)
 		{
 			listReport = copyReloadRequestToReport(listReloadRequest);    		
-    		Iterator it = listReport.iterator();
-    		Report reportSummary = new Report();
-            while(it.hasNext()) {        
-                try {
-                  reportSummary = (Report)it.next();
-                   //todo
+			Iterator it = listReport.iterator();
+			Report reportSummary = new Report();
+	        while(it.hasNext()) {        
+	            try {
+	              reportSummary = (Report)it.next();
+	               //todo
 				  reportSummary.setTransactionDate(reportSummary.getRequestedTime());
 		          reportSummary.setGrossPaymentToTngRm(reportSummary.getReloadAmount());
 		          reportSummary.setTotalCancellationRm(reportSummary.getReloadAmount());
 		          reportSummary.setAmountCreditedToTngRm(reportSummary.getReloadAmount());
 		          reportSummary.setDateCreditedToTngAccount(reportSummary.getRequestedTime());
-  		        } catch (Exception e) {
-                    e.printStackTrace();  
-                }
-            }
-            listCompleteReport.add(reportSummary);    		
+		        } catch (Exception e) {
+	                e.printStackTrace();  
+	            }
+	        }
+	        listCompleteReport.add(reportSummary);    		
 		}  		
 		dateMin = dateMaxSearch;
-	}
-    return listCompleteReport;
+	  }
+	  
+	  if(first > -1 && size > 0) 
+	  { 	
+  		 List<Report> listReportPage= new ArrayList<Report>();
+  		 int i = 0;
+  		 while(i<size)
+  		 {
+  			if (first<listCompleteReport.size())
+  			{
+  				listReportPage.add(listCompleteReport.get(first));
+  				first++; 				
+  			}
+  			i++;
+  		  }
+  		 return listReportPage;
+  	  }
+  	  else
+  	  {
+  		return listCompleteReport;
+  	  }     
   }
     
 

@@ -138,24 +138,51 @@ public class ReloadRequest {
 		return typedQuery;
 	}
 
-	/**
-	  * To get the reload request between requested time
-	  * @param status The reload request status
-	  * @return List Reload request in list
-	  * @throws ParseException 
-	  */
-	public static List<ReloadRequest> findReloadRequestsByRequestedTimeBetweenAndStatus(Date minRequestedTime,
-			Date maxRequestedTime, List<String> listStatus) throws ParseException {
-		String query = "SELECT ReloadRequest " + "FROM ReloadRequest reloadrequest "
-				+ "WHERE reloadrequest.requestedTime BETWEEN :minRequestedTime AND :maxRequestedTime "
-				+ "AND LOWER(reloadrequest.status) IN (:statusList)";
-		TypedQuery<ReloadRequest> q = entityManager().createQuery(query, ReloadRequest.class);
-		q.setParameter("minRequestedTime", minRequestedTime);
-		q.setParameter("maxRequestedTime", maxRequestedTime);
+ 	/**
+      * To get the reload request between requested time and status(for generating the report)
+      * @param minRequestedTime Date 
+      * @param maxRequestedTime Date 
+      * @param listStatus List<String> 
+      * @param firstResult int 
+      * @param maxResults int 
+      * @return  TypedQuery<ReloadRequest>
+ 	  * @throws ParseException 
+      */
+     public static  TypedQuery<ReloadRequest>findReloadRequestsByRequestedTimeBetweenAndStatus (Date minRequestedTime, Date maxRequestedTime, List<String> listStatus, int firstResult, int maxResults) throws ParseException {		
+    	EntityManager em = ReloadRequest.entityManager();
+        TypedQuery<ReloadRequest> q = null;
+        String query = "SELECT ReloadRequest " +
+    				   "FROM ReloadRequest reloadrequest " +
+    				   "WHERE reloadrequest.requestedTime BETWEEN :minRequestedTime AND :maxRequestedTime " +
+    				   "AND LOWER(reloadrequest.status) IN (:statusList) ORDER BY reloadrequest.requestedTime";				
+		q = (firstResult > -1 && maxResults > 0) ? em.createQuery(query, ReloadRequest.class).setFirstResult(firstResult).setMaxResults(maxResults) : em.createQuery(query, ReloadRequest.class);
+		q.setParameter("minRequestedTime",  minRequestedTime);
+		q.setParameter("maxRequestedTime",  maxRequestedTime);
 		q.setParameter("statusList", listStatus);
-		return q.getResultList();
-	}
+	    return q;        
+     } 
 
+  	/**
+      * To get total number of reload request between requested time and status (for generating the report with paging)
+      * @param minRequestedTime Date 
+      * @param maxRequestedTime Date 
+      * @param listStatus List<String>  
+      * @return totalresult long
+ 	  * @throws ParseException 
+      */
+     public static long totalReloadRequestsByRequestedTimeBetweenAndStatus (Date minRequestedTime, Date maxRequestedTime, List<String> listStatus) throws ParseException {		
+     	EntityManager em = ReloadRequest.entityManager();
+        TypedQuery<Long> q = null;
+        String query = "SELECT count(ReloadRequest) " +
+     				   "FROM ReloadRequest reloadrequest " +
+     				   "WHERE reloadrequest.requestedTime BETWEEN :minRequestedTime AND :maxRequestedTime " +
+     				   "AND LOWER(reloadrequest.status) IN (:statusList)";				
+        q = em.createQuery(query, Long.class);
+ 		q.setParameter("minRequestedTime",  minRequestedTime);
+ 		q.setParameter("maxRequestedTime",  maxRequestedTime);
+ 		q.setParameter("statusList", listStatus);
+ 	    return q.getSingleResult();     
+     } 
 	/**
 	 * To get the reload request between requested time
 	 * 
@@ -181,47 +208,56 @@ public class ReloadRequest {
 		return q;
 	}
 
-	/** 
-	 * firman: for summary Reload Request
-	*/
-	public static List<ReloadRequest> findSummaryReloadRequestsByRequestedTimeBetweenAndStatus(Date minRequestedTime,
-			Date maxRequestedTime, List<String> listStatus) throws ParseException {
+	/**
+     * To get reload request between requested time and status (for generating summary report)
+     * @param minRequestedTime Date 
+     * @param maxRequestedTime Date 
+     * @param listStatus List<String>  
+     * @param firstResult int 
+     * @param maxResults int 
+     * @return List<ReloadRequest>
+	 * @throws ParseException 
+     */
+   public static List<ReloadRequest> findSummaryReloadRequestsByRequestedTimeBetweenAndStatus(Date minRequestedTime, Date maxRequestedTime, List<String> listStatus, int firstResult, int maxResults) throws ParseException {				 
+	   List<ReloadRequest> listRR = findReloadRequestsByRequestedTimeBetweenAndStatus(minRequestedTime, maxRequestedTime, listStatus, firstResult, maxResults).getResultList();
+	   return summarizeReloadRequest(listRR);
+   } 
+   
+   /**
+    * To get reload request between requested time and status (for generating summary report)
+    * @param reloadRequests List<ReloadRequest> 
+    * @return  List<ReloadRequest> with grouped value
+	* @throws ParseException 
+    */
+   public static List<ReloadRequest> summarizeReloadRequest(List<ReloadRequest> reloadRequests) throws ParseException {
+	   Map<String, ReloadRequest> mapSummary = new HashMap<String, ReloadRequest>();
+	   
+	   if(reloadRequests != null && reloadRequests.size() > 0) {
+		   for(ReloadRequest rr : reloadRequests) {
+			   if(rr.getRequestedTime() != null) {
+				   String dateKey = DateUtil.getDateTime("dd/MM/yyyy", rr.requestedTime);
+				   BigDecimal amount = rr.getReloadAmount();
+				   
+				   ReloadRequest groupRR = null;
+				   if(mapSummary.containsKey(dateKey)) {
+					   groupRR = mapSummary.get(dateKey);
+					   groupRR.setReloadAmount(groupRR.getReloadAmount().add(amount));			   
+					   groupRR.setTotalReloadQty(groupRR.getTotalReloadQty() + (new Long(1)));
+				   } else {
+					   groupRR = new ReloadRequest();
+					   groupRR.setReloadAmount(amount);
+					   groupRR.setTotalReloadQty(new Long(1));
+				   }
+				   groupRR.setRequestedTime(DateUtil.convertStringToDate("dd/MM/yyyy", dateKey));
+				   groupRR.setModifiedTime(DateUtil.convertStringToDate("dd/MM/yyyy", dateKey));
+				   mapSummary.put(dateKey, groupRR);
+			   }
+		   }
+	   }
 
-		List<ReloadRequest> listRR = findReloadRequestsByRequestedTimeBetweenAndStatus(minRequestedTime, maxRequestedTime,
-				listStatus);
-		return summarizeReloadRequest(listRR);
-
-	}
-
-	public static List<ReloadRequest> summarizeReloadRequest(List<ReloadRequest> reloadRequests) throws ParseException {
-		Map<String, ReloadRequest> mapSummary = new HashMap<String, ReloadRequest>();
-
-		if (reloadRequests != null && reloadRequests.size() > 0) {
-			for (ReloadRequest rr : reloadRequests) {
-				if (rr.getRequestedTime() != null) {
-					String dateKey = DateUtil.getDateTime("dd/MM/yyyy", rr.requestedTime);
-					BigDecimal amount = rr.getReloadAmount();
-
-					ReloadRequest groupRR = null;
-					if (mapSummary.containsKey(dateKey)) {
-						groupRR = mapSummary.get(dateKey);
-						groupRR.setReloadAmount(groupRR.getReloadAmount().add(amount));
-						groupRR.setTotalReloadQty(groupRR.getTotalReloadQty() + (new Long(1)));
-					} else {
-						groupRR = new ReloadRequest();
-						groupRR.setReloadAmount(amount);
-						groupRR.setTotalReloadQty(new Long(1));
-					}
-					groupRR.setRequestedTime(DateUtil.convertStringToDate("dd/MM/yyyy", dateKey));
-					groupRR.setModifiedTime(DateUtil.convertStringToDate("dd/MM/yyyy", dateKey));
-					mapSummary.put(dateKey, groupRR);
-				}
-			}
-		}
-
-		return new ArrayList<ReloadRequest>(mapSummary.values());
-	}
-
+	   return new ArrayList<ReloadRequest>(mapSummary.values());
+   }
+   
 	public static List<ReloadRequest> findReloadRequestsByParam2(Date minRequestedTime, Date maxRequestedTime,
 			List<String> listStatus) throws ParseException {
 		int firstResult = -1;
