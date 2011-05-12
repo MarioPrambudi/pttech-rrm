@@ -24,5 +24,4 @@ public class MessageHandler {
 
         return message;
     }
-
 }

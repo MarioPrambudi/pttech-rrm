@@ -75,6 +75,7 @@
         <constructor-arg ref="batchReportChannel"/>
     </bean>
     <bean class="org.springframework.context.support.ResourceBundleMessageSource" id="messageSource"/>
+    <bean class="com.djavafactory.pttech.rrm.ws.WsClient" id="wsClientBean"/>
     <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="entityManagerFactory">
         <property name="dataSource" ref="dataSource"/>
     </bean>
@@ -84,4 +85,13 @@
         <property name="basename" value="views"/>
     </bean>
 
+    <aop:config>
+        <aop:pointcut id="pointcut.services.integration"
+                      expression="execution(* com.djavafactory.pttech.rrm.ws.WsClient.sendWsClient(..))"/>
+        <aop:advisor pointcut-ref="pointcut.services.integration" advice-ref="retryAdvice" order="1"/>
+    </aop:config>
+
+    <bean id="retryAdvice" class="org.springframework.batch.retry.interceptor.RetryOperationsInterceptor">
+        <property name="retryOperations" ref="retryTemplate"/>
+    </bean>
 </beans>

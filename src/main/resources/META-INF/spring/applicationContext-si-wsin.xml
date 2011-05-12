@@ -19,7 +19,7 @@
 
     <chain input-channel="keyRequestWsChannel" output-channel="tngKeyResponseChannel">
         <transformer ref="mapperBean" method="mapTngKeyReqToReloadReq"/>
-        <filter ref="filterBean" method="keyRequestFilter" discard-channel="tngKeyInvalidStatusChannel"/>
+        <filter ref="filterBean" method="reloadRequestFilter" discard-channel="tngKeyErrorChannel"/>
         <filter ref="filterBean" method="validateTimeoutFilter" discard-channel="timeOutPersistChannel"/>
     </chain>
 
@@ -32,19 +32,19 @@
         <transformer ref="mapperBean" method="mapTimeoutReloadRequest"/>
         <service-activator ref="messagePersistenceBean" method="mergeReloadRequest"/>
     </chain>
-    <transformer input-channel="tngKeyExceedTimeOutChannel" ref="transformerBean" method="transformTimeoutMessage"
+    <transformer input-channel="tngKeyExceedTimeOutChannel" ref="transformerBean" method="transformMessageToResponse"
                  output-channel="keyRequestReplyChannel"/>
 
-    <channel id="tngKeyInvalidStatusChannel">
+    <channel id="tngKeyErrorChannel">
         <queue capacity="100"/>
     </channel>
-    <transformer input-channel="tngKeyInvalidStatusChannel" ref="transformerBean"
-                 method="transformKeyInvalidStatusMessage"
+    <transformer input-channel="tngKeyErrorChannel" ref="transformerBean"
+                 method="transformMessageToResponse"
                  output-channel="keyRequestReplyChannel"/>
 
     <publish-subscribe-channel id="tngKeyResponseChannel"/>
 
-    <transformer input-channel="tngKeyResponseChannel" ref="transformerBean" method="transformSuccessMessage"
+    <transformer input-channel="tngKeyResponseChannel" ref="transformerBean" method="transformMessageToResponse"
                  output-channel="keyRequestReplyChannel"/>
 
     <chain input-channel="tngKeyResponseChannel" output-channel="rtmReloadRequestChannel">
@@ -52,4 +52,7 @@
         <service-activator ref="messagePersistenceBean" method="mergeReloadRequest"/>
     </chain>
 
+    <channel id="errorChannel">
+        <queue capacity="500"/>
+    </channel>
 </beans:beans>

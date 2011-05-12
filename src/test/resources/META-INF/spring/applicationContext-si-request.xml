@@ -19,7 +19,7 @@
     <channel id="invalidMessagesChannel">
         <queue capacity="100"/>
     </channel>
-    <transformer input-channel="invalidMessagesChannel" ref="transformerBean" method="transformInvalidMessage"
+    <transformer input-channel="invalidMessagesChannel" ref="transformerBean" method="transformMessageToResponse"
                  output-channel="rmiReloadStatusChannel"/>
 
     <channel id="routeMessageChannel">
@@ -39,45 +39,15 @@
         <queue capacity="100"/>
     </channel>
     <chain input-channel="rtmReloadReqPersistChannel" output-channel="rtmRequestResponseChannel">
-        <filter ref="filterBean" method="rtmReloadRequestFilter" discard-channel="invalidRtmStatusChannel"/>
         <transformer ref="mapperBean" method="mapRtmReloadRequest"/>
         <service-activator ref="messagePersistenceBean" method="mergeReloadRequest"/>
     </chain>
 
-    <channel id="invalidRtmStatusChannel">
-        <queue capacity="100"/>
-    </channel>
-    <transformer input-channel="invalidRtmStatusChannel" ref="transformerBean" method="transformInvalidStatusMessage"
-                 output-channel="rtmRequestResponseChannel"/>
-
-    <channel id="tngKeyInboundChannel"/>
-    <filter input-channel="tngKeyInboundChannel" ref="filterBean" method="validateTimeoutFilter"
-            output-channel="tngKeyResponseChannel" discard-channel="tngKeyExceedTimeOutChannel"/>
-
     <channel id="tngReloadRequestChannel">
         <queue capacity="100"/>
     </channel>
-    <transformer input-channel="tngReloadRequestChannel" ref="transformerBean" method="transformMessageToJson"
-                 output-channel="tngReloadReqChannel"/>
-    <!-- Waiting for confirmation on whether there's proxy for tng. -->
-
-    <channel id="tngKeyExceedTimeOutChannel">
-        <queue capacity="100"/>
-    </channel>
-    <transformer input-channel="tngKeyExceedTimeOutChannel" ref="transformerBean" method="transformTimeoutMessage"
-                 output-channel="tngReloadStatusChannel"/>
-    <!-- Waiting for confirmation on whether there's proxy for tng. -->
-
-    <publish-subscribe-channel id="tngKeyResponseChannel"/>
-
-    <transformer input-channel="tngKeyResponseChannel" ref="transformerBean" method="transformSuccessMessage"
-                 output-channel="tngReloadStatusChannel"/>
-    <!-- Waiting for confirmation on whether there's proxy for tng. -->
-
-    <chain input-channel="tngKeyResponseChannel" output-channel="rtmReloadRequestChannel">
-        <transformer ref="mapperBean" method="mapTngReloadRequest"/>
-        <service-activator ref="messagePersistenceBean" method="mergeReloadRequest"/>
-    </chain>
+    <transformer input-channel="tngReloadRequestChannel" ref="transformerBean" method="transformMessageToReloadReq"
+                 output-channel="tngRequestWsChannel"/>
 
     <channel id="rtmReloadRequestChannel">
         <queue capacity="100"/>
@@ -88,7 +58,7 @@
     <publish-subscribe-channel id="rtmRequestResponseChannel"/>
     <transformer input-channel="rtmRequestResponseChannel" ref="transformerBean" method="transformMessageToJson"
                  output-channel="rmiReloadRequestChannel"/>
-    <transformer input-channel="rtmRequestResponseChannel" ref="transformerBean" method="transformSuccessMessage"
+    <transformer input-channel="rtmRequestResponseChannel" ref="transformerBean" method="transformMessageToResponse"
                  output-channel="rtmReloadStatusChannel"/>
 
     <poller id="defaultPoller" default="true" fixed-rate="3000"/>

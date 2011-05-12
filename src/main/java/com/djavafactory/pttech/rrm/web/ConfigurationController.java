@@ -84,8 +84,7 @@ public class ConfigurationController {
             DynamicScheduler tngScheduler = jmxReloadContextManager.getContext().getBean("tngScheduler", DynamicScheduler.class);
             tngScheduler.resetScheduler(configuration.getConfigValue());
         } else if (StringUtils.equals(Constants.CONFIG_CEL_LOCATION, configuration.getConfigKey()) ||
-                StringUtils.equals(Constants.CONFIG_TNG_BATCHWS, configuration.getConfigKey()) ||
-                StringUtils.equals(Constants.CONFIG_TNG_REQUESTWS, configuration.getConfigKey())) {
+                StringUtils.equals(Constants.CONFIG_TNG_BATCHWS, configuration.getConfigKey())) {
             jmxReloadContextManager.reloadContext();
         }
     }
