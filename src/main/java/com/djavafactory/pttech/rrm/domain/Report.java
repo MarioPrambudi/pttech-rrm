@@ -19,6 +19,8 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
 
 @RooJavaBean
 @RooToString
@@ -39,29 +41,38 @@ public class Report {
     private String serviceProviderId;
 
     private Integer transCode;
-
+    
+    @NumberFormat(pattern="#,##0.00")
     private BigDecimal reloadAmount;
 
+    @NumberFormat(pattern="#,##0.00")
     private BigDecimal fees;
 
+    @NumberFormat(pattern="#,##0.00")
     private BigDecimal totalChargeToCustomer;
 
+    @NumberFormat(pattern="#,##0.00")
     private BigDecimal commissionAmountDeductedBySof;
 
+    @NumberFormat(pattern="#,##0.00")
     private BigDecimal netPaymentToTng;
 
     private long totalReloadQty;
 
+    @NumberFormat(pattern="#,##0.00")
     private BigDecimal totalAmountRequestRm;
 
+    @NumberFormat(pattern="#,##0.00")
     private BigDecimal totalFees;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
     private Date reloadDate;
 
+    @NumberFormat(pattern="#,##0.00")
     private BigDecimal totalReloadAmountRm;
 
+    @NumberFormat(pattern="#,##0.00")
     private BigDecimal amountRefundedToCustomer;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -80,52 +91,45 @@ public class Report {
 
     private Long totalCancellationQty;
 
+    @NumberFormat(pattern="#,##0.00")
     private BigDecimal totalAmountCancelledRm;
 
+    @NumberFormat(pattern="#,##0.00")
     private BigDecimal totalRefundToCustomerRm;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
     private Date transactionDate;
 
+    @NumberFormat(pattern="#,##0.00")
     private BigDecimal grossPaymentToTngRm;
 
+    @NumberFormat(pattern="#,##0.00")
     private BigDecimal totalCancellationRm;
 
+    @NumberFormat(pattern="#,##0.00")
     private BigDecimal amountCreditedToTngRm;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
     private Date dateCreditedToTngAccount;
 
+    @NumberFormat(pattern="#,##0.00")
     private BigDecimal totalPaymentToTngRm;
 
     private String tngKey;
     
-    //Added
+    @NumberFormat(pattern="#,##0.00")
     private BigDecimal sumTotalChargeToCustomer;
     
+    @NumberFormat(pattern="#,##0.00")
     private BigDecimal sumCommissionAmountDeductedBySof;
     
+    @NumberFormat(pattern="#,##0.00")
     private BigDecimal sumNetPaymentToTng;
     
     @Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(style = "S-")
 	private Date modifiedDate;
 
-//    /**
-//
-//     */
-//    public static TypedQuery<ReloadRequest> findReloadRequestsByRequestedTimeBetweenAndStatus(String name, String registrationNo, Boolean deleted, String order, int firstResult, int maxResults) {
-//        EntityManager em = ReloadRequest.entityManager();
-//        TypedQuery<ReloadRequest> q = null;
-//        String query = "SELECT ReloadRequest " +
-//					   "FROM ReloadRequest reloadrequest " +
-//					   "WHERE reloadrequest.requestedTime BETWEEN :minRequestedTime AND :maxRequestedTime " +
-//					   "AND LOWER(reloadrequest.status) IN (:statusList)";		
-//        q = (firstResult > -1 && maxResults > 0) ? em.createQuery(query, ReloadRequest.class).setFirstResult(firstResult).setMaxResults(maxResults) : em.createQuery(query, ReloadRequest.class);
-//        return q;
-//    }
-
-    
 }
