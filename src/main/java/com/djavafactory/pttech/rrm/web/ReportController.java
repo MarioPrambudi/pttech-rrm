@@ -94,24 +94,23 @@ public class ReportController extends BaseController {
 														  ) throws Exception {
 		if (dateMin==null) dateMin="null";
 		if (dateMax==null) dateMax="null";
-		List<Report> reportList = new ArrayList<Report>();
 		if(format.equalsIgnoreCase("html")) {
 			  if (page != null || size != null) {
 				    int sizeNo = size == null ? 10 : size.intValue();
-		    		reportList = ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo);
 		    		long totalReport = ReportGenerator.getTotalReport(dateMin, dateMax, ReportGenerator.getListAllStatus());
 		    		float nrOfPages = (float)totalReport / sizeNo;
-		    		uiModel.addAttribute("reports", reportList);		            
+		    		uiModel.addAttribute("reports", ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo));		            
 		            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
 		            uiModel.addAttribute("params", "&dateMin=" + dateMin + "&dateMax=" + dateMax);
 			        
 			  } else {
+				    
 		            uiModel.addAttribute("reports", ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport(dateMin, dateMax, -1, -1));
 		      }
 			  return "dailyDetailsRequestReloadFrmCelcomList";
             
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList,false);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport(dateMin, dateMax, -1, -1),false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 
@@ -132,14 +131,12 @@ public class ReportController extends BaseController {
 		
 		if (dateMin==null) dateMin="null";
 		if (dateMax==null) dateMax="null";
-		List<Report> reportList = new ArrayList<Report>();		
 		if(format.equalsIgnoreCase("html")) {
 			  if (page != null || size != null) {
 				    int sizeNo = size == null ? 10 : size.intValue();
-		    		reportList = ReportGenerator.getSummaryRequestReloadFrmCelcomReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo);
 		    		long totalReport = ReportGenerator.getTotalSummaryReport(dateMin, dateMax, ReportGenerator.getListAllStatus());
 		    		float nrOfPages = (float)totalReport / sizeNo;
-		    		uiModel.addAttribute("reports", reportList);		            
+		    		uiModel.addAttribute("reports", ReportGenerator.getSummaryRequestReloadFrmCelcomReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo));		            
 		            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
 		            uiModel.addAttribute("params", "&dateMin=" + dateMin + "&dateMax=" + dateMax);
 			        
@@ -148,7 +145,7 @@ public class ReportController extends BaseController {
 		      }			
 			  return "summaryRequestReloadFrmCelcomList";
 		} else {	
-	        JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
+	        JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(ReportGenerator.getSummaryRequestReloadFrmCelcomReport(dateMin, dateMax, -1, -1) ,false);
 	        modelMap.put("reportData", jrDataSource);
 	        modelMap.put("format", format);
 	        return "summaryRequestReloadFrmCelcomReport";
@@ -166,25 +163,22 @@ public class ReportController extends BaseController {
 													  ) throws Exception {
 		
 		if (dateMin==null) dateMin="null";
-		if (dateMax==null) dateMax="null";
-		List<Report> reportList = new ArrayList<Report>();	
+		if (dateMax==null) dateMax="null";	
 		if(format.equalsIgnoreCase("html")) {
 			  if (page != null || size != null) {
 				    int sizeNo = size == null ? 10 : size.intValue();
-		    		reportList = ReportGenerator.getDailyDetailedReloadFrmCelcomReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo);
 		    		long totalReport = ReportGenerator.getTotalReport(dateMin, dateMax, ReportGenerator.getListAllSuccess());
 		    		float nrOfPages = (float)totalReport / sizeNo;
-		    		uiModel.addAttribute("reports", reportList);		            
+		    		uiModel.addAttribute("reports", ReportGenerator.getDailyDetailedReloadFrmCelcomReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo));		            
 		            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
 		            uiModel.addAttribute("params", "&dateMin=" + dateMin + "&dateMax=" + dateMax);
 			        
 			  } else {
 		            uiModel.addAttribute("reports", ReportGenerator.getDailyDetailedReloadFrmCelcomReport(dateMin, dateMax, -1, -1));
-		      }		
-			
+		      }					
 	        return "dailyDetailedReloadFrmCelcomList";
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(ReportGenerator.getDailyDetailedReloadFrmCelcomReport(dateMin, dateMax, -1, -1),false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "dailyDetailedReloadFrmCelcomReport";
@@ -203,23 +197,20 @@ public class ReportController extends BaseController {
 		
 		if (dateMin==null) dateMin="null";
 		if (dateMax==null) dateMax="null";
-		List<Report> reportList = new ArrayList<Report>();
 		if(format.equalsIgnoreCase("html")) {
 			  if (page != null || size != null) {
 				    int sizeNo = size == null ? 10 : size.intValue();
-		    		reportList = ReportGenerator.getSummaryReloadReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo);
 		    		long totalReport = ReportGenerator.getTotalSummaryReport(dateMin, dateMax, ReportGenerator.getListAllSuccess());
 		    		float nrOfPages = (float)totalReport / sizeNo;
-		    		uiModel.addAttribute("reports", reportList);		            
+		    		uiModel.addAttribute("reports", ReportGenerator.getSummaryReloadReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo));		            
 		            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-		            uiModel.addAttribute("params", "&dateMin=" + dateMin + "&dateMax=" + dateMax);
-			        
+		            uiModel.addAttribute("params", "&dateMin=" + dateMin + "&dateMax=" + dateMax);		        
 			  } else {
 		            uiModel.addAttribute("reports", ReportGenerator.getSummaryReloadReport(dateMin, dateMax, -1, -1));
 		      }					
 	        return "summaryReloadFrmCelcomList";
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(ReportGenerator.getSummaryReloadReport(dateMin, dateMax, -1, -1),false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "summaryReloadFrmCelcomReport";
@@ -238,15 +229,12 @@ public class ReportController extends BaseController {
 		
 		if (dateMin==null) dateMin="null";
 		if (dateMax==null) dateMax="null";
-		List<Report> reportList = new ArrayList<Report>();
 		if(format.equalsIgnoreCase("html")) {
 			 if (page != null || size != null) {
 				    int sizeNo = size == null ? 10 : size.intValue();
-		    		reportList = ReportGenerator.getDailyDetailsCancellationReloadReqFrmCelcomReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo);
-
 		    		long totalReport = ReportGenerator.getTotalReport(dateMin, dateMax, ReportGenerator.getListAllCancel());
 		    		float nrOfPages = (float)totalReport / sizeNo;
-		    		uiModel.addAttribute("reports", reportList);		            
+		    		uiModel.addAttribute("reports", ReportGenerator.getDailyDetailsCancellationReloadReqFrmCelcomReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo));		            
 		            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
 		            uiModel.addAttribute("params", "&dateMin=" + dateMin + "&dateMax=" + dateMax);
 			        
@@ -255,7 +243,7 @@ public class ReportController extends BaseController {
 		      }
 			 return "dailyDetailsCancellationReloadReqFrmCelcomList";
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(ReportGenerator.getDailyDetailsCancellationReloadReqFrmCelcomReport(dateMin, dateMax, -1, -1),false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "dailyDetailsCancellationReloadReqFrmCelcomReport";
@@ -274,14 +262,12 @@ public class ReportController extends BaseController {
 		
 		if (dateMin==null) dateMin="null";
 		if (dateMax==null) dateMax="null";
-		List<Report> reportList = new ArrayList<Report>();	
 		if(format.equalsIgnoreCase("html")) {
 			if (page != null || size != null) {
 			    int sizeNo = size == null ? 10 : size.intValue();
-	    		reportList = ReportGenerator.getSummaryCancellationReloadReqFrmCelcomReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo);
 	    		long totalReport = ReportGenerator.getTotalSummaryReport(dateMin, dateMax, ReportGenerator.getListAllCancel());
 	    		float nrOfPages = (float)totalReport / sizeNo;
-	    		uiModel.addAttribute("reports", reportList);		            
+	    		uiModel.addAttribute("reports", ReportGenerator.getSummaryCancellationReloadReqFrmCelcomReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo));		            
 	            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
 	            uiModel.addAttribute("params", "&dateMin=" + dateMin + "&dateMax=" + dateMax);		        
 		  } else {
@@ -289,7 +275,7 @@ public class ReportController extends BaseController {
 	      }		
 	      return "summaryCancellationReloadFrmCelcomList";
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(ReportGenerator.getSummaryCancellationReloadReqFrmCelcomReport(dateMin, dateMax, -1, -1),false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "summaryCancellationReloadFrmCelcomReport";
@@ -308,14 +294,12 @@ public class ReportController extends BaseController {
 		
 		if (dateMin==null) dateMin="null";
 		if (dateMax==null) dateMax="null";
-		List<Report> reportList = new ArrayList<Report>();
 		if(format.equalsIgnoreCase("html")) {
 			if (page != null || size != null) {
 			    int sizeNo = size == null ? 10 : size.intValue();
-	    		reportList = ReportGenerator.getDailySettlementReloadFrmCelcomReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo);
 	    		long totalReport = ReportGenerator.getTotalReport(dateMin, dateMax, ReportGenerator.getListAllStatus());
 	    		float nrOfPages = (float)totalReport / sizeNo;
-	    		uiModel.addAttribute("reports", reportList);		            
+	    		uiModel.addAttribute("reports", ReportGenerator.getDailySettlementReloadFrmCelcomReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo));		            
 	            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
 	            uiModel.addAttribute("params", "&dateMin=" + dateMin + "&dateMax=" + dateMax);		        
 			} else {
@@ -323,7 +307,7 @@ public class ReportController extends BaseController {
 			}				
 	        return "dailySettlementReloadFrmCelcomList";
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(ReportGenerator.getDailySettlementReloadFrmCelcomReport(dateMin, dateMax, -1, -1),false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "dailySettlementReloadFrmCelcomReport";
@@ -343,14 +327,12 @@ public class ReportController extends BaseController {
 			
 		if (dateMin==null) dateMin="null";
 		if (dateMax==null) dateMax="null";
-		List<Report> reportList = new ArrayList<Report>();
 		if(format.equalsIgnoreCase("html")) {
 			if (page != null || size != null) {
 			    int sizeNo = size == null ? 10 : size.intValue();
-	    		reportList = ReportGenerator.getSummarySettlementReloadFrmCelcomReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo);
 	    		long totalReport = ReportGenerator.getTotalSummaryReport(dateMin, dateMax, ReportGenerator.getListAllStatus());
 	    		float nrOfPages = (float)totalReport / sizeNo;
-	    		uiModel.addAttribute("reports", reportList);		            
+	    		uiModel.addAttribute("reports", ReportGenerator.getSummarySettlementReloadFrmCelcomReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo));		            
 	            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
 	            uiModel.addAttribute("params", "&dateMin=" + dateMin + "&dateMax=" + dateMax);		        
 			} else {
@@ -358,7 +340,7 @@ public class ReportController extends BaseController {
 			}		
 	        return "monthlySettlementReloadFrmCelcomList";
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(ReportGenerator.getSummarySettlementReloadFrmCelcomReport(dateMin, dateMax, -1, -1),false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "monthlySettlementReloadFrmCelcomReport";

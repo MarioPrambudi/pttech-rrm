@@ -221,7 +221,7 @@
           	<spring:url value="/reports/${item[reportType]}-Report/pdf" var="report_url"/>
           	<spring:url value="/resources/images/report-pdf.png" var="report_image_url" />
           	<spring:message arguments="${typeName}" code="entity_list_report" htmlEscape="false" var="report_label"/>
-          	<a alt="" href="javascript:getDateRange('${fn:escapeXml(report_url)}')" title="${fn:escapeXml(report_label)}" >
+          	<a alt="" href="javascript:getDateRange('${fn:escapeXml(report_url)}', '-1', '-1')" title="${fn:escapeXml(report_label)}" >
           		<img alt="${fn:escapeXml(report_label)}" class="image" 
           			 src="${fn:escapeXml(report_image_url)}" 
           			 title="${fn:escapeXml(report_label)}"/>
@@ -233,7 +233,7 @@
           	<spring:url value="/reports/${item[reportType]}-Report/xls" var="report_url"/>
           	<spring:url value="/resources/images/report-xls.png" var="report_image_url" />
           	<spring:message arguments="${typeName}" code="entity_list_report" htmlEscape="false" var="report_label"/>
-          	<a alt="" href="javascript:getDateRange('${fn:escapeXml(report_url)}')" title="${fn:escapeXml(report_label)}" >
+          	<a alt="" href="javascript:getDateRange('${fn:escapeXml(report_url)}', '-1', '-1')" title="${fn:escapeXml(report_label)}" >
           		<img alt="${fn:escapeXml(report_label)}" class="image" 
           			 src="${fn:escapeXml(report_image_url)}" 
           			 title="${fn:escapeXml(report_label)}"/>
