@@ -5,6 +5,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
+import org.springframework.format.annotation.NumberFormat.Style;
+import org.springframework.format.annotation.NumberFormat;
 
 import com.djavafactory.pttech.rrm.util.DateUtil;
 
@@ -37,6 +39,7 @@ public class ReloadRequest {
 
 	private Long mfgNumber;
 
+	@NumberFormat(pattern="#,##0.00")
 	private BigDecimal reloadAmount;
 
 	private String serviceProviderId;
