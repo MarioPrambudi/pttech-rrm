@@ -32,7 +32,7 @@ public class ReloadReq {
     @XmlElement(name = "ServiceProviderId", required = true)
     protected String serviceProviderId;
     @XmlElement(name = "TransactionCode", required = true)
-    protected Integer transactionCode;
+    protected String transactionCode;
     @XmlElement(name = "RequestDateTime", required = true)
     protected Date requestDateTime;
 
@@ -68,11 +68,11 @@ public class ReloadReq {
         this.serviceProviderId = serviceProviderId;
     }
 
-    public Integer getTransactionCode() {
+    public String getTransactionCode() {
         return transactionCode;
     }
 
-    public void setTransactionCode(Integer transactionCode) {
+    public void setTransactionCode(String transactionCode) {
         this.transactionCode = transactionCode;
     }
 

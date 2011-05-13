@@ -2,20 +2,18 @@
 <beans:beans xmlns="http://www.springframework.org/schema/integration"
              xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xmlns:ws="http://www.springframework.org/schema/integration/ws"
+             xmlns:util="http://www.springframework.org/schema/util"
              xsi:schemaLocation="http://www.springframework.org/schema/beans
 							http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 							http://www.springframework.org/schema/integration
 			                http://www.springframework.org/schema/integration/spring-integration-2.0.xsd
-			                http://www.springframework.org/schema/integration/ws http://www.springframework.org/schema/integration/ws/spring-integration-ws-2.0.xsd">
+			                http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
     <channel id="tngRequestWsChannel">
         <queue capacity="100"/>
     </channel>
-    <ws:outbound-gateway id="tngRequestWsGateway"
-                         request-channel="tngRequestWsChannel" uri="${TNG.reloadendpoint}"
-                         marshaller="jaxbMarshaller" unmarshaller="jaxbMarshaller"
-                         reply-channel="tngRequestReplyChannel"/>
+    <service-activator input-channel="tngRequestWsChannel" ref="wsClientBean" method="sendWsClient"
+                       output-channel="tngRequestReplyChannel"/>
 
     <channel id="tngRequestReplyChannel">
         <queue capacity="100"/>
@@ -41,6 +39,34 @@
 
     <beans:bean id="jaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
         <beans:property name="contextPath" value="com.djavafactory.pttech.rrm.ws"/>
+    </beans:bean>
+
+    <beans:bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory"/>
+
+    <beans:bean id="webServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+        <beans:constructor-arg ref="messageFactory"/>
+        <beans:property name="marshaller" ref="jaxbMarshaller"/>
+        <beans:property name="unmarshaller" ref="jaxbMarshaller"/>
+    </beans:bean>
+
+    <beans:bean id="retryTemplate" class="org.springframework.batch.retry.support.RetryTemplate">
+        <beans:property name="retryPolicy" ref="simpleRetryPolicy"/>
+        <beans:property name="backOffPolicy" ref="fixedBackOffPolicy"/>
+    </beans:bean>
+
+    <!-- simple policy that retries the call based on configuration setting -->
+    <beans:bean id="simpleRetryPolicy" class="org.springframework.batch.retry.policy.SimpleRetryPolicy">
+        <beans:constructor-arg value="#{${RRM.retries} + 1}"/>
+        <beans:constructor-arg>
+            <util:map>
+                <beans:entry key="org.springframework.ws.client.WebServiceTransportException" value="true"/>
+            </util:map>
+        </beans:constructor-arg>
+    </beans:bean>
+
+    <!-- implementation of BackOffPolicy that pauses for a fixed period of time before continuing -->
+    <beans:bean id="fixedBackOffPolicy" class="org.springframework.batch.retry.backoff.FixedBackOffPolicy">
+        <beans:property name="backOffPeriod" value="10000"/>
     </beans:bean>
 
 </beans:beans>

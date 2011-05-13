@@ -88,7 +88,7 @@ public class MessageMapperTest extends BaseManagerTestCase {
         reloadRequestMessage.setMsgType("F");
         reloadRequestMessage.setRequestTime(new Date());
         reloadRequestMessage.setSpId("318938123");
-        reloadRequestMessage.setTransCode(2);
+        reloadRequestMessage.setTransCode("2");
         reloadRequestMessage.setTransId("00000000000001");
 
         return reloadRequestMessage;

@@ -12,7 +12,7 @@ public class TerminalDataOnDemand {
         obj.setPort("port_" + index);
         obj.setDescription("description_" + index);
         obj.setAcquirerState(getProvince(index));
-        obj.setCity(new Long(index));
+        obj.setCity(getCity(index).getId());
         obj.setLocation("location_" + index);
         obj.setStatus("status_" + index);
         obj.setCreatedTime(new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY), java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE), java.util.Calendar.getInstance().get(java.util.Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime());
@@ -31,7 +31,7 @@ public class TerminalDataOnDemand {
         acquirerObj.setStreet1("street1_" + index);
         acquirerObj.setStreet2("street2_" + index);
         acquirerObj.setAcquirerState(getProvince(index));
-        acquirerObj.setCity(new Long(index));
+        acquirerObj.setCity(getCity(index).getId());
         acquirerObj.setPostCode("postCode_" + index);
         acquirerObj.setEmail("testuser@testemail.com");
         acquirerObj.setHotline("hotline_" + index);
@@ -44,6 +44,16 @@ public class TerminalDataOnDemand {
         acquirerObj.flush();
 
         return acquirerObj;
+    }
+
+    private static com.djavafactory.pttech.rrm.domain.City getCity(int index) {
+        com.djavafactory.pttech.rrm.domain.City cityObj = new com.djavafactory.pttech.rrm.domain.City();
+        cityObj.setCityName("name_" + index);
+        cityObj.setAcquirerState(getProvince(index));
+        cityObj.persist();
+        cityObj.flush();
+
+        return cityObj;
     }
 
     private static com.djavafactory.pttech.rrm.domain.Province getProvince(int index) {

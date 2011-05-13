@@ -14,13 +14,7 @@
         ${propertyKey}.
 
     <context:property-placeholder location="classpath*:META-INF/spring/*.properties" />-->
-    <util:properties id="config" location="classpath:/META-INF/spring/database.properties"/>
-    <bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="dataSource">
-        <property name="driverClassName" value="#{config['database.driverClassName']}"/>
-        <property name="url" value="#{config['database.url']}"/>
-        <property name="username" value="#{config['database.username']}"/>
-        <property name="password" value="#{config['database.password']}"/>
-    </bean>
+
     <!--
         Turn on AspectJ @Configurable support. As a result, any time you
         instantiate an object, Spring will attempt to perform dependency
@@ -70,11 +64,8 @@
     <bean class="com.djavafactory.pttech.rrm.integration.MessageRouter" id="routerBean"/>
     <bean class="com.djavafactory.pttech.rrm.integration.MessageMapper" id="mapperBean"/>
     <bean class="com.djavafactory.pttech.rrm.integration.MessagePersistence" id="messagePersistenceBean"/>
-    <bean class="com.djavafactory.pttech.rrm.service.BatchReportServiceManagerImpl" id="batchReportServiceManager">
-        <constructor-arg ref="ftpClientFactory"/>
-        <constructor-arg ref="batchReportChannel"/>
-    </bean>
     <bean class="org.springframework.context.support.ResourceBundleMessageSource" id="messageSource"/>
+    <bean class="com.djavafactory.pttech.rrm.ws.WsClient" id="wsClientBean"/>
     <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="entityManagerFactory">
         <property name="dataSource" ref="dataSource"/>
     </bean>
@@ -84,4 +75,13 @@
         <property name="basename" value="views"/>
     </bean>
 
+    <aop:config>
+        <aop:pointcut id="pointcut.services.integration"
+                      expression="execution(* com.djavafactory.pttech.rrm.ws.WsClient.sendWsClient(..))"/>
+        <aop:advisor pointcut-ref="pointcut.services.integration" advice-ref="retryAdvice" order="1"/>
+    </aop:config>
+
+    <bean id="retryAdvice" class="org.springframework.batch.retry.interceptor.RetryOperationsInterceptor">
+        <property name="retryOperations" ref="retryTemplate"/>
+    </bean>
 </beans>
