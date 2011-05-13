@@ -5,6 +5,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
+import org.springframework.format.annotation.NumberFormat.Style;
+import org.springframework.format.annotation.NumberFormat;
 
 import com.djavafactory.pttech.rrm.util.DateUtil;
 
@@ -28,33 +30,59 @@ import java.util.Map;
 @RooJasperoo
 @RooEntity(finders = {"findReloadRequestsByTransId", "findReloadRequestsByRequestedTimeBetween"})
 public class ReloadRequest {
+	@NotNull
+	@Column(unique = true)
+	private String transId;
 
-    @NotNull
-    @Column(unique = true)
-    private String transId;
+	private String status;
 
-    private String status;
+	private Long mfgNumber;
 
-    private Long mfgNumber;
+	@NumberFormat(pattern="#,##0.00")
+	private BigDecimal reloadAmount;
 
-    private BigDecimal reloadAmount;
+	private String serviceProviderId;
 
-    private String serviceProviderId;
+	private String transCode;
 
-    private String transCode;
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(style = "S-")
+	private Date requestedTime;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "S-")
-    private Date requestedTime;
+	private String tngKey;
 
-    private String tngKey;
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(style = "S-")
+	private Date modifiedTime;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "S-")
-    private Date modifiedTime;
+	@Transient
+	private Long totalReloadQty;
 
-    @Transient
-    private Long totalReloadQty;
+ 	/**
+      * To get the reload request between requested time and status(for generating the report)
+      * @param minRequestedTime Date 
+      * @param maxRequestedTime Date 
+      * @param listStatus List<String> 
+      * @param firstResult int 
+      * @param maxResults int 
+      * @return  TypedQuery<ReloadRequest>
+ 	  * @throws ParseException 
+      */
+     public static  TypedQuery<ReloadRequest>findReloadRequestsByRequestedTimeBetweenAndStatus (Date minRequestedTime, Date maxRequestedTime, List<String> listStatus, int firstResult, int maxResults) throws ParseException {		
+    	EntityManager em = ReloadRequest.entityManager();
+        TypedQuery<ReloadRequest> q = null;
+        String query = "SELECT ReloadRequest " +
+                "FROM ReloadRequest reloadrequest " +
+                "WHERE reloadrequest.requestedTime BETWEEN :minRequestedTime AND :maxRequestedTime " +
+                "AND LOWER(reloadrequest.status) IN (:statusList) ORDER BY reloadrequest.requestedTime";
+        q = (firstResult > -1 && maxResults > 0) ? em.createQuery(query, ReloadRequest.class).setFirstResult(firstResult).setMaxResults(maxResults) : em.createQuery(query, ReloadRequest.class);
+        q.setParameter("minRequestedTime", minRequestedTime);
+        q.setParameter("maxRequestedTime", maxRequestedTime);
+        q.setParameter("statusList", listStatus);
+        return q;
+    }
+
+
 
     public static TypedQuery<ReloadRequest> findReloadRequestsByTransId(String transId) {
         if (transId == null || transId.length() == 0)
@@ -137,32 +165,7 @@ public class ReloadRequest {
             typedQuery.setParameter("requestedTimeTo", requestedTimeTo);
         return typedQuery;
     }
-
-    /**
-     * To get the reload request between requested time and status(for generating the report)
-     *
-     * @param minRequestedTime Date
-     * @param maxRequestedTime Date
-     * @param listStatus       List<String>
-     * @param firstResult      int
-     * @param maxResults       int
-     * @return TypedQuery<ReloadRequest>
-     * @throws ParseException
-     */
-    public static TypedQuery<ReloadRequest> findReloadRequestsByRequestedTimeBetweenAndStatus(Date minRequestedTime, Date maxRequestedTime, List<String> listStatus, int firstResult, int maxResults) throws ParseException {
-        EntityManager em = ReloadRequest.entityManager();
-        TypedQuery<ReloadRequest> q = null;
-        String query = "SELECT ReloadRequest " +
-                "FROM ReloadRequest reloadrequest " +
-                "WHERE reloadrequest.requestedTime BETWEEN :minRequestedTime AND :maxRequestedTime " +
-                "AND LOWER(reloadrequest.status) IN (:statusList) ORDER BY reloadrequest.requestedTime";
-        q = (firstResult > -1 && maxResults > 0) ? em.createQuery(query, ReloadRequest.class).setFirstResult(firstResult).setMaxResults(maxResults) : em.createQuery(query, ReloadRequest.class);
-        q.setParameter("minRequestedTime", minRequestedTime);
-        q.setParameter("maxRequestedTime", maxRequestedTime);
-        q.setParameter("statusList", listStatus);
-        return q;
-    }
-
+ 
     /**
      * To get total number of reload request between requested time and status (for generating the report with paging)
      *

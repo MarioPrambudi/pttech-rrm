@@ -4,9 +4,8 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_com_djavafactory_pttech_rrm_domain_Report" items="${reports}" >
         <table:table data="${reports}" id="l_com_djavafactory_pttech_rrm_domain_Report" path="/reports" z="user-managed"
-        			 show="false" create="false" delete="false" update="false">
-        
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_Report_sofRequestedDatetime" property="sofRequestedDatetime" z="user-managed"/>
+        			 show="false" create="false" delete="false" update="false" alignRight="true">
+         <table:column id="c_com_djavafactory_pttech_rrm_domain_Report_sofRequestedDatetime" property="sofRequestedDatetime" z="user-managed"/>
             <table:column id="c_com_djavafactory_pttech_rrm_domain_Report_mfgNumber" property="mfgNumber" z="user-managed"/>
             <table:column id="c_com_djavafactory_pttech_rrm_domain_Report_reloadAmount" property="reloadAmount" z="user-managed"/>
             <table:column id="c_com_djavafactory_pttech_rrm_domain_Report_fees" property="fees" z="user-managed="/>
@@ -16,6 +15,8 @@
             <table:column id="c_com_djavafactory_pttech_rrm_domain_Report_amountRefundedToCustomer" property="amountRefundedToCustomer" z="user-managed"/>
             <table:column id="c_com_djavafactory_pttech_rrm_domain_Report_dateRefundedCustomer" property="dateRefundedCustomer" z="user-managed="/>
             <table:column id="c_com_djavafactory_pttech_rrm_domain_Report_cancellationStatus" property="cancellationStatus" z="user-managed"/>
+
+
         </table:table>
     </page:list>
 </div>

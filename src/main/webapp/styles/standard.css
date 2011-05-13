@@ -269,6 +269,8 @@ table a:link {color: #303030;}
 
 .utilbox {width: 18px;}
 
+.tdright{text-align: right;}
+
 caption {
 	caption-side: top;
 	width: auto;

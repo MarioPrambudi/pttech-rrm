@@ -357,6 +357,32 @@ public class ReportGenerator {
 	      return listCompleteReport.size();
 	  }
 	  
+	/**
+	 * rearrange report list for paging
+	 * @param String dateMinStr
+	 * @param String dateMaxStr 
+	 * @param listStatus List<String>  
+	 * @return long - total number of summary report
+	 */
+	  public static List<Report> formatSummaryList(List<Report> listReport, int first, int size)
+	  {
+		  if(first > -1 && size > 0) 
+		  { 	
+	    		 List<Report> listReportPage= new ArrayList<Report>();
+	    		 int i = 0;
+	    		 while(i<size)
+	    		 {
+	    			if (first<listReport.size())
+	    			{
+	    				listReportPage.add(listReport.get(first));
+	    				first++; 				
+	    			}
+	    			i++;
+	    		  }
+	    		 return listReportPage;
+		  }
+		  return listReport;
+	  }
     /*
 	 * TNG Report
 	 */
@@ -379,13 +405,11 @@ public class ReportGenerator {
         listReport = copyReloadRequestToReport(listReloadRequest);
 		Iterator it = listReport.iterator();
 
-		//Summary Variables
-//		BigDecimal totalFee= new BigDecimal("0.00");
-//		int totalQty = 0;
-//		BigDecimal totalAmountRequest = new BigDecimal("0.00");
-//		BigDecimal totalChargeCust= new BigDecimal("0.00");
-//		BigDecimal totalCommSofDeduct= new BigDecimal("0.00");
-//		BigDecimal totalNetPaymentTng= new BigDecimal("0.00");
+		BigDecimal totalFee= new BigDecimal("0.00");
+		BigDecimal totalAmountRequest = new BigDecimal("0.00");
+		BigDecimal sumTotalChargeCust= new BigDecimal("0.00");
+		BigDecimal totalCommSofDeduct= new BigDecimal("0.00");
+		BigDecimal totalNetPaymentTng= new BigDecimal("0.00");
 		
         while(it.hasNext())
 		{        
@@ -399,18 +423,25 @@ public class ReportGenerator {
             	report.setNetPaymentToTng(getNetPaymentToTnG(report.getTotalChargeToCustomer(), report.getCommissionAmountDeductedBySof()));
             	listCompleteReport.add(report);
             	//sum
-//            	totalFee = totalFee.add(report.getFees());
-//            	totalAmountRequest = totalAmountRequest.add(report.getReloadAmount());
-//            	totalQty = totalQty + 1;
-//            	totalChargeCust = totalChargeCust.add(report.getTotalChargeToCustomer());
-//            	totalCommSofDeduct = totalCommSofDeduct.add(report.getCommissionAmountDeductedBySof());
-//            	totalNetPaymentTng = totalNetPaymentTng.add(report.getNetPaymentToTng());
+            	totalFee = totalFee.add(report.getFees());
+            	totalAmountRequest = totalAmountRequest.add(report.getReloadAmount());
+            	sumTotalChargeCust = sumTotalChargeCust.add(report.getTotalChargeToCustomer());
+            	totalCommSofDeduct = totalCommSofDeduct.add(report.getCommissionAmountDeductedBySof());
+            	totalNetPaymentTng = totalNetPaymentTng.add(report.getNetPaymentToTng());
             } catch (Exception e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
-
         }
-          
+        
+        //the add the sum to the end of the report list
+        Report reportSum = new Report();
+        reportSum.setFees(totalFee);
+        reportSum.setReloadAmount(totalAmountRequest);
+        reportSum.setTotalChargeToCustomer(sumTotalChargeCust);
+        reportSum.setCommissionAmountDeductedBySof(totalCommSofDeduct);
+        reportSum.setNetPaymentToTng(totalNetPaymentTng);
+        listCompleteReport.add(reportSum);
+
         return listCompleteReport;
 
     }
@@ -435,13 +466,11 @@ public class ReportGenerator {
         listReport = copyReloadRequestToReport(listReloadRequest);        
 		Iterator it = listReport.iterator();
 		
-		//Summary Variables
-//		BigDecimal totalFee= new BigDecimal("0.00");
-//		int totalQty = 0;
-//		BigDecimal totalAmountRequest = new BigDecimal("0.00");
-//		BigDecimal totalChargeCust= new BigDecimal("0.00");
-//		BigDecimal totalCommSofDeduct= new BigDecimal("0.00");
-//		BigDecimal totalNetPaymentTng= new BigDecimal("0.00");
+		BigDecimal totalFee= new BigDecimal("0.00");
+		BigDecimal totalAmountRequest = new BigDecimal("0.00");
+		BigDecimal sumTotalChargeCust= new BigDecimal("0.00");
+		BigDecimal totalCommSofDeduct= new BigDecimal("0.00");
+		BigDecimal totalNetPaymentTng= new BigDecimal("0.00");
 
         while(it.hasNext())
 		{        
@@ -454,20 +483,25 @@ public class ReportGenerator {
             	report.setTotalChargeToCustomer(getTotalChargeToCustomer(report.getReloadAmount()));
             	report.setCommissionAmountDeductedBySof(getCommAmountDeductedBySOF());
             	report.setNetPaymentToTng(getNetPaymentToTnG(report.getTotalChargeToCustomer(), report.getCommissionAmountDeductedBySof()));
-            	listCompleteReport.add(report);
-            	
-//            	//sum
-//            	totalFee = totalFee.add(report.getFees());
-//            	totalAmountRequest = totalAmountRequest.add(report.getReloadAmount());
-//            	totalQty = totalQty + 1;
-//            	totalChargeCust = totalChargeCust.add(report.getTotalChargeToCustomer());
-//            	totalCommSofDeduct = totalCommSofDeduct.add(report.getCommissionAmountDeductedBySof());
-//            	totalNetPaymentTng = totalNetPaymentTng.add(report.getNetPaymentToTng());            	
+            	listCompleteReport.add(report);            	
+            	//sum
+            	totalFee = totalFee.add(report.getFees());
+            	totalAmountRequest = totalAmountRequest.add(report.getReloadAmount());
+            	sumTotalChargeCust = sumTotalChargeCust.add(report.getTotalChargeToCustomer());
+            	totalCommSofDeduct = totalCommSofDeduct.add(report.getCommissionAmountDeductedBySof());
+            	totalNetPaymentTng = totalNetPaymentTng.add(report.getNetPaymentToTng());       	
             } catch (Exception e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
-
         }
+        //the add the sum to the end of the report list
+        Report reportSum = new Report();
+        reportSum.setFees(totalFee);
+        reportSum.setReloadAmount(totalAmountRequest);
+        reportSum.setTotalChargeToCustomer(sumTotalChargeCust);
+        reportSum.setCommissionAmountDeductedBySof(totalCommSofDeduct);
+        reportSum.setNetPaymentToTng(totalNetPaymentTng);
+        listCompleteReport.add(reportSum);
         return listCompleteReport;
     }
     
@@ -481,7 +515,6 @@ public class ReportGenerator {
      * @throws Exception  
      */
     public static List<Report> getDailyDetailsCancellationReloadReqFrmCelcomReport(String dateMinStr, String dateMaxStr, int first, int size) throws Exception {
-    	//all reload request status
     	List<Report> listReport = new ArrayList<Report>();
         List<Report> listCompleteReport = new ArrayList<Report>();
       	List<String> listStatus = getListAllCancel();
@@ -491,13 +524,11 @@ public class ReportGenerator {
         listReport = copyReloadRequestToReport(listReloadRequest);
 		Iterator it = listReport.iterator();
 
-		//Summary Variables
-//		BigDecimal totalFee= new BigDecimal("0.00");
-//		int totalCancellation = 0;
-//		BigDecimal totalAmountCancelled = new BigDecimal("0.00");
-//		BigDecimal totalChargeCust = new BigDecimal("0.00");
-//		BigDecimal totalCommSofDeduct = new BigDecimal("0.00");
-//		BigDecimal totalRefundCust = new BigDecimal("0.00");
+		BigDecimal totalFee= new BigDecimal("0.00");
+		BigDecimal sumTotalChargeCust = new BigDecimal("0.00");
+		BigDecimal totalCommSofDeduct = new BigDecimal("0.00");
+		BigDecimal totalRefundCust = new BigDecimal("0.00");
+		BigDecimal totalNetPaymentTng= new BigDecimal("0.00");
 		
         while(it.hasNext())
 		{        
@@ -524,22 +555,25 @@ public class ReportGenerator {
         		{
             		report.setCancellationStatus(Constants.REPORT_RELOAD_REQUEST_CANCELLED);
         		}
-            	listCompleteReport.add(report);
-            	
+            	listCompleteReport.add(report);            	
             	//sum
-//            	totalChargeCust = totalChargeCust.add(report.getTotalChargeToCustomer());
-//            	totalCancellation = totalCancellation + 1;
-//            	totalAmountCancelled = totalAmountCancelled.add(report.getReloadAmount());
-//            	totalFee = totalFee.add(report.getFees());
-//            	totalRefundCust = totalRefundCust.add(report.getAmountRefundedToCustomer());
-//            	totalCommSofDeduct = totalCommSofDeduct.add(report.getCommissionAmountDeductedBySof());
-            	
-
+            	totalFee = totalFee.add(report.getFees());
+            	sumTotalChargeCust = sumTotalChargeCust.add(report.getTotalChargeToCustomer());
+            	totalCommSofDeduct = totalCommSofDeduct.add(report.getCommissionAmountDeductedBySof());
+            	totalNetPaymentTng = totalNetPaymentTng.add(report.getNetPaymentToTng());            	
+            	totalRefundCust = totalRefundCust.add(report.getAmountRefundedToCustomer());         	      	           	
             } catch (Exception e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
-
         }
+        //the add the sum to the end of the report list
+        Report reportSum = new Report();
+        reportSum.setFees(totalFee);
+        reportSum.setAmountRefundedToCustomer(totalRefundCust);
+        reportSum.setTotalChargeToCustomer(sumTotalChargeCust);
+        reportSum.setCommissionAmountDeductedBySof(totalCommSofDeduct);
+        reportSum.setNetPaymentToTng(totalNetPaymentTng);
+        listCompleteReport.add(reportSum);
         return listCompleteReport;
     }
     
@@ -558,10 +592,8 @@ public class ReportGenerator {
 	List<Report> listReport = new ArrayList<Report>();
     List<Report> listCompleteReport = new ArrayList<Report>();
   	List<String> listStatus = getListAllStatus();
-  	
   	Date dateMin = getDateMin(dateMinStr);
 	Date dateMax = getDateMax(dateMin, dateMaxStr);	
-
   	List<ReloadRequest> listReloadRequest = ReloadRequest.findReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMax, listStatus, first, size).getResultList();
     listReport = copyReloadRequestToReport(listReloadRequest);
 	Iterator it = listReport.iterator();
@@ -577,12 +609,10 @@ public class ReportGenerator {
           	report.setTotalCancellationRm(report.getReloadAmount());
           	report.setAmountCreditedToTngRm(report.getReloadAmount());
           	report.setDateCreditedToTngAccount(report.getRequestedTime());
-
           	listCompleteReport.add(report);
           } catch (Exception e) {
               e.printStackTrace();  
           }
-
       }       
       return listCompleteReport;
   }
@@ -600,11 +630,20 @@ public class ReportGenerator {
     public static List<Report> getSummaryRequestReloadFrmCelcomReport(String dateMinStr, String dateMaxStr, int first, int size) throws Exception {
     	List<Report> listReport = new ArrayList<Report>();
         List<Report> listCompleteReport = new ArrayList<Report>();
+        List<Report> listReportPage = new ArrayList<Report>();
     	List<String> listStatus = getListAllStatus();
      	
     	Date dateMin = getSummaryDateMin(dateMinStr);
     	Date dateMax = getSummaryDateMax(dateMin, dateMaxStr);		
     	Date dateMaxSearch = null;
+    	
+		BigDecimal sumFee= new BigDecimal("0.00");
+		BigDecimal sumAmountRequest = new BigDecimal("0.00");
+		BigDecimal sumTotalChargeCust= new BigDecimal("0.00");
+		BigDecimal sumCommSofDeduct= new BigDecimal("0.00");
+		BigDecimal sumNetPaymentTng= new BigDecimal("0.00");
+		Long sumReloadQty = new Long(0);
+		
     	while(dateMin.before(dateMax))
     	{	   		
     		dateMaxSearch = DateUtil.add(dateMin, 5, 1);   		
@@ -631,27 +670,33 @@ public class ReportGenerator {
                 listCompleteReport.add(reportSummary);    		
     		}  		
     		dateMin = dateMaxSearch;
+    	}	
+    	
+    	listReportPage = formatSummaryList(listCompleteReport, first, size);
+    	Iterator it = listReportPage.iterator();
+    	while(it.hasNext()){
+    		Report reportSummary = new Report();
+    		reportSummary = (Report)it.next();
+    		//sum
+        	sumFee = sumFee.add(reportSummary.getTotalFees());
+        	sumAmountRequest = sumAmountRequest.add(reportSummary.getTotalAmountRequestRm());
+        	sumTotalChargeCust = sumTotalChargeCust.add(reportSummary.getSumTotalChargeToCustomer());
+        	sumCommSofDeduct = sumCommSofDeduct.add(reportSummary.getSumCommissionAmountDeductedBySof());
+        	sumNetPaymentTng = sumNetPaymentTng.add(reportSummary.getSumNetPaymentToTng());   
+        	sumReloadQty = sumReloadQty + reportSummary.getTotalReloadQty();
     	}
 
-    	if(first > -1 && size > 0) 
-    	{ 	
-    		 List<Report> listReportPage= new ArrayList<Report>();
-    		 int i = 0;
-    		 while(i<size)
-    		 {
-    			if (first<listCompleteReport.size())
-    			{
-    				listReportPage.add(listCompleteReport.get(first));
-    				first++; 				
-    			}
-    			i++;
-    		  }
-    		 return listReportPage;
-    	}
-    	else
-    	{
-    		return listCompleteReport;
-    	}       
+        //the add the sum to the end of the report list
+        Report reportSum = new Report();
+        reportSum.setTotalFees(sumFee);
+        reportSum.setTotalAmountRequestRm(sumAmountRequest);
+        reportSum.setSumTotalChargeToCustomer(sumTotalChargeCust);
+        reportSum.setSumCommissionAmountDeductedBySof(sumCommSofDeduct);
+        reportSum.setSumNetPaymentToTng(sumNetPaymentTng);
+        reportSum.setTotalReloadQty(sumReloadQty);
+        listReportPage.add(reportSum);
+
+    	return listReportPage;
     }
 
 
@@ -668,11 +713,17 @@ public class ReportGenerator {
     	List<Report> listReport = new ArrayList<Report>();
         List<Report> listCompleteReport = new ArrayList<Report>();
     	List<String> listStatus = getListAllSuccess();
-    	
+    	List<Report> listReportPage = new ArrayList<Report>();
     	Date dateMin = getSummaryDateMin(dateMinStr);
     	Date dateMax = getSummaryDateMax(dateMin, dateMaxStr);		
     	Date dateMaxSearch = null;
     	
+    	BigDecimal sumFee= new BigDecimal("0.00");
+		BigDecimal sumReloadAmount = new BigDecimal("0.00");
+		BigDecimal sumTotalChargeCust= new BigDecimal("0.00");
+		BigDecimal sumCommSofDeduct= new BigDecimal("0.00");
+		BigDecimal sumNetPaymentTng= new BigDecimal("0.00");
+		
     	while(dateMin.before(dateMax))
     	{	   		
     		dateMaxSearch = DateUtil.add(dateMin, 5, 1);   		
@@ -700,26 +751,29 @@ public class ReportGenerator {
     		}  		
     		dateMin = dateMaxSearch;
     	}
-    	
-    	if(first > -1 && size > 0) 
-    	{ 	
-    		 List<Report> listReportPage= new ArrayList<Report>();
-    		 int i = 0;
-    		 while(i<size)
-    		 {
-    			if (first<listCompleteReport.size())
-    			{
-    				listReportPage.add(listCompleteReport.get(first));
-    				first++; 				
-    			}
-    			i++;
-    		  }
-    		 return listReportPage;
+    	listReportPage = formatSummaryList(listCompleteReport, first, size);
+    	Iterator it = listReportPage.iterator();
+    	while(it.hasNext()){
+    		Report reportSummary = new Report();
+    		reportSummary = (Report)it.next();
+    		//sum
+        	sumFee = sumFee.add(reportSummary.getTotalFees());
+        	sumReloadAmount = sumReloadAmount.add(reportSummary.getTotalReloadAmountRm());
+        	sumTotalChargeCust = sumTotalChargeCust.add(reportSummary.getSumTotalChargeToCustomer());
+        	sumCommSofDeduct = sumCommSofDeduct.add(reportSummary.getSumCommissionAmountDeductedBySof());
+        	sumNetPaymentTng = sumNetPaymentTng.add(reportSummary.getSumNetPaymentToTng());   
     	}
-    	else
-    	{
-    		return listCompleteReport;
-    	}   
+
+        //the add the sum to the end of the report list
+        Report reportSum = new Report();
+        reportSum.setTotalFees(sumFee);
+        reportSum.setTotalReloadAmountRm(sumReloadAmount);
+        reportSum.setSumTotalChargeToCustomer(sumTotalChargeCust);
+        reportSum.setSumCommissionAmountDeductedBySof(sumCommSofDeduct);
+        reportSum.setSumNetPaymentToTng(sumNetPaymentTng);
+        listReportPage.add(reportSum);
+ 
+    	return listReportPage;
     }
    
     
@@ -736,10 +790,16 @@ public class ReportGenerator {
     	List<Report> listReport = new ArrayList<Report>();
         List<Report> listCompleteReport = new ArrayList<Report>();
     	List<String> listStatus = getListAllCancel();
-
+    	List<Report> listReportPage = new ArrayList<Report>();
     	Date dateMin = getSummaryDateMin(dateMinStr);
     	Date dateMax = getSummaryDateMax(dateMin, dateMaxStr);		
     	Date dateMaxSearch = null; 
+    	
+    	BigDecimal sumFee= new BigDecimal("0.00");
+		BigDecimal sumAmountCancel = new BigDecimal("0.00");
+		BigDecimal sumCommSofDeduct= new BigDecimal("0.00");
+		BigDecimal sumRefundToCust= new BigDecimal("0.00");
+		Long sumCancelQty = new Long(0);
 
     	while(dateMin.before(dateMax))	   		
     	{	   		
@@ -770,26 +830,27 @@ public class ReportGenerator {
     		}  		
     		dateMin = dateMaxSearch;
     	}
-    	
-    	if(first > -1 && size > 0) 
-    	{ 	
-    		 List<Report> listReportPage= new ArrayList<Report>();
-    		 int i = 0;
-    		 while(i<size)
-    		 {
-    			if (first<listCompleteReport.size())
-    			{
-    				listReportPage.add(listCompleteReport.get(first));
-    				first++; 				
-    			}
-    			i++;
-    		  }
-    		 return listReportPage;
+    	listReportPage = formatSummaryList(listCompleteReport, first, size);
+    	Iterator it = listReportPage.iterator();
+    	while(it.hasNext()){
+    		Report reportSummary = new Report();
+    		reportSummary = (Report)it.next();
+    		//sum
+        	sumFee = sumFee.add(reportSummary.getTotalFees());
+        	sumAmountCancel = sumAmountCancel.add(reportSummary.getTotalAmountCancelledRm());
+        	sumRefundToCust = sumRefundToCust.add(reportSummary.getTotalRefundToCustomerRm());
+        	sumCommSofDeduct = sumCommSofDeduct.add(reportSummary.getSumCommissionAmountDeductedBySof());
+        	sumCancelQty = sumCancelQty + reportSummary.getTotalCancellationQty();
     	}
-    	else
-    	{
-    		return listCompleteReport;
-    	}   
+    	//the add the sum to the end of the report list
+        Report reportSum = new Report();
+        reportSum.setTotalFees(sumFee);
+        reportSum.setTotalRefundToCustomerRm(sumRefundToCust);
+        reportSum.setTotalAmountCancelledRm(sumAmountCancel);
+        reportSum.setSumCommissionAmountDeductedBySof(sumCommSofDeduct);
+        reportSum.setTotalCancellationQty(sumCancelQty);
+        listReportPage.add(reportSum);
+    	return listReportPage;
     }
   
     /** 
@@ -806,7 +867,7 @@ public class ReportGenerator {
 	  List <Report> listReport = new ArrayList<Report>();
 	  List <Report> listCompleteReport = new ArrayList<Report>();
 	  List<String> listStatus = getListAllStatus();
-
+	  List<Report> listReportPage = new ArrayList<Report>();
 	  Date dateMin = getSummaryDateMin(dateMinStr);
 	  Date dateMax = getSummaryDateMax(dateMin, dateMaxStr);		
 	  Date dateMaxSearch = null;
@@ -838,26 +899,9 @@ public class ReportGenerator {
 		}  		
 		dateMin = dateMaxSearch;
 	  }
-	  
-	  if(first > -1 && size > 0) 
-	  { 	
-  		 List<Report> listReportPage= new ArrayList<Report>();
-  		 int i = 0;
-  		 while(i<size)
-  		 {
-  			if (first<listCompleteReport.size())
-  			{
-  				listReportPage.add(listCompleteReport.get(first));
-  				first++; 				
-  			}
-  			i++;
-  		  }
-  		 return listReportPage;
-  	  }
-  	  else
-  	  {
-  		return listCompleteReport;
-  	  }     
+	  listReportPage = formatSummaryList(listCompleteReport, first, size);	
+	  //sum
+	  return listReportPage;   
   }
     
 
