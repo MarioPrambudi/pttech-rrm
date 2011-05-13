@@ -41,7 +41,7 @@ public class ReloadRequestMessage {
     private String statusMsg;
 
     public String toJsonString() {
-        return new JSONSerializer().exclude("*.class").transform(new DateTransformer("ddMMyyyyHHmmss"), Date.class).serialize(this);
+        return new JSONSerializer().exclude("*.class", "statusCode", "statusMsg").transform(new DateTransformer("ddMMyyyyHHmmss"), Date.class).serialize(this);
     }
 
     public ReloadRequestMessage fromJsonToMessage(String jsonString) {
