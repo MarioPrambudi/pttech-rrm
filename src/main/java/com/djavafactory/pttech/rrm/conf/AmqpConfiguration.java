@@ -13,6 +13,7 @@ import org.springframework.context.annotation.ImportResource;
 
 /**
  * Configuration class for RabbitMQ
+ *
  * @author Carine Leong
  */
 @Configuration
@@ -54,16 +55,10 @@ public class AmqpConfiguration {
     @Value("#{amqp['queue.rtm.terminal']}")
     private String rtmTerminalQ;
 
-    @Value("#{amqp['queue.tng.reload.req']}")
-    private String tngReloadReqQ;
-
-    @Value("#{amqp['queue.tng.reload.status']}")
-    private String tngReloadStatusQ;
-
     @Bean
     public RabbitTemplate rabbitTemplate() {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(singleConnectionFactory());
-	    return rabbitTemplate;
+        return rabbitTemplate;
     }
 
     @Bean
@@ -148,94 +143,66 @@ public class AmqpConfiguration {
     }
 
     @Bean
-    public Queue tngReloadReqQueue() {
-        Queue q = new Queue(this.tngReloadReqQ);
-        amqpAdmin().declareQueue(q);
-        return q;
-    }
-
-    @Bean
-    public Queue tngReloadStatusQueue() {
-        Queue q = new Queue(this.tngReloadStatusQ);
-        amqpAdmin().declareQueue(q);
-        return q;
-    }
-
-    @Bean
     public DirectExchange rmiReloadReqExchange() {
         DirectExchange directExchange = new DirectExchange(this.rmiReloadReqQ);
         this.amqpAdmin().declareExchange(directExchange);
-        return directExchange ;
+        return directExchange;
     }
 
     @Bean
     public DirectExchange rmiReloadStatusExchange() {
         DirectExchange directExchange = new DirectExchange(this.rmiReloadStatusQ);
         this.amqpAdmin().declareExchange(directExchange);
-        return directExchange ;
+        return directExchange;
     }
 
     @Bean
     public DirectExchange rrmReloadReqExchange() {
         DirectExchange directExchange = new DirectExchange(this.rrmReloadReqQ);
         this.amqpAdmin().declareExchange(directExchange);
-        return directExchange ;
+        return directExchange;
     }
 
     @Bean
     public DirectExchange rrmReloadStatusExchange() {
         DirectExchange directExchange = new DirectExchange(this.rrmReloadStatusQ);
         this.amqpAdmin().declareExchange(directExchange);
-        return directExchange ;
+        return directExchange;
     }
 
     @Bean
     public DirectExchange rrmTerminalExchange() {
         DirectExchange directExchange = new DirectExchange(this.rrmTerminalQ);
         this.amqpAdmin().declareExchange(directExchange);
-        return directExchange ;
+        return directExchange;
     }
 
     @Bean
     public DirectExchange rrmEventExchange() {
         DirectExchange directExchange = new DirectExchange(this.rrmEventQ);
         this.amqpAdmin().declareExchange(directExchange);
-        return directExchange ;
+        return directExchange;
     }
 
     @Bean
     public DirectExchange rtmReloadReqExchange() {
         DirectExchange directExchange = new DirectExchange(this.rtmReloadReqQ);
         this.amqpAdmin().declareExchange(directExchange);
-        return directExchange ;
+        return directExchange;
     }
 
     @Bean
     public DirectExchange rtmReloadStatusExchange() {
         DirectExchange directExchange = new DirectExchange(this.rtmReloadStatusQ);
         this.amqpAdmin().declareExchange(directExchange);
-        return directExchange ;
+        return directExchange;
     }
 
     @Bean
     public DirectExchange rtmTerminalExchange() {
         DirectExchange directExchange = new DirectExchange(this.rtmTerminalQ);
         this.amqpAdmin().declareExchange(directExchange);
-        return directExchange ;
-    }
-
-    @Bean
-    public DirectExchange tngReloadReqExchange() {
-        DirectExchange directExchange = new DirectExchange(this.tngReloadReqQ);
-        this.amqpAdmin().declareExchange(directExchange);
-        return directExchange ;
-    }
-
-    @Bean
-    public DirectExchange tngReloadStatusExchange() {
-        DirectExchange directExchange = new DirectExchange(this.tngReloadStatusQ);
-        this.amqpAdmin().declareExchange(directExchange);
-        return directExchange ;
+        return directExchange;
     }
 
     @Bean
@@ -283,16 +250,6 @@ public class AmqpConfiguration {
         return BindingBuilder.from(rtmTerminalQueue()).to(rtmTerminalExchange()).with(this.rtmTerminalQ);
     }
 
-    @Bean
-    public Binding tngReloadRequestDataBinding() {
-        return BindingBuilder.from(tngReloadReqQueue()).to(tngReloadReqExchange()).with(this.tngReloadReqQ);
-    }
-
-    @Bean
-    public Binding tngReloadStatusDataBinding() {
-        return BindingBuilder.from(tngReloadStatusQueue()).to(tngReloadStatusExchange()).with(this.tngReloadStatusQ);
-    }
-
     @Override
     public String toString() {
         return "AmqpConfiguration{" +
@@ -308,8 +265,6 @@ public class AmqpConfiguration {
                 ", rtmReloadReqQ='" + rtmReloadReqQ + '\'' +
                 ", rtmReloadStatusQ='" + rtmReloadStatusQ + '\'' +
                 ", rtmTerminalQ='" + rtmTerminalQ + '\'' +
-                ", tngReloadReqQ='" + tngReloadReqQ + '\'' +
-                ", tngReloadStatusQ='" + tngReloadStatusQ + '\'' +
                 '}';
     }
 }

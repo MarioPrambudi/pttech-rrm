@@ -38,6 +38,7 @@ public final class Constants {
     public static final String CONFIG_CEL_LOCATION = "CEL.location";
     public static final String CONFIG_TNG_REQUESTWS = "TNG.reloadendpoint";
     public static final String CONFIG_TNG_BATCHWS = "TNG.batchendpoint";
+    public static final String CONFIG_RRM_RETRIES = "RRM.retries";
 
     /**
      * Constants to be used in database logging to identify the status of the terminal.

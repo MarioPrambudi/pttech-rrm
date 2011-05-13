@@ -51,20 +51,11 @@ public class MessageMapperTest extends BaseManagerTestCase {
     }
 
     @Test
-    public void testMapTngReloadResponse() {
-        List<Object> list = new MessageMapper().mapTngReloadResponse(getReloadResponseMessage());
+    public void testMapTngResponseToReloadResponse() {
+        List<Object> list = new MessageMapper().mapTngResponseToReloadResponse(getReloadReqResponseMessage());
         assert (list.size() == 2);
         assert ((list.get(0) instanceof ReloadRequest) == true);
         assert ((list.get(1) instanceof ReloadResponseMessage) == true);
-    }
-
-    @Test
-    public void testMapTngResponseToReloadResponse() {
-        ReloadResponseMessage message = new MessageMapper().mapTngResponseToReloadResponse(getReloadReqResponseMessage());
-        assert (message != null);
-        assertEquals("00", message.getStatusCode());
-        assertEquals("Success", message.getStatusMsg());
-        assertEquals("00000000000001", message.getTransId());
     }
 
     public void testMapTngKeyReqToReloadReq() {
@@ -88,7 +79,7 @@ public class MessageMapperTest extends BaseManagerTestCase {
         reloadRequestMessage.setMsgType("F");
         reloadRequestMessage.setRequestTime(new Date());
         reloadRequestMessage.setSpId("318938123");
-        reloadRequestMessage.setTransCode(2);
+        reloadRequestMessage.setTransCode("2");
         reloadRequestMessage.setTransId("00000000000001");
 
         return reloadRequestMessage;

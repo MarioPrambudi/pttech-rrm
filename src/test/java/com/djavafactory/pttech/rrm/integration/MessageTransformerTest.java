@@ -14,7 +14,7 @@ public class MessageTransformerTest extends BaseManagerTestCase {
 
     @Test
     public void testTransformReloadRequest() {
-        String msg = "{\"amount\":100.00,\"transCode\":1,\"spId\":\"4213232\",\"encryptedMsg\":null,\"mfgNo\":6767676,\"msgType\":\"N\",\"requestTime\":\"28042011120100\",\"transId\":\"00000000001\"}";
+        String msg = "{\"amount\":100.00,\"transCode\":\"1\",\"spId\":\"4213232\",\"encryptedMsg\":null,\"mfgNo\":6767676,\"msgType\":\"N\",\"requestTime\":\"28042011120100\",\"transId\":\"00000000001\"}";
         ReloadRequestMessage requestMessage = new MessageTransformer().transformReloadRequest(msg);
         assert (requestMessage != null);
         assertEquals(requestMessage.getAmount(), new BigDecimal("100"));
@@ -22,33 +22,8 @@ public class MessageTransformerTest extends BaseManagerTestCase {
         assert (requestMessage.getMfgNo() == 6767676L);
         assertEquals(requestMessage.getMsgType(), "N");
         assertEquals(requestMessage.getSpId(), "4213232");
-        assert (requestMessage.getTransCode() == 1);
+        assertEquals("1", requestMessage.getTransCode());
         assertEquals(requestMessage.getTransId(), "00000000001");
-    }
-
-    @Test
-    public void testTransformInvalidMessage() {
-        assert (new MessageTransformer().transformInvalidMessage(getReloadRequestMessage()) != null);
-    }
-
-    @Test
-    public void testTransformInvalidStatusMessage() {
-        assert (new MessageTransformer().transformInvalidStatusMessage(getReloadRequestMessage()) != null);
-    }
-
-    @Test
-    public void testTransformKeyInvalidStatusMessage() {
-        assert (new MessageTransformer().transformKeyInvalidStatusMessage(getReloadRequestMessage()) != null);
-    }
-
-    @Test
-    public void testTransformSuccessMessage() {
-        assert (new MessageTransformer().transformSuccessMessage(getReloadRequestMessage()) != null);
-    }
-
-    @Test
-    public void testTransformTimeoutMessage() {
-        assert (new MessageTransformer().transformTimeoutMessage(getReloadRequestMessage()) != null);
     }
 
     @Test
@@ -80,7 +55,7 @@ public class MessageTransformerTest extends BaseManagerTestCase {
         reloadRequestMessage.setMsgType("F");
         reloadRequestMessage.setRequestTime(new Date());
         reloadRequestMessage.setSpId("318938123");
-        reloadRequestMessage.setTransCode(2);
+        reloadRequestMessage.setTransCode("2");
         reloadRequestMessage.setTransId("00000000000001");
 
         return reloadRequestMessage;

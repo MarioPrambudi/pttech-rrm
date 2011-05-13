@@ -3,7 +3,6 @@
 
 package com.djavafactory.pttech.rrm.domain;
 
-import java.lang.Integer;
 import java.lang.Long;
 import java.lang.String;
 import java.math.BigDecimal;
@@ -51,11 +50,11 @@ privileged aspect ReloadRequest_Roo_JavaBean {
         this.serviceProviderId = serviceProviderId;
     }
     
-    public Integer ReloadRequest.getTransCode() {
+    public String ReloadRequest.getTransCode() {
         return this.transCode;
     }
     
-    public void ReloadRequest.setTransCode(Integer transCode) {
+    public void ReloadRequest.setTransCode(String transCode) {
         this.transCode = transCode;
     }
     

@@ -1,7 +1,9 @@
 package com.djavafactory.pttech.rrm.service;
 
 
+import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.Configuration;
+import com.djavafactory.pttech.rrm.domain.ReloadRequest;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -11,6 +13,8 @@ import org.springframework.integration.ftp.session.DefaultFtpsSessionFactory;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class BatchReportServiceManagerImpl implements BatchReportServiceManager {
@@ -61,5 +65,22 @@ public class BatchReportServiceManagerImpl implements BatchReportServiceManager 
     @Scheduled(cron = "0 0 0 * * ?")
     public void generateTngBatchReport() {
         //TODO generate celcom batch reports
+    }
+
+    @Scheduled(cron = "0 */5 * * * ?")
+    public void updateTimeoutReloadReq() {
+        Configuration configuration = Configuration.findConfigurationByConfigKey(Constants.CONFIG_TNG_TIMEOUT);
+        if (configuration != null && !"".equals(configuration.getConfigValue())) {
+            Calendar timeOutDate = Calendar.getInstance();
+            timeOutDate.setTimeInMillis(timeOutDate.getTimeInMillis() - Long.valueOf(configuration.getConfigValue()));
+
+            List<ReloadRequest> reloadRequests = ReloadRequest.findReloadRequestsByParam(Constants.RELOAD_STATUS_NEW, null,
+                    null, timeOutDate.getTime(), -1, -1, null).getResultList();
+            for (ReloadRequest request : reloadRequests) {
+                request.setStatus(Constants.RELOAD_STATUS_FAILED);
+                request.setModifiedTime(new Date());
+                request.merge();
+            }
+        }
     }
 }

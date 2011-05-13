@@ -26,7 +26,7 @@ public class ReloadRequestMessage {
 
     private String spId;
 
-    private Integer transCode;
+    private String transCode;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
@@ -36,8 +36,12 @@ public class ReloadRequestMessage {
 
     private String msgType;
 
+    private String statusCode;
+
+    private String statusMsg;
+
     public String toJsonString() {
-        return new JSONSerializer().exclude("*.class").transform(new DateTransformer("ddMMyyyyHHmmss"), Date.class).serialize(this);
+        return new JSONSerializer().exclude("*.class", "statusCode", "statusMsg").transform(new DateTransformer("ddMMyyyyHHmmss"), Date.class).serialize(this);
     }
 
     public ReloadRequestMessage fromJsonToMessage(String jsonString) {

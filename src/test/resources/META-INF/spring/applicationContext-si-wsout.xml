@@ -48,7 +48,7 @@
 
     <!-- simple policy that retries the call based on configuration setting -->
     <beans:bean id="simpleRetryPolicy" class="org.springframework.batch.retry.policy.SimpleRetryPolicy">
-        <beans:constructor-arg value="#{${RRM.retries} + 1}"/>
+        <beans:constructor-arg value="3"/>
         <beans:constructor-arg>
             <util:map>
                 <beans:entry key="org.springframework.ws.client.WebServiceTransportException" value="true"/>

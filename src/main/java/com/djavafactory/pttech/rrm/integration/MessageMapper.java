@@ -81,16 +81,22 @@ public class MessageMapper {
     }
 
     /**
-     * Method to map the Reload Request Response to List<Object>.
+     * Method to map the TnG Response Message to List<Object>.
      *
-     * @param message ReloadResponseMessage object
+     * @param message ReloadReqResponse object
      * @return List of Object.
      */
-    public List<Object> mapTngReloadResponse(ReloadResponseMessage message) {
+    public List<Object> mapTngResponseToReloadResponse(ReloadReqResponse message) {
+        ReloadResponseMessage responseMessage = new ReloadResponseMessage();
+        responseMessage.setTransId(message.getTransactionId());
+        responseMessage.setStatusCode(message.getStatusCode());
+        responseMessage.setStatusMsg(message.getStatusMsg());
+        responseMessage.setResponseTime(new Date());
+
         List<Object> objectList = new ArrayList<Object>();
         ReloadRequest reloadRequest = new ReloadRequest();
 
-        List<ReloadRequest> reloadRecord = new ReloadRequest().findReloadRequestsByTransId(message.getTransId()).getResultList();
+        List<ReloadRequest> reloadRecord = new ReloadRequest().findReloadRequestsByTransId(message.getTransactionId()).getResultList();
         if (reloadRecord != null && !reloadRecord.isEmpty()) {
             reloadRequest = reloadRecord.get(0);
             if (!StringUtils.equalsIgnoreCase(Constants.RESPONSE_CODE_SUCCESS, message.getStatusCode())) {
@@ -100,24 +106,9 @@ public class MessageMapper {
 
         logger.info("[mapTngReloadResponse - New ReloadReq object] >> " + reloadRequest);
         objectList.add(reloadRequest);
-        objectList.add(message);
-        return objectList;
-    }
+        objectList.add(responseMessage);
 
-    /**
-     * Method to map the TnG Response Message to ReloadResponseMessage.
-     *
-     * @param message ReloadReqResponse object
-     * @return ReloadResponseMessage.
-     */
-    public ReloadResponseMessage mapTngResponseToReloadResponse(ReloadReqResponse message) {
-        ReloadResponseMessage responseMessage = new ReloadResponseMessage();
-        responseMessage.setTransId(message.getTransactionId());
-        responseMessage.setStatusCode(message.getStatusCode());
-        responseMessage.setStatusMsg(message.getStatusMsg());
-        responseMessage.setResponseTime(new Date());
-        logger.info("[mapTngResponseToReloadResponse - New ReloadResponseMessage object] >> " + responseMessage);
-        return responseMessage;
+        return objectList;
     }
 
     /**

@@ -44,48 +44,9 @@ public class MessageTransformer {
      * @param message ReloadRequestMessage object
      * @return Response JSON string
      */
-    public String transformInvalidMessage(ReloadRequestMessage message) {
-        return transformResponse(message, "99", "Invalid reload request message.");   //TODO
-    }
-
-    /**
-     * Method to transform the ReloadRequestMessage to a KeyResponse object.
-     *
-     * @param message ReloadRequestMessage object
-     * @return TngKeyResponse
-     */
-    public KeyResponse transformTimeoutMessage(ReloadRequestMessage message) {
-        return transformKeyResponse("98", "Message Timeout", message.getTransId());    //TODO
-    }
-
-    /**
-     * Method to transform the ReloadRequestMessage to a KeyResponse object.
-     *
-     * @param message ReloadRequestMessage object
-     * @return KeyResponse
-     */
-    public KeyResponse transformSuccessMessage(ReloadRequestMessage message) {
-        return transformKeyResponse("00", "Success", message.getTransId());    //TODO
-    }
-
-    /**
-     * Method to transform the ReloadRequestMessage to a response string in JSON format.
-     *
-     * @param message ReloadRequestMessage object
-     * @return Response JSON string
-     */
-    public String transformInvalidStatusMessage(ReloadRequestMessage message) {
-        return transformResponse(message, "97", "Unable to proceed the request due to the record is not found or the record is not in a correct status.");         //TODO
-    }
-
-    /**
-     * Method to transform the ReloadRequestMessage to a KeyResponse object.
-     *
-     * @param message ReloadRequestMessage object
-     * @return KeyResponse
-     */
-    public KeyResponse transformKeyInvalidStatusMessage(ReloadRequestMessage message) {
-        return transformKeyResponse("97", "Unable to proceed the request due to the record is not found or the record is not in a correct status.", message.getTransId());         //TODO
+    public String transformMessageToResponse(Object message) {
+        ReloadRequestMessage requestMessage = (ReloadRequestMessage) message;
+        return transformResponse(requestMessage, requestMessage.getStatusCode(), requestMessage.getStatusMsg());
     }
 
     /**
