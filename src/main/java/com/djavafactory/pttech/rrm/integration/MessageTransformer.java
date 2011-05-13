@@ -44,8 +44,9 @@ public class MessageTransformer {
      * @param message ReloadRequestMessage object
      * @return Response JSON string
      */
-    public String transformMessageToResponse(ReloadRequestMessage message) {
-        return transformResponse(message, message.getStatusCode(), message.getStatusMsg());
+    public String transformMessageToResponse(Object message) {
+        ReloadRequestMessage requestMessage = (ReloadRequestMessage) message;
+        return transformResponse(requestMessage, requestMessage.getStatusCode(), requestMessage.getStatusMsg());
     }
 
     /**

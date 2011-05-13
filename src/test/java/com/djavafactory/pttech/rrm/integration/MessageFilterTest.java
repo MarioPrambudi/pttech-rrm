@@ -24,6 +24,11 @@ public class MessageFilterTest extends BaseManagerTestCase {
         assert (new MessageFilter().validateTimeoutFilter(getReloadRequestMessage(cal.getTime())) == false);
     }
 
+    @Test
+    public void testRtmRequestFilter() {
+        assert (new MessageFilter().rtmRequestFilter(getReloadRequestMessage(new Date())) == true);
+    }
+
     private ReloadRequestMessage getReloadRequestMessage(Date date) {
         ReloadRequestMessage reloadRequestMessage = new ReloadRequestMessage();
         reloadRequestMessage.setAmount(new BigDecimal("10.00"));

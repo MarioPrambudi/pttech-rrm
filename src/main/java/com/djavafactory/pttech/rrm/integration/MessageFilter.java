@@ -83,6 +83,16 @@ public class MessageFilter {
         return false;
     }
 
+    /**
+     * Method to validate whether the incoming RTM message needs to be routed to RMI or not.
+     *
+     * @param requestMessage ReloadRequestMessage object
+     * @return true/false
+     */
+    public Boolean rtmRequestFilter(ReloadRequestMessage requestMessage) {
+        return (!StringUtils.equalsIgnoreCase(Constants.RELOAD_REQUEST_SUCCESS, requestMessage.getMsgType()));
+    }
+
     private boolean validateFieldLength(ReloadRequestMessage requestMessage) {
         try {
             isValidLength(String.valueOf(requestMessage.getAmount()), 7);

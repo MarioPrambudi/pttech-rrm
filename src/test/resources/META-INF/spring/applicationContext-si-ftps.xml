@@ -4,6 +4,7 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns:ftp="http://www.springframework.org/schema/integration/ftp"
              xmlns:task="http://www.springframework.org/schema/task"
+             xmlns:util="http://www.springframework.org/schema/util"
              xsi:schemaLocation="http://www.springframework.org/schema/beans
 							http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 							http://www.springframework.org/schema/integration
@@ -11,12 +12,52 @@
                             http://www.springframework.org/schema/integration/ftp
 	                        http://www.springframework.org/schema/integration/ftp/spring-integration-ftp-2.0.xsd
 	                        http://www.springframework.org/schema/task
-	                        http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+	                        http://www.springframework.org/schema/task/spring-task-3.0.xsd
+	                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
+    <util:properties id="config" location="classpath:/META-INF/spring/database.properties"/>
+    <beans:bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="dataSource">
+        <beans:property name="driverClassName" value="#{config['database.driverClassName']}"/>
+        <beans:property name="url" value="#{config['database.url']}"/>
+        <beans:property name="username" value="#{config['database.username']}"/>
+        <beans:property name="password" value="#{config['database.password']}"/>
+    </beans:bean>
 
     <beans:bean id="jdbcPropertyPlaceHolderConfigurer"
                 class="com.djavafactory.pttech.rrm.conf.JdbcPropertyPlaceHolderConfigurer">
         <beans:property name="dataSource" ref="dataSource"/>
+    </beans:bean>
+
+    <beans:bean class="com.djavafactory.pttech.rrm.service.BatchReportServiceManagerImpl"
+                id="batchReportServiceManager">
+        <beans:constructor-arg ref="ftpClientFactory"/>
+        <beans:constructor-arg ref="batchReportChannel"/>
+    </beans:bean>
+    <!-- Activates scanning of @Scheduled -->
+    <task:annotation-driven/>
+
+    <task:scheduler id="scheduler" pool-size="30"/>
+
+    <beans:bean id="celcomScheduler" class="com.djavafactory.pttech.rrm.conf.DynamicScheduler">
+        <beans:constructor-arg ref="scheduler"/>
+        <beans:constructor-arg value="0 0 2 * * ?"/>
+        <beans:constructor-arg>
+            <beans:bean class="org.springframework.scheduling.support.MethodInvokingRunnable">
+                <beans:property name="targetObject" ref="batchReportServiceManager"/>
+                <beans:property name="targetMethod" value="getCelcomBatchReportDetail"/>
+            </beans:bean>
+        </beans:constructor-arg>
+    </beans:bean>
+
+    <beans:bean id="tngScheduler" class="com.djavafactory.pttech.rrm.conf.DynamicScheduler">
+        <beans:constructor-arg ref="scheduler"/>
+        <beans:constructor-arg value="0 0 2 * * ?"/>
+        <beans:constructor-arg>
+            <beans:bean class="org.springframework.scheduling.support.MethodInvokingRunnable">
+                <beans:property name="targetObject" ref="batchReportServiceManager"/>
+                <beans:property name="targetMethod" value="getTngBatchReportDetail"/>
+            </beans:bean>
+        </beans:constructor-arg>
     </beans:bean>
 
     <beans:bean id="ftpClientFactory" class="org.springframework.integration.ftp.session.DefaultFtpsSessionFactory">
@@ -38,5 +79,11 @@
         <beans:property name="fileExtension" value="txt"/>
     </beans:bean>
     <channel id="batchReportChannel"/>
+    <ftp:outbound-channel-adapter id="ftpsOutboundAdapter"
+                                  session-factory="ftpClientFactory"
+                                  channel="batchReportChannel"
+                                  charset="UTF-8"
+                                  remote-directory="/home/user/"
+                                  remote-filename-generator="remoteFilenameGenerator"/>
 
 </beans:beans>
