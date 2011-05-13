@@ -62,4 +62,6 @@
                  output-channel="rtmReloadStatusChannel"/>
 
     <poller id="defaultPoller" default="true" fixed-rate="3000"/>
+
+    <logging-channel-adapter id="defLogger" expression="'[Sending message to channel] >> '.concat(payload)"/>
 </beans:beans>

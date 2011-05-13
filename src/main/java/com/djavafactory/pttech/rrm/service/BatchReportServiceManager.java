@@ -24,4 +24,6 @@ public interface BatchReportServiceManager {
 
     public void generateTngBatchReport();
 
+    public void updateTimeoutReloadReq();
+
 }
