@@ -37,9 +37,6 @@ public class AmqpConfiguration {
     @Value("#{amqp['queue.rrm.reload.req']}")
     private String rrmReloadReqQ;
 
-    @Value("#{amqp['queue.rrm.reload.status']}")
-    private String rrmReloadStatusQ;
-
     @Value("#{amqp['queue.rrm.terminal']}")
     private String rrmTerminalQ;
 
@@ -101,13 +98,6 @@ public class AmqpConfiguration {
     }
 
     @Bean
-    public Queue rrmReloadStatusQueue() {
-        Queue q = new Queue(this.rrmReloadStatusQ);
-        amqpAdmin().declareQueue(q);
-        return q;
-    }
-
-    @Bean
     public Queue rrmTerminalQueue() {
         Queue q = new Queue(this.rrmTerminalQ);
         amqpAdmin().declareQueue(q);
@@ -164,13 +154,6 @@ public class AmqpConfiguration {
     }
 
     @Bean
-    public DirectExchange rrmReloadStatusExchange() {
-        DirectExchange directExchange = new DirectExchange(this.rrmReloadStatusQ);
-        this.amqpAdmin().declareExchange(directExchange);
-        return directExchange;
-    }
-
-    @Bean
     public DirectExchange rrmTerminalExchange() {
         DirectExchange directExchange = new DirectExchange(this.rrmTerminalQ);
         this.amqpAdmin().declareExchange(directExchange);
@@ -221,11 +204,6 @@ public class AmqpConfiguration {
     }
 
     @Bean
-    public Binding rrmReloadStatusDataBinding() {
-        return BindingBuilder.from(rrmReloadStatusQueue()).to(rrmReloadStatusExchange()).with(this.rrmReloadStatusQ);
-    }
-
-    @Bean
     public Binding rrmTerminalDataBinding() {
         return BindingBuilder.from(rrmTerminalQueue()).to(rrmTerminalExchange()).with(this.rrmTerminalQ);
     }
@@ -259,7 +237,6 @@ public class AmqpConfiguration {
                 ", rmiReloadReqQ='" + rmiReloadReqQ + '\'' +
                 ", rmiReloadStatusQ='" + rmiReloadStatusQ + '\'' +
                 ", rrmReloadReqQ='" + rrmReloadReqQ + '\'' +
-                ", rrmReloadStatusQ='" + rrmReloadStatusQ + '\'' +
                 ", rrmTerminalQ='" + rrmTerminalQ + '\'' +
                 ", rrmEventQ='" + rrmEventQ + '\'' +
                 ", rtmReloadReqQ='" + rtmReloadReqQ + '\'' +
