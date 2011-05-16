@@ -7,8 +7,8 @@ import com.djavafactory.pttech.rrm.domain.AuditTrail;
 
 /**
  * 
- * @author Mario Tinton Prambudi
  * May 8, 2011 8:22:58 PM
+ * @author Mario Tinton Prambudi
  *
  */
 public interface AuditTrailRepository extends MongoRepository<AuditTrail, ObjectId>, AuditTrailCustomRepository {

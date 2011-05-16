@@ -7,8 +7,8 @@ import com.djavafactory.pttech.rrm.domain.AuditTrail;
 
 /**
  * 
- * @author Mario Tinton Prambudi
  * May 9, 2011 3:28:36 PM
+ * @author Mario Tinton Prambudi
  *
  */
 public interface AuditTrailCustomRepository {

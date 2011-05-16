@@ -74,5 +74,13 @@ public final class Constants {
     public static final String AUDIT_TRAIL_ACTION_PERSIST = "P";
     public static final String AUDIT_TRAIL_ACTION_MERGE = "M";
     public static final String AUDIT_TRAIL_ACTION_REMOVE = "R";
+    
+    /**
+     * Constants for Event Trail
+     */
+    public static final String EVENT_TRAIL_MONGODB_COLLECTION_NAME = "EventTrail";
+    public static final String EVENT_TRAIL_SOURCE_RRM = "M";
+    public static final String EVENT_TRAIL_SOURCE_RMI = "I";
+    public static final String EVENT_TRAIL_SOURCE_RTM = "T";
 
 }
