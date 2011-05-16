@@ -10,6 +10,21 @@
 	<field name="totalFees" class="java.math.BigDecimal"/>
 	<field name="totalRefundToCustomerRm" class="java.math.BigDecimal"/>
 	<field name="sumCommissionAmountDeductedBySof" class="java.math.BigDecimal"/>
+	<variable name="SUM_TOTAL_CANCEL_QTY" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalCancellationQty}]]></variableExpression>
+	</variable>
+	<variable name="SUM_TOTAL_AMT_CANCEL" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalAmountCancelledRm}]]></variableExpression>
+	</variable>
+	<variable name="SUM_TOTAL_FEES" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalFees}]]></variableExpression>
+	</variable>
+	<variable name="SUM_TOTAL_REFUND" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalRefundToCustomerRm}]]></variableExpression>
+	</variable>
+	<variable name="SUM_COMM_AMT_DEDUCTED" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{sumCommissionAmountDeductedBySof}]]></variableExpression>
+	</variable>
 	<pageHeader>
 		<band height="101">
 			<image scaleImage="RetainShape" hAlign="Center">
@@ -136,4 +151,40 @@
 			</textField>
 		</band>
 	</pageFooter>
+	<summary>
+		<band height="50">
+			<textField>
+				<reportElement x="300" y="30" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_TOTAL_AMT_CANCEL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="620" y="30" width="130" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_COMM_AMT_DEDUCTED}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="30" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_TOTAL_FEES}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="30" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{SUM_TOTAL_CANCEL_QTY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="30" width="120" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_TOTAL_REFUND}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="100" y="30" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total :]]></text>
+			</staticText>
+		</band>
+	</summary>
 </jasperReport>
