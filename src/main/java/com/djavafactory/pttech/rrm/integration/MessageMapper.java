@@ -135,7 +135,7 @@ public class MessageMapper {
         List<ReloadRequest> reloadRecord = new ReloadRequest().findReloadRequestsByTransId(message.getTransId()).getResultList();
         if (reloadRecord != null && !reloadRecord.isEmpty()) {
             reloadRequest = reloadRecord.get(0);
-            reloadRequest.setModifiedTime(new Date());
+            reloadRequest.setModifiedTime(message.getRequestTime());
         } else {
             reloadRequest = new ReloadRequest();
             reloadRequest.setTransId(message.getTransId());
