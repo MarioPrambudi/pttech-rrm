@@ -4,7 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_com_djavafactory_pttech_rrm_domain_Report" items="${reports}" >
         <table:table data="${reports}" id="l_com_djavafactory_pttech_rrm_domain_Report" path="/reports" z="user-managed"
-        			 show="false" create="false" delete="false" update="false">
+        			 show="false" create="false" delete="false" update="false" alignRight="true">
         
             <table:column id="c_com_djavafactory_pttech_rrm_domain_Report_transactionDate" property="transactionDate" z="user-managed"/>
             <table:column id="c_com_djavafactory_pttech_rrm_domain_Report_totalReloadQty" property="totalReloadQty" z="user-managed"/>

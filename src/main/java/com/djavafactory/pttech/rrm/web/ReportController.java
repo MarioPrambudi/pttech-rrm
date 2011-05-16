@@ -101,16 +101,16 @@ public class ReportController extends BaseController {
 		    		float nrOfPages = (float)totalReport / sizeNo;
 		    		uiModel.addAttribute("reports", ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo));		            
 		            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-		            uiModel.addAttribute("params", "&dateMin=" + dateMin + "&dateMax=" + dateMax);
-			        
-			  } else {
-				    
+		            uiModel.addAttribute("params", "&dateMin=" + dateMin + "&dateMax=" + dateMax);			        
+			  } else {				    
 		            uiModel.addAttribute("reports", ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport(dateMin, dateMax, -1, -1));
 		      }
-			  return "dailyDetailsRequestReloadFrmCelcomList";
-            
+			  return "dailyDetailsRequestReloadFrmCelcomList";            
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport(dateMin, dateMax, -1, -1),false);
+			List<Report> listReport = new ArrayList<Report>();
+			listReport = ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
+	        listReport.remove(listReport.size()-1);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 
@@ -171,14 +171,16 @@ public class ReportController extends BaseController {
 		    		float nrOfPages = (float)totalReport / sizeNo;
 		    		uiModel.addAttribute("reports", ReportGenerator.getDailyDetailedReloadFrmCelcomReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo));		            
 		            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-		            uiModel.addAttribute("params", "&dateMin=" + dateMin + "&dateMax=" + dateMax);
-			        
+		            uiModel.addAttribute("params", "&dateMin=" + dateMin + "&dateMax=" + dateMax);			        
 			  } else {
 		            uiModel.addAttribute("reports", ReportGenerator.getDailyDetailedReloadFrmCelcomReport(dateMin, dateMax, -1, -1));
 		      }					
 	        return "dailyDetailedReloadFrmCelcomList";
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(ReportGenerator.getDailyDetailedReloadFrmCelcomReport(dateMin, dateMax, -1, -1),false);
+			List<Report> listReport = new ArrayList<Report>();
+			listReport = ReportGenerator.getDailyDetailedReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
+			listReport.remove(listReport.size()-1);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "dailyDetailedReloadFrmCelcomReport";
@@ -236,14 +238,16 @@ public class ReportController extends BaseController {
 		    		float nrOfPages = (float)totalReport / sizeNo;
 		    		uiModel.addAttribute("reports", ReportGenerator.getDailyDetailsCancellationReloadReqFrmCelcomReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo));		            
 		            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-		            uiModel.addAttribute("params", "&dateMin=" + dateMin + "&dateMax=" + dateMax);
-			        
+		            uiModel.addAttribute("params", "&dateMin=" + dateMin + "&dateMax=" + dateMax);			        
 			  } else {
 		            uiModel.addAttribute("reports", ReportGenerator.getDailyDetailsCancellationReloadReqFrmCelcomReport(dateMin, dateMax, -1, -1));
 		      }
 			 return "dailyDetailsCancellationReloadReqFrmCelcomList";
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(ReportGenerator.getDailyDetailsCancellationReloadReqFrmCelcomReport(dateMin, dateMax, -1, -1),false);
+			List<Report> listReport = new ArrayList<Report>();
+			listReport = ReportGenerator.getDailyDetailsCancellationReloadReqFrmCelcomReport(dateMin, dateMax, -1, -1);
+			listReport.remove(listReport.size()-1);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "dailyDetailsCancellationReloadReqFrmCelcomReport";
@@ -307,7 +311,10 @@ public class ReportController extends BaseController {
 			}				
 	        return "dailySettlementReloadFrmCelcomList";
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(ReportGenerator.getDailySettlementReloadFrmCelcomReport(dateMin, dateMax, -1, -1),false);
+			List<Report> listReport = new ArrayList<Report>();
+			listReport = ReportGenerator.getDailySettlementReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
+			//listReport.remove(listReport.size()-1); TO DO
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "dailySettlementReloadFrmCelcomReport";

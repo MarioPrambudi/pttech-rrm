@@ -35,6 +35,8 @@
                          description="show xls report (default false)"/>
 <jsp:directive.attribute name="html_report" type="java.lang.Boolean" required="false" rtexprvalue="true"
                          description="show html report (default false)"/>
+<jsp:directive.attribute name="alignRight" type="java.lang.Boolean" required="false" rtexprvalue="true"
+                         description="report column text align left"/>
 <c:if test="${empty render or render}">
 
 <c:set var="columnProperties" scope="request"/>
@@ -70,11 +72,12 @@
 <c:if test="${empty xls_report}">
     <c:set var="xls_report" value="false"/>
 </c:if>
-
 <c:if test="${empty terminalAction}">
     <c:set var="terminalAction" value="false"/>
 </c:if>
-
+<c:if test="${empty alignRight}">
+    <c:set var="alignRight" value="false"/>
+</c:if>
 <c:set var="typeName" value="${fn:split(id,'_')[fn:length(fn:split(id,'_')) - 1]}"/>
 <c:set var="lengths" value="${fn:split(columnMaxLengths, ',')}" scope="request"/>
 
@@ -127,7 +130,6 @@
                 <spring:eval var="colCounter" expression="colCounter  + 1"/>
             </th>
         </c:forTokens>
-        <th></th>
         <c:if test="${show}">
             <th></th>
             <spring:eval var="colCounter" expression="colCounter  + 1"/>
@@ -163,11 +165,17 @@
         <tr>
           <c:forTokens items="${columnProperties}" delims="," var="column" varStatus="num">
             <c:set var="columnMaxLength" value="${lengths[num.count-1]}" scope="request" />
-            <td>
-              <spring:eval expression="item[column]" />
-            </td>
-          </c:forTokens>
-          
+            <c:if test="${alignRight==true}">
+	            <td class="tdright">        
+	              <spring:eval expression="item[column]" />
+	            </td>
+            </c:if>
+            <c:if test="${alignRight==false}">
+	            <td>        
+	              <spring:eval expression="item[column]" />
+	            </td>
+            </c:if>
+          </c:forTokens>         
           <c:if test="${show}">
           <td class="utilbox">
             <spring:url value="${path}/${item[typeIdFieldName]}" var="show_form_url" />
@@ -239,8 +247,7 @@
           			 title="${fn:escapeXml(report_label)}"/>
           	</a>
           </td>
-          </c:if>
-          
+          </c:if>         
           <c:if test="${update}">
             <td class="utilbox">
               <spring:url value="${path}/${item[typeIdFieldName]}" var="update_form_url">
@@ -284,27 +291,27 @@
           </c:if>
         </tr>
     </c:forEach>
-    <tr class="footer">
-        <td colspan="${colCounter}">
-            <c:if test="${empty create or create}">
-            <span class="new">
-              <spring:url value="/${path}" var="create_url">
-                  <spring:param name="form"/>
-              </spring:url>
-              <a href="${fn:escapeXml(create_url)}">
-                  <spring:url value="/resources/images/add.png" var="create_img_url"/>
-                  <spring:message arguments="${typeName}" code="global_menu_new" var="add_message" htmlEscape="false"/>
-                  <img alt="${fn:escapeXml(add_message)}" src="${fn:escapeXml(create_img_url)}"
-                       title="${fn:escapeXml(add_message)}"/>
-              </a>
-            </span>
-                <c:out value=" "/>
-            </c:if>
-            <c:if test="${not empty maxPages}">
-                <util:pagination maxPages="${maxPages}" page="${param.page}" size="${param.size}" params="${params}"/>
-            </c:if>
-        </td>
-    </tr>
+	    <tr class="footer">
+	        <td colspan="${colCounter}">
+	            <c:if test="${empty create or create}">
+	            <span class="new">
+	              <spring:url value="/${path}" var="create_url">
+	                  <spring:param name="form"/>
+	              </spring:url>
+	              <a href="${fn:escapeXml(create_url)}">
+	                  <spring:url value="/resources/images/add.png" var="create_img_url"/>
+	                  <spring:message arguments="${typeName}" code="global_menu_new" var="add_message" htmlEscape="false"/>
+	                  <img alt="${fn:escapeXml(add_message)}" src="${fn:escapeXml(create_img_url)}"
+	                       title="${fn:escapeXml(add_message)}"/>
+	              </a>
+	            </span>
+	                <c:out value=" "/>
+	            </c:if>
+	            <c:if test="${not empty maxPages}">
+	                <util:pagination maxPages="${maxPages}" page="${param.page}" size="${param.size}" params="${params}"/>
+	            </c:if>
+	        </td>
+	    </tr>
 </table>
 </c:if>
 
