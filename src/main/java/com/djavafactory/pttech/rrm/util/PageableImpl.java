@@ -6,8 +6,8 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 
 /**
  * 
- * @author Mario Tinton Prambudi
  * May 8, 2011 10:32:46 PM
+ * @author Mario Tinton Prambudi
  *
  */
 @RooJavaBean

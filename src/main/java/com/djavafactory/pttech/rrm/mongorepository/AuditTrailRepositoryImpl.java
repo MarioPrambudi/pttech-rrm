@@ -19,8 +19,8 @@ import com.djavafactory.pttech.rrm.domain.AuditTrail;
 
 /**
  * 
- * @author Mario Tinton Prambudi
  * May 9, 2011 2:41:13 PM
+ * @author Mario Tinton Prambudi
  *
  */
 public class AuditTrailRepositoryImpl implements AuditTrailRepository {

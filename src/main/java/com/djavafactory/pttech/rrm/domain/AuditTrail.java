@@ -11,8 +11,8 @@ import org.springframework.roo.addon.tostring.RooToString;
 
 /**
  * 
- * @author Mario Tinton Prambudi
  * May 6, 2011 4:55:36 PM
+ * @author Mario Tinton Prambudi
  * 
  */
 @Document(collection="AuditTrail")
