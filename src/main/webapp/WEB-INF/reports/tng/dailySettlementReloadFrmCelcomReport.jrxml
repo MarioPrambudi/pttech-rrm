@@ -9,6 +9,18 @@
 	<field name="totalCancellationRm" class="java.math.BigDecimal"/>
 	<field name="amountCreditedToTngRm" class="java.math.BigDecimal"/>
 	<field name="dateCreditedToTngAccount" class="java.util.Date"/>
+	<variable name="SUM_TOTAL_RELOAD_QTY" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalReloadQty}]]></variableExpression>
+	</variable>
+	<variable name="SUM_GROSS_PAYMENT" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{grossPaymentToTngRm}]]></variableExpression>
+	</variable>
+	<variable name="SUM_TOTAL_CANCEL" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalCancellationRm}]]></variableExpression>
+	</variable>
+	<variable name="SUM_AMT_CREDITED" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{amountCreditedToTngRm}]]></variableExpression>
+	</variable>
 	<pageHeader>
 		<band height="101">
 			<image scaleImage="RetainShape" hAlign="Center">
@@ -123,4 +135,35 @@
 			</textField>
 		</band>
 	</pageFooter>
+	<summary>
+		<band height="50">
+			<textField>
+				<reportElement x="320" y="30" width="130" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_TOTAL_CANCEL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="30" width="130" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_GROSS_PAYMENT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="30" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{SUM_TOTAL_RELOAD_QTY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="30" width="150" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_AMT_CREDITED}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="30" width="90" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total :]]></text>
+			</staticText>
+		</band>
+	</summary>
 </jasperReport>

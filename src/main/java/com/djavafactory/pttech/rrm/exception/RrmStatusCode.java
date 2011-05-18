@@ -11,7 +11,8 @@ public enum RrmStatusCode {
     STS_MSGTIMEOUT("02", "Message Timeout"),
     STS_INVALIDSTATUS("03", "Unable to proceed the request due to the record is not found or the record is not in a correct status"),
     STS_INVALIDLENGTH("04", "Value exceeded allowable length {0}"),
-    STS_INVALIDNUMBERFORMAT("05", "Invalid amount format");
+    STS_INVALIDNUMBERFORMAT("05", "Invalid amount format"),
+    STS_GENERALRRMERROR("99","General RRM-specific error");
 
     private final String description;
     private final String code;

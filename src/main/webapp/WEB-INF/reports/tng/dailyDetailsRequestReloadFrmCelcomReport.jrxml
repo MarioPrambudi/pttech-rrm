@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dailyDetailsRequestReloadFrmCelcomReport" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" resourceBundle="jasperoo" whenResourceMissingType="Key">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="19"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<field name="sofRequestedDatetime" class="java.util.Date"/>
 	<field name="mfgNumber" class="java.lang.Long"/>
@@ -10,6 +10,21 @@
 	<field name="totalChargeToCustomer" class="java.math.BigDecimal"/>
 	<field name="commissionAmountDeductedBySof" class="java.math.BigDecimal"/>
 	<field name="netPaymentToTng" class="java.math.BigDecimal"/>
+	<variable name="SUM_RELOAD_AMOUNT" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{reloadAmount}]]></variableExpression>
+	</variable>
+	<variable name="SUM_FEES" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{fees}]]></variableExpression>
+	</variable>
+	<variable name="SUM_TOTAL_CHARGES" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalChargeToCustomer}]]></variableExpression>
+	</variable>
+	<variable name="SUM_COMM_AMOUNT" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{commissionAmountDeductedBySof}]]></variableExpression>
+	</variable>
+	<variable name="SUM_NET_PAYMENT" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{netPaymentToTng}]]></variableExpression>
+	</variable>
 	<pageHeader>
 		<band height="101">
 			<image scaleImage="RetainShape" hAlign="Center">
@@ -136,4 +151,40 @@
 			</textField>
 		</band>
 	</pageFooter>
+	<summary>
+		<band height="50">
+			<textField>
+				<reportElement x="640" y="30" width="110" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_NET_PAYMENT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="30" width="130" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_TOTAL_CHARGES}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="520" y="30" width="120" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_COMM_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="30" width="70" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_FEES}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="30" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_RELOAD_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="120" y="30" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total :]]></text>
+			</staticText>
+		</band>
+	</summary>
 </jasperReport>

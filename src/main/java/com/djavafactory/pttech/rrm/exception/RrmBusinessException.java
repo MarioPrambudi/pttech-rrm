@@ -10,14 +10,14 @@ import java.text.MessageFormat;
  * @author Carine
  */
 
-public class RrmBusinessException extends Exception {
+public class RrmBusinessException extends RrmException {
 
     private String errorCode = null;
     private String[] args = null;
     private static final long serialVersionUID = -3182919753766245313L;
 
     /**
-     * Instantiates a new acdd business exception.
+     * Instantiates a new RRM business exception.
      *
      * @param errorCode the error code
      * @param message   the message
@@ -82,6 +82,7 @@ public class RrmBusinessException extends Exception {
      *
      * @return the error code
      */
+    @Override
     public String getErrorCode() {
         return errorCode;
     }
@@ -91,6 +92,7 @@ public class RrmBusinessException extends Exception {
      *
      * @param errorCode the new error code
      */
+    @Override
     public void setErrorCode(String errorCode) {
         this.errorCode = errorCode;
     }

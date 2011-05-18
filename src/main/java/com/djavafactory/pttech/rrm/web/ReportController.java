@@ -145,7 +145,10 @@ public class ReportController extends BaseController {
 		      }			
 			  return "summaryRequestReloadFrmCelcomList";
 		} else {	
-	        JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(ReportGenerator.getSummaryRequestReloadFrmCelcomReport(dateMin, dateMax, -1, -1) ,false);
+			List<Report> listReport = new ArrayList<Report>();
+			listReport = ReportGenerator.getSummaryRequestReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
+			listReport.remove(listReport.size()-1);
+	        JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport ,false);
 	        modelMap.put("reportData", jrDataSource);
 	        modelMap.put("format", format);
 	        return "summaryRequestReloadFrmCelcomReport";
@@ -212,7 +215,10 @@ public class ReportController extends BaseController {
 		      }					
 	        return "summaryReloadFrmCelcomList";
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(ReportGenerator.getSummaryReloadReport(dateMin, dateMax, -1, -1),false);
+			List<Report> listReport = new ArrayList<Report>();
+			listReport = ReportGenerator.getSummaryReloadReport(dateMin, dateMax, -1, -1);
+			listReport.remove(listReport.size()-1);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport ,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "summaryReloadFrmCelcomReport";
@@ -279,7 +285,10 @@ public class ReportController extends BaseController {
 	      }		
 	      return "summaryCancellationReloadFrmCelcomList";
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(ReportGenerator.getSummaryCancellationReloadReqFrmCelcomReport(dateMin, dateMax, -1, -1),false);
+			List<Report> listReport = new ArrayList<Report>();
+			listReport = ReportGenerator.getSummaryCancellationReloadReqFrmCelcomReport(dateMin, dateMax, -1, -1);
+			listReport.remove(listReport.size()-1);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport ,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "summaryCancellationReloadFrmCelcomReport";

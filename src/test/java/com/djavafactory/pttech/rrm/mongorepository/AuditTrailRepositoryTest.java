@@ -15,8 +15,8 @@ import com.djavafactory.pttech.rrm.domain.AuditTrail;
 
 /**
  * 
- * @author Mario Tinton Prambudi
  * May 9, 2011 5:26:21 PM
+ * @author Mario Tinton Prambudi
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -13,6 +13,24 @@
 	<field name="amountRefundedToCustomer" class="java.math.BigDecimal"/>
 	<field name="dateRefundedCustomer" class="java.util.Date"/>
 	<field name="cancellationStatus" class="java.lang.String"/>
+	<variable name="SUM_RELOAD_AMOUNT" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{reloadAmount}]]></variableExpression>
+	</variable>
+	<variable name="SUM_FEES" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{fees}]]></variableExpression>
+	</variable>
+	<variable name="SUM_TOTAL_CHARGES" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalChargeToCustomer}]]></variableExpression>
+	</variable>
+	<variable name="SUM_COMM_AMOUNT" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{commissionAmountDeductedBySof}]]></variableExpression>
+	</variable>
+	<variable name="SUM_NET_PAYMENT" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{netPaymentToTng}]]></variableExpression>
+	</variable>
+	<variable name="SUM_AMT_REFUNDED" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{amountRefundedToCustomer}]]></variableExpression>
+	</variable>
 	<pageHeader>
 		<band height="101">
 			<image scaleImage="RetainShape" hAlign="Center">
@@ -31,14 +49,14 @@
 	<columnHeader>
 		<band height="50" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="50" height="40"/>
+				<reportElement x="0" y="0" width="70" height="40"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.sofRequestedDatetime}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="50" y="0" width="70" height="40"/>
+				<reportElement x="70" y="0" width="50" height="40"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
@@ -73,7 +91,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.commissionAmountDeductedBySof}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="420" y="0" width="90" height="40"/>
+				<reportElement x="430" y="0" width="70" height="40"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
@@ -94,7 +112,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.dateRefundedCustomer}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="690" y="0" width="90" height="40"/>
+				<reportElement x="690" y="0" width="60" height="40"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
@@ -105,12 +123,12 @@
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="50" height="20"/>
+				<reportElement x="0" y="0" width="70" height="20"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{sofRequestedDatetime}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="50" y="0" width="70" height="20"/>
+				<reportElement x="70" y="0" width="50" height="20"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{mfgNumber}]]></textFieldExpression>
 			</textField>
@@ -135,7 +153,7 @@
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{commissionAmountDeductedBySof}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="420" y="0" width="90" height="20"/>
+				<reportElement x="430" y="0" width="70" height="20"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{netPaymentToTng}]]></textFieldExpression>
 			</textField>
@@ -150,7 +168,7 @@
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{dateRefundedCustomer}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="690" y="0" width="90" height="20"/>
+				<reportElement x="690" y="0" width="60" height="20"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{cancellationStatus}]]></textFieldExpression>
 			</textField>
@@ -175,4 +193,45 @@
 			</textField>
 		</band>
 	</pageFooter>
+	<summary>
+		<band height="50">
+			<textField>
+				<reportElement x="240" y="30" width="90" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_TOTAL_CHARGES}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="30" width="50" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_FEES}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="30" width="70" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_NET_PAYMENT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="30" width="90" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_COMM_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="30" width="70" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_RELOAD_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="30" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="510" y="30" width="90" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_AMT_REFUNDED}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
 </jasperReport>
