@@ -10,6 +10,7 @@ import java.util.TreeMap;
 
 import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.AuditTrail;
+import com.djavafactory.pttech.rrm.domain.EventTrail;
 import com.djavafactory.pttech.rrm.mongorepository.AuditTrailRepository;
 import com.djavafactory.pttech.rrm.util.DateUtil;
 
@@ -67,7 +68,7 @@ public class AuditTrailController extends BaseController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") ObjectId id, Model uiModel) {
 		addDateTimeFormatPatterns(uiModel);
-		uiModel.addAttribute("audittrail", auditTrailRepository.findOne(id));
+		uiModel.addAttribute("audittrail", regenerateShow(auditTrailRepository.findOne(id)));
 		uiModel.addAttribute("itemId", id);
 		return "audittrails/show";
 	}
@@ -111,6 +112,23 @@ public class AuditTrailController extends BaseController {
 
 	void addDateTimeFormatPatterns(Model uiModel) {
 		uiModel.addAttribute("auditTrail_performedat_date_format", getResourceText("date_display_format"));
+	}
+	
+    /**
+	 * display presentable source info on show details.
+	 * @param auditTrail AuditTrail
+	 * @return auditTrail
+	 */
+	public AuditTrail regenerateShow(AuditTrail auditTrail) {
+		String action = auditTrail.getAction();
+		if (action != null && !action.isEmpty()) {
+			try {		
+				 auditTrail.setAction(getResourceText(resourcePrefix + action));
+			} catch (Exception x) {
+				 auditTrail.setAction(action);
+			}	
+		}
+		return auditTrail;
 	}
 
 }

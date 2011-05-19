@@ -60,5 +60,9 @@
             <menu:item id="i_audittrail_new" messageCode="global_menu_new" render="false" url="/audittrails?form" z="user-managed"/>
         <menu:item id="i_audittrail_list" messageCode="global_menu_list" url="/audittrails?page=1&amp;size=${empty param.size ? 10 : param.size}" z="hPzyv2K1hsHiNJmyc7AI0Fs93X4="/>
         </menu:category>
+    <menu:category id="c_eventtrail" z="uq5SaKKKm2/w2Am+uaCbMaA9j5U=">
+            <menu:item id="i_eventtrail_new" messageCode="global_menu_new" render="false" url="/eventtrails?form" z="user-managed"/>
+        <menu:item id="i_eventtrail_list" messageCode="global_menu_list" url="/eventtrails?page=1&amp;size=${empty param.size ? 10 : param.size}" z="O2klNvO4z1KnyMXsSkJj7FDUlp0="/>
+        </menu:category>
     </menu:menu>
 </div>
