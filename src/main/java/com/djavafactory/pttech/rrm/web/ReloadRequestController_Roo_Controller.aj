@@ -110,13 +110,6 @@ privileged aspect ReloadRequestController_Roo_Controller {
         return ReloadRequest.findAllReloadRequests();
     }
     
-    void ReloadRequestController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("reloadRequest_minrequestedtime_date_format", org.joda.time.format.DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("reloadRequest_requestedtime_date_format", org.joda.time.format.DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("reloadRequest_modifiedtime_date_format", org.joda.time.format.DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("reloadRequest_maxrequestedtime_date_format", org.joda.time.format.DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
-    }
-    
     String ReloadRequestController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
         String enc = httpServletRequest.getCharacterEncoding();
         if (enc == null) {
