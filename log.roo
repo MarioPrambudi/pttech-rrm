@@ -242,3 +242,33 @@ field string --fieldName tngKey
 // Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-16 09:27:00
 // Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-16 14:58:39
 // Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-18 10:40:23
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-18 10:49:35
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-18 11:01:50
+// [failed] entity --class ~.domain.EventTrail
+controller all --package ~.web
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-18 11:13:17
+// [failed] entity --class ~.domain.EventTrail
+controller all --package ~.web
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-18 11:18:12
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-18 11:18:22
+controller scaffold --class ~.web.EventTrailController --entity EventTrail
+controller scaffold --class ~.web.EventTrailController --entity EventTrail
+controller scaffold --class ~.web.EventTrailController --entity EventTrail
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-18 11:27:05
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-18 11:27:16
+controller scaffold --class ~.web.EventTrailController --entity EventTrail
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-18 11:29:19
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-18 11:29:29
+controller scaffold --class ~.web.EventTrailController --entity EventTrail
+controller scaffold --class ~.web.EventTrailController
+controller scaffold --class ~.EventTrailController
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-18 11:46:53
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-18 11:47:01
+// [failed] entity --class ~.domain.EventTrail
+controller scaffold --class ~.web.EventTrailController
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-18 11:52:53
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-18 11:55:14
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-18 11:55:22
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-18 12:00:47
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-18 19:42:48
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-19 08:51:12

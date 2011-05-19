@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:find finderName="ByParam" id="ff_com_djavafactory_pttech_rrm_domain_EventTrail" path="/eventtrails/findEventTrailsByParam?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed">
+		<table:select disableFormBinding="true" field="source" id="f_com_djavafactory_pttech_rrm_domain_EventTrail_source" itemValue="id" items="${source}" path="/source" z="user-managed"/>
+		<table:input disableFormBinding="true" field="code" id="f_com_djavafactory_pttech_rrm_domain_EventTrail_Code" z="user-managed"/>
+		<table:input disableFormBinding="true" field="message" id="f_com_djavafactory_pttech_rrm_domain_EventTrail_Message" z="user-managed"/>
+		<table:datetime dateTimePattern="dd/MM/yyyy" disableFormBinding="true" field="dateFrom" id="f_com_djavafactory_pttech_rrm_domain_EventTrail_dateFrom" z="user-managed"/>
+		<table:datetime dateTimePattern="dd/MM/yyyy" disableFormBinding="true" field="dateTo" id="f_com_djavafactory_pttech_rrm_domain_EventTrail_dateTo" z="user-managed"/>
+	</page:find>
+    <page:list id="pl_com_djavafactory_pttech_rrm_domain_EventTrail" items="${eventtrails}" z="6bm9zZDgz+w2ohaujzU+8mRHwpk=">
+        <table:table data="${eventtrails}" id="l_com_djavafactory_pttech_rrm_domain_EventTrail" create="false" update="false" delete="false" path="/eventtrails" typeIdFieldName="id" z="HprwFs2Rd2G51fw/z3Z3roskqoo=">
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_EventTrail_user" property="user" z="hf1a0B9eYIpJIFYTTkPJBGetRNQ="/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_EventTrail_date" property="date" z="q3Hp8SZXORQJ2SZCiLViV1B9K/Y="/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_EventTrail_source" property="source" z="rNkJRQLrU3rg2BPPceeqq8YpK5s="/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_EventTrail_message" render="false" property="message" z="21GKnX13hnoKL8kOdAzqP0y3nVI="/>          
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_EventTrail_id" render="false" property="id" z="+Ls7GtQpEKOzoRkuRE90e5ismu0="/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_EventTrail_code" property="code" z="5xV7sSmOphtJ7QVRnsUEOlvRwuQ="/>
+        </table:table>
+    </page:list>
+</div>

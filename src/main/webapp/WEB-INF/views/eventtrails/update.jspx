@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_djavafactory_pttech_rrm_domain_EventTrail" idField="_id" modelAttribute="eventTrail" path="/eventtrails" versionField="Version" z="Gdul4BLcQOwPC6IsTtCN1TAtmHc=">
+        <field:input field="user" id="c_com_djavafactory_pttech_rrm_domain_EventTrail_user" z="TaRH9uZrgM00PTwKSvTTLWiEUS0="/>
+        <field:input field="source" id="c_com_djavafactory_pttech_rrm_domain_EventTrail_source" z="q4sTZNHgjq7mjrGpxoa6RnROFTY="/>
+        <field:input field="message" id="c_com_djavafactory_pttech_rrm_domain_EventTrail_message" z="4xrRmQVrzaR3MaZnYRa0mfDUej4="/>
+        <field:input field="date" id="c_com_djavafactory_pttech_rrm_domain_EventTrail_date" z="+KAf9h1JcJc5G89E0LTtkl+kfG0="/>
+        <field:input field="id" id="c_com_djavafactory_pttech_rrm_domain_EventTrail_id" z="nrWhD5PP+I+honkCBKy0nB90COY="/>
+        <field:input field="code" id="c_com_djavafactory_pttech_rrm_domain_EventTrail_code" z="L2T2okhs/tcYZN3XDgJOX3/oIfE="/>
+        <field:input field="stackTrace" id="c_com_djavafactory_pttech_rrm_domain_EventTrail_stackTrace" z="JQwuAEkg82WOPdkWZrTYf1z2y+8="/>
+    </form:update>
+</div>
