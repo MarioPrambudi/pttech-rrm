@@ -7,7 +7,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.document.mongodb.index.Indexed;
 import org.springframework.data.document.mongodb.mapping.Document;
-import org.springframework.roo.addon.entity.RooEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 
@@ -28,6 +28,7 @@ public class EventTrail implements Serializable {
 	private static final long serialVersionUID = -2326588854852436309L;
 	@Id
 	private ObjectId id;
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private Date date;
 	@Indexed
 	private String code;

@@ -6,7 +6,7 @@
         <field:display field="id" id="s_com_djavafactory_pttech_rrm_domain_EventTrail_id" object="${eventtrail}" z="UGYGofM2biaVE7Qil8CnO4EtbZQ="/>       
         <field:display field="source" id="s_com_djavafactory_pttech_rrm_domain_EventTrail_source" object="${eventtrail}" z="9AYBY1YIoEIc/uTc9LAMAG3THdw="/>
         <field:display field="message" id="s_com_djavafactory_pttech_rrm_domain_EventTrail_message" object="${eventtrail}" z="GAREjuD/pyBW2YLcXu0wS/B6t+g="/>
-        <field:display date="true" dateTimePattern="${eventTrail_date_date_format}" field="date" id="s_com_djavafactory_pttech_rrm_domain_EventTrail_date" object="${eventtrail}" z="htVVU/rCQqn8Is5HD/L4mtYg1jQ="/>
+        <field:display date="true" dateTimePattern="dd/MM/yyyy HH:mm:ss" field="date" id="s_com_djavafactory_pttech_rrm_domain_EventTrail_date" object="${eventtrail}" z="htVVU/rCQqn8Is5HD/L4mtYg1jQ="/>
         <field:display field="user" id="s_com_djavafactory_pttech_rrm_domain_EventTrail_user" object="${eventtrail}" z="Df8p1RKVw+KLBvyMX4QhhOS4eaw="/>
         <field:display field="code" id="s_com_djavafactory_pttech_rrm_domain_EventTrail_code" object="${eventtrail}" z="soHlAHVuyF32QQzmHBSTUEz4TpY="/>
         <field:display field="stackTrace" id="s_com_djavafactory_pttech_rrm_domain_EventTrail_stackTrace" object="${eventtrail}" z="cxVVn8jmKqwdZuW25pxdd6cUXdQ="/>

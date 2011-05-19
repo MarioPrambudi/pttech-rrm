@@ -11,12 +11,12 @@
 	</page:find>
     <page:list id="pl_com_djavafactory_pttech_rrm_domain_EventTrail" items="${eventtrails}" z="6bm9zZDgz+w2ohaujzU+8mRHwpk=">
         <table:table data="${eventtrails}" id="l_com_djavafactory_pttech_rrm_domain_EventTrail" create="false" update="false" delete="false" path="/eventtrails" typeIdFieldName="id" z="HprwFs2Rd2G51fw/z3Z3roskqoo=">
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_EventTrail_user" property="user" z="hf1a0B9eYIpJIFYTTkPJBGetRNQ="/>
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_EventTrail_date" property="date" z="q3Hp8SZXORQJ2SZCiLViV1B9K/Y="/>
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_EventTrail_source" property="source" z="rNkJRQLrU3rg2BPPceeqq8YpK5s="/>
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_EventTrail_message" render="false" property="message" z="21GKnX13hnoKL8kOdAzqP0y3nVI="/>          
             <table:column id="c_com_djavafactory_pttech_rrm_domain_EventTrail_id" render="false" property="id" z="+Ls7GtQpEKOzoRkuRE90e5ismu0="/>
             <table:column id="c_com_djavafactory_pttech_rrm_domain_EventTrail_code" property="code" z="5xV7sSmOphtJ7QVRnsUEOlvRwuQ="/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_EventTrail_message" property="message" z="21GKnX13hnoKL8kOdAzqP0y3nVI="/>          
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_EventTrail_source" property="source" z="rNkJRQLrU3rg2BPPceeqq8YpK5s="/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_EventTrail_date" property="date" z="q3Hp8SZXORQJ2SZCiLViV1B9K/Y="/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_EventTrail_user" property="user" z="hf1a0B9eYIpJIFYTTkPJBGetRNQ="/>
         </table:table>
     </page:list>
 </div>

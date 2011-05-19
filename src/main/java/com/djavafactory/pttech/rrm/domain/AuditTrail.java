@@ -6,6 +6,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.document.mongodb.index.Indexed;
 import org.springframework.data.document.mongodb.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 
@@ -15,7 +16,7 @@ import org.springframework.roo.addon.tostring.RooToString;
  * @author Mario Tinton Prambudi
  * 
  */
-@Document(collection="AuditTrail")
+@Document(collection = "AuditTrail")
 @RooJavaBean
 @RooToString
 public class AuditTrail implements Serializable {
@@ -29,6 +30,7 @@ public class AuditTrail implements Serializable {
 	private String entity;
 	private String action;
 	@Indexed
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private Date performedAt;
 	private Object performedBy;
 	private String description;
@@ -94,7 +96,5 @@ public class AuditTrail implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
 
 }

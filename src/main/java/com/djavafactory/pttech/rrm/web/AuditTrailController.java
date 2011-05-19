@@ -10,7 +10,6 @@ import java.util.TreeMap;
 
 import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.AuditTrail;
-import com.djavafactory.pttech.rrm.domain.EventTrail;
 import com.djavafactory.pttech.rrm.mongorepository.AuditTrailRepository;
 import com.djavafactory.pttech.rrm.util.DateUtil;
 
