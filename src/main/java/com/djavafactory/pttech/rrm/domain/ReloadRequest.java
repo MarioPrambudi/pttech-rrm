@@ -45,13 +45,14 @@ public class ReloadRequest {
 	private String transCode;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	@DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
 	private Date requestedTime;
 
 	private String tngKey;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	@DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
+
 	private Date modifiedTime;
 
 	@Transient

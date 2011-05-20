@@ -113,7 +113,6 @@ public class ReportController extends BaseController {
 			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
-
 			return "dailyDetailsRequestReloadFrmCelcomReport";
 		}
 		
@@ -177,7 +176,7 @@ public class ReportController extends BaseController {
 		            uiModel.addAttribute("params", "&dateMin=" + dateMin + "&dateMax=" + dateMax);			        
 			  } else {
 		            uiModel.addAttribute("reports", ReportGenerator.getDailyDetailedReloadFrmCelcomReport(dateMin, dateMax, -1, -1));
-		      }					
+		      }	
 	        return "dailyDetailedReloadFrmCelcomList";
 		} else {
 			List<Report> listReport = new ArrayList<Report>();

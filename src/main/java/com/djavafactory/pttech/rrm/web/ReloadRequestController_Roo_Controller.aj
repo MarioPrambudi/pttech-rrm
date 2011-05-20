@@ -12,7 +12,6 @@ import java.util.Collection;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,14 +42,6 @@ privileged aspect ReloadRequestController_Roo_Controller {
         uiModel.addAttribute("reloadRequest", new ReloadRequest());
         addDateTimeFormatPatterns(uiModel);
         return "reloadrequests/create";
-    }
-    
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String ReloadRequestController.show(@PathVariable("id") Long id, Model uiModel) {
-        addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("reloadrequest", ReloadRequest.findReloadRequest(id));
-        uiModel.addAttribute("itemId", id);
-        return "reloadrequests/show";
     }
     
     @RequestMapping(method = RequestMethod.PUT)
@@ -88,7 +79,7 @@ privileged aspect ReloadRequestController_Roo_Controller {
     }
     
     @RequestMapping(params = "find=ByRequestedTimeBetween", method = RequestMethod.GET)
-    public String ReloadRequestController.findReloadRequestsByRequestedTimeBetween(@RequestParam("minRequestedTime") @DateTimeFormat(style = "S-") Date minRequestedTime, @RequestParam("maxRequestedTime") @DateTimeFormat(style = "S-") Date maxRequestedTime, Model uiModel) {
+    public String ReloadRequestController.findReloadRequestsByRequestedTimeBetween(@RequestParam("minRequestedTime") @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss") Date minRequestedTime, @RequestParam("maxRequestedTime") @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss") Date maxRequestedTime, Model uiModel) {
         uiModel.addAttribute("reloadrequests", ReloadRequest.findReloadRequestsByRequestedTimeBetween(minRequestedTime, maxRequestedTime).getResultList());
         addDateTimeFormatPatterns(uiModel);
         return "reloadrequests/list";

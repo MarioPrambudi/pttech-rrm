@@ -69,6 +69,7 @@ public class AuditTrailController extends BaseController {
 		addDateTimeFormatPatterns(uiModel);
 		uiModel.addAttribute("audittrail", regenerateShow(auditTrailRepository.findOne(id)));
 		uiModel.addAttribute("itemId", id);
+		addDateTimeFormatPatterns(uiModel);
 		return "audittrails/show";
 	}
 
@@ -110,7 +111,7 @@ public class AuditTrailController extends BaseController {
 	}
 
 	void addDateTimeFormatPatterns(Model uiModel) {
-		uiModel.addAttribute("auditTrail_performedat_date_format", getResourceText("date_display_format"));
+		uiModel.addAttribute("auditTrail_performedat_date_format", getResourceText("date_time_display_format"));
 	}
 	
     /**

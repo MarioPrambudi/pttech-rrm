@@ -57,12 +57,12 @@ public class Acquirer {
     private String modifiedBy;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "S-")
+    @DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
     @Column(updatable = false, insertable = true)
     private Date createdTime;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "S-")
+     @DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
     private Date modifiedTime;
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "acquirer")
