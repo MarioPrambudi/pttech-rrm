@@ -109,13 +109,6 @@ privileged aspect ReloadRequestController_Roo_Controller {
         return ReloadRequest.findAllReloadRequests();
     }
     
-    void ReloadRequestController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("reloadRequest_minrequestedtime_date_format", "dd/MM/yyyy HH:mm:ss");
-        uiModel.addAttribute("reloadRequest_requestedtime_date_format", "dd/MM/yyyy HH:mm:ss");
-        uiModel.addAttribute("reloadRequest_modifiedtime_date_format", "dd/MM/yyyy HH:mm:ss");
-        uiModel.addAttribute("reloadRequest_maxrequestedtime_date_format", "dd/MM/yyyy HH:mm:ss");
-    }
-    
     String ReloadRequestController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
         String enc = httpServletRequest.getCharacterEncoding();
         if (enc == null) {

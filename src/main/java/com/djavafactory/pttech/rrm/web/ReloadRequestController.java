@@ -112,4 +112,14 @@ public class ReloadRequestController extends BaseController {
 		}
 		return reloadRequestList;
 	}
+	
+    void addDateTimeFormatPatterns(Model uiModel) {
+    	String dateTimeFormat = getResourceText("date_time_display_format");
+        uiModel.addAttribute("reloadRequest_minrequestedtime_date_format", dateTimeFormat);
+        uiModel.addAttribute("reloadRequest_requestedtime_date_format", dateTimeFormat);
+        uiModel.addAttribute("reloadRequest_modifiedtime_date_format", dateTimeFormat);
+        uiModel.addAttribute("reloadRequest_maxrequestedtime_date_format", dateTimeFormat);
+    }
+    
+
 }
