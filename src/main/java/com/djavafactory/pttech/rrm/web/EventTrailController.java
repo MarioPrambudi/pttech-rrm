@@ -69,11 +69,12 @@ public class EventTrailController extends BaseController{
 		addDateTimeFormatPatterns(uiModel);
 		uiModel.addAttribute("eventtrail", regenerateShow(eventTrailRepository.findOne(id)));
 		uiModel.addAttribute("itemId", id);
+		addDateTimeFormatPatterns(uiModel);
 		return "eventtrails/show";
 	}
 	
 	void addDateTimeFormatPatterns(Model uiModel) {
-		uiModel.addAttribute("eventTrail_date_date_format", getResourceText("date_display_format"));
+		uiModel.addAttribute("eventTrail_date_date_format", getResourceText("date_time_display_format"));
 	}
 	
 	@ModelAttribute("source")

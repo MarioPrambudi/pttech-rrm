@@ -27,8 +27,12 @@ import org.springframework.format.annotation.NumberFormat.Style;
 public class Report {
 
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "S-")
+    @DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
     private Date sofRequestedDatetime;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(style = "S-")
+    private Date sofRequestedDate;
 
     private Long id;
 
@@ -66,6 +70,10 @@ public class Report {
     private BigDecimal totalFees;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
+    private Date reloadDateTime;
+    
+    @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
     private Date reloadDate;
 
@@ -79,12 +87,16 @@ public class Report {
     @DateTimeFormat(style = "S-")
     private Date dateRefundedCustomer;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
+    private Date dateTimeRefundedCustomer;
+    
     private String cancellationStatus;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
     private Date dateCancelRequest;
-
+    
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
     private Date requestedTime;
@@ -100,6 +112,10 @@ public class Report {
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
     private Date transactionDate;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
+    private Date transactionDateTime;
 
     @NumberFormat(pattern="#,##0.00")
     private BigDecimal grossPaymentToTngRm;
@@ -114,6 +130,10 @@ public class Report {
     @DateTimeFormat(style = "S-")
     private Date dateCreditedToTngAccount;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
+    private Date dateTimeCreditedToTngAccount;
+    
     @NumberFormat(pattern="#,##0.00")
     private BigDecimal totalPaymentToTngRm;
 
@@ -131,5 +151,45 @@ public class Report {
     @Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(style = "S-")
 	private Date modifiedDate;
+    
+    private Long cmmpTrxId;
+    
+    private Long tngTrxId;
+    
+    private Long aircashAccNo;
+    
+    private Long mobileNo;
+    
+    private Long tngMfgNo;
+    
+    @NumberFormat(pattern="#,##0.00")
+    private BigDecimal grossAmount;
+    
+    @NumberFormat(pattern="#,##0.00")
+    private BigDecimal tngFee;
+    
+    @NumberFormat(pattern="#,##0.00")
+    private BigDecimal printisFee;
+
+    @NumberFormat(pattern="#,##0.00")
+    private BigDecimal celcomMobileFee;
+    
+    @NumberFormat(pattern="#,##0.00")
+    private BigDecimal cmmFee;
+    
+    @NumberFormat(pattern="#,##0.00")
+    private BigDecimal amountDueTng;
+    
+    @NumberFormat(pattern="#,##0.00")
+    private BigDecimal amountDuePrintis;
+    
+    @NumberFormat(pattern="#,##0.00")
+    private BigDecimal amountDueCelcomMobile;
+    
+    @NumberFormat(pattern="#,##0.00")
+    private BigDecimal amountDueCmm;
+    
+    @NumberFormat(pattern="#,##0.00")
+    private BigDecimal totalGrossAmount;
 
 }

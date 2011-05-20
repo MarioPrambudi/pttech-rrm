@@ -19,6 +19,14 @@ privileged aspect Report_Roo_JavaBean {
         this.sofRequestedDatetime = sofRequestedDatetime;
     }
     
+    public Date Report.getSofRequestedDate() {
+        return this.sofRequestedDate;
+    }
+    
+    public void Report.setSofRequestedDate(Date sofRequestedDate) {
+        this.sofRequestedDate = sofRequestedDate;
+    }
+    
     public Long Report.getId() {
         return this.id;
     }
@@ -131,6 +139,14 @@ privileged aspect Report_Roo_JavaBean {
         this.totalFees = totalFees;
     }
     
+    public Date Report.getReloadDateTime() {
+        return this.reloadDateTime;
+    }
+    
+    public void Report.setReloadDateTime(Date reloadDateTime) {
+        this.reloadDateTime = reloadDateTime;
+    }
+    
     public Date Report.getReloadDate() {
         return this.reloadDate;
     }
@@ -161,6 +177,14 @@ privileged aspect Report_Roo_JavaBean {
     
     public void Report.setDateRefundedCustomer(Date dateRefundedCustomer) {
         this.dateRefundedCustomer = dateRefundedCustomer;
+    }
+    
+    public Date Report.getDateTimeRefundedCustomer() {
+        return this.dateTimeRefundedCustomer;
+    }
+    
+    public void Report.setDateTimeRefundedCustomer(Date dateTimeRefundedCustomer) {
+        this.dateTimeRefundedCustomer = dateTimeRefundedCustomer;
     }
     
     public String Report.getCancellationStatus() {
@@ -219,6 +243,14 @@ privileged aspect Report_Roo_JavaBean {
         this.transactionDate = transactionDate;
     }
     
+    public Date Report.getTransactionDateTime() {
+        return this.transactionDateTime;
+    }
+    
+    public void Report.setTransactionDateTime(Date transactionDateTime) {
+        this.transactionDateTime = transactionDateTime;
+    }
+    
     public BigDecimal Report.getGrossPaymentToTngRm() {
         return this.grossPaymentToTngRm;
     }
@@ -249,6 +281,14 @@ privileged aspect Report_Roo_JavaBean {
     
     public void Report.setDateCreditedToTngAccount(Date dateCreditedToTngAccount) {
         this.dateCreditedToTngAccount = dateCreditedToTngAccount;
+    }
+    
+    public Date Report.getDateTimeCreditedToTngAccount() {
+        return this.dateTimeCreditedToTngAccount;
+    }
+    
+    public void Report.setDateTimeCreditedToTngAccount(Date dateTimeCreditedToTngAccount) {
+        this.dateTimeCreditedToTngAccount = dateTimeCreditedToTngAccount;
     }
     
     public BigDecimal Report.getTotalPaymentToTngRm() {
@@ -297,6 +337,126 @@ privileged aspect Report_Roo_JavaBean {
     
     public void Report.setModifiedDate(Date modifiedDate) {
         this.modifiedDate = modifiedDate;
+    }
+    
+    public Long Report.getCmmpTrxId() {
+        return this.cmmpTrxId;
+    }
+    
+    public void Report.setCmmpTrxId(Long cmmpTrxId) {
+        this.cmmpTrxId = cmmpTrxId;
+    }
+    
+    public Long Report.getTngTrxId() {
+        return this.tngTrxId;
+    }
+    
+    public void Report.setTngTrxId(Long tngTrxId) {
+        this.tngTrxId = tngTrxId;
+    }
+    
+    public Long Report.getAircashAccNo() {
+        return this.aircashAccNo;
+    }
+    
+    public void Report.setAircashAccNo(Long aircashAccNo) {
+        this.aircashAccNo = aircashAccNo;
+    }
+    
+    public Long Report.getMobileNo() {
+        return this.mobileNo;
+    }
+    
+    public void Report.setMobileNo(Long mobileNo) {
+        this.mobileNo = mobileNo;
+    }
+    
+    public Long Report.getTngMfgNo() {
+        return this.tngMfgNo;
+    }
+    
+    public void Report.setTngMfgNo(Long tngMfgNo) {
+        this.tngMfgNo = tngMfgNo;
+    }
+    
+    public BigDecimal Report.getGrossAmount() {
+        return this.grossAmount;
+    }
+    
+    public void Report.setGrossAmount(BigDecimal grossAmount) {
+        this.grossAmount = grossAmount;
+    }
+    
+    public BigDecimal Report.getTngFee() {
+        return this.tngFee;
+    }
+    
+    public void Report.setTngFee(BigDecimal tngFee) {
+        this.tngFee = tngFee;
+    }
+    
+    public BigDecimal Report.getPrintisFee() {
+        return this.printisFee;
+    }
+    
+    public void Report.setPrintisFee(BigDecimal printisFee) {
+        this.printisFee = printisFee;
+    }
+    
+    public BigDecimal Report.getCelcomMobileFee() {
+        return this.celcomMobileFee;
+    }
+    
+    public void Report.setCelcomMobileFee(BigDecimal celcomMobileFee) {
+        this.celcomMobileFee = celcomMobileFee;
+    }
+    
+    public BigDecimal Report.getCmmFee() {
+        return this.cmmFee;
+    }
+    
+    public void Report.setCmmFee(BigDecimal cmmFee) {
+        this.cmmFee = cmmFee;
+    }
+    
+    public BigDecimal Report.getAmountDueTng() {
+        return this.amountDueTng;
+    }
+    
+    public void Report.setAmountDueTng(BigDecimal amountDueTng) {
+        this.amountDueTng = amountDueTng;
+    }
+    
+    public BigDecimal Report.getAmountDuePrintis() {
+        return this.amountDuePrintis;
+    }
+    
+    public void Report.setAmountDuePrintis(BigDecimal amountDuePrintis) {
+        this.amountDuePrintis = amountDuePrintis;
+    }
+    
+    public BigDecimal Report.getAmountDueCelcomMobile() {
+        return this.amountDueCelcomMobile;
+    }
+    
+    public void Report.setAmountDueCelcomMobile(BigDecimal amountDueCelcomMobile) {
+        this.amountDueCelcomMobile = amountDueCelcomMobile;
+    }
+    
+    public BigDecimal Report.getAmountDueCmm() {
+        return this.amountDueCmm;
+    }
+    
+    public void Report.setAmountDueCmm(BigDecimal amountDueCmm) {
+        this.amountDueCmm = amountDueCmm;
+    }
+    
+    public BigDecimal Report.getTotalGrossAmount() {
+        return this.totalGrossAmount;
+    }
+    
+    public void Report.setTotalGrossAmount(BigDecimal totalGrossAmount) {
+        this.totalGrossAmount = totalGrossAmount;
     }
     
 }

@@ -433,17 +433,18 @@ public class ReportGenerator {
             }
         }
         
-        //the add the sum to the end of the report list
-        Report reportSum = new Report();
-        reportSum.setFees(totalFee);
-        reportSum.setReloadAmount(totalAmountRequest);
-        reportSum.setTotalChargeToCustomer(sumTotalChargeCust);
-        reportSum.setCommissionAmountDeductedBySof(totalCommSofDeduct);
-        reportSum.setNetPaymentToTng(totalNetPaymentTng);
-        listCompleteReport.add(reportSum);
-
-        return listCompleteReport;
-
+        if(!listCompleteReport.isEmpty())
+        {
+        	 //the add the sum to the end of the report list
+            Report reportSum = new Report();
+            reportSum.setFees(totalFee);
+            reportSum.setReloadAmount(totalAmountRequest);
+            reportSum.setTotalChargeToCustomer(sumTotalChargeCust);
+            reportSum.setCommissionAmountDeductedBySof(totalCommSofDeduct);
+            reportSum.setNetPaymentToTng(totalNetPaymentTng);
+            listCompleteReport.add(reportSum);       	
+        }
+      return listCompleteReport;
     }
     
     
@@ -478,7 +479,7 @@ public class ReportGenerator {
 
             	Report report = (Report)it.next();
             	//manually set value into report fields
-            	report.setReloadDate(report.getRequestedTime());
+            	report.setReloadDateTime(report.getRequestedTime());
             	report.setFees(getReportFee());
             	report.setTotalChargeToCustomer(getTotalChargeToCustomer(report.getReloadAmount()));
             	report.setCommissionAmountDeductedBySof(getCommAmountDeductedBySOF());
@@ -494,14 +495,17 @@ public class ReportGenerator {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
         }
-        //the add the sum to the end of the report list
-        Report reportSum = new Report();
-        reportSum.setFees(totalFee);
-        reportSum.setReloadAmount(totalAmountRequest);
-        reportSum.setTotalChargeToCustomer(sumTotalChargeCust);
-        reportSum.setCommissionAmountDeductedBySof(totalCommSofDeduct);
-        reportSum.setNetPaymentToTng(totalNetPaymentTng);
-        listCompleteReport.add(reportSum);
+        if(!listCompleteReport.isEmpty())
+        {
+	        //the add the sum to the end of the report list
+	        Report reportSum = new Report();
+	        reportSum.setFees(totalFee);
+	        reportSum.setReloadAmount(totalAmountRequest);
+	        reportSum.setTotalChargeToCustomer(sumTotalChargeCust);
+	        reportSum.setCommissionAmountDeductedBySof(totalCommSofDeduct);
+	        reportSum.setNetPaymentToTng(totalNetPaymentTng);
+	        listCompleteReport.add(reportSum);
+        }
         return listCompleteReport;
     }
     
@@ -542,7 +546,7 @@ public class ReportGenerator {
             	report.setCommissionAmountDeductedBySof(getCommAmountDeductedBySOF());
             	report.setNetPaymentToTng(getNetPaymentToTnG(report.getTotalChargeToCustomer(), report.getCommissionAmountDeductedBySof()));
             	report.setAmountRefundedToCustomer(report.getReloadAmount());
-            	report.setDateRefundedCustomer(report.getModifiedDate());
+            	report.setDateTimeRefundedCustomer(report.getModifiedDate());
             	if(Constants.RELOAD_REQUEST_FAILED.equals(report.getStatus()))
         		{
             		report.setCancellationStatus(Constants.REPORT_RELOAD_REQUEST_FAILED);
@@ -566,14 +570,17 @@ public class ReportGenerator {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
         }
-        //the add the sum to the end of the report list
-        Report reportSum = new Report();
-        reportSum.setFees(totalFee);
-        reportSum.setAmountRefundedToCustomer(totalRefundCust);
-        reportSum.setTotalChargeToCustomer(sumTotalChargeCust);
-        reportSum.setCommissionAmountDeductedBySof(totalCommSofDeduct);
-        reportSum.setNetPaymentToTng(totalNetPaymentTng);
-        listCompleteReport.add(reportSum);
+        if(!listCompleteReport.isEmpty())
+        {
+	        //the add the sum to the end of the report list
+	        Report reportSum = new Report();
+	        reportSum.setFees(totalFee);
+	        reportSum.setAmountRefundedToCustomer(totalRefundCust);
+	        reportSum.setTotalChargeToCustomer(sumTotalChargeCust);
+	        reportSum.setCommissionAmountDeductedBySof(totalCommSofDeduct);
+	        reportSum.setNetPaymentToTng(totalNetPaymentTng);
+	        listCompleteReport.add(reportSum);
+        }
         return listCompleteReport;
     }
     
@@ -602,13 +609,13 @@ public class ReportGenerator {
 		{        
           try {
           	Report report = (Report)it.next();
-          	// TO DO 
-          	report.setTransactionDate(report.getRequestedTime());
+          	//TODO:
+          	report.setTransactionDateTime(report.getRequestedTime());
           	report.setTotalReloadQty(listReport.size());
           	report.setGrossPaymentToTngRm(report.getReloadAmount());
           	report.setTotalCancellationRm(report.getReloadAmount());
           	report.setAmountCreditedToTngRm(report.getReloadAmount());
-          	report.setDateCreditedToTngAccount(report.getRequestedTime());
+          	report.setDateTimeCreditedToTngAccount(report.getRequestedTime());
           	listCompleteReport.add(report);
           } catch (Exception e) {
               e.printStackTrace();  
@@ -657,7 +664,7 @@ public class ReportGenerator {
                 while(it.hasNext()) { 
                     try {
                       reportSummary = (Report)it.next();
-                      reportSummary.setSofRequestedDatetime(reportSummary.getRequestedTime());
+                      reportSummary.setSofRequestedDate(reportSummary.getRequestedTime());
                       reportSummary.setTotalAmountRequestRm(reportSummary.getReloadAmount());
                       reportSummary.setTotalFees(getTotalFee(reportSummary.getTotalReloadQty()));
                       reportSummary.setSumTotalChargeToCustomer(getSumTotalChargeToCustomer(reportSummary.getTotalAmountRequestRm(), reportSummary.getTotalFees()));
@@ -686,16 +693,18 @@ public class ReportGenerator {
         	sumReloadQty = sumReloadQty + reportSummary.getTotalReloadQty();
     	}
 
-        //the add the sum to the end of the report list
-        Report reportSum = new Report();
-        reportSum.setTotalFees(sumFee);
-        reportSum.setTotalAmountRequestRm(sumAmountRequest);
-        reportSum.setSumTotalChargeToCustomer(sumTotalChargeCust);
-        reportSum.setSumCommissionAmountDeductedBySof(sumCommSofDeduct);
-        reportSum.setSumNetPaymentToTng(sumNetPaymentTng);
-        reportSum.setTotalReloadQty(sumReloadQty);
-        listReportPage.add(reportSum);
-
+    	 if(!listReportPage.isEmpty())
+    	 {
+    		//the add the sum to the end of the report list
+	        Report reportSum = new Report();
+	        reportSum.setTotalFees(sumFee);
+	        reportSum.setTotalAmountRequestRm(sumAmountRequest);
+	        reportSum.setSumTotalChargeToCustomer(sumTotalChargeCust);
+	        reportSum.setSumCommissionAmountDeductedBySof(sumCommSofDeduct);
+	        reportSum.setSumNetPaymentToTng(sumNetPaymentTng);
+	        reportSum.setTotalReloadQty(sumReloadQty);
+	        listReportPage.add(reportSum);
+    	 }
     	return listReportPage;
     }
 
@@ -764,14 +773,17 @@ public class ReportGenerator {
         	sumNetPaymentTng = sumNetPaymentTng.add(reportSummary.getSumNetPaymentToTng());   
     	}
 
-        //the add the sum to the end of the report list
-        Report reportSum = new Report();
-        reportSum.setTotalFees(sumFee);
-        reportSum.setTotalReloadAmountRm(sumReloadAmount);
-        reportSum.setSumTotalChargeToCustomer(sumTotalChargeCust);
-        reportSum.setSumCommissionAmountDeductedBySof(sumCommSofDeduct);
-        reportSum.setSumNetPaymentToTng(sumNetPaymentTng);
-        listReportPage.add(reportSum);
+    	if(!listReportPage.isEmpty())
+	   	 {
+	        //the add the sum to the end of the report list
+	        Report reportSum = new Report();
+	        reportSum.setTotalFees(sumFee);
+	        reportSum.setTotalReloadAmountRm(sumReloadAmount);
+	        reportSum.setSumTotalChargeToCustomer(sumTotalChargeCust);
+	        reportSum.setSumCommissionAmountDeductedBySof(sumCommSofDeduct);
+	        reportSum.setSumNetPaymentToTng(sumNetPaymentTng);
+	        listReportPage.add(reportSum);
+	   	 }
  
     	return listReportPage;
     }
@@ -842,15 +854,19 @@ public class ReportGenerator {
         	sumCommSofDeduct = sumCommSofDeduct.add(reportSummary.getSumCommissionAmountDeductedBySof());
         	sumCancelQty = sumCancelQty + reportSummary.getTotalCancellationQty();
     	}
-    	//the add the sum to the end of the report list
-        Report reportSum = new Report();
-        reportSum.setTotalFees(sumFee);
-        reportSum.setTotalRefundToCustomerRm(sumRefundToCust);
-        reportSum.setTotalAmountCancelledRm(sumAmountCancel);
-        reportSum.setSumCommissionAmountDeductedBySof(sumCommSofDeduct);
-        reportSum.setTotalCancellationQty(sumCancelQty);
-        listReportPage.add(reportSum);
+    	if(!listReportPage.isEmpty())
+	   	 {
+	    	//the add the sum to the end of the report list
+	        Report reportSum = new Report();
+	        reportSum.setTotalFees(sumFee);
+	        reportSum.setTotalRefundToCustomerRm(sumRefundToCust);
+	        reportSum.setTotalAmountCancelledRm(sumAmountCancel);
+	        reportSum.setSumCommissionAmountDeductedBySof(sumCommSofDeduct);
+	        reportSum.setTotalCancellationQty(sumCancelQty);
+	        listReportPage.add(reportSum);
+	   	 }
     	return listReportPage;
+   	 
     }
   
     /** 
@@ -885,7 +901,7 @@ public class ReportGenerator {
 	        while(it.hasNext()) {        
 	            try {
 	              reportSummary = (Report)it.next();
-	               //todo
+	               //TODO
 				  reportSummary.setTransactionDate(reportSummary.getRequestedTime());
 		          reportSummary.setGrossPaymentToTngRm(reportSummary.getReloadAmount());
 		          reportSummary.setTotalCancellationRm(reportSummary.getReloadAmount());

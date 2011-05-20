@@ -12,7 +12,6 @@ import java.util.Collection;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -88,7 +87,7 @@ privileged aspect ReloadRequestController_Roo_Controller {
     }
     
     @RequestMapping(params = "find=ByRequestedTimeBetween", method = RequestMethod.GET)
-    public String ReloadRequestController.findReloadRequestsByRequestedTimeBetween(@RequestParam("minRequestedTime") @DateTimeFormat(style = "S-") Date minRequestedTime, @RequestParam("maxRequestedTime") @DateTimeFormat(style = "S-") Date maxRequestedTime, Model uiModel) {
+    public String ReloadRequestController.findReloadRequestsByRequestedTimeBetween(@RequestParam("minRequestedTime") @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss") Date minRequestedTime, @RequestParam("maxRequestedTime") @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss") Date maxRequestedTime, Model uiModel) {
         uiModel.addAttribute("reloadrequests", ReloadRequest.findReloadRequestsByRequestedTimeBetween(minRequestedTime, maxRequestedTime).getResultList());
         addDateTimeFormatPatterns(uiModel);
         return "reloadrequests/list";
@@ -111,10 +110,10 @@ privileged aspect ReloadRequestController_Roo_Controller {
     }
     
     void ReloadRequestController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("reloadRequest_minrequestedtime_date_format", org.joda.time.format.DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("reloadRequest_requestedtime_date_format", org.joda.time.format.DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("reloadRequest_modifiedtime_date_format", org.joda.time.format.DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("reloadRequest_maxrequestedtime_date_format", org.joda.time.format.DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("reloadRequest_minrequestedtime_date_format", "dd/MM/yyyy HH:mm:ss");
+        uiModel.addAttribute("reloadRequest_requestedtime_date_format", "dd/MM/yyyy HH:mm:ss");
+        uiModel.addAttribute("reloadRequest_modifiedtime_date_format", "dd/MM/yyyy HH:mm:ss");
+        uiModel.addAttribute("reloadRequest_maxrequestedtime_date_format", "dd/MM/yyyy HH:mm:ss");
     }
     
     String ReloadRequestController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

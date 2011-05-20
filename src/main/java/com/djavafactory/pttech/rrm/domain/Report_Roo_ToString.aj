@@ -10,6 +10,7 @@ privileged aspect Report_Roo_ToString {
     public String Report.toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("SofRequestedDatetime: ").append(getSofRequestedDatetime()).append(", ");
+        sb.append("SofRequestedDate: ").append(getSofRequestedDate()).append(", ");
         sb.append("Id: ").append(getId()).append(", ");
         sb.append("TransId: ").append(getTransId()).append(", ");
         sb.append("Status: ").append(getStatus()).append(", ");
@@ -24,10 +25,12 @@ privileged aspect Report_Roo_ToString {
         sb.append("TotalReloadQty: ").append(getTotalReloadQty()).append(", ");
         sb.append("TotalAmountRequestRm: ").append(getTotalAmountRequestRm()).append(", ");
         sb.append("TotalFees: ").append(getTotalFees()).append(", ");
+        sb.append("ReloadDateTime: ").append(getReloadDateTime()).append(", ");
         sb.append("ReloadDate: ").append(getReloadDate()).append(", ");
         sb.append("TotalReloadAmountRm: ").append(getTotalReloadAmountRm()).append(", ");
         sb.append("AmountRefundedToCustomer: ").append(getAmountRefundedToCustomer()).append(", ");
         sb.append("DateRefundedCustomer: ").append(getDateRefundedCustomer()).append(", ");
+        sb.append("DateTimeRefundedCustomer: ").append(getDateTimeRefundedCustomer()).append(", ");
         sb.append("CancellationStatus: ").append(getCancellationStatus()).append(", ");
         sb.append("DateCancelRequest: ").append(getDateCancelRequest()).append(", ");
         sb.append("RequestedTime: ").append(getRequestedTime()).append(", ");
@@ -35,16 +38,33 @@ privileged aspect Report_Roo_ToString {
         sb.append("TotalAmountCancelledRm: ").append(getTotalAmountCancelledRm()).append(", ");
         sb.append("TotalRefundToCustomerRm: ").append(getTotalRefundToCustomerRm()).append(", ");
         sb.append("TransactionDate: ").append(getTransactionDate()).append(", ");
+        sb.append("TransactionDateTime: ").append(getTransactionDateTime()).append(", ");
         sb.append("GrossPaymentToTngRm: ").append(getGrossPaymentToTngRm()).append(", ");
         sb.append("TotalCancellationRm: ").append(getTotalCancellationRm()).append(", ");
         sb.append("AmountCreditedToTngRm: ").append(getAmountCreditedToTngRm()).append(", ");
         sb.append("DateCreditedToTngAccount: ").append(getDateCreditedToTngAccount()).append(", ");
+        sb.append("DateTimeCreditedToTngAccount: ").append(getDateTimeCreditedToTngAccount()).append(", ");
         sb.append("TotalPaymentToTngRm: ").append(getTotalPaymentToTngRm()).append(", ");
         sb.append("TngKey: ").append(getTngKey()).append(", ");
         sb.append("SumTotalChargeToCustomer: ").append(getSumTotalChargeToCustomer()).append(", ");
         sb.append("SumCommissionAmountDeductedBySof: ").append(getSumCommissionAmountDeductedBySof()).append(", ");
         sb.append("SumNetPaymentToTng: ").append(getSumNetPaymentToTng()).append(", ");
-        sb.append("ModifiedDate: ").append(getModifiedDate());
+        sb.append("ModifiedDate: ").append(getModifiedDate()).append(", ");
+        sb.append("CmmpTrxId: ").append(getCmmpTrxId()).append(", ");
+        sb.append("TngTrxId: ").append(getTngTrxId()).append(", ");
+        sb.append("AircashAccNo: ").append(getAircashAccNo()).append(", ");
+        sb.append("MobileNo: ").append(getMobileNo()).append(", ");
+        sb.append("TngMfgNo: ").append(getTngMfgNo()).append(", ");
+        sb.append("GrossAmount: ").append(getGrossAmount()).append(", ");
+        sb.append("TngFee: ").append(getTngFee()).append(", ");
+        sb.append("PrintisFee: ").append(getPrintisFee()).append(", ");
+        sb.append("CelcomMobileFee: ").append(getCelcomMobileFee()).append(", ");
+        sb.append("CmmFee: ").append(getCmmFee()).append(", ");
+        sb.append("AmountDueTng: ").append(getAmountDueTng()).append(", ");
+        sb.append("AmountDuePrintis: ").append(getAmountDuePrintis()).append(", ");
+        sb.append("AmountDueCelcomMobile: ").append(getAmountDueCelcomMobile()).append(", ");
+        sb.append("AmountDueCmm: ").append(getAmountDueCmm()).append(", ");
+        sb.append("TotalGrossAmount: ").append(getTotalGrossAmount());
         return sb.toString();
     }
     
