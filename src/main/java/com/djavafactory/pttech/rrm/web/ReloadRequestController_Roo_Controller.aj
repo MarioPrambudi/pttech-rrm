@@ -44,14 +44,6 @@ privileged aspect ReloadRequestController_Roo_Controller {
         return "reloadrequests/create";
     }
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String ReloadRequestController.show(@PathVariable("id") Long id, Model uiModel) {
-        addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("reloadrequest", ReloadRequest.findReloadRequest(id));
-        uiModel.addAttribute("itemId", id);
-        return "reloadrequests/show";
-    }
-    
     @RequestMapping(method = RequestMethod.PUT)
     public String ReloadRequestController.update(@Valid ReloadRequest reloadRequest, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {

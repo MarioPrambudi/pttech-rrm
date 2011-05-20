@@ -16,6 +16,7 @@ import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -113,6 +114,19 @@ public class ReloadRequestController extends BaseController {
 		return reloadRequestList;
 	}
 	
+	/**
+	 * Turn status codes into user-friendly status texts
+	 * 
+	 * @param reloadRequestList
+	 * @return reloadRequestList
+	 */
+	public ReloadRequest regenerateShow(ReloadRequest reloadRequest) {
+		String status = reloadRequest.getStatus();
+		if (status != null && !status.isEmpty())
+			reloadRequest.setStatus(getResourceText(resourcePrefix + status));
+		return reloadRequest;
+	}
+	
     void addDateTimeFormatPatterns(Model uiModel) {
     	String dateTimeFormat = getResourceText("date_time_display_format");
         uiModel.addAttribute("reloadRequest_minrequestedtime_date_format", dateTimeFormat);
@@ -121,5 +135,12 @@ public class ReloadRequestController extends BaseController {
         uiModel.addAttribute("reloadRequest_maxrequestedtime_date_format", dateTimeFormat);
     }
     
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String show(@PathVariable("id") Long id, Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("reloadrequest", regenerateShow(ReloadRequest.findReloadRequest(id)));
+        uiModel.addAttribute("itemId", id);
+        return "reloadrequests/show";
+    }
 
 }
