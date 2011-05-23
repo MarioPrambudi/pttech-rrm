@@ -368,45 +368,78 @@ public class ReportController extends BaseController {
 	@RequestMapping(value = "/CE0001-Report/{format}", method = RequestMethod.GET)
 	public String dailyTrxDetailsReport(ModelMap modelMap,
 										Model uiModel,
-										@PathVariable("format") String format) throws Exception {
+										 @PathVariable("format") String format,
+										 @RequestParam(value = "page", required = false) Integer page, 
+										 @RequestParam(value = "size", required = false) Integer size,
+										 @RequestParam(value = "dateMin", required = false)String dateMin,
+										 @RequestParam(value = "dateMax", required = false)String dateMax) throws Exception {
 
-		List<Report> reportList = ReportGenerator.getDailyTransactionDetailsReport();
-		
+		if (dateMin==null) dateMin="null";
+		if (dateMax==null) dateMax="null";
 		if(format.equalsIgnoreCase("html")) {
-	        uiModel.addAttribute("reports", reportList);
-			
-	        return "dailyTrxDetailsList";
+	        if (page != null || size != null) {
+			    int sizeNo = size == null ? 10 : size.intValue();
+	    		long totalReport = ReloadRequest.totalReloadRequests(ReportGenerator.getListAllStatus());
+	    		float nrOfPages = (float)totalReport / sizeNo;
+	    		uiModel.addAttribute("reports", ReportGenerator.getDailyTransactionDetailsReport((page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo));		            
+	            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+	            uiModel.addAttribute("params", "&dateMin=" + dateMin + "&dateMax=" + dateMax);			        
+		  } else {				    
+	            uiModel.addAttribute("reports", ReportGenerator.getDailyTransactionDetailsReport(-1, -1));
+	      }
+		  return "dailyTrxDetailsReport"; 
 		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
+			List<Report> listReport = new ArrayList<Report>();
+			listReport = ReportGenerator.getDailyTransactionDetailsReport(-1, -1);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "dailyTrxDetailsReport";
 		}
+
 	}
 	
 	@RequestMapping(value = "/CE0002-Report/{format}", method = RequestMethod.GET)
-	public String dailyTrxDetailsByRangeDateReport(ModelMap modelMap, Model uiModel,
-												   @PathVariable("format") String format,
-												   @RequestParam(value = "startDate", required = false) String startDate,
-												   @RequestParam(value = "endDate", required = false) String endDate) throws Exception {
+	public String dailyTrxDetailsByRangeDateReport(ModelMap modelMap,
+													 Model uiModel,
+													 @PathVariable("format") String format,
+													 @RequestParam(value = "page", required = false) Integer page, 
+													 @RequestParam(value = "size", required = false) Integer size,
+													 @RequestParam(value = "dateMin", required = false)String dateMin,
+													 @RequestParam(value = "dateMax", required = false)String dateMax	
+													 ) throws Exception {
 
-		List<Report> reportList = ReportGenerator.getDailyTransactionDetailsReport();
-		
+		if (dateMin==null) dateMin="null";
+		if (dateMax==null) dateMax="null";
 		if(format.equalsIgnoreCase("html")) {
-	        uiModel.addAttribute("reports", reportList);
-			
-	        return "dailyTrxDetailsByRangeDateList";
-		} else {		
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
+	        if (page != null || size != null) {
+			    int sizeNo = size == null ? 10 : size.intValue();
+	    		long totalReport = ReportGenerator.getTotalReport(dateMin, dateMax, ReportGenerator.getListAllStatus());
+	    		float nrOfPages = (float)totalReport / sizeNo;
+	    		uiModel.addAttribute("reports", ReportGenerator.getDailyTransactionDetailsReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo));		            
+	            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+	            uiModel.addAttribute("params", "&dateMin=" + dateMin + "&dateMax=" + dateMax);			        
+		  } else {				    
+	            uiModel.addAttribute("reports", ReportGenerator.getDailyTransactionDetailsReport(dateMin, dateMax, -1, -1));
+	      }
+		  return "dailyTrxDetailsByRangeDateList"; 
+		} else {
+			List<Report> listReport = new ArrayList<Report>();
+			listReport = ReportGenerator.getDailyTransactionDetailsReport(dateMin, dateMax, -1, -1);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "dailyTrxDetailsByRangeDateReport";
-		}
+		}       
 	}
 	
 	@RequestMapping(value = "/CE0003-Report/{format}", method = RequestMethod.GET)
 	public String dailyTrxFeeDetailsReport(ModelMap modelMap, Model uiModel,
-										   @PathVariable("format") String format) throws Exception {
+											 @PathVariable("format") String format,
+											 @RequestParam(value = "page", required = false) Integer page, 
+											 @RequestParam(value = "size", required = false) Integer size,
+											 @RequestParam(value = "dateMin", required = false)String dateMin,
+											 @RequestParam(value = "dateMax", required = false)String dateMax) throws Exception {
 
 		List<Report> reportList = ReportGenerator.getDailyTransactionFeeDetailsReport();
 		
@@ -424,18 +457,31 @@ public class ReportController extends BaseController {
 	
 	@RequestMapping(value = "/CE0004-Report/{format}", method = RequestMethod.GET)
 	public String dailyTrxFeeDetailsByRangeDateReport(ModelMap modelMap, Model uiModel,
-			 										  @PathVariable("format") String format,
-													   @RequestParam(value = "startDate", required = false) String startDate,
-													   @RequestParam(value = "endDate", required = false) String endDate) throws Exception {
+													 @PathVariable("format") String format,
+													 @RequestParam(value = "page", required = false) Integer page, 
+													 @RequestParam(value = "size", required = false) Integer size,
+													 @RequestParam(value = "dateMin", required = false)String dateMin,
+													 @RequestParam(value = "dateMax", required = false)String dateMax) throws Exception {
 
-		List<Report> reportList = ReportGenerator.getDailyTransactionFeeDetailsReport();
-		
+		if (dateMin==null) dateMin="null";
+		if (dateMax==null) dateMax="null";
 		if(format.equalsIgnoreCase("html")) {
-	        uiModel.addAttribute("reports", reportList);
-			
-	        return "dailyTrxFeeDetailsByRangeDateList";
-		} else {	
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
+	        if (page != null || size != null) {
+			    int sizeNo = size == null ? 10 : size.intValue();
+	    		long totalReport = ReportGenerator.getTotalReport(dateMin, dateMax, ReportGenerator.getListAllStatus());
+	    		float nrOfPages = (float)totalReport / sizeNo;
+	    		uiModel.addAttribute("reports", ReportGenerator.getDailyTransactionFeeDetailsReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo));		            
+	            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+	            uiModel.addAttribute("params", "&dateMin=" + dateMin + "&dateMax=" + dateMax);			        
+		  } else {				    
+	            uiModel.addAttribute("reports", ReportGenerator.getDailyTransactionFeeDetailsReport(dateMin, dateMax, -1, -1));
+	      }
+		  return "dailyTrxFeeDetailsByRangeDateList"; 
+		} else {
+			List<Report> listReport = new ArrayList<Report>();
+			listReport = ReportGenerator.getDailyTransactionFeeDetailsReport(dateMin, dateMax, -1, -1);
+	        listReport.remove(listReport.size()-1);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "dailyTrxFeeDetailsByRangeDateReport";
@@ -444,9 +490,13 @@ public class ReportController extends BaseController {
 	
 	@RequestMapping(value = "/CE0005-Report/{format}", method = RequestMethod.GET)
 	public String summaryDailyTrxReport(ModelMap modelMap, Model uiModel,
-										@PathVariable("format") String format) throws Exception {
+										 @PathVariable("format") String format,
+										 @RequestParam(value = "page", required = false) Integer page, 
+										 @RequestParam(value = "size", required = false) Integer size,
+										 @RequestParam(value = "dateMin", required = false)String dateMin,
+										 @RequestParam(value = "dateMax", required = false)String dateMax) throws Exception {
 
-		List<Report> reportList = ReportGenerator.summaryDailyTransactionDetailsReport();
+		List<Report> reportList = ReportGenerator.getSummaryDailyTransactionDetailsReport(-1,-1);
 		
 		if(format.equalsIgnoreCase("html")) {
 	        uiModel.addAttribute("reports", reportList);
@@ -462,85 +512,33 @@ public class ReportController extends BaseController {
 	
 	@RequestMapping(value = "/CE0006-Report/{format}", method = RequestMethod.GET)
 	public String summaryDailyTrxByRangeDateReport(ModelMap modelMap, Model uiModel,
-												   @PathVariable("format") String format,
-												   @RequestParam(value = "startDate", required = false) String startDate,
-												   @RequestParam(value = "endDate", required = false) String endDate) throws Exception {
-
-		List<Report> reportList = ReportGenerator.summaryDailyTransactionDetailsReport();
-		
+													 @PathVariable("format") String format,
+													 @RequestParam(value = "page", required = false) Integer page, 
+													 @RequestParam(value = "size", required = false) Integer size,
+													 @RequestParam(value = "dateMin", required = false)String dateMin,
+													 @RequestParam(value = "dateMax", required = false)String dateMax) throws Exception {
+	
+		if (dateMin==null) dateMin="null";
+		if (dateMax==null) dateMax="null";
 		if(format.equalsIgnoreCase("html")) {
-	        uiModel.addAttribute("reports", reportList);
-			
-	        return "summaryDailyTrxByRangeDateList";
-		} else {	
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
+	        if (page != null || size != null) {
+			    int sizeNo = size == null ? 10 : size.intValue();
+	    		long totalReport = ReportGenerator.getTotalReport(dateMin, dateMax, ReportGenerator.getListAllStatus());
+	    		float nrOfPages = (float)totalReport / sizeNo;
+	    		uiModel.addAttribute("reports", ReportGenerator.getSummaryDailyTransactionDetailsReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo));		            
+	            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+	            uiModel.addAttribute("params", "&dateMin=" + dateMin + "&dateMax=" + dateMax);			        
+		  } else {				    
+	            uiModel.addAttribute("reports", ReportGenerator.getSummaryDailyTransactionDetailsReport(dateMin, dateMax, -1, -1));
+	      }
+		  return "summaryDailyTrxByRangeDateList"; 
+		} else {
+			List<Report> listReport = new ArrayList<Report>();
+			listReport = ReportGenerator.getSummaryDailyTransactionDetailsReport(dateMin, dateMax, -1, -1);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "summaryDailyTrxByRangeDateReport";
 		}
 	}
-	
-
-//	@RequestMapping(value = "/findReportByParam", method = RequestMethod.POST)
-//	public String findReloadRequestsByParam(
-//			@RequestParam(value = "status", required = false) String status,
-//			@RequestParam(value = "minRequestedTime", required = false) String dateMinStr,
-//			@RequestParam(value = "maxRequestedTime", required = false) String dateMaxStr, Model uiModel) throws Exception {
-//		Date dateMin = null;
-//		Date dateMax = null;
-//		SimpleDateFormat dateFormat = new SimpleDateFormat(getResourceText("date_display_format"));
-//		try {
-//			dateMin = dateMinStr == null || dateMinStr.isEmpty() ? null : dateFormat
-//					.parse(dateMinStr);
-//			dateMax = dateMaxStr == null || dateMaxStr.isEmpty() ? null : dateFormat
-//					.parse(dateMaxStr);
-//		} catch (ParseException x) {
-//			x.printStackTrace();
-//		}
-//		
-//		List<Report> reportList = ReportGenerator.getSummaryRequestReloadFrmCelcomReport();
-//	    uiModel.addAttribute("reports", reportList);
-//			
-//	    return "summaryRequestReloadFrmCelcomList";
-//	
-//	}
-//	
-//	@ModelAttribute("reportType")
-//	public Collection<Map<String, String>> populateStatusCodes() {
-//		List<Map<String, String>> statusList = new ArrayList<Map<String, String>>();
-//		Map<String, String> statusMap = new TreeMap<String, String>();
-//		statusMap.put("id", Constants.RELOAD_STATUS_NEW);
-//		statusMap.put("value", getResourceText(resourcePrefix + Constants.RELOAD_STATUS_NEW));
-//		statusList.add(statusMap);
-//
-//		statusMap = new TreeMap<String, String>();
-//		statusMap.put("id", Constants.RELOAD_STATUS_PENDING);
-//		statusMap.put("value", getResourceText(resourcePrefix + Constants.RELOAD_STATUS_PENDING));
-//		statusList.add(statusMap);
-//
-//		statusMap = new TreeMap<String, String>();
-//		statusMap.put("id", Constants.RELOAD_STATUS_FAILED);
-//		statusMap.put("value", getResourceText(resourcePrefix + Constants.RELOAD_STATUS_FAILED));
-//		statusList.add(statusMap);
-//
-//		statusMap = new TreeMap<String, String>();
-//		statusMap.put("id", Constants.RELOAD_STATUS_EXPIRED);
-//		statusMap.put("value", getResourceText(resourcePrefix + Constants.RELOAD_STATUS_EXPIRED));
-//		statusList.add(statusMap);
-//
-//		statusMap = new TreeMap<String, String>();
-//		statusMap.put("id", Constants.RELOAD_STATUS_MANUALCANCEL);
-//		statusMap.put("value", getResourceText(resourcePrefix + Constants.RELOAD_STATUS_MANUALCANCEL));
-//		statusList.add(statusMap);
-//
-//		statusMap = new TreeMap<String, String>();
-//		statusMap.put("id", Constants.RELOAD_STATUS_SUCCESS);
-//		statusMap.put("value", getResourceText(resourcePrefix + Constants.RELOAD_STATUS_SUCCESS));
-//		statusList.add(statusMap);
-//		return statusList;
-//	}
-//
-//	
-
-
 }
