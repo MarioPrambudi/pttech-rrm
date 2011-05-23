@@ -23,11 +23,31 @@ privileged aspect FirmwareDataOnDemand_Roo_DataOnDemand {
     
     public Firmware FirmwareDataOnDemand.getNewTransientFirmware(int index) {
         com.djavafactory.pttech.rrm.domain.Firmware obj = new com.djavafactory.pttech.rrm.domain.Firmware();
-        obj.setName("name_" + index);
-        obj.setFirmwareFile(null);
-        obj.setActive(Boolean.TRUE);
-        obj.setAcquirer(acquirerDataOnDemand.getRandomAcquirer());
+        setName(obj, index);
+        setFirmwareFile(obj, index);
+        setActive(obj, index);
+        setAcquirer(obj, index);
         return obj;
+    }
+    
+    public void FirmwareDataOnDemand.setName(Firmware obj, int index) {
+        java.lang.String name = "name_" + index;
+        obj.setName(name);
+    }
+    
+    public void FirmwareDataOnDemand.setFirmwareFile(Firmware obj, int index) {
+        byte[] firmwareFile = String.valueOf(index).getBytes();
+        obj.setFirmwareFile(firmwareFile);
+    }
+    
+    public void FirmwareDataOnDemand.setActive(Firmware obj, int index) {
+        java.lang.Boolean active = Boolean.TRUE;
+        obj.setActive(active);
+    }
+    
+    public void FirmwareDataOnDemand.setAcquirer(Firmware obj, int index) {
+        com.djavafactory.pttech.rrm.domain.Acquirer acquirer = acquirerDataOnDemand.getRandomAcquirer();
+        obj.setAcquirer(acquirer);
     }
     
     public Firmware FirmwareDataOnDemand.getSpecificFirmware(int index) {

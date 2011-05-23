@@ -18,10 +18,25 @@ privileged aspect ParamDataOnDemand_Roo_DataOnDemand {
     
     public Param ParamDataOnDemand.getNewTransientParam(int index) {
         com.djavafactory.pttech.rrm.domain.Param obj = new com.djavafactory.pttech.rrm.domain.Param();
-        obj.setParameterFile(null);
-        obj.setCreatedBy("createdBy_" + index);
-        obj.setCreatedTime(new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY), java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE), java.util.Calendar.getInstance().get(java.util.Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime());
+        setParameterFile(obj, index);
+        setCreatedBy(obj, index);
+        setCreatedTime(obj, index);
         return obj;
+    }
+    
+    public void ParamDataOnDemand.setParameterFile(Param obj, int index) {
+        byte[] parameterFile = String.valueOf(index).getBytes();
+        obj.setParameterFile(parameterFile);
+    }
+    
+    public void ParamDataOnDemand.setCreatedBy(Param obj, int index) {
+        java.lang.String createdBy = "createdBy_" + index;
+        obj.setCreatedBy(createdBy);
+    }
+    
+    public void ParamDataOnDemand.setCreatedTime(Param obj, int index) {
+        java.util.Date createdTime = new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY), java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE), java.util.Calendar.getInstance().get(java.util.Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
+        obj.setCreatedTime(createdTime);
     }
     
     public Param ParamDataOnDemand.getSpecificParam(int index) {

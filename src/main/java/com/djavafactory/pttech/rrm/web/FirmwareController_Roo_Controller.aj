@@ -100,7 +100,7 @@ privileged aspect FirmwareController_Roo_Controller {
     }
     
     @ModelAttribute("firmwares")
-    public java.util.Collection<Firmware> FirmwareController.populateFirmwares() {
+    public Collection<Firmware> FirmwareController.populateFirmwares() {
         return Firmware.findAllFirmwares();
     }
     

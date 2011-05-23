@@ -93,11 +93,11 @@ privileged aspect Terminal_Roo_Entity {
     }
     
     public static long Terminal.countTerminals() {
-        return entityManager().createQuery("select count(o) from Terminal o", Long.class).getSingleResult();
+        return entityManager().createQuery("SELECT COUNT(o) FROM Terminal o", Long.class).getSingleResult();
     }
     
     public static List<Terminal> Terminal.findAllTerminals() {
-        return entityManager().createQuery("select o from Terminal o", Terminal.class).getResultList();
+        return entityManager().createQuery("SELECT o FROM Terminal o", Terminal.class).getResultList();
     }
     
     public static Terminal Terminal.findTerminal(Long id) {
@@ -106,7 +106,7 @@ privileged aspect Terminal_Roo_Entity {
     }
     
     public static List<Terminal> Terminal.findTerminalEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("select o from Terminal o", Terminal.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+        return entityManager().createQuery("SELECT o FROM Terminal o", Terminal.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
 }

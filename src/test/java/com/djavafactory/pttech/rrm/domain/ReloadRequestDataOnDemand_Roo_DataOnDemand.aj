@@ -18,16 +18,61 @@ privileged aspect ReloadRequestDataOnDemand_Roo_DataOnDemand {
     
     public ReloadRequest ReloadRequestDataOnDemand.getNewTransientReloadRequest(int index) {
         com.djavafactory.pttech.rrm.domain.ReloadRequest obj = new com.djavafactory.pttech.rrm.domain.ReloadRequest();
-        obj.setTransId("transId_" + index);
-        obj.setStatus("status_" + index);
-        obj.setMfgNumber(new Integer(index).longValue());
-        obj.setReloadAmount(java.math.BigDecimal.valueOf(index));
-        obj.setServiceProviderId("serviceProviderId_" + index);
-        obj.setTransCode("transCode_" + index);
-        obj.setRequestedTime(new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY), java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE), java.util.Calendar.getInstance().get(java.util.Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime());
-        obj.setTngKey("tngKey_" + index);
-        obj.setModifiedTime(new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY), java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE), java.util.Calendar.getInstance().get(java.util.Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime());
+        setTransId(obj, index);
+        setStatus(obj, index);
+        setMfgNumber(obj, index);
+        setReloadAmount(obj, index);
+        setServiceProviderId(obj, index);
+        setTransCode(obj, index);
+        setRequestedTime(obj, index);
+        setTngKey(obj, index);
+        setModifiedTime(obj, index);
         return obj;
+    }
+    
+    public void ReloadRequestDataOnDemand.setTransId(ReloadRequest obj, int index) {
+        java.lang.String transId = "transId_" + index;
+        obj.setTransId(transId);
+    }
+    
+    public void ReloadRequestDataOnDemand.setStatus(ReloadRequest obj, int index) {
+        java.lang.String status = "status_" + index;
+        obj.setStatus(status);
+    }
+    
+    public void ReloadRequestDataOnDemand.setMfgNumber(ReloadRequest obj, int index) {
+        java.lang.Long mfgNumber = new Integer(index).longValue();
+        obj.setMfgNumber(mfgNumber);
+    }
+    
+    public void ReloadRequestDataOnDemand.setReloadAmount(ReloadRequest obj, int index) {
+        java.math.BigDecimal reloadAmount = java.math.BigDecimal.valueOf(index);
+        obj.setReloadAmount(reloadAmount);
+    }
+    
+    public void ReloadRequestDataOnDemand.setServiceProviderId(ReloadRequest obj, int index) {
+        java.lang.String serviceProviderId = "serviceProviderId_" + index;
+        obj.setServiceProviderId(serviceProviderId);
+    }
+    
+    public void ReloadRequestDataOnDemand.setTransCode(ReloadRequest obj, int index) {
+        java.lang.String transCode = "transCode_" + index;
+        obj.setTransCode(transCode);
+    }
+    
+    public void ReloadRequestDataOnDemand.setRequestedTime(ReloadRequest obj, int index) {
+        java.util.Date requestedTime = new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY), java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE), java.util.Calendar.getInstance().get(java.util.Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
+        obj.setRequestedTime(requestedTime);
+    }
+    
+    public void ReloadRequestDataOnDemand.setTngKey(ReloadRequest obj, int index) {
+        java.lang.String tngKey = "tngKey_" + index;
+        obj.setTngKey(tngKey);
+    }
+    
+    public void ReloadRequestDataOnDemand.setModifiedTime(ReloadRequest obj, int index) {
+        java.util.Date modifiedTime = new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY), java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE), java.util.Calendar.getInstance().get(java.util.Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
+        obj.setModifiedTime(modifiedTime);
     }
     
     public ReloadRequest ReloadRequestDataOnDemand.getSpecificReloadRequest(int index) {

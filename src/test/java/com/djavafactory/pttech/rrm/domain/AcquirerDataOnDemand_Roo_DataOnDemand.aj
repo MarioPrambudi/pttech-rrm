@@ -16,6 +16,76 @@ privileged aspect AcquirerDataOnDemand_Roo_DataOnDemand {
     
     private List<Acquirer> AcquirerDataOnDemand.data;
     
+    public void AcquirerDataOnDemand.setName(Acquirer obj, int index) {
+        java.lang.String name = "name_" + index;
+        obj.setName(name);
+    }
+    
+    public void AcquirerDataOnDemand.setRegistrationNo(Acquirer obj, int index) {
+        java.lang.String registrationNo = "registrationNo_" + index;
+        obj.setRegistrationNo(registrationNo);
+    }
+    
+    public void AcquirerDataOnDemand.setStreet1(Acquirer obj, int index) {
+        java.lang.String street1 = "street1_" + index;
+        obj.setStreet1(street1);
+    }
+    
+    public void AcquirerDataOnDemand.setStreet2(Acquirer obj, int index) {
+        java.lang.String street2 = "street2_" + index;
+        obj.setStreet2(street2);
+    }
+    
+    public void AcquirerDataOnDemand.setAcquirerState(Acquirer obj, int index) {
+        com.djavafactory.pttech.rrm.domain.Province acquirerState = null;
+        obj.setAcquirerState(acquirerState);
+    }
+    
+    public void AcquirerDataOnDemand.setCity(Acquirer obj, int index) {
+        java.lang.Long city = new Integer(index).longValue();
+        obj.setCity(city);
+    }
+    
+    public void AcquirerDataOnDemand.setPostCode(Acquirer obj, int index) {
+        java.lang.String postCode = "postCode_" + index;
+        obj.setPostCode(postCode);
+    }
+    
+    public void AcquirerDataOnDemand.setEmail(Acquirer obj, int index) {
+        java.lang.String email = "email_" + index;
+        obj.setEmail(email);
+    }
+    
+    public void AcquirerDataOnDemand.setHotline(Acquirer obj, int index) {
+        java.lang.String hotline = "hotline_" + index;
+        obj.setHotline(hotline);
+    }
+    
+    public void AcquirerDataOnDemand.setCreatedBy(Acquirer obj, int index) {
+        java.lang.String createdBy = "createdBy_" + index;
+        obj.setCreatedBy(createdBy);
+    }
+    
+    public void AcquirerDataOnDemand.setModifiedBy(Acquirer obj, int index) {
+        java.lang.String modifiedBy = "modifiedBy_" + index;
+        obj.setModifiedBy(modifiedBy);
+    }
+    
+    public void AcquirerDataOnDemand.setCreatedTime(Acquirer obj, int index) {
+        java.util.Date createdTime = new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY), java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE), java.util.Calendar.getInstance().get(java.util.Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
+        obj.setCreatedTime(createdTime);
+    }
+    
+    public void AcquirerDataOnDemand.setModifiedTime(Acquirer obj, int index) {
+        java.util.Date modifiedTime = new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY), java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE), java.util.Calendar.getInstance().get(java.util.Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
+        obj.setModifiedTime(modifiedTime);
+    }
+    
+    public void AcquirerDataOnDemand.setDeleted(Acquirer obj, int index) {
+        java.lang.Boolean deleted = Boolean.TRUE;
+        obj.setDeleted(deleted);
+    }
+    
     public Acquirer AcquirerDataOnDemand.getSpecificAcquirer(int index) {
         init();
         if (index < 0) index = 0;

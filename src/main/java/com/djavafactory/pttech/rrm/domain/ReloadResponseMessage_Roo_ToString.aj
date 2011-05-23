@@ -9,10 +9,10 @@ privileged aspect ReloadResponseMessage_Roo_ToString {
     
     public String ReloadResponseMessage.toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("TransId: ").append(getTransId()).append(", ");
         sb.append("ResponseTime: ").append(getResponseTime()).append(", ");
         sb.append("StatusCode: ").append(getStatusCode()).append(", ");
-        sb.append("StatusMsg: ").append(getStatusMsg());
+        sb.append("StatusMsg: ").append(getStatusMsg()).append(", ");
+        sb.append("TransId: ").append(getTransId());
         return sb.toString();
     }
     

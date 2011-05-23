@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:find finderName="ByRequestedTimeBetween" id="ff_com_djavafactory_pttech_rrm_domain_ReloadRequest" path="/reloadrequests" z="3SJrfXgN+/MwUNr2XdnqqRpXsjI=">
-        <field:datetime dateTimePattern="${reloadRequest_minrequestedtime_date_format}" disableFormBinding="true" field="minRequestedTime" id="f_com_djavafactory_pttech_rrm_domain_ReloadRequest_minRequestedTime" z="dn2o1WP236uY4Wmqn+GGWit4KMc="/>
-        <field:datetime dateTimePattern="${reloadRequest_maxrequestedtime_date_format}" disableFormBinding="true" field="maxRequestedTime" id="f_com_djavafactory_pttech_rrm_domain_ReloadRequest_maxRequestedTime" z="t/dCDtIuenW9c480ikrQ7fFSLa0="/>
+        <field:datetime dateTimePattern="${reloadRequest_minrequestedtime_date_format}" disableFormBinding="true" field="minRequestedTime" id="f_com_djavafactory_pttech_rrm_domain_ReloadRequest_minRequestedTime" required="true" z="GVa50WAmc96I4zKOqesKSO0G+OI="/>
+        <field:datetime dateTimePattern="${reloadRequest_maxrequestedtime_date_format}" disableFormBinding="true" field="maxRequestedTime" id="f_com_djavafactory_pttech_rrm_domain_ReloadRequest_maxRequestedTime" required="true" z="T4GwNSzRnMfE/we1qp5tUvMjk3k="/>
     </form:find>
 </div>

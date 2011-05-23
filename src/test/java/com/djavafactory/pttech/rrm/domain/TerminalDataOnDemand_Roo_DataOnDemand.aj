@@ -16,6 +16,76 @@ privileged aspect TerminalDataOnDemand_Roo_DataOnDemand {
     
     private List<Terminal> TerminalDataOnDemand.data;
     
+    public void TerminalDataOnDemand.setTerminalId(Terminal obj, int index) {
+        java.lang.String terminalId = "terminalId_" + index;
+        obj.setTerminalId(terminalId);
+    }
+    
+    public void TerminalDataOnDemand.setIp(Terminal obj, int index) {
+        java.lang.String ip = "ip_" + index;
+        obj.setIp(ip);
+    }
+    
+    public void TerminalDataOnDemand.setPort(Terminal obj, int index) {
+        java.lang.String port = "port_" + index;
+        obj.setPort(port);
+    }
+    
+    public void TerminalDataOnDemand.setDescription(Terminal obj, int index) {
+        java.lang.String description = "description_" + index;
+        obj.setDescription(description);
+    }
+    
+    public void TerminalDataOnDemand.setAcquirerState(Terminal obj, int index) {
+        com.djavafactory.pttech.rrm.domain.Province acquirerState = null;
+        obj.setAcquirerState(acquirerState);
+    }
+    
+    public void TerminalDataOnDemand.setCity(Terminal obj, int index) {
+        java.lang.Long city = new Integer(index).longValue();
+        obj.setCity(city);
+    }
+    
+    public void TerminalDataOnDemand.setLocation(Terminal obj, int index) {
+        java.lang.String location = "location_" + index;
+        obj.setLocation(location);
+    }
+    
+    public void TerminalDataOnDemand.setStatus(Terminal obj, int index) {
+        java.lang.String status = "status_" + index;
+        obj.setStatus(status);
+    }
+    
+    public void TerminalDataOnDemand.setCreatedTime(Terminal obj, int index) {
+        java.util.Date createdTime = new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY), java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE), java.util.Calendar.getInstance().get(java.util.Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
+        obj.setCreatedTime(createdTime);
+    }
+    
+    public void TerminalDataOnDemand.setModifiedTime(Terminal obj, int index) {
+        java.util.Date modifiedTime = new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY), java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE), java.util.Calendar.getInstance().get(java.util.Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
+        obj.setModifiedTime(modifiedTime);
+    }
+    
+    public void TerminalDataOnDemand.setCreatedBy(Terminal obj, int index) {
+        java.lang.String createdBy = "createdBy_" + index;
+        obj.setCreatedBy(createdBy);
+    }
+    
+    public void TerminalDataOnDemand.setModifiedBy(Terminal obj, int index) {
+        java.lang.String modifiedBy = "modifiedBy_" + index;
+        obj.setModifiedBy(modifiedBy);
+    }
+    
+    public void TerminalDataOnDemand.setAcquirer(Terminal obj, int index) {
+        com.djavafactory.pttech.rrm.domain.Acquirer acquirer = null;
+        obj.setAcquirer(acquirer);
+    }
+    
+    public void TerminalDataOnDemand.setTerminalType(Terminal obj, int index) {
+        com.djavafactory.pttech.rrm.domain.TerminalType terminalType = null;
+        obj.setTerminalType(terminalType);
+    }
+    
     public Terminal TerminalDataOnDemand.getSpecificTerminal(int index) {
         init();
         if (index < 0) index = 0;
