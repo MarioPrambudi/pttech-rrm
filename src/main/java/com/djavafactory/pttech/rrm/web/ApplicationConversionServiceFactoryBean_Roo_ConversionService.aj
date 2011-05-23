@@ -3,6 +3,7 @@
 
 package com.djavafactory.pttech.rrm.web;
 
+import com.djavafactory.pttech.rrm.domain.Acquirer;
 import com.djavafactory.pttech.rrm.domain.City;
 import com.djavafactory.pttech.rrm.domain.Configuration;
 import com.djavafactory.pttech.rrm.domain.Firmware;
@@ -10,78 +11,86 @@ import com.djavafactory.pttech.rrm.domain.Param;
 import com.djavafactory.pttech.rrm.domain.Province;
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
 import com.djavafactory.pttech.rrm.domain.Terminal;
+import com.djavafactory.pttech.rrm.domain.TerminalType;
 import java.lang.String;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
 
 privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService {
     
-    Converter<City, String> ApplicationConversionServiceFactoryBean.getCityConverter() {
-        return new Converter<City, String>() {
-            public String convert(City city) {
-                return new StringBuilder().append(city.getCityName()).toString();
-            }
-        };
-    }
-    
-    org.springframework.core.convert.converter.Converter<Configuration, String> ApplicationConversionServiceFactoryBean.getConfigurationConverter() {
-        return new org.springframework.core.convert.converter.Converter<Configuration, String>() {
-            public String convert(Configuration configuration) {
-                return new StringBuilder().append(configuration.getConfigKey()).append(" ").append(configuration.getConfigValue()).append(" ").append(configuration.getOrdering()).toString();
-            }
-        };
-    }
-    
-    org.springframework.core.convert.converter.Converter<Firmware, String> ApplicationConversionServiceFactoryBean.getFirmwareConverter() {
-        return new org.springframework.core.convert.converter.Converter<Firmware, String>() {
-            public String convert(Firmware firmware) {
-                return new StringBuilder().append(firmware.getName()).toString();
-            }
-        };
-    }
-    
-    org.springframework.core.convert.converter.Converter<Param, String> ApplicationConversionServiceFactoryBean.getParamConverter() {
-        return new org.springframework.core.convert.converter.Converter<Param, String>() {
-            public String convert(Param param) {
-                return new StringBuilder().append(param.getCreatedBy()).append(" ").append(param.getCreatedTime()).toString();
-            }
-        };
-    }
-    
-    org.springframework.core.convert.converter.Converter<Province, String> ApplicationConversionServiceFactoryBean.getProvinceConverter() {
-        return new org.springframework.core.convert.converter.Converter<Province, String>() {
-            public String convert(Province province) {
-                return new StringBuilder().append(province.getName()).toString();
-            }
-        };
-    }
-    
-    org.springframework.core.convert.converter.Converter<ReloadRequest, String> ApplicationConversionServiceFactoryBean.getReloadRequestConverter() {
-        return new org.springframework.core.convert.converter.Converter<ReloadRequest, String>() {
-            public String convert(ReloadRequest reloadrequest) {
-                return new StringBuilder().append(reloadrequest.getTransId()).append(" ").append(reloadrequest.getStatus()).append(" ").append(reloadrequest.getMfgNumber()).append(" ").append(reloadrequest.getReloadAmount()).toString();
-            }
-        };
-    }
-    
-    org.springframework.core.convert.converter.Converter<Terminal, String> ApplicationConversionServiceFactoryBean.getTerminalConverter() {
-        return new org.springframework.core.convert.converter.Converter<Terminal, String>() {
-            public String convert(Terminal terminal) {
-                return new StringBuilder().append(terminal.getTerminalId()).append(" ").append(terminal.getIp()).append(" ").append(terminal.getPort()).append(" ").append(terminal.getDescription()).toString();
-            }
-        };
-    }
-    
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
-        registry.addConverter(getAcquirerConverter());
-        registry.addConverter(getCityConverter());
-        registry.addConverter(getConfigurationConverter());
-        registry.addConverter(getFirmwareConverter());
-        registry.addConverter(getParamConverter());
-        registry.addConverter(getProvinceConverter());
-        registry.addConverter(getReloadRequestConverter());
-        registry.addConverter(getTerminalConverter());
-        registry.addConverter(getTerminalTypeConverter());
+        registry.addConverter(new AcquirerConverter());
+        registry.addConverter(new CityConverter());
+        registry.addConverter(new ConfigurationConverter());
+        registry.addConverter(new FirmwareConverter());
+        registry.addConverter(new ParamConverter());
+        registry.addConverter(new ProvinceConverter());
+        registry.addConverter(new ReloadRequestConverter());
+        registry.addConverter(new TerminalConverter());
+        registry.addConverter(new TerminalTypeConverter());
+    }
+    
+    static class com.djavafactory.pttech.rrm.web.ApplicationConversionServiceFactoryBean.AcquirerConverter implements Converter<Acquirer, String>  {
+        public String convert(Acquirer acquirer) {
+            return new StringBuilder().append(acquirer.getName()).append(" ").append(acquirer.getRegistrationNo()).append(" ").append(acquirer.getStreet1()).append(" ").append(acquirer.getStreet2()).toString();
+        }
+        
+    }
+    
+    static class com.djavafactory.pttech.rrm.web.ApplicationConversionServiceFactoryBean.CityConverter implements Converter<City, String>  {
+        public String convert(City city) {
+            return new StringBuilder().append(city.getCityName()).toString();
+        }
+        
+    }
+    
+    static class com.djavafactory.pttech.rrm.web.ApplicationConversionServiceFactoryBean.ConfigurationConverter implements Converter<Configuration, String>  {
+        public String convert(Configuration configuration) {
+            return new StringBuilder().append(configuration.getConfigKey()).append(" ").append(configuration.getConfigValue()).append(" ").append(configuration.getOrdering()).toString();
+        }
+        
+    }
+    
+    static class com.djavafactory.pttech.rrm.web.ApplicationConversionServiceFactoryBean.FirmwareConverter implements Converter<Firmware, String>  {
+        public String convert(Firmware firmware) {
+            return new StringBuilder().append(firmware.getName()).toString();
+        }
+        
+    }
+    
+    static class com.djavafactory.pttech.rrm.web.ApplicationConversionServiceFactoryBean.ParamConverter implements Converter<Param, String>  {
+        public String convert(Param param) {
+            return new StringBuilder().append(param.getCreatedBy()).append(" ").append(param.getCreatedTime()).toString();
+        }
+        
+    }
+    
+    static class com.djavafactory.pttech.rrm.web.ApplicationConversionServiceFactoryBean.ProvinceConverter implements Converter<Province, String>  {
+        public String convert(Province province) {
+            return new StringBuilder().append(province.getName()).toString();
+        }
+        
+    }
+    
+    static class com.djavafactory.pttech.rrm.web.ApplicationConversionServiceFactoryBean.ReloadRequestConverter implements Converter<ReloadRequest, String>  {
+        public String convert(ReloadRequest reloadRequest) {
+            return new StringBuilder().append(reloadRequest.getTransId()).append(" ").append(reloadRequest.getStatus()).append(" ").append(reloadRequest.getMfgNumber()).append(" ").append(reloadRequest.getReloadAmount()).toString();
+        }
+        
+    }
+    
+    static class com.djavafactory.pttech.rrm.web.ApplicationConversionServiceFactoryBean.TerminalConverter implements Converter<Terminal, String>  {
+        public String convert(Terminal terminal) {
+            return new StringBuilder().append(terminal.getTerminalId()).append(" ").append(terminal.getIp()).append(" ").append(terminal.getPort()).append(" ").append(terminal.getDescription()).toString();
+        }
+        
+    }
+    
+    static class com.djavafactory.pttech.rrm.web.ApplicationConversionServiceFactoryBean.TerminalTypeConverter implements Converter<TerminalType, String>  {
+        public String convert(TerminalType terminalType) {
+            return new StringBuilder().append(terminalType.getName()).append(" ").append(terminalType.getDescription()).toString();
+        }
+        
     }
     
 }

@@ -46,7 +46,7 @@ privileged aspect TerminalController_Roo_Controller {
     }
     
     @ModelAttribute("terminals")
-    public java.util.Collection<Terminal> TerminalController.populateTerminals() {
+    public Collection<Terminal> TerminalController.populateTerminals() {
         return Terminal.findAllTerminals();
     }
     

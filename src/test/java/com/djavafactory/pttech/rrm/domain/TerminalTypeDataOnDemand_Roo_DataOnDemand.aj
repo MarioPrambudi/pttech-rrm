@@ -18,10 +18,25 @@ privileged aspect TerminalTypeDataOnDemand_Roo_DataOnDemand {
     
     public TerminalType TerminalTypeDataOnDemand.getNewTransientTerminalType(int index) {
         com.djavafactory.pttech.rrm.domain.TerminalType obj = new com.djavafactory.pttech.rrm.domain.TerminalType();
-        obj.setName("name_" + index);
-        obj.setDescription("description_" + index);
-        obj.setDeleted(Boolean.TRUE);
+        setName(obj, index);
+        setDescription(obj, index);
+        setDeleted(obj, index);
         return obj;
+    }
+    
+    public void TerminalTypeDataOnDemand.setName(TerminalType obj, int index) {
+        java.lang.String name = "name_" + index;
+        obj.setName(name);
+    }
+    
+    public void TerminalTypeDataOnDemand.setDescription(TerminalType obj, int index) {
+        java.lang.String description = "description_" + index;
+        obj.setDescription(description);
+    }
+    
+    public void TerminalTypeDataOnDemand.setDeleted(TerminalType obj, int index) {
+        java.lang.Boolean deleted = Boolean.TRUE;
+        obj.setDeleted(deleted);
     }
     
     public TerminalType TerminalTypeDataOnDemand.getSpecificTerminalType(int index) {

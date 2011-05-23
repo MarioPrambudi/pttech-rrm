@@ -9,21 +9,23 @@ privileged aspect Terminal_Roo_ToString {
     
     public String Terminal.toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("CityName: ").append(getCityName()).append(", ");
-        sb.append("TerminalId: ").append(getTerminalId()).append(", ");
-        sb.append("Ip: ").append(getIp()).append(", ");
-        sb.append("Port: ").append(getPort()).append(", ");
-        sb.append("Description: ").append(getDescription()).append(", ");
+        sb.append("Acquirer: ").append(getAcquirer()).append(", ");
         sb.append("AcquirerState: ").append(getAcquirerState()).append(", ");
         sb.append("City: ").append(getCity()).append(", ");
-        sb.append("Location: ").append(getLocation()).append(", ");
-        sb.append("Status: ").append(getStatus()).append(", ");
-        sb.append("CreatedTime: ").append(getCreatedTime()).append(", ");
-        sb.append("ModifiedTime: ").append(getModifiedTime()).append(", ");
+        sb.append("CityName: ").append(getCityName()).append(", ");
         sb.append("CreatedBy: ").append(getCreatedBy()).append(", ");
+        sb.append("CreatedTime: ").append(getCreatedTime()).append(", ");
+        sb.append("Description: ").append(getDescription()).append(", ");
+        sb.append("Id: ").append(getId()).append(", ");
+        sb.append("Ip: ").append(getIp()).append(", ");
+        sb.append("Location: ").append(getLocation()).append(", ");
         sb.append("ModifiedBy: ").append(getModifiedBy()).append(", ");
-        sb.append("Acquirer: ").append(getAcquirer()).append(", ");
-        sb.append("TerminalType: ").append(getTerminalType());
+        sb.append("ModifiedTime: ").append(getModifiedTime()).append(", ");
+        sb.append("Port: ").append(getPort()).append(", ");
+        sb.append("Status: ").append(getStatus()).append(", ");
+        sb.append("TerminalId: ").append(getTerminalId()).append(", ");
+        sb.append("TerminalType: ").append(getTerminalType()).append(", ");
+        sb.append("Version: ").append(getVersion());
         return sb.toString();
     }
     

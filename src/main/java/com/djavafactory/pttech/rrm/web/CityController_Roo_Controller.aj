@@ -8,24 +8,19 @@ import com.djavafactory.pttech.rrm.domain.Province;
 import java.io.UnsupportedEncodingException;
 import java.lang.Integer;
 import java.lang.Long;
-import java.lang.Object;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
@@ -105,66 +100,8 @@ privileged aspect CityController_Roo_Controller {
     }
     
     @ModelAttribute("provinces")
-    public java.util.Collection<Province> CityController.populateProvinces() {
+    public Collection<Province> CityController.populateProvinces() {
         return Province.findAllProvinces();
-    }
-    
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
-    @ResponseBody
-    public Object CityController.showJson(@PathVariable("id") Long id) {
-        City city = City.findCity(id);
-        if (city == null) {
-            return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
-        }
-        return city.toJson();
-    }
-    
-    @RequestMapping(headers = "Accept=application/json")
-    @ResponseBody
-    public String CityController.listJson() {
-        return City.toJsonArray(City.findAllCitys());
-    }
-    
-    @RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
-    public org.springframework.http.ResponseEntity<String> CityController.createFromJson(@RequestBody String json) {
-        City.fromJsonToCity(json).persist();
-        return new ResponseEntity<String>(HttpStatus.CREATED);
-    }
-    
-    @RequestMapping(value = "/jsonArray", method = RequestMethod.POST, headers = "Accept=application/json")
-    public org.springframework.http.ResponseEntity<String> CityController.createFromJsonArray(@RequestBody String json) {
-        for (City city: City.fromJsonArrayToCitys(json)) {
-            city.persist();
-        }
-        return new ResponseEntity<String>(HttpStatus.CREATED);
-    }
-    
-    @RequestMapping(method = RequestMethod.PUT, headers = "Accept=application/json")
-    public org.springframework.http.ResponseEntity<String> CityController.updateFromJson(@RequestBody String json) {
-        if (City.fromJsonToCity(json).merge() == null) {
-            return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<String>(HttpStatus.OK);
-    }
-    
-    @RequestMapping(value = "/jsonArray", method = RequestMethod.PUT, headers = "Accept=application/json")
-    public org.springframework.http.ResponseEntity<String> CityController.updateFromJsonArray(@RequestBody String json) {
-        for (City city: City.fromJsonArrayToCitys(json)) {
-            if (city.merge() == null) {
-                return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
-            }
-        }
-        return new ResponseEntity<String>(HttpStatus.OK);
-    }
-    
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
-    public org.springframework.http.ResponseEntity<String> CityController.deleteFromJson(@PathVariable("id") Long id) {
-        City city = City.findCity(id);
-        if (city == null) {
-            return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
-        }
-        city.remove();
-        return new ResponseEntity<String>(HttpStatus.OK);
     }
     
     String CityController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

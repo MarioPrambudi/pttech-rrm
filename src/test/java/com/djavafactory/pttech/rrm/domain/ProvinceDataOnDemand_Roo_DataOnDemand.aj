@@ -18,8 +18,13 @@ privileged aspect ProvinceDataOnDemand_Roo_DataOnDemand {
     
     public Province ProvinceDataOnDemand.getNewTransientProvince(int index) {
         com.djavafactory.pttech.rrm.domain.Province obj = new com.djavafactory.pttech.rrm.domain.Province();
-        obj.setName("name_" + index);
+        setName(obj, index);
         return obj;
+    }
+    
+    public void ProvinceDataOnDemand.setName(Province obj, int index) {
+        java.lang.String name = "name_" + index;
+        obj.setName(name);
     }
     
     public Province ProvinceDataOnDemand.getSpecificProvince(int index) {
