@@ -5,21 +5,21 @@
 	<property name="ireport.y" value="0"/>
 	<field name="transactionDate" class="java.util.Date"/>
 	<field name="totalReloadQty" class="java.lang.Long"/>
-	<field name="grossPaymentToTngRm" class="java.math.BigDecimal"/>
+	<field name="totalPaymentToTngRm" class="java.math.BigDecimal"/>
 	<field name="totalCancellationRm" class="java.math.BigDecimal"/>
-	<field name="amountCreditedToTngRm" class="java.math.BigDecimal"/>
+	<field name="netPaymentToTng" class="java.math.BigDecimal"/>
 	<field name="dateCreditedToTngAccount" class="java.util.Date"/>
 	<variable name="SUM_TOTAL_RELOAD_QTY" class="java.lang.Long" calculation="Sum">
 		<variableExpression><![CDATA[$F{totalReloadQty}]]></variableExpression>
 	</variable>
 	<variable name="SUM_GROSS_PAYMENT" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{grossPaymentToTngRm}]]></variableExpression>
+		<variableExpression><![CDATA[$F{totalPaymentToTngRm}]]></variableExpression>
 	</variable>
 	<variable name="SUM_TOTAL_CANCEL" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{totalCancellationRm}]]></variableExpression>
 	</variable>
 	<variable name="SUM_AMT_CREDITED" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{amountCreditedToTngRm}]]></variableExpression>
+		<variableExpression><![CDATA[$F{netPaymentToTng}]]></variableExpression>
 	</variable>
 	<pageHeader>
 		<band height="101">
@@ -57,7 +57,7 @@
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.grossPaymentToTngRm}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.totalPaymentToTngRm}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="330" y="0" width="150" height="40"/>
@@ -71,7 +71,7 @@
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.amountCreditedToTngRm}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.netPaymentToTng}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="610" y="0" width="130" height="40"/>
@@ -97,7 +97,7 @@
 			<textField>
 				<reportElement x="200" y="0" width="130" height="20"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{grossPaymentToTngRm}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{totalPaymentToTngRm}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="330" y="0" width="150" height="20"/>
@@ -107,7 +107,7 @@
 			<textField>
 				<reportElement x="480" y="0" width="130" height="20"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{amountCreditedToTngRm}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{netPaymentToTng}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="610" y="0" width="130" height="20"/>

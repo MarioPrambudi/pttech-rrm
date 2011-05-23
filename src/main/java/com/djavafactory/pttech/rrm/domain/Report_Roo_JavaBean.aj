@@ -243,14 +243,6 @@ privileged aspect Report_Roo_JavaBean {
         this.transactionDate = transactionDate;
     }
     
-    public Date Report.getTransactionDateTime() {
-        return this.transactionDateTime;
-    }
-    
-    public void Report.setTransactionDateTime(Date transactionDateTime) {
-        this.transactionDateTime = transactionDateTime;
-    }
-    
     public BigDecimal Report.getGrossPaymentToTngRm() {
         return this.grossPaymentToTngRm;
     }

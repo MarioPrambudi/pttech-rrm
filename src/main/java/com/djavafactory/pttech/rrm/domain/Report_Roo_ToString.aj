@@ -38,7 +38,6 @@ privileged aspect Report_Roo_ToString {
         sb.append("TotalAmountCancelledRm: ").append(getTotalAmountCancelledRm()).append(", ");
         sb.append("TotalRefundToCustomerRm: ").append(getTotalRefundToCustomerRm()).append(", ");
         sb.append("TransactionDate: ").append(getTransactionDate()).append(", ");
-        sb.append("TransactionDateTime: ").append(getTransactionDateTime()).append(", ");
         sb.append("GrossPaymentToTngRm: ").append(getGrossPaymentToTngRm()).append(", ");
         sb.append("TotalCancellationRm: ").append(getTotalCancellationRm()).append(", ");
         sb.append("AmountCreditedToTngRm: ").append(getAmountCreditedToTngRm()).append(", ");

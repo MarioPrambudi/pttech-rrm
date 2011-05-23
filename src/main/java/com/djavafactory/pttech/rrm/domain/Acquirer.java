@@ -62,7 +62,7 @@ public class Acquirer {
     private Date createdTime;
 
     @Temporal(TemporalType.TIMESTAMP)
-     @DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
+    @DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
     private Date modifiedTime;
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "acquirer")

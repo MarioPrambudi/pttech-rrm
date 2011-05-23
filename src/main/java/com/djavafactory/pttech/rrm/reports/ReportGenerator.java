@@ -154,6 +154,33 @@ public class ReportGenerator {
 	    cal.set(calNow.get(Calendar.YEAR), calNow.get(Calendar.MONTH), date);
 	    return cal.getTime();
     }
+    
+	/**
+	 * Get getTotalPaymentToTNG (totalReloadAmount + totalFee - sumCommAmountDeductedBySOF)
+	 * @param totalReloadQty long
+	 * @param totalReloadAmount BigDecimal 
+	 * @return BigDecimal - TotalPaymentToTNG
+	 */    
+    public static BigDecimal getTotalPaymentToTNG(long totalReloadQty, BigDecimal totalReloadAmount)
+    {
+    	BigDecimal sumCommissionAmountDeductedBySof= getSumCommissionAmountDeductedBySof(totalReloadQty);
+        BigDecimal totalFee = getTotalFee(totalReloadQty);
+    	BigDecimal totalPaymentToTNG =  totalReloadAmount.add(totalFee).subtract(sumCommissionAmountDeductedBySof);
+    	
+    	return totalPaymentToTNG;
+    	
+    }
+    
+    /**
+	 * Get settlementNetPaymentToTng (totalPaymentToTNG- totalCancellation)
+	 * @param totalPaymentToTNG BigDecimal
+	 * @param totalCancellation BigDecimal
+	 * @return BigDecimal - settlementNetPaymentToTng
+	 */
+    public static BigDecimal getSettlementNetPaymentToTng(BigDecimal totalPaymentToTNG, BigDecimal totalCancellation) {	
+     	BigDecimal settlementNetPaymentToTng = totalPaymentToTNG.subtract(totalCancellation);
+     	 return settlementNetPaymentToTng; 
+    }
 	/*
 	 * end calculation methods
    	*/
@@ -176,6 +203,10 @@ public class ReportGenerator {
 	            {
 	            	report.setModifiedDate(reloadrequest.getModifiedTime());
 	            }
+	            if(reloadrequest.getTotalCancellationAmt() != null)
+	            {
+	            	report.setTotalCancellationRm(reloadrequest.getTotalCancellationAmt());
+	            }
 	            listReport.add(report);
 
             } catch (Exception e) {
@@ -196,10 +227,26 @@ public class ReportGenerator {
 		  listStatus.add(Constants.RELOAD_REQUEST_FAILED.toLowerCase());			
 		  listStatus.add(Constants.RELOAD_REQUEST_EXPIRED.toLowerCase());			
 		  listStatus.add(Constants.RELOAD_REQUEST_MANUALCANCEL.toLowerCase());
-		  listStatus.add(Constants.RELOAD_REQUEST_SUCCESS.toLowerCase()); 
+		  listStatus.add(Constants.RELOAD_REQUEST_SUCCESS.toLowerCase());
+		  listStatus.add(Constants.RELOAD_STATUS_PENDING.toLowerCase());
 		  return listStatus;		
 	  }
 	  
+	/**
+	 * get list of all status
+	 * @param none
+	 * @return List<String> - list of status
+	 */
+	  public static List<String> getListAllStatusNotPending(){
+		  List<String> listStatus = new ArrayList<String>();
+		  listStatus.add(Constants.RELOAD_REQUEST_NEW.toLowerCase());
+		  listStatus.add(Constants.RELOAD_REQUEST_FAILED.toLowerCase());			
+		  listStatus.add(Constants.RELOAD_REQUEST_EXPIRED.toLowerCase());			
+		  listStatus.add(Constants.RELOAD_REQUEST_MANUALCANCEL.toLowerCase());
+		  listStatus.add(Constants.RELOAD_REQUEST_SUCCESS.toLowerCase());
+		  return listStatus;		
+	  }
+		  
 	/**
 	 * get list of all cancellation status
 	 * @param none
@@ -479,7 +526,7 @@ public class ReportGenerator {
 
             	Report report = (Report)it.next();
             	//manually set value into report fields
-            	report.setReloadDateTime(report.getRequestedTime());
+            	report.setReloadDateTime(report.getModifiedDate());
             	report.setFees(getReportFee());
             	report.setTotalChargeToCustomer(getTotalChargeToCustomer(report.getReloadAmount()));
             	report.setCommissionAmountDeductedBySof(getCommAmountDeductedBySOF());
@@ -586,7 +633,6 @@ public class ReportGenerator {
     
 
     /**
-     * TO DO
      * get result for report dailySettlementReloadReqFrmCelcomReport/TG0007 
      * @param dateMinStr String
      * @param dateMaxStr String
@@ -596,32 +642,68 @@ public class ReportGenerator {
      * @throws Exception 
      */
   public static List<Report> getDailySettlementReloadFrmCelcomReport(String dateMinStr, String dateMaxStr, int first, int size) throws Exception {
-	List<Report> listReport = new ArrayList<Report>();
-    List<Report> listCompleteReport = new ArrayList<Report>();
-  	List<String> listStatus = getListAllStatus();
-  	Date dateMin = getDateMin(dateMinStr);
-	Date dateMax = getDateMax(dateMin, dateMaxStr);	
-  	List<ReloadRequest> listReloadRequest = ReloadRequest.findReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMax, listStatus, first, size).getResultList();
-    listReport = copyReloadRequestToReport(listReloadRequest);
-	Iterator it = listReport.iterator();
-	
-      while(it.hasNext())
-		{        
-          try {
-          	Report report = (Report)it.next();
-          	//TODO:
-          	report.setTransactionDateTime(report.getRequestedTime());
-          	report.setTotalReloadQty(listReport.size());
-          	report.setGrossPaymentToTngRm(report.getReloadAmount());
-          	report.setTotalCancellationRm(report.getReloadAmount());
-          	report.setAmountCreditedToTngRm(report.getReloadAmount());
-          	report.setDateTimeCreditedToTngAccount(report.getRequestedTime());
-          	listCompleteReport.add(report);
-          } catch (Exception e) {
-              e.printStackTrace();  
-          }
-      }       
-      return listCompleteReport;
+	  List <Report> listReport = new ArrayList<Report>();
+	  List <Report> listCompleteReport = new ArrayList<Report>();
+	  List<String> listStatus = getListAllStatusNotPending();
+	  List<Report> listReportPage = new ArrayList<Report>();
+	  Date dateMin = getSummaryDateMin(dateMinStr);
+	  Date dateMax = getDateMax(dateMin, dateMaxStr);		
+	  Date dateMaxSearch = null;	  
+	  BigDecimal sumGrossPaymentToTNG = new BigDecimal("0.00");
+	  BigDecimal sumCancellationAmt = new BigDecimal("0.00");
+	  BigDecimal sumAmtCreditedToTNG = new BigDecimal("0.00");
+	  Long sumReloadQty = new Long(0);
+
+	  while(dateMin.before(dateMax))
+	  {	   		   		
+		dateMaxSearch = DateUtil.add(dateMin, 5, 1);   			
+		List<ReloadRequest> listReloadRequest = ReloadRequest.findSummaryReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMaxSearch, listStatus, -1, 0);
+		
+		if (listReloadRequest != null && listReloadRequest.size()>0)
+		{
+			listReport = copyReloadRequestToReport(listReloadRequest);    		
+			Iterator it = listReport.iterator();
+			Report reportSummary = new Report();
+	        while(it.hasNext()) {        
+	            try {
+	              reportSummary = (Report)it.next();
+				  reportSummary.setTransactionDate(reportSummary.getModifiedDate());
+				  reportSummary.setGrossPaymentToTngRm(getTotalPaymentToTNG(reportSummary.getTotalReloadQty(), reportSummary.getReloadAmount()));		         		          
+		          reportSummary.setAmountCreditedToTngRm(getSettlementNetPaymentToTng(reportSummary.getGrossPaymentToTngRm(), reportSummary.getTotalCancellationRm()));
+		          //reportSummary.setDateCreditedToTngAccount(); Blank
+		        } catch (Exception e) {
+	                e.printStackTrace();  
+	            }
+	        }
+	        listCompleteReport.add(reportSummary);    		
+		}  		
+		dateMin = dateMaxSearch;
+	  }
+
+		listReportPage = formatSummaryList(listCompleteReport, first, size);
+		Iterator it = listReportPage.iterator();
+	  	while(it.hasNext()){
+	  		Report reportSummary = new Report();
+	  		reportSummary = (Report)it.next();
+	  		if (reportSummary.getTotalCancellationRm() != null && reportSummary.getTotalCancellationRm() != new BigDecimal("0.00"))
+	      	{
+	  			sumCancellationAmt = sumCancellationAmt.add(reportSummary.getTotalCancellationRm());
+	      	}
+	      	sumGrossPaymentToTNG = sumGrossPaymentToTNG.add(reportSummary.getGrossPaymentToTngRm());
+	      	sumAmtCreditedToTNG = sumAmtCreditedToTNG.add(reportSummary.getAmountCreditedToTngRm());
+	      	sumReloadQty = sumReloadQty + reportSummary.getTotalReloadQty();
+	  	}
+	  	if(!listReportPage.isEmpty())
+		   	 {
+		    	//the add the sum to the end of the report list
+		        Report reportSum = new Report();
+		        reportSum.setGrossPaymentToTngRm(sumGrossPaymentToTNG);
+		        reportSum.setAmountCreditedToTngRm(sumAmtCreditedToTNG);
+		        reportSum.setTotalCancellationRm(sumCancellationAmt);
+		        reportSum.setTotalReloadQty(sumReloadQty);
+		        listReportPage.add(reportSum);
+		   	 }	  	
+	  	return listReportPage;
   }
 
   	//Tng Summary Reports
@@ -746,7 +828,7 @@ public class ReportGenerator {
                 while(it.hasNext()) {        
                     try {
                       reportSummary = (Report)it.next();
-                      reportSummary.setReloadDate(reportSummary.getRequestedTime());
+                      reportSummary.setReloadDate(reportSummary.getModifiedDate());
 	                  reportSummary.setTotalReloadAmountRm(reportSummary.getReloadAmount());
 	                  reportSummary.setTotalFees(getTotalFee(reportSummary.getTotalReloadQty()));
 	                  reportSummary.setSumTotalChargeToCustomer(getSumTotalChargeToCustomer(reportSummary.getTotalReloadAmountRm(), reportSummary.getTotalFees()));
@@ -870,7 +952,6 @@ public class ReportGenerator {
     }
   
     /** 
-     * TO DO
      * get result for report summarySettlementReloadReqFrmCelcomReport/TG0008
      * @param dateMinStr String
      * @param dateMaxStr String
@@ -882,11 +963,17 @@ public class ReportGenerator {
     public static List<Report> getSummarySettlementReloadFrmCelcomReport(String dateMinStr, String dateMaxStr, int first, int size) throws Exception {
 	  List <Report> listReport = new ArrayList<Report>();
 	  List <Report> listCompleteReport = new ArrayList<Report>();
-	  List<String> listStatus = getListAllStatus();
+	  List<String> listStatus = getListAllStatusNotPending();
 	  List<Report> listReportPage = new ArrayList<Report>();
 	  Date dateMin = getSummaryDateMin(dateMinStr);
 	  Date dateMax = getSummaryDateMax(dateMin, dateMaxStr);		
 	  Date dateMaxSearch = null;
+	  
+	  BigDecimal sumPaymentToTNG = new BigDecimal("0.00");
+	  BigDecimal sumCancellationAmt = new BigDecimal("0.00");
+	  BigDecimal sumNetPaymentToTNG = new BigDecimal("0.00");
+	  Long sumReloadQty = new Long(0);
+
 
 	  while(dateMin.before(dateMax))
 	  {	   		   		
@@ -901,12 +988,10 @@ public class ReportGenerator {
 	        while(it.hasNext()) {        
 	            try {
 	              reportSummary = (Report)it.next();
-	               //TODO
-				  reportSummary.setTransactionDate(reportSummary.getRequestedTime());
-		          reportSummary.setGrossPaymentToTngRm(reportSummary.getReloadAmount());
-		          reportSummary.setTotalCancellationRm(reportSummary.getReloadAmount());
-		          reportSummary.setAmountCreditedToTngRm(reportSummary.getReloadAmount());
-		          reportSummary.setDateCreditedToTngAccount(reportSummary.getRequestedTime());
+				  reportSummary.setTransactionDate(reportSummary.getModifiedDate());
+				  reportSummary.setTotalPaymentToTngRm(getTotalPaymentToTNG(reportSummary.getTotalReloadQty(), reportSummary.getReloadAmount()));		         		          
+		          reportSummary.setNetPaymentToTng(getSettlementNetPaymentToTng(reportSummary.getTotalPaymentToTngRm(), reportSummary.getTotalCancellationRm()));
+		          //reportSummary.setDateCreditedToTngAccount(); Blank
 		        } catch (Exception e) {
 	                e.printStackTrace();  
 	            }
@@ -915,11 +1000,36 @@ public class ReportGenerator {
 		}  		
 		dateMin = dateMaxSearch;
 	  }
-	  listReportPage = formatSummaryList(listCompleteReport, first, size);	
-	  //sum
-	  return listReportPage;   
+
+		listReportPage = formatSummaryList(listCompleteReport, first, size);
+		Iterator it = listReportPage.iterator();
+	  	while(it.hasNext()){
+	  		Report reportSummary = new Report();
+	  		reportSummary = (Report)it.next();
+	  		if (reportSummary.getTotalCancellationRm() != null && reportSummary.getTotalCancellationRm() != new BigDecimal("0.00"))
+	      	{
+	  			sumCancellationAmt = sumCancellationAmt.add(reportSummary.getTotalCancellationRm());
+	      	}
+	      	sumPaymentToTNG = sumPaymentToTNG.add(reportSummary.getTotalPaymentToTngRm());
+	      	sumNetPaymentToTNG = sumNetPaymentToTNG.add(reportSummary.getNetPaymentToTng());
+	      	sumReloadQty = sumReloadQty + reportSummary.getTotalReloadQty();
+	  	}
+	  	if(!listReportPage.isEmpty())
+		   	 {
+		    	//the add the sum to the end of the report list
+		        Report reportSum = new Report();
+		        reportSum.setTotalPaymentToTngRm(sumPaymentToTNG);
+		        reportSum.setNetPaymentToTng(sumNetPaymentToTNG);
+		        reportSum.setTotalCancellationRm(sumCancellationAmt);
+		        reportSum.setTotalReloadQty(sumReloadQty);
+		        listReportPage.add(reportSum);
+		   	 }
+	  	
+	  	return listReportPage;
+ 	 
   }
     
+
 
     /*
 	 * End of TNG Report
