@@ -25,7 +25,9 @@ insert into configuration ( config_key , config_value , ordering , version ) val
 insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.CEL.CE0006', 'Summary of Daily Transactions By Range of Dates Report', 6, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.FEES', '1.00', 1, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.CELCOMM', '0.55', 2, 0);
-insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.TNGCOMM', '0.45', 3, 0);
+insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.TNGCOMM', '0.45', 3, 0);;
+insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.PRICOMM', '0.30', 4, 0);
+insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.CMMCOMM', '0.25', 5, 0);
 
 
 insert into province ( id, name ) values ( 1, 'Johor' );

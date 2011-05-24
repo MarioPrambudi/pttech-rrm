@@ -187,5 +187,13 @@ public class Report {
     
     @NumberFormat(pattern="#,##0.00")
     private BigDecimal totalGrossAmount;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern="dd/MM/yyyy")
+	private Date date;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern="HH:mm:ss")
+	private Date time;
 
 }

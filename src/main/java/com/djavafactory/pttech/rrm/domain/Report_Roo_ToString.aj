@@ -21,6 +21,7 @@ privileged aspect Report_Roo_ToString {
         sb.append("CmmFee: ").append(getCmmFee()).append(", ");
         sb.append("CmmpTrxId: ").append(getCmmpTrxId()).append(", ");
         sb.append("CommissionAmountDeductedBySof: ").append(getCommissionAmountDeductedBySof()).append(", ");
+        sb.append("Date: ").append(getDate()).append(", ");
         sb.append("DateCancelRequest: ").append(getDateCancelRequest()).append(", ");
         sb.append("DateCreditedToTngAccount: ").append(getDateCreditedToTngAccount()).append(", ");
         sb.append("DateRefundedCustomer: ").append(getDateRefundedCustomer()).append(", ");
@@ -46,6 +47,7 @@ privileged aspect Report_Roo_ToString {
         sb.append("SumCommissionAmountDeductedBySof: ").append(getSumCommissionAmountDeductedBySof()).append(", ");
         sb.append("SumNetPaymentToTng: ").append(getSumNetPaymentToTng()).append(", ");
         sb.append("SumTotalChargeToCustomer: ").append(getSumTotalChargeToCustomer()).append(", ");
+        sb.append("Time: ").append(getTime()).append(", ");
         sb.append("TngFee: ").append(getTngFee()).append(", ");
         sb.append("TngKey: ").append(getTngKey()).append(", ");
         sb.append("TngMfgNo: ").append(getTngMfgNo()).append(", ");

@@ -56,7 +56,7 @@ public class ReportGenerator {
     /**
 	 * Get Tng commission value from configuration
 	 * @param none
-	 * @return BigDecimal - Tng commission commission in BigDecimal
+	 * @return BigDecimal - Tng commission in BigDecimal
 	 */ 
     public static BigDecimal getReportTngComm() {	      
      	 String reportTngComm = Configuration.getReportConfigValue(Constants.REPORT_CONFIG_TNGCOMM);
@@ -64,6 +64,27 @@ public class ReportGenerator {
      	 return decimalTngComm; 
     }
     
+    /**
+	 * Get printis commission value from configuration
+	 * @param none
+	 * @return BigDecimal - Printis commission in BigDecimal
+	 */ 
+    public static BigDecimal getReportPrintisComm() {	      
+     	 String reportPriComm = Configuration.getReportConfigValue(Constants.REPORT_CONFIG_PRINTIS_COMM);
+     	 BigDecimal decimalPriComm = new BigDecimal(reportPriComm); 
+     	 return decimalPriComm; 
+    }
+    
+    /**
+	 * Get CMM commission value from configuration
+	 * @param none
+	 * @return BigDecimal - CMM commission in BigDecimal
+	 */ 
+    public static BigDecimal getReportCmmComm() {	      
+     	 String reportCMMComm = Configuration.getReportConfigValue(Constants.REPORT_CONFIG_CMM_COMM);
+     	 BigDecimal decimalCMMComm= new BigDecimal(reportCMMComm); 
+     	 return decimalCMMComm; 
+    }
     /**
 	 * Get totalChargeToCustomer (reload amount + fee)
 	 * @param reloadAmount BigDecimal
@@ -181,6 +202,111 @@ public class ReportGenerator {
      	BigDecimal settlementNetPaymentToTng = totalPaymentToTNG.subtract(totalCancellation);
      	 return settlementNetPaymentToTng; 
     }
+    
+    /**
+	 * Get getGrossAmount (reloadAmount + fee)
+	 * @param reloadAmount BigDecimal 
+	 * @return BigDecimal - grossAmount
+	 */
+    public static BigDecimal getGrossAmount(BigDecimal reloadAmount) {	
+     	BigDecimal grossAmount = reloadAmount.add(getReportFee());
+     	 return grossAmount; 
+    }
+ 
+    /**
+	 * Get getTngFee (tngComm x fee)
+	 * @param none
+	 * @return BigDecimal - tngFee
+	 */
+    public static BigDecimal getTngFee() {	
+     	BigDecimal tngFee = getReportTngComm().multiply(getReportFee());
+     	 return tngFee ; 
+    }
+    
+  
+    /**
+	 * Get getPrintisFee (priComm x fee)
+	 * @param none
+	 * @return BigDecimal - printisFee
+	 */
+    public static BigDecimal getPrintisFee() {	
+     	BigDecimal printisFee = getReportPrintisComm().multiply(getReportFee());
+     	 return printisFee ; 
+    }
+    
+    /**
+	 * Get getCmmFee (cmmComm x fee)
+	 * @param none
+	 * @return BigDecimal - cmmFee
+	 */
+    public static BigDecimal getCmmFee() {	
+     	BigDecimal cmmFee = getReportCmmComm().multiply(getReportFee());
+     	 return cmmFee ; 
+    }
+    
+    /**
+	 * Get getCelcomFee (celComm x fee)
+	 * @param none
+	 * @return BigDecimal - celcomFee
+	 */
+    public static BigDecimal getCelcomFee() {	
+     	BigDecimal celcomFee = getReportCelComm().multiply(getReportFee());
+     	 return celcomFee; 
+    }
+    
+    /**
+	 * Get getTotalFee (cmmFee + printisFee + tngFee + celcomFee)
+	 * @param none
+	 * @return BigDecimal - totalFee
+	 */
+    public static BigDecimal getCelcomTotalFee() {	
+     	BigDecimal totalFee = getCmmFee().add(getPrintisFee().add(getTngFee()));
+//     	getCelcomFee() TODO: sum all fee     	
+     	return totalFee ; 
+    }
+    
+    /**
+	 * Get getAmountDueTmg (reloadAmount + tngFee)
+	 * @param reloadAmount BigDecimal 
+	 * @return BigDecimal - amountDueTmg
+	 */
+    public static BigDecimal getAmountDueTmg(BigDecimal reloadAmount) {	
+     	BigDecimal amountDueTmg =  reloadAmount.add(getTngFee());  	
+     	return amountDueTmg ; 
+    }
+    
+    
+    /**
+	 * Get getAmountDueTmg (reloadAmount + tngFee)
+	 * @param reloadAmount BigDecimal 
+	 * @return BigDecimal - amountDueTmg
+	 */
+    public static BigDecimal getAmountDuePrintis(BigDecimal reloadAmount) {	
+     	BigDecimal amountDuePrintis =  reloadAmount.add(getPrintisFee());  	
+     	return amountDuePrintis ; 
+    }
+    
+    /**
+	 * Get getAmountDueTmg (reloadAmount + tngFee)
+	 * @param reloadAmount BigDecimal 
+	 * @return BigDecimal - amountDueTmg
+	 */
+    public static BigDecimal getAmountDueCelcomMobile(BigDecimal reloadAmount) {	
+     	BigDecimal amountDueCelcomMobile =  reloadAmount.add(getCelcomFee());  	
+     	return amountDueCelcomMobile ; 
+    }
+    
+    /**
+	 * Get getAmountDueTmg (reloadAmount + tngFee)
+	 * @param reloadAmount BigDecimal 
+	 * @return BigDecimal - amountDueTmg
+	 */
+    public static BigDecimal getAmountDueCmm(BigDecimal reloadAmount) {	
+     	BigDecimal amountDueCmm =  reloadAmount.add(getCmmFee());  	
+     	return amountDueCmm ; 
+    }
+
+    
 	/*
 	 * end calculation methods
    	*/
@@ -360,6 +486,20 @@ public class ReportGenerator {
 		  return totalReport;
 	  }
 	  
+    /**
+	 * get total number of report based on requested date between and status
+	 * @param String dateMinStr
+	 * @param String dateMaxStr 
+	 * @param listStatus List<String>  
+	 * @return long - total number of report
+	 */
+	  public static long getTotalReportCelcom(String dateMinStr, String dateMaxStr, List<String> listStatus) throws ParseException
+	  {
+		  Date dateMin = getDateMin(dateMinStr);
+		  Date dateMax = getDateMax(dateMin, dateMaxStr);	
+		  long totalReport = ReloadRequest.totalReloadRequests(dateMin, dateMax, listStatus);
+		  return totalReport;
+	  }
 	/**
 	 * get total number of summary report based on requested date between and status
 	 * @param String dateMinStr
@@ -983,29 +1123,26 @@ public class ReportGenerator {
 		if (listReloadRequest != null && listReloadRequest.size()>0)
 		{
 			listReport = copyReloadRequestToReport(listReloadRequest);    		
-			Iterator it = listReport.iterator();
-			Report reportSummary = new Report();
-	        while(it.hasNext()) {        
+			
+			for(Report reportSummary : listReport)
+			{        
 	            try {
-	              reportSummary = (Report)it.next();
 				  reportSummary.setTransactionDate(reportSummary.getModifiedDate());
 				  reportSummary.setTotalPaymentToTngRm(getTotalPaymentToTNG(reportSummary.getTotalReloadQty(), reportSummary.getReloadAmount()));		         		          
 		          reportSummary.setNetPaymentToTng(getSettlementNetPaymentToTng(reportSummary.getTotalPaymentToTngRm(), reportSummary.getTotalCancellationRm()));
 		          //reportSummary.setDateCreditedToTngAccount(); Blank
+		          listCompleteReport.add(reportSummary); 
 		        } catch (Exception e) {
 	                e.printStackTrace();  
 	            }
-	        }
-	        listCompleteReport.add(reportSummary);    		
+	        }         		
 		}  		
 		dateMin = dateMaxSearch;
 	  }
 
 		listReportPage = formatSummaryList(listCompleteReport, first, size);
-		Iterator it = listReportPage.iterator();
-	  	while(it.hasNext()){
-	  		Report reportSummary = new Report();
-	  		reportSummary = (Report)it.next();
+		for(Report reportSummary : listReport)
+		{
 	  		if (reportSummary.getTotalCancellationRm() != null && reportSummary.getTotalCancellationRm() != new BigDecimal("0.00"))
 	      	{
 	  			sumCancellationAmt = sumCancellationAmt.add(reportSummary.getTotalCancellationRm());
@@ -1014,6 +1151,7 @@ public class ReportGenerator {
 	      	sumNetPaymentToTNG = sumNetPaymentToTNG.add(reportSummary.getNetPaymentToTng());
 	      	sumReloadQty = sumReloadQty + reportSummary.getTotalReloadQty();
 	  	}
+		
 	  	if(!listReportPage.isEmpty())
 		   	 {
 		    	//the add the sum to the end of the report list
@@ -1023,10 +1161,8 @@ public class ReportGenerator {
 		        reportSum.setTotalCancellationRm(sumCancellationAmt);
 		        reportSum.setTotalReloadQty(sumReloadQty);
 		        listReportPage.add(reportSum);
-		   	 }
-	  	
-	  	return listReportPage;
- 	 
+		   	 }	  	
+	  	return listReportPage; 	 
   }
     
 
@@ -1047,7 +1183,9 @@ public class ReportGenerator {
      * @throws Exception 
      */
     public static List<Report> getDailyTransactionDetailsReport(int first, int size) throws Exception {
-    	return getDailyTransactionDetailsReport(null, null, first, size);
+    	List<Report> listReportResult = new ArrayList<Report>();
+    	listReportResult = getDailyTransactionDetailsReport("null", "null", first, size);
+    	return listReportResult;
     }
     
     /** 
@@ -1061,17 +1199,11 @@ public class ReportGenerator {
     	List<Report> listReport = new ArrayList<Report>();
         List<Report> listCompleteReport = new ArrayList<Report>();
       	List<String> listStatus = getListAllStatus();
-      	Date dateMin = null;
-    	Date dateMax = null;
-    	
-    	if(dateMinStr != null && dateMaxStr != null) {System.out.println("<<<<<<<<<<<<< date tidak null");
-      	  	dateMin = getDateMin(dateMinStr);
-	    	dateMax = getDateMax(dateMin, dateMaxStr);
-    	}
-      	
-    	List<ReloadRequest> listReloadRequest = ReloadRequest.findReloadRequestsByParamCelcom(dateMin, dateMax, listStatus, first, size);
+      	Date dateMin = getDateMin(dateMinStr);
+    	Date dateMax = getDateMax(dateMin, dateMaxStr);	
+    	List<ReloadRequest> listReloadRequest = ReloadRequest.findReloadRequestsByParamCelcom(dateMin, dateMax, listStatus, first, size).getResultList();
     	listReport = copyReloadRequestToReport(listReloadRequest);
-
+    	
 //		BigDecimal totalFee= new BigDecimal("0.00");
 //		BigDecimal totalAmountRequest = new BigDecimal("0.00");
 //		BigDecimal sumTotalChargeCust= new BigDecimal("0.00");
@@ -1081,9 +1213,7 @@ public class ReportGenerator {
 		for (Report report : listReport) {
 			try {
 				// TODO :set attribute for daily transaction details report
-				
-//				report.setDate();
-//				report.setTime();
+
 //				report.setCmmpTrxId(); 		// Long
 //				report.setTngTrxId(); 		// Long
 //				report.setAircashAccNo(); 	// Long
@@ -1091,18 +1221,20 @@ public class ReportGenerator {
 //				report.setTngMfgNo(); 		// Long
 				
             	report.setFees(getReportFee());
-            	report.setGrossAmount(report.getReloadAmount().add(report.getFees())); 			// reloadAmount + fee
-            	report.setTngFee(new BigDecimal(0.45)); 				// RM 0.45
-            	report.setPrintisFee(new BigDecimal(0.30)); 			// RM 0.30
-            	report.setCelcomMobileFee(new BigDecimal(0.00)); 		// RM 0.00
-            	report.setCmmFee(new BigDecimal(0.25)); 				// RM 0.25
-            	report.setTotalFees(new BigDecimal(1)); 				// RM 1
-            	report.setAmountDueTng(report.getReloadAmount().add(report.getTngFee()));	// reloadAmount + tng Fee
-            	report.setAmountDuePrintis(new BigDecimal(0.30)); 		// RM 0.30
-            	report.setAmountDueCelcomMobile(new BigDecimal(0.00)); 	// RM 0.00
-            	report.setAmountDueCmm(new BigDecimal(0.30)); 			// RM 0.25
-            	
+            	report.setDate(report.getRequestedTime());
+            	report.setTime(report.getRequestedTime());
+            	report.setGrossAmount(getGrossAmount(report.getReloadAmount())); 		
+            	report.setTngFee(getTngFee()); 				
+            	report.setPrintisFee(getPrintisFee()); 			
+            	report.setCelcomMobileFee(new BigDecimal(0.00)); 		// RM 0.00 TODO
+            	report.setCmmFee(getCmmFee()); 				
+            	report.setTotalFees(getCelcomTotalFee()); 				
+            	report.setAmountDueTng(getAmountDueTmg(report.getReloadAmount()));	
+            	report.setAmountDuePrintis(getAmountDuePrintis(report.getReloadAmount())); 		
+            	report.setAmountDueCelcomMobile(getAmountDueCelcomMobile(report.getReloadAmount())); 
+            	report.setAmountDueCmm(getAmountDueCmm(report.getReloadAmount())); 			      	
             	listCompleteReport.add(report);
+            	
 //            	//sum
 //            	totalFee = totalFee.add(report.getFees());
 //            	totalAmountRequest = totalAmountRequest.add(report.getReloadAmount());
@@ -1135,8 +1267,10 @@ public class ReportGenerator {
      * @return List A report list
      * @throws Exception 
      */
-    public static List<Report> getDailyTransactionFeeDetailsReport() throws Exception {
-    	return getDailyTransactionFeeDetailsReport(null, null, -1, -1);
+    public static List<Report> getDailyTransactionFeeDetailsReport(int first, int size) throws Exception {
+    	List<Report> listReportResult = new ArrayList<Report>();
+    	listReportResult = getDailyTransactionFeeDetailsReport("null", "null", first, size);
+    	return listReportResult;
     }
     
     /** 
@@ -1153,7 +1287,7 @@ public class ReportGenerator {
       	Date dateMin = getDateMin(dateMinStr);
     	Date dateMax = getDateMax(dateMin, dateMaxStr);
       	
-    	List<ReloadRequest> listReloadRequest = ReloadRequest.findReloadRequestsByParamCelcom(dateMin, dateMax, listStatus, first, size);
+    	List<ReloadRequest> listReloadRequest = ReloadRequest.findReloadRequestsByParamCelcom(dateMin, dateMax, listStatus, first, size).getResultList();
     	listReport = copyReloadRequestToReport(listReloadRequest);
 
 //		BigDecimal totalFee= new BigDecimal("0.00");
@@ -1165,20 +1299,22 @@ public class ReportGenerator {
 		for (Report report : listReport) {
 			try {
 				// TODO :set attribute for daily transaction details report
-				
-//				report.setSofRequestedDatetime(report.getRequestedTime());
-//            	report.setFees(getReportFee());
-//            	report.setTotalChargeToCustomer(getTotalChargeToCustomer(report.getReloadAmount()));
-//            	report.setCommissionAmountDeductedBySof(getCommAmountDeductedBySOF());
-//            	report.setNetPaymentToTng(getNetPaymentToTnG(report.getTotalChargeToCustomer(), report.getCommissionAmountDeductedBySof()));
-//            	listCompleteReport.add(report);
+				report.setDate(report.getRequestedTime());
+            	report.setTime(report.getRequestedTime());
+				report.setFees(getReportFee());           
+            	report.setTngFee(getTngFee()); 				
+            	report.setPrintisFee(getPrintisFee()); 			
+            	report.setCelcomMobileFee(new BigDecimal(0.00)); 		// RM 0.00 TODO
+            	report.setCmmFee(getCmmFee()); 			
+            	report.setTotalFees(getCelcomTotalFee()); 				
+            	listCompleteReport.add(report);
+            	
 //            	//sum
 //            	totalFee = totalFee.add(report.getFees());
 //            	totalAmountRequest = totalAmountRequest.add(report.getReloadAmount());
 //            	sumTotalChargeCust = sumTotalChargeCust.add(report.getTotalChargeToCustomer());
 //            	totalCommSofDeduct = totalCommSofDeduct.add(report.getCommissionAmountDeductedBySof());
 //            	totalNetPaymentTng = totalNetPaymentTng.add(report.getNetPaymentToTng());
-            	listCompleteReport.add(report);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -1205,64 +1341,70 @@ public class ReportGenerator {
      * @throws Exception 
      */
     public static List<Report> getSummaryDailyTransactionDetailsReport(int first, int size) throws Exception {
-    	return getSummaryDailyTransactionDetailsReport(null, null, first, size);
+      	List<Report> listReportResult = new ArrayList<Report>();
+    	listReportResult = getSummaryDailyTransactionDetailsReport("null", "null", first, size);
+    	return listReportResult;
     }
     
     /** 
      * TODO
-     * get result for report ummaryDailyTransactionDetailsReportByRangeOfDatesReport/CE0006
+     * get result for report summaryDailyTransactionDetailsReportByRangeOfDatesReport/CE0006
      * @param dateMin, dateMax
      * @return List A report list
      * @throws Exception 
      */
     public static List<Report> getSummaryDailyTransactionDetailsReport(String dateMinStr, String dateMaxStr, int first, int size) throws Exception {
-    	List<Report> listReport = new ArrayList<Report>();
-        List<Report> listCompleteReport = new ArrayList<Report>();
-      	List<String> listStatus = getListAllStatus();
-      	Date dateMin = getDateMin(dateMinStr);
-    	Date dateMax = getDateMax(dateMin, dateMaxStr);
-      	
-    	List<ReloadRequest> listReloadRequest = ReloadRequest.findReloadRequestsByParamCelcom(dateMin, dateMax, listStatus, first, size);
-    	listReport = copyReloadRequestToReport(listReloadRequest);
+      List <Report> listReport = new ArrayList<Report>();
+   	  List <Report> listCompleteReport = new ArrayList<Report>();
+   	  List<String> listStatus = getListAllStatusNotPending();
+   	  List<Report> listReportPage = new ArrayList<Report>();
+   	  Date dateMin = getDateMin(dateMinStr);
+   	  Date dateMax = getDateMax(dateMin, dateMaxStr);		
+   	  Date dateMaxSearch = null;
+   	  
+   	  while(dateMin.before(dateMax))
+   	  {	   		   		
+   		dateMaxSearch = DateUtil.add(dateMin, 5, 1);   			
+   		List<ReloadRequest> listReloadRequest = ReloadRequest.findSummaryReloadRequestsByRequestedTimeBetweenAndStatus(dateMin, dateMaxSearch, listStatus, -1, 0);
+   		
+   		if (listReloadRequest != null && listReloadRequest.size()>0)
+   		{
+   			listReport = copyReloadRequestToReport(listReloadRequest);    		
+   			
+   			for(Report reportSummary : listReport)
+   			{        
+   	            try {
+   	          // TODO :set attribute for daily transaction details report
+   	            	reportSummary.setDate(reportSummary.getRequestedTime());
+   	            	reportSummary.setFees(getTotalFee(reportSummary.getTotalReloadQty()));
+   	            	reportSummary.setTotalGrossAmount(reportSummary.getReloadAmount().add(reportSummary.getFees()));
+   	            	reportSummary.setTngFee(getTngFee().multiply(new BigDecimal (reportSummary.getTotalReloadQty()))); 				
+   	            	reportSummary.setPrintisFee(getPrintisFee().multiply(new BigDecimal (reportSummary.getTotalReloadQty()))); 		
+   	            	reportSummary.setCelcomMobileFee(new BigDecimal(0.00)); 		// RM 0.00 TODO
+   	            	reportSummary.setCmmFee(getCmmFee().multiply(new BigDecimal (reportSummary.getTotalReloadQty()))); 		
+   	            	reportSummary.setTotalFees(reportSummary.getTngFee().add(reportSummary.getPrintisFee().add(reportSummary.getCmmFee()))); 	//sum up all fee		
+   	            	reportSummary.setAmountDueTng(reportSummary.getReloadAmount().add(reportSummary.getTngFee()));	
+   	            	reportSummary.setAmountDuePrintis(reportSummary.getReloadAmount().add(reportSummary.getPrintisFee())); 		
+   	            	reportSummary.setAmountDueCelcomMobile(reportSummary.getReloadAmount().add(reportSummary.getCelcomMobileFee())); 	
+   	            	reportSummary.setAmountDueCmm(reportSummary.getReloadAmount().add(reportSummary.getCmmFee())); 			
+   	            	
+//   	       	  reportSummary.setDateCancelRequest(reportSummary.getModifiedDate());
+//              reportSummary.setReloadDate(reportSummary.getRequestedTime());
+//              reportSummary.setTotalCancellationQty(reportSummary.getTotalReloadQty());
+//              reportSummary.setTotalAmountCancelledRm(reportSummary.getReloadAmount());
+//              reportSummary.setTotalFees(getTotalFee(reportSummary.getTotalCancellationQty()));
+//              reportSummary.setTotalRefundToCustomerRm(reportSummary.getTotalAmountCancelledRm());
+//              reportSummary.setSumCommissionAmountDeductedBySof(getSumCommissionAmountDeductedBySof(reportSummary.getTotalCancellationQty()));                   
+   	            	listCompleteReport.add(reportSummary); 
+   		        } catch (Exception e) {
+   	                e.printStackTrace();  
+   	            }
+   	        }         		
+   		}  		
+   		dateMin = dateMaxSearch;
+   	  }
 
-//		BigDecimal totalFee= new BigDecimal("0.00");
-//		BigDecimal totalAmountRequest = new BigDecimal("0.00");
-//		BigDecimal sumTotalChargeCust= new BigDecimal("0.00");
-//		BigDecimal totalCommSofDeduct= new BigDecimal("0.00");
-//		BigDecimal totalNetPaymentTng= new BigDecimal("0.00");
-    	
-		for (Report report : listReport) {
-			try {
-				// TODO :set attribute for daily transaction details report
-				
-//				report.setSofRequestedDatetime(report.getRequestedTime());
-//            	report.setFees(getReportFee());
-//            	report.setTotalChargeToCustomer(getTotalChargeToCustomer(report.getReloadAmount()));
-//            	report.setCommissionAmountDeductedBySof(getCommAmountDeductedBySOF());
-//            	report.setNetPaymentToTng(getNetPaymentToTnG(report.getTotalChargeToCustomer(), report.getCommissionAmountDeductedBySof()));
-//            	listCompleteReport.add(report);
-//            	//sum
-//            	totalFee = totalFee.add(report.getFees());
-//            	totalAmountRequest = totalAmountRequest.add(report.getReloadAmount());
-//            	sumTotalChargeCust = sumTotalChargeCust.add(report.getTotalChargeToCustomer());
-//            	totalCommSofDeduct = totalCommSofDeduct.add(report.getCommissionAmountDeductedBySof());
-//            	totalNetPaymentTng = totalNetPaymentTng.add(report.getNetPaymentToTng());
-            	listCompleteReport.add(report);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-		}
-
-//      if(!listCompleteReport.isEmpty()) {
-//      	 //the add the sum to the end of the report list
-//          Report reportSum = new Report();
-//          reportSum.setFees(totalFee);
-//          reportSum.setReloadAmount(totalAmountRequest);
-//          reportSum.setTotalChargeToCustomer(sumTotalChargeCust);
-//          reportSum.setCommissionAmountDeductedBySof(totalCommSofDeduct);
-//          reportSum.setNetPaymentToTng(totalNetPaymentTng);
-//          listCompleteReport.add(reportSum);       	
-//      }		          
-        return listCompleteReport;
+   		listReportPage = formatSummaryList(listCompleteReport, first, size);  	
+   	  	return listReportPage; 	
     }
 }

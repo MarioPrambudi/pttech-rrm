@@ -451,4 +451,20 @@ privileged aspect Report_Roo_JavaBean {
         this.totalGrossAmount = totalGrossAmount;
     }
     
+    public Date Report.getDate() {
+        return this.date;
+    }
+    
+    public void Report.setDate(Date date) {
+        this.date = date;
+    }
+    
+    public Date Report.getTime() {
+        return this.time;
+    }
+    
+    public void Report.setTime(Date time) {
+        this.time = time;
+    }
+    
 }

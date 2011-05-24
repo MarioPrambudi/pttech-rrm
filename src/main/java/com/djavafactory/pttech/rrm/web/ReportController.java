@@ -377,20 +377,20 @@ public class ReportController extends BaseController {
 										 @RequestParam(value = "dateMin", required = false)String dateMin,
 										 @RequestParam(value = "dateMax", required = false)String dateMax) throws Exception {
 
-		if (dateMin==null) dateMin="null";
-		if (dateMax==null) dateMax="null";
+		dateMin="null";
+		dateMax="null";
 		if(format.equalsIgnoreCase("html")) {
 	        if (page != null || size != null) {
 			    int sizeNo = size == null ? 10 : size.intValue();
-	    		long totalReport = ReloadRequest.totalReloadRequests(ReportGenerator.getListAllStatus());
+	    		long totalReport = ReportGenerator.getTotalReportCelcom(dateMin, dateMax, ReportGenerator.getListAllStatus());
 	    		float nrOfPages = (float)totalReport / sizeNo;
 	    		uiModel.addAttribute("reports", ReportGenerator.getDailyTransactionDetailsReport((page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo));		            
 	            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
 	            uiModel.addAttribute("params", "&dateMin=" + dateMin + "&dateMax=" + dateMax);			        
-		  } else {				    
-	            uiModel.addAttribute("reports", ReportGenerator.getDailyTransactionDetailsReport(-1, -1));
-	      }
-		  return "dailyTrxDetailsReport"; 
+			  } else {				    
+		            uiModel.addAttribute("reports", ReportGenerator.getDailyTransactionDetailsReport(-1, -1));
+		      }
+		  return "dailyTrxDetailsList"; 
 		} else {
 			List<Report> listReport = new ArrayList<Report>();
 			listReport = ReportGenerator.getDailyTransactionDetailsReport(-1, -1);
@@ -417,7 +417,7 @@ public class ReportController extends BaseController {
 		if(format.equalsIgnoreCase("html")) {
 	        if (page != null || size != null) {
 			    int sizeNo = size == null ? 10 : size.intValue();
-	    		long totalReport = ReportGenerator.getTotalReport(dateMin, dateMax, ReportGenerator.getListAllStatus());
+	    		long totalReport = ReportGenerator.getTotalReportCelcom(dateMin, dateMax, ReportGenerator.getListAllStatus());
 	    		float nrOfPages = (float)totalReport / sizeNo;
 	    		uiModel.addAttribute("reports", ReportGenerator.getDailyTransactionDetailsReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo));		            
 	            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
@@ -444,14 +444,24 @@ public class ReportController extends BaseController {
 											 @RequestParam(value = "dateMin", required = false)String dateMin,
 											 @RequestParam(value = "dateMax", required = false)String dateMax) throws Exception {
 
-		List<Report> reportList = ReportGenerator.getDailyTransactionFeeDetailsReport();
-		
+		dateMin="null";
+		dateMax="null";
 		if(format.equalsIgnoreCase("html")) {
-	        uiModel.addAttribute("reports", reportList);
-			
+	        if (page != null || size != null) {
+			    int sizeNo = size == null ? 10 : size.intValue();
+	    		long totalReport = ReportGenerator.getTotalReportCelcom(dateMin, dateMax, ReportGenerator.getListAllStatus());
+	    		float nrOfPages = (float)totalReport / sizeNo;
+	    		uiModel.addAttribute("reports", ReportGenerator.getDailyTransactionFeeDetailsReport((page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo));		            
+	            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+	            uiModel.addAttribute("params", "&dateMin=" + dateMin + "&dateMax=" + dateMax);			        
+		  } else {				    
+	            uiModel.addAttribute("reports", ReportGenerator.getDailyTransactionFeeDetailsReport(-1, -1));
+	      }			
 	        return "dailyTrxFeeDetailsList";
 		} else {		
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
+			List<Report> listReport = new ArrayList<Report>();
+			listReport = ReportGenerator.getDailyTransactionFeeDetailsReport(-1, -1);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "dailyTrxFeeDetailsReport";
@@ -471,7 +481,7 @@ public class ReportController extends BaseController {
 		if(format.equalsIgnoreCase("html")) {
 	        if (page != null || size != null) {
 			    int sizeNo = size == null ? 10 : size.intValue();
-	    		long totalReport = ReportGenerator.getTotalReport(dateMin, dateMax, ReportGenerator.getListAllStatus());
+	    		long totalReport = ReportGenerator.getTotalReportCelcom(dateMin, dateMax, ReportGenerator.getListAllStatus());
 	    		float nrOfPages = (float)totalReport / sizeNo;
 	    		uiModel.addAttribute("reports", ReportGenerator.getDailyTransactionFeeDetailsReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo));		            
 	            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
@@ -483,7 +493,6 @@ public class ReportController extends BaseController {
 		} else {
 			List<Report> listReport = new ArrayList<Report>();
 			listReport = ReportGenerator.getDailyTransactionFeeDetailsReport(dateMin, dateMax, -1, -1);
-	        listReport.remove(listReport.size()-1);
 			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
@@ -499,14 +508,24 @@ public class ReportController extends BaseController {
 										 @RequestParam(value = "dateMin", required = false)String dateMin,
 										 @RequestParam(value = "dateMax", required = false)String dateMax) throws Exception {
 
-		List<Report> reportList = ReportGenerator.getSummaryDailyTransactionDetailsReport(-1,-1);
-		
+		dateMin="null";
+		dateMax="null";
 		if(format.equalsIgnoreCase("html")) {
-	        uiModel.addAttribute("reports", reportList);
-			
-	        return "summaryDailyTrxList";
-		} else {	
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(reportList ,false);
+	        if (page != null || size != null) {
+			    int sizeNo = size == null ? 10 : size.intValue();
+	    		long totalReport = ReportGenerator.getTotalReportCelcom(dateMin, dateMax, ReportGenerator.getListAllStatus());
+	    		float nrOfPages = (float)totalReport / sizeNo;
+	    		uiModel.addAttribute("reports", ReportGenerator.getSummaryDailyTransactionDetailsReport((page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo));		            
+	            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+	            uiModel.addAttribute("params", "&dateMin=" + dateMin + "&dateMax=" + dateMax);			        
+		  } else {				    
+	            uiModel.addAttribute("reports", ReportGenerator.getSummaryDailyTransactionDetailsReport(-1, -1));
+	      }			
+	      return "summaryDailyTrxList";
+		} else {
+			List<Report> listReport = new ArrayList<Report>();
+			listReport = ReportGenerator.getSummaryDailyTransactionDetailsReport(-1, -1);
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
 			return "summaryDailyTrxReport";
@@ -526,7 +545,7 @@ public class ReportController extends BaseController {
 		if(format.equalsIgnoreCase("html")) {
 	        if (page != null || size != null) {
 			    int sizeNo = size == null ? 10 : size.intValue();
-	    		long totalReport = ReportGenerator.getTotalReport(dateMin, dateMax, ReportGenerator.getListAllStatus());
+	    		long totalReport = ReportGenerator.getTotalReportCelcom(dateMin, dateMax, ReportGenerator.getListAllStatus());
 	    		float nrOfPages = (float)totalReport / sizeNo;
 	    		uiModel.addAttribute("reports", ReportGenerator.getSummaryDailyTransactionDetailsReport(dateMin, dateMax, (page == null ? 0 : (page.intValue() - 1) * sizeNo), sizeNo));		            
 	            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));

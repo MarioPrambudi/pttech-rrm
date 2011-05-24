@@ -217,7 +217,7 @@ public class ReloadRequest {
     }
 
     /**
-     * To get reload request between requested time and status (for generating summary report)
+     * To get reload request between requested time and status (for generating tng summary report)
      *
      * @param minRequestedTime Date
      * @param maxRequestedTime Date
@@ -233,7 +233,7 @@ public class ReloadRequest {
     }
 
     /**
-     * To get reload request between requested time and status (for generating summary report)
+     * To get reload request between requested time and status (for generating tng summary report)
      *
      * @param reloadRequests List<ReloadRequest>
      * @return List<ReloadRequest> with grouped value
@@ -246,6 +246,7 @@ public class ReloadRequest {
             for (ReloadRequest rr : reloadRequests) {
                 if (rr.getRequestedTime() != null) {
                     String dateKey = DateUtil.getDateTime("dd/MM/yyyy", rr.requestedTime);
+ 
                     BigDecimal amount = rr.getReloadAmount();
                     String status = rr.getStatus();
 
@@ -276,7 +277,7 @@ public class ReloadRequest {
                         }
                     }
                     groupRR.setRequestedTime(DateUtil.convertStringToDate("dd/MM/yyyy", dateKey));
-                    groupRR.setModifiedTime(DateUtil.convertStringToDate("dd/MM/yyyy", dateKey));
+
                     mapSummary.put(dateKey, groupRR);
                 }
             }
@@ -285,49 +286,84 @@ public class ReloadRequest {
         return new ArrayList<ReloadRequest>(mapSummary.values());
     }
 
-    public static List<ReloadRequest> findReloadRequestsByParamCelcom(Date minRequestedTime, Date maxRequestedTime,
+    public static TypedQuery<ReloadRequest> findReloadRequestsByParamCelcom(Date minRequestedTime, Date maxRequestedTime,
                                                                  List<String> listStatus,
                                                                  int firstResult, int maxResults) throws ParseException {
 
-        EntityManager em = ReloadRequest.entityManager();
-        TypedQuery<ReloadRequest> typedQuery = null;
-
-        StringBuilder queryBuilder = new StringBuilder("SELECT ReloadRequest FROM ReloadRequest AS reloadrequest WHERE 1=1 ");
-
-        if (listStatus != null && listStatus.size() != 0)
-            queryBuilder.append("AND LOWER(reloadrequest.status) IN (:listStatus)");
-        if (minRequestedTime != null && maxRequestedTime == null)
-            queryBuilder.append("AND reloadrequest.requestedTime >= :minRequestedTime");
-        else if (minRequestedTime == null && maxRequestedTime != null)
-            queryBuilder.append("AND reloadrequest.requestedTime <= :maxRequestedTime");
-        else if (minRequestedTime != null && maxRequestedTime != null)
-            queryBuilder.append("AND reloadrequest.requestedTime BETWEEN :minRequestedTime AND :maxRequestedTime");
-
-        // if (order != null && !order.isEmpty())
-        // queryBuilder.append(" ORDER BY " + order);
-        String stringQuery = queryBuilder.toString();
-
-        typedQuery = (firstResult > 0 && maxResults > 0) ? em.createQuery(stringQuery, ReloadRequest.class)
-                .setFirstResult(firstResult).setMaxResults(maxResults) : em.createQuery(stringQuery, ReloadRequest.class);
-
-        if (listStatus != null && listStatus.size() != 0)
-            typedQuery.setParameter("listStatus", listStatus);
-        if (minRequestedTime != null)
-            typedQuery.setParameter("minRequestedTime", minRequestedTime);
-        if (maxRequestedTime != null)
-            typedQuery.setParameter("maxRequestedTime", maxRequestedTime);
-
-        return typedQuery.getResultList();
+     	EntityManager em = ReloadRequest.entityManager();
+        TypedQuery<ReloadRequest> q = null;
+        String query = "SELECT ReloadRequest " +
+                "FROM ReloadRequest reloadrequest " +
+                "WHERE reloadrequest.requestedTime BETWEEN :minRequestedTime AND :maxRequestedTime " +
+                "AND LOWER(reloadrequest.status) IN (:statusList) ORDER BY reloadrequest.requestedTime";
+        q = (firstResult > -1 && maxResults > 0) ? em.createQuery(query, ReloadRequest.class).setFirstResult(firstResult).setMaxResults(maxResults) : em.createQuery(query, ReloadRequest.class);
+        q.setParameter("minRequestedTime", minRequestedTime);
+        q.setParameter("maxRequestedTime", maxRequestedTime);
+        q.setParameter("statusList", listStatus);
+        return q;
     }
     
-    public static long totalReloadRequests(List<String> listStatus) throws ParseException {
-        EntityManager em = ReloadRequest.entityManager();
-        TypedQuery<Long> q = null;
-        String query = "SELECT count(ReloadRequest) " +
-                "FROM ReloadRequest reloadrequest " +
-                "WHERE LOWER(reloadrequest.status) IN (:statusList)";
-        q = em.createQuery(query, Long.class);
-        q.setParameter("statusList", listStatus);
-        return q.getSingleResult();
+   /** To get reload request between requested time and status (for generating celcom summary report)
+    * @param minRequestedTime Date
+    * @param maxRequestedTime Date
+    * @param listStatus       List<String>
+    * @param firstResult      int
+    * @param maxResults       int
+    * @return List<ReloadRequest>
+    * @throws ParseException
+    */
+   public static List<ReloadRequest> findSummarizeReloadRequestsByParamCelcom(Date minRequestedTime, Date maxRequestedTime, List<String> listStatus, int firstResult, int maxResults) throws ParseException {
+       List<ReloadRequest> listRR = findReloadRequestsByParamCelcom(minRequestedTime, maxRequestedTime, listStatus, firstResult, maxResults).getResultList();
+       return  summarizeReloadRequestforCelcom(listRR);
+   }
+   
+   /**
+    * To get reload request between requested time and status (for generating celcom summary report)
+    *
+    * @param reloadRequests List<ReloadRequest>
+    * @return List<ReloadRequest> with grouped value
+    * @throws ParseException
+    */
+   public static List<ReloadRequest> summarizeReloadRequestforCelcom(List<ReloadRequest> reloadRequests) throws ParseException {
+       Map<String, ReloadRequest> mapSummary = new HashMap<String, ReloadRequest>();
+
+       if (reloadRequests != null && reloadRequests.size() > 0) {
+           for (ReloadRequest rr : reloadRequests) {
+               if (rr.getRequestedTime() != null) {
+                   String dateKey = DateUtil.getDateTime("dd/MM/yyyy", rr.requestedTime);
+                   BigDecimal amount = rr.getReloadAmount();
+                   ReloadRequest groupRR = null;
+                   if (mapSummary.containsKey(dateKey)) {
+                       groupRR = mapSummary.get(dateKey);
+                       groupRR.setReloadAmount(groupRR.getReloadAmount().add(amount));
+                       groupRR.setTotalReloadQty(groupRR.getTotalReloadQty() + (new Long(1)));
+                   } else {
+                       groupRR = new ReloadRequest();
+                       groupRR.setReloadAmount(amount);
+                       groupRR.setTotalReloadQty(new Long(1));                   
+                   }
+                   groupRR.setRequestedTime(DateUtil.convertStringToDate("dd/MM/yyyy", dateKey));
+                   groupRR.setModifiedTime(DateUtil.convertStringToDate("dd/MM/yyyy", dateKey));
+                   mapSummary.put(dateKey, groupRR);
+               }
+           }
+       }
+
+       return new ArrayList<ReloadRequest>(mapSummary.values());
+   }
+
+   
+    public static long totalReloadRequests(Date minRequestedTime, Date maxRequestedTime, List<String> listStatus)  throws ParseException {
+    	  EntityManager em = ReloadRequest.entityManager();
+          TypedQuery<Long> q = null;
+          String query = "SELECT count(ReloadRequest) " +
+                  "FROM ReloadRequest reloadrequest " +
+                  "WHERE reloadrequest.requestedTime BETWEEN :minRequestedTime AND :maxRequestedTime " +
+                  "AND LOWER(reloadrequest.status) IN (:statusList)";
+          q = em.createQuery(query, Long.class);
+          q.setParameter("minRequestedTime", minRequestedTime);
+          q.setParameter("maxRequestedTime", maxRequestedTime);
+          q.setParameter("statusList", listStatus);
+          return q.getSingleResult();
     }
 }
