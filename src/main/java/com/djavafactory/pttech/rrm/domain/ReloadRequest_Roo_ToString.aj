@@ -9,7 +9,6 @@ privileged aspect ReloadRequest_Roo_ToString {
     
     public String ReloadRequest.toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Id: ").append(getId()).append(", ");
         sb.append("MfgNumber: ").append(getMfgNumber()).append(", ");
         sb.append("ModifiedTime: ").append(getModifiedTime()).append(", ");
         sb.append("ReloadAmount: ").append(getReloadAmount()).append(", ");
@@ -20,8 +19,7 @@ privileged aspect ReloadRequest_Roo_ToString {
         sb.append("TotalCancellationAmt: ").append(getTotalCancellationAmt()).append(", ");
         sb.append("TotalReloadQty: ").append(getTotalReloadQty()).append(", ");
         sb.append("TransCode: ").append(getTransCode()).append(", ");
-        sb.append("TransId: ").append(getTransId()).append(", ");
-        sb.append("Version: ").append(getVersion());
+        sb.append("TransId: ").append(getTransId());
         return sb.toString();
     }
     
