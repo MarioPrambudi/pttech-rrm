@@ -264,10 +264,9 @@ public class ReloadRequest {
         return new ArrayList<ReloadRequest>(mapSummary.values());
     }
 
-    public static List<ReloadRequest> findReloadRequestsByParam2(Date minRequestedTime, Date maxRequestedTime,
-                                                                 List<String> listStatus) throws ParseException {
-        int firstResult = -1;
-        int maxResults = -1;
+    public static List<ReloadRequest> findReloadRequestsByParamCelcom(Date minRequestedTime, Date maxRequestedTime,
+                                                                 List<String> listStatus,
+                                                                 int firstResult, int maxResults) throws ParseException {
 
         EntityManager em = ReloadRequest.entityManager();
         TypedQuery<ReloadRequest> typedQuery = null;
@@ -285,7 +284,6 @@ public class ReloadRequest {
 
         // if (order != null && !order.isEmpty())
         // queryBuilder.append(" ORDER BY " + order);
-
         String stringQuery = queryBuilder.toString();
 
         typedQuery = (firstResult > 0 && maxResults > 0) ? em.createQuery(stringQuery, ReloadRequest.class)
@@ -299,5 +297,16 @@ public class ReloadRequest {
             typedQuery.setParameter("maxRequestedTime", maxRequestedTime);
 
         return typedQuery.getResultList();
+    }
+    
+    public static long totalReloadRequests(List<String> listStatus) throws ParseException {
+        EntityManager em = ReloadRequest.entityManager();
+        TypedQuery<Long> q = null;
+        String query = "SELECT count(ReloadRequest) " +
+                "FROM ReloadRequest reloadrequest " +
+                "WHERE LOWER(reloadrequest.status) IN (:statusList)";
+        q = em.createQuery(query, Long.class);
+        q.setParameter("statusList", listStatus);
+        return q.getSingleResult();
     }
 }
