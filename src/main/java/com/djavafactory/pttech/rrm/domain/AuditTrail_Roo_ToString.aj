@@ -9,13 +9,13 @@ privileged aspect AuditTrail_Roo_ToString {
     
     public String AuditTrail.toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Id: ").append(getId()).append(", ");
-        sb.append("Entity: ").append(getEntity()).append(", ");
         sb.append("Action: ").append(getAction()).append(", ");
-        sb.append("PerformedAt: ").append(getPerformedAt()).append(", ");
-        sb.append("PerformedBy: ").append(getPerformedBy()).append(", ");
+        sb.append("DebugInfo: ").append(getDebugInfo()).append(", ");
         sb.append("Description: ").append(getDescription()).append(", ");
-        sb.append("DebugInfo: ").append(getDebugInfo());
+        sb.append("Entity: ").append(getEntity()).append(", ");
+        sb.append("Id: ").append(getId()).append(", ");
+        sb.append("PerformedAt: ").append(getPerformedAt()).append(", ");
+        sb.append("PerformedBy: ").append(getPerformedBy());
         return sb.toString();
     }
     

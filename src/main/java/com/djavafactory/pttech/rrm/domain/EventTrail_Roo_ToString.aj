@@ -9,13 +9,13 @@ privileged aspect EventTrail_Roo_ToString {
     
     public String EventTrail.toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Id: ").append(getId()).append(", ");
-        sb.append("Date: ").append(getDate()).append(", ");
         sb.append("Code: ").append(getCode()).append(", ");
+        sb.append("Date: ").append(getDate()).append(", ");
+        sb.append("Id: ").append(getId()).append(", ");
         sb.append("Message: ").append(getMessage()).append(", ");
         sb.append("Source: ").append(getSource()).append(", ");
-        sb.append("User: ").append(getUser()).append(", ");
-        sb.append("StackTrace: ").append(getStackTrace());
+        sb.append("StackTrace: ").append(getStackTrace()).append(", ");
+        sb.append("User: ").append(getUser());
         return sb.toString();
     }
     

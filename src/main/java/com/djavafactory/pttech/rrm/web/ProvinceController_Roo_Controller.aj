@@ -93,7 +93,7 @@ privileged aspect ProvinceController_Roo_Controller {
     }
     
     @ModelAttribute("provinces")
-    public java.util.Collection<Province> ProvinceController.populateProvinces() {
+    public Collection<Province> ProvinceController.populateProvinces() {
         return Province.findAllProvinces();
     }
     

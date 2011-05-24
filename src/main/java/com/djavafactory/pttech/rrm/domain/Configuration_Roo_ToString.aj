@@ -9,10 +9,12 @@ privileged aspect Configuration_Roo_ToString {
     
     public String Configuration.toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("ConfigPrefix: ").append(getConfigPrefix()).append(", ");
         sb.append("ConfigKey: ").append(getConfigKey()).append(", ");
+        sb.append("ConfigPrefix: ").append(getConfigPrefix()).append(", ");
         sb.append("ConfigValue: ").append(getConfigValue()).append(", ");
-        sb.append("Ordering: ").append(getOrdering());
+        sb.append("Id: ").append(getId()).append(", ");
+        sb.append("Ordering: ").append(getOrdering()).append(", ");
+        sb.append("Version: ").append(getVersion());
         return sb.toString();
     }
     

@@ -93,11 +93,11 @@ privileged aspect Acquirer_Roo_Entity {
     }
     
     public static long Acquirer.countAcquirers() {
-        return entityManager().createQuery("select count(o) from Acquirer o", Long.class).getSingleResult();
+        return entityManager().createQuery("SELECT COUNT(o) FROM Acquirer o", Long.class).getSingleResult();
     }
     
     public static List<Acquirer> Acquirer.findAllAcquirers() {
-        return entityManager().createQuery("select o from Acquirer o", Acquirer.class).getResultList();
+        return entityManager().createQuery("SELECT o FROM Acquirer o", Acquirer.class).getResultList();
     }
     
     public static Acquirer Acquirer.findAcquirer(Long id) {
@@ -106,7 +106,7 @@ privileged aspect Acquirer_Roo_Entity {
     }
     
     public static List<Acquirer> Acquirer.findAcquirerEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("select o from Acquirer o", Acquirer.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+        return entityManager().createQuery("SELECT o FROM Acquirer o", Acquirer.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
 }

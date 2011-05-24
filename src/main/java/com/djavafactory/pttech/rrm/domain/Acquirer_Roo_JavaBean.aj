@@ -126,11 +126,11 @@ privileged aspect Acquirer_Roo_JavaBean {
         this.firmwares = firmwares;
     }
     
-    public java.util.Set<Terminal> Acquirer.getTerminals() {
+    public Set<Terminal> Acquirer.getTerminals() {
         return this.terminals;
     }
     
-    public void Acquirer.setTerminals(java.util.Set<Terminal> terminals) {
+    public void Acquirer.setTerminals(Set<Terminal> terminals) {
         this.terminals = terminals;
     }
     

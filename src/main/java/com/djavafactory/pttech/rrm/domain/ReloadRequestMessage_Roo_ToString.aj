@@ -9,16 +9,16 @@ privileged aspect ReloadRequestMessage_Roo_ToString {
     
     public String ReloadRequestMessage.toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("TransId: ").append(getTransId()).append(", ");
-        sb.append("MfgNo: ").append(getMfgNo()).append(", ");
         sb.append("Amount: ").append(getAmount()).append(", ");
-        sb.append("SpId: ").append(getSpId()).append(", ");
-        sb.append("TransCode: ").append(getTransCode()).append(", ");
-        sb.append("RequestTime: ").append(getRequestTime()).append(", ");
         sb.append("EncryptedMsg: ").append(getEncryptedMsg()).append(", ");
+        sb.append("MfgNo: ").append(getMfgNo()).append(", ");
         sb.append("MsgType: ").append(getMsgType()).append(", ");
+        sb.append("RequestTime: ").append(getRequestTime()).append(", ");
+        sb.append("SpId: ").append(getSpId()).append(", ");
         sb.append("StatusCode: ").append(getStatusCode()).append(", ");
-        sb.append("StatusMsg: ").append(getStatusMsg());
+        sb.append("StatusMsg: ").append(getStatusMsg()).append(", ");
+        sb.append("TransCode: ").append(getTransCode()).append(", ");
+        sb.append("TransId: ").append(getTransId());
         return sb.toString();
     }
     

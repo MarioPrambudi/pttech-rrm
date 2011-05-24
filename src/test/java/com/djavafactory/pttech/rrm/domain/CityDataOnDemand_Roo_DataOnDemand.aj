@@ -23,9 +23,19 @@ privileged aspect CityDataOnDemand_Roo_DataOnDemand {
     
     public City CityDataOnDemand.getNewTransientCity(int index) {
         com.djavafactory.pttech.rrm.domain.City obj = new com.djavafactory.pttech.rrm.domain.City();
-        obj.setCityName("cityName_" + index);
-        obj.setAcquirerState(provinceDataOnDemand.getRandomProvince());
+        setCityName(obj, index);
+        setAcquirerState(obj, index);
         return obj;
+    }
+    
+    public void CityDataOnDemand.setCityName(City obj, int index) {
+        java.lang.String cityName = "cityName_" + index;
+        obj.setCityName(cityName);
+    }
+    
+    public void CityDataOnDemand.setAcquirerState(City obj, int index) {
+        com.djavafactory.pttech.rrm.domain.Province acquirerState = provinceDataOnDemand.getRandomProvince();
+        obj.setAcquirerState(acquirerState);
     }
     
     public City CityDataOnDemand.getSpecificCity(int index) {

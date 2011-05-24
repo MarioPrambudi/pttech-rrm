@@ -9,21 +9,16 @@ import com.djavafactory.pttech.rrm.domain.Province;
 import com.djavafactory.pttech.rrm.domain.Terminal;
 import java.io.UnsupportedEncodingException;
 import java.lang.Long;
-import java.lang.Object;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
@@ -55,76 +50,18 @@ privileged aspect AcquirerController_Roo_Controller {
     }
     
     @ModelAttribute("firmwares")
-    public java.util.Collection<Firmware> AcquirerController.populateFirmwares() {
+    public Collection<Firmware> AcquirerController.populateFirmwares() {
         return Firmware.findAllFirmwares();
     }
     
     @ModelAttribute("provinces")
-    public java.util.Collection<Province> AcquirerController.populateProvinces() {
+    public Collection<Province> AcquirerController.populateProvinces() {
         return Province.findAllProvinces();
     }
     
     @ModelAttribute("terminals")
-    public java.util.Collection<Terminal> AcquirerController.populateTerminals() {
+    public Collection<Terminal> AcquirerController.populateTerminals() {
         return Terminal.findAllTerminals();
-    }
-    
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
-    @ResponseBody
-    public Object AcquirerController.showJson(@PathVariable("id") Long id) {
-        Acquirer acquirer = Acquirer.findAcquirer(id);
-        if (acquirer == null) {
-            return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
-        }
-        return acquirer.toJson();
-    }
-    
-    @RequestMapping(headers = "Accept=application/json")
-    @ResponseBody
-    public String AcquirerController.listJson() {
-        return Acquirer.toJsonArray(Acquirer.findAllAcquirers());
-    }
-    
-    @RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
-    public org.springframework.http.ResponseEntity<String> AcquirerController.createFromJson(@RequestBody String json) {
-        Acquirer.fromJsonToAcquirer(json).persist();
-        return new ResponseEntity<String>(HttpStatus.CREATED);
-    }
-    
-    @RequestMapping(value = "/jsonArray", method = RequestMethod.POST, headers = "Accept=application/json")
-    public org.springframework.http.ResponseEntity<String> AcquirerController.createFromJsonArray(@RequestBody String json) {
-        for (Acquirer acquirer: Acquirer.fromJsonArrayToAcquirers(json)) {
-            acquirer.persist();
-        }
-        return new ResponseEntity<String>(HttpStatus.CREATED);
-    }
-    
-    @RequestMapping(method = RequestMethod.PUT, headers = "Accept=application/json")
-    public org.springframework.http.ResponseEntity<String> AcquirerController.updateFromJson(@RequestBody String json) {
-        if (Acquirer.fromJsonToAcquirer(json).merge() == null) {
-            return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<String>(HttpStatus.OK);
-    }
-    
-    @RequestMapping(value = "/jsonArray", method = RequestMethod.PUT, headers = "Accept=application/json")
-    public org.springframework.http.ResponseEntity<String> AcquirerController.updateFromJsonArray(@RequestBody String json) {
-        for (Acquirer acquirer: Acquirer.fromJsonArrayToAcquirers(json)) {
-            if (acquirer.merge() == null) {
-                return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
-            }
-        }
-        return new ResponseEntity<String>(HttpStatus.OK);
-    }
-    
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
-    public org.springframework.http.ResponseEntity<String> AcquirerController.deleteFromJson(@PathVariable("id") Long id) {
-        Acquirer acquirer = Acquirer.findAcquirer(id);
-        if (acquirer == null) {
-            return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
-        }
-        acquirer.remove();
-        return new ResponseEntity<String>(HttpStatus.OK);
     }
     
     String AcquirerController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

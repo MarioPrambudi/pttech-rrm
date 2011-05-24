@@ -9,17 +9,19 @@ privileged aspect ReloadRequest_Roo_ToString {
     
     public String ReloadRequest.toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("TransId: ").append(getTransId()).append(", ");
-        sb.append("Status: ").append(getStatus()).append(", ");
+        sb.append("Id: ").append(getId()).append(", ");
         sb.append("MfgNumber: ").append(getMfgNumber()).append(", ");
-        sb.append("ReloadAmount: ").append(getReloadAmount()).append(", ");
-        sb.append("ServiceProviderId: ").append(getServiceProviderId()).append(", ");
-        sb.append("TransCode: ").append(getTransCode()).append(", ");
-        sb.append("RequestedTime: ").append(getRequestedTime()).append(", ");
-        sb.append("TngKey: ").append(getTngKey()).append(", ");
         sb.append("ModifiedTime: ").append(getModifiedTime()).append(", ");
+        sb.append("ReloadAmount: ").append(getReloadAmount()).append(", ");
+        sb.append("RequestedTime: ").append(getRequestedTime()).append(", ");
+        sb.append("ServiceProviderId: ").append(getServiceProviderId()).append(", ");
+        sb.append("Status: ").append(getStatus()).append(", ");
+        sb.append("TngKey: ").append(getTngKey()).append(", ");
+        sb.append("TotalCancellationAmt: ").append(getTotalCancellationAmt()).append(", ");
         sb.append("TotalReloadQty: ").append(getTotalReloadQty()).append(", ");
-        sb.append("TotalCancellationAmt: ").append(getTotalCancellationAmt());
+        sb.append("TransCode: ").append(getTransCode()).append(", ");
+        sb.append("TransId: ").append(getTransId()).append(", ");
+        sb.append("Version: ").append(getVersion());
         return sb.toString();
     }
     

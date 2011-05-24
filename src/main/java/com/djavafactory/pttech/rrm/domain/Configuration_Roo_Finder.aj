@@ -13,7 +13,7 @@ privileged aspect Configuration_Roo_Finder {
     public static TypedQuery<Configuration> Configuration.findConfigurationsByConfigKey(String configKey) {
         if (configKey == null || configKey.length() == 0) throw new IllegalArgumentException("The configKey argument is required");
         EntityManager em = Configuration.entityManager();
-        TypedQuery<Configuration> q = em.createQuery("SELECT Configuration FROM Configuration AS configuration WHERE configuration.configKey = :configKey", Configuration.class);
+        TypedQuery<Configuration> q = em.createQuery("SELECT o FROM Configuration AS o WHERE o.configKey = :configKey", Configuration.class);
         q.setParameter("configKey", configKey);
         return q;
     }
@@ -28,7 +28,7 @@ privileged aspect Configuration_Roo_Finder {
             configKey = configKey + "%";
         }
         EntityManager em = Configuration.entityManager();
-        TypedQuery<Configuration> q = em.createQuery("SELECT Configuration FROM Configuration AS configuration WHERE LOWER(configuration.configKey) LIKE LOWER(:configKey)", Configuration.class);
+        TypedQuery<Configuration> q = em.createQuery("SELECT o FROM Configuration AS o WHERE LOWER(o.configKey) LIKE LOWER(:configKey)", Configuration.class);
         q.setParameter("configKey", configKey);
         return q;
     }

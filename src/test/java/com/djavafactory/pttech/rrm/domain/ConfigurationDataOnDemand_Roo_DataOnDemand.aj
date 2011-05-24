@@ -18,10 +18,25 @@ privileged aspect ConfigurationDataOnDemand_Roo_DataOnDemand {
     
     public Configuration ConfigurationDataOnDemand.getNewTransientConfiguration(int index) {
         com.djavafactory.pttech.rrm.domain.Configuration obj = new com.djavafactory.pttech.rrm.domain.Configuration();
-        obj.setConfigKey("configKey_" + index);
-        obj.setConfigValue("configValue_" + index);
-        obj.setOrdering(new Integer(index));
+        setConfigKey(obj, index);
+        setConfigValue(obj, index);
+        setOrdering(obj, index);
         return obj;
+    }
+    
+    public void ConfigurationDataOnDemand.setConfigKey(Configuration obj, int index) {
+        java.lang.String configKey = "configKey_" + index;
+        obj.setConfigKey(configKey);
+    }
+    
+    public void ConfigurationDataOnDemand.setConfigValue(Configuration obj, int index) {
+        java.lang.String configValue = "configValue_" + index;
+        obj.setConfigValue(configValue);
+    }
+    
+    public void ConfigurationDataOnDemand.setOrdering(Configuration obj, int index) {
+        java.lang.Integer ordering = new Integer(index);
+        obj.setOrdering(ordering);
     }
     
     public Configuration ConfigurationDataOnDemand.getSpecificConfiguration(int index) {
