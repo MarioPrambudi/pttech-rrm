@@ -7,6 +7,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.format.annotation.NumberFormat;
 
+import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.util.DateUtil;
 
 import javax.persistence.Column;
@@ -57,6 +58,9 @@ public class ReloadRequest {
 
 	@Transient
 	private Long totalReloadQty;
+	
+	@Transient
+	private BigDecimal totalCancellationAmt;
 
  	/**
       * To get the reload request between requested time and status(for generating the report)
@@ -243,16 +247,33 @@ public class ReloadRequest {
                 if (rr.getRequestedTime() != null) {
                     String dateKey = DateUtil.getDateTime("dd/MM/yyyy", rr.requestedTime);
                     BigDecimal amount = rr.getReloadAmount();
+                    String status = rr.getStatus();
 
                     ReloadRequest groupRR = null;
                     if (mapSummary.containsKey(dateKey)) {
                         groupRR = mapSummary.get(dateKey);
                         groupRR.setReloadAmount(groupRR.getReloadAmount().add(amount));
                         groupRR.setTotalReloadQty(groupRR.getTotalReloadQty() + (new Long(1)));
+                        if(status.equals(Constants.RELOAD_STATUS_FAILED) || status.equals(Constants.RELOAD_STATUS_EXPIRED) || status.equals(Constants.RELOAD_STATUS_MANUALCANCEL))
+                        {
+                        	groupRR.setTotalCancellationAmt(groupRR.getTotalCancellationAmt().add(amount));
+                        }
+                        else
+                        {
+                        	groupRR.setTotalCancellationAmt(new BigDecimal("0.00"));
+                        }
                     } else {
                         groupRR = new ReloadRequest();
                         groupRR.setReloadAmount(amount);
                         groupRR.setTotalReloadQty(new Long(1));
+                        if(status.equals(Constants.RELOAD_STATUS_FAILED) || status.equals(Constants.RELOAD_STATUS_EXPIRED) || status.equals(Constants.RELOAD_STATUS_MANUALCANCEL))
+                        {
+                        	groupRR.setTotalCancellationAmt(amount);
+                        }
+                        else
+                        {
+                        	groupRR.setTotalCancellationAmt(new BigDecimal("0.00"));
+                        }
                     }
                     groupRR.setRequestedTime(DateUtil.convertStringToDate("dd/MM/yyyy", dateKey));
                     groupRR.setModifiedTime(DateUtil.convertStringToDate("dd/MM/yyyy", dateKey));

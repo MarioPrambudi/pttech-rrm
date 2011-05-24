@@ -63,8 +63,7 @@ privileged aspect Report_Roo_ToString {
         sb.append("TotalReloadQty: ").append(getTotalReloadQty()).append(", ");
         sb.append("TransCode: ").append(getTransCode()).append(", ");
         sb.append("TransId: ").append(getTransId()).append(", ");
-        sb.append("TransactionDate: ").append(getTransactionDate()).append(", ");
-        sb.append("TransactionDateTime: ").append(getTransactionDateTime());
+        sb.append("TransactionDate: ").append(getTransactionDate());
         return sb.toString();
     }
     

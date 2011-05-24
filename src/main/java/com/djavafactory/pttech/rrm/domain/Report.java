@@ -112,10 +112,6 @@ public class Report {
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
     private Date transactionDate;
-    
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
-    private Date transactionDateTime;
 
     @NumberFormat(pattern="#,##0.00")
     private BigDecimal grossPaymentToTngRm;

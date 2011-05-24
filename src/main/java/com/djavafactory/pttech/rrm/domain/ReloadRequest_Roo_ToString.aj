@@ -17,6 +17,7 @@ privileged aspect ReloadRequest_Roo_ToString {
         sb.append("ServiceProviderId: ").append(getServiceProviderId()).append(", ");
         sb.append("Status: ").append(getStatus()).append(", ");
         sb.append("TngKey: ").append(getTngKey()).append(", ");
+        sb.append("TotalCancellationAmt: ").append(getTotalCancellationAmt()).append(", ");
         sb.append("TotalReloadQty: ").append(getTotalReloadQty()).append(", ");
         sb.append("TransCode: ").append(getTransCode()).append(", ");
         sb.append("TransId: ").append(getTransId()).append(", ");

@@ -90,4 +90,12 @@ privileged aspect ReloadRequest_Roo_JavaBean {
         this.totalReloadQty = totalReloadQty;
     }
     
+    public BigDecimal ReloadRequest.getTotalCancellationAmt() {
+        return this.totalCancellationAmt;
+    }
+    
+    public void ReloadRequest.setTotalCancellationAmt(BigDecimal totalCancellationAmt) {
+        this.totalCancellationAmt = totalCancellationAmt;
+    }
+    
 }
