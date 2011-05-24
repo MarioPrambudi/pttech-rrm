@@ -10,7 +10,6 @@
     </page:find>
     <page:list id="pl_com_djavafactory_pttech_rrm_domain_ReloadRequest" items="${reloadrequests}" z="vdfIkKqE0aVdNMpR8LSUm94KsLg=">
         <table:table create="false" data="${reloadrequests}" delete="false" html_report="false" id="l_com_djavafactory_pttech_rrm_domain_ReloadRequest" path="/reloadrequests" pdf_report="false" update="false" z="user-managed">
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_transId" property="transId" z="I2SOBlUCJ8CgorEahkRlU1Px+X4="/>
             <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_requestedTime" property="requestedTime" z="user-managed"/>
             <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_mfgNumber" property="mfgNumber" z="user-managed"/>
             <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_serviceProviderId" property="serviceProviderId" z="zi8gJWwUPd7pR4NgiC7Q0iV5Pq0="/>
@@ -18,6 +17,7 @@
             <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_status" property="status" z="user-managed"/>
             <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_tngKey" property="tngKey" render="false" z="user-managed"/>
             <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_totalReloadQty" property="totalReloadQty" render="false" z="user-managed"/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_transId" property="transId" z="I2SOBlUCJ8CgorEahkRlU1Px+X4="/>
             <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_reloadAmount" property="reloadAmount" z="QpZ1d6tALlcWvCtF+5wmbn714Hw="/>
         </table:table>
     </page:list>
