@@ -148,9 +148,9 @@ public class Report {
 	@DateTimeFormat(style = "S-")
 	private Date modifiedDate;
     
-    private Long cmmpTrxId;
+    private String cmmpTrxId;
     
-    private Long tngTrxId;
+    private String tngTrxId;
     
     private Long aircashAccNo;
     
@@ -195,5 +195,7 @@ public class Report {
     @Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern="HH:mm:ss")
 	private Date time;
-
+    
+	private String acquirerTerminal;
+    
 }

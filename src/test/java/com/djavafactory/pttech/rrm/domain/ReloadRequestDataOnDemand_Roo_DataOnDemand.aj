@@ -27,6 +27,9 @@ privileged aspect ReloadRequestDataOnDemand_Roo_DataOnDemand {
         setRequestedTime(obj, index);
         setTngKey(obj, index);
         setModifiedTime(obj, index);
+        setAcquirerTerminal(obj, index);
+        setCmmpTrxId(obj, index);
+        setMobileNo(obj, index);
         return obj;
     }
     
@@ -73,6 +76,21 @@ privileged aspect ReloadRequestDataOnDemand_Roo_DataOnDemand {
     public void ReloadRequestDataOnDemand.setModifiedTime(ReloadRequest obj, int index) {
         java.util.Date modifiedTime = new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY), java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE), java.util.Calendar.getInstance().get(java.util.Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
         obj.setModifiedTime(modifiedTime);
+    }
+    
+    public void ReloadRequestDataOnDemand.setAcquirerTerminal(ReloadRequest obj, int index) {
+        java.lang.String acquirerTerminal = "acquirerTerminal_" + index;
+        obj.setAcquirerTerminal(acquirerTerminal);
+    }
+    
+    public void ReloadRequestDataOnDemand.setCmmpTrxId(ReloadRequest obj, int index) {
+        java.lang.String cmmpTrxId = "cmmpTrxId_" + index;
+        obj.setCmmpTrxId(cmmpTrxId);
+    }
+    
+    public void ReloadRequestDataOnDemand.setMobileNo(ReloadRequest obj, int index) {
+        java.lang.Long mobileNo = new Integer(index).longValue();
+        obj.setMobileNo(mobileNo);
     }
     
     public ReloadRequest ReloadRequestDataOnDemand.getSpecificReloadRequest(int index) {

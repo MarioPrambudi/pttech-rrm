@@ -55,6 +55,12 @@ public class ReloadRequest {
 	@DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
 
 	private Date modifiedTime;
+	
+	private String acquirerTerminal;
+	
+	private String cmmpTrxId;
+	
+	private Long mobileNo;
 
 	@Transient
 	private Long totalReloadQty;
