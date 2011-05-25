@@ -331,19 +331,19 @@ privileged aspect Report_Roo_JavaBean {
         this.modifiedDate = modifiedDate;
     }
     
-    public Long Report.getCmmpTrxId() {
+    public String Report.getCmmpTrxId() {
         return this.cmmpTrxId;
     }
     
-    public void Report.setCmmpTrxId(Long cmmpTrxId) {
+    public void Report.setCmmpTrxId(String cmmpTrxId) {
         this.cmmpTrxId = cmmpTrxId;
     }
     
-    public Long Report.getTngTrxId() {
+    public String Report.getTngTrxId() {
         return this.tngTrxId;
     }
     
-    public void Report.setTngTrxId(Long tngTrxId) {
+    public void Report.setTngTrxId(String tngTrxId) {
         this.tngTrxId = tngTrxId;
     }
     
@@ -465,6 +465,14 @@ privileged aspect Report_Roo_JavaBean {
     
     public void Report.setTime(Date time) {
         this.time = time;
+    }
+    
+    public String Report.getAcquirerTerminal() {
+        return this.acquirerTerminal;
+    }
+    
+    public void Report.setAcquirerTerminal(String acquirerTerminal) {
+        this.acquirerTerminal = acquirerTerminal;
     }
     
 }

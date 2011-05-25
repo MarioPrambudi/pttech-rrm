@@ -1213,13 +1213,9 @@ public class ReportGenerator {
 		for (Report report : listReport) {
 			try {
 				// TODO :set attribute for daily transaction details report
-
-//				report.setCmmpTrxId(); 		// Long
-//				report.setTngTrxId(); 		// Long
 //				report.setAircashAccNo(); 	// Long
-//				report.setMobileNo(); 		// Long
-//				report.setTngMfgNo(); 		// Long
-				
+				report.setTngMfgNo(report.getMfgNumber()); 		// Long
+				report.setTngTrxId(report.getTransId());
             	report.setFees(getReportFee());
             	report.setDate(report.getRequestedTime());
             	report.setTime(report.getRequestedTime());

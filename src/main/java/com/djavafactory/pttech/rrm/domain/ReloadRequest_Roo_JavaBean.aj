@@ -82,6 +82,30 @@ privileged aspect ReloadRequest_Roo_JavaBean {
         this.modifiedTime = modifiedTime;
     }
     
+    public String ReloadRequest.getAcquirerTerminal() {
+        return this.acquirerTerminal;
+    }
+    
+    public void ReloadRequest.setAcquirerTerminal(String acquirerTerminal) {
+        this.acquirerTerminal = acquirerTerminal;
+    }
+    
+    public String ReloadRequest.getCmmpTrxId() {
+        return this.cmmpTrxId;
+    }
+    
+    public void ReloadRequest.setCmmpTrxId(String cmmpTrxId) {
+        this.cmmpTrxId = cmmpTrxId;
+    }
+    
+    public Long ReloadRequest.getMobileNo() {
+        return this.mobileNo;
+    }
+    
+    public void ReloadRequest.setMobileNo(Long mobileNo) {
+        this.mobileNo = mobileNo;
+    }
+    
     public Long ReloadRequest.getTotalReloadQty() {
         return this.totalReloadQty;
     }

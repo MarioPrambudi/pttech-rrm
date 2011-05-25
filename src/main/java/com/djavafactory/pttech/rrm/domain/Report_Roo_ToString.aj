@@ -9,6 +9,7 @@ privileged aspect Report_Roo_ToString {
     
     public String Report.toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append("AcquirerTerminal: ").append(getAcquirerTerminal()).append(", ");
         sb.append("AircashAccNo: ").append(getAircashAccNo()).append(", ");
         sb.append("AmountCreditedToTngRm: ").append(getAmountCreditedToTngRm()).append(", ");
         sb.append("AmountDueCelcomMobile: ").append(getAmountDueCelcomMobile()).append(", ");

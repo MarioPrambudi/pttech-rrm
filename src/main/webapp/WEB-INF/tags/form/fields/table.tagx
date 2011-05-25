@@ -164,7 +164,6 @@
         </c:if>
     </tr>
     </thead>
-    <c:set value="dd/MM/yyyy HH:mm:ss" var="dateTimePattern" />
     <c:forEach items="${data}" var="item">
         <tr>
           <c:forTokens items="${columnProperties}" delims="," var="column" varStatus="num">
@@ -196,7 +195,7 @@
           function getDateRange(rurl, page, size)
 		  {
 			  var dateMin = document.getElementById('_dateFrom_id');
-			  var dateMax = document.getElementById('_dateTo_id');
+			  var dateMax = document.getElementById('_dateTo_id');	
 			  var dateMinValue = dateMin.value;
 			  var dateMaxValue = dateMax.value;
 			  var reporturl = rurl;

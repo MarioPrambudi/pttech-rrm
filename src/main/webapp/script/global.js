@@ -26,8 +26,4 @@ function updateCityList(state, cityUrl) {
                     }
                 }
             });
-
-    
-        
-	
 }
