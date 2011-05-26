@@ -109,7 +109,7 @@ public class ReportController extends BaseController {
 		} else {
 			List<Report> listReport = new ArrayList<Report>();
 			listReport = ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
-	        listReport.remove(listReport.size()-1);
+			if (listReport.size() >0)listReport.remove(listReport.size()-1);
 			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
@@ -146,7 +146,7 @@ public class ReportController extends BaseController {
 		} else {	
 			List<Report> listReport = new ArrayList<Report>();
 			listReport = ReportGenerator.getSummaryRequestReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
-			listReport.remove(listReport.size()-1);
+			if (listReport.size() >0)listReport.remove(listReport.size()-1);
 	        JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport ,false);
 	        modelMap.put("reportData", jrDataSource);
 	        modelMap.put("format", format);
@@ -181,7 +181,7 @@ public class ReportController extends BaseController {
 		} else {
 			List<Report> listReport = new ArrayList<Report>();
 			listReport = ReportGenerator.getDailyDetailedReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
-			listReport.remove(listReport.size()-1);
+			if (listReport.size() >0)listReport.remove(listReport.size()-1);
 			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
@@ -216,7 +216,7 @@ public class ReportController extends BaseController {
 		} else {
 			List<Report> listReport = new ArrayList<Report>();
 			listReport = ReportGenerator.getSummaryReloadReport(dateMin, dateMax, -1, -1);
-			listReport.remove(listReport.size()-1);
+			if (listReport.size() >0)listReport.remove(listReport.size()-1);
 			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport ,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
@@ -251,7 +251,7 @@ public class ReportController extends BaseController {
 		} else {
 			List<Report> listReport = new ArrayList<Report>();
 			listReport = ReportGenerator.getDailyDetailsCancellationReloadReqFrmCelcomReport(dateMin, dateMax, -1, -1);
-			listReport.remove(listReport.size()-1);
+			if (listReport.size() >0)listReport.remove(listReport.size()-1);
 			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
@@ -286,7 +286,7 @@ public class ReportController extends BaseController {
 		} else {
 			List<Report> listReport = new ArrayList<Report>();
 			listReport = ReportGenerator.getSummaryCancellationReloadReqFrmCelcomReport(dateMin, dateMax, -1, -1);
-			listReport.remove(listReport.size()-1);
+			if (listReport.size() >0)listReport.remove(listReport.size()-1);
 			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport ,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
@@ -321,7 +321,7 @@ public class ReportController extends BaseController {
 		} else {
 			List<Report> listReport = new ArrayList<Report>();
 			listReport = ReportGenerator.getDailySettlementReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
-			listReport.remove(listReport.size()-1);
+			if (listReport.size() >0)listReport.remove(listReport.size()-1);
 			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
@@ -357,7 +357,7 @@ public class ReportController extends BaseController {
 		} else {
 			List<Report> listReport = new ArrayList<Report>();
 			listReport = ReportGenerator.getSummarySettlementReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
-			listReport.remove(listReport.size()-1);
+			if (listReport.size() >0)listReport.remove(listReport.size()-1);
 			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);

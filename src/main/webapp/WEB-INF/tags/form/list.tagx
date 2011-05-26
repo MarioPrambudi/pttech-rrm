@@ -26,6 +26,7 @@
 
 	<jsp:directive.attribute name="pdf_report" type="java.lang.Boolean" required="false" rtexprvalue="true" description="show pdf report (default false)" />
 	<jsp:directive.attribute name="xls_report" type="java.lang.Boolean" required="false" rtexprvalue="true" description="show pdf report (default false)" />
+
     <c:if test="${empty render or render}">
         <c:if test="${empty label}">
             <spring:message code="label_${fn:toLowerCase(fn:substringAfter(id,'_'))}" htmlEscape="false" var="label"/>

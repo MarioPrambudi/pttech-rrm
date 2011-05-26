@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_com_djavafactory_pttech_rrm_domain_Report" items="${reports}" z="user-managed">
-    <table:datetime dateTimePattern="dd/MM/yyyy" disableFormBinding="true" field="dateFrom" id="f_com_djavafactory_pttech_rrm_domain_ReloadRequest_requestedTimeFrom" z="user-managed"/>
-	<table:datetime dateTimePattern="dd/MM/yyyy" disableFormBinding="true" field="dateTo" id="f_com_djavafactory_pttech_rrm_domain_ReloadRequest_requestedTimeTo" z="user-managed"/>
-        <table:table data="${reports}" id="l_com_djavafactory_pttech_rrm_domain_Report" path="/reports" z="user-managed" 
+ 		<label><spring:message code="label_com_djavafactory_pttech_rrm_domain_report_fromdate" /></label>
+ 		<input id="fromDate" type="text" name="fromDate"/> <p/>
+ 		<label><spring:message code="label_com_djavafactory_pttech_rrm_domain_report_todate" /></label>
+ 		<input id="toDate" type="text" name="toDate"/>
+       <!--  <table:datetime dateTimePattern="dd/MM/yyyy" disableFormBinding="true" field="fromDate" id="f_com_djavafactory_pttech_rrm_domain_Report_fromDate" z="user-managed"/>
+		<table:datetime dateTimePattern="dd/MM/yyyy" disableFormBinding="true" field="toDate" id="f_com_djavafactory_pttech_rrm_domain_Report_toDate" z="user-managed"/> -->
+		<table:table data="${reports}" id="l_com_djavafactory_pttech_rrm_domain_Report" path="/reports" z="user-managed" 
         		     html_report="true" pdf_report="true" xls_report="true" show="false" create="false" delete="false" update="false">
 	        <table:column id="c_com_djavafactory_pttech_rrm_domain_Report_reportId" property="configKey" z="user-managed"/>
 	        <table:column id="c_com_djavafactory_pttech_rrm_domain_Report_title" property="configValue" z="user-managed"/>           
         </table:table>
     </page:list>
+     <script type="text/javascript">
+     	Spring.addDecoration(new Spring.ElementDecoration({elementId : 'fromDate', widgetType: 'dijit.form.DateTextBox', widgetAttrs: {required: 'true',  constraints: {datePattern : 'dd/MM/yyyy', required : 'true'}, datePattern : 'dd/MM/yyyy'}})); 
+       	Spring.addDecoration(new Spring.ElementDecoration({elementId : 'toDate', widgetType: 'dijit.form.DateTextBox', widgetAttrs: {required: 'true',  constraints: {datePattern : 'dd/MM/yyyy', required : 'true'}, datePattern : 'dd/MM/yyyy'}})); 
+       	dojo.addOnLoad(function() {
+            var fromdate = dijit.byId('fromDate');
+            var todate = dijit.byId('toDate');
+            
+            dojo.connect(fromdate , "onChange", function() {
+            	todate.constraints.min = arguments[0];
+            });
+            
+            dojo.connect(todate , "onChange", function() {
+            	fromdate.constraints.max = arguments[0];
+            });
+        }); 
+/*        	Spring.addDecoration(new Spring.ElementDecoration({elementId : 'fromDate', widgetType: 'dijit.form.DateTextBox', widgetAttrs: {required: 'true', constraints: {datePattern : 'dd/MM/yyyy', required : 'true'}}}));
+       	Spring.addDecoration(new Spring.ElementDecoration({elementId : 'toDate', widgetType: 'dijit.form.DateTextBox', widgetAttrs: {required: 'true', constraints: {datePattern : 'dd/MM/yyyy', required : 'true'}}}));
+       	dojo.addOnLoad(function() {
+            var fromdate = dijit.byId('fromDate');
+            var todate = dijit.byId('toDate');
+            dojo.connect(fromdate , "onChange", function() {
+            	todate.constraints.min = arguments[0];
+            });
+            
+            dojo.connect(todate , "onChange", function() {
+            	fromdate.constraints.max = arguments[0];
+            });
+        });   */  
+    </script>
 </div>
