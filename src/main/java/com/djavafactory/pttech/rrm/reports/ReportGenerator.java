@@ -810,7 +810,7 @@ public class ReportGenerator {
 				  reportSummary.setTransactionDate(reportSummary.getModifiedDate());
 				  reportSummary.setGrossPaymentToTngRm(getTotalPaymentToTNG(reportSummary.getTotalReloadQty(), reportSummary.getReloadAmount()));		         		          
 		          reportSummary.setAmountCreditedToTngRm(getSettlementNetPaymentToTng(reportSummary.getGrossPaymentToTngRm(), reportSummary.getTotalCancellationRm()));
-		          //reportSummary.setDateCreditedToTngAccount(); Blank
+		          //reportSummary.setDateCreditedToTngAccount(); Blank //TODO
 		        } catch (Exception e) {
 	                e.printStackTrace();  
 	            }
@@ -1049,8 +1049,8 @@ public class ReportGenerator {
                     try {
                       reportSummary = (Report)it.next();
                       // summary calculation
-	            	  reportSummary.setDateCancelRequest(reportSummary.getModifiedDate());
-	                  reportSummary.setReloadDate(reportSummary.getRequestedTime());
+	            	  reportSummary.setDateCancelRequest(reportSummary.getModifiedDate());//TODO
+	                  reportSummary.setReloadDate(reportSummary.getModifiedDate());//TODO
 	                  reportSummary.setTotalCancellationQty(reportSummary.getTotalReloadQty());
 	                  reportSummary.setTotalAmountCancelledRm(reportSummary.getReloadAmount());
 	                  reportSummary.setTotalFees(getTotalFee(reportSummary.getTotalCancellationQty()));
@@ -1130,7 +1130,7 @@ public class ReportGenerator {
 				  reportSummary.setTransactionDate(reportSummary.getModifiedDate());
 				  reportSummary.setTotalPaymentToTngRm(getTotalPaymentToTNG(reportSummary.getTotalReloadQty(), reportSummary.getReloadAmount()));		         		          
 		          reportSummary.setNetPaymentToTng(getSettlementNetPaymentToTng(reportSummary.getTotalPaymentToTngRm(), reportSummary.getTotalCancellationRm()));
-		          //reportSummary.setDateCreditedToTngAccount(); Blank
+		          //reportSummary.setDateCreditedToTngAccount(); Blank //TODO
 		          listCompleteReport.add(reportSummary); 
 		        } catch (Exception e) {
 	                e.printStackTrace();  

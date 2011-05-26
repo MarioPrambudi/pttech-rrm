@@ -11,7 +11,7 @@
 	<field name="commissionAmountDeductedBySof" class="java.math.BigDecimal"/>
 	<field name="netPaymentToTng" class="java.math.BigDecimal"/>
 	<field name="amountRefundedToCustomer" class="java.math.BigDecimal"/>
-	<field name="dateRefundedCustomer" class="java.util.Date"/>
+	<field name="dateTimeRefundedCustomer" class="java.util.Date"/>
 	<field name="cancellationStatus" class="java.lang.String"/>
 	<variable name="SUM_RELOAD_AMOUNT" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{reloadAmount}]]></variableExpression>
@@ -165,7 +165,7 @@
 			<textField>
 				<reportElement x="600" y="0" width="90" height="20"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression class="java.util.Date"><![CDATA[$F{dateRefundedCustomer}]]></textFieldExpression>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{dateTimeRefundedCustomer}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="690" y="0" width="60" height="20"/>

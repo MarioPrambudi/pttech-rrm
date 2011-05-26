@@ -3,7 +3,7 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<field name="sofRequestedDatetime" class="java.util.Date"/>
+	<field name="sofRequestedDate" class="java.util.Date"/>
 	<field name="totalReloadQty" class="java.lang.Long"/>
 	<field name="totalAmountRequestRm" class="java.math.BigDecimal"/>
 	<field name="totalFees" class="java.math.BigDecimal"/>
@@ -98,10 +98,10 @@
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
-			<textField>
+			<textField pattern="dd-MMM-yy">
 				<reportElement x="0" y="0" width="100" height="20"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression class="java.util.Date"><![CDATA[$F{sofRequestedDatetime}]]></textFieldExpression>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{sofRequestedDate}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="100" y="0" width="100" height="20"/>
