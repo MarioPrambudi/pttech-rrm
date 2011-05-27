@@ -1214,7 +1214,7 @@ public class ReportGenerator {
 			try {
 				// TODO :set attribute for daily transaction details report
 //				report.setAircashAccNo(); 	// Long
-				report.setTngMfgNo(report.getMfgNumber()); 		// Long
+				report.setTngMfgNo(report.getMfgNumber()); 		// TODO
 				report.setTngTrxId(report.getTransId());
             	report.setFees(getReportFee());
             	report.setDate(report.getRequestedTime());
@@ -1295,6 +1295,7 @@ public class ReportGenerator {
 		for (Report report : listReport) {
 			try {
 				// TODO :set attribute for daily transaction details report
+				report.setTngMfgNo(report.getMfgNumber()); 		// TODO
 				report.setDate(report.getRequestedTime());
             	report.setTime(report.getRequestedTime());
 				report.setFees(getReportFee());           
