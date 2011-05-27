@@ -191,11 +191,12 @@
             </a>
           </td>
           </c:if>
-       <script type="text/javascript">
+       
+     	 <script type="text/javascript">
           function getDateRange(rurl, page, size)
 		  {
-			  var dateMin = document.getElementById('_dateFrom_id');
-			  var dateMax = document.getElementById('_dateTo_id');	
+			  var dateMin = document.getElementById('fromDate');	
+			  var dateMax = document.getElementById('toDate');	 
 			  var dateMinValue = dateMin.value;
 			  var dateMaxValue = dateMax.value;
 			  var reporturl = rurl;
@@ -214,8 +215,25 @@
 					}
 				}
 			  }
-			 window.location = reporturl + '?page=' + page + '&amp;size=' + size + '&amp;dateMin=' + dateMinValue + '&amp;dateMax=' + dateMaxValue;
-		  }	  	   
+			  
+			  if(dateMax != null) 
+			  {
+				if(dateMin != null) 
+				{  	  			
+		  			if (dateMax.value.length == 0)
+					{
+		  				dateMaxValue = 'null';
+					}
+		  			if (dateMin.value.length == 0)
+					{
+		  				dateMinValue = 'null';
+					}
+				}
+			  }
+		 
+	    	 	window.location = reporturl + '?page=' + page + '&amp;size=' + size + '&amp;dateMin=' + dateMinValue + '&amp;dateMax=' + dateMaxValue;
+	     }
+			   
           </script>
           <c:if test="${html_report}">
           <td class="utilbox">

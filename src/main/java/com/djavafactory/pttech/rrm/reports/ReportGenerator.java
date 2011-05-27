@@ -810,7 +810,7 @@ public class ReportGenerator {
 				  reportSummary.setTransactionDate(reportSummary.getModifiedDate());
 				  reportSummary.setGrossPaymentToTngRm(getTotalPaymentToTNG(reportSummary.getTotalReloadQty(), reportSummary.getReloadAmount()));		         		          
 		          reportSummary.setAmountCreditedToTngRm(getSettlementNetPaymentToTng(reportSummary.getGrossPaymentToTngRm(), reportSummary.getTotalCancellationRm()));
-		          //reportSummary.setDateCreditedToTngAccount(); Blank
+		          //reportSummary.setDateCreditedToTngAccount(); Blank //TODO
 		        } catch (Exception e) {
 	                e.printStackTrace();  
 	            }
@@ -1049,8 +1049,8 @@ public class ReportGenerator {
                     try {
                       reportSummary = (Report)it.next();
                       // summary calculation
-	            	  reportSummary.setDateCancelRequest(reportSummary.getModifiedDate());
-	                  reportSummary.setReloadDate(reportSummary.getRequestedTime());
+	            	  reportSummary.setDateCancelRequest(reportSummary.getModifiedDate());//TODO
+	                  reportSummary.setReloadDate(reportSummary.getModifiedDate());//TODO
 	                  reportSummary.setTotalCancellationQty(reportSummary.getTotalReloadQty());
 	                  reportSummary.setTotalAmountCancelledRm(reportSummary.getReloadAmount());
 	                  reportSummary.setTotalFees(getTotalFee(reportSummary.getTotalCancellationQty()));
@@ -1130,7 +1130,7 @@ public class ReportGenerator {
 				  reportSummary.setTransactionDate(reportSummary.getModifiedDate());
 				  reportSummary.setTotalPaymentToTngRm(getTotalPaymentToTNG(reportSummary.getTotalReloadQty(), reportSummary.getReloadAmount()));		         		          
 		          reportSummary.setNetPaymentToTng(getSettlementNetPaymentToTng(reportSummary.getTotalPaymentToTngRm(), reportSummary.getTotalCancellationRm()));
-		          //reportSummary.setDateCreditedToTngAccount(); Blank
+		          //reportSummary.setDateCreditedToTngAccount(); Blank //TODO
 		          listCompleteReport.add(reportSummary); 
 		        } catch (Exception e) {
 	                e.printStackTrace();  
@@ -1214,7 +1214,7 @@ public class ReportGenerator {
 			try {
 				// TODO :set attribute for daily transaction details report
 //				report.setAircashAccNo(); 	// Long
-				report.setTngMfgNo(report.getMfgNumber()); 		// Long
+				report.setTngMfgNo(report.getMfgNumber()); 		// TODO
 				report.setTngTrxId(report.getTransId());
             	report.setFees(getReportFee());
             	report.setDate(report.getRequestedTime());
@@ -1224,7 +1224,7 @@ public class ReportGenerator {
             	report.setPrintisFee(getPrintisFee()); 			
             	report.setCelcomMobileFee(new BigDecimal(0.00)); 		// RM 0.00 TODO
             	report.setCmmFee(getCmmFee()); 				
-            	report.setTotalFees(getCelcomTotalFee()); 				
+            	report.setTotalGrossAmount(getCelcomTotalFee()); 				
             	report.setAmountDueTng(getAmountDueTmg(report.getReloadAmount()));	
             	report.setAmountDuePrintis(getAmountDuePrintis(report.getReloadAmount())); 		
             	report.setAmountDueCelcomMobile(getAmountDueCelcomMobile(report.getReloadAmount())); 
@@ -1295,14 +1295,16 @@ public class ReportGenerator {
 		for (Report report : listReport) {
 			try {
 				// TODO :set attribute for daily transaction details report
+				report.setTngMfgNo(report.getMfgNumber()); 		// TODO
 				report.setDate(report.getRequestedTime());
             	report.setTime(report.getRequestedTime());
 				report.setFees(getReportFee());           
-            	report.setTngFee(getTngFee()); 				
+            	report.setTngFee(getTngFee()); 	
+            	report.setGrossAmount(getGrossAmount(report.getReloadAmount())); 
             	report.setPrintisFee(getPrintisFee()); 			
             	report.setCelcomMobileFee(new BigDecimal(0.00)); 		// RM 0.00 TODO
             	report.setCmmFee(getCmmFee()); 			
-            	report.setTotalFees(getCelcomTotalFee()); 				
+            	report.setTotalGrossAmount(getCelcomTotalFee()); 				
             	listCompleteReport.add(report);
             	
 //            	//sum
@@ -1373,12 +1375,12 @@ public class ReportGenerator {
    	          // TODO :set attribute for daily transaction details report
    	            	reportSummary.setDate(reportSummary.getRequestedTime());
    	            	reportSummary.setFees(getTotalFee(reportSummary.getTotalReloadQty()));
-   	            	reportSummary.setTotalGrossAmount(reportSummary.getReloadAmount().add(reportSummary.getFees()));
+   	            	reportSummary.setGrossAmount(reportSummary.getReloadAmount().add(reportSummary.getFees()));
    	            	reportSummary.setTngFee(getTngFee().multiply(new BigDecimal (reportSummary.getTotalReloadQty()))); 				
    	            	reportSummary.setPrintisFee(getPrintisFee().multiply(new BigDecimal (reportSummary.getTotalReloadQty()))); 		
    	            	reportSummary.setCelcomMobileFee(new BigDecimal(0.00)); 		// RM 0.00 TODO
    	            	reportSummary.setCmmFee(getCmmFee().multiply(new BigDecimal (reportSummary.getTotalReloadQty()))); 		
-   	            	reportSummary.setTotalFees(reportSummary.getTngFee().add(reportSummary.getPrintisFee().add(reportSummary.getCmmFee()))); 	//sum up all fee		
+   	            	reportSummary.setTotalGrossAmount(reportSummary.getTngFee().add(reportSummary.getPrintisFee().add(reportSummary.getCmmFee()))); 	//sum up all fee		
    	            	reportSummary.setAmountDueTng(reportSummary.getReloadAmount().add(reportSummary.getTngFee()));	
    	            	reportSummary.setAmountDuePrintis(reportSummary.getReloadAmount().add(reportSummary.getPrintisFee())); 		
    	            	reportSummary.setAmountDueCelcomMobile(reportSummary.getReloadAmount().add(reportSummary.getCelcomMobileFee())); 	
