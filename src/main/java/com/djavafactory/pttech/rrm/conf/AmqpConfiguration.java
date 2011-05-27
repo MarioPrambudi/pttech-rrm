@@ -34,8 +34,11 @@ public class AmqpConfiguration {
     @Value("#{amqp['queue.rmi.reload.status']}")
     private String rmiReloadStatusQ;
 
-    @Value("#{amqp['queue.rrm.reload.req']}")
-    private String rrmReloadReqQ;
+    @Value("#{amqp['queue.rrm.rmireload.req']}")
+    private String rrmRmiReloadReqQ;
+
+    @Value("#{amqp['queue.rrm.rtmreload.req']}")
+    private String rrmRtmReloadReqQ;
 
     @Value("#{amqp['queue.rrm.terminal']}")
     private String rrmTerminalQ;
@@ -91,8 +94,15 @@ public class AmqpConfiguration {
     }
 
     @Bean
-    public Queue rrmReloadReqQueue() {
-        Queue q = new Queue(this.rrmReloadReqQ);
+    public Queue rrmRmiReloadReqQueue() {
+        Queue q = new Queue(this.rrmRmiReloadReqQ);
+        amqpAdmin().declareQueue(q);
+        return q;
+    }
+
+    @Bean
+    public Queue rrmRtmReloadReqQueue() {
+        Queue q = new Queue(this.rrmRtmReloadReqQ);
         amqpAdmin().declareQueue(q);
         return q;
     }
@@ -147,8 +157,15 @@ public class AmqpConfiguration {
     }
 
     @Bean
-    public DirectExchange rrmReloadReqExchange() {
-        DirectExchange directExchange = new DirectExchange(this.rrmReloadReqQ);
+    public DirectExchange rrmRmiReloadReqExchange() {
+        DirectExchange directExchange = new DirectExchange(this.rrmRmiReloadReqQ);
+        this.amqpAdmin().declareExchange(directExchange);
+        return directExchange;
+    }
+
+    @Bean
+    public DirectExchange rrmRtmReloadReqExchange() {
+        DirectExchange directExchange = new DirectExchange(this.rrmRtmReloadReqQ);
         this.amqpAdmin().declareExchange(directExchange);
         return directExchange;
     }
@@ -199,8 +216,13 @@ public class AmqpConfiguration {
     }
 
     @Bean
-    public Binding rrmReloadRequestDataBinding() {
-        return BindingBuilder.from(rrmReloadReqQueue()).to(rrmReloadReqExchange()).with(this.rrmReloadReqQ);
+    public Binding rrmRmiReloadRequestDataBinding() {
+        return BindingBuilder.from(rrmRmiReloadReqQueue()).to(rrmRmiReloadReqExchange()).with(this.rrmRmiReloadReqQ);
+    }
+
+    @Bean
+    public Binding rrmRtmReloadRequestDataBinding() {
+        return BindingBuilder.from(rrmRtmReloadReqQueue()).to(rrmRtmReloadReqExchange()).with(this.rrmRtmReloadReqQ);
     }
 
     @Bean
@@ -236,7 +258,7 @@ public class AmqpConfiguration {
                 ", password='" + password + '\'' +
                 ", rmiReloadReqQ='" + rmiReloadReqQ + '\'' +
                 ", rmiReloadStatusQ='" + rmiReloadStatusQ + '\'' +
-                ", rrmReloadReqQ='" + rrmReloadReqQ + '\'' +
+                ", rrmRmiReloadReqQ='" + rrmRmiReloadReqQ + '\'' +
                 ", rrmTerminalQ='" + rrmTerminalQ + '\'' +
                 ", rrmEventQ='" + rrmEventQ + '\'' +
                 ", rtmReloadReqQ='" + rtmReloadReqQ + '\'' +

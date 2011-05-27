@@ -3,11 +3,15 @@ package com.djavafactory.pttech.rrm.integration;
 
 import com.djavafactory.pttech.rrm.domain.ReloadRequestMessage;
 import com.djavafactory.pttech.rrm.domain.ReloadResponseMessage;
+import com.djavafactory.pttech.rrm.util.DateUtil;
 import com.djavafactory.pttech.rrm.ws.KeyResponse;
-import com.djavafactory.pttech.rrm.ws.ReloadReq;
+import epg.webservice.ObjectFactory;
+import epg.webservice.ReloadRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.integration.MessagingException;
 
+import javax.xml.bind.JAXBElement;
 import java.util.Date;
 
 /**
@@ -25,7 +29,11 @@ public class MessageTransformer {
      * @return ReloadRequestMessage object
      */
     public ReloadRequestMessage transformReloadRequest(String content) {
-        return new ReloadRequestMessage().fromJsonToMessage(content);
+        try {
+            return new ReloadRequestMessage().fromJsonToMessage(content);
+        } catch (Exception e) {
+            throw new MessagingException(e.getMessage() + " - " + content, e);
+        }
     }
 
     /**
@@ -35,7 +43,11 @@ public class MessageTransformer {
      * @return ReloadResponseMessage object
      */
     public ReloadResponseMessage transformReloadResponse(String content) {
-        return new ReloadResponseMessage().fromJsonToMessage(content);
+        try {
+            return new ReloadResponseMessage().fromJsonToMessage(content);
+        } catch (Exception e) {
+            throw new MessagingException(e.getMessage() + " - " + content, e);
+        }
     }
 
     /**
@@ -69,22 +81,22 @@ public class MessageTransformer {
     }
 
     /**
-     * Method to transform the ReloadRequestMessage to TnG WS ReloadReq format.
+     * Method to transform the ReloadRequestMessage to TnG WS ReloadRequest format.
      *
      * @param message Object message object
      * @return Object
      */
-    public ReloadReq transformMessageToReloadReq(Object message) {
-        ReloadReq reloadReq = new ReloadReq();
+    public JAXBElement<ReloadRequest> transformMessageToReloadReq(Object message) {
+        ReloadRequest reloadReq = new ObjectFactory().createReloadRequest();
         if (message != null && message instanceof ReloadRequestMessage) {
-            reloadReq.setAmount(((ReloadRequestMessage) message).getAmount());
-            reloadReq.setMfgNo(((ReloadRequestMessage) message).getMfgNo());
-            reloadReq.setRequestDateTime(new Date());
+            reloadReq.setAmount(String.valueOf(((ReloadRequestMessage) message).getAmount()));
+            reloadReq.setMfgNo(String.valueOf(((ReloadRequestMessage) message).getMfgNo()));
+            reloadReq.setRequestDateTime(DateUtil.getDateTime("ddMMyyyyHHmmss", new Date()));
             reloadReq.setServiceProviderId(((ReloadRequestMessage) message).getSpId());
             reloadReq.setTransactionCode(((ReloadRequestMessage) message).getTransCode());
             reloadReq.setTransactionId(((ReloadRequestMessage) message).getTransId());
         }
-        return reloadReq;
+        return new ObjectFactory().createReloadRequest(reloadReq);
     }
 
     private String transformResponse(ReloadRequestMessage message, String statusCode, String statusMsg) {
@@ -100,7 +112,7 @@ public class MessageTransformer {
     }
 
     private KeyResponse transformKeyResponse(String statusCode, String statusMsg, String transId) {
-        KeyResponse keyResponse = new KeyResponse();
+        KeyResponse keyResponse = new com.djavafactory.pttech.rrm.ws.ObjectFactory().createTngKeyResponse();
         keyResponse.setStatusCode(statusCode);
         keyResponse.setStatusMsg(statusMsg);
         keyResponse.setTransactionId(transId);

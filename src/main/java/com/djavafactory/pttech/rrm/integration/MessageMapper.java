@@ -5,11 +5,12 @@ import com.djavafactory.pttech.rrm.domain.ReloadRequest;
 import com.djavafactory.pttech.rrm.domain.ReloadRequestMessage;
 import com.djavafactory.pttech.rrm.domain.ReloadResponseMessage;
 import com.djavafactory.pttech.rrm.ws.KeyRequest;
-import com.djavafactory.pttech.rrm.ws.ReloadReqResponse;
+import epg.webservice.ReloadRequestResponse;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import javax.xml.bind.JAXBElement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -83,23 +84,23 @@ public class MessageMapper {
     /**
      * Method to map the TnG Response Message to List<Object>.
      *
-     * @param message ReloadReqResponse object
+     * @param message ReloadRequestResponse object
      * @return List of Object.
      */
-    public List<Object> mapTngResponseToReloadResponse(ReloadReqResponse message) {
+    public List<Object> mapTngResponseToReloadResponse(JAXBElement<ReloadRequestResponse> message) {
         ReloadResponseMessage responseMessage = new ReloadResponseMessage();
-        responseMessage.setTransId(message.getTransactionId());
-        responseMessage.setStatusCode(message.getStatusCode());
-        responseMessage.setStatusMsg(message.getStatusMsg());
+        responseMessage.setTransId(message.getValue().getReturn().getTransactionId());
+        responseMessage.setStatusCode(message.getValue().getReturn().getStatusCode());
+        responseMessage.setStatusMsg(message.getValue().getReturn().getStatusMessage());
         responseMessage.setResponseTime(new Date());
 
         List<Object> objectList = new ArrayList<Object>();
         ReloadRequest reloadRequest = new ReloadRequest();
 
-        List<ReloadRequest> reloadRecord = new ReloadRequest().findReloadRequestsByTransId(message.getTransactionId()).getResultList();
+        List<ReloadRequest> reloadRecord = new ReloadRequest().findReloadRequestsByTransId(message.getValue().getReturn().getTransactionId()).getResultList();
         if (reloadRecord != null && !reloadRecord.isEmpty()) {
             reloadRequest = reloadRecord.get(0);
-            if (!StringUtils.equalsIgnoreCase(Constants.RESPONSE_CODE_SUCCESS, message.getStatusCode())) {
+            if (!StringUtils.equalsIgnoreCase(Constants.RESPONSE_CODE_SUCCESS, message.getValue().getReturn().getStatusCode())) {
                 reloadRequest.setStatus(Constants.RELOAD_STATUS_FAILED);
             }
         }
@@ -136,6 +137,9 @@ public class MessageMapper {
         if (reloadRecord != null && !reloadRecord.isEmpty()) {
             reloadRequest = reloadRecord.get(0);
             reloadRequest.setModifiedTime(message.getRequestTime());
+            if (message.getAcquirerTerminal() != null && !"".equals(message.getAcquirerTerminal())) {
+                reloadRequest.setAcquirerTerminal(message.getAcquirerTerminal());
+            }
         } else {
             reloadRequest = new ReloadRequest();
             reloadRequest.setTransId(message.getTransId());
@@ -144,7 +148,11 @@ public class MessageMapper {
             reloadRequest.setServiceProviderId(message.getSpId());
             reloadRequest.setTransCode(message.getTransCode());
             reloadRequest.setRequestedTime(message.getRequestTime());
+            reloadRequest.setCmmpTrxId(message.getCmmpTransId());
             reloadRequest.setModifiedTime(null);
+            if (message.getMobileNo() != null && !"".equals(message.getMobileNo())) {
+                reloadRequest.setMobileNo(Long.valueOf(message.getMobileNo()));
+            }
         }
         if (StringUtils.equalsIgnoreCase(Constants.RELOAD_STATUS_PENDING, status)) {
             reloadRequest.setTngKey(message.getEncryptedMsg());
