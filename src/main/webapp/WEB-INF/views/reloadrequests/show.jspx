@@ -1,21 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show create="false" delete="false" id="ps_com_djavafactory_pttech_rrm_domain_ReloadRequest" object="${reloadrequest}" path="/reloadrequests" update="false" z="user-managed">
-        <field:display field="transCode" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_transCode" object="${reloadrequest}" z="BUiownS97wPEu4Ej/fAp5us7VzI="/>
-        <field:display field="status" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_status" object="${reloadrequest}" z="WYXU95xi9TYh93vrdTIHM1B21jM="/>
-        <field:display field="tngKey" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_tngKey" object="${reloadrequest}" z="89cQvj9ozEeYVnYwzYPlUj68JPw="/>
-        <field:display field="serviceProviderId" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_serviceProviderId" object="${reloadrequest}" z="Z/fr3aLc5nc1vETblS85qA5Eo4w="/>
-        <field:display field="transId" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_transId" object="${reloadrequest}" z="a+Oe3h3+7Thr1/xvWrOlcPVociU="/>
-        <field:display field="reloadAmount" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_reloadAmount" object="${reloadrequest}" z="nclJMLoyaVGv7upuyhaMcInRPyU="/>
-        <field:display date="true" dateTimePattern="${reloadRequest_requestedtime_date_format}" field="requestedTime" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_requestedTime" object="${reloadrequest}" z="v13BH0gd5/l55SG1fp23K4P7GJc="/>
-        <field:display field="mfgNumber" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_mfgNumber" object="${reloadrequest}" z="Kglu78ySw2Lu43YhSh7PEfsmolo="/>
-        <field:display date="true" dateTimePattern="${reloadRequest_modifiedtime_date_format}" field="modifiedTime" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_modifiedTime" object="${reloadrequest}" z="SxwBgi4g6xJ/IbxeDthURMfd5XE="/>
-        <field:display field="totalReloadQty" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_totalReloadQty" object="${reloadrequest}" render="false" z="user-managed"/>
-        <field:display field="totalCancellationAmt" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_totalCancellationAmt" object="${reloadrequest}" z="lGoQ+aZwRoHBvzu6BViaXYIHU10="/>
-        <field:display field="acquirerTerminal" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_acquirerTerminal" object="${reloadrequest}" z="7yPUfWj3yflCB0Kgy7bHXkhxySU="/>
-        <field:display field="mobileNo" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_mobileNo" object="${reloadrequest}" z="/xxgVMawaDR6oZoPb6vRhEFdMlQ="/>
-        <field:display field="cmmpTrxId" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_cmmpTrxId" object="${reloadrequest}" z="eAQRHAYedrW7XoLTlDms9Tn/aXQ="/>
+    <page:show create="false" delete="false" id="ps_com_djavafactory_pttech_rrm_domain_ReloadRequest"
+               object="${reloadrequest}" path="/reloadrequests" update="false" z="user-managed">
+        <field:display field="transId" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_transId"
+                       object="${reloadrequest}" z="a+Oe3h3+7Thr1/xvWrOlcPVociU="/>
+        <field:display field="mfgNumber" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_mfgNumber"
+                       object="${reloadrequest}" z="Kglu78ySw2Lu43YhSh7PEfsmolo="/>
+        <field:display field="reloadAmount" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_reloadAmount"
+                       object="${reloadrequest}" z="nclJMLoyaVGv7upuyhaMcInRPyU="/>
+        <field:display field="serviceProviderId"
+                       id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_serviceProviderId"
+                       object="${reloadrequest}" z="Z/fr3aLc5nc1vETblS85qA5Eo4w="/>
+        <field:display field="transCode" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_transCode"
+                       object="${reloadrequest}" z="BUiownS97wPEu4Ej/fAp5us7VzI="/>
+        <field:display date="true" dateTimePattern="${reloadRequest_requestedtime_date_format}" field="requestedTime"
+                       id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_requestedTime" object="${reloadrequest}"
+                       z="v13BH0gd5/l55SG1fp23K4P7GJc="/>
+        <field:display date="true" dateTimePattern="${reloadRequest_modifiedtime_date_format}" field="modifiedTime"
+                       id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_modifiedTime" object="${reloadrequest}"
+                       z="SxwBgi4g6xJ/IbxeDthURMfd5XE="/>
+        <field:display field="status" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_status"
+                       object="${reloadrequest}" z="WYXU95xi9TYh93vrdTIHM1B21jM="/>
+        <field:display field="tngKey" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_tngKey"
+                       object="${reloadrequest}" render="false" z="user-managed"/>
+        <field:display field="totalReloadQty" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_totalReloadQty"
+                       object="${reloadrequest}" render="false" z="user-managed"/>
+        <field:display field="totalCancellationAmt"
+                       id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_totalCancellationAmt"
+                       object="${reloadrequest}" render="false" z="user-managed"/>
+        <field:display field="acquirerTerminal" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_acquirerTerminal"
+                       object="${reloadrequest}" render="false" z="user-managed"/>
+        <field:display field="mobileNo" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_mobileNo"
+                       object="${reloadrequest}" render="false" z="user-managed"/>
+        <field:display field="cmmpTrxId" id="s_com_djavafactory_pttech_rrm_domain_ReloadRequest_cmmpTrxId"
+                       object="${reloadrequest}" render="false" z="user-managed"/>
     </page:show>
 </div>

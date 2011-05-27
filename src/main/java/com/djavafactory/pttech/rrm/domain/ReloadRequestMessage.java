@@ -15,8 +15,10 @@ import java.util.Date;
 
 @RooJavaBean
 @RooToString
-@RooJson(toJsonMethod = "toJsonString", fromJsonMethod = "ReloadRequestMessage")
+@RooJson(toJsonMethod = "toJsonString", fromJsonMethod = "fromJsonToMessage")
 public class ReloadRequestMessage {
+
+    private String cmmpTransId;
 
     private String transId;
 
@@ -27,6 +29,10 @@ public class ReloadRequestMessage {
     private String spId;
 
     private String transCode;
+
+    private String acquirerTerminal;
+
+    private String mobileNo;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
@@ -41,7 +47,7 @@ public class ReloadRequestMessage {
     private String statusMsg;
 
     public String toJsonString() {
-        return new JSONSerializer().exclude("*.class", "statusCode", "statusMsg").transform(new DateTransformer("ddMMyyyyHHmmss"), Date.class).serialize(this);
+        return new JSONSerializer().exclude("*.class", "statusCode", "statusMsg", "cmmpTransId", "acquirerTerminal", "mobileNo").transform(new DateTransformer("ddMMyyyyHHmmss"), Date.class).serialize(this);
     }
 
     public ReloadRequestMessage fromJsonToMessage(String jsonString) {

@@ -16,8 +16,12 @@
 
     <util:properties id="amqp" location="classpath:/META-INF/spring/amqp.properties"/>
 
-    <amqp:inbound-channel-adapter channel="rrmReloadReqInboundChannel"
-                                  queue-name="#{amqp['queue.rrm.reload.req']}"
+    <amqp:inbound-channel-adapter channel="rrmRmiReloadReqInboundChannel"
+                                  queue-name="#{amqp['queue.rrm.rmireload.req']}"
+                                  connection-factory="singleConnectionFactory"/>
+
+    <amqp:inbound-channel-adapter channel="rrmRtmReloadReqInboundChannel"
+                                  queue-name="#{amqp['queue.rrm.rtmreload.req']}"
                                   connection-factory="singleConnectionFactory"/>
 
     <channel id="rmiReloadStatusChannel">

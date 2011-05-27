@@ -7,20 +7,47 @@
 							http://www.springframework.org/schema/integration
 			                http://www.springframework.org/schema/integration/spring-integration-2.0.xsd">
 
-    <service-activator input-channel="rrmReloadReqInboundChannel"
-                       ref="messageHandler" method="reloadRequestHandler" output-channel="rrmReloadReqOutputChannel"/>
+    <service-activator input-channel="rrmRmiReloadReqInboundChannel"
+                       ref="messageHandler" method="reloadRequestHandler"
+                       output-channel="rrmRmiReloadReqOutputChannel"/>
 
-    <channel id="rrmReloadReqOutputChannel"/>
-    <chain input-channel="rrmReloadReqOutputChannel" output-channel="routeMessageChannel">
-        <transformer ref="transformerBean" method="transformReloadRequest"/>
-        <filter ref="filterBean" method="reloadRequestFilter" discard-channel="invalidMessagesChannel"/>
-    </chain>
+    <service-activator input-channel="rrmRtmReloadReqInboundChannel"
+                       ref="messageHandler" method="reloadRequestHandler"
+                       output-channel="rrmRtmReloadReqOutputChannel"/>
 
-    <channel id="invalidMessagesChannel">
+    <channel id="rrmRmiReloadReqOutputChannel">
         <queue capacity="100"/>
     </channel>
-    <transformer input-channel="invalidMessagesChannel" ref="transformerBean" method="transformMessageToResponse"
+    <chain input-channel="rrmRmiReloadReqOutputChannel" output-channel="routeMessageChannel">
+        <header-enricher>
+            <header name="req" value="rmi"/>
+        </header-enricher>
+        <transformer ref="transformerBean" method="transformReloadRequest"/>
+        <filter ref="filterBean" method="reloadRequestFilter" discard-channel="invalidRmiMessagesChannel"/>
+    </chain>
+
+    <channel id="rrmRtmReloadReqOutputChannel">
+        <queue capacity="100"/>
+    </channel>
+    <chain input-channel="rrmRtmReloadReqOutputChannel" output-channel="routeMessageChannel">
+        <header-enricher>
+            <header name="req" value="rtm"/>
+        </header-enricher>
+        <transformer ref="transformerBean" method="transformReloadRequest"/>
+        <filter ref="filterBean" method="reloadRequestFilter" discard-channel="invalidRtmMessagesChannel"/>
+    </chain>
+
+    <channel id="invalidRmiMessagesChannel">
+        <queue capacity="100"/>
+    </channel>
+    <transformer input-channel="invalidRmiMessagesChannel" ref="transformerBean" method="transformMessageToResponse"
                  output-channel="rmiReloadStatusChannel"/>
+
+    <channel id="invalidRtmMessagesChannel">
+        <queue capacity="100"/>
+    </channel>
+    <transformer input-channel="invalidRtmMessagesChannel" ref="transformerBean" method="transformMessageToResponse"
+                 output-channel="rtmReloadStatusChannel"/>
 
     <channel id="routeMessageChannel">
         <queue capacity="100"/>
@@ -63,4 +90,24 @@
                  output-channel="rtmReloadStatusChannel"/>
 
     <poller id="defaultPoller" default="true" fixed-rate="3000"/>
+
+    <channel id="errorChannel">
+        <queue capacity="500"/>
+    </channel>
+    <chain input-channel="errorChannel">
+        <service-activator ref="messageHandler" method="reloadRequestErrorHandler"/>
+        <router ref="routerBean" method="routeErrorRequest"/>
+    </chain>
+
+    <channel id="rmiErrorChannel">
+        <queue capacity="100"/>
+    </channel>
+    <transformer input-channel="rmiErrorChannel" ref="transformerBean" method="transformMessageToResponse"
+                 output-channel="rmiReloadStatusChannel"/>
+
+    <channel id="rtmErrorChannel">
+        <queue capacity="100"/>
+    </channel>
+    <transformer input-channel="rtmErrorChannel" ref="transformerBean" method="transformMessageToResponse"
+                 output-channel="rtmReloadStatusChannel"/>
 </beans:beans>

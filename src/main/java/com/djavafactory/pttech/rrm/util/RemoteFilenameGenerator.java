@@ -4,7 +4,6 @@ package com.djavafactory.pttech.rrm.util;
 import org.springframework.integration.Message;
 import org.springframework.integration.file.FileNameGenerator;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class RemoteFilenameGenerator implements FileNameGenerator {
@@ -20,6 +19,6 @@ public class RemoteFilenameGenerator implements FileNameGenerator {
 
     @Override
     public String generateFileName(Message<?> message) {
-        return new StringBuilder().append(new SimpleDateFormat("yyyyMMdd").format(new Date())).append("_").append(message.getPayload().toString().substring(0, 10)).append(".").append(fileExtension).toString();
+        return new StringBuilder().append(DateUtil.convertDateToString(new Date(), "yyyyMMdd")).append("_").append(message.getPayload().toString().substring(0, 10)).append(".").append(fileExtension).toString();
     }
 }

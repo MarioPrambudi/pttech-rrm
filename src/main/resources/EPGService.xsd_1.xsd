@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.1 (branches/2.1-6728; 2011-02-03T14:14:58+0000) JAXWS-RI/2.2.3 JAXWS/2.2. -->
+<xs:schema xmlns:tns="http://webservice.epg/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0"
+           targetNamespace="http://webservice.epg/">
+
+    <xs:element name="ReloadRequest" type="tns:ReloadRequest"/>
+
+    <xs:element name="ReloadRequestResponse" type="tns:ReloadRequestResponse"/>
+
+    <xs:element name="Transaction" type="tns:Transaction"/>
+
+    <xs:element name="TransactionResponse" type="tns:TransactionResponse"/>
+
+    <xs:complexType name="Transaction">
+        <xs:sequence>
+            <xs:element name="TransactionId" type="xs:string" minOccurs="0"/>
+            <xs:element name="StatusCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="StatusMessage" type="xs:string" minOccurs="0"/>
+            <xs:element name="TranMessage" type="tns:reloadTransactions" minOccurs="0"/>
+            <xs:element name="LastTransactionDetail" type="tns:lastReload" minOccurs="0"/>
+            <xs:element name="BlackListInfo" type="tns:blackList" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="reloadTransactions">
+        <xs:sequence>
+            <xs:element name="TransactionDetails" type="tns:fields" nillable="true" minOccurs="0"
+                        maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="fields">
+        <xs:sequence>
+            <xs:element name="MfgNo" type="xs:string" minOccurs="0"/>
+            <xs:element name="CardTranno" type="xs:string" minOccurs="0"/>
+            <xs:element name="TranType" type="xs:string" minOccurs="0"/>
+            <xs:element name="TranDateTime" type="xs:string" minOccurs="0"/>
+            <xs:element name="DrCrFlag" type="xs:string" minOccurs="0"/>
+            <xs:element name="PurseFlag" type="xs:string" minOccurs="0"/>
+            <xs:element name="Transactedamt" type="xs:string" minOccurs="0"/>
+            <xs:element name="AftCardBal" type="xs:string" minOccurs="0"/>
+            <xs:element name="CardIssuer" type="xs:string" minOccurs="0"/>
+            <xs:element name="MachineCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="OBUNo" type="xs:string" minOccurs="0"/>
+            <xs:element name="EntrySPID" type="xs:string" minOccurs="0"/>
+            <xs:element name="SignatureVerNo" type="xs:string" minOccurs="0"/>
+            <xs:element name="Signature" type="xs:string" minOccurs="0"/>
+            <xs:element name="CardNo" type="xs:string" minOccurs="0"/>
+            <xs:element name="CorporateFlag" type="xs:string" minOccurs="0"/>
+            <xs:element name="UserCategory" type="xs:string" minOccurs="0"/>
+            <xs:element name="CSCCardType" type="xs:string" minOccurs="0"/>
+            <xs:element name="EntryLocation" type="xs:string" minOccurs="0"/>
+            <xs:element name="LastRefillMachineCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="ApplicationSector" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="lastReload">
+        <xs:sequence>
+            <xs:element name="LastTransactionFields" type="tns:lrFields" nillable="true" minOccurs="0"
+                        maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="lrFields">
+        <xs:sequence>
+            <xs:element name="CardTransactionNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="Location" type="xs:string" minOccurs="0"/>
+            <xs:element name="CreditTransactionType" type="xs:string" minOccurs="0"/>
+            <xs:element name="CreditedAmount" type="xs:string" minOccurs="0"/>
+            <xs:element name="AfterCardBalance" type="xs:string" minOccurs="0"/>
+            <xs:element name="TransactionDateTime" type="xs:string" minOccurs="0"/>
+            <xs:element name="SPID" type="xs:string" minOccurs="0"/>
+            <xs:element name="FreeFormat" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="blackList">
+        <xs:sequence>
+            <xs:element name="BlackListFields" type="tns:blkFields" nillable="true" minOccurs="0"
+                        maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="blkFields">
+        <xs:sequence>
+            <xs:element name="DataTimeBlacklisted" type="xs:string" minOccurs="0"/>
+            <xs:element name="BlacklistCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="ReaderId" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TransactionResponse">
+        <xs:sequence>
+            <xs:element name="return" type="tns:epgResponse" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="epgResponse">
+        <xs:sequence>
+            <xs:element name="TransactionId" type="xs:string" minOccurs="0"/>
+            <xs:element name="StatusCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="StatusMessage" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ReloadRequest">
+        <xs:sequence>
+            <xs:element name="TransactionId" type="xs:string" minOccurs="0"/>
+            <xs:element name="MfgNo" type="xs:string" minOccurs="0"/>
+            <xs:element name="Amount" type="xs:string" minOccurs="0"/>
+            <xs:element name="ServiceProviderId" type="xs:string" minOccurs="0"/>
+            <xs:element name="TransactionCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="RequestDateTime" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ReloadRequestResponse">
+        <xs:sequence>
+            <xs:element name="return" type="tns:epgResponse" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

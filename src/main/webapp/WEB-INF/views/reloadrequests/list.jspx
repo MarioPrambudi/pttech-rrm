@@ -1,39 +1,59 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:find finderName="ByParam" id="ff_com_djavafactory_pttech_rrm_domain_ReloadRequest" path="/reloadrequests/findReloadRequestsByParam?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed">
-        <table:select disableFormBinding="true" field="status" id="f_com_djavafactory_pttech_rrm_domain_ReloadRequest_status" itemValue="id" items="${statuscode}" path="/statuscode" z="user-managed"/>
-        <table:input disableFormBinding="true" field="serviceProviderId" id="f_com_djavafactory_pttech_rrm_domain_ReloadRequest_serviceProviderId" z="user-managed"/>
-        <table:datetime dateTimePattern="dd/MM/yyyy" disableFormBinding="true" field="requestedTimeFrom" id="f_com_djavafactory_pttech_rrm_domain_ReloadRequest_requestedTimeFrom" z="user-managed"/>
-        <table:datetime dateTimePattern="dd/MM/yyyy" disableFormBinding="true" field="requestedTimeTo" id="f_com_djavafactory_pttech_rrm_domain_ReloadRequest_requestedTimeTo" z="user-managed"/>
+    <page:find finderName="ByParam" id="ff_com_djavafactory_pttech_rrm_domain_ReloadRequest"
+               path="/reloadrequests/findReloadRequestsByParam?page=1&amp;size=${empty param.size ? 10 : param.size}"
+               z="user-managed">
+        <table:select disableFormBinding="true" field="status"
+                      id="f_com_djavafactory_pttech_rrm_domain_ReloadRequest_status" itemValue="id"
+                      items="${statuscode}" path="/statuscode" z="user-managed"/>
+        <table:input disableFormBinding="true" field="serviceProviderId"
+                     id="f_com_djavafactory_pttech_rrm_domain_ReloadRequest_serviceProviderId" z="user-managed"/>
+        <table:datetime dateTimePattern="dd/MM/yyyy" disableFormBinding="true" field="requestedTimeFrom"
+                        id="f_com_djavafactory_pttech_rrm_domain_ReloadRequest_requestedTimeFrom" z="user-managed"/>
+        <table:datetime dateTimePattern="dd/MM/yyyy" disableFormBinding="true" field="requestedTimeTo"
+                        id="f_com_djavafactory_pttech_rrm_domain_ReloadRequest_requestedTimeTo" z="user-managed"/>
     </page:find>
-    <page:list id="pl_com_djavafactory_pttech_rrm_domain_ReloadRequest" items="${reloadrequests}" z="vdfIkKqE0aVdNMpR8LSUm94KsLg=">
-        <table:table create="false" data="${reloadrequests}" delete="false" html_report="false" id="l_com_djavafactory_pttech_rrm_domain_ReloadRequest" path="/reloadrequests" pdf_report="false" update="false" z="user-managed">
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_requestedTime" property="requestedTime" z="user-managed"/>
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_mfgNumber" property="mfgNumber" z="user-managed"/>
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_serviceProviderId" property="serviceProviderId" z="zi8gJWwUPd7pR4NgiC7Q0iV5Pq0="/>
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_transCode" property="transCode" z="uvD+EpJuKRMOEfQK/zhTVNwSZVk="/>
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_status" property="status" z="user-managed"/>
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_tngKey" property="tngKey" render="false" z="user-managed"/>
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_totalReloadQty" property="totalReloadQty" render="false" z="user-managed"/>
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_transId" property="transId" z="I2SOBlUCJ8CgorEahkRlU1Px+X4="/>
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_reloadAmount" property="reloadAmount" z="QpZ1d6tALlcWvCtF+5wmbn714Hw="/>
+    <page:list id="pl_com_djavafactory_pttech_rrm_domain_ReloadRequest" items="${reloadrequests}"
+               z="vdfIkKqE0aVdNMpR8LSUm94KsLg=">
+        <table:table create="false" data="${reloadrequests}" delete="false" html_report="false"
+                     id="l_com_djavafactory_pttech_rrm_domain_ReloadRequest" path="/reloadrequests" pdf_report="false"
+                     update="false" z="user-managed">
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_requestedTime" property="requestedTime"
+                          z="user-managed"/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_mfgNumber" property="mfgNumber"
+                          z="user-managed"/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_transId" property="transId"
+                          z="I2SOBlUCJ8CgorEahkRlU1Px+X4="/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_reloadAmount" property="reloadAmount"
+                          z="QpZ1d6tALlcWvCtF+5wmbn714Hw="/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_serviceProviderId"
+                          property="serviceProviderId" z="zi8gJWwUPd7pR4NgiC7Q0iV5Pq0="/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_transCode" property="transCode"
+                          z="uvD+EpJuKRMOEfQK/zhTVNwSZVk="/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_status" property="status"
+                          z="user-managed"/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_tngKey" property="tngKey"
+                          render="false" z="user-managed"/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_ReloadRequest_totalReloadQty"
+                          property="totalReloadQty" render="false" z="user-managed"/>
         </table:table>
     </page:list>
-     <script type="text/javascript">
-       	Spring.addDecoration(new Spring.ElementDecoration({elementId : '_requestedTimeFrom_id', widgetType: 'dijit.form.DateTextBox', widgetAttrs: {required: 'true', constraints: {datePattern : 'dd/MM/yyyy', required : 'true'}, datePattern : 'dd/MM/yyyy'}})); 
-       	Spring.addDecoration(new Spring.ElementDecoration({elementId : '_requestedTimeTo_id', widgetType: 'dijit.form.DateTextBox', widgetAttrs: {required: 'true', constraints: {datePattern : 'dd/MM/yyyy', required : 'true'}, datePattern : 'dd/MM/yyyy'}})); 
-       	dojo.addOnLoad(function() {
+    <script type="text/javascript">
+        Spring.addDecoration(new Spring.ElementDecoration({elementId : '_requestedTimeFrom_id', widgetType: 'dijit.form.DateTextBox', widgetAttrs: {required: 'true', constraints: {datePattern : 'dd/MM/yyyy', required : 'true'}, datePattern : 'dd/MM/yyyy'}}));
+        Spring.addDecoration(new Spring.ElementDecoration({elementId : '_requestedTimeTo_id', widgetType: 'dijit.form.DateTextBox', widgetAttrs: {required: 'true', constraints: {datePattern : 'dd/MM/yyyy', required : 'true'}, datePattern : 'dd/MM/yyyy'}}));
+        dojo.addOnLoad(function() {
             var fromdate = dijit.byId('_requestedTimeFrom_id');
             var todate = dijit.byId('_requestedTimeTo_id');
-            dojo.connect(fromdate , "onChange", function() {
-            	todate.constraints.min = arguments[0];
+            dojo.connect(fromdate, "onChange", function() {
+                todate.constraints.min = arguments[0];
             });
-            
-            dojo.connect(todate , "onChange", function() {
-            	fromdate.constraints.max = arguments[0];
+
+            dojo.connect(todate, "onChange", function() {
+                fromdate.constraints.max = arguments[0];
             });
-        });    
-   </script>
+        });
+    </script>
 </div>

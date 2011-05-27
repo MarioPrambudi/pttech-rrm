@@ -35,20 +35,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ReloadReq }
-     */
-    public ReloadReq createReloadReq() {
-        return new ReloadReq();
-    }
-
-    /**
-     * Create an instance of {@link ReloadReqResponse }
-     */
-    public ReloadReqResponse createReloadReqResponse() {
-        return new ReloadReqResponse();
-    }
-
-    /**
      * Create an instance of {@link KeyRequest }
      */
     public KeyRequest createTngKeyRequest() {

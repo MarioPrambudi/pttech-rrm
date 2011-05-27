@@ -19,6 +19,7 @@ import java.util.List;
  * @author Carine Leong
  */
 public class MessageFilter {
+    private static Long milisecinsec = 1000L;
 
     /**
      * Method to validate the message type in the queue.rrm.reload.req queue.
@@ -65,7 +66,7 @@ public class MessageFilter {
 
         List<Configuration> configList = Configuration.findConfigurationsByConfigKey(Constants.CONFIG_TNG_TIMEOUT).getResultList();
         if (configList != null && !configList.isEmpty()) {
-            timeOutPeriod = Long.valueOf(configList.get(0).getConfigValue());
+            timeOutPeriod = Long.valueOf(configList.get(0).getConfigValue()) * milisecinsec;
         }
 
         List<ReloadRequest> reloadList = ReloadRequest.findReloadRequestsByTransId(requestMessage.getTransId()).getResultList();
@@ -100,6 +101,7 @@ public class MessageFilter {
             isValidLength(requestMessage.getSpId(), 4);
             isValidLength(requestMessage.getTransCode(), 2);
             isValidLength(requestMessage.getTransId(), 16);
+            isValidLength(requestMessage.getMobileNo(), 10);
         } catch (RrmBusinessException e) {
             setReloadMessageStatus(requestMessage, e.getErrorCode(), e.getMessage());
             return false;

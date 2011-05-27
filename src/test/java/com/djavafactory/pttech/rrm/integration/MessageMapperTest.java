@@ -5,16 +5,17 @@ import com.djavafactory.pttech.rrm.domain.ReloadRequest;
 import com.djavafactory.pttech.rrm.domain.ReloadRequestMessage;
 import com.djavafactory.pttech.rrm.domain.ReloadResponseMessage;
 import com.djavafactory.pttech.rrm.ws.KeyRequest;
-import com.djavafactory.pttech.rrm.ws.ReloadReqResponse;
+import epg.webservice.EpgResponse;
+import epg.webservice.ObjectFactory;
+import epg.webservice.ReloadRequestResponse;
 import org.junit.Test;
 
+import javax.xml.bind.JAXBElement;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.*;
 
 public class MessageMapperTest extends BaseManagerTestCase {
 
@@ -95,13 +96,14 @@ public class MessageMapperTest extends BaseManagerTestCase {
         return reloadResponseMessage;
     }
 
-    private ReloadReqResponse getReloadReqResponseMessage() {
-        ReloadReqResponse message = new ReloadReqResponse();
-        message.setStatusCode("00");
-        message.setStatusMsg("Success");
-        message.setTransactionId("00000000000001");
-
-        return message;
+    private JAXBElement<ReloadRequestResponse> getReloadReqResponseMessage() {
+        ReloadRequestResponse message = new ObjectFactory().createReloadRequestResponse();
+        EpgResponse response = new EpgResponse();
+        response.setStatusCode("00");
+        response.setStatusMessage("Success");
+        response.setTransactionId("00000000000001");
+        message.setReturn(response);
+        return new ObjectFactory().createReloadRequestResponse(message);
     }
 
     private KeyRequest getKeyRequestMessage() {

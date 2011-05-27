@@ -30,7 +30,7 @@
                  output-channel="rmiReloadStatusChannel"/>
 
     <beans:bean id="jaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
-        <beans:property name="contextPath" value="com.djavafactory.pttech.rrm.ws"/>
+        <beans:property name="contextPath" value="epg.webservice"/>
     </beans:bean>
 
     <beans:bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory"/>
