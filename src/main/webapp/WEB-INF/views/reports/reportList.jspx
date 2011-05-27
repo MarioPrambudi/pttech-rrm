@@ -29,19 +29,6 @@
             dojo.connect(todate , "onChange", function() {
             	fromdate.constraints.max = arguments[0];
             });
-        }); 
-/*        	Spring.addDecoration(new Spring.ElementDecoration({elementId : 'fromDate', widgetType: 'dijit.form.DateTextBox', widgetAttrs: {required: 'true', constraints: {datePattern : 'dd/MM/yyyy', required : 'true'}}}));
-       	Spring.addDecoration(new Spring.ElementDecoration({elementId : 'toDate', widgetType: 'dijit.form.DateTextBox', widgetAttrs: {required: 'true', constraints: {datePattern : 'dd/MM/yyyy', required : 'true'}}}));
-       	dojo.addOnLoad(function() {
-            var fromdate = dijit.byId('fromDate');
-            var todate = dijit.byId('toDate');
-            dojo.connect(fromdate , "onChange", function() {
-            	todate.constraints.min = arguments[0];
-            });
-            
-            dojo.connect(todate , "onChange", function() {
-            	fromdate.constraints.max = arguments[0];
-            });
-        });   */  
+        });
     </script>
 </div>
