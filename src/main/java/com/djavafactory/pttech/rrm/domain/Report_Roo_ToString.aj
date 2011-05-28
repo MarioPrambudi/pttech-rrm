@@ -25,7 +25,9 @@ privileged aspect Report_Roo_ToString {
         sb.append("Date: ").append(getDate()).append(", ");
         sb.append("DateCancelRequest: ").append(getDateCancelRequest()).append(", ");
         sb.append("DateCreditedToTngAccount: ").append(getDateCreditedToTngAccount()).append(", ");
+        sb.append("DateEnd: ").append(getDateEnd()).append(", ");
         sb.append("DateRefundedCustomer: ").append(getDateRefundedCustomer()).append(", ");
+        sb.append("DateStart: ").append(getDateStart()).append(", ");
         sb.append("DateTimeCreditedToTngAccount: ").append(getDateTimeCreditedToTngAccount()).append(", ");
         sb.append("DateTimeRefundedCustomer: ").append(getDateTimeRefundedCustomer()).append(", ");
         sb.append("Fees: ").append(getFees()).append(", ");

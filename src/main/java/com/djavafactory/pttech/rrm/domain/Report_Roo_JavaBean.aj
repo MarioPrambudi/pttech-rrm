@@ -475,4 +475,20 @@ privileged aspect Report_Roo_JavaBean {
         this.acquirerTerminal = acquirerTerminal;
     }
     
+    public Date Report.getDateStart() {
+        return this.dateStart;
+    }
+    
+    public void Report.setDateStart(Date dateStart) {
+        this.dateStart = dateStart;
+    }
+    
+    public Date Report.getDateEnd() {
+        return this.dateEnd;
+    }
+    
+    public void Report.setDateEnd(Date dateEnd) {
+        this.dateEnd = dateEnd;
+    }
+    
 }
