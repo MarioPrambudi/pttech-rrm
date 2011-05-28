@@ -3,7 +3,7 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="184"/>
 	<property name="ireport.y" value="0"/>
-	<field name="transactionDate" class="java.util.Date"/>
+	<field name="reloadDate" class="java.util.Date"/>
 	<field name="totalReloadQty" class="java.lang.Long"/>
 	<field name="totalPaymentToTngRm" class="java.math.BigDecimal"/>
 	<field name="totalCancellationRm" class="java.math.BigDecimal"/>
@@ -60,7 +60,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.transactionDate}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.reloadDate}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="100" y="0" width="100" height="40"/>
@@ -125,7 +125,7 @@
 			<textField pattern="dd-MMM-yy">
 				<reportElement x="0" y="0" width="100" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.util.Date"><![CDATA[$F{transactionDate}]]></textFieldExpression>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{reloadDate}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="100" y="0" width="90" height="20"/>
