@@ -22,6 +22,7 @@ public class BatchReportServiceManagerImpl implements BatchReportServiceManager 
 
     private DefaultFtpsSessionFactory ftpsSessionFactory;
     private MessageChannel ftpsChannel;
+    private static Long milisecinsec = 1000L;
 
     public BatchReportServiceManagerImpl() {
     }
@@ -72,7 +73,7 @@ public class BatchReportServiceManagerImpl implements BatchReportServiceManager 
         Configuration configuration = Configuration.findConfigurationByConfigKey(Constants.CONFIG_TNG_TIMEOUT);
         if (configuration != null && !"".equals(configuration.getConfigValue())) {
             Calendar timeOutDate = Calendar.getInstance();
-            timeOutDate.setTimeInMillis(timeOutDate.getTimeInMillis() - Long.valueOf(configuration.getConfigValue()));
+            timeOutDate.setTimeInMillis(timeOutDate.getTimeInMillis() - (Long.valueOf(configuration.getConfigValue()) * milisecinsec));
 
             List<ReloadRequest> reloadRequests = ReloadRequest.findReloadRequestsByParam(Constants.RELOAD_STATUS_NEW, null,
                     null, timeOutDate.getTime(), -1, -1, null).getResultList();

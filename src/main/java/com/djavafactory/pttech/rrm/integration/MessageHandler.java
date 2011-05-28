@@ -1,7 +1,14 @@
 package com.djavafactory.pttech.rrm.integration;
 
+import com.djavafactory.pttech.rrm.domain.ReloadRequestMessage;
+import com.djavafactory.pttech.rrm.exception.RrmStatusCode;
+import flexjson.JSONDeserializer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.integration.Message;
+import org.springframework.integration.MessagingException;
+
+import java.util.HashMap;
 
 /**
  * Spring Integration Service Activator class.
@@ -23,5 +30,35 @@ public class MessageHandler {
         logger.info("[reloadRequestHandler - Received Reload Request Message] >> " + message);
 
         return message;
+    }
+
+    /**
+     * Method to process the error message in errorChannel.
+     *
+     * @param e Exception
+     * @return
+     */
+    public ReloadRequestMessage reloadRequestErrorHandler(Exception e) {
+        ReloadRequestMessage requestMessage = null;
+        if (e instanceof MessagingException) {
+            Message<?> failedMessage = ((MessagingException) e).getFailedMessage();
+            if (failedMessage != null) {
+                if (failedMessage.getPayload() instanceof ReloadRequestMessage) {
+                    requestMessage = (ReloadRequestMessage) failedMessage.getPayload();
+                } else if (failedMessage.getPayload() instanceof String) {
+                    requestMessage = new ReloadRequestMessage();
+                    try {
+                        HashMap hashMap = new JSONDeserializer<HashMap>().deserialize(String.valueOf(failedMessage.getPayload()));
+                        requestMessage.setTransId(String.valueOf(hashMap.get("transId")));
+                    } catch (ClassCastException ex) {
+                        logger.info("[transformStringToReloadRequest] >> Invalid message [" + failedMessage.getPayload() + "]. Ignore!!");
+                    }
+                }
+                requestMessage.setMsgType(String.valueOf(failedMessage.getHeaders().get("req")));
+                requestMessage.setStatusCode(RrmStatusCode.STS_GENERALRRMERROR.getCode());
+                requestMessage.setStatusMsg(e.getMessage());
+            }
+        }
+        return requestMessage;
     }
 }

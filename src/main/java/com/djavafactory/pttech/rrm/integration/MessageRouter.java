@@ -13,6 +13,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MessageRouter {
     private static final Log logger = LogFactory.getLog(MessageRouter.class);
+    private static final String rmiReq = "rmi";
 
     /**
      * Method to route the ReloadRequestMessage to the appropriate channel based on message type.
@@ -26,5 +27,15 @@ public class MessageRouter {
                 : ((StringUtils.equalsIgnoreCase(message.getMsgType(), Constants.RELOAD_REQUEST_NEW) && (message.getEncryptedMsg() == null || StringUtils.equalsIgnoreCase(message.getEncryptedMsg(), "")))
                 ? "newReloadReqPersistChannel" : "rtmReloadReqPersistChannel");
         //TODO add manual cancellation router in phase 2
+    }
+
+    /**
+     * Method to route the Error Message to the appropriate channel based on message type.
+     *
+     * @param message object
+     * @return Channel in string
+     */
+    public String routeErrorRequest(ReloadRequestMessage message) {
+        return (message.getMsgType() != null) ? ((StringUtils.equalsIgnoreCase(rmiReq, message.getMsgType())) ? "rmiErrorChannel" : "rtmErrorChannel") : null;
     }
 }

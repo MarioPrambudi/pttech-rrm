@@ -14,7 +14,7 @@
     </channel>
     <ws:inbound-gateway id="keyRequestWsGateway"
                         request-channel="keyRequestWsChannel"
-                        marshaller="jaxbMarshaller" unmarshaller="jaxbMarshaller"
+                        marshaller="jaxbMarshallerIn" unmarshaller="jaxbMarshallerIn"
                         reply-channel="keyRequestReplyChannel"/>
 
     <chain input-channel="keyRequestWsChannel" output-channel="tngKeyResponseChannel">
@@ -60,4 +60,8 @@
     <channel id="errorChannel">
         <queue capacity="500"/>
     </channel>
+
+    <beans:bean id="jaxbMarshallerIn" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <beans:property name="contextPath" value="com.djavafactory.pttech.rrm.ws"/>
+    </beans:bean>
 </beans:beans>
