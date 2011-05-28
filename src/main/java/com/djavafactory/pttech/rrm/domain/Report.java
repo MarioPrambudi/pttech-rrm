@@ -197,5 +197,13 @@ public class Report {
 	private Date time;
     
 	private String acquirerTerminal;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern="dd/MM/yyyy")
+	private Date dateStart;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern="dd/MM/yyyy")
+	private Date dateEnd;
     
 }

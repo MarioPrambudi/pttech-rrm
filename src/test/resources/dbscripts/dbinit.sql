@@ -17,17 +17,21 @@ insert into configuration ( config_key , config_value , ordering , version ) val
 insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.TNG.TG0006', 'Summary Cancellation Reload Report', 5, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.TNG.TG0007', 'Daily Settlement Reload Report', 6, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.TNG.TG0008', 'Monthly Settlement Reload Report', 7, 0);
+insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.TNG.TG0009', 'Daily Commission Reload Report', 8, 0);
+insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.TNG.TG0010', 'Monthly Commission Reload Report', 9, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.CEL.CE0001', 'Daily Transaction Details Report', 1, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.CEL.CE0002', 'Daily Transaction Details By Range Of Dates Report', 2, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.CEL.CE0003', 'Daily Transaction Fee  Details Report', 3, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.CEL.CE0004', 'Daily Transaction Fee  Details By Range Of Dates Report', 4, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.CEL.CE0005', 'Summary of Daily Transactions Report', 5, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.CEL.CE0006', 'Summary of Daily Transactions By Range of Dates Report', 6, 0);
+insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.CEL.CE0007', 'Summary of Daily Fee Report', 7, 0);
+insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.CEL.CE0008', 'Summary of Daily Fee By Range of Dates Report', 8, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.FEES', '1.00', 1, 0);
-insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.CELCOMM', '0.55', 2, 0);
-insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.TNGCOMM', '0.45', 3, 0);;
-insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.PRICOMM', '0.30', 4, 0);
-insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.CMMCOMM', '0.25', 5, 0);
+insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.SOF', '0.25', 2, 0);
+insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.TNG', '0.20', 3, 0);;
+insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.RS', '0.30', 4, 0);
+insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.TA', '0.25', 5, 0);
 
 
 insert into province ( id, name ) values ( 1, 'Johor' );

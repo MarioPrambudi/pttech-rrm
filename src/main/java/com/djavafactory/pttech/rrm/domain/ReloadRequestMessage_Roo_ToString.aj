@@ -6,7 +6,7 @@ package com.djavafactory.pttech.rrm.domain;
 import java.lang.String;
 
 privileged aspect ReloadRequestMessage_Roo_ToString {
-
+    
     public String ReloadRequestMessage.toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("AcquirerTerminal: ").append(getAcquirerTerminal()).append(", ");
@@ -24,5 +24,5 @@ privileged aspect ReloadRequestMessage_Roo_ToString {
         sb.append("TransId: ").append(getTransId());
         return sb.toString();
     }
-
+    
 }

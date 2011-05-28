@@ -4,7 +4,7 @@
 	<property name="ireport.x" value="184"/>
 	<property name="ireport.y" value="0"/>
 	<field name="dateCancelRequest" class="java.util.Date"/>
-	<field name="reloadDate" class="java.util.Date"/>
+	<field name="requestedTime" class="java.util.Date"/>
 	<field name="totalCancellationQty" class="java.lang.Long"/>
 	<field name="totalAmountCancelledRm" class="java.math.BigDecimal"/>
 	<field name="totalFees" class="java.math.BigDecimal"/>
@@ -147,7 +147,7 @@
 			<textField pattern="dd-MMM-yy">
 				<reportElement x="100" y="0" width="100" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.util.Date"><![CDATA[$F{reloadDate}]]></textFieldExpression>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{requestedTime}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="200" y="0" width="90" height="20"/>

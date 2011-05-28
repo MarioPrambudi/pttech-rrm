@@ -3,21 +3,22 @@
 
 package com.djavafactory.pttech.rrm.domain;
 
+import com.djavafactory.pttech.rrm.domain.ReloadRequestMessage;
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
-
+import java.lang.String;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 privileged aspect ReloadRequestMessage_Roo_Json {
-
+    
     public static String ReloadRequestMessage.toJsonArray(Collection<ReloadRequestMessage> collection) {
         return new JSONSerializer().exclude("*.class").serialize(collection);
     }
-
+    
     public static Collection<ReloadRequestMessage> ReloadRequestMessage.fromJsonArrayToReloadRequestMessages(String json) {
         return new JSONDeserializer<List<ReloadRequestMessage>>().use(null, ArrayList.class).use("values", ReloadRequestMessage.class).deserialize(json);
     }
-
+    
 }

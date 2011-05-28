@@ -49,10 +49,15 @@ public final class Constants {
     public static final String TERMINAL_STATUS_BLOCK = "B";
 
     public static final String REPORT_CONFIG_FEE = "REPORT.FEES";
-    public static final String REPORT_CONFIG_CELCOMM = "REPORT.CELCOMM";
-    public static final String REPORT_CONFIG_TNGCOMM = "REPORT.TNGCOMM";
-    public static final String REPORT_CONFIG_PRINTIS_COMM = "REPORT.PRICOMM";
-    public static final String REPORT_CONFIG_CMM_COMM = "REPORT.CMMCOMM";
+    public static final String REPORT_CONFIG_SOF = "REPORT.SOF";
+    public static final String REPORT_CONFIG_TNG = "REPORT.TNG";
+    public static final String REPORT_CONFIG_AT = "REPORT.AT";
+    public static final String REPORT_CONFIG_RS = "REPORT.RS";
+    
+//    public static final String REPORT_CONFIG_CELCOMM = "REPORT.CELCOMM";
+//    public static final String REPORT_CONFIG_TNGCOMM = "REPORT.TNGCOMM";
+//    public static final String REPORT_CONFIG_PRINTIS_COMM = "REPORT.PRICOMM";
+//    public static final String REPORT_CONFIG_CMM_COMM = "REPORT.CMMCOMM";
 
     /**
      * Constants for DataUtil
