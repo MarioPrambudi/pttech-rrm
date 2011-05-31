@@ -270,7 +270,7 @@ public class ReportController extends BaseController {
 	}
 	
 	@RequestMapping(value ="/TG0007-Report/{format}", method = RequestMethod.GET)
-	public String dailySettlementReloadFrmCelcomReport(ModelMap modelMap,
+	public String settlementReloadFrmCelcomReport(ModelMap modelMap,
 													   Model uiModel,
 													   @PathVariable("format") String format,
 													   @RequestParam(value = "page", required = false) Integer page, 
@@ -284,7 +284,7 @@ public class ReportController extends BaseController {
 		Date dateStart;
 		Date dateEnd;
 		List<Report> listReport = new ArrayList<Report>();
-		listReport = ReportGenerator.getDailySettlementReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
+		listReport = ReportGenerator.getSettlementReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
 		if(listReport == null  || listReport.size() == 0) {
 			return "emptyReport";
 		} else {
@@ -295,14 +295,13 @@ public class ReportController extends BaseController {
 			modelMap.put("endDate", dateEnd);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
-			return "dailySettlementReloadFrmCelcomReport";
+			return "settlementReloadFrmCelcomReport";
 		}
 		
 	}
-	
 	
 	@RequestMapping(value = "/TG0008-Report/{format}", method = RequestMethod.GET)
-	public String monthlySettlementReloadFrmCelcomReport(ModelMap modelMap,
+	public String commissionReloadFrmCchsForCelcomReport(ModelMap modelMap,
 														 Model uiModel,
 														 @PathVariable("format") String format,
 														 @RequestParam(value = "page", required = false) Integer page, 
@@ -316,69 +315,7 @@ public class ReportController extends BaseController {
 		Date dateStart;
 		Date dateEnd;
 		List<Report> listReport = new ArrayList<Report>();
-		listReport = ReportGenerator.getSummarySettlementReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
-		if(listReport == null  || listReport.size() == 0) {
-			return "emptyReport";
-		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
-			dateStart = ReportGenerator.getSummaryDateMin(dateMin);
-			dateEnd =  ReportGenerator.getSummaryDateMax(dateStart, dateMax);
-			modelMap.put("startDate", dateStart);
-			modelMap.put("endDate", dateEnd);
-			modelMap.put("reportData", jrDataSource);
-			modelMap.put("format", format);
-			return "monthlySettlementReloadFrmCelcomReport";
-		}
-		
-	}
-	
-	@RequestMapping(value = "/TG0009-Report/{format}", method = RequestMethod.GET)
-	public String dailyCommissionReloadFrmCchsForCelcomReport(ModelMap modelMap,
-														 Model uiModel,
-														 @PathVariable("format") String format,
-														 @RequestParam(value = "page", required = false) Integer page, 
-														 @RequestParam(value = "size", required = false) Integer size,
-														 @RequestParam(value = "dateMin", required = false)String dateMin,
-														 @RequestParam(value = "dateMax", required = false)String dateMax											   
-														  ) throws Exception {
-			
-		if (dateMin==null) dateMin="null";
-		if (dateMax==null) dateMax="null";
-		Date dateStart;
-		Date dateEnd;
-		List<Report> listReport = new ArrayList<Report>();
-		listReport = ReportGenerator.getDailyCommissionReloadFrmCchsForCelcomReport(dateMin, dateMax, -1, -1);
-		if(listReport == null  || listReport.size() == 0) {
-			return "emptyReport";
-		} else {
-			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
-			dateStart = ReportGenerator.getDateMin(dateMin);
-			dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
-			modelMap.put("startDate", dateStart);
-			modelMap.put("endDate", dateEnd);
-			modelMap.put("reportData", jrDataSource);
-			modelMap.put("format", format);
-			return "dailyCommissionReloadFrmCchsForCelcomReport";
-		}
-		
-	}
-	
-	@RequestMapping(value = "/TG0010-Report/{format}", method = RequestMethod.GET)
-	public String monthlyCommissionReloadFrmCchsForCelcomReport(ModelMap modelMap,
-														 Model uiModel,
-														 @PathVariable("format") String format,
-														 @RequestParam(value = "page", required = false) Integer page, 
-														 @RequestParam(value = "size", required = false) Integer size,
-														 @RequestParam(value = "dateMin", required = false)String dateMin,
-														 @RequestParam(value = "dateMax", required = false)String dateMax											   
-														  ) throws Exception {
-			
-		if (dateMin==null) dateMin="null";
-		if (dateMax==null) dateMax="null";
-		Date dateStart;
-		Date dateEnd;
-		List<Report> listReport = new ArrayList<Report>();
-		listReport = ReportGenerator.getMonthlyCommissionReloadFrmCchsForCelcomReport(dateMin, dateMax, -1, -1);
+		listReport = ReportGenerator.getCommissionReloadFrmCchsForCelcomReport(dateMin, dateMax, -1, -1);
 		if(listReport == null  || listReport.size() == 0) {
 			return "emptyReport";
 		} else {
@@ -389,7 +326,7 @@ public class ReportController extends BaseController {
 			modelMap.put("endDate", dateEnd);
 			modelMap.put("reportData", jrDataSource);
 			modelMap.put("format", format);
-			return "monthlyCommissionReloadFrmCchsForCelcomReport";
+			return "commissionReloadFrmCchsForCelcomReport";
 		}
 	}
 	
