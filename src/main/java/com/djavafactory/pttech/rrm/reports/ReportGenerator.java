@@ -616,7 +616,7 @@ public class ReportGenerator {
     
 
     /**
-     * get result for report dailySettlementReloadReqFrmCelcomReport/TG0007 
+     * get result for report settlementReloadReqFrmCelcomReport/TG0007 
      * @param dateMinStr String
      * @param dateMaxStr String
      * @param first int 
@@ -624,13 +624,12 @@ public class ReportGenerator {
      * @return List<Report> listReport
      * @throws Exception 
      */
-  public static List<Report> getDailySettlementReloadFrmCelcomReport(String dateMinStr, String dateMaxStr, int first, int size) throws Exception {
+  public static List<Report> getSettlementReloadFrmCelcomReport(String dateMinStr, String dateMaxStr, int first, int size) throws Exception {
 	  List <Report> listReport = new ArrayList<Report>();
 	  List <Report> listCompleteReport = new ArrayList<Report>();
 	  List<String> listStatus = getListAllStatusNotPending();
-	  List<Report> listReportPage = new ArrayList<Report>();
 	  Date dateMin = getSummaryDateMin(dateMinStr);
-	  Date dateMax = getDateMax(dateMin, dateMaxStr);		
+	  Date dateMax = getSummaryDateMax(dateMin, dateMaxStr);	
 	  Date dateMaxSearch = null;	  
 	  int i = 1; 
 	  while(dateMin.before(dateMax))
@@ -645,12 +644,12 @@ public class ReportGenerator {
 			for(Report reportSummary : listReport)  
 			{    
 	            try {
-	              reportSummary.setSeqNo(i++);    
-	              reportSummary.setReloadDate(reportSummary.getModifiedDate());
-				  reportSummary.setGrossPaymentToTngRm(getTotalPaymentToTNG(reportSummary.getTotalReloadQty(), reportSummary.getReloadAmount()));		         		          
-		          reportSummary.setTotalAmountCancelledRm(reportSummary.getReloadAmount());
-				  reportSummary.setAmountCreditedToTngRm(reportSummary.getGrossPaymentToTngRm().subtract(reportSummary.getTotalCancellationRm()));
-		          //reportSummary.setDateCreditedToTngAccount(); Blank //TODO
+	            	 reportSummary.setSeqNo(i++);  
+	            	 reportSummary.setReloadDate(reportSummary.getModifiedDate());
+	            	 reportSummary.setTotalPaymentToTngRm(getTotalPaymentToTNG(reportSummary.getTotalReloadQty(), reportSummary.getReloadAmount()));		         		          
+	            	 reportSummary.setTotalCancellationRm(reportSummary.getReloadAmount()); 
+	            	 reportSummary.setNetPaymentToTng(reportSummary.getTotalPaymentToTngRm().subtract(reportSummary.getTotalCancellationRm()));		          
+	            	 //reportSummary.setDateCreditedToTngAccount(); Blank //TODO
 				  listCompleteReport.add(reportSummary);    		
 		        } catch (Exception e) {
 	                e.printStackTrace();  
@@ -663,46 +662,6 @@ public class ReportGenerator {
 	  	return listCompleteReport;
   }
   
-	  /**
-	   * get result for report dailyCommissionReloadFrmCchsForCelcomReport/TG0009
-	   * @param dateMinStr String
-	   * @param dateMaxStr String
-	   * @param first int 
-	   * @param size int
-	   * @return List<Report> listReport
-	   * @throws Exception 
-	   */
-	public static List<Report> getDailyCommissionReloadFrmCchsForCelcomReport(String dateMinStr, String dateMaxStr, int first, int size) throws Exception {
-		List<Report> listReport = new ArrayList<Report>();
-        List<Report> listCompleteReport = new ArrayList<Report>();
-      	List<String> listStatus = getListAllCancel();
-      	Date dateMin = getDateMin(dateMinStr);
-    	Date dateMax = getDateMax(dateMin, dateMaxStr);	 			
-		List<ReloadRequest> listReloadRequest = ReloadRequest.findReloadRequestsByModifiedTimeBetweenAndStatus(dateMin, dateMax, listStatus, first, size).getResultList();
-        listReport = copyReloadRequestToReport(listReloadRequest);
-        int i = 1; 
-		for(Report report : listReport)  
-		{        
-            try {
-            	//manually set value into report fields
-            	report.setSeqNo(i++);    
-            	report.setReloadDateTime(report.getModifiedDate());
-            	report.setFees(getReportFee());
-            	report.setCommissionAmountDeductedBySof(getReportSOF());
-            	report.setTotalReloadQty(1); //TODO            	
-            	report.setTngFee(getReportTng()); 						
-            	report.setCelcomMobileFee(getReportRS()); 		// TODO
-            	report.setCmmFee(getReportAT()); 			
-            	listCompleteReport.add(report);            	
-      	      	           	
-            } catch (Exception e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            }
-        }
-
-        return listCompleteReport;
-	}
-
   	//Tng Summary Reports
     /**
      * get result for report summaryRequestReloadFrmCelcomReport/TG0002
@@ -816,7 +775,6 @@ public class ReportGenerator {
     	List<Report> listReport = new ArrayList<Report>();
         List<Report> listCompleteReport = new ArrayList<Report>();
     	List<String> listStatus = getListAllCancel();
-    	List<Report> listReportPage = new ArrayList<Report>();
     	Date dateMin = getSummaryDateMin(dateMinStr);
     	Date dateMax = getSummaryDateMax(dateMin, dateMaxStr);		
     	Date dateMaxSearch = null; 
@@ -853,56 +811,9 @@ public class ReportGenerator {
     	return listCompleteReport;
    	 
     }
-  
-    /** 
-     * get result for report summarySettlementReloadReqFrmCelcomReport/TG0008
-     * @param dateMinStr String
-     * @param dateMaxStr String
-     * @param first int 
-     * @param size int
-     * @return List<Report> listReport
-     * @throws Exception 
-     */
-    public static List<Report> getSummarySettlementReloadFrmCelcomReport(String dateMinStr, String dateMaxStr, int first, int size) throws Exception {
-	  List <Report> listReport = new ArrayList<Report>();
-	  List <Report> listCompleteReport = new ArrayList<Report>();
-	  List<String> listStatus = getListAllStatusNotPending();
-	  Date dateMin = getSummaryDateMin(dateMinStr);
-	  Date dateMax = getSummaryDateMax(dateMin, dateMaxStr);		
-	  Date dateMaxSearch = null;
-	  int i = 1; 
-	  while(dateMin.before(dateMax))
-	  {	   		   		
-		dateMaxSearch = DateUtil.add(dateMin, 5, 1);   			
-		List<ReloadRequest> listReloadRequest = ReloadRequest.findSummaryReloadRequestsByModifiedTimeBetweenAndStatus(dateMin, dateMaxSearch, listStatus, -1, 0);
-		
-		if (listReloadRequest != null && listReloadRequest.size()>0)
-		{
-			listReport = copyReloadRequestToReport(listReloadRequest);    		
-			
-			for(Report reportSummary : listReport)
-			{        
-	            try {
-	            	 reportSummary.setSeqNo(i++);  
-	            	 reportSummary.setReloadDate(reportSummary.getModifiedDate());
-	            	 reportSummary.setTotalPaymentToTngRm(getTotalPaymentToTNG(reportSummary.getTotalReloadQty(), reportSummary.getReloadAmount()));		         		          
-	            	 reportSummary.setTotalCancellationRm(reportSummary.getReloadAmount()); 
-	            	 reportSummary.setNetPaymentToTng(reportSummary.getTotalPaymentToTngRm().subtract(reportSummary.getTotalCancellationRm()));		          
-	            	 //reportSummary.setDateCreditedToTngAccount(); Blank //TODO
-		          listCompleteReport.add(reportSummary); 
-		        } catch (Exception e) {
-	                e.printStackTrace();  
-	            }
-	        }         		
-		}  		
-		dateMin = dateMaxSearch;
-	  }
-
-	  	return listCompleteReport; 	 
-  }
     
     /** 
-     * get result for report monthlyCommissionReloadFrmCchsForCelcomReport/TG0010
+     * get result for report commissionReloadFrmCchsForCelcomReport/TG0008
      * @param dateMinStr String
      * @param dateMaxStr String
      * @param first int 
@@ -910,7 +821,7 @@ public class ReportGenerator {
      * @return List<Report> listReport
      * @throws Exception 
      */
-    public static List<Report> getMonthlyCommissionReloadFrmCchsForCelcomReport(String dateMinStr, String dateMaxStr, int first, int size) throws Exception {
+    public static List<Report> getCommissionReloadFrmCchsForCelcomReport(String dateMinStr, String dateMaxStr, int first, int size) throws Exception {
 	  List <Report> listReport = new ArrayList<Report>();
 	  List <Report> listCompleteReport = new ArrayList<Report>();
 	  List<String> listStatus = getListAllStatusNotPending();
