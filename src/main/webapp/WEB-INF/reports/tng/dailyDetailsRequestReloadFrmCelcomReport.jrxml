@@ -3,6 +3,7 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="184"/>
 	<property name="ireport.y" value="0"/>
+	<property name="net.sf.jasperreports.export.html.using.images.to.align" value="false"/>
 	<field name="sofRequestedDatetime" class="java.util.Date"/>
 	<field name="mfgNumber" class="java.lang.Long"/>
 	<field name="reloadAmount" class="java.math.BigDecimal"/>

@@ -205,5 +205,7 @@ public class Report {
 	@Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date dateEnd;
+	
+	private Integer seqNo;
     
 }

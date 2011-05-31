@@ -7,8 +7,6 @@
  		<input id="fromDate" type="text" name="fromDate"/> <p/>
  		<label><spring:message code="label_com_djavafactory_pttech_rrm_domain_report_todate" /></label>
  		<input id="toDate" type="text" name="toDate"/>
-       <!--  <table:datetime dateTimePattern="dd/MM/yyyy" disableFormBinding="true" field="fromDate" id="f_com_djavafactory_pttech_rrm_domain_Report_fromDate" z="user-managed"/>
-		<table:datetime dateTimePattern="dd/MM/yyyy" disableFormBinding="true" field="toDate" id="f_com_djavafactory_pttech_rrm_domain_Report_toDate" z="user-managed"/> -->
 		<table:table data="${reports}" id="l_com_djavafactory_pttech_rrm_domain_Report" path="/reports" z="user-managed" 
         		     html_report="true" pdf_report="true" xls_report="true" show="false" create="false" delete="false" update="false">
 	        <table:column id="c_com_djavafactory_pttech_rrm_domain_Report_reportId" property="configKey" z="user-managed"/>
