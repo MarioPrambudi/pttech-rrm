@@ -5,10 +5,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.export.JRHtmlExporter;
+import net.sf.jasperreports.engine.export.JRHtmlExporterParameter;
 import net.sf.jasperreports.engine.export.JRRtfExporter;
 import net.sf.jasperreports.engine.export.JRXmlExporter;
 import net.sf.jasperreports.engine.export.oasis.JROdtExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
+import net.sf.jasperreports.engine.util.JRProperties;
 
 import org.springframework.ui.jasperreports.JasperReportsUtils;
 import org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView;
@@ -88,6 +91,7 @@ public class CustomJasperReportsMultiFormatView extends JasperReportsMultiFormat
         } else if (format.endsWith("rtf")) {
             JRRtfExporter exporter = new JRRtfExporter();
             exporter.setParameters(model);
+            
             JasperReportsUtils.render(exporter, populatedReport, response.getOutputStream());
             /*
              * Early testing had problems.

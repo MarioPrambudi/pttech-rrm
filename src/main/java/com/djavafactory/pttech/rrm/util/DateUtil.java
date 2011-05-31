@@ -35,7 +35,7 @@ public class DateUtil {
 	}
 
 	public static String getDateTimePattern() {
-		return DateUtil.getDatePattern() + " HH:mm:ss.S";
+		return DateUtil.getDatePattern() + " hh:mm:ss";
 	}
 
 	/**
@@ -206,7 +206,7 @@ public class DateUtil {
 //				log.debug("converting date with pattern: " + getDatePattern());
 //			}
 
-			aDate = convertStringToDate(getDatePattern(), strDate);
+			aDate = convertStringToDate(getDateTimePattern(), strDate);
 		} catch (ParseException pe) {
 			log.error("Could not convert '" + strDate + "' to a date, throwing exception");
 			pe.printStackTrace();

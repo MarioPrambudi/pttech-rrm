@@ -5,10 +5,10 @@
         <put-attribute name="body" value="/WEB-INF/views/reports/reportList.jspx"/>
     </definition>    
     <!-- TnG Report -->
-    <definition extends="default" name="dailyDetailsRequestReloadFrmCelcomList">
-     	<put-attribute name="body" value="/WEB-INF/views/reports/tng/dailyDetailsRequestReloadFrmCelcomList.jspx"/> 
+    <definition extends="default" name="emptyReport">
+     	<put-attribute name="body" value="/WEB-INF/views/reports/emptyReport.jspx"/> 
     </definition>
-    <definition extends="default" name="summaryRequestReloadFrmCelcomList">
+    <!-- <definition extends="default" name="summaryRequestReloadFrmCelcomList">
      	<put-attribute name="body" value="/WEB-INF/views/reports/tng/summaryRequestReloadFrmCelcomList.jspx"/> 
     </definition>
     <definition extends="default" name="dailyDetailedReloadFrmCelcomList">
@@ -28,10 +28,10 @@
     </definition>
     <definition extends="default" name="monthlySettlementReloadFrmCelcomList">
      	<put-attribute name="body" value="/WEB-INF/views/reports/tng/monthlySettlementReloadFrmCelcomList.jspx"/> 
-    </definition>
+    </definition> -->
     
     
-    <!-- Celcom Report -->
+<!--     Celcom Report
     <definition extends="default" name="dailyTrxDetailsList">
      	<put-attribute name="body" value="/WEB-INF/views/reports/celcom/dailyTrxDetailsList.jspx"/> 
     </definition>
@@ -50,5 +50,5 @@
     <definition extends="default" name="summaryDailyTrxByRangeDateList">
      	<put-attribute name="body" value="/WEB-INF/views/reports/celcom/summaryDailyTrxByRangeDateList.jspx"/> 
     </definition>
-    
+     -->
 </tiles-definitions>

@@ -491,4 +491,12 @@ privileged aspect Report_Roo_JavaBean {
         this.dateEnd = dateEnd;
     }
     
+    public Integer Report.getSeqNo() {
+        return this.seqNo;
+    }
+    
+    public void Report.setSeqNo(Integer seqNo) {
+        this.seqNo = seqNo;
+    }
+    
 }

@@ -43,6 +43,7 @@ privileged aspect Report_Roo_ToString {
         sb.append("ReloadDate: ").append(getReloadDate()).append(", ");
         sb.append("ReloadDateTime: ").append(getReloadDateTime()).append(", ");
         sb.append("RequestedTime: ").append(getRequestedTime()).append(", ");
+        sb.append("SeqNo: ").append(getSeqNo()).append(", ");
         sb.append("ServiceProviderId: ").append(getServiceProviderId()).append(", ");
         sb.append("SofRequestedDate: ").append(getSofRequestedDate()).append(", ");
         sb.append("SofRequestedDatetime: ").append(getSofRequestedDatetime()).append(", ");
