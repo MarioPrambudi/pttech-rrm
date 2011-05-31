@@ -1051,6 +1051,7 @@ public class ReportGenerator {
 			try {
 				// TODO :set attribute for daily transaction details report
 				report.setSeqNo(i++);  
+				report.setTngTrxId(report.getTransId());
 				report.setTngMfgNo(report.getMfgNumber()); 		// TODO
 				report.setDate(report.getRequestedTime());
             	report.setTime(report.getRequestedTime());
