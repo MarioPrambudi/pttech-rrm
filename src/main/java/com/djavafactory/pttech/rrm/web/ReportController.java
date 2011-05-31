@@ -128,20 +128,20 @@ public class ReportController extends BaseController {
 		if (dateMax==null) dateMax="null";	
 		Date dateStart;
 		Date dateEnd;
-			List<Report> listReport = new ArrayList<Report>();
-			listReport = ReportGenerator.getSummaryRequestReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
-			if(listReport == null  || listReport.size() == 0) {
-				return "emptyReport";
-			} else {
-		        JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport ,false);
-		        dateStart = ReportGenerator.getSummaryDateMin(dateMin);
-				dateEnd =  ReportGenerator.getSummaryDateMax(dateStart, dateMax);
-				modelMap.put("startDate", dateStart);
-				modelMap.put("endDate", dateEnd);
-				modelMap.put("reportData", jrDataSource);
-		        modelMap.put("format", format);
-		        return "summaryRequestReloadFrmCelcomReport";
-			}
+		List<Report> listReport = new ArrayList<Report>();
+		listReport = ReportGenerator.getSummaryRequestReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
+		if(listReport == null  || listReport.size() == 0) {
+			return "emptyReport";
+		} else {
+	        JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport ,false);
+	        dateStart = ReportGenerator.getSummaryDateMin(dateMin);
+			dateEnd =  ReportGenerator.getSummaryDateMax(dateStart, dateMax);
+			modelMap.put("startDate", dateStart);
+			modelMap.put("endDate", dateEnd);
+			modelMap.put("reportData", jrDataSource);
+	        modelMap.put("format", format);
+	        return "summaryRequestReloadFrmCelcomReport";
+		}
 	}
 	
 	@RequestMapping(value = "/TG0003-Report/{format}", method = RequestMethod.GET)
@@ -159,20 +159,20 @@ public class ReportController extends BaseController {
 		Date dateStart;
 		Date dateEnd;
 
-			List<Report> listReport = new ArrayList<Report>();
-			listReport = ReportGenerator.getDailyDetailedReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
-			if(listReport == null  || listReport.size() == 0) {
-				return "emptyReport";
-			} else {
-				JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
-				dateStart = ReportGenerator.getDateMin(dateMin);
-				dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
-				modelMap.put("startDate", dateStart);
-				modelMap.put("endDate", dateEnd);
-				modelMap.put("reportData", jrDataSource);
-				modelMap.put("format", format);
-				return "dailyDetailedReloadFrmCelcomReport";		
-			}
+		List<Report> listReport = new ArrayList<Report>();
+		listReport = ReportGenerator.getDailyDetailedReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
+		if(listReport == null  || listReport.size() == 0) {
+			return "emptyReport";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
+			dateStart = ReportGenerator.getDateMin(dateMin);
+			dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
+			modelMap.put("startDate", dateStart);
+			modelMap.put("endDate", dateEnd);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "dailyDetailedReloadFrmCelcomReport";		
+		}
 	}
 	
 	@RequestMapping(value = "/TG0004-Report/{format}", method = RequestMethod.GET)
@@ -190,20 +190,20 @@ public class ReportController extends BaseController {
 		Date dateStart;
 		Date dateEnd;
 	
-			List<Report> listReport = new ArrayList<Report>();
-			listReport = ReportGenerator.getSummaryReloadReport(dateMin, dateMax, -1, -1);
-			if(listReport == null  || listReport.size() == 0) {
-				return "emptyReport";
-			} else {
-				JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport ,false);
-				dateStart = ReportGenerator.getSummaryDateMin(dateMin);
-				dateEnd =  ReportGenerator.getSummaryDateMax(dateStart, dateMax);
-				modelMap.put("startDate", dateStart);
-				modelMap.put("endDate", dateEnd);
-				modelMap.put("reportData", jrDataSource);
-				modelMap.put("format", format);
-				return "summaryReloadFrmCelcomReport";
-			}
+		List<Report> listReport = new ArrayList<Report>();
+		listReport = ReportGenerator.getSummaryReloadReport(dateMin, dateMax, -1, -1);
+		if(listReport == null  || listReport.size() == 0) {
+			return "emptyReport";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport ,false);
+			dateStart = ReportGenerator.getSummaryDateMin(dateMin);
+			dateEnd =  ReportGenerator.getSummaryDateMax(dateStart, dateMax);
+			modelMap.put("startDate", dateStart);
+			modelMap.put("endDate", dateEnd);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "summaryReloadFrmCelcomReport";
+		}
 		
 	}
 	
@@ -221,20 +221,20 @@ public class ReportController extends BaseController {
 		if (dateMax==null) dateMax="null";
 		Date dateStart;
 		Date dateEnd;
-			List<Report> listReport = new ArrayList<Report>();
-			listReport = ReportGenerator.getDailyDetailsCancellationReloadReqFrmCelcomReport(dateMin, dateMax, -1, -1);
-			if(listReport == null  || listReport.size() == 0) {
-				return "emptyReport";
-			} else {
-				JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);		
-				dateStart = ReportGenerator.getDateMin(dateMin);
-				dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
-				modelMap.put("startDate", dateStart);
-				modelMap.put("endDate", dateEnd);
-				modelMap.put("reportData", jrDataSource);
-				modelMap.put("format", format);
-				return "dailyDetailsCancellationReloadReqFrmCelcomReport";
-			}
+		List<Report> listReport = new ArrayList<Report>();
+		listReport = ReportGenerator.getDailyDetailsCancellationReloadReqFrmCelcomReport(dateMin, dateMax, -1, -1);
+		if(listReport == null  || listReport.size() == 0) {
+			return "emptyReport";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);		
+			dateStart = ReportGenerator.getDateMin(dateMin);
+			dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
+			modelMap.put("startDate", dateStart);
+			modelMap.put("endDate", dateEnd);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "dailyDetailsCancellationReloadReqFrmCelcomReport";
+		}
 		
 	}
 	
@@ -252,20 +252,20 @@ public class ReportController extends BaseController {
 		if (dateMax==null) dateMax="null";
 		Date dateStart;
 		Date dateEnd;
-			List<Report> listReport = new ArrayList<Report>();
-			listReport = ReportGenerator.getSummaryCancellationReloadReqFrmCelcomReport(dateMin, dateMax, -1, -1);
-			if(listReport == null  || listReport.size() == 0) {
-				return "emptyReport";
-			} else {
-				JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport ,false);
-		    	dateStart = ReportGenerator.getSummaryDateMin(dateMin);
-				dateEnd =  ReportGenerator.getSummaryDateMax(dateStart, dateMax);
-				modelMap.put("startDate", dateStart);
-				modelMap.put("endDate", dateEnd);
-				modelMap.put("reportData", jrDataSource);
-				modelMap.put("format", format);
-				return "summaryCancellationReloadFrmCelcomReport";
-			}
+		List<Report> listReport = new ArrayList<Report>();
+		listReport = ReportGenerator.getSummaryCancellationReloadReqFrmCelcomReport(dateMin, dateMax, -1, -1);
+		if(listReport == null  || listReport.size() == 0) {
+			return "emptyReport";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport ,false);
+	    	dateStart = ReportGenerator.getSummaryDateMin(dateMin);
+			dateEnd =  ReportGenerator.getSummaryDateMax(dateStart, dateMax);
+			modelMap.put("startDate", dateStart);
+			modelMap.put("endDate", dateEnd);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "summaryCancellationReloadFrmCelcomReport";
+		}
 		
 	}
 	
@@ -283,20 +283,20 @@ public class ReportController extends BaseController {
 		if (dateMax==null) dateMax="null";
 		Date dateStart;
 		Date dateEnd;
-			List<Report> listReport = new ArrayList<Report>();
-			listReport = ReportGenerator.getDailySettlementReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
-			if(listReport == null  || listReport.size() == 0) {
-				return "emptyReport";
-			} else {
-				JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
-				dateStart = ReportGenerator.getDateMin(dateMin);
-				dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
-				modelMap.put("startDate", dateStart);
-				modelMap.put("endDate", dateEnd);
-				modelMap.put("reportData", jrDataSource);
-				modelMap.put("format", format);
-				return "dailySettlementReloadFrmCelcomReport";
-			}
+		List<Report> listReport = new ArrayList<Report>();
+		listReport = ReportGenerator.getDailySettlementReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
+		if(listReport == null  || listReport.size() == 0) {
+			return "emptyReport";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
+			dateStart = ReportGenerator.getDateMin(dateMin);
+			dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
+			modelMap.put("startDate", dateStart);
+			modelMap.put("endDate", dateEnd);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "dailySettlementReloadFrmCelcomReport";
+		}
 		
 	}
 	
@@ -315,20 +315,20 @@ public class ReportController extends BaseController {
 		if (dateMax==null) dateMax="null";
 		Date dateStart;
 		Date dateEnd;
-			List<Report> listReport = new ArrayList<Report>();
-			listReport = ReportGenerator.getSummarySettlementReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
-			if(listReport == null  || listReport.size() == 0) {
-				return "emptyReport";
-			} else {
-				JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
-				dateStart = ReportGenerator.getSummaryDateMin(dateMin);
-				dateEnd =  ReportGenerator.getSummaryDateMax(dateStart, dateMax);
-				modelMap.put("startDate", dateStart);
-				modelMap.put("endDate", dateEnd);
-				modelMap.put("reportData", jrDataSource);
-				modelMap.put("format", format);
-				return "monthlySettlementReloadFrmCelcomReport";
-			}
+		List<Report> listReport = new ArrayList<Report>();
+		listReport = ReportGenerator.getSummarySettlementReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
+		if(listReport == null  || listReport.size() == 0) {
+			return "emptyReport";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
+			dateStart = ReportGenerator.getSummaryDateMin(dateMin);
+			dateEnd =  ReportGenerator.getSummaryDateMax(dateStart, dateMax);
+			modelMap.put("startDate", dateStart);
+			modelMap.put("endDate", dateEnd);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "monthlySettlementReloadFrmCelcomReport";
+		}
 		
 	}
 	
@@ -346,20 +346,20 @@ public class ReportController extends BaseController {
 		if (dateMax==null) dateMax="null";
 		Date dateStart;
 		Date dateEnd;
-			List<Report> listReport = new ArrayList<Report>();
-			listReport = ReportGenerator.getDailyCommissionReloadFrmCchsForCelcomReport(dateMin, dateMax, -1, -1);
-			if(listReport == null  || listReport.size() == 0) {
-				return "emptyReport";
-			} else {
-				JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
-				dateStart = ReportGenerator.getDateMin(dateMin);
-				dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
-				modelMap.put("startDate", dateStart);
-				modelMap.put("endDate", dateEnd);
-				modelMap.put("reportData", jrDataSource);
-				modelMap.put("format", format);
-				return "dailyCommissionReloadFrmCchsForCelcomReport";
-			}
+		List<Report> listReport = new ArrayList<Report>();
+		listReport = ReportGenerator.getDailyCommissionReloadFrmCchsForCelcomReport(dateMin, dateMax, -1, -1);
+		if(listReport == null  || listReport.size() == 0) {
+			return "emptyReport";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
+			dateStart = ReportGenerator.getDateMin(dateMin);
+			dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
+			modelMap.put("startDate", dateStart);
+			modelMap.put("endDate", dateEnd);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "dailyCommissionReloadFrmCchsForCelcomReport";
+		}
 		
 	}
 	
@@ -377,20 +377,20 @@ public class ReportController extends BaseController {
 		if (dateMax==null) dateMax="null";
 		Date dateStart;
 		Date dateEnd;
-			List<Report> listReport = new ArrayList<Report>();
-			listReport = ReportGenerator.getMonthlyCommissionReloadFrmCchsForCelcomReport(dateMin, dateMax, -1, -1);
-			if(listReport == null  || listReport.size() == 0) {
-				return "emptyReport";
-			} else {
-				JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
-				dateStart = ReportGenerator.getSummaryDateMin(dateMin);
-			    dateEnd =  ReportGenerator.getSummaryDateMax(dateStart, dateMax);
-				modelMap.put("startDate", dateStart);
-				modelMap.put("endDate", dateEnd);
-				modelMap.put("reportData", jrDataSource);
-				modelMap.put("format", format);
-				return "monthlyCommissionReloadFrmCchsForCelcomReport";
-			}
+		List<Report> listReport = new ArrayList<Report>();
+		listReport = ReportGenerator.getMonthlyCommissionReloadFrmCchsForCelcomReport(dateMin, dateMax, -1, -1);
+		if(listReport == null  || listReport.size() == 0) {
+			return "emptyReport";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
+			dateStart = ReportGenerator.getSummaryDateMin(dateMin);
+		    dateEnd =  ReportGenerator.getSummaryDateMax(dateStart, dateMax);
+			modelMap.put("startDate", dateStart);
+			modelMap.put("endDate", dateEnd);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "monthlyCommissionReloadFrmCchsForCelcomReport";
+		}
 	}
 	
 	/*
@@ -410,20 +410,20 @@ public class ReportController extends BaseController {
 		Date dateStart;
 		Date dateEnd;
 
-			List<Report> listReport = new ArrayList<Report>();
-			listReport = ReportGenerator.getDailyTransactionDetailsReport(-1, -1);
-			if(listReport == null  || listReport.size() == 0) {
-				return "emptyReport";
-			} else {
-				JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
-				dateStart = ReportGenerator.getDateMin(dateMin);
-				dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
-				modelMap.put("startDate", dateStart);
-				modelMap.put("endDate", dateEnd);
-				modelMap.put("reportData", jrDataSource);
-				modelMap.put("format", format);
-				return "dailyTrxDetailsReport";
-			}
+		List<Report> listReport = new ArrayList<Report>();
+		listReport = ReportGenerator.getDailyTransactionDetailsReport(-1, -1);
+		if(listReport == null  || listReport.size() == 0) {
+			return "emptyReport";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
+			dateStart = ReportGenerator.getDateMin(dateMin);
+			dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
+			modelMap.put("startDate", dateStart);
+			modelMap.put("endDate", dateEnd);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "dailyTrxDetailsReport";
+		}
 		
 
 	}
@@ -442,20 +442,20 @@ public class ReportController extends BaseController {
 		if (dateMax==null) dateMax="null";
 		Date dateStart;
 		Date dateEnd;
-			List<Report> listReport = new ArrayList<Report>();
-			listReport = ReportGenerator.getDailyTransactionDetailsReport(dateMin, dateMax, -1, -1);
-			if(listReport == null  || listReport.size() == 0) {
-				return "emptyReport";
-			} else {
-				JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
-				dateStart = ReportGenerator.getDateMin(dateMin);
-				dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
-				modelMap.put("startDate", dateStart);
-				modelMap.put("endDate", dateEnd);
-				modelMap.put("reportData", jrDataSource);
-				modelMap.put("format", format);
-				return "dailyTrxDetailsByRangeDateReport";
-			}
+		List<Report> listReport = new ArrayList<Report>();
+		listReport = ReportGenerator.getDailyTransactionDetailsReport(dateMin, dateMax, -1, -1);
+		if(listReport == null  || listReport.size() == 0) {
+			return "emptyReport";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
+			dateStart = ReportGenerator.getDateMin(dateMin);
+			dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
+			modelMap.put("startDate", dateStart);
+			modelMap.put("endDate", dateEnd);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "dailyTrxDetailsByRangeDateReport";
+		}
 	}
 	
 	@RequestMapping(value = "/CE0003-Report/{format}", method = RequestMethod.GET)
@@ -470,20 +470,20 @@ public class ReportController extends BaseController {
 		dateMax="null";
 		Date dateStart;
 		Date dateEnd;
-			List<Report> listReport = new ArrayList<Report>();
-			listReport = ReportGenerator.getDailyTransactionFeeDetailsReport(-1, -1);
-			if(listReport == null  || listReport.size() == 0) {
-				return "emptyReport";
-			} else {
-				JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
-				dateStart = ReportGenerator.getDateMin(dateMin);
-				dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
-				modelMap.put("startDate", dateStart);
-				modelMap.put("endDate", dateEnd);
-				modelMap.put("reportData", jrDataSource);
-				modelMap.put("format", format);
-				return "dailyTrxFeeDetailsReport";
-			}
+		List<Report> listReport = new ArrayList<Report>();
+		listReport = ReportGenerator.getDailyTransactionFeeDetailsReport(-1, -1);
+		if(listReport == null  || listReport.size() == 0) {
+			return "emptyReport";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
+			dateStart = ReportGenerator.getDateMin(dateMin);
+			dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
+			modelMap.put("startDate", dateStart);
+			modelMap.put("endDate", dateEnd);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "dailyTrxFeeDetailsReport";
+		}
 		
 	}
 	
@@ -499,20 +499,20 @@ public class ReportController extends BaseController {
 		if (dateMax==null) dateMax="null";
 		Date dateStart;
 		Date dateEnd;
-			List<Report> listReport = new ArrayList<Report>();
-			listReport = ReportGenerator.getDailyTransactionFeeDetailsReport(dateMin, dateMax, -1, -1);
-			if(listReport == null  || listReport.size() == 0) {
-				return "emptyReport";
-			} else {
-				JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
-				dateStart = ReportGenerator.getDateMin(dateMin);
-				dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
-				modelMap.put("startDate", dateStart);
-				modelMap.put("endDate", dateEnd);
-				modelMap.put("reportData", jrDataSource);
-				modelMap.put("format", format);
-				return "dailyTrxFeeDetailsByRangeDateReport";
-			}
+		List<Report> listReport = new ArrayList<Report>();
+		listReport = ReportGenerator.getDailyTransactionFeeDetailsReport(dateMin, dateMax, -1, -1);
+		if(listReport == null  || listReport.size() == 0) {
+			return "emptyReport";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
+			dateStart = ReportGenerator.getDateMin(dateMin);
+			dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
+			modelMap.put("startDate", dateStart);
+			modelMap.put("endDate", dateEnd);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "dailyTrxFeeDetailsByRangeDateReport";
+		}
 		
 	}
 	
@@ -528,20 +528,20 @@ public class ReportController extends BaseController {
 		dateMax="null";
 		Date dateStart;
 		Date dateEnd;
-			List<Report> listReport = new ArrayList<Report>();
-			listReport = ReportGenerator.getSummaryDailyTransactionDetailsReport(-1, -1);
-			if(listReport == null  || listReport.size() == 0) {
-				return "emptyReport";
-			} else {
-				JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
-				dateStart = ReportGenerator.getDateMin(dateMin);
-				dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
-				modelMap.put("startDate", dateStart);
-				modelMap.put("endDate", dateEnd);
-				modelMap.put("reportData", jrDataSource);
-				modelMap.put("format", format);
-				return "summaryDailyTrxReport";
-			}
+		List<Report> listReport = new ArrayList<Report>();
+		listReport = ReportGenerator.getSummaryDailyTransactionDetailsReport(-1, -1);
+		if(listReport == null  || listReport.size() == 0) {
+			return "emptyReport";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
+			dateStart = ReportGenerator.getDateMin(dateMin);
+			dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
+			modelMap.put("startDate", dateStart);
+			modelMap.put("endDate", dateEnd);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "summaryDailyTrxReport";
+		}
 		
 	}
 	
@@ -557,20 +557,20 @@ public class ReportController extends BaseController {
 		if (dateMax==null) dateMax="null";
 		Date dateStart;
 		Date dateEnd;
-			List<Report> listReport = new ArrayList<Report>();
-			listReport = ReportGenerator.getSummaryDailyTransactionDetailsReport(dateMin, dateMax, -1, -1);
-			if(listReport == null  || listReport.size() == 0) {
-				return "emptyReport";
-			} else {
-				JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
-				dateStart = ReportGenerator.getDateMin(dateMin);
-				dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
-				modelMap.put("startDate", dateStart);
-				modelMap.put("endDate", dateEnd);
-				modelMap.put("reportData", jrDataSource);
-				modelMap.put("format", format);
-				return "summaryDailyTrxByRangeDateReport";
-			}
+		List<Report> listReport = new ArrayList<Report>();
+		listReport = ReportGenerator.getSummaryDailyTransactionDetailsReport(dateMin, dateMax, -1, -1);
+		if(listReport == null  || listReport.size() == 0) {
+			return "emptyReport";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
+			dateStart = ReportGenerator.getDateMin(dateMin);
+			dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
+			modelMap.put("startDate", dateStart);
+			modelMap.put("endDate", dateEnd);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "summaryDailyTrxByRangeDateReport";
+		}
 		
 	}
 	
@@ -586,20 +586,20 @@ public class ReportController extends BaseController {
 		dateMax="null";
 		Date dateStart;
 		Date dateEnd;
-			List<Report> listReport = new ArrayList<Report>();
-			listReport = ReportGenerator.getSummaryDailyFeeReport(-1, -1);
-			if(listReport == null  || listReport.size() == 0) {
-				return "emptyReport";
-			} else {
-				JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
-				dateStart = ReportGenerator.getDateMin(dateMin);
-				dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
-				modelMap.put("startDate", dateStart);
-				modelMap.put("endDate", dateEnd);
-				modelMap.put("reportData", jrDataSource);
-				modelMap.put("format", format);
-				return "summaryDailyFeeReport";
-			}
+		List<Report> listReport = new ArrayList<Report>();
+		listReport = ReportGenerator.getSummaryDailyFeeReport(-1, -1);
+		if(listReport == null  || listReport.size() == 0) {
+			return "emptyReport";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
+			dateStart = ReportGenerator.getDateMin(dateMin);
+			dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
+			modelMap.put("startDate", dateStart);
+			modelMap.put("endDate", dateEnd);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "summaryDailyFeeReport";
+		}
 		
 	}
 	
@@ -615,20 +615,20 @@ public class ReportController extends BaseController {
 		if (dateMax==null) dateMax="null";
 		Date dateStart;
 		Date dateEnd;
-			List<Report> listReport = new ArrayList<Report>();
-			listReport = ReportGenerator.getSummaryDailyFeeByRangeDateReport(dateMin, dateMax, -1, -1);
-			if(listReport == null  || listReport.size() == 0) {
-				return "emptyReport";
-			} else {
-				JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
-				dateStart = ReportGenerator.getDateMin(dateMin);
-				dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
-				modelMap.put("startDate", dateStart);
-				modelMap.put("endDate", dateEnd);
-				modelMap.put("reportData", jrDataSource);
-				modelMap.put("format", format);
-				return "summaryDailyFeeByRangeDateReport";
-			}
+		List<Report> listReport = new ArrayList<Report>();
+		listReport = ReportGenerator.getSummaryDailyFeeByRangeDateReport(dateMin, dateMax, -1, -1);
+		if(listReport == null  || listReport.size() == 0) {
+			return "emptyReport";
+		} else {
+			JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(listReport,false);
+			dateStart = ReportGenerator.getDateMin(dateMin);
+			dateEnd =  ReportGenerator.getDateMax(dateStart, dateMax);
+			modelMap.put("startDate", dateStart);
+			modelMap.put("endDate", dateEnd);
+			modelMap.put("reportData", jrDataSource);
+			modelMap.put("format", format);
+			return "summaryDailyFeeByRangeDateReport";
+		}
 		
 	}
 }
