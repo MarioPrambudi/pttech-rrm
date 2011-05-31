@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="summaryCancellationReloadFrmCelcomReport" pageWidth="790" pageHeight="612" orientation="Landscape" columnWidth="750" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" resourceBundle="jasperoo" whenResourceMissingType="Key">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="184"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<property name="net.sf.jasperreports.export.html.using.images.to.align" value="false"/>
+	<parameter name="startDate" class="java.util.Date"/>
+	<parameter name="endDate" class="java.util.Date"/>
 	<field name="dateCancelRequest" class="java.util.Date"/>
 	<field name="requestedTime" class="java.util.Date"/>
 	<field name="totalCancellationQty" class="java.lang.Long"/>
@@ -33,6 +36,26 @@
 					<font fontName="FreeSerif" size="24" isBold="true" isItalic="false" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.summaryCancellationReloadFrmCelcomReport}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="62" width="60" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[Period From]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="131" y="62" width="15" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[To]]></text>
+			</staticText>
+			<textField pattern="dd-MMM-yy" isBlankWhenNull="true">
+				<reportElement x="146" y="62" width="70" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{endDate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yy" isBlankWhenNull="true">
+				<reportElement x="61" y="62" width="70" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{startDate}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>

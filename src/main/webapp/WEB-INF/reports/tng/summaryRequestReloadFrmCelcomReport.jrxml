@@ -3,6 +3,9 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<property name="net.sf.jasperreports.export.html.using.images.to.align" value="false"/>
+	<parameter name="startDate" class="java.util.Date"/>
+	<parameter name="endDate" class="java.util.Date"/>
 	<field name="sofRequestedDate" class="java.util.Date"/>
 	<field name="totalReloadQty" class="java.lang.Long"/>
 	<field name="totalAmountRequestRm" class="java.math.BigDecimal"/>
@@ -36,6 +39,26 @@
 					<font fontName="FreeSerif" size="24" isBold="true" isItalic="false" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.summaryRequestReloadFrmCelcomReport}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yy" isBlankWhenNull="true">
+				<reportElement x="66" y="62" width="70" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{startDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="136" y="62" width="15" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[To]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="62" width="60" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[Period From]]></text>
+			</staticText>
+			<textField pattern="dd-MMM-yy" isBlankWhenNull="true">
+				<reportElement x="151" y="62" width="70" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{endDate}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
