@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dailyDetailsCancellationReloadReqFrmCelcomReport" pageWidth="900" pageHeight="612" orientation="Landscape" columnWidth="860" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" resourceBundle="jasperoo" whenResourceMissingType="Key">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="17"/>
 	<property name="ireport.y" value="0"/>
 	<property name="net.sf.jasperreports.export.html.using.images.to.align" value="false"/>
 	<parameter name="startDate" class="java.util.Date"/>
@@ -67,196 +67,330 @@
 	</pageHeader>
 	<columnHeader>
 		<band height="40" splitType="Stretch">
-			<rectangle>
-				<reportElement x="0" y="0" width="860" height="40"/>
-			</rectangle>
-			<rectangle>
+			<frame>
 				<reportElement x="0" y="0" width="90" height="40"/>
-			</rectangle>
-			<rectangle>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="0" y="0" width="90" height="40"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.sofRequestedDatetime}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
 				<reportElement x="90" y="0" width="60" height="40"/>
-			</rectangle>
-			<rectangle>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="0" y="0" width="60" height="40"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.mfgNumber}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
 				<reportElement x="150" y="0" width="90" height="40"/>
-			</rectangle>
-			<rectangle>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="0" y="0" width="90" height="40"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.reloadAmount}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
 				<reportElement x="240" y="0" width="70" height="40"/>
-			</rectangle>
-			<rectangle>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="0" y="0" width="70" height="40"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.fees}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
 				<reportElement x="310" y="0" width="100" height="40"/>
-			</rectangle>
-			<rectangle>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="0" y="0" width="100" height="40"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.totalChargeToCustomer}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
 				<reportElement x="410" y="0" width="100" height="40"/>
-			</rectangle>
-			<rectangle>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="0" y="0" width="100" height="40"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.commissionAmountDeductedBySof}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
 				<reportElement x="510" y="0" width="100" height="40"/>
-			</rectangle>
-			<rectangle>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="10" y="0" width="80" height="40"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.netPaymentToTng}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
 				<reportElement x="610" y="0" width="100" height="40"/>
-			</rectangle>
-			<rectangle>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="10" y="0" width="80" height="40"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.amountRefundedToCustomer}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
 				<reportElement x="710" y="0" width="90" height="40"/>
-			</rectangle>
-			<rectangle>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="0" y="0" width="90" height="40"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.dateRefundedCustomer}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
 				<reportElement x="800" y="0" width="60" height="40"/>
-			</rectangle>
-			<textField>
-				<reportElement x="0" y="0" width="90" height="40"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.sofRequestedDatetime}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="90" y="0" width="60" height="40"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.mfgNumber}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="150" y="0" width="90" height="40"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.reloadAmount}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="240" y="0" width="70" height="40"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.fees}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="310" y="0" width="100" height="40"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.totalChargeToCustomer}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="410" y="0" width="100" height="40"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.commissionAmountDeductedBySof}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="520" y="0" width="80" height="40"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.netPaymentToTng}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="620" y="0" width="80" height="40"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.amountRefundedToCustomer}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="710" y="0" width="90" height="40"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.dateRefundedCustomer}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="800" y="0" width="60" height="40"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.cancellationStatus}]]></textFieldExpression>
-			</textField>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="0" y="0" width="60" height="40"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.cancellationStatus}]]></textFieldExpression>
+				</textField>
+			</frame>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
-			<rectangle>
-				<reportElement x="0" y="0" width="860" height="20"/>
-			</rectangle>
-			<rectangle>
+			<frame>
 				<reportElement x="0" y="0" width="90" height="20"/>
-			</rectangle>
-			<rectangle>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField pattern="dd/MM/yyyy HH.mm.ss">
+					<reportElement x="0" y="0" width="90" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{sofRequestedDatetime}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
 				<reportElement x="90" y="0" width="60" height="20"/>
-			</rectangle>
-			<rectangle>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="0" y="0" width="60" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.Long"><![CDATA[$F{mfgNumber}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
 				<reportElement x="150" y="0" width="90" height="20"/>
-			</rectangle>
-			<rectangle>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField pattern="###0.00">
+					<reportElement x="0" y="0" width="80" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{reloadAmount}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
 				<reportElement x="240" y="0" width="70" height="20"/>
-			</rectangle>
-			<rectangle>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField pattern="###0.00">
+					<reportElement x="0" y="0" width="60" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{fees}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
 				<reportElement x="310" y="0" width="100" height="20"/>
-			</rectangle>
-			<rectangle>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField pattern="###0.00">
+					<reportElement x="0" y="0" width="90" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{totalChargeToCustomer}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
 				<reportElement x="410" y="0" width="100" height="20"/>
-			</rectangle>
-			<rectangle>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField pattern="###0.00">
+					<reportElement x="0" y="0" width="90" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{commissionAmountDeductedBySof}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
 				<reportElement x="510" y="0" width="100" height="20"/>
-			</rectangle>
-			<rectangle>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField pattern="###0.00">
+					<reportElement x="0" y="0" width="90" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{netPaymentToTng}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
 				<reportElement x="610" y="0" width="100" height="20"/>
-			</rectangle>
-			<rectangle>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField pattern="###0.00">
+					<reportElement x="0" y="0" width="90" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{amountRefundedToCustomer}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
 				<reportElement x="710" y="0" width="90" height="20"/>
-			</rectangle>
-			<rectangle>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="0" y="0" width="90" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{dateTimeRefundedCustomer}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
 				<reportElement x="800" y="0" width="60" height="20"/>
-			</rectangle>
-			<textField>
-				<reportElement x="0" y="0" width="90" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.util.Date"><![CDATA[$F{sofRequestedDatetime}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="90" y="0" width="60" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.lang.Long"><![CDATA[$F{mfgNumber}]]></textFieldExpression>
-			</textField>
-			<textField pattern="###0.00">
-				<reportElement x="150" y="0" width="80" height="20"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{reloadAmount}]]></textFieldExpression>
-			</textField>
-			<textField pattern="###0.00">
-				<reportElement x="240" y="0" width="60" height="20"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{fees}]]></textFieldExpression>
-			</textField>
-			<textField pattern="###0.00">
-				<reportElement x="310" y="0" width="90" height="20"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{totalChargeToCustomer}]]></textFieldExpression>
-			</textField>
-			<textField pattern="###0.00">
-				<reportElement x="410" y="0" width="90" height="20"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{commissionAmountDeductedBySof}]]></textFieldExpression>
-			</textField>
-			<textField pattern="###0.00">
-				<reportElement x="510" y="0" width="90" height="20"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{netPaymentToTng}]]></textFieldExpression>
-			</textField>
-			<textField pattern="###0.00">
-				<reportElement x="610" y="0" width="90" height="20"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{amountRefundedToCustomer}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="710" y="0" width="90" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.util.Date"><![CDATA[$F{dateTimeRefundedCustomer}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="800" y="0" width="60" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{cancellationStatus}]]></textFieldExpression>
-			</textField>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="60" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{cancellationStatus}]]></textFieldExpression>
+				</textField>
+			</frame>
 		</band>
 	</detail>
 	<pageFooter>
@@ -280,49 +414,113 @@
 	</pageFooter>
 	<summary>
 		<band height="20">
-			<rectangle>
-				<reportElement x="0" y="0" width="710" height="20"/>
-			</rectangle>
-			<rectangle>
+			<frame>
 				<reportElement x="0" y="0" width="150" height="20"/>
-			</rectangle>
-			<textField pattern="###0.00">
-				<reportElement x="310" y="0" width="100" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_TOTAL_CHARGES}]]></textFieldExpression>
-			</textField>
-			<textField pattern="###0.00">
-				<reportElement x="240" y="0" width="70" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_FEES}]]></textFieldExpression>
-			</textField>
-			<textField pattern="###0.00">
-				<reportElement x="510" y="0" width="100" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_NET_PAYMENT}]]></textFieldExpression>
-			</textField>
-			<textField pattern="###0.00">
-				<reportElement x="410" y="0" width="100" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_COMM_AMOUNT}]]></textFieldExpression>
-			</textField>
-			<textField pattern="###0.00">
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement x="0" y="0" width="150" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total :]]></text>
+				</staticText>
+			</frame>
+			<frame>
 				<reportElement x="150" y="0" width="90" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_RELOAD_AMOUNT}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="0" y="0" width="150" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Total :]]></text>
-			</staticText>
-			<textField pattern="###0.00">
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField pattern="###0.00">
+					<reportElement x="0" y="0" width="80" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_RELOAD_AMOUNT}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="240" y="0" width="70" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField pattern="###0.00">
+					<reportElement x="0" y="0" width="60" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_FEES}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="310" y="0" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField pattern="###0.00">
+					<reportElement x="0" y="0" width="90" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_TOTAL_CHARGES}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="410" y="0" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField pattern="###0.00">
+					<reportElement x="0" y="0" width="90" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_COMM_AMOUNT}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="510" y="0" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField pattern="###0.00">
+					<reportElement x="0" y="0" width="90" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_NET_PAYMENT}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
 				<reportElement x="610" y="0" width="100" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_AMT_REFUNDED}]]></textFieldExpression>
-			</textField>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField pattern="###0.00">
+					<reportElement x="0" y="0" width="90" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_AMT_REFUNDED}]]></textFieldExpression>
+				</textField>
+			</frame>
 		</band>
 	</summary>
 </jasperReport>
