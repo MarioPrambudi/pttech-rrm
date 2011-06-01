@@ -230,7 +230,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="320" y="0" width="69" height="20"/>
+				<reportElement x="320" y="0" width="70" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -245,7 +245,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="390" y="0" width="129" height="20"/>
+				<reportElement x="390" y="0" width="130" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -260,7 +260,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="520" y="0" width="119" height="20"/>
+				<reportElement x="520" y="0" width="120" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -275,7 +275,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="639" y="0" width="113" height="20"/>
+				<reportElement x="640" y="0" width="113" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dailyDetailedReloadFrmCelcomReport" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" resourceBundle="jasperoo" whenResourceMissingType="Key">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dailyDetailedReloadFrmCelcomReport" pageWidth="821" pageHeight="612" orientation="Landscape" columnWidth="781" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" resourceBundle="jasperoo" whenResourceMissingType="Key">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="8"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="net.sf.jasperreports.export.html.using.images.to.align" value="false"/>
 	<parameter name="startDate" class="java.util.Date"/>
@@ -62,7 +62,7 @@
 	<columnHeader>
 		<band height="40" splitType="Stretch">
 			<frame>
-				<reportElement x="0" y="0" width="100" height="40"/>
+				<reportElement x="0" y="0" width="130" height="40"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -71,7 +71,7 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textField>
-					<reportElement x="0" y="0" width="100" height="40"/>
+					<reportElement x="0" y="0" width="130" height="40"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
@@ -79,7 +79,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="100" y="0" width="100" height="40"/>
+				<reportElement x="130" y="0" width="100" height="40"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -96,7 +96,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="200" y="0" width="110" height="40"/>
+				<reportElement x="230" y="0" width="110" height="40"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -113,7 +113,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="310" y="0" width="110" height="40"/>
+				<reportElement x="340" y="0" width="110" height="40"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -130,7 +130,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="420" y="0" width="100" height="40"/>
+				<reportElement x="450" y="0" width="100" height="40"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -147,7 +147,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="520" y="0" width="110" height="40"/>
+				<reportElement x="550" y="0" width="110" height="40"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -164,7 +164,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="630" y="0" width="122" height="40"/>
+				<reportElement x="660" y="0" width="122" height="40"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -185,7 +185,7 @@
 	<detail>
 		<band height="20" splitType="Stretch">
 			<frame>
-				<reportElement x="0" y="0" width="100" height="20"/>
+				<reportElement x="0" y="0" width="130" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -193,14 +193,14 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textField pattern="dd-MMM-yy HH.mm.ss">
-					<reportElement x="0" y="0" width="100" height="20"/>
+				<textField pattern="dd-MMM-yyyy HH:mm:ss">
+					<reportElement x="0" y="0" width="130" height="20"/>
 					<textElement textAlignment="Center"/>
 					<textFieldExpression class="java.util.Date"><![CDATA[$F{reloadDateTime}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="100" y="0" width="100" height="20"/>
+				<reportElement x="130" y="0" width="100" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -215,7 +215,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="200" y="0" width="110" height="20"/>
+				<reportElement x="230" y="0" width="110" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -230,7 +230,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="310" y="0" width="110" height="20"/>
+				<reportElement x="340" y="0" width="110" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -245,7 +245,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="420" y="0" width="100" height="20"/>
+				<reportElement x="450" y="0" width="100" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -260,7 +260,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="520" y="0" width="110" height="20"/>
+				<reportElement x="550" y="0" width="110" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -275,7 +275,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="630" y="0" width="122" height="20"/>
+				<reportElement x="660" y="0" width="122" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -313,7 +313,7 @@
 	<summary>
 		<band height="20">
 			<frame>
-				<reportElement x="0" y="0" width="200" height="20"/>
+				<reportElement x="0" y="0" width="230" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -322,7 +322,7 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<staticText>
-					<reportElement x="0" y="0" width="200" height="20"/>
+					<reportElement x="0" y="0" width="230" height="20"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="12" isBold="true"/>
 					</textElement>
@@ -330,7 +330,7 @@
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement x="200" y="0" width="110" height="20"/>
+				<reportElement x="230" y="0" width="110" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -345,7 +345,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="310" y="0" width="110" height="20"/>
+				<reportElement x="340" y="0" width="110" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -360,7 +360,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="420" y="0" width="100" height="20"/>
+				<reportElement x="450" y="0" width="100" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -375,7 +375,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="520" y="0" width="110" height="20"/>
+				<reportElement x="550" y="0" width="110" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -390,7 +390,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="630" y="0" width="122" height="20"/>
+				<reportElement x="660" y="0" width="122" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
