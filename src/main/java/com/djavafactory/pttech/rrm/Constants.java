@@ -16,6 +16,7 @@ public final class Constants {
     public static final String RELOAD_REQUEST_EXPIRED = "E";
     public static final String RELOAD_REQUEST_MANUALCANCEL = "M";
     public static final String RELOAD_REQUEST_SUCCESS = "S";
+    public static final String RELOAD_REQUEST_TNG_KEY = "K";
 
     /**
      * Constants to be used in database logging to identify the status of the transaction.
@@ -53,7 +54,7 @@ public final class Constants {
     public static final String REPORT_CONFIG_TNG = "REPORT.TNG";
     public static final String REPORT_CONFIG_AT = "REPORT.AT";
     public static final String REPORT_CONFIG_RS = "REPORT.RS";
-    
+
 //    public static final String REPORT_CONFIG_CELCOMM = "REPORT.CELCOMM";
 //    public static final String REPORT_CONFIG_TNGCOMM = "REPORT.TNGCOMM";
 //    public static final String REPORT_CONFIG_PRINTIS_COMM = "REPORT.PRICOMM";
@@ -81,7 +82,7 @@ public final class Constants {
     public static final String AUDIT_TRAIL_ACTION_PERSIST = "P";
     public static final String AUDIT_TRAIL_ACTION_MERGE = "M";
     public static final String AUDIT_TRAIL_ACTION_REMOVE = "R";
-    
+
     /**
      * Constants for Event Trail
      */
