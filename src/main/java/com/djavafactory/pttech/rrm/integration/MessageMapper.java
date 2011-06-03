@@ -125,7 +125,7 @@ public class MessageMapper {
         requestMessage.setEncryptedMsg(message.getEncryptedMessage());
         requestMessage.setTransId(message.getTransactionId());
         requestMessage.setRequestTime(message.getRequestDateTime());
-        requestMessage.setMsgType(Constants.RELOAD_REQUEST_NEW);
+        requestMessage.setMsgType(Constants.RELOAD_REQUEST_TNG_KEY);
         logger.info("[mapTngKeyReqToReloadReq - New ReloadRequestMessage object] >> " + requestMessage);
         return requestMessage;
     }

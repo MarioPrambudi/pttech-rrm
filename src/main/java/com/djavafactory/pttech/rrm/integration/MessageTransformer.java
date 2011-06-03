@@ -61,6 +61,11 @@ public class MessageTransformer {
         return transformResponse(requestMessage, requestMessage.getStatusCode(), requestMessage.getStatusMsg());
     }
 
+    public KeyResponse transformMessageToTngResponse(Object message) {
+        ReloadRequestMessage requestMessage = (ReloadRequestMessage) message;
+        return transformKeyResponse(requestMessage.getStatusCode(), requestMessage.getStatusMsg(), requestMessage.getTransId());
+    }
+
     /**
      * Method to transform the ReloadRequestMessage or ReloadResponseMessage to JSON format.
      *
