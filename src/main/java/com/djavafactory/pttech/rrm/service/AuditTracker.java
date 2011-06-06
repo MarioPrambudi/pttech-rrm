@@ -40,7 +40,7 @@ public class AuditTracker {
 		// TODO: set description here
 		auditTrail.setDescription(target.toString());
 		auditTrail.setDebugInfo(jp.getSourceLocation() == null ? "N/A" : jp.getSourceLocation().toString());
-		mongoOps.save(Constants.AUDIT_TRAIL_MONGODB_COLLECTION_NAME, auditTrail);
+		mongoOps.save(auditTrail, Constants.AUDIT_TRAIL_MONGODB_COLLECTION_NAME);
 	}
 
 	@Pointcut("execution(* com.djavafactory.pttech.rrm.domain.*.persist*(..))")

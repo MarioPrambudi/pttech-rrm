@@ -100,9 +100,9 @@ public class AuditTrailRepositoryImpl implements AuditTrailRepository {
 	}
 
 	@Override
-	public Iterable<AuditTrail> save(Iterable<? extends AuditTrail> entities) {
+	public java.util.List<AuditTrail> save(java.lang.Iterable<? extends AuditTrail> entities) {
 		return auditTrailRepository.save(entities);
-	}
+	};
 
 	@Override
 	public AuditTrail findOne(ObjectId id) {
@@ -115,13 +115,18 @@ public class AuditTrailRepositoryImpl implements AuditTrailRepository {
 	}
 
 	@Override
-	public Long count() {
+	public long count() {
 		return auditTrailRepository.count();
 	}
 
 	@Override
 	public void delete(AuditTrail entity) {
 		auditTrailRepository.delete(entity);
+	}
+
+	@Override
+	public void delete(ObjectId arg0) {
+		auditTrailRepository.delete(arg0);
 	}
 
 	@Override
