@@ -31,19 +31,19 @@
     <chain input-channel="timeOutPersistChannel" output-channel="keyRequestReplyChannel">
         <transformer ref="mapperBean" method="mapTimeoutReloadRequest"/>
         <service-activator ref="messagePersistenceBean" method="mergeReloadRequest"/>
-        <transformer ref="transformerBean" method="transformMessageToResponse"/>
+        <transformer ref="transformerBean" method="transformMessageToTngResponse"/>
     </chain>
 
     <channel id="tngKeyErrorChannel">
         <queue capacity="100"/>
     </channel>
     <transformer input-channel="tngKeyErrorChannel" ref="transformerBean"
-                 method="transformMessageToResponse"
+                 method="transformMessageToTngResponse"
                  output-channel="keyRequestReplyChannel"/>
 
     <publish-subscribe-channel id="tngKeyResponseChannel"/>
 
-    <transformer input-channel="tngKeyResponseChannel" ref="transformerBean" method="transformMessageToResponse"
+    <transformer input-channel="tngKeyResponseChannel" ref="transformerBean" method="transformMessageToTngResponse"
                  output-channel="keyRequestReplyChannel"/>
 
     <chain input-channel="tngKeyResponseChannel" output-channel="rtmReloadRequestChannel">

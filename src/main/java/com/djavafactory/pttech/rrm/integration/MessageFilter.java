@@ -31,13 +31,12 @@ public class MessageFilter {
      */
     public Boolean reloadRequestFilter(ReloadRequestMessage requestMessage) {
         if (Arrays.asList(Constants.RELOAD_REQUEST_NEW, Constants.RELOAD_REQUEST_FAILED,
-                Constants.RELOAD_REQUEST_EXPIRED, Constants.RELOAD_REQUEST_SUCCESS, Constants.RELOAD_REQUEST_MANUALCANCEL)
+                Constants.RELOAD_REQUEST_EXPIRED, Constants.RELOAD_REQUEST_SUCCESS, Constants.RELOAD_REQUEST_MANUALCANCEL, Constants.RELOAD_REQUEST_TNG_KEY)
                 .contains(requestMessage.getMsgType())) {
 
             if (!validateFieldLength(requestMessage)) {
                 return false;
-            } else if (!requestMessage.getMsgType().equalsIgnoreCase(Constants.RELOAD_REQUEST_NEW) ||
-                    (requestMessage.getEncryptedMsg() != null && !"".equals(requestMessage.getEncryptedMsg()))) {
+            } else if (!requestMessage.getMsgType().equalsIgnoreCase(Constants.RELOAD_REQUEST_NEW)) {
                 List<ReloadRequest> reloadRecord = new ReloadRequest().findReloadRequestsByTransId(requestMessage.getTransId()).getResultList();
                 if (reloadRecord == null || reloadRecord.isEmpty() ||
                         (!requestMessage.getMsgType().equalsIgnoreCase(Constants.RELOAD_REQUEST_NEW) && !StringUtils.equalsIgnoreCase(reloadRecord.get(0).getStatus(), Constants.RELOAD_STATUS_PENDING)) ||
