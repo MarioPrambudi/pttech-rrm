@@ -5,6 +5,7 @@ package com.djavafactory.pttech.rrm.web;
 
 import com.djavafactory.pttech.rrm.domain.Acquirer;
 import com.djavafactory.pttech.rrm.domain.City;
+import com.djavafactory.pttech.rrm.domain.ConfValidityPeriod;
 import com.djavafactory.pttech.rrm.domain.Configuration;
 import com.djavafactory.pttech.rrm.domain.Firmware;
 import com.djavafactory.pttech.rrm.domain.Param;
@@ -21,6 +22,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
         registry.addConverter(new AcquirerConverter());
         registry.addConverter(new CityConverter());
+        registry.addConverter(new ConfValidityPeriodConverter());
         registry.addConverter(new ConfigurationConverter());
         registry.addConverter(new FirmwareConverter());
         registry.addConverter(new ParamConverter());
@@ -40,6 +42,13 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     static class com.djavafactory.pttech.rrm.web.ApplicationConversionServiceFactoryBean.CityConverter implements Converter<City, String>  {
         public String convert(City city) {
             return new StringBuilder().append(city.getCityName()).toString();
+        }
+        
+    }
+    
+    static class com.djavafactory.pttech.rrm.web.ApplicationConversionServiceFactoryBean.ConfValidityPeriodConverter implements Converter<ConfValidityPeriod, String>  {
+        public String convert(ConfValidityPeriod confValidityPeriod) {
+            return new StringBuilder().append(confValidityPeriod.getConfigKey()).append(" ").append(confValidityPeriod.getConfigValue()).append(" ").append(confValidityPeriod.getStartDate()).append(" ").append(confValidityPeriod.getEndDate()).toString();
         }
         
     }

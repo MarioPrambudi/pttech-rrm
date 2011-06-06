@@ -300,3 +300,31 @@ controller scaffold --class ~.web.EventTrailController
 // Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-05-31 10:40:52
 // Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-05-31 18:08:04
 // Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-06-01 14:09:50
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-06-01 18:38:20
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-06-02 09:15:28
+ent --class ~.domain.ConfValidityPeriod
+test integration --entity ConfValidityPeriod
+field string --fieldName configKey 
+field string --fieldName configValue
+field date --fieldName startDate --type java.util.Date
+field date --fieldName endDate --type java.util.Date
+controller scaffold --class ~.web.ConfValidityPeriod
+controller scaffold --class ~.web.ConfValidityPeriodController --entity ConfiValidityPeriod
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-06-02 19:59:15
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-06-02 19:59:31
+controller scaffold --class ~.web.ConfValidityPeriodController --entity ConfValidityPeriod
+controller class --class com.djavafactory.pttech.rrm.web.ConfValidityPeriod
+controller scaffold --class com.djavafactory.pttech.rrm.web.ConfValidityPeriod 
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-06-02 20:21:43
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-06-02 20:21:58
+controller scaffold --entity com.djavafactory.pttech.rrm.domain.ConfValidityPeriod --class com.djavafactory.pttech.rrm.web.ConfValidityPeriodController
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-06-02 21:45:48
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-06-03 09:50:22
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-06-03 17:31:08
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-06-03 17:37:18
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-06-04 02:10:41
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-06-04 12:05:37
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-06-05 00:43:31
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-06-06 09:10:29
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-06-06 10:59:49
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-06-06 11:01:48

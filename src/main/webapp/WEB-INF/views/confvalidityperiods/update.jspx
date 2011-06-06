@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_djavafactory_pttech_rrm_domain_ConfValidityPeriod" modelAttribute="confValidityPeriod" path="/confvalidityperiods" versionField="Version" z="uotmaGhQnhWQs3ATYkzNFCbONzQ=">
+        <field:display field="configKey" id="c_com_djavafactory_pttech_rrm_domain_ConfValidityPeriod_configKey" object="${confValidityPeriod}" z="user-managed"/>
+        <input name="configKey" type="hidden" value="${confValidityPeriod.configKey}"/>
+       
+        <field:datetime dateTimePattern="${confValidityPeriod_startdate_date_format}" field="startDate" id="c_com_djavafactory_pttech_rrm_domain_ConfValidityPeriod_startDate" z="user-managed"/>
+        <field:input field="configValue" id="c_com_djavafactory_pttech_rrm_domain_ConfValidityPeriod_configValue" z="fa5c4s8HNGnZ7OTpa3TznNLQIjk="/>
+        <input name="configValueHidden" type="hidden" value="${confValidityPeriod.configValue}"/>
+        <field:datetime dateTimePattern="${confValidityPeriod_enddate_date_format}" field="endDate" id="c_com_djavafactory_pttech_rrm_domain_ConfValidityPeriod_endDate" render="false" z="user-managed"/>
+        <field:datetime dateTimePattern="${confValidityPeriod_startdatenew_date_format}" field="startDateNew" id="c_com_djavafactory_pttech_rrm_domain_ConfValidityPeriod_startDateNew" z="user-managed"/>
+        
+        <field:input field="configKey" id="c_com_djavafactory_pttech_rrm_domain_ConfValidityPeriod_configKey" render="false" z="mU+zz9g5/bVQxg7s5BTdDwAx898="/>
+        <field:input field="configValueHidden" id="c_com_djavafactory_pttech_rrm_domain_ConfValidityPeriod_configValueHidden" render="false" z="user-managed"/>
+    </form:update>
+    <script type="text/javascript">
+    	Spring.addDecoration(new Spring.ElementDecoration({elementId : '_startDate_id', widgetType: 'dijit.form.DateTextBox', widgetAttrs: {required: 'true', disabled:'disabled', constraints: {datePattern : 'dd/MM/yyyy HH:mm:ss', required : 'true'}, datePattern : 'dd/MM/yyyy HH:mm:ss'}}));	
+     	Spring.addDecoration(new Spring.ElementDecoration({elementId : '_startDateNew_id', widgetType: 'dijit.form.DateTextBox', widgetAttrs: {required: 'true', constraints: {datePattern : 'dd/MM/yyyy', required : 'true'}, datePattern : 'dd/MM/yyyy'}}));	
+     	dojo.addOnLoad(function() {     		
+            var startdatenew = dijit.byId('_startDateNew_id');
+            var startdateold =  dijit.byId('_startDate_id');
+        	var minDate = new Date(startdateold.value);  
+        	var today = new Date();
+        	//Date must + 1, endDate is substract one day from selected date
+        	if (today > minDate)
+       		{
+       			startdatenew.constraints.min = new Date(today.getFullYear(), today.getMonth(), today.getDate()+1);
+       		}
+        	else
+        	{
+        		startdatenew.constraints.min = new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate()+1);  
+        	}
+        });
+   </script>
+</div>

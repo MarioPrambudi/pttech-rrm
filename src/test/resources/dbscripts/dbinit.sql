@@ -50,3 +50,10 @@ insert into city ( city_name, acquirer_state ) values ('Kuala Lumpur', 5);
 
 insert into reload_request  ( mfg_number , reload_amount , service_provider_id , tng_key , trans_code , trans_id , version  ) values ('2211', 50000, 1, 1, 1, 1, 0);
 insert into reload_request  ( mfg_number , reload_amount , service_provider_id , tng_key , trans_code , trans_id , version  ) values ('2222', 94000, 1, 1, 1, 2, 0);
+
+
+insert into conf_validity_period( config_key , config_value , start_date , end_date, version ) values ('REPORT.FEES', '1.00', '2011-05-01 00:00:00', null, 0);
+insert into conf_validity_period( config_key , config_value , start_date , end_date, version ) values ('REPORT.SOF', '0.25', '2011-05-01 00:00:00', null, 0);
+insert into conf_validity_period( config_key , config_value , start_date , end_date, version ) values ('REPORT.TNG', '0.20', '2011-05-01 00:00:00', null, 0);
+insert into conf_validity_period( config_key , config_value , start_date , end_date, version ) values ('REPORT.RS', '0.30', '2011-05-01 00:00:00', null, 0);
+insert into conf_validity_period( config_key , config_value , start_date , end_date, version ) values ('REPORT.AT', '0.25', '2011-05-01 00:00:00', null, 0);

@@ -364,4 +364,20 @@ public class DateUtil {
 		}
 		return days;
 	}
+	
+	public static Date getDateMinTime(Date oriDate) throws ParseException{
+		  Calendar calOri = Calendar.getInstance();
+		  Calendar calNew = Calendar.getInstance();
+		  calOri.setTime(oriDate);
+		  calNew.set(calOri.get(Calendar.YEAR), calOri.get(Calendar.MONTH), calOri.get(Calendar.DATE), 00, 00, 00);
+		  return calNew.getTime();	  
+	}
+	
+	public static Date getDateMaxTime(Date oriDate) throws ParseException{
+		  Calendar calOri = Calendar.getInstance();
+		  Calendar calNew = Calendar.getInstance();
+		  calOri.setTime(DateUtil.add(oriDate, 5, -1));
+		  calNew.set(calOri.get(Calendar.YEAR), calOri.get(Calendar.MONTH), calOri.get(Calendar.DATE), 23, 59, 59);
+		  return calNew.getTime();	  
+	}	
 }
