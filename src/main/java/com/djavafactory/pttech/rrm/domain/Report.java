@@ -1,11 +1,14 @@
 package com.djavafactory.pttech.rrm.domain;
 
 import com.djavafactory.pttech.rrm.Constants;
+
+import org.bson.types.ObjectId;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.ui.Model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Iterator;
@@ -13,20 +16,28 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.EntityManager;
+import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.data.document.mongodb.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
+@Document(collection = "Report")
 @RooJavaBean
 @RooToString
-public class Report {
+public class Report implements Serializable {
 
-    @Temporal(TemporalType.TIMESTAMP)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
     private Date sofRequestedDatetime;
     
@@ -34,7 +45,8 @@ public class Report {
     @DateTimeFormat(style = "S-")
     private Date sofRequestedDate;
 
-    private Long id;
+    @Id
+    private String id;
 
     private String transId;
 

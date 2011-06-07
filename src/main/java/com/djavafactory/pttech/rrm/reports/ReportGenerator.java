@@ -4,6 +4,7 @@ import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.Configuration;
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
 import com.djavafactory.pttech.rrm.domain.Report;
+import com.djavafactory.pttech.rrm.mongorepository.ReportRepository;
 import com.djavafactory.pttech.rrm.util.DateUtil;
 
 import java.math.BigDecimal;
@@ -17,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Methods to generate reports.
@@ -27,6 +29,9 @@ import org.apache.commons.beanutils.BeanUtils;
  */
 public class ReportGenerator {
 
+	@Autowired
+	ReportRepository reportRepository;
+	
 	/*
 	 * calculation method
 	 */
@@ -1106,5 +1111,27 @@ public class ReportGenerator {
    		dateMin = dateMaxSearch;
    	  }
    	  	return listCompleteReport;
+    }
+    
+    /**
+     *  check the total record in ReloadRequest with MongoDB
+     *  if the total is different, erase and regenerate it based on ReloadRequest
+     *  
+     */
+    public void checkReportRecord() {
+    	List<ReloadRequest> listRR = new ArrayList<ReloadRequest>();
+    	List<Report> listReport    = new ArrayList<Report>();
+    	
+    	Long countRR 	  = ReloadRequest.countReloadRequestsByParam(null, null, null, null);
+    	Long countMongoDB = reportRepository.count();
+    	
+    	if(countRR != countMongoDB) {
+    		reportRepository.deleteAll();
+    		
+    		listRR = ReloadRequest.findAllReloadRequests();
+    		listReport = copyReloadRequestToReport(listRR);
+    		
+    		reportRepository.save(listReport);
+    	}
     }
 }
