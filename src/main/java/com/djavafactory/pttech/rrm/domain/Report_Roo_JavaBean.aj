@@ -27,11 +27,11 @@ privileged aspect Report_Roo_JavaBean {
         this.sofRequestedDate = sofRequestedDate;
     }
     
-    public Long Report.getId() {
+    public String Report.getId() {
         return this.id;
     }
     
-    public void Report.setId(Long id) {
+    public void Report.setId(String id) {
         this.id = id;
     }
     
