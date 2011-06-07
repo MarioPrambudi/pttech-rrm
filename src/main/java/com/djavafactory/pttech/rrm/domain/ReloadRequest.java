@@ -53,7 +53,6 @@ public class ReloadRequest {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
-
 	private Date modifiedTime;
 	
 	private String acquirerTerminal;
@@ -70,6 +69,23 @@ public class ReloadRequest {
 
 	
 	// <<<<<<<<<<<<<<<<<<<<<<<<< REPORT FINDER - START >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	
+	/**
+     * To get the reload request between requested time and status(for generating the report)
+     * @param minRequestedTime Date 
+     * @param maxRequestedTime Date 
+     * @param listStatus List<String> 
+     * @param firstResult int 
+     * @param maxResults int 
+     * @return  TypedQuery<ReloadRequest>
+	  * @throws ParseException 
+     */
+    public static  TypedQuery<ReloadRequest>findDailyReloadRequests(Date minRequestedTime, Date maxRequestedTime) throws ParseException {		
+    	TypedQuery<ReloadRequest> q = findReloadRequestsByRequestedTimeBetween(minRequestedTime, maxRequestedTime);
+    	return q;
+   }
+
+    //------------
  	/**
       * To get the reload request between requested time and status(for generating the report)
       * @param minRequestedTime Date 

@@ -1,6 +1,7 @@
 package com.djavafactory.pttech.rrm.reports;
 
 import com.djavafactory.pttech.rrm.Constants;
+import com.djavafactory.pttech.rrm.domain.ConfValidityPeriod;
 import com.djavafactory.pttech.rrm.domain.Configuration;
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
 import com.djavafactory.pttech.rrm.domain.Report;
@@ -17,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.springframework.scheduling.annotation.Scheduled;
 
 /**
  * Methods to generate reports.
@@ -36,8 +38,8 @@ public class ReportGenerator {
 	 * @param none
 	 * @return BigDecimal - Fee 
 	 */
-    public static BigDecimal getReportFee() {    	 
-    	 String reportfee =  Configuration.getReportConfigValue(Constants.REPORT_CONFIG_FEE);
+    public static BigDecimal getReportFee(Date requestedDate) {    	 
+    	 String reportfee =  ConfValidityPeriod.getReportConfigValue(Constants.REPORT_CONFIG_FEE, requestedDate);
     	 BigDecimal decimalFee = new BigDecimal(reportfee); 
     	 return decimalFee;
     }
@@ -47,8 +49,8 @@ public class ReportGenerator {
 	 * @param none
 	 * @return BigDecimal - SOF
 	 */
-    public static BigDecimal getReportSOF() {	      
-    	 String reportSOF = Configuration.getReportConfigValue(Constants.REPORT_CONFIG_SOF);
+    public static BigDecimal getReportSOF(Date requestedDate) {	      
+    	 String reportSOF = ConfValidityPeriod.getReportConfigValue(Constants.REPORT_CONFIG_SOF, requestedDate);
     	 BigDecimal decimalSOF = new BigDecimal(reportSOF); 
     	 return decimalSOF;    	 
     }
@@ -58,8 +60,8 @@ public class ReportGenerator {
 	 * @param none
 	 * @return BigDecimal - TNG
 	 */
-    public static BigDecimal getReportTng() {	      
-     	 String reportTng = Configuration.getReportConfigValue(Constants.REPORT_CONFIG_TNG);
+    public static BigDecimal getReportTng(Date requestedDate) {	      
+     	 String reportTng = ConfValidityPeriod.getReportConfigValue(Constants.REPORT_CONFIG_TNG, requestedDate);
      	 BigDecimal decimalTng= new BigDecimal(reportTng); 
      	 return decimalTng; 
     }
@@ -69,8 +71,8 @@ public class ReportGenerator {
 	 * @param none
 	 * @return BigDecimal - RS
 	 */
-    public static BigDecimal getReportRS() {	      
-    	 String reportRS = Configuration.getReportConfigValue(Constants.REPORT_CONFIG_RS);
+    public static BigDecimal getReportRS(Date requestedDate) {	      
+    	 String reportRS = ConfValidityPeriod.getReportConfigValue(Constants.REPORT_CONFIG_RS, requestedDate);
     	 BigDecimal decimalRS= new BigDecimal(reportRS); 
     	 return decimalRS; 
    }
@@ -80,21 +82,20 @@ public class ReportGenerator {
 	 * @param none
 	 * @return BigDecimal - AT
 	 */
-    public static BigDecimal getReportAT() {	      
-    	 String reportAT = Configuration.getReportConfigValue(Constants.REPORT_CONFIG_AT);
+    public static BigDecimal getReportAT(Date requestedDate) {	      
+    	 String reportAT = ConfValidityPeriod.getReportConfigValue(Constants.REPORT_CONFIG_AT, requestedDate);
     	 BigDecimal decimalAT = new BigDecimal(reportAT); 
     	 return decimalAT; 
    }
+    
     
     /**
 	 * Get totalChargeToCustomer (reload amount + fee)
 	 * @param reloadAmount BigDecimal
 	 * @return BigDecimal - TotalChargeToCustomer
 	 */ 
-    public static BigDecimal getTotalChargeToCustomer(BigDecimal reloadAmount) {	
-     	BigDecimal fee = getReportFee();
-     	BigDecimal sumForReloadAmountAndFee = fee.add(reloadAmount);
-     	 
+    public static BigDecimal getTotalChargeToCustomer(BigDecimal reloadAmount, BigDecimal reportFee) {	
+     	BigDecimal sumForReloadAmountAndFee = reportFee.add(reloadAmount);   	 
      	 return sumForReloadAmountAndFee; 
     }
     
@@ -260,6 +261,35 @@ public class ReportGenerator {
 	 * end calculation methods
    	*/
     
+    
+    /**
+	 * Get get initial date value
+	 * @param none
+	 * @return Date - 01/MM/yyyy
+	 */
+    public static Date getDailyStartDate()
+    {
+	  	Calendar cal = Calendar.getInstance();
+	  	Calendar calNow = Calendar.getInstance();
+	    cal.set(calNow.get(Calendar.YEAR), calNow.get(Calendar.MONTH), calNow.get(Calendar.DATE), 00, 00, 00);
+	    return cal.getTime();
+    }
+
+    
+    /**
+	 * Get get initial date value
+	 * @param none
+	 * @return Date - 01/MM/yyyy
+	 */
+    public static Date getDailyEndDate(Date startDate)
+    {
+    	  Calendar calMin = Calendar.getInstance();
+		  Calendar calMax = Calendar.getInstance();
+		  calMin.setTime(startDate);
+		  calMax.set(calMin.get(Calendar.YEAR), calMin.get(Calendar.MONTH), calMin.get(Calendar.DATE), 23, 59, 59);
+		  return calMax.getTime();
+    }
+    
     /**
 	 * To copy reload request list to report list
 	 * @param listReloadRequest A list of reload request
@@ -359,7 +389,8 @@ public class ReportGenerator {
 	    cal.set(calNow.get(Calendar.YEAR), calNow.get(Calendar.MONTH), date, 00, 00, 00);
 	    return cal.getTime();
     }
-	  
+
+    
 	/**
 	 * get the formated start date for finder
 	 * @param dateMinStr String 
@@ -1107,4 +1138,72 @@ public class ReportGenerator {
    	  }
    	  	return listCompleteReport;
     }
+    
+    @Scheduled(cron = "0 0 0 * * ?")
+    public static void generateDailyReport() throws ParseException{
+    	Date startDate = getDailyStartDate();
+    	Date endDate = getDailyEndDate(startDate);
+    	List<ReloadRequest> listReloadRequest = ReloadRequest.findDailyReloadRequests(startDate, endDate).getResultList();
+        List<Report> listCompleteReport = new ArrayList<Report>();
+
+		for(ReloadRequest reloadrequest : listReloadRequest)
+		{   
+            try {  
+            	
+            	BigDecimal reportRS = getReportRS(reloadrequest.getRequestedTime());
+            	BigDecimal reportAT = getReportAT(reloadrequest.getRequestedTime());
+            	BigDecimal reportFee = getReportFee(reloadrequest.getRequestedTime());
+            	BigDecimal reportSOF = getReportSOF(reloadrequest.getRequestedTime());
+            	BigDecimal reportTng = getReportTng(reloadrequest.getRequestedTime());	
+            	BigDecimal commDeductedBySOF =  reportRS.add(reportSOF);              
+            	BigDecimal grossPaymentToTng = reloadrequest.getReloadAmount().add(reportFee);
+            	BigDecimal tngFee = reportFee .multiply(reportAT.add(reportTng));
+            	BigDecimal printisFee = reportFee.multiply(reportRS); 
+            	BigDecimal cmmFee = reportFee.multiply(reportSOF);  	
+            	BigDecimal celcomFee = new BigDecimal(0.00);  	//TODO
+            	
+            	Report report = new Report();
+            	report.setRequestedTime(reloadrequest.getRequestedTime());
+            	report.setReloadAmount(reloadrequest.getReloadAmount());
+            	report.setFees(reportFee);
+            	report.setTotalChargeToCustomer(getTotalChargeToCustomer(report.getReloadAmount(), reportFee));
+            	report.setMfgNumber(reloadrequest.getMfgNumber());
+            	report.setCommissionAmountDeductedBySof(commDeductedBySOF);
+            	report.setNetPaymentToTng(report.getTotalChargeToCustomer().subtract(commDeductedBySOF));
+            	report.setReloadDate(reloadrequest.getModifiedTime());
+            	report.setAmountRefundedToCustomer(reloadrequest.getReloadAmount());
+            	report.setDateRefundedCustomer(reloadrequest.getModifiedTime());
+            	report.setGrossPaymentToTngRm(grossPaymentToTng);
+            	report.setAcquirerTerminal(reloadrequest.getAcquirerTerminal());
+            	report.setCmmpTrxId(reloadrequest.getCmmpTrxId());
+            	//report.setAircashAccNo(); TODO
+            	report.setMobileNo(reloadrequest.getMobileNo());
+            	report.setModifiedDate(reloadrequest.getModifiedTime());
+            	report.setStatus(reloadrequest.getStatus());
+            	report.setTransId(reloadrequest.getTransId());
+            	report.setTngFee(tngFee);
+            	report.setCelcomMobileFee(celcomFee); //TODO
+            	report.setCmmFee(cmmFee);
+            	report.setPrintisFee(printisFee);
+            	report.setTotalFees(tngFee.add(printisFee).add(cmmFee).add(celcomFee));
+            	report.setAmountDueTng(reloadrequest.getReloadAmount().add(tngFee));
+            	report.setAmountDuePrintis(reloadrequest.getReloadAmount().add(printisFee));
+            	report.setAmountDueCmm(reloadrequest.getReloadAmount().add(cmmFee));
+            	report.setAmountDueCelcomMobile(reloadrequest.getReloadAmount().add(celcomFee));
+            	//report.setDate();
+            	//report.setTime();
+            	listCompleteReport.add(report);
+        
+            } catch (Exception e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }
+		
+		//INSERT INTO MONGO DB with SHORT DATE
+    	
+    }
+    
+    
 }
+
+
