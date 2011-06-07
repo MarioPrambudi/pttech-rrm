@@ -47,7 +47,7 @@ public class EventTracker {
 		// Save stack trace
 		eventTrail.setStackTrace(ExceptionUtils.getStackTrace(exception));
 		if (lastEventTrail == null || !lastEventTrail.equals(eventTrail)) {
-			mongoOps.save(Constants.EVENT_TRAIL_MONGODB_COLLECTION_NAME, eventTrail);
+			mongoOps.save(eventTrail, Constants.EVENT_TRAIL_MONGODB_COLLECTION_NAME);
 			lastEventTrail = eventTrail;
 		}
 	}
