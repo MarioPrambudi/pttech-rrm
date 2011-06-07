@@ -2,7 +2,6 @@
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="menu" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-
     <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
         <menu:category id="c_configuration" render="true" z="user-managed">
             <menu:item id="i_configuration_list_cel" messageCode="global_menu_list" url="/configurations/keys/CEL"/>
@@ -21,12 +20,10 @@
             <menu:item id="i_terminal_new" messageCode="global_menu_new" url="/terminals?form" z="sRcSLq2zPV9S3mdpnj6HUCgYigQ="/>
             <menu:item id="i_terminal_list" messageCode="global_menu_list" url="/terminals?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
         </menu:category>
-
         <menu:category id="c_terminaltype" z="JACOsLZLgyswNWemsA+IEwyEMnc=">
             <menu:item id="i_terminaltype_new" messageCode="global_menu_new" url="/terminaltypes?form" z="UptivpplXCaiHWX8uYthKpDHMy4="/>
             <menu:item id="i_terminaltype_list" messageCode="global_menu_list" url="/terminaltypes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="HnyN2FxT4rN6fIaZGJQZWipBcwk="/>
         </menu:category>
-
         <menu:category id="c_firmware" render="false" z="user-managed">
             <menu:item id="i_firmware_new" messageCode="global_menu_new" url="/firmwares?form" z="r3a6COLXRooa9hc7VK3V8Lcdk0w="/>
             <menu:item id="i_firmware_list" messageCode="global_menu_list" url="/firmwares?page=1&amp;size=${empty param.size ? 10 : param.size}" z="weIN3MnvUK2XVOFzJ/VKhmLcJFI="/>
@@ -38,11 +35,9 @@
         <menu:category id="c_reloadrequest" render="true" z="user-managed">
             <menu:item id="i_reloadrequest_new" messageCode="global_menu_new" render="false" url="/reloadrequests?form" z="user-managed"/>
             <menu:item id="i_reloadrequest_list" messageCode="global_menu_list" url="/reloadrequests?page=1&amp;size=${empty param.size ? 10 : param.size}" z="dObqRnXTskprfRdAeUTJf9dydWo="/>
-
-
-        <menu:item id="fi_reloadrequest_requestedtimebetween" messageCode="global_menu_find" render="false" url="/reloadrequests?find=ByRequestedTimeBetween&amp;form" z="user-managed"/>
-        <menu:item id="fi_reloadrequest_transid" messageCode="global_menu_find" render="false" url="/reloadrequests?find=ByTransId&amp;form" z="user-managed"/>
-        <menu:item id="fi_reloadrequest_id" messageCode="global_menu_find" render="false" url="/reloadrequests?find=ById&amp;form" z="user-managed"/>
+            <menu:item id="fi_reloadrequest_requestedtimebetween" messageCode="global_menu_find" render="false" url="/reloadrequests?find=ByRequestedTimeBetween&amp;form" z="user-managed"/>
+            <menu:item id="fi_reloadrequest_transid" messageCode="global_menu_find" render="false" url="/reloadrequests?find=ByTransId&amp;form" z="user-managed"/>
+            <menu:item id="fi_reloadrequest_id" messageCode="global_menu_find" render="false" url="/reloadrequests?find=ById&amp;form" z="user-managed"/>
         </menu:category>
         <menu:category id="c_province" render="false" z="user-managed">
             <menu:item id="i_province_new" messageCode="global_menu_new" url="/provinces?form" z="tQd5zZ0Vd7mRtDwnU8dcyQYNVcs="/>
@@ -56,13 +51,17 @@
             <menu:item id="i_report_celcom" messageCode="global_menu_celcom_report" url="/reports?type=REPORT.CEL." z="user-managed"/>
             <menu:item id="i_report_tng" messageCode="global_menu_tng_report" url="/reports?type=REPORT.TNG."/>
         </menu:category>
-    <menu:category id="c_audittrail" z="XK55ssLTCjNt+Qn1fw4S+Wz7LEk=">
+        <menu:category id="c_audittrail" z="XK55ssLTCjNt+Qn1fw4S+Wz7LEk=">
             <menu:item id="i_audittrail_new" messageCode="global_menu_new" render="false" url="/audittrails?form" z="user-managed"/>
-        <menu:item id="i_audittrail_list" messageCode="global_menu_list" url="/audittrails?page=1&amp;size=${empty param.size ? 10 : param.size}" z="hPzyv2K1hsHiNJmyc7AI0Fs93X4="/>
+            <menu:item id="i_audittrail_list" messageCode="global_menu_list" url="/audittrails?page=1&amp;size=${empty param.size ? 10 : param.size}" z="hPzyv2K1hsHiNJmyc7AI0Fs93X4="/>
         </menu:category>
-    <menu:category id="c_eventtrail" z="uq5SaKKKm2/w2Am+uaCbMaA9j5U=">
+        <menu:category id="c_eventtrail" z="uq5SaKKKm2/w2Am+uaCbMaA9j5U=">
             <menu:item id="i_eventtrail_new" messageCode="global_menu_new" render="false" url="/eventtrails?form" z="user-managed"/>
-        <menu:item id="i_eventtrail_list" messageCode="global_menu_list" url="/eventtrails?page=1&amp;size=${empty param.size ? 10 : param.size}" z="O2klNvO4z1KnyMXsSkJj7FDUlp0="/>
+            <menu:item id="i_eventtrail_list" messageCode="global_menu_list" url="/eventtrails?page=1&amp;size=${empty param.size ? 10 : param.size}" z="O2klNvO4z1KnyMXsSkJj7FDUlp0="/>
+        </menu:category>
+        <menu:category id="c_confvalidityperiod" z="VzJjcKymb5bPgOGhQH6z9tv/ThQ=">
+            <menu:item id="i_confvalidityperiod_new" messageCode="global_menu_new" render="false" url="/confvalidityperiods?form" z="user-managed"/>
+            <menu:item id="i_confvalidityperiod_list" messageCode="global_menu_list" url="/confvalidityperiods?page=1&amp;size=${empty param.size ? 10 : param.size}" z="mmJVkB6O50kXFpj8qOwbSXO77J8="/>
         </menu:category>
     </menu:menu>
 </div>

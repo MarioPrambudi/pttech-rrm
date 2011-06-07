@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show create="false" delete="false" id="ps_com_djavafactory_pttech_rrm_domain_ConfValidityPeriod" object="${confvalidityperiod}" path="/confvalidityperiods" z="user-managed">
+        <field:display field="configKey" id="s_com_djavafactory_pttech_rrm_domain_ConfValidityPeriod_configKey" object="${confvalidityperiod}" z="c2ou4U/HKOpyTXmr6joNrdQrzlQ="/>
+        <field:display field="configValue" id="s_com_djavafactory_pttech_rrm_domain_ConfValidityPeriod_configValue" object="${confvalidityperiod}" z="vBciXUM5+BEEidanKBVXb2GIWf4="/>
+        <field:display date="true" dateTimePattern="${confValidityPeriod_startdate_date_format}" field="startDate" id="s_com_djavafactory_pttech_rrm_domain_ConfValidityPeriod_startDate" object="${confvalidityperiod}" z="2PXE8K7KWwnsPpk6CwVd4W97Chg="/>
+        <field:display date="true" dateTimePattern="${confValidityPeriod_enddate_date_format}" field="endDate" id="s_com_djavafactory_pttech_rrm_domain_ConfValidityPeriod_endDate" object="${confvalidityperiod}" z="VB0674oDheYrToemB28wZXXPyK8="/>
+        <field:display date="true" dateTimePattern="${confValidityPeriod_startdatenew_date_format}" field="startDateNew" id="s_com_djavafactory_pttech_rrm_domain_ConfValidityPeriod_startDateNew" object="${confvalidityperiod}" render="false" z="user-managed"/>
+        <field:display field="configValueHidden" id="s_com_djavafactory_pttech_rrm_domain_ConfValidityPeriod_configValueHidden" object="${confvalidityperiod}" render="false" z="user-managed"/>
+    </page:show>
+</div>

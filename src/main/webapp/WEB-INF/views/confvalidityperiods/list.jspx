@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_djavafactory_pttech_rrm_domain_ConfValidityPeriod" items="${confvalidityperiods}" z="ObgwtcDpodf76wlqSw1wTueuh+o=">
+        <table:table create="false" data="${confvalidityperiods}" delete="false" id="l_com_djavafactory_pttech_rrm_domain_ConfValidityPeriod" path="/confvalidityperiods" z="user-managed">
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_ConfValidityPeriod_configKey" property="configKey" z="ZXrvD3aggTym43d1mIpgg7x2tIE="/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_ConfValidityPeriod_configValue" property="configValue" z="NXSHjxDCVtQ94cTMSCTlJhsnago="/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_ConfValidityPeriod_startDate" property="startDate" z="user-managed"/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_ConfValidityPeriod_endDate" property="endDate" z="user-managed"/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_ConfValidityPeriod_startDateNew" property="startDateNew" render="false" z="user-managed"/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_ConfValidityPeriod_configValueHidden" property="configValueHidden" render="false" z="user-managed"/>
+        </table:table>
+    </page:list>
+</div>

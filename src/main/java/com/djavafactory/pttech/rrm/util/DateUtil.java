@@ -364,4 +364,32 @@ public class DateUtil {
 		}
 		return days;
 	}
+	
+	/**
+	 * To get date with time 00:00:00
+	 * 
+	 * @param oriDate Date
+	 * @return date with min time - Date
+	 */
+	public static Date getDateMinTime(Date oriDate) throws ParseException{
+		  Calendar calOri = Calendar.getInstance();
+		  Calendar calNew = Calendar.getInstance();
+		  calOri.setTime(oriDate);
+		  calNew.set(calOri.get(Calendar.YEAR), calOri.get(Calendar.MONTH), calOri.get(Calendar.DATE), 00, 00, 00);
+		  return calNew.getTime();	  
+	}
+	
+	/**
+	 * To get date with time 23:59:59
+	 * 
+	 * @param oriDate Date
+	 * @return date with max time - Date
+	 */
+	public static Date getDateMaxTime(Date oriDate) throws ParseException{
+		  Calendar calOri = Calendar.getInstance();
+		  Calendar calNew = Calendar.getInstance();
+		  calOri.setTime(DateUtil.add(oriDate, 5, -1));
+		  calNew.set(calOri.get(Calendar.YEAR), calOri.get(Calendar.MONTH), calOri.get(Calendar.DATE), 23, 59, 59);
+		  return calNew.getTime();	  
+	}	
 }

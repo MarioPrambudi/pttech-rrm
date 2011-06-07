@@ -150,7 +150,7 @@ public class AcquirerController extends BaseController {
         }
 
         uiModel.asMap().clear();
-        acquirer.setCreatedBy("System");  // Temporary static
+        acquirer.setCreatedBy("System");  // TODO Temporary static
         acquirer.setCreatedTime(new Date());
         acquirer.persist();
         return "redirect:/acquirers/" + encodeUrlPathSegment(acquirer.getId().toString(), httpServletRequest);
