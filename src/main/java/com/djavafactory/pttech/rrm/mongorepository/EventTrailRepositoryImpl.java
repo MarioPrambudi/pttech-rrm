@@ -3,7 +3,9 @@ package com.djavafactory.pttech.rrm.mongorepository;
 import static org.springframework.data.document.mongodb.query.Criteria.where;
 import static org.springframework.data.document.mongodb.query.Query.query;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.bson.types.ObjectId;
@@ -15,7 +17,11 @@ import org.springframework.data.document.mongodb.repository.MongoRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+
+import com.djavafactory.pttech.rrm.domain.AuditTrail;
 import com.djavafactory.pttech.rrm.domain.EventTrail;
+import com.mongodb.BasicDBObject;
+import com.mongodb.QueryBuilder;
 
 public class EventTrailRepositoryImpl implements EventTrailRepository {
 
@@ -25,6 +31,7 @@ public class EventTrailRepositoryImpl implements EventTrailRepository {
 	private static final String fieldEventTrailMessage = "message";
 	private static final String fieldEventTrailId = "_id";
 
+	
 	@Autowired
 	private MongoOperations mongoOps;
 
@@ -98,7 +105,7 @@ public class EventTrailRepositoryImpl implements EventTrailRepository {
 	}
 
 	@Override
-	public List<EventTrail> save(Iterable<? extends EventTrail> entities) {
+	public Iterable<EventTrail> save(Iterable<? extends EventTrail> entities) {
 		return eventTrailRepository.save(entities);
 	}
 
@@ -113,18 +120,13 @@ public class EventTrailRepositoryImpl implements EventTrailRepository {
 	}
 
 	@Override
-	public long count() {
+	public Long count() {
 		return eventTrailRepository.count();
 	}
 
 	@Override
 	public void delete(EventTrail entity) {
 		eventTrailRepository.delete(entity);
-	}
-
-	@Override
-	public void delete(ObjectId arg0) {
-		eventTrailRepository.delete(arg0);
 	}
 
 	@Override

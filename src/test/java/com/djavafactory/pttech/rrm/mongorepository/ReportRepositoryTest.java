@@ -30,7 +30,6 @@ public class ReportRepositoryTest {
 	ReportRepository reportRepository;
 	
 	@Test
-	@Ignore
 	public void testCount() {
 		Report report = new Report();
 		report.setTransId("1122");
@@ -62,7 +61,6 @@ public class ReportRepositoryTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testSave() {
 		reportRepository.deleteAll();
 		
@@ -90,7 +88,6 @@ public class ReportRepositoryTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testCompare() {
 		Report report = new Report();
 		report.setTransId("1111");

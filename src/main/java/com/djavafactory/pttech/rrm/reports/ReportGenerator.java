@@ -4,7 +4,7 @@ import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.Configuration;
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
 import com.djavafactory.pttech.rrm.domain.Report;
-import com.djavafactory.pttech.rrm.mongorepository.ReportRepository;
+//import com.djavafactory.pttech.rrm.mongorepository.ReportRepository;
 import com.djavafactory.pttech.rrm.util.DateUtil;
 
 import java.math.BigDecimal;
@@ -29,8 +29,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class ReportGenerator {
 
-	@Autowired
-	ReportRepository reportRepository;
+//	@Autowired
+//	ReportRepository reportRepository;
 	
 	/*
 	 * calculation method
@@ -1118,20 +1118,20 @@ public class ReportGenerator {
      *  if the total is different, erase and regenerate it based on ReloadRequest
      *  
      */
-    public void checkReportRecord() {
-    	List<ReloadRequest> listRR = new ArrayList<ReloadRequest>();
-    	List<Report> listReport    = new ArrayList<Report>();
-    	
-    	Long countRR 	  = ReloadRequest.countReloadRequestsByParam(null, null, null, null);
-    	Long countMongoDB = reportRepository.count();
-    	
-    	if(countRR != countMongoDB) {
-    		reportRepository.deleteAll();
-    		
-    		listRR = ReloadRequest.findAllReloadRequests();
-    		listReport = copyReloadRequestToReport(listRR);
-    		
-    		reportRepository.save(listReport);
-    	}
-    }
+//    public void checkReportRecord() {
+//    	List<ReloadRequest> listRR = new ArrayList<ReloadRequest>();
+//    	List<Report> listReport    = new ArrayList<Report>();
+//    	
+//    	Long countRR 	  = ReloadRequest.countReloadRequestsByParam(null, null, null, null);
+//    	Long countMongoDB = reportRepository.count();
+//    	
+//    	if(countRR != countMongoDB) {
+//    		reportRepository.deleteAll();
+//    		
+//    		listRR = ReloadRequest.findAllReloadRequests();
+//    		listReport = copyReloadRequestToReport(listRR);
+//    		
+//    		reportRepository.save(listReport);
+//    	}
+//    }
 }
