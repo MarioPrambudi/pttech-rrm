@@ -4,6 +4,7 @@ import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
 import com.djavafactory.pttech.rrm.domain.ReloadRequestMessage;
 import com.djavafactory.pttech.rrm.domain.ReloadResponseMessage;
+import com.djavafactory.pttech.rrm.exception.RrmStatusCode;
 import com.djavafactory.pttech.rrm.ws.KeyRequest;
 import epg.webservice.ReloadRequestResponse;
 import org.apache.commons.lang.StringUtils;
@@ -126,6 +127,8 @@ public class MessageMapper {
         requestMessage.setTransId(message.getTransactionId());
         requestMessage.setRequestTime(message.getRequestDateTime());
         requestMessage.setMsgType(Constants.RELOAD_REQUEST_TNG_KEY);
+        requestMessage.setStatusCode(RrmStatusCode.STS_SUCCESS.getCode());
+        requestMessage.setStatusMsg(RrmStatusCode.STS_SUCCESS.getDescription());
         logger.info("[mapTngKeyReqToReloadReq - New ReloadRequestMessage object] >> " + requestMessage);
         return requestMessage;
     }

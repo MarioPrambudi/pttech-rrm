@@ -17,8 +17,9 @@ import org.springframework.data.document.mongodb.repository.MongoRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-
 import com.djavafactory.pttech.rrm.domain.EventTrail;
+import com.mongodb.BasicDBObject;
+import com.mongodb.QueryBuilder;
 
 
 public class EventTrailRepositoryImpl implements EventTrailRepository {
@@ -28,7 +29,7 @@ public class EventTrailRepositoryImpl implements EventTrailRepository {
 	private static final String fieldEventTrailCode = "code";
 	private static final String fieldEventTrailMessage = "message";
 	private static final String fieldEventTrailId = "_id";
-	
+
 	
 	@Autowired
 	private MongoOperations mongoOps;

@@ -1,6 +1,7 @@
 package com.djavafactory.pttech.rrm.domain;
 
 import java.io.Serializable;
+
 import org.bson.types.ObjectId;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;

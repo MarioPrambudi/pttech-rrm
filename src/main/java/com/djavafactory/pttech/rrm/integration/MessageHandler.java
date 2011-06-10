@@ -2,12 +2,14 @@ package com.djavafactory.pttech.rrm.integration;
 
 import com.djavafactory.pttech.rrm.domain.ReloadRequestMessage;
 import com.djavafactory.pttech.rrm.exception.RrmStatusCode;
+import epg.webservice.ReloadRequest;
 import flexjson.JSONDeserializer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.integration.Message;
 import org.springframework.integration.MessagingException;
 
+import javax.xml.bind.JAXBElement;
 import java.util.HashMap;
 
 /**
@@ -39,20 +41,21 @@ public class MessageHandler {
      * @return
      */
     public ReloadRequestMessage reloadRequestErrorHandler(Exception e) {
-        ReloadRequestMessage requestMessage = null;
+        ReloadRequestMessage requestMessage = new ReloadRequestMessage();
         if (e instanceof MessagingException) {
             Message<?> failedMessage = ((MessagingException) e).getFailedMessage();
             if (failedMessage != null) {
                 if (failedMessage.getPayload() instanceof ReloadRequestMessage) {
                     requestMessage = (ReloadRequestMessage) failedMessage.getPayload();
                 } else if (failedMessage.getPayload() instanceof String) {
-                    requestMessage = new ReloadRequestMessage();
                     try {
                         HashMap hashMap = new JSONDeserializer<HashMap>().deserialize(String.valueOf(failedMessage.getPayload()));
                         requestMessage.setTransId(String.valueOf(hashMap.get("transId")));
                     } catch (ClassCastException ex) {
                         logger.info("[transformStringToReloadRequest] >> Invalid message [" + failedMessage.getPayload() + "]. Ignore!!");
                     }
+                } else if (failedMessage.getPayload() instanceof JAXBElement) {
+                    requestMessage.setTransId(((JAXBElement<ReloadRequest>) failedMessage.getPayload()).getValue().getTransactionId());
                 }
                 requestMessage.setMsgType(String.valueOf(failedMessage.getHeaders().get("req")));
                 requestMessage.setStatusCode(RrmStatusCode.STS_GENERALRRMERROR.getCode());

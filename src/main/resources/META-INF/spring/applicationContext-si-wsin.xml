@@ -14,8 +14,7 @@
     </channel>
     <ws:inbound-gateway id="keyRequestWsGateway"
                         request-channel="keyRequestWsChannel"
-                        marshaller="jaxbMarshallerIn" unmarshaller="jaxbMarshallerIn"
-                        reply-channel="keyRequestReplyChannel"/>
+                        marshaller="jaxbMarshallerIn" unmarshaller="jaxbMarshallerIn"/>
 
     <chain input-channel="keyRequestWsChannel" output-channel="tngKeyResponseChannel">
         <transformer ref="mapperBean" method="mapTngKeyReqToReloadReq"/>
@@ -23,39 +22,33 @@
         <filter ref="filterBean" method="validateTimeoutFilter" discard-channel="timeOutPersistChannel"/>
     </chain>
 
-    <channel id="keyRequestReplyChannel"/>
-
-    <channel id="timeOutPersistChannel">
-        <queue capacity="100"/>
-    </channel>
-    <chain input-channel="timeOutPersistChannel" output-channel="keyRequestReplyChannel">
+    <channel id="timeOutPersistChannel"/>
+    <chain input-channel="timeOutPersistChannel">
         <transformer ref="mapperBean" method="mapTimeoutReloadRequest"/>
         <service-activator ref="messagePersistenceBean" method="mergeReloadRequest"/>
         <transformer ref="transformerBean" method="transformMessageToTngResponse"/>
     </chain>
 
-    <channel id="tngKeyErrorChannel">
-        <queue capacity="100"/>
-    </channel>
+    <channel id="tngKeyErrorChannel"/>
     <transformer input-channel="tngKeyErrorChannel" ref="transformerBean"
-                 method="transformMessageToTngResponse"
-                 output-channel="keyRequestReplyChannel"/>
+                 method="transformMessageToTngResponse"/>
 
     <publish-subscribe-channel id="tngKeyResponseChannel"/>
 
-    <transformer input-channel="tngKeyResponseChannel" ref="transformerBean" method="transformMessageToTngResponse"
-                 output-channel="keyRequestReplyChannel"/>
+    <transformer input-channel="tngKeyResponseChannel" ref="transformerBean" method="transformMessageToTngResponse"/>
 
     <chain input-channel="tngKeyResponseChannel" output-channel="rtmReloadRequestChannel">
         <transformer ref="mapperBean" method="mapTngReloadRequest"/>
         <service-activator ref="messagePersistenceBean" method="mergeReloadRequest"/>
     </chain>
 
-    <channel id="rtmReloadRequestChannel">
-        <queue capacity="100"/>
-    </channel>
+    <publish-subscribe-channel id="rtmReloadRequestChannel"/>
+
     <transformer input-channel="rtmReloadRequestChannel" ref="transformerBean" method="transformMessageToJson"
                  output-channel="rtmReloadInboundChannel"/>
+
+    <transformer input-channel="rtmReloadRequestChannel" ref="transformerBean" method="transformMessageToResponse"
+                 output-channel="rmiReloadStatusChannel"/>
 
     <beans:bean id="jaxbMarshallerIn" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
         <beans:property name="contextPath" value="com.djavafactory.pttech.rrm.ws"/>

@@ -40,6 +40,7 @@ import org.springframework.data.document.mongodb.MongoOperations;
 public class ReportGenerator {
 	@Autowired
 	ReportRepository reportRepository;
+
 	
 	private static final String FIELDREQUESTEDTIME= "requestedTime";
 	private static final String FIELDMODIFIEDTIME = "modifiedDate";
