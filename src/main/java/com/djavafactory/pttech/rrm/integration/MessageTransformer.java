@@ -1,12 +1,14 @@
 package com.djavafactory.pttech.rrm.integration;
 
 
+import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.ReloadRequestMessage;
 import com.djavafactory.pttech.rrm.domain.ReloadResponseMessage;
 import com.djavafactory.pttech.rrm.util.DateUtil;
 import com.djavafactory.pttech.rrm.ws.KeyResponse;
 import epg.webservice.ObjectFactory;
 import epg.webservice.ReloadRequest;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.integration.MessagingException;
@@ -61,6 +63,12 @@ public class MessageTransformer {
         return transformResponse(requestMessage, requestMessage.getStatusCode(), requestMessage.getStatusMsg());
     }
 
+    /**
+     * Method to transform the ReloadRequestMessage to a KeyResponse.
+     *
+     * @param message ReloadRequestMessage object
+     * @return KeyResponse
+     */
     public KeyResponse transformMessageToTngResponse(Object message) {
         ReloadRequestMessage requestMessage = (ReloadRequestMessage) message;
         return transformKeyResponse(requestMessage.getStatusCode(), requestMessage.getStatusMsg(), requestMessage.getTransId());
@@ -74,6 +82,9 @@ public class MessageTransformer {
      */
     public String transformMessageToJson(Object message) {
         if (message != null && message instanceof ReloadRequestMessage) {
+            if(StringUtils.equalsIgnoreCase(((ReloadRequestMessage) message).getMsgType(), Constants.RELOAD_REQUEST_TNG_KEY)) {
+                ((ReloadRequestMessage) message).setMsgType(Constants.RELOAD_REQUEST_NEW);
+            }
             ((ReloadRequestMessage) message).setRequestTime(new Date());
             logger.info("[transformRtmReloadRequest - New json string] >> " + ((ReloadRequestMessage) message).toJsonString());
             return ((ReloadRequestMessage) message).toJsonString();
