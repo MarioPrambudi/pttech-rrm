@@ -365,12 +365,6 @@ public class DateUtil {
 		return days;
 	}
 	
-	/**
-	 * To get date with time 00:00:00
-	 * 
-	 * @param oriDate Date
-	 * @return date with min time - Date
-	 */
 	public static Date getDateMinTime(Date oriDate) throws ParseException{
 		  Calendar calOri = Calendar.getInstance();
 		  Calendar calNew = Calendar.getInstance();
@@ -379,12 +373,6 @@ public class DateUtil {
 		  return calNew.getTime();	  
 	}
 	
-	/**
-	 * To get date with time 23:59:59
-	 * 
-	 * @param oriDate Date
-	 * @return date with max time - Date
-	 */
 	public static Date getDateMaxTime(Date oriDate) throws ParseException{
 		  Calendar calOri = Calendar.getInstance();
 		  Calendar calNew = Calendar.getInstance();

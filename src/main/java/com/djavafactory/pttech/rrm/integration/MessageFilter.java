@@ -6,8 +6,10 @@ import com.djavafactory.pttech.rrm.domain.ReloadRequest;
 import com.djavafactory.pttech.rrm.domain.ReloadRequestMessage;
 import com.djavafactory.pttech.rrm.exception.RrmBusinessException;
 import com.djavafactory.pttech.rrm.exception.RrmStatusCode;
+import epg.webservice.ReloadRequestResponse;
 import org.apache.commons.lang.StringUtils;
 
+import javax.xml.bind.JAXBElement;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -39,8 +41,9 @@ public class MessageFilter {
             } else if (!requestMessage.getMsgType().equalsIgnoreCase(Constants.RELOAD_REQUEST_NEW)) {
                 List<ReloadRequest> reloadRecord = new ReloadRequest().findReloadRequestsByTransId(requestMessage.getTransId()).getResultList();
                 if (reloadRecord == null || reloadRecord.isEmpty() ||
-                        (!requestMessage.getMsgType().equalsIgnoreCase(Constants.RELOAD_REQUEST_NEW) && !StringUtils.equalsIgnoreCase(reloadRecord.get(0).getStatus(), Constants.RELOAD_STATUS_PENDING)) ||
-                        (requestMessage.getMsgType().equalsIgnoreCase(Constants.RELOAD_REQUEST_NEW) && !StringUtils.equalsIgnoreCase(reloadRecord.get(0).getStatus(), Constants.RELOAD_STATUS_NEW))) {
+                        (requestMessage.getMsgType().equalsIgnoreCase(Constants.RELOAD_REQUEST_TNG_KEY) && !StringUtils.equalsIgnoreCase(reloadRecord.get(0).getStatus(), Constants.RELOAD_STATUS_NEW)) ||
+                        (!requestMessage.getMsgType().equalsIgnoreCase(Constants.RELOAD_REQUEST_TNG_KEY) && !requestMessage.getMsgType().equalsIgnoreCase(Constants.RELOAD_REQUEST_NEW)
+                                && !StringUtils.equalsIgnoreCase(reloadRecord.get(0).getStatus(), Constants.RELOAD_STATUS_PENDING))) {
                     setReloadMessageStatus(requestMessage, RrmStatusCode.STS_INVALIDSTATUS.getCode(), RrmStatusCode.STS_INVALIDSTATUS.getDescription());
                     return false;
                 }
@@ -91,6 +94,16 @@ public class MessageFilter {
      */
     public Boolean rtmRequestFilter(ReloadRequestMessage requestMessage) {
         return (!StringUtils.equalsIgnoreCase(Constants.RELOAD_REQUEST_SUCCESS, requestMessage.getMsgType()));
+    }
+
+    /**
+     * Method to validate whether the TNG card verification response needs to be routed to RMI or not.
+     *
+     * @param message JAXBElement<ReloadRequestResponse> object
+     * @return true/false
+     */
+    public Boolean tngRequestReplyFilter(JAXBElement<ReloadRequestResponse> message) {
+        return (!StringUtils.equalsIgnoreCase(Constants.RESPONSE_CODE_SUCCESS, message.getValue().getReturn().getStatusCode()));
     }
 
     private boolean validateFieldLength(ReloadRequestMessage requestMessage) {
