@@ -13,10 +13,8 @@ privileged aspect ConfValidityPeriod_Roo_ToString {
         sb.append("ConfigValue: ").append(getConfigValue()).append(", ");
         sb.append("ConfigValueHidden: ").append(getConfigValueHidden()).append(", ");
         sb.append("EndDate: ").append(getEndDate()).append(", ");
-        sb.append("Id: ").append(getId()).append(", ");
         sb.append("StartDate: ").append(getStartDate()).append(", ");
-        sb.append("StartDateNew: ").append(getStartDateNew()).append(", ");
-        sb.append("Version: ").append(getVersion());
+        sb.append("StartDateNew: ").append(getStartDateNew());
         return sb.toString();
     }
     

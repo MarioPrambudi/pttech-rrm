@@ -28,9 +28,9 @@ public class EventTrail implements Serializable {
 	private static final long serialVersionUID = -2326588854852436309L;
 	@Id
 	private ObjectId id;
+	@Indexed
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private Date date;
-	@Indexed
 	private String code;
 	private String message;
 	private String source;

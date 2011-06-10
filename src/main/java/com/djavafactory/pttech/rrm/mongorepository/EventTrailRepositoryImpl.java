@@ -17,11 +17,10 @@ import org.springframework.data.document.mongodb.repository.MongoRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-
-import com.djavafactory.pttech.rrm.domain.AuditTrail;
 import com.djavafactory.pttech.rrm.domain.EventTrail;
 import com.mongodb.BasicDBObject;
 import com.mongodb.QueryBuilder;
+
 
 public class EventTrailRepositoryImpl implements EventTrailRepository {
 
@@ -37,39 +36,47 @@ public class EventTrailRepositoryImpl implements EventTrailRepository {
 
 	@Autowired
 	MongoRepository<EventTrail, ObjectId> eventTrailRepository;
-
+	
 	@Override
-	public List<EventTrail> findByParam(Date dateFrom, Date dateTo, String source, String code, String message, Integer page,
-			Integer size) {
+	public List<EventTrail> findByParam(Date dateFrom, Date dateTo, String source, String code, String message, Integer page, Integer size) {
 		Criteria criteria = where(fieldEventTrailId).exists(true);
-		if (source == null || source.isEmpty() || !source.equalsIgnoreCase("-1")) {
+		if (source != null && !source.isEmpty() && !source.equalsIgnoreCase("-1")) 
+		{
 			criteria = criteria.and(fieldEventTrailSource).is(source);
-		}
-		if (code != null && !code.isEmpty()) {
+		}	
+		if (code != null && !code.isEmpty()) 
+		{
 			criteria = criteria.and(fieldEventTrailCode).regex("(?i)" + code);
 		}
-		if (message != null && !message.isEmpty()) {
+		if (message != null && !message.isEmpty()) 
+		{
 			criteria = criteria.and(fieldEventTrailMessage).regex("(?i)" + message);
 		}
-		if (dateFrom != null && dateTo != null) {
+		if (dateFrom != null && dateTo != null) 
+		{
 			criteria = criteria.and(fieldEventTrailDate);
 			criteria = criteria.lte(dateTo);
-			criteria = criteria.gte(dateFrom);
+			criteria = criteria.gte(dateFrom);	
 		}
 		Query querying = query(criteria);
-		if (dateFrom == null && dateTo == null && (source == null || source.isEmpty() || source.equalsIgnoreCase("-1"))
-				&& (code == null || code.isEmpty()) && (message == null || message.isEmpty())) {
+		if (dateFrom == null && dateTo == null 
+			&& (source == null || source.isEmpty() || source.equalsIgnoreCase("-1"))
+			&& (code == null || code.isEmpty())
+			&& (message == null || message.isEmpty()))
+		{
 			querying = new Query();
 		}
-		if (page != null && page > 0) {
-			querying = querying.skip((page - 1) * (size == null || size < 0 ? 0 : size));
-		}
-		if (size != null && size > 0) {
+		if (page != null && page > 0)
+		{
+			querying= querying.skip((page - 1) * (size == null || size < 0 ? 0 : size));
+		}			
+		if (size != null && size > 0)
+		{	
 			querying = querying.limit(size);
-		}
+		}		
 		return mongoOps.find(querying, EventTrail.class);
 	}
-
+	
 	@Override
 	public Long countByParam(Date dateFrom, Date dateTo, String source, String code, String message) {
 		Long totalCount = 0L;

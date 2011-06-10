@@ -45,8 +45,11 @@ public class AuditTrailController extends BaseController {
                                          @RequestParam(value = "entity", required = false) String entity,
                                          @RequestParam(value = "dateFrom", required = false) String dateFromStr,
                                          @RequestParam(value = "dateTo", required = false) String dateToStr, Model uiModel) {
-        Date dateFrom = DateUtil.smartConvertStringToDate(dateFromStr);
-        Date dateTo = DateUtil.smartConvertStringToDate(dateToStr);
+
+    	Date dateFrom = null;
+		Date dateTo = null;
+		if (dateFromStr != null)dateFrom = DateUtil.smartConvertStringToDate(dateFromStr);
+		if (dateToStr != null)dateTo = DateUtil.smartConvertStringToDate(dateToStr);	
         dateFrom = dateFrom == null ? null : DateUtil.resetTimeToMinimum(dateFrom);
         dateTo = dateTo == null ? null : DateUtil.resetTimeToMaximum(dateTo);
         List<AuditTrail> auditTrailList = regenerateList(auditTrailRepository.findByParam(dateFrom, dateTo, entity, action,

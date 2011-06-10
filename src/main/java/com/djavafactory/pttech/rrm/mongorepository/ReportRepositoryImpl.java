@@ -16,6 +16,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import com.djavafactory.pttech.rrm.Constants;
+import com.djavafactory.pttech.rrm.domain.EventTrail;
 import com.djavafactory.pttech.rrm.domain.Report;
 	
 /**
@@ -26,55 +28,63 @@ import com.djavafactory.pttech.rrm.domain.Report;
  */
 public class ReportRepositoryImpl implements ReportRepository {
 
-	private static final String fieldSofRequestedDate = "sofRequestedDate";
-	private static final String fieldStatus = "status";
-	
+	private static final String FIELDREQUESTEDTIME= "requestedTime";
+	private static final String FIELDMODIFIEDTIME = "modifiedDate";
+	private static final String FIELDSTATUS = "status";
+	private static final String FIELDID= "_id";
+
 	@Autowired
 	private MongoOperations mongoOps;
 	
 	@Autowired
-	MongoRepository<Report, String> reportRepository;
+	MongoRepository<Report, ObjectId> reportRepository;
 	
 	@Override
-	public List<Report> findByParam(Date dateFrom, Date dateTo, String status, Integer page, Integer size) {
-		Criteria criteria = where(fieldStatus);
-		
-		if(dateFrom != null && dateTo != null) {
-			criteria = criteria.and(fieldSofRequestedDate);
-			criteria = criteria.lte(dateTo);
-			criteria = criteria.gte(dateFrom);
-		}
-		
+	public List<Report> findByParam(Date dateFrom, Date dateTo, String[] listStatus, String dateField) {
+		Criteria criteria = where(FIELDSTATUS).in(listStatus);	
+		criteria = criteria.and(dateField);
+		criteria = criteria.lte(dateTo);
+		criteria = criteria.gte(dateFrom);
 		Query querying = query(criteria);
-		if(dateFrom == null && dateTo == null) {
-			querying = new Query();
-		}
-		
-		if(page != null && page > 0) {
-			querying = querying.skip((page - 1) * (size == null || size < 0 ? 0 : size));
-		}
-		if(size != null && size > 0) {
-			querying = querying.limit(size);
-		}
-		
 		return mongoOps.find(querying, Report.class);
 	}
 	
 	@Override
-	public Long countByParam(Date dateFrom, Date dateTo, String status) {
-		Long totalCount = 0L;
-		Integer tempCount = 0;
-		int pageNo = 1;
-		do {
-			List<Report> reports = findByParam(dateFrom, dateTo, status, pageNo, Integer.MAX_VALUE);
-			tempCount = reports == null ? null : reports.size();
-			totalCount += tempCount == null ? 0L : tempCount.longValue();
-			pageNo++;
-		} while (tempCount != null && tempCount >= Integer.MAX_VALUE);
-		
-		return totalCount;
+	public List<Report> findByParam(Date dateFrom, Date dateTo) {
+		Criteria criteria = where(FIELDREQUESTEDTIME);
+		criteria = criteria.lte(dateTo);
+		criteria = criteria.gte(dateFrom);
+		Query querying = query(criteria);
+		return mongoOps.find(querying, Report.class);
 	}
 	
+	@Override
+	public Long countByParam(Date dateFrom, Date dateTo){
+		int size = 0;
+		List<Report> listReport = findByParam(dateFrom, dateTo);
+		if (listReport != null && listReport.size()>0) size = listReport.size();
+		return (long)size;
+	}
+	
+	@Override
+	public void delete(Date dateFrom, Date dateTo){
+		System.out.println(">>>>>>>>>>> DELETE");
+		Criteria criteria = where(FIELDREQUESTEDTIME);
+		criteria = criteria.lte(dateTo);
+		criteria = criteria.gte(dateFrom);
+		Query querying = query(criteria);
+		mongoOps.findAndRemove(querying, Report.class);
+	}
+	
+	
+	@Override
+	public void saveReport(List<Report> listReport) {
+		for(Report report : listReport)
+		{
+			mongoOps.save(Constants.REPORT_MONGODB_COLLECTION_NAME, report);	
+		}		
+	}
+
 	@Override
 	public List<Report> findAll() {
 		return reportRepository.findAll();
@@ -101,13 +111,13 @@ public class ReportRepositoryImpl implements ReportRepository {
 	}
 
 	@Override
-	public Report findOne(String reportId) {
-		return reportRepository.findOne(reportId);
+	public Report findOne(ObjectId id) {
+		return reportRepository.findOne(id);
 	}
 
 	@Override
-	public boolean exists(String reportId) {
-		return reportRepository.exists(reportId);
+	public boolean exists(ObjectId id) {
+		return reportRepository.exists(id);
 	}
 
 	@Override

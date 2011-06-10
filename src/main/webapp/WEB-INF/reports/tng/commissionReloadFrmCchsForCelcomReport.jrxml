@@ -7,31 +7,31 @@
 	<parameter name="startDate" class="java.util.Date"/>
 	<parameter name="endDate" class="java.util.Date"/>
 	<field name="acquirerTerminal" class="java.lang.String"/>
-	<field name="reloadDateTime" class="java.util.Date"/>
-	<field name="reloadAmount" class="java.math.BigDecimal"/>
-	<field name="fees" class="java.math.BigDecimal"/>
-	<field name="commissionAmountDeductedBySof" class="java.math.BigDecimal"/>
-	<field name="tngFee" class="java.math.BigDecimal"/>
-	<field name="celcomMobileFee" class="java.math.BigDecimal"/>
-	<field name="cmmFee" class="java.math.BigDecimal"/>
+	<field name="reloadDate" class="java.util.Date"/>
+	<field name="reloadAmount" class="java.lang.Double"/>
+	<field name="totalFees" class="java.lang.Double"/>
+	<field name="commissionAmountDeductedBySof" class="java.lang.Double"/>
+	<field name="tngFee" class="java.lang.Double"/>
+	<field name="celcomMobileFee" class="java.lang.Double"/>
+	<field name="cmmFee" class="java.lang.Double"/>
 	<field name="totalReloadQty" class="java.lang.Long"/>
-	<variable name="SUM_COMM_SOF" class="java.math.BigDecimal" calculation="Sum">
+	<variable name="SUM_COMM_SOF" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{commissionAmountDeductedBySof}]]></variableExpression>
 	</variable>
-	<variable name="SUM_COMM_TNG" class="java.math.BigDecimal" calculation="Sum">
+	<variable name="SUM_COMM_TNG" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{tngFee}]]></variableExpression>
 	</variable>
-	<variable name="SUM_COMM_CELCOM" class="java.math.BigDecimal" calculation="Sum">
+	<variable name="SUM_COMM_CELCOM" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{celcomMobileFee}]]></variableExpression>
 	</variable>
-	<variable name="SUM_COMM_CMM" class="java.math.BigDecimal" calculation="Sum">
+	<variable name="SUM_COMM_CMM" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{cmmFee}]]></variableExpression>
 	</variable>
-	<variable name="SUM_AMT_RELOAD" class="java.math.BigDecimal" calculation="Sum">
+	<variable name="SUM_AMT_RELOAD" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{reloadAmount}]]></variableExpression>
 	</variable>
-	<variable name="SUM_FEE" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{fees}]]></variableExpression>
+	<variable name="SUM_FEE" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalFees}]]></variableExpression>
 	</variable>
 	<variable name="SUM_TRX_QTY" class="java.lang.Long" calculation="Sum">
 		<variableExpression><![CDATA[$F{totalReloadQty}]]></variableExpression>
@@ -253,7 +253,7 @@
 				<textField pattern="dd-MMM-yy">
 					<reportElement x="0" y="0" width="90" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.util.Date"><![CDATA[$F{reloadDateTime}]]></textFieldExpression>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{reloadDate}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -283,7 +283,7 @@
 				<textField pattern="###0.00">
 					<reportElement x="0" y="0" width="100" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{reloadAmount}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{reloadAmount}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -298,7 +298,7 @@
 				<textField pattern="###0.00">
 					<reportElement x="0" y="0" width="100" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{fees}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{totalFees}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -313,7 +313,7 @@
 				<textField pattern="###0.00">
 					<reportElement x="0" y="0" width="100" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{commissionAmountDeductedBySof}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{commissionAmountDeductedBySof}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -328,7 +328,7 @@
 				<textField pattern="###0.00">
 					<reportElement x="0" y="0" width="100" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{tngFee}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{tngFee}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -343,7 +343,7 @@
 				<textField pattern="###0.00">
 					<reportElement x="0" y="0" width="100" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{celcomMobileFee}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{celcomMobileFee}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -358,7 +358,7 @@
 				<textField pattern="###0.00">
 					<reportElement x="0" y="0" width="100" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cmmFee}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{cmmFee}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
@@ -428,7 +428,7 @@
 				<textField pattern="###0.00">
 					<reportElement x="0" y="0" width="100" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_AMT_RELOAD}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{SUM_AMT_RELOAD}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -443,7 +443,7 @@
 				<textField pattern="###0.00">
 					<reportElement x="0" y="0" width="100" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_FEE}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{SUM_FEE}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -458,7 +458,7 @@
 				<textField pattern="###0.00">
 					<reportElement x="0" y="0" width="100" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_COMM_SOF}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{SUM_COMM_SOF}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -473,7 +473,7 @@
 				<textField pattern="###0.00">
 					<reportElement x="0" y="0" width="100" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_COMM_TNG}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{SUM_COMM_TNG}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -488,7 +488,7 @@
 				<textField pattern="###0.00">
 					<reportElement x="0" y="0" width="97" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_COMM_CELCOM}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{SUM_COMM_CELCOM}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -503,7 +503,7 @@
 				<textField pattern="###0.00">
 					<reportElement x="0" y="0" width="100" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_COMM_CMM}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{SUM_COMM_CMM}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

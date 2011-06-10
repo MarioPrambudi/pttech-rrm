@@ -91,4 +91,11 @@ public final class Constants {
     public static final String EVENT_TRAIL_SOURCE_RMI = "I";
     public static final String EVENT_TRAIL_SOURCE_RTM = "T";
 
+    /**
+     * Constants for Report
+     */
+    public static final String REPORT_MONGODB_COLLECTION_NAME = "Report";
+    public static final String REPORT_MONGODB_DATE_PATTERN = "EEE d MMM yyyy HH:mm:ss Z";
+    
+    
 }

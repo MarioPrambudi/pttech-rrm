@@ -13,6 +13,9 @@ import com.djavafactory.pttech.rrm.domain.Report;
  */
 public interface ReportCustomRepository {
 
-	public List<Report> findByParam(Date dateFrom, Date dateTo, String status, Integer page, Integer size);
-	public Long countByParam(Date dateFrom, Date dateTo, String status);
+	public List<Report> findByParam(Date dateFrom, Date dateTo, String[] listStatus, String dateField);
+	public List<Report> findByParam(Date dateFrom, Date dateTo);
+	public Long countByParam(Date dateFrom, Date dateTo);
+	public void saveReport(List<Report> listReport);
+	public void delete(Date dateFrom, Date dateTo);
 }

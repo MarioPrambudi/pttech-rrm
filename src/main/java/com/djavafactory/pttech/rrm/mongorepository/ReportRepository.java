@@ -12,6 +12,6 @@ import com.djavafactory.pttech.rrm.domain.Report;
  * @author Firman Agustian
  *
  */
-public interface ReportRepository extends MongoRepository<Report, String>, ReportCustomRepository {
+public interface ReportRepository extends MongoRepository<Report, ObjectId>, ReportCustomRepository {
 
 }

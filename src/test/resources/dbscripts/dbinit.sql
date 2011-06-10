@@ -25,11 +25,6 @@ insert into configuration ( config_key , config_value , ordering , version ) val
 insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.CEL.CE0006', 'Summary of Daily Transactions By Range of Dates Report', 6, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.CEL.CE0007', 'Summary of Daily Fee Report', 7, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.CEL.CE0008', 'Summary of Daily Fee By Range of Dates Report', 8, 0);
-insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.FEES', '1.00', 1, 0);
-insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.SOF', '0.25', 2, 0);
-insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.TNG', '0.20', 3, 0);;
-insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.RS', '0.30', 4, 0);
-insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.AT', '0.25', 5, 0);
 
 
 insert into province ( id, name ) values ( 1, 'Johor' );
