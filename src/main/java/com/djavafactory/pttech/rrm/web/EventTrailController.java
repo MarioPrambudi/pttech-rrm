@@ -9,14 +9,12 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import com.djavafactory.pttech.rrm.Constants;
-import com.djavafactory.pttech.rrm.domain.AuditTrail;
 import com.djavafactory.pttech.rrm.domain.EventTrail;
 import com.djavafactory.pttech.rrm.mongorepository.EventTrailRepository;
 import com.djavafactory.pttech.rrm.util.DateUtil;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -41,8 +39,10 @@ public class EventTrailController extends BaseController{
 			@RequestParam(value = "message", required = false) String message,
 			@RequestParam(value = "dateFrom", required = false) String dateFromStr,
 			@RequestParam(value = "dateTo", required = false) String dateToStr, Model uiModel) {
-		Date dateFrom = DateUtil.smartConvertStringToDate(dateFromStr);
-		Date dateTo = DateUtil.smartConvertStringToDate(dateToStr);
+		Date dateFrom = null;
+		Date dateTo = null;
+		if (dateFromStr != null)dateFrom = DateUtil.smartConvertStringToDate(dateFromStr);
+		if (dateToStr != null)dateTo = DateUtil.smartConvertStringToDate(dateToStr);		
 		dateFrom = dateFrom == null ? null : DateUtil.resetTimeToMinimum(dateFrom);
 		dateTo = dateTo == null ? null : DateUtil.resetTimeToMaximum(dateTo);
 		List<EventTrail> eventTrailList = regenerateList(eventTrailRepository.findByParam(dateFrom, dateTo, source, code, message, page == null ? 1 : page, size == null ? 10 : size));

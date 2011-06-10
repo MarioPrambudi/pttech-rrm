@@ -11,7 +11,6 @@ privileged aspect ReloadRequest_Roo_ToString {
         StringBuilder sb = new StringBuilder();
         sb.append("AcquirerTerminal: ").append(getAcquirerTerminal()).append(", ");
         sb.append("CmmpTrxId: ").append(getCmmpTrxId()).append(", ");
-        sb.append("Id: ").append(getId()).append(", ");
         sb.append("MfgNumber: ").append(getMfgNumber()).append(", ");
         sb.append("MobileNo: ").append(getMobileNo()).append(", ");
         sb.append("ModifiedTime: ").append(getModifiedTime()).append(", ");
@@ -23,8 +22,7 @@ privileged aspect ReloadRequest_Roo_ToString {
         sb.append("TotalCancellationAmt: ").append(getTotalCancellationAmt()).append(", ");
         sb.append("TotalReloadQty: ").append(getTotalReloadQty()).append(", ");
         sb.append("TransCode: ").append(getTransCode()).append(", ");
-        sb.append("TransId: ").append(getTransId()).append(", ");
-        sb.append("Version: ").append(getVersion());
+        sb.append("TransId: ").append(getTransId());
         return sb.toString();
     }
     

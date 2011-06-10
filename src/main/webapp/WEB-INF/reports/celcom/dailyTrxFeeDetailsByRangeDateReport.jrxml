@@ -9,18 +9,18 @@
 	<field name="id" class="java.lang.Long"/>
 	<field name="requestedTime" class="java.util.Date"/>
 	<field name="cmmpTrxId" class="java.lang.String"/>
-	<field name="tngTrxId" class="java.lang.String"/>
+	<field name="transId" class="java.lang.String"/>
 	<field name="aircashAccNo" class="java.lang.Long"/>
 	<field name="mobileNo" class="java.lang.Long"/>
-	<field name="tngMfgNo" class="java.lang.Long"/>
+	<field name="mfgNumber" class="java.lang.Long"/>
 	<field name="reloadAmount" class="java.math.BigDecimal"/>
 	<field name="fees" class="java.math.BigDecimal"/>
-	<field name="grossAmount" class="java.math.BigDecimal"/>
+	<field name="grossPaymentToTngRm" class="java.math.BigDecimal"/>
 	<field name="tngFee" class="java.math.BigDecimal"/>
 	<field name="printisFee" class="java.math.BigDecimal"/>
 	<field name="celcomMobileFee" class="java.math.BigDecimal"/>
 	<field name="cmmFee" class="java.math.BigDecimal"/>
-	<field name="totalGrossAmount" class="java.math.BigDecimal"/>
+	<field name="totalFees" class="java.math.BigDecimal"/>
 	<field name="amountDueTng" class="java.math.BigDecimal"/>
 	<field name="amountDuePrintis" class="java.math.BigDecimal"/>
 	<field name="amountDueCelcomMobile" class="java.math.BigDecimal"/>
@@ -33,7 +33,7 @@
 		<variableExpression><![CDATA[$F{fees}]]></variableExpression>
 	</variable>
 	<variable name="SUM_GROSS_AMT" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{grossAmount}]]></variableExpression>
+		<variableExpression><![CDATA[$F{grossPaymentToTngRm}]]></variableExpression>
 	</variable>
 	<variable name="SUM_TNG_FEE" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{tngFee}]]></variableExpression>
@@ -48,7 +48,7 @@
 		<variableExpression><![CDATA[$F{cmmFee}]]></variableExpression>
 	</variable>
 	<variable name="SUM_TOTAL_GROSS_AMT" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{totalGrossAmount}]]></variableExpression>
+		<variableExpression><![CDATA[$F{totalFees}]]></variableExpression>
 	</variable>
 	<variable name="SUM_AMT_DUE_TNG" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{amountDueTng}]]></variableExpression>
@@ -631,7 +631,7 @@
 				<textField>
 					<reportElement x="0" y="0" width="50" height="20"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.String"><![CDATA[$F{tngTrxId}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{transId}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -676,7 +676,7 @@
 				<textField>
 					<reportElement x="0" y="0" width="90" height="20"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.Long"><![CDATA[$F{tngMfgNo}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Long"><![CDATA[$F{mfgNumber}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -721,7 +721,7 @@
 				<textField>
 					<reportElement x="0" y="0" width="70" height="20"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{grossAmount}]]></textFieldExpression>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{grossPaymentToTngRm}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -796,7 +796,7 @@
 				<textField pattern="###0.00">
 					<reportElement x="0" y="0" width="90" height="20"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{totalGrossAmount}]]></textFieldExpression>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{totalFees}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

@@ -45,10 +45,12 @@ public class ReportController extends BaseController {
 
     public static final String REPORT_TYPE_CELCOM = "celcom";
     public static final String REPORT_TYPE_TNG = "tng";
-
+    ReportGenerator reportGenerator = new ReportGenerator();
+    
     @RequestMapping(method = RequestMethod.GET)
-    public String getReportList(@RequestParam(value = "type") String type, Model uiModel) {
-        List<Configuration> configList = Configuration.findByConfigKeyPrefix(type);
+    public String getReportList(@RequestParam(value = "type") String type, Model uiModel) throws Exception {
+    	reportGenerator.generateDailyReport();
+    	List<Configuration> configList = Configuration.findByConfigKeyPrefix(type);
         if (configList != null && !configList.isEmpty()) {
             for (int i = 0; i < configList.size(); i++) {
                 Configuration config = configList.get(i);
@@ -98,8 +100,9 @@ public class ReportController extends BaseController {
 		Date dateStart;
 		Date dateEnd;
 		List<Report> listReport = new ArrayList<Report>();
-		listReport = ReportGenerator.getDailyDetailsRequestReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
-		
+		listReport =  reportGenerator.getDailyDetailsRequestReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
+		System.out.println("-------" + listReport);
+	
 		if(listReport == null  || listReport.size() == 0) {
 			return "emptyReport";
 		} else {
@@ -129,7 +132,7 @@ public class ReportController extends BaseController {
 		Date dateStart;
 		Date dateEnd;
 		List<Report> listReport = new ArrayList<Report>();
-		listReport = ReportGenerator.getSummaryRequestReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
+		listReport = reportGenerator.getSummaryRequestReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
 		if(listReport == null  || listReport.size() == 0) {
 			return "emptyReport";
 		} else {
@@ -160,7 +163,7 @@ public class ReportController extends BaseController {
 		Date dateEnd;
 
 		List<Report> listReport = new ArrayList<Report>();
-		listReport = ReportGenerator.getDailyDetailedReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
+		listReport = reportGenerator.getDailyDetailedReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
 		if(listReport == null  || listReport.size() == 0) {
 			return "emptyReport";
 		} else {
@@ -191,7 +194,7 @@ public class ReportController extends BaseController {
 		Date dateEnd;
 	
 		List<Report> listReport = new ArrayList<Report>();
-		listReport = ReportGenerator.getSummaryReloadReport(dateMin, dateMax, -1, -1);
+		listReport = reportGenerator.getSummaryReloadReport(dateMin, dateMax, -1, -1);
 		if(listReport == null  || listReport.size() == 0) {
 			return "emptyReport";
 		} else {
@@ -222,7 +225,7 @@ public class ReportController extends BaseController {
 		Date dateStart;
 		Date dateEnd;
 		List<Report> listReport = new ArrayList<Report>();
-		listReport = ReportGenerator.getDailyDetailsCancellationReloadReqFrmCelcomReport(dateMin, dateMax, -1, -1);
+		listReport = reportGenerator.getDailyDetailsCancellationReloadReqFrmCelcomReport(dateMin, dateMax, -1, -1);
 		if(listReport == null  || listReport.size() == 0) {
 			return "emptyReport";
 		} else {
@@ -253,7 +256,7 @@ public class ReportController extends BaseController {
 		Date dateStart;
 		Date dateEnd;
 		List<Report> listReport = new ArrayList<Report>();
-		listReport = ReportGenerator.getSummaryCancellationReloadReqFrmCelcomReport(dateMin, dateMax, -1, -1);
+		listReport = reportGenerator.getSummaryCancellationReloadReqFrmCelcomReport(dateMin, dateMax, -1, -1);
 		if(listReport == null  || listReport.size() == 0) {
 			return "emptyReport";
 		} else {
@@ -284,7 +287,7 @@ public class ReportController extends BaseController {
 		Date dateStart;
 		Date dateEnd;
 		List<Report> listReport = new ArrayList<Report>();
-		listReport = ReportGenerator.getSettlementReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
+		listReport = reportGenerator.getSettlementReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
 		if(listReport == null  || listReport.size() == 0) {
 			return "emptyReport";
 		} else {
@@ -315,7 +318,7 @@ public class ReportController extends BaseController {
 		Date dateStart;
 		Date dateEnd;
 		List<Report> listReport = new ArrayList<Report>();
-		listReport = ReportGenerator.getCommissionReloadFrmCchsForCelcomReport(dateMin, dateMax, -1, -1);
+		listReport = reportGenerator.getCommissionReloadFrmCchsForCelcomReport(dateMin, dateMax, -1, -1);
 		if(listReport == null  || listReport.size() == 0) {
 			return "emptyReport";
 		} else {
@@ -348,7 +351,7 @@ public class ReportController extends BaseController {
 		Date dateEnd;
 
 		List<Report> listReport = new ArrayList<Report>();
-		listReport = ReportGenerator.getDailyTransactionDetailsReport(-1, -1);
+		listReport = reportGenerator.getDailyTransactionDetailsReport(-1, -1);
 		if(listReport == null  || listReport.size() == 0) {
 			return "emptyReport";
 		} else {
@@ -380,7 +383,7 @@ public class ReportController extends BaseController {
 		Date dateStart;
 		Date dateEnd;
 		List<Report> listReport = new ArrayList<Report>();
-		listReport = ReportGenerator.getDailyTransactionDetailsReport(dateMin, dateMax, -1, -1);
+		listReport = reportGenerator.getDailyTransactionDetailsReport(dateMin, dateMax, -1, -1);
 		if(listReport == null  || listReport.size() == 0) {
 			return "emptyReport";
 		} else {
@@ -408,7 +411,7 @@ public class ReportController extends BaseController {
 		Date dateStart;
 		Date dateEnd;
 		List<Report> listReport = new ArrayList<Report>();
-		listReport = ReportGenerator.getDailyTransactionFeeDetailsReport(-1, -1);
+		listReport = reportGenerator.getDailyTransactionFeeDetailsReport(-1, -1);
 		if(listReport == null  || listReport.size() == 0) {
 			return "emptyReport";
 		} else {
@@ -437,7 +440,7 @@ public class ReportController extends BaseController {
 		Date dateStart;
 		Date dateEnd;
 		List<Report> listReport = new ArrayList<Report>();
-		listReport = ReportGenerator.getDailyTransactionFeeDetailsReport(dateMin, dateMax, -1, -1);
+		listReport = reportGenerator.getDailyTransactionFeeDetailsReport(dateMin, dateMax, -1, -1);
 		if(listReport == null  || listReport.size() == 0) {
 			return "emptyReport";
 		} else {
@@ -466,7 +469,7 @@ public class ReportController extends BaseController {
 		Date dateStart;
 		Date dateEnd;
 		List<Report> listReport = new ArrayList<Report>();
-		listReport = ReportGenerator.getSummaryDailyTransactionDetailsReport(-1, -1);
+		listReport = reportGenerator.getSummaryDailyTransactionDetailsReport(-1, -1);
 		if(listReport == null  || listReport.size() == 0) {
 			return "emptyReport";
 		} else {
@@ -495,7 +498,7 @@ public class ReportController extends BaseController {
 		Date dateStart;
 		Date dateEnd;
 		List<Report> listReport = new ArrayList<Report>();
-		listReport = ReportGenerator.getSummaryDailyTransactionDetailsReport(dateMin, dateMax, -1, -1);
+		listReport = reportGenerator.getSummaryDailyTransactionDetailsReport(dateMin, dateMax, -1, -1);
 		if(listReport == null  || listReport.size() == 0) {
 			return "emptyReport";
 		} else {
@@ -524,7 +527,7 @@ public class ReportController extends BaseController {
 		Date dateStart;
 		Date dateEnd;
 		List<Report> listReport = new ArrayList<Report>();
-		listReport = ReportGenerator.getSummaryDailyFeeReport(-1, -1);
+		listReport = reportGenerator.getSummaryDailyFeeReport(-1, -1);
 		if(listReport == null  || listReport.size() == 0) {
 			return "emptyReport";
 		} else {
@@ -553,7 +556,7 @@ public class ReportController extends BaseController {
 		Date dateStart;
 		Date dateEnd;
 		List<Report> listReport = new ArrayList<Report>();
-		listReport = ReportGenerator.getSummaryDailyFeeByRangeDateReport(dateMin, dateMax, -1, -1);
+		listReport = reportGenerator.getSummaryDailyFeeByRangeDateReport(dateMin, dateMax, -1, -1);
 		if(listReport == null  || listReport.size() == 0) {
 			return "emptyReport";
 		} else {

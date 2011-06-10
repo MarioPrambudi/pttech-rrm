@@ -11,7 +11,7 @@
           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-	<util:properties id="mconf" location="classpath:/META-INF/spring/mongodb.properties"/>
+	<util:properties id="mconf" location="classpath:/META-INF/spring/mongodb.properties" />
 
 	<!-- Default bean name is 'mongo' -->
 	<mongo:mongo id="mongo" host="#{mconf['mongodb.host']}" port="27017" />
@@ -20,15 +20,13 @@
 	<context:annotation-config />
 
 	<bean id="mongoTemplate" class="org.springframework.data.document.mongodb.MongoTemplate">
-		<constructor-arg ref="mongo" />
-		<constructor-arg name="databaseName" value="#{mconf['mongodb.databaseName']}" />
-		<constructor-arg name="defaultCollectionName" value="#{mconf['mongodb.defaultCollectionName']}" />
-		<constructor-arg>
-			<mongo:mapping-converter />
-		</constructor-arg>
+		 <constructor-arg ref="mongo" />
+		 <constructor-arg name="databaseName" value="#{mconf['mongodb.databaseName']}" />
+		 <constructor-arg name="defaultCollectionName" value="#{mconf['mongodb.defaultCollectionName']}" />
+		 <constructor-arg>
+	      	<mongo:mapping-converter />
+    	 </constructor-arg>
 	</bean>
 
-	<mongo:repositories
-		base-package="com.djavafactory.pttech.rrm.mongorepository"
-		mongo-template-ref="mongoTemplate" />
+	<mongo:repositories base-package="com.djavafactory.pttech.rrm.mongorepository" mongo-template-ref="mongoTemplate" />
 </beans>

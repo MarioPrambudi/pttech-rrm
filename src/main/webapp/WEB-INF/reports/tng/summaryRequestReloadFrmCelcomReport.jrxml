@@ -6,7 +6,7 @@
 	<property name="net.sf.jasperreports.export.html.using.images.to.align" value="false"/>
 	<parameter name="startDate" class="java.util.Date"/>
 	<parameter name="endDate" class="java.util.Date"/>
-	<field name="sofRequestedDate" class="java.util.Date"/>
+	<field name="requestedTime" class="java.util.Date"/>
 	<field name="totalReloadQty" class="java.lang.Long"/>
 	<field name="totalAmountRequestRm" class="java.math.BigDecimal"/>
 	<field name="totalFees" class="java.math.BigDecimal"/>
@@ -199,7 +199,7 @@
 				<textField pattern="dd-MMM-yy">
 					<reportElement x="0" y="0" width="100" height="20"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.util.Date"><![CDATA[$F{sofRequestedDate}]]></textFieldExpression>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{requestedTime}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>

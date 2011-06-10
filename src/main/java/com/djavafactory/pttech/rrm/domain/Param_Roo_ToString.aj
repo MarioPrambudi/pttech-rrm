@@ -11,9 +11,7 @@ privileged aspect Param_Roo_ToString {
         StringBuilder sb = new StringBuilder();
         sb.append("CreatedBy: ").append(getCreatedBy()).append(", ");
         sb.append("CreatedTime: ").append(getCreatedTime()).append(", ");
-        sb.append("Id: ").append(getId()).append(", ");
-        sb.append("ParameterFile: ").append(java.util.Arrays.toString(getParameterFile())).append(", ");
-        sb.append("Version: ").append(getVersion());
+        sb.append("ParameterFile: ").append(java.util.Arrays.toString(getParameterFile()));
         return sb.toString();
     }
     

@@ -9,7 +9,7 @@
 	<field name="dateCancelRequest" class="java.util.Date"/>
 	<field name="requestedTime" class="java.util.Date"/>
 	<field name="totalCancellationQty" class="java.lang.Long"/>
-	<field name="totalAmountCancelledRm" class="java.math.BigDecimal"/>
+	<field name="totalCancellationRm" class="java.math.BigDecimal"/>
 	<field name="totalFees" class="java.math.BigDecimal"/>
 	<field name="totalRefundToCustomerRm" class="java.math.BigDecimal"/>
 	<field name="sumCommissionAmountDeductedBySof" class="java.math.BigDecimal"/>
@@ -17,7 +17,7 @@
 		<variableExpression><![CDATA[$F{totalCancellationQty}]]></variableExpression>
 	</variable>
 	<variable name="SUM_TOTAL_AMT_CANCEL" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{totalAmountCancelledRm}]]></variableExpression>
+		<variableExpression><![CDATA[$F{totalCancellationRm}]]></variableExpression>
 	</variable>
 	<variable name="SUM_TOTAL_FEES" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{totalFees}]]></variableExpression>
@@ -241,7 +241,7 @@
 				<textField pattern="###0.00">
 					<reportElement x="0" y="0" width="90" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{totalAmountCancelledRm}]]></textFieldExpression>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{totalCancellationRm}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>

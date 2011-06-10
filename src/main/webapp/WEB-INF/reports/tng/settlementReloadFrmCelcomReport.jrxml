@@ -10,7 +10,7 @@
 	<field name="totalReloadQty" class="java.lang.Long"/>
 	<field name="totalPaymentToTngRm" class="java.math.BigDecimal"/>
 	<field name="totalCancellationRm" class="java.math.BigDecimal"/>
-	<field name="netPaymentToTng" class="java.math.BigDecimal"/>
+	<field name="sumNetPaymentToTng" class="java.math.BigDecimal"/>
 	<field name="dateCreditedToTngAccount" class="java.util.Date"/>
 	<variable name="SUM_TOTAL_RELOAD_QTY" class="java.lang.Long" calculation="Sum">
 		<variableExpression><![CDATA[$F{totalReloadQty}]]></variableExpression>
@@ -22,7 +22,7 @@
 		<variableExpression><![CDATA[$F{totalCancellationRm}]]></variableExpression>
 	</variable>
 	<variable name="SUM_AMT_CREDITED" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{netPaymentToTng}]]></variableExpression>
+		<variableExpression><![CDATA[$F{sumNetPaymentToTng}]]></variableExpression>
 	</variable>
 	<pageHeader>
 		<band height="100">
@@ -235,7 +235,7 @@
 				<textField pattern="###0.00">
 					<reportElement x="0" y="0" width="130" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{netPaymentToTng}]]></textFieldExpression>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{sumNetPaymentToTng}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>

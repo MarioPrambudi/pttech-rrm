@@ -392,4 +392,15 @@ public class DateUtil {
 		  calNew.set(calOri.get(Calendar.YEAR), calOri.get(Calendar.MONTH), calOri.get(Calendar.DATE), 23, 59, 59);
 		  return calNew.getTime();	  
 	}	
+	
+	public static Date convertDateToDate(Date oriDate, String pattern) throws ParseException
+	{
+		String newDateStr;
+		Date newDate;
+		SimpleDateFormat formatter;
+		formatter = new SimpleDateFormat(pattern);
+		newDateStr = formatter.format(oriDate);
+		newDate = convertStringToDate(pattern, newDateStr);
+		return newDate;
+	}
 }

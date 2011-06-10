@@ -18,10 +18,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import com.djavafactory.pttech.rrm.domain.AuditTrail;
 import com.djavafactory.pttech.rrm.domain.EventTrail;
-import com.mongodb.BasicDBObject;
-import com.mongodb.QueryBuilder;
+
 
 public class EventTrailRepositoryImpl implements EventTrailRepository {
 
@@ -40,8 +38,8 @@ public class EventTrailRepositoryImpl implements EventTrailRepository {
 	
 	@Override
 	public List<EventTrail> findByParam(Date dateFrom, Date dateTo, String source, String code, String message, Integer page, Integer size) {
-		Criteria criteria = where(fieldEventTrailId).exists(true);		
-		if (source == null || source.isEmpty() || !source.equalsIgnoreCase("-1")) 
+		Criteria criteria = where(fieldEventTrailId).exists(true);
+		if (source != null && !source.isEmpty() && !source.equalsIgnoreCase("-1")) 
 		{
 			criteria = criteria.and(fieldEventTrailSource).is(source);
 		}	
