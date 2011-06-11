@@ -34,18 +34,18 @@ public class Report implements Serializable {
     
     @Id
     private ObjectId id;
-//    
-//    @NumberFormat(pattern="#,##0.00")
-//    private double rs;
-//    
-//    @NumberFormat(pattern="#,##0.00")
-//    private double at;
-//    
-//    @NumberFormat(pattern="#,##0.00")
-//    private double sof;
-//    
-//    @NumberFormat(pattern="#,##0.00")
-//    private double tng;
+    
+    @NumberFormat(pattern="#,##0.00")
+    private double rs;
+    
+    @NumberFormat(pattern="#,##0.00")
+    private double at;
+    
+    @NumberFormat(pattern="#,##0.00")
+    private double sof;
+    
+    @NumberFormat(pattern="#,##0.00")
+    private double tng;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
@@ -68,66 +68,66 @@ public class Report implements Serializable {
     @NumberFormat(pattern="#,##0.00")
     private double netPaymentToTng;
     
-//    @Temporal(TemporalType.TIMESTAMP)
-//    @DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
-//    private Date reloadDate;
-//    
-//    @NumberFormat(pattern="#,##0.00")
-//    private double amountRefundedToCustomer;
-//    
-//    @Temporal(TemporalType.TIMESTAMP)
-//    @DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
-//    private Date dateRefundedCustomer;
-//    
-//    @NumberFormat(pattern="#,##0.00")
-//    private double grossPaymentToTngRm;
-//    
-//    private String acquirerTerminal;
-//    
-//    private String cmmpTrxId;
-//    
-//    private Long aircashAccNo;
-//    
-//    private Long mobileNo;
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
+    private Date reloadDate;
     
-//    @Temporal(TemporalType.TIMESTAMP)
-//	@DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
-//	private Date modifiedDate;
+    @NumberFormat(pattern="#,##0.00")
+    private double amountRefundedToCustomer;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
+    private Date dateRefundedCustomer;
+    
+    @NumberFormat(pattern="#,##0.00")
+    private double grossPaymentToTngRm;
+    
+    private String acquirerTerminal;
+    
+    private String cmmpTrxId;
+    
+    private Long aircashAccNo;
+    
+    private Long mobileNo;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
+	private Date modifiedDate;
 
-//    private String transId;
+    private String transId;
 
     private String status;
-//  
-//    @NumberFormat(pattern="#,##0.00")
-//    private double tngFee;
-//    
-//    @NumberFormat(pattern="#,##0.00")
-//    private double printisFee;
-//
-//    @NumberFormat(pattern="#,##0.00")
-//    private double celcomMobileFee;
-//    
-//    @NumberFormat(pattern="#,##0.00")
-//    private double cmmFee;
-//   
-//    @NumberFormat(pattern="#,##0.00")
-//    private double totalFees;
-//
-//    @NumberFormat(pattern="#,##0.00")
-//    private double amountDueTng;
-//    
-//    @NumberFormat(pattern="#,##0.00")
-//    private double amountDuePrintis;
-//    
-//    @NumberFormat(pattern="#,##0.00")
-//    private double amountDueCelcomMobile;
-//    
-//    @NumberFormat(pattern="#,##0.00")
-//    private double amountDueCmm;
-//    
-//    @Temporal(TemporalType.TIMESTAMP)
-//    @DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
-//    private Date dateCreditedToTngAccount;
+  
+    @NumberFormat(pattern="#,##0.00")
+    private double tngFee;
+    
+    @NumberFormat(pattern="#,##0.00")
+    private double printisFee;
+
+    @NumberFormat(pattern="#,##0.00")
+    private double celcomMobileFee;
+    
+    @NumberFormat(pattern="#,##0.00")
+    private double cmmFee;
+   
+    @NumberFormat(pattern="#,##0.00")
+    private double totalFees;
+
+    @NumberFormat(pattern="#,##0.00")
+    private double amountDueTng;
+    
+    @NumberFormat(pattern="#,##0.00")
+    private double amountDuePrintis;
+    
+    @NumberFormat(pattern="#,##0.00")
+    private double amountDueCelcomMobile;
+    
+    @NumberFormat(pattern="#,##0.00")
+    private double amountDueCmm;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
+    private Date dateCreditedToTngAccount;
 //    
 //    
 //   //Transient field for displayed only 
@@ -135,65 +135,65 @@ public class Report implements Serializable {
 //	
 	@Transient
 	private Integer seqNo;
-//	
-//	@Transient
-//	private long totalReloadQty;
-//	
-//	@Transient
-//	@NumberFormat(pattern="#,##0.00")
-//    private double totalPaymentToTngRm;
-//    
-//	@Transient
-//	@NumberFormat(pattern="#,##0.00")
-//  	private double totalCancellationRm;
-//	
-//	@Transient
-//	@NumberFormat(pattern="#,##0.00")
-//  	private double sumNetPaymentToTng;
-//	
-//	@Transient
-//    @NumberFormat(pattern="#,##0.00")
-//    private double sumTotalChargeToCustomer;
-//  
-//	@Transient
-//    @NumberFormat(pattern="#,##0.00")
-//    private double sumCommissionAmountDeductedBySof;
-//	
-//	@Transient
-//	@NumberFormat(pattern="#,##0.00")
-//	private double totalAmountRequestRm;
-//	
-//	@Transient
-//	@Temporal(TemporalType.TIMESTAMP)
-//	@DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
-//	private Date dateCancelRequest;
-//   
-//	@Transient
-//	private Long totalCancellationQty;
-//	
-//	@Transient
-//	@NumberFormat(pattern="#,##0.00")
-//	private double totalRefundToCustomerRm;
-//	
-//	@Transient
-//	@NumberFormat(pattern="#,##0.00")
-//	private double commSofAmountComm;
-//	
-//	@Transient
-//	@NumberFormat(pattern="#,##0.00")
-//	private double sumTng;
-//	
-//	@Transient
-//	@NumberFormat(pattern="#,##0.00")
-//	private double sumCelcomMobile;
-//	
-//	@Transient
-//	@NumberFormat(pattern="#,##0.00")
-//	private double sumCmm;
-//	
-//	@Transient
-//	@NumberFormat(pattern="#,##0.00")
-//	private double sumTotalFee;
+	
+	@Transient
+	private long totalReloadQty;
+	
+	@Transient
+	@NumberFormat(pattern="#,##0.00")
+    private double totalPaymentToTngRm;
+    
+	@Transient
+	@NumberFormat(pattern="#,##0.00")
+  	private double totalCancellationRm;
+	
+	@Transient
+	@NumberFormat(pattern="#,##0.00")
+  	private double sumNetPaymentToTng;
+	
+	@Transient
+    @NumberFormat(pattern="#,##0.00")
+    private double sumTotalChargeToCustomer;
+  
+	@Transient
+    @NumberFormat(pattern="#,##0.00")
+    private double sumCommissionAmountDeductedBySof;
+	
+	@Transient
+	@NumberFormat(pattern="#,##0.00")
+	private double totalAmountRequestRm;
+	
+	@Transient
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
+	private Date dateCancelRequest;
+   
+	@Transient
+	private Long totalCancellationQty;
+	
+	@Transient
+	@NumberFormat(pattern="#,##0.00")
+	private double totalRefundToCustomerRm;
+	
+	@Transient
+	@NumberFormat(pattern="#,##0.00")
+	private double commSofAmountComm;
+	
+	@Transient
+	@NumberFormat(pattern="#,##0.00")
+	private double sumTng;
+	
+	@Transient
+	@NumberFormat(pattern="#,##0.00")
+	private double sumCelcomMobile;
+	
+	@Transient
+	@NumberFormat(pattern="#,##0.00")
+	private double sumCmm;
+	
+	@Transient
+	@NumberFormat(pattern="#,##0.00")
+	private double sumTotalFee;
 
     
 }

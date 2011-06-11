@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dailyTrxDetailsReport" pageWidth="900" pageHeight="612" orientation="Landscape" columnWidth="860" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" resourceBundle="jasperoo" whenResourceMissingType="Key">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="112"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="net.sf.jasperreports.export.html.using.images.to.align" value="false"/>
 	<parameter name="startDate" class="java.util.Date"/>
@@ -80,26 +80,6 @@
 				<reportElement x="0" y="50" width="200" height="20"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<text><![CDATA[AIR CASH]]></text>
-			</staticText>
-			<textField pattern="dd-MMM-yy" isBlankWhenNull="true">
-				<reportElement x="145" y="90" width="70" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.util.Date"><![CDATA[$P{endDate}]]></textFieldExpression>
-			</textField>
-			<textField pattern="dd-MMM-yy" isBlankWhenNull="true">
-				<reportElement x="60" y="90" width="70" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.util.Date"><![CDATA[$P{startDate}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="0" y="90" width="60" height="20"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
-				<text><![CDATA[Period From]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="130" y="90" width="15" height="20"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
-				<text><![CDATA[To]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
