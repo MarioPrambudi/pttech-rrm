@@ -134,7 +134,7 @@ public class MessageMapper {
     }
 
     /**
-     * Method to map the Manual Cancellation Request Reload to to ReloadRequestMessage.
+     * Method to map the Manual Cancellation Request Reload to ReloadRequestMessage.
      *
      * @param request ReloadRequest object
      * @return to ReloadRequestMessage.
@@ -147,6 +147,26 @@ public class MessageMapper {
         requestMessage.setMsgType(Constants.RELOAD_REQUEST_MANUALCANCEL);
         logger.info("[mapReloadRequestToMessage - New ReloadRequestMessage object] >> " + requestMessage);
         return requestMessage;
+    }
+
+    /**
+     * Method to map the Manual Cancellation Response message to ReloadRequestMessage and ReloadRequest.
+     *
+     * @param response ReloadResponseMessage object
+     * @return to List<Object>.
+     */
+    public List<Object> mapManualCancelResponse(ReloadResponseMessage response) {
+        ReloadRequest request = ReloadRequest.findReloadRequestsByTransId(response.getTransId()).getSingleResult();
+        request.setStatus(Constants.RELOAD_REQUEST_MANUALCANCEL);
+
+        ReloadRequestMessage requestMessage = mapManualCancelReloadRequest(request);
+        request.setTngKey(null);
+        logger.info("[mapManualCancelResponse - New ReloadRequestMessage object] >> " + requestMessage);
+
+        List<Object> objectList = new ArrayList<Object>();
+        objectList.add(request);
+        objectList.add(requestMessage);
+        return objectList;
     }
 
     private ReloadRequest convertMessageToReloadRequest(ReloadRequestMessage message, String status) {

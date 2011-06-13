@@ -3,8 +3,6 @@ package com.djavafactory.pttech.rrm.integration;
 import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.ReloadRequestMessage;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * Spring Integration Router class to route the messages to appropriate channel.
@@ -12,7 +10,6 @@ import org.apache.commons.logging.LogFactory;
  * @author Carine Leong
  */
 public class MessageRouter {
-    private static final Log logger = LogFactory.getLog(MessageRouter.class);
     private static final String rmiReq = "rmi";
 
     /**
@@ -26,7 +23,6 @@ public class MessageRouter {
                 ? "tngKeyInboundChannel"
                 : ((StringUtils.equalsIgnoreCase(message.getMsgType(), Constants.RELOAD_REQUEST_NEW) && (message.getEncryptedMsg() == null || StringUtils.equalsIgnoreCase(message.getEncryptedMsg(), "")))
                 ? "newReloadReqPersistChannel" : "rtmReloadReqPersistChannel");
-        //TODO add manual cancellation router in phase 2
     }
 
     /**

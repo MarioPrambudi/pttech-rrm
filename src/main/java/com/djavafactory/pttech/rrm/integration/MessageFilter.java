@@ -4,6 +4,7 @@ import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.Configuration;
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
 import com.djavafactory.pttech.rrm.domain.ReloadRequestMessage;
+import com.djavafactory.pttech.rrm.domain.ReloadResponseMessage;
 import com.djavafactory.pttech.rrm.exception.RrmBusinessException;
 import com.djavafactory.pttech.rrm.exception.RrmStatusCode;
 import epg.webservice.ReloadRequestResponse;
@@ -33,7 +34,7 @@ public class MessageFilter {
      */
     public Boolean reloadRequestFilter(ReloadRequestMessage requestMessage) {
         if (Arrays.asList(Constants.RELOAD_REQUEST_NEW, Constants.RELOAD_REQUEST_FAILED,
-                Constants.RELOAD_REQUEST_EXPIRED, Constants.RELOAD_REQUEST_SUCCESS, Constants.RELOAD_REQUEST_MANUALCANCEL, Constants.RELOAD_REQUEST_TNG_KEY)
+                Constants.RELOAD_REQUEST_EXPIRED, Constants.RELOAD_REQUEST_SUCCESS, Constants.RELOAD_REQUEST_TNG_KEY)
                 .contains(requestMessage.getMsgType())) {
 
             if (!validateFieldLength(requestMessage)) {
@@ -41,9 +42,8 @@ public class MessageFilter {
             } else if (!requestMessage.getMsgType().equalsIgnoreCase(Constants.RELOAD_REQUEST_NEW)) {
                 List<ReloadRequest> reloadRecord = new ReloadRequest().findReloadRequestsByTransId(requestMessage.getTransId()).getResultList();
                 if (reloadRecord == null || reloadRecord.isEmpty() ||
-                        (requestMessage.getMsgType().equalsIgnoreCase(Constants.RELOAD_REQUEST_TNG_KEY) && !StringUtils.equalsIgnoreCase(reloadRecord.get(0).getStatus(), Constants.RELOAD_STATUS_NEW)) ||
-                        (!requestMessage.getMsgType().equalsIgnoreCase(Constants.RELOAD_REQUEST_TNG_KEY) && !requestMessage.getMsgType().equalsIgnoreCase(Constants.RELOAD_REQUEST_NEW)
-                                && !StringUtils.equalsIgnoreCase(reloadRecord.get(0).getStatus(), Constants.RELOAD_STATUS_PENDING))) {
+                        (StringUtils.equalsIgnoreCase(requestMessage.getMsgType(), Constants.RELOAD_REQUEST_TNG_KEY) && !StringUtils.equalsIgnoreCase(reloadRecord.get(0).getStatus(), Constants.RELOAD_STATUS_NEW)) ||
+                        (!StringUtils.equalsIgnoreCase(reloadRecord.get(0).getStatus(), Constants.RELOAD_STATUS_PENDING) && !StringUtils.equalsIgnoreCase(reloadRecord.get(0).getStatus(), Constants.RELOAD_STATUS_PENDINGCANCEL))) {
                     setReloadMessageStatus(requestMessage, RrmStatusCode.STS_INVALIDSTATUS.getCode(), RrmStatusCode.STS_INVALIDSTATUS.getDescription());
                     return false;
                 }
@@ -104,6 +104,16 @@ public class MessageFilter {
      */
     public Boolean tngRequestReplyFilter(JAXBElement<ReloadRequestResponse> message) {
         return (!StringUtils.equalsIgnoreCase(Constants.RESPONSE_CODE_SUCCESS, message.getValue().getReturn().getStatusCode()));
+    }
+
+    /**
+     * Method to validate whether the Manual Cancellation response needs to be routed to RMI or not.
+     *
+     * @param message ReloadResponseMessage object
+     * @return true/false
+     */
+    public Boolean manualCancelResponseFilter(ReloadResponseMessage message) {
+        return (StringUtils.equalsIgnoreCase(Constants.RESPONSE_CODE_SUCCESS, message.getStatusCode()));
     }
 
     private boolean validateFieldLength(ReloadRequestMessage requestMessage) {

@@ -15,6 +15,10 @@
                        ref="messageHandler" method="reloadRequestHandler"
                        output-channel="rrmRtmReloadReqOutputChannel"/>
 
+    <service-activator input-channel="rrmManualCancelResInboundChannel"
+                       ref="messageHandler" method="reloadRequestHandler"
+                       output-channel="rrmManualCancelResOutputChannel"/>
+
     <channel id="rrmRmiReloadReqOutputChannel">
         <queue capacity="100"/>
     </channel>
@@ -121,5 +125,21 @@
         <transformer ref="transformerBean" method="transformMessageToJson" />
     </chain>
 
+    <channel id="rrmManualCancelResOutputChannel">
+        <queue capacity="100"/>
+    </channel>
+    <chain input-channel="rrmManualCancelResOutputChannel" output-channel="manualCancelPersistChannel">
+        <transformer ref="transformerBean" method="transformReloadResponse"/>
+        <filter ref="filterBean" method="manualCancelResponseFilter"/>
+    </chain>
+
+    <channel id="manualCancelPersistChannel">
+        <queue capacity="100"/>
+    </channel>
+    <chain input-channel="manualCancelPersistChannel" output-channel="rmiReloadRequestChannel">
+        <transformer ref="mapperBean" method="mapManualCancelResponse"/>
+        <service-activator ref="messagePersistenceBean" method="mergeReloadRequest"/>
+        <transformer ref="transformerBean" method="transformMessageToJson"/>
+    </chain>
 
 </beans:beans>
