@@ -68,7 +68,6 @@ public class ReportRepositoryImpl implements ReportRepository {
 	
 	@Override
 	public void delete(Date dateFrom, Date dateTo){
-		System.out.println(">>>>>>>>>>> DELETE");
 		Criteria criteria = where(FIELDREQUESTEDTIME);
 		criteria = criteria.lte(dateTo);
 		criteria = criteria.gte(dateFrom);

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dailyTrxDetailsReport" pageWidth="900" pageHeight="612" orientation="Landscape" columnWidth="860" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" resourceBundle="jasperoo" whenResourceMissingType="Key">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dailyTrxDetailsReport" pageWidth="500" pageHeight="612" orientation="Landscape" columnWidth="460" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" resourceBundle="jasperoo" whenResourceMissingType="Key">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="112"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="net.sf.jasperreports.export.html.using.images.to.align" value="false"/>
 	<parameter name="startDate" class="java.util.Date"/>
@@ -65,11 +65,11 @@
 	<pageHeader>
 		<band height="150">
 			<textField>
-				<reportElement mode="Opaque" x="0" y="0" width="820" height="31" forecolor="#000000"/>
+				<reportElement mode="Opaque" x="0" y="0" width="460" height="31" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="FreeSerif" size="24" isBold="true" isItalic="false" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.summaryDailyTrxReport}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.summaryDailyFeeReport}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="70" width="200" height="20"/>
@@ -80,26 +80,6 @@
 				<reportElement x="0" y="50" width="200" height="20"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<text><![CDATA[AIR CASH]]></text>
-			</staticText>
-			<textField pattern="dd-MMM-yy" isBlankWhenNull="true">
-				<reportElement x="145" y="90" width="70" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.util.Date"><![CDATA[$P{endDate}]]></textFieldExpression>
-			</textField>
-			<textField pattern="dd-MMM-yy" isBlankWhenNull="true">
-				<reportElement x="60" y="90" width="70" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.util.Date"><![CDATA[$P{startDate}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="0" y="90" width="60" height="20"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
-				<text><![CDATA[Period From]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="130" y="90" width="15" height="20"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
-				<text><![CDATA[To]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -147,7 +127,7 @@
 				<textField>
 					<reportElement x="0" y="0" width="70" height="60"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.totalAmountRequestRm}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.fee}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -162,71 +142,11 @@
 				<staticText>
 					<reportElement x="0" y="0" width="70" height="20"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<text><![CDATA[A]]></text>
-				</staticText>
-			</frame>
-			<frame>
-				<reportElement x="170" y="0" width="70" height="60"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textField>
-					<reportElement x="0" y="0" width="70" height="60"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.fee}]]></textFieldExpression>
-				</textField>
-			</frame>
-			<frame>
-				<reportElement x="170" y="60" width="70" height="20"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<staticText>
-					<reportElement x="0" y="0" width="70" height="20"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
 					<text><![CDATA[B]]></text>
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement x="240" y="0" width="70" height="60"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textField>
-					<reportElement x="0" y="0" width="70" height="60"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.totalGrossAmount}]]></textFieldExpression>
-				</textField>
-			</frame>
-			<frame>
-				<reportElement x="240" y="60" width="70" height="20"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<staticText>
-					<reportElement x="0" y="0" width="70" height="20"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<text><![CDATA[C = A + B]]></text>
-				</staticText>
-			</frame>
-			<frame>
-				<reportElement x="310" y="0" width="200" height="20"/>
+				<reportElement x="170" y="0" width="200" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -241,7 +161,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="310" y="20" width="50" height="20"/>
+				<reportElement x="170" y="20" width="50" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -256,7 +176,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="310" y="40" width="50" height="20"/>
+				<reportElement x="170" y="40" width="50" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -271,7 +191,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="310" y="60" width="50" height="20"/>
+				<reportElement x="170" y="60" width="50" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -286,7 +206,7 @@
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement x="360" y="20" width="50" height="20"/>
+				<reportElement x="220" y="20" width="50" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -301,7 +221,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="360" y="40" width="50" height="20"/>
+				<reportElement x="220" y="40" width="50" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -316,7 +236,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="360" y="60" width="50" height="20"/>
+				<reportElement x="220" y="60" width="50" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -331,7 +251,7 @@
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement x="410" y="20" width="50" height="20"/>
+				<reportElement x="270" y="20" width="50" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -346,7 +266,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="410" y="40" width="50" height="20"/>
+				<reportElement x="270" y="40" width="50" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -361,7 +281,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="410" y="60" width="50" height="20"/>
+				<reportElement x="270" y="60" width="50" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -376,7 +296,7 @@
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement x="460" y="20" width="50" height="20"/>
+				<reportElement x="320" y="20" width="50" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -391,7 +311,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="460" y="40" width="50" height="20"/>
+				<reportElement x="320" y="40" width="50" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -406,7 +326,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="460" y="60" width="50" height="20"/>
+				<reportElement x="320" y="60" width="50" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -421,7 +341,7 @@
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement x="510" y="0" width="90" height="60"/>
+				<reportElement x="370" y="0" width="90" height="60"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -436,7 +356,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="510" y="60" width="90" height="20"/>
+				<reportElement x="370" y="60" width="90" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -449,141 +369,6 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
 					<text><![CDATA[H = D + E + F + G]]></text>
 				</staticText>
-			</frame>
-			<frame>
-				<reportElement x="600" y="0" width="220" height="20"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textField>
-					<reportElement x="0" y="0" width="220" height="20"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.amountDueTo}]]></textFieldExpression>
-				</textField>
-			</frame>
-			<frame>
-				<reportElement x="600" y="20" width="70" height="40"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textField>
-					<reportElement x="0" y="0" width="70" height="40"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.tng}]]></textFieldExpression>
-				</textField>
-			</frame>
-			<frame>
-				<reportElement x="670" y="20" width="50" height="40"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textField>
-					<reportElement x="0" y="0" width="50" height="40"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.ptt}]]></textFieldExpression>
-				</textField>
-			</frame>
-			<frame>
-				<reportElement x="720" y="20" width="50" height="40"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textField>
-					<reportElement x="0" y="0" width="50" height="40"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.celcomM}]]></textFieldExpression>
-				</textField>
-			</frame>
-			<frame>
-				<reportElement x="600" y="60" width="70" height="20"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<staticText>
-					<reportElement x="0" y="0" width="70" height="20"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<text><![CDATA[A + D]]></text>
-				</staticText>
-			</frame>
-			<frame>
-				<reportElement x="670" y="60" width="50" height="20"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<staticText>
-					<reportElement x="0" y="0" width="50" height="20"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<text><![CDATA[E]]></text>
-				</staticText>
-			</frame>
-			<frame>
-				<reportElement x="720" y="60" width="50" height="20"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<staticText>
-					<reportElement x="0" y="0" width="50" height="20"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<text><![CDATA[F]]></text>
-				</staticText>
-			</frame>
-			<frame>
-				<reportElement x="770" y="60" width="50" height="20"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<staticText>
-					<reportElement x="0" y="0" width="50" height="20"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<text><![CDATA[G]]></text>
-				</staticText>
-			</frame>
-			<frame>
-				<reportElement x="770" y="20" width="50" height="40"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textField>
-					<reportElement x="0" y="0" width="50" height="40"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.String"><![CDATA[$R{jasperoo.Reports.cmm}]]></textFieldExpression>
-				</textField>
 			</frame>
 		</band>
 	</columnHeader>
@@ -631,41 +416,11 @@
 				<textField>
 					<reportElement x="0" y="0" width="70" height="20"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.Double"><![CDATA[$F{totalAmountRequestRm}]]></textFieldExpression>
-				</textField>
-			</frame>
-			<frame>
-				<reportElement x="170" y="0" width="70" height="20"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textField>
-					<reportElement x="0" y="0" width="70" height="20"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
 					<textFieldExpression class="java.lang.Double"><![CDATA[$F{totalFees}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="240" y="0" width="70" height="20"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textField>
-					<reportElement x="0" y="0" width="70" height="20"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.Double"><![CDATA[$F{grossPaymentToTngRm}]]></textFieldExpression>
-				</textField>
-			</frame>
-			<frame>
-				<reportElement x="310" y="0" width="50" height="20"/>
+				<reportElement x="170" y="0" width="50" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -680,7 +435,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="360" y="0" width="50" height="20"/>
+				<reportElement x="220" y="0" width="50" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -695,7 +450,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="410" y="0" width="50" height="20"/>
+				<reportElement x="270" y="0" width="50" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -710,7 +465,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="460" y="0" width="50" height="20"/>
+				<reportElement x="320" y="0" width="50" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -725,7 +480,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="510" y="0" width="90" height="20"/>
+				<reportElement x="370" y="0" width="90" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -739,66 +494,6 @@
 					<textFieldExpression class="java.lang.Double"><![CDATA[$F{sumTotalFee}]]></textFieldExpression>
 				</textField>
 			</frame>
-			<frame>
-				<reportElement x="600" y="0" width="70" height="20"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textField pattern="###0.00">
-					<reportElement x="0" y="0" width="70" height="20"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.Double"><![CDATA[$F{amountDueTng}]]></textFieldExpression>
-				</textField>
-			</frame>
-			<frame>
-				<reportElement x="670" y="0" width="50" height="20"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textField pattern="###0.00">
-					<reportElement x="0" y="0" width="50" height="20"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.Double"><![CDATA[$F{amountDuePrintis}]]></textFieldExpression>
-				</textField>
-			</frame>
-			<frame>
-				<reportElement x="720" y="0" width="50" height="20"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textField pattern="###0.00">
-					<reportElement x="0" y="0" width="50" height="20"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.Double"><![CDATA[$F{amountDueCelcomMobile}]]></textFieldExpression>
-				</textField>
-			</frame>
-			<frame>
-				<reportElement x="770" y="0" width="50" height="20"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textField pattern="###0.00">
-					<reportElement x="0" y="0" width="50" height="20"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.Double"><![CDATA[$F{amountDueCmm}]]></textFieldExpression>
-				</textField>
-			</frame>
 		</band>
 	</detail>
 	<pageFooter>
@@ -809,12 +504,12 @@
 				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="700" y="0" width="80" height="20"/>
+				<reportElement x="339" y="0" width="80" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
 				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="780" y="0" width="40" height="20"/>
+				<reportElement x="419" y="0" width="40" height="20"/>
 				<textElement verticalAlignment="Bottom"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
@@ -840,37 +535,7 @@
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement x="770" y="0" width="50" height="20"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textField pattern="###0.00">
-					<reportElement x="0" y="0" width="50" height="20"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.Double"><![CDATA[$V{SUM_AMT_DUE_CMM}]]></textFieldExpression>
-				</textField>
-			</frame>
-			<frame>
 				<reportElement x="100" y="0" width="70" height="20"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textField pattern="###0.00">
-					<reportElement x="0" y="0" width="70" height="20"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.Double"><![CDATA[$V{SUM_RELOAD_AMT}]]></textFieldExpression>
-				</textField>
-			</frame>
-			<frame>
-				<reportElement x="170" y="0" width="70" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -885,22 +550,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="240" y="0" width="70" height="20"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textField pattern="###0.00">
-					<reportElement x="0" y="0" width="70" height="20"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.Double"><![CDATA[$V{SUM_GROSS_AMT}]]></textFieldExpression>
-				</textField>
-			</frame>
-			<frame>
-				<reportElement x="310" y="0" width="50" height="20"/>
+				<reportElement x="170" y="0" width="50" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -915,7 +565,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="360" y="0" width="50" height="20"/>
+				<reportElement x="220" y="0" width="50" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -930,7 +580,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="410" y="0" width="50" height="20"/>
+				<reportElement x="270" y="0" width="50" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -945,7 +595,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="460" y="0" width="50" height="20"/>
+				<reportElement x="320" y="0" width="50" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -960,7 +610,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="510" y="0" width="90" height="20"/>
+				<reportElement x="370" y="0" width="90" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -972,51 +622,6 @@
 					<reportElement x="0" y="0" width="90" height="20"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
 					<textFieldExpression class="java.lang.Double"><![CDATA[$V{SUM_TOTAL_GROSS_AMT}]]></textFieldExpression>
-				</textField>
-			</frame>
-			<frame>
-				<reportElement x="600" y="0" width="70" height="20"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textField pattern="###0.00">
-					<reportElement x="0" y="0" width="70" height="20"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.Double"><![CDATA[$V{SUM_AMT_DUE_TNG}]]></textFieldExpression>
-				</textField>
-			</frame>
-			<frame>
-				<reportElement x="670" y="0" width="50" height="20"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textField pattern="###0.00">
-					<reportElement x="0" y="0" width="50" height="20"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.Double"><![CDATA[$V{SUM_AMT_DUE_PTT}]]></textFieldExpression>
-				</textField>
-			</frame>
-			<frame>
-				<reportElement x="720" y="0" width="50" height="20"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textField pattern="###0.00">
-					<reportElement x="0" y="0" width="50" height="20"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.Double"><![CDATA[$V{SUM_AMT_DUE_CELCOMM}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

@@ -9,16 +9,55 @@ privileged aspect Report_Roo_ToString {
     
     public String Report.toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append("AcquirerTerminal: ").append(getAcquirerTerminal()).append(", ");
+        sb.append("AircashAccNo: ").append(getAircashAccNo()).append(", ");
+        sb.append("AmountDueCelcomMobile: ").append(getAmountDueCelcomMobile()).append(", ");
+        sb.append("AmountDueCmm: ").append(getAmountDueCmm()).append(", ");
+        sb.append("AmountDuePrintis: ").append(getAmountDuePrintis()).append(", ");
+        sb.append("AmountDueTng: ").append(getAmountDueTng()).append(", ");
+        sb.append("AmountRefundedToCustomer: ").append(getAmountRefundedToCustomer()).append(", ");
+        sb.append("At: ").append(getAt()).append(", ");
+        sb.append("CelcomMobileFee: ").append(getCelcomMobileFee()).append(", ");
+        sb.append("CmmFee: ").append(getCmmFee()).append(", ");
+        sb.append("CmmpTrxId: ").append(getCmmpTrxId()).append(", ");
+        sb.append("CommSofAmountComm: ").append(getCommSofAmountComm()).append(", ");
         sb.append("CommissionAmountDeductedBySof: ").append(getCommissionAmountDeductedBySof()).append(", ");
+        sb.append("DateCancelRequest: ").append(getDateCancelRequest()).append(", ");
+        sb.append("DateCreditedToTngAccount: ").append(getDateCreditedToTngAccount()).append(", ");
+        sb.append("DateRefundedCustomer: ").append(getDateRefundedCustomer()).append(", ");
         sb.append("Fees: ").append(getFees()).append(", ");
+        sb.append("GrossPaymentToTngRm: ").append(getGrossPaymentToTngRm()).append(", ");
         sb.append("Id: ").append(getId()).append(", ");
         sb.append("MfgNumber: ").append(getMfgNumber()).append(", ");
+        sb.append("MobileNo: ").append(getMobileNo()).append(", ");
+        sb.append("ModifiedDate: ").append(getModifiedDate()).append(", ");
         sb.append("NetPaymentToTng: ").append(getNetPaymentToTng()).append(", ");
+        sb.append("PrintisFee: ").append(getPrintisFee()).append(", ");
         sb.append("ReloadAmount: ").append(getReloadAmount()).append(", ");
+        sb.append("ReloadDate: ").append(getReloadDate()).append(", ");
         sb.append("RequestedTime: ").append(getRequestedTime()).append(", ");
+        sb.append("Rs: ").append(getRs()).append(", ");
         sb.append("SeqNo: ").append(getSeqNo()).append(", ");
+        sb.append("Sof: ").append(getSof()).append(", ");
         sb.append("Status: ").append(getStatus()).append(", ");
-        sb.append("TotalChargeToCustomer: ").append(getTotalChargeToCustomer());
+        sb.append("SumCelcomMobile: ").append(getSumCelcomMobile()).append(", ");
+        sb.append("SumCmm: ").append(getSumCmm()).append(", ");
+        sb.append("SumCommissionAmountDeductedBySof: ").append(getSumCommissionAmountDeductedBySof()).append(", ");
+        sb.append("SumNetPaymentToTng: ").append(getSumNetPaymentToTng()).append(", ");
+        sb.append("SumTng: ").append(getSumTng()).append(", ");
+        sb.append("SumTotalChargeToCustomer: ").append(getSumTotalChargeToCustomer()).append(", ");
+        sb.append("SumTotalFee: ").append(getSumTotalFee()).append(", ");
+        sb.append("Tng: ").append(getTng()).append(", ");
+        sb.append("TngFee: ").append(getTngFee()).append(", ");
+        sb.append("TotalAmountRequestRm: ").append(getTotalAmountRequestRm()).append(", ");
+        sb.append("TotalCancellationQty: ").append(getTotalCancellationQty()).append(", ");
+        sb.append("TotalCancellationRm: ").append(getTotalCancellationRm()).append(", ");
+        sb.append("TotalChargeToCustomer: ").append(getTotalChargeToCustomer()).append(", ");
+        sb.append("TotalFees: ").append(getTotalFees()).append(", ");
+        sb.append("TotalPaymentToTngRm: ").append(getTotalPaymentToTngRm()).append(", ");
+        sb.append("TotalRefundToCustomerRm: ").append(getTotalRefundToCustomerRm()).append(", ");
+        sb.append("TotalReloadQty: ").append(getTotalReloadQty()).append(", ");
+        sb.append("TransId: ").append(getTransId());
         return sb.toString();
     }
     

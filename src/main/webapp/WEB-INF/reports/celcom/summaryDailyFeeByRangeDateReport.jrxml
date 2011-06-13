@@ -13,21 +13,21 @@
 	<field name="aircashAccNo" class="java.lang.Long"/>
 	<field name="mobileNo" class="java.lang.Long"/>
 	<field name="mfgNumber" class="java.lang.Long"/>
-	<field name="reloadAmount" class="java.lang.Double"/>
+	<field name="totalAmountRequestRm" class="java.lang.Double"/>
 	<field name="totalFees" class="java.lang.Double"/>
 	<field name="grossPaymentToTngRm" class="java.lang.Double"/>
 	<field name="tngFee" class="java.lang.Double"/>
 	<field name="printisFee" class="java.lang.Double"/>
 	<field name="celcomMobileFee" class="java.lang.Double"/>
 	<field name="cmmFee" class="java.lang.Double"/>
-	<field name="sumTotalFees" class="java.lang.Double"/>
+	<field name="sumTotalFee" class="java.lang.Double"/>
 	<field name="amountDueTng" class="java.lang.Double"/>
 	<field name="amountDuePrintis" class="java.lang.Double"/>
 	<field name="amountDueCelcomMobile" class="java.lang.Double"/>
 	<field name="amountDueCmm" class="java.lang.Double"/>
 	<field name="seqNo" class="java.lang.Integer"/>
 	<variable name="SUM_RELOAD_AMT" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{reloadAmount}]]></variableExpression>
+		<variableExpression><![CDATA[$F{totalAmountRequestRm}]]></variableExpression>
 	</variable>
 	<variable name="SUM_FEES" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{totalFees}]]></variableExpression>
@@ -48,7 +48,7 @@
 		<variableExpression><![CDATA[$F{cmmFee}]]></variableExpression>
 	</variable>
 	<variable name="SUM_TOTAL_GROSS_AMT" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{sumTotalFees}]]></variableExpression>
+		<variableExpression><![CDATA[$F{sumTotalFee}]]></variableExpression>
 	</variable>
 	<variable name="SUM_AMT_DUE_TNG" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{amountDueTng}]]></variableExpression>
@@ -511,7 +511,7 @@
 				<textField pattern="###0.00">
 					<reportElement x="0" y="0" width="90" height="20"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.Double"><![CDATA[$F{sumTotalFees}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{sumTotalFee}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

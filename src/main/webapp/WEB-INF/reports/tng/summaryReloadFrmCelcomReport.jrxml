@@ -7,13 +7,13 @@
 	<parameter name="startDate" class="java.util.Date"/>
 	<parameter name="endDate" class="java.util.Date"/>
 	<field name="reloadDate" class="java.util.Date"/>
-	<field name="totalReloadAmountRm" class="java.lang.Double"/>
+	<field name="totalAmountRequestRm" class="java.lang.Double"/>
 	<field name="totalFees" class="java.lang.Double"/>
 	<field name="sumTotalChargeToCustomer" class="java.lang.Double"/>
 	<field name="sumCommissionAmountDeductedBySof" class="java.lang.Double"/>
 	<field name="sumNetPaymentToTng" class="java.lang.Double"/>
 	<variable name="SUM_TOTAL_RELOAD_AMT" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{totalReloadAmountRm}]]></variableExpression>
+		<variableExpression><![CDATA[$F{totalAmountRequestRm}]]></variableExpression>
 	</variable>
 	<variable name="SUM_TOTAL_FEES" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{totalFees}]]></variableExpression>
@@ -193,7 +193,7 @@
 				<textField pattern="###0.00">
 					<reportElement x="0" y="0" width="90" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.Double"><![CDATA[$F{totalReloadAmountRm}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{totalAmountRequestRm}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
