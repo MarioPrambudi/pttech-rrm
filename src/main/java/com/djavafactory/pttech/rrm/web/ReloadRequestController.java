@@ -1,25 +1,17 @@
 package com.djavafactory.pttech.rrm.web;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
 import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
+import com.djavafactory.pttech.rrm.service.ManualCancellation;
 import com.djavafactory.pttech.rrm.util.DateUtil;
-
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.*;
 
 @RooWebScaffold(path = "reloadrequests", formBackingObject = ReloadRequest.class)
 @RequestMapping("/reloadrequests")
@@ -27,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ReloadRequestController extends BaseController {
 
 	private final String resourcePrefix = "reload_request_status_";
+
+    @Autowired
+    ManualCancellation manualCancellation;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(@RequestParam(value = "page", required = false) Integer page,
@@ -48,7 +43,7 @@ public class ReloadRequestController extends BaseController {
 		requestedTimeTo = requestedTimeTo == null ? null : DateUtil.resetTimeToMaximum(requestedTimeTo);
 		List<ReloadRequest> reloadRequests = ReloadRequest.findReloadRequestsByParam(status, serviceProviderId,
 				requestedTimeFrom, requestedTimeTo, page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo,
-				"reloadrequest.transId").getResultList();
+				"reloadrequest.requestedTime desc").getResultList();
 		uiModel.addAttribute("reloadrequests", regenerateList(reloadRequests));
 		if (page != null || size != null) {
 			float nrOfPages = (float) ReloadRequest.countReloadRequestsByParam(status, serviceProviderId, requestedTimeFrom,
@@ -60,6 +55,21 @@ public class ReloadRequestController extends BaseController {
 		}
 		addDateTimeFormatPatterns(uiModel);
 		return "reloadrequests/list";
+	}
+
+    @RequestMapping(value = "/manualcancel/{id}", method = { RequestMethod.GET })
+	public String manualCancellation(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page,
+			@RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+        ReloadRequest reloadRequest = ReloadRequest.findReloadRequest(id);
+		if(StringUtils.equalsIgnoreCase(reloadRequest.getStatus(), Constants.RELOAD_STATUS_PENDING)) {
+            reloadRequest.setStatus(Constants.RELOAD_STATUS_PENDINGCANCEL);
+            reloadRequest.merge();
+            manualCancellation.sendManualCancel(reloadRequest);
+            uiModel.addAttribute("cancelResponse", getResourceText("manualCancel.send", new Object[] {reloadRequest.getTransId()}));
+        } else {
+            uiModel.addAttribute("cancelResponse", getResourceText("manualCancel.failed", new Object[] {reloadRequest.getTransId()}));
+        }
+        return findReloadRequestsByParam(page, size, null, null, null, null, uiModel);
 	}
 
 	@ModelAttribute("statuscode")
@@ -116,8 +126,7 @@ public class ReloadRequestController extends BaseController {
 	
 	/**
 	 * Turn status codes into user-friendly status texts
-	 * 
-	 * @param reloadRequestList
+	 *
 	 * @return reloadRequestList
 	 */
 	public ReloadRequest regenerateShow(ReloadRequest reloadRequest) {

@@ -27,6 +27,7 @@ public final class Constants {
     public static final String RELOAD_STATUS_EXPIRED = "E";
     public static final String RELOAD_STATUS_MANUALCANCEL = "M";
     public static final String RELOAD_STATUS_SUCCESS = "S";
+    public static final String RELOAD_STATUS_PENDINGCANCEL = "C";
 
     public static final String RESPONSE_CODE_SUCCESS = "00";
 

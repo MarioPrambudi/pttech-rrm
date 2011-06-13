@@ -63,6 +63,13 @@ public class MessageMapperTest extends BaseManagerTestCase {
         ReloadRequestMessage message = new MessageMapper().mapTngKeyReqToReloadReq(getKeyRequestMessage());
         assert (message != null);
         assertEquals("00000000000001", message.getTransId());
+        assertEquals("12345L", message.getMfgNo());
+    }
+
+    public void testMapManualCancelReloadRequest() {
+        ReloadRequestMessage message = new MessageMapper().mapManualCancelReloadRequest(getReloadRequest());
+        assert (message != null);
+        assertEquals("00000000000001", message.getTransId());
         assertEquals(new BigDecimal("200"), message.getAmount());
         assertEquals("Message", message.getEncryptedMsg());
         assertEquals("12345L", message.getMfgNo());
@@ -70,6 +77,12 @@ public class MessageMapperTest extends BaseManagerTestCase {
         assertNotNull(message.getRequestTime());
         assertNull(message.getSpId());
         assertNull(message.getTransCode());
+    }
+
+    public void testMapManualCancelResponse() {
+        List<Object> list = new MessageMapper().mapManualCancelResponse(getReloadResponseMessage());
+        assert ((list.get(0) instanceof ReloadRequest) == true);
+        assert ((list.get(1) instanceof ReloadResponseMessage) == true);
     }
 
     private ReloadRequestMessage getReloadRequestMessage() {
@@ -115,5 +128,12 @@ public class MessageMapperTest extends BaseManagerTestCase {
         message.setRequestDateTime(new Date());
 
         return message;
+    }
+
+    private ReloadRequest getReloadRequest() {
+        ReloadRequest reloadRequest = new ReloadRequest();
+        reloadRequest.setTransId("00000000000001");
+        reloadRequest.setMfgNumber(12345L);
+        return reloadRequest;
     }
 }

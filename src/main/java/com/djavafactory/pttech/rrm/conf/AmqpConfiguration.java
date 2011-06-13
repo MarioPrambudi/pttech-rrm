@@ -40,6 +40,9 @@ public class AmqpConfiguration {
     @Value("#{amqp['queue.rrm.rtmreload.req']}")
     private String rrmRtmReloadReqQ;
 
+    @Value("#{amqp['queue.rrm.manualcancel.res']}")
+    private String rrmManualCancelResQ;
+
     @Value("#{amqp['queue.rrm.terminal']}")
     private String rrmTerminalQ;
 
@@ -108,6 +111,13 @@ public class AmqpConfiguration {
     }
 
     @Bean
+    public Queue rrmManualCancelResQueue() {
+        Queue q = new Queue(this.rrmManualCancelResQ);
+        amqpAdmin().declareQueue(q);
+        return q;
+    }
+
+    @Bean
     public Queue rrmTerminalQueue() {
         Queue q = new Queue(this.rrmTerminalQ);
         amqpAdmin().declareQueue(q);
@@ -171,6 +181,13 @@ public class AmqpConfiguration {
     }
 
     @Bean
+    public DirectExchange rrmManualCancelResExchange() {
+        DirectExchange directExchange = new DirectExchange(this.rrmManualCancelResQ);
+        this.amqpAdmin().declareExchange(directExchange);
+        return directExchange;
+    }
+
+    @Bean
     public DirectExchange rrmTerminalExchange() {
         DirectExchange directExchange = new DirectExchange(this.rrmTerminalQ);
         this.amqpAdmin().declareExchange(directExchange);
@@ -226,6 +243,11 @@ public class AmqpConfiguration {
     }
 
     @Bean
+    public Binding rrmManualCancelResDataBinding() {
+        return BindingBuilder.from(rrmManualCancelResQueue()).to(rrmManualCancelResExchange()).with(this.rrmManualCancelResQ);
+    }
+
+    @Bean
     public Binding rrmTerminalDataBinding() {
         return BindingBuilder.from(rrmTerminalQueue()).to(rrmTerminalExchange()).with(this.rrmTerminalQ);
     }
@@ -259,6 +281,8 @@ public class AmqpConfiguration {
                 ", rmiReloadReqQ='" + rmiReloadReqQ + '\'' +
                 ", rmiReloadStatusQ='" + rmiReloadStatusQ + '\'' +
                 ", rrmRmiReloadReqQ='" + rrmRmiReloadReqQ + '\'' +
+                ", rrmRtmReloadReqQ='" + rrmRtmReloadReqQ + '\'' +
+                ", rrmManualCancelResQ='" + rrmManualCancelResQ + '\'' +
                 ", rrmTerminalQ='" + rrmTerminalQ + '\'' +
                 ", rrmEventQ='" + rrmEventQ + '\'' +
                 ", rtmReloadReqQ='" + rtmReloadReqQ + '\'' +

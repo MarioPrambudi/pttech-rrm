@@ -9,6 +9,7 @@ insert into configuration ( config_key , config_value , ordering , version ) val
 insert into configuration ( config_key , config_value , ordering , version ) values ('TNG.uploadschedule', '* * 2 * * ?', 2, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('RRM.retries', '3', 0, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('RRM.timeout', '120', 1, 0);
+insert into configuration ( config_key , config_value , ordering , version ) values ('RRM.terminalHeartBeat', '120', 1, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.TNG.TG0001', 'Daily Detailed Request Reload Report', 0, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.TNG.TG0002', 'Summary Request Reload Report', 1, 0);
 insert into configuration ( config_key , config_value , ordering , version ) values ('REPORT.TNG.TG0003', 'Daily Detailed Reload Report', 2, 0);
