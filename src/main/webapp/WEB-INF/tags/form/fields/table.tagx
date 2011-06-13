@@ -371,7 +371,10 @@
             <td class="utilbox">
                 <spring:message code="reload_request_status_P" var="reloadReqStatus" htmlEscape="false"/>
                 <c:if test="${reloadReqStatus eq item[reloadStatus]}">
-                    <spring:url value="${path}/manualcancel/${item[typeIdFieldName]}" var="cancel_form_url" />
+                    <spring:url value="${path}/manualcancel/${item[typeIdFieldName]}" var="cancel_form_url">
+                        <spring:param name="page" value="${empty param.page ? 1 : param.page}"/>
+                        <spring:param name="size" value="${empty param.size ? 10 : param.size}"/>
+                    </spring:url>
                     <spring:url value="/resources/images/delete.png" var="cancel_image_url"/>
                     <spring:message code="entity_cancel" var="cancel_label" htmlEscape="false"/>
                     <a href="${fn:escapeXml(cancel_form_url)}" alt="${fn:escapeXml(cancel_label)}"

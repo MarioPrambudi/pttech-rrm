@@ -13,4 +13,8 @@ public class BaseController {
     public String getResourceText(String text) {
         return messageSource.getMessage(text, null, LocaleContextHolder.getLocale());
     }
+
+    public String getResourceText(String text, Object[] param) {
+        return messageSource.getMessage(text, param, LocaleContextHolder.getLocale());
+    }
 }

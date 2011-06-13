@@ -133,6 +133,22 @@ public class MessageMapper {
         return requestMessage;
     }
 
+    /**
+     * Method to map the Manual Cancellation Request Reload to to ReloadRequestMessage.
+     *
+     * @param request ReloadRequest object
+     * @return to ReloadRequestMessage.
+     */
+    public ReloadRequestMessage mapManualCancelReloadRequest(ReloadRequest request) {
+        ReloadRequestMessage requestMessage = new ReloadRequestMessage();
+        requestMessage.setMfgNo(request.getMfgNumber());
+        requestMessage.setTransId(request.getTransId());
+        requestMessage.setRequestTime(new Date());
+        requestMessage.setMsgType(Constants.RELOAD_REQUEST_MANUALCANCEL);
+        logger.info("[mapReloadRequestToMessage - New ReloadRequestMessage object] >> " + requestMessage);
+        return requestMessage;
+    }
+
     private ReloadRequest convertMessageToReloadRequest(ReloadRequestMessage message, String status) {
         ReloadRequest reloadRequest;
 
