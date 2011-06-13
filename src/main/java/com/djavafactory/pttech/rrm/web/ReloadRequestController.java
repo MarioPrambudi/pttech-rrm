@@ -1,25 +1,14 @@
 package com.djavafactory.pttech.rrm.web;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
 import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
 import com.djavafactory.pttech.rrm.util.DateUtil;
-
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.*;
 
 @RooWebScaffold(path = "reloadrequests", formBackingObject = ReloadRequest.class)
 @RequestMapping("/reloadrequests")
@@ -48,7 +37,7 @@ public class ReloadRequestController extends BaseController {
 		requestedTimeTo = requestedTimeTo == null ? null : DateUtil.resetTimeToMaximum(requestedTimeTo);
 		List<ReloadRequest> reloadRequests = ReloadRequest.findReloadRequestsByParam(status, serviceProviderId,
 				requestedTimeFrom, requestedTimeTo, page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo,
-				"reloadrequest.transId").getResultList();
+				"reloadrequest.requestedTime desc").getResultList();
 		uiModel.addAttribute("reloadrequests", regenerateList(reloadRequests));
 		if (page != null || size != null) {
 			float nrOfPages = (float) ReloadRequest.countReloadRequestsByParam(status, serviceProviderId, requestedTimeFrom,
@@ -116,8 +105,7 @@ public class ReloadRequestController extends BaseController {
 	
 	/**
 	 * Turn status codes into user-friendly status texts
-	 * 
-	 * @param reloadRequestList
+	 *
 	 * @return reloadRequestList
 	 */
 	public ReloadRequest regenerateShow(ReloadRequest reloadRequest) {

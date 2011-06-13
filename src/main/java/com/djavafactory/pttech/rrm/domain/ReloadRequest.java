@@ -73,10 +73,7 @@ public class ReloadRequest {
 	/**
      * To get the reload request between requested time and status(for generating the report)
      * @param minRequestedTime Date 
-     * @param maxRequestedTime Date 
-     * @param listStatus List<String> 
-     * @param firstResult int 
-     * @param maxResults int 
+     * @param maxRequestedTime Date
      * @return  TypedQuery<ReloadRequest>
 	  * @throws ParseException 
      */
@@ -112,7 +109,6 @@ public class ReloadRequest {
       * To get total number of reload request between requested time and status (for generating the report with paging)
       * @param minRequestedTime Date
       * @param maxRequestedTime Date
-      * @param listStatus       List<String>
       * @return totalresult long
       * @throws ParseException
       */
@@ -186,6 +182,21 @@ public class ReloadRequest {
                 requestedTimeTo);
     }
 
+
+    public static long totalReloadRequests(Date minRequestedTime, Date maxRequestedTime, List<String> listStatus)  throws ParseException {
+    	  EntityManager em = ReloadRequest.entityManager();
+          TypedQuery<Long> q = null;
+          String query = "SELECT count(ReloadRequest) " +
+                  "FROM ReloadRequest reloadrequest " +
+                  "WHERE reloadrequest.requestedTime BETWEEN :minRequestedTime AND :maxRequestedTime " +
+                  "AND LOWER(reloadrequest.status) IN (:statusList)";
+          q = em.createQuery(query, Long.class);
+          q.setParameter("minRequestedTime", minRequestedTime);
+          q.setParameter("maxRequestedTime", maxRequestedTime);
+          q.setParameter("statusList", listStatus);
+          return q.getSingleResult();
+    }
+
     private static StringBuilder buildWhereClause(StringBuilder queryBuilder, String status, String serviceProviderId,
                                                   Date requestedTimeFrom, Date requestedTimeTo) {
         if (status != null && !status.isEmpty() && !status.equalsIgnoreCase("-1"))
@@ -213,19 +224,5 @@ public class ReloadRequest {
             typedQuery.setParameter("requestedTimeTo", requestedTimeTo);
         return typedQuery;
     }
- 
 
-    public static long totalReloadRequests(Date minRequestedTime, Date maxRequestedTime, List<String> listStatus)  throws ParseException {
-    	  EntityManager em = ReloadRequest.entityManager();
-          TypedQuery<Long> q = null;
-          String query = "SELECT count(ReloadRequest) " +
-                  "FROM ReloadRequest reloadrequest " +
-                  "WHERE reloadrequest.requestedTime BETWEEN :minRequestedTime AND :maxRequestedTime " +
-                  "AND LOWER(reloadrequest.status) IN (:statusList)";
-          q = em.createQuery(query, Long.class);
-          q.setParameter("minRequestedTime", minRequestedTime);
-          q.setParameter("maxRequestedTime", maxRequestedTime);
-          q.setParameter("statusList", listStatus);
-          return q.getSingleResult();
-    }
 }
