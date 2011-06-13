@@ -124,4 +124,12 @@ privileged aspect Terminal_Roo_JavaBean {
         this.terminalType = terminalType;
     }
     
+    public Date Terminal.getLastHeartBeatReceived() {
+        return this.lastHeartBeatReceived;
+    }
+    
+    public void Terminal.setLastHeartBeatReceived(Date lastHeartBeatReceived) {
+        this.lastHeartBeatReceived = lastHeartBeatReceived;
+    }
+    
 }

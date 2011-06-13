@@ -18,6 +18,7 @@ privileged aspect Terminal_Roo_ToString {
         sb.append("Description: ").append(getDescription()).append(", ");
         sb.append("Id: ").append(getId()).append(", ");
         sb.append("Ip: ").append(getIp()).append(", ");
+        sb.append("LastHeartBeatReceived: ").append(getLastHeartBeatReceived()).append(", ");
         sb.append("Location: ").append(getLocation()).append(", ");
         sb.append("ModifiedBy: ").append(getModifiedBy()).append(", ");
         sb.append("ModifiedTime: ").append(getModifiedTime()).append(", ");

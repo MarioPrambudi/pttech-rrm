@@ -21,34 +21,33 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 		// Register application converters and formatters
 	}
 
-    Converter<Acquirer, String> getAcquirerConverter() {
-        return new Converter<Acquirer, String>() {
-            public String convert(Acquirer acquirer) {
-                return new StringBuilder().append(acquirer.getName()).toString();
-            }
-        };
+    static class AcquirerConverter implements Converter<Acquirer, String>  {
+        public String convert(Acquirer acquirer) {
+            return new StringBuilder().append(acquirer.getName()).toString();
+        }
+
     }
 
-   org.springframework.core.convert.converter.Converter<TerminalType, String> getTerminalTypeConverter() {
-        return new org.springframework.core.convert.converter.Converter<TerminalType, String>() {
-            public String convert(TerminalType terminaltype) {
-                return new StringBuilder().append(terminaltype.getName()).toString();
-            }
-        };
+   static class TerminalTypeConverter implements Converter<TerminalType, String>  {
+        public String convert(TerminalType terminalType) {
+            return new StringBuilder().append(terminalType.getName()).toString();
+        }
+
     }
 
-    org.springframework.core.convert.converter.Converter<Map, String> getStatusCodeConverter() {
-        return new org.springframework.core.convert.converter.Converter<Map, String>() {
-            public String convert(Map map) {
-                return new StringBuilder().append(map.get("value")).toString();
-            }
-        };
+    static class StatusCodeConverter implements Converter<Map, String>  {
+        public String convert(Map map) {
+            return new StringBuilder().append(map.get("value")).toString();
+        }
+
     }
 
     public void afterPropertiesSet() {
         super.afterPropertiesSet();
         installLabelConverters(getObject());
-        getObject().addConverter(getStatusCodeConverter());
+        getObject().addConverter(new AcquirerConverter());
+        getObject().addConverter(new TerminalTypeConverter());
+        getObject().addConverter(new StatusCodeConverter());
     }
 	
 }
