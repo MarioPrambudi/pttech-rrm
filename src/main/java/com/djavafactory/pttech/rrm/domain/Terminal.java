@@ -64,6 +64,10 @@ public class Terminal {
     @ManyToOne
     private TerminalType terminalType;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
+    private Date lastHeartBeatReceived;
+
     @Transient
     public String getCityName() {
         return City.findCity(this.city).getCityName();

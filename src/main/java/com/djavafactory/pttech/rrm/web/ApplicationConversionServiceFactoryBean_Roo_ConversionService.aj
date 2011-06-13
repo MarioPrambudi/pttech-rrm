@@ -3,7 +3,6 @@
 
 package com.djavafactory.pttech.rrm.web;
 
-import com.djavafactory.pttech.rrm.domain.Acquirer;
 import com.djavafactory.pttech.rrm.domain.City;
 import com.djavafactory.pttech.rrm.domain.ConfValidityPeriod;
 import com.djavafactory.pttech.rrm.domain.Configuration;
@@ -12,7 +11,6 @@ import com.djavafactory.pttech.rrm.domain.Param;
 import com.djavafactory.pttech.rrm.domain.Province;
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
 import com.djavafactory.pttech.rrm.domain.Terminal;
-import com.djavafactory.pttech.rrm.domain.TerminalType;
 import java.lang.String;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
@@ -20,7 +18,6 @@ import org.springframework.format.FormatterRegistry;
 privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService {
     
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
-        registry.addConverter(new AcquirerConverter());
         registry.addConverter(new CityConverter());
         registry.addConverter(new ConfValidityPeriodConverter());
         registry.addConverter(new ConfigurationConverter());
@@ -29,14 +26,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(new ProvinceConverter());
         registry.addConverter(new ReloadRequestConverter());
         registry.addConverter(new TerminalConverter());
-        registry.addConverter(new TerminalTypeConverter());
-    }
-    
-    static class com.djavafactory.pttech.rrm.web.ApplicationConversionServiceFactoryBean.AcquirerConverter implements Converter<Acquirer, String>  {
-        public String convert(Acquirer acquirer) {
-            return new StringBuilder().append(acquirer.getName()).append(" ").append(acquirer.getRegistrationNo()).append(" ").append(acquirer.getStreet1()).append(" ").append(acquirer.getStreet2()).toString();
-        }
-        
     }
     
     static class com.djavafactory.pttech.rrm.web.ApplicationConversionServiceFactoryBean.CityConverter implements Converter<City, String>  {
@@ -91,13 +80,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     static class com.djavafactory.pttech.rrm.web.ApplicationConversionServiceFactoryBean.TerminalConverter implements Converter<Terminal, String>  {
         public String convert(Terminal terminal) {
             return new StringBuilder().append(terminal.getTerminalId()).append(" ").append(terminal.getIp()).append(" ").append(terminal.getPort()).append(" ").append(terminal.getDescription()).toString();
-        }
-        
-    }
-    
-    static class com.djavafactory.pttech.rrm.web.ApplicationConversionServiceFactoryBean.TerminalTypeConverter implements Converter<TerminalType, String>  {
-        public String convert(TerminalType terminalType) {
-            return new StringBuilder().append(terminalType.getName()).append(" ").append(terminalType.getDescription()).toString();
         }
         
     }
