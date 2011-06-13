@@ -39,6 +39,10 @@
 <jsp:directive.attribute name="alignRight" type="java.lang.Boolean" required="false" rtexprvalue="true"
                          description="report column text align left"/>
 
+<jsp:directive.attribute name="manualCancel" type="java.lang.Boolean" required="false" rtexprvalue="true"
+                         description="Show Manual Cancellation icon"/>
+<jsp:directive.attribute name="reloadStatus" type="java.lang.String" required="false" rtexprvalue="true"
+                         description="Reload request status"/>
 
 <c:if test="${empty render or render}">
 
@@ -81,6 +85,14 @@
 <c:if test="${empty alignRight}">
     <c:set var="alignRight" value="false"/>
 </c:if>
+
+<c:if test="${empty reloadStatus}">
+    <c:set var="reloadStatus" value="status"/>
+</c:if>
+<c:if test="${empty manualCancel}">
+    <c:set var="manualCancel" value="false"/>
+</c:if>
+
 <c:set var="typeName" value="${fn:split(id,'_')[fn:length(fn:split(id,'_')) - 1]}"/>
 <c:set var="lengths" value="${fn:split(columnMaxLengths, ',')}" scope="request"/>
 
@@ -159,6 +171,10 @@
         <spring:eval var="colCounter" expression="colCounter  + 1"/>
     </c:if>
     <c:if test="${xls_report}">
+        <th></th>
+        <spring:eval var="colCounter" expression="colCounter  + 1"/>
+    </c:if>
+    <c:if test="${manualCancel}">
         <th></th>
         <spring:eval var="colCounter" expression="colCounter  + 1"/>
     </c:if>
@@ -349,6 +365,21 @@
                 <script type="text/javascript">
                     Spring.addDecoration(new Spring.ElementDecoration({elementId : 'cb{item[typeIdFieldName]}', widgetType: 'dijit.form.Checkbox'}));
                 </script>
+            </td>
+        </c:if>
+        <c:if test="${manualCancel}">
+            <td class="utilbox">
+                <spring:message code="reload_request_status_P" var="reloadReqStatus" htmlEscape="false"/>
+                <c:if test="${reloadReqStatus eq item[reloadStatus]}">
+                    <spring:url value="${path}/manualcancel/${item[typeIdFieldName]}" var="cancel_form_url" />
+                    <spring:url value="/resources/images/delete.png" var="cancel_image_url"/>
+                    <spring:message code="entity_cancel" var="cancel_label" htmlEscape="false"/>
+                    <a href="${fn:escapeXml(cancel_form_url)}" alt="${fn:escapeXml(cancel_label)}"
+                       title="${fn:escapeXml(cancel_label)}">
+                        <img alt="${fn:escapeXml(cancel_label)}" class="image" src="${fn:escapeXml(cancel_image_url)}"
+                             title="${fn:escapeXml(cancel_label)}"/>
+                    </a>
+                </c:if>
             </td>
         </c:if>
     </tr>
