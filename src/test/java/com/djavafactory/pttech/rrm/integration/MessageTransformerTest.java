@@ -47,6 +47,16 @@ public class MessageTransformerTest extends BaseManagerTestCase {
         assert (new MessageTransformer().transformMessageToJson(getReloadRequestMessage()) != null);
     }
 
+    @Test
+    public void testTransformMessageToResponse() {
+        assert (new MessageTransformer().transformMessageToResponse(getReloadRequestMessage()) != null);
+    }
+
+    @Test
+    public void testTransformMessageToTngResponse() {
+        assert (new MessageTransformer().transformMessageToTngResponse(getReloadRequestMessage()) != null);
+    }
+
     private ReloadRequestMessage getReloadRequestMessage() {
         ReloadRequestMessage reloadRequestMessage = new ReloadRequestMessage();
         reloadRequestMessage.setAmount(new BigDecimal("10.00"));

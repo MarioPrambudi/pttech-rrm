@@ -79,6 +79,12 @@ public class MessageMapperTest extends BaseManagerTestCase {
         assertNull(message.getTransCode());
     }
 
+    public void testMapManualCancelResponse() {
+        List<Object> list = new MessageMapper().mapManualCancelResponse(getReloadResponseMessage());
+        assert ((list.get(0) instanceof ReloadRequest) == true);
+        assert ((list.get(1) instanceof ReloadResponseMessage) == true);
+    }
+
     private ReloadRequestMessage getReloadRequestMessage() {
         ReloadRequestMessage reloadRequestMessage = new ReloadRequestMessage();
         reloadRequestMessage.setAmount(new BigDecimal("10.00"));

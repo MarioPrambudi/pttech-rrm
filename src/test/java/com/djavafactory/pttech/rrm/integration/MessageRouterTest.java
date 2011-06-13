@@ -16,6 +16,13 @@ public class MessageRouterTest extends BaseManagerTestCase {
         assertEquals(new MessageRouter().routeReloadRequest(getReloadRequestMessage()), "newReloadReqPersistChannel");
     }
 
+    @Test
+    public void testRouteErrorRequest() {
+        ReloadRequestMessage requestMessage = getReloadRequestMessage();
+        requestMessage.setMsgType("rtm");
+        assertEquals(new MessageRouter().routeErrorRequest(requestMessage), "rtmErrorChannel");
+    }
+
     private ReloadRequestMessage getReloadRequestMessage() {
         ReloadRequestMessage reloadRequestMessage = new ReloadRequestMessage();
         reloadRequestMessage.setAmount(new BigDecimal("10.00"));

@@ -19,7 +19,7 @@
         <queue capacity="100"/>
     </channel>
     <chain input-channel="tngRequestReplyChannel" output-channel="transformResponseChannel">
-        <filter ref="filterBean" method="tngRequestReplyFilter" discard-channel="tngRequestSuccessChannel"/>
+        <filter ref="filterBean" method="tngRequestReplyFilter"/>
         <transformer ref="mapperBean" method="mapTngResponseToReloadResponse"/>
         <service-activator ref="messagePersistenceBean" method="mergeReloadRequest"/>
     </chain>
@@ -29,8 +29,6 @@
     </channel>
     <transformer input-channel="transformResponseChannel" ref="transformerBean" method="transformMessageToJson"
                  output-channel="rmiReloadStatusChannel"/>
-
-    <channel id="tngRequestSuccessChannel" />
 
     <beans:bean id="jaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
         <beans:property name="contextPath" value="epg.webservice"/>

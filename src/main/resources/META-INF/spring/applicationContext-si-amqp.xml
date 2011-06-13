@@ -24,6 +24,10 @@
                                   queue-name="#{amqp['queue.rrm.rtmreload.req']}"
                                   connection-factory="singleConnectionFactory"/>
 
+    <amqp:inbound-channel-adapter channel="rrmManualCancelResInboundChannel"
+                                  queue-name="#{amqp['queue.rrm.manualcancel.res']}"
+                                  connection-factory="singleConnectionFactory"/>
+
     <channel id="rmiReloadStatusChannel">
         <interceptors>
             <wire-tap channel="logger"/>
