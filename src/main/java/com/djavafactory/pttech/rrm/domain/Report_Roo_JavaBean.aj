@@ -19,6 +19,38 @@ privileged aspect Report_Roo_JavaBean {
         this.id = id;
     }
     
+    public double Report.getRs() {
+        return this.rs;
+    }
+    
+    public void Report.setRs(double rs) {
+        this.rs = rs;
+    }
+    
+    public double Report.getAt() {
+        return this.at;
+    }
+    
+    public void Report.setAt(double at) {
+        this.at = at;
+    }
+    
+    public double Report.getSof() {
+        return this.sof;
+    }
+    
+    public void Report.setSof(double sof) {
+        this.sof = sof;
+    }
+    
+    public double Report.getTng() {
+        return this.tng;
+    }
+    
+    public void Report.setTng(double tng) {
+        this.tng = tng;
+    }
+    
     public Date Report.getRequestedTime() {
         return this.requestedTime;
     }
@@ -75,6 +107,86 @@ privileged aspect Report_Roo_JavaBean {
         this.netPaymentToTng = netPaymentToTng;
     }
     
+    public Date Report.getReloadDate() {
+        return this.reloadDate;
+    }
+    
+    public void Report.setReloadDate(Date reloadDate) {
+        this.reloadDate = reloadDate;
+    }
+    
+    public double Report.getAmountRefundedToCustomer() {
+        return this.amountRefundedToCustomer;
+    }
+    
+    public void Report.setAmountRefundedToCustomer(double amountRefundedToCustomer) {
+        this.amountRefundedToCustomer = amountRefundedToCustomer;
+    }
+    
+    public Date Report.getDateRefundedCustomer() {
+        return this.dateRefundedCustomer;
+    }
+    
+    public void Report.setDateRefundedCustomer(Date dateRefundedCustomer) {
+        this.dateRefundedCustomer = dateRefundedCustomer;
+    }
+    
+    public double Report.getGrossPaymentToTngRm() {
+        return this.grossPaymentToTngRm;
+    }
+    
+    public void Report.setGrossPaymentToTngRm(double grossPaymentToTngRm) {
+        this.grossPaymentToTngRm = grossPaymentToTngRm;
+    }
+    
+    public String Report.getAcquirerTerminal() {
+        return this.acquirerTerminal;
+    }
+    
+    public void Report.setAcquirerTerminal(String acquirerTerminal) {
+        this.acquirerTerminal = acquirerTerminal;
+    }
+    
+    public String Report.getCmmpTrxId() {
+        return this.cmmpTrxId;
+    }
+    
+    public void Report.setCmmpTrxId(String cmmpTrxId) {
+        this.cmmpTrxId = cmmpTrxId;
+    }
+    
+    public Long Report.getAircashAccNo() {
+        return this.aircashAccNo;
+    }
+    
+    public void Report.setAircashAccNo(Long aircashAccNo) {
+        this.aircashAccNo = aircashAccNo;
+    }
+    
+    public Long Report.getMobileNo() {
+        return this.mobileNo;
+    }
+    
+    public void Report.setMobileNo(Long mobileNo) {
+        this.mobileNo = mobileNo;
+    }
+    
+    public Date Report.getModifiedDate() {
+        return this.modifiedDate;
+    }
+    
+    public void Report.setModifiedDate(Date modifiedDate) {
+        this.modifiedDate = modifiedDate;
+    }
+    
+    public String Report.getTransId() {
+        return this.transId;
+    }
+    
+    public void Report.setTransId(String transId) {
+        this.transId = transId;
+    }
+    
     public String Report.getStatus() {
         return this.status;
     }
@@ -83,12 +195,212 @@ privileged aspect Report_Roo_JavaBean {
         this.status = status;
     }
     
+    public double Report.getTngFee() {
+        return this.tngFee;
+    }
+    
+    public void Report.setTngFee(double tngFee) {
+        this.tngFee = tngFee;
+    }
+    
+    public double Report.getPrintisFee() {
+        return this.printisFee;
+    }
+    
+    public void Report.setPrintisFee(double printisFee) {
+        this.printisFee = printisFee;
+    }
+    
+    public double Report.getCelcomMobileFee() {
+        return this.celcomMobileFee;
+    }
+    
+    public void Report.setCelcomMobileFee(double celcomMobileFee) {
+        this.celcomMobileFee = celcomMobileFee;
+    }
+    
+    public double Report.getCmmFee() {
+        return this.cmmFee;
+    }
+    
+    public void Report.setCmmFee(double cmmFee) {
+        this.cmmFee = cmmFee;
+    }
+    
+    public double Report.getTotalFees() {
+        return this.totalFees;
+    }
+    
+    public void Report.setTotalFees(double totalFees) {
+        this.totalFees = totalFees;
+    }
+    
+    public double Report.getAmountDueTng() {
+        return this.amountDueTng;
+    }
+    
+    public void Report.setAmountDueTng(double amountDueTng) {
+        this.amountDueTng = amountDueTng;
+    }
+    
+    public double Report.getAmountDuePrintis() {
+        return this.amountDuePrintis;
+    }
+    
+    public void Report.setAmountDuePrintis(double amountDuePrintis) {
+        this.amountDuePrintis = amountDuePrintis;
+    }
+    
+    public double Report.getAmountDueCelcomMobile() {
+        return this.amountDueCelcomMobile;
+    }
+    
+    public void Report.setAmountDueCelcomMobile(double amountDueCelcomMobile) {
+        this.amountDueCelcomMobile = amountDueCelcomMobile;
+    }
+    
+    public double Report.getAmountDueCmm() {
+        return this.amountDueCmm;
+    }
+    
+    public void Report.setAmountDueCmm(double amountDueCmm) {
+        this.amountDueCmm = amountDueCmm;
+    }
+    
+    public Date Report.getDateCreditedToTngAccount() {
+        return this.dateCreditedToTngAccount;
+    }
+    
+    public void Report.setDateCreditedToTngAccount(Date dateCreditedToTngAccount) {
+        this.dateCreditedToTngAccount = dateCreditedToTngAccount;
+    }
+    
     public Integer Report.getSeqNo() {
         return this.seqNo;
     }
     
     public void Report.setSeqNo(Integer seqNo) {
         this.seqNo = seqNo;
+    }
+    
+    public long Report.getTotalReloadQty() {
+        return this.totalReloadQty;
+    }
+    
+    public void Report.setTotalReloadQty(long totalReloadQty) {
+        this.totalReloadQty = totalReloadQty;
+    }
+    
+    public double Report.getTotalPaymentToTngRm() {
+        return this.totalPaymentToTngRm;
+    }
+    
+    public void Report.setTotalPaymentToTngRm(double totalPaymentToTngRm) {
+        this.totalPaymentToTngRm = totalPaymentToTngRm;
+    }
+    
+    public double Report.getTotalCancellationRm() {
+        return this.totalCancellationRm;
+    }
+    
+    public void Report.setTotalCancellationRm(double totalCancellationRm) {
+        this.totalCancellationRm = totalCancellationRm;
+    }
+    
+    public double Report.getSumNetPaymentToTng() {
+        return this.sumNetPaymentToTng;
+    }
+    
+    public void Report.setSumNetPaymentToTng(double sumNetPaymentToTng) {
+        this.sumNetPaymentToTng = sumNetPaymentToTng;
+    }
+    
+    public double Report.getSumTotalChargeToCustomer() {
+        return this.sumTotalChargeToCustomer;
+    }
+    
+    public void Report.setSumTotalChargeToCustomer(double sumTotalChargeToCustomer) {
+        this.sumTotalChargeToCustomer = sumTotalChargeToCustomer;
+    }
+    
+    public double Report.getSumCommissionAmountDeductedBySof() {
+        return this.sumCommissionAmountDeductedBySof;
+    }
+    
+    public void Report.setSumCommissionAmountDeductedBySof(double sumCommissionAmountDeductedBySof) {
+        this.sumCommissionAmountDeductedBySof = sumCommissionAmountDeductedBySof;
+    }
+    
+    public double Report.getTotalAmountRequestRm() {
+        return this.totalAmountRequestRm;
+    }
+    
+    public void Report.setTotalAmountRequestRm(double totalAmountRequestRm) {
+        this.totalAmountRequestRm = totalAmountRequestRm;
+    }
+    
+    public Date Report.getDateCancelRequest() {
+        return this.dateCancelRequest;
+    }
+    
+    public void Report.setDateCancelRequest(Date dateCancelRequest) {
+        this.dateCancelRequest = dateCancelRequest;
+    }
+    
+    public Long Report.getTotalCancellationQty() {
+        return this.totalCancellationQty;
+    }
+    
+    public void Report.setTotalCancellationQty(Long totalCancellationQty) {
+        this.totalCancellationQty = totalCancellationQty;
+    }
+    
+    public double Report.getTotalRefundToCustomerRm() {
+        return this.totalRefundToCustomerRm;
+    }
+    
+    public void Report.setTotalRefundToCustomerRm(double totalRefundToCustomerRm) {
+        this.totalRefundToCustomerRm = totalRefundToCustomerRm;
+    }
+    
+    public double Report.getCommSofAmountComm() {
+        return this.commSofAmountComm;
+    }
+    
+    public void Report.setCommSofAmountComm(double commSofAmountComm) {
+        this.commSofAmountComm = commSofAmountComm;
+    }
+    
+    public double Report.getSumTng() {
+        return this.sumTng;
+    }
+    
+    public void Report.setSumTng(double sumTng) {
+        this.sumTng = sumTng;
+    }
+    
+    public double Report.getSumCelcomMobile() {
+        return this.sumCelcomMobile;
+    }
+    
+    public void Report.setSumCelcomMobile(double sumCelcomMobile) {
+        this.sumCelcomMobile = sumCelcomMobile;
+    }
+    
+    public double Report.getSumCmm() {
+        return this.sumCmm;
+    }
+    
+    public void Report.setSumCmm(double sumCmm) {
+        this.sumCmm = sumCmm;
+    }
+    
+    public double Report.getSumTotalFee() {
+        return this.sumTotalFee;
+    }
+    
+    public void Report.setSumTotalFee(double sumTotalFee) {
+        this.sumTotalFee = sumTotalFee;
     }
     
 }

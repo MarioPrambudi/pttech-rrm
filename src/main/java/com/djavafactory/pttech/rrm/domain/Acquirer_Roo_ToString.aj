@@ -18,6 +18,7 @@ privileged aspect Acquirer_Roo_ToString {
         sb.append("Email: ").append(getEmail()).append(", ");
         sb.append("Firmwares: ").append(getFirmwares() == null ? "null" : getFirmwares().size()).append(", ");
         sb.append("Hotline: ").append(getHotline()).append(", ");
+        sb.append("Id: ").append(getId()).append(", ");
         sb.append("ModifiedBy: ").append(getModifiedBy()).append(", ");
         sb.append("ModifiedTime: ").append(getModifiedTime()).append(", ");
         sb.append("Name: ").append(getName()).append(", ");
@@ -25,7 +26,8 @@ privileged aspect Acquirer_Roo_ToString {
         sb.append("RegistrationNo: ").append(getRegistrationNo()).append(", ");
         sb.append("Street1: ").append(getStreet1()).append(", ");
         sb.append("Street2: ").append(getStreet2()).append(", ");
-        sb.append("Terminals: ").append(getTerminals() == null ? "null" : getTerminals().size());
+        sb.append("Terminals: ").append(getTerminals() == null ? "null" : getTerminals().size()).append(", ");
+        sb.append("Version: ").append(getVersion());
         return sb.toString();
     }
     

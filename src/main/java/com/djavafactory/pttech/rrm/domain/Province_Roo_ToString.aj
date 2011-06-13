@@ -10,7 +10,9 @@ privileged aspect Province_Roo_ToString {
     public String Province.toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Cities: ").append(getCities() == null ? "null" : getCities().size()).append(", ");
-        sb.append("Name: ").append(getName());
+        sb.append("Id: ").append(getId()).append(", ");
+        sb.append("Name: ").append(getName()).append(", ");
+        sb.append("Version: ").append(getVersion());
         return sb.toString();
     }
     

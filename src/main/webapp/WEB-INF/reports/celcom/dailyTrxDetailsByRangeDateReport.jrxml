@@ -793,7 +793,7 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="0" y="0" width="90" height="20"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
 					<textFieldExpression class="java.lang.Long"><![CDATA[$F{mobileNo}]]></textFieldExpression>
