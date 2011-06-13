@@ -4,8 +4,12 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_com_djavafactory_pttech_rrm_domain_Firmware" object="${firmware}" path="/firmwares" z="5AUSQ5tnzZ5qSaiShxn4I3yfn+M=">
         <field:display field="name" id="s_com_djavafactory_pttech_rrm_domain_Firmware_name" object="${firmware}" z="yUAKC7K45+dqqq3yU1Pf6sXXneU="/>
-        <field:display field="active" id="s_com_djavafactory_pttech_rrm_domain_Firmware_active" object="${firmware}" z="BYFgnJLxTUnhTWhXehZOXJrjjG0="/>
-        <field:display field="firmwareFile" id="s_com_djavafactory_pttech_rrm_domain_Firmware_firmwareFile" object="${firmware}" z="0wcmlj7nKdVQL8G5JCB8roBHTP8="/>
+        <field:display field="firmwareFile" id="s_com_djavafactory_pttech_rrm_domain_Firmware_firmwareFile" object="${firmware}" render="false" z="user-managed"/>
+        <field:display field="active" id="s_com_djavafactory_pttech_rrm_domain_Firmware_active" object="${firmware}" render="false" z="user-managed"/>
         <field:display field="acquirer" id="s_com_djavafactory_pttech_rrm_domain_Firmware_acquirer" object="${firmware}" z="RMBuFEpWjdmxldTOIJAKAbADJCI="/>
+        <field:display field="createdBy" id="s_com_djavafactory_pttech_rrm_domain_Firmware_createdBy" object="${firmware}" z="V8/Mnpg7j0KfASbSTnr9VZt3iPY="/>
+        <field:display date="true" dateTimePattern="${firmware_createdtime_date_format}" field="createdTime" id="s_com_djavafactory_pttech_rrm_domain_Firmware_createdTime" object="${firmware}" z="4WcqLPfti1pDtw7UEaJV/0Iu15E="/>
+        <field:display field="modifiedBy" id="s_com_djavafactory_pttech_rrm_domain_Firmware_modifiedBy" object="${firmware}" z="Yhhr6OFblI1d0KbIw+eIveJ7wAU="/>
+        <field:display date="true" dateTimePattern="${firmware_modifiedtime_date_format}" field="modifiedTime" id="s_com_djavafactory_pttech_rrm_domain_Firmware_modifiedTime" object="${firmware}" z="xq/Kj8Y49py0uKFJhGl10T2ZeaM="/>
     </page:show>
 </div>

@@ -42,8 +42,8 @@
         </table:table>
     </page:list>
     <script type="text/javascript">
-        Spring.addDecoration(new Spring.ElementDecoration({elementId : '_requestedTimeFrom_id', widgetType: 'dijit.form.DateTextBox', widgetAttrs: {required: 'true', constraints: {datePattern : 'dd/MM/yyyy', required : 'true'}, datePattern : 'dd/MM/yyyy'}}));
-        Spring.addDecoration(new Spring.ElementDecoration({elementId : '_requestedTimeTo_id', widgetType: 'dijit.form.DateTextBox', widgetAttrs: {required: 'true', constraints: {datePattern : 'dd/MM/yyyy', required : 'true'}, datePattern : 'dd/MM/yyyy'}}));
+        Spring.addDecoration(new Spring.ElementDecoration({elementId : '_requestedTimeFrom_id', widgetType: 'dijit.form.DateTextBox', widgetAttrs: {constraints: {datePattern : 'dd/MM/yyyy', required : 'true'}, datePattern : 'dd/MM/yyyy'}}));
+        Spring.addDecoration(new Spring.ElementDecoration({elementId : '_requestedTimeTo_id', widgetType: 'dijit.form.DateTextBox', widgetAttrs: {constraints: {datePattern : 'dd/MM/yyyy', required : 'true'}, datePattern : 'dd/MM/yyyy'}}));
         dojo.addOnLoad(function() {
             var fromdate = dijit.byId('_requestedTimeFrom_id');
             var todate = dijit.byId('_requestedTimeTo_id');

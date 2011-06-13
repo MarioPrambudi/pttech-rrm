@@ -6,6 +6,7 @@ package com.djavafactory.pttech.rrm.domain;
 import com.djavafactory.pttech.rrm.domain.Acquirer;
 import java.lang.Boolean;
 import java.lang.String;
+import java.util.Date;
 
 privileged aspect Firmware_Roo_JavaBean {
     
@@ -39,6 +40,38 @@ privileged aspect Firmware_Roo_JavaBean {
     
     public void Firmware.setAcquirer(Acquirer acquirer) {
         this.acquirer = acquirer;
+    }
+    
+    public String Firmware.getCreatedBy() {
+        return this.createdBy;
+    }
+    
+    public void Firmware.setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+    
+    public String Firmware.getModifiedBy() {
+        return this.modifiedBy;
+    }
+    
+    public void Firmware.setModifiedBy(String modifiedBy) {
+        this.modifiedBy = modifiedBy;
+    }
+    
+    public Date Firmware.getCreatedTime() {
+        return this.createdTime;
+    }
+    
+    public void Firmware.setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
+    }
+    
+    public Date Firmware.getModifiedTime() {
+        return this.modifiedTime;
+    }
+    
+    public void Firmware.setModifiedTime(Date modifiedTime) {
+        this.modifiedTime = modifiedTime;
     }
     
 }
