@@ -2,7 +2,10 @@ package com.djavafactory.pttech.rrm.web;
 
 import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.ReloadRequest;
+import com.djavafactory.pttech.rrm.service.ManualCancellation;
 import com.djavafactory.pttech.rrm.util.DateUtil;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +19,9 @@ import java.util.*;
 public class ReloadRequestController extends BaseController {
 
 	private final String resourcePrefix = "reload_request_status_";
+
+    @Autowired
+    ManualCancellation manualCancellation;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(@RequestParam(value = "page", required = false) Integer page,
@@ -49,6 +55,21 @@ public class ReloadRequestController extends BaseController {
 		}
 		addDateTimeFormatPatterns(uiModel);
 		return "reloadrequests/list";
+	}
+
+    @RequestMapping(value = "/manualcancel/{id}", method = { RequestMethod.GET })
+	public String manualCancellation(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page,
+			@RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+        ReloadRequest reloadRequest = ReloadRequest.findReloadRequest(id);
+		if(StringUtils.equalsIgnoreCase(reloadRequest.getStatus(), Constants.RELOAD_STATUS_PENDING)) {
+            reloadRequest.setStatus(Constants.RELOAD_STATUS_PENDINGCANCEL);
+            reloadRequest.merge();
+            manualCancellation.sendManualCancel(reloadRequest);
+            uiModel.addAttribute("cancelResponse", getResourceText("manualCancel.send", new Object[] {reloadRequest.getTransId()}));
+        } else {
+            uiModel.addAttribute("cancelResponse", getResourceText("manualCancel.failed", new Object[] {reloadRequest.getTransId()}));
+        }
+        return findReloadRequestsByParam(page, size, null, null, null, null, uiModel);
 	}
 
 	@ModelAttribute("statuscode")
