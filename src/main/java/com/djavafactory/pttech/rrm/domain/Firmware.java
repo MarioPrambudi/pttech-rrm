@@ -11,6 +11,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 
@@ -45,18 +46,22 @@ public class Firmware {
     @Column(updatable = false, insertable = true)
     private String createdBy;
 
-    @Column(updatable = true, insertable = false)
-    private String modifiedBy;
-
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
     @Column(updatable = false, insertable = true)
     private Date createdTime;
+    
+    @Column(updatable = false, insertable = true)
+    private String versionExt;
+    
+    @Column(updatable = false, insertable = true)
+    private String versionInt;
+    
+    @Column(updatable = false, insertable = true)
+    private String description;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
-    @Column(updatable = true, insertable = false)
-    private Date modifiedTime;
+    @Transient
+    private Long acquirerId;
     
 	/**
      * To get all active firmware (active=true)
@@ -84,6 +89,5 @@ public class Firmware {
         q = em.createQuery(query, Long.class); 
         return q.getSingleResult();
     }
-    
 
 }

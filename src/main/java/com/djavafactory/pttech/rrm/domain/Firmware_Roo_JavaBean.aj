@@ -5,6 +5,7 @@ package com.djavafactory.pttech.rrm.domain;
 
 import com.djavafactory.pttech.rrm.domain.Acquirer;
 import java.lang.Boolean;
+import java.lang.Long;
 import java.lang.String;
 import java.util.Date;
 
@@ -50,14 +51,6 @@ privileged aspect Firmware_Roo_JavaBean {
         this.createdBy = createdBy;
     }
     
-    public String Firmware.getModifiedBy() {
-        return this.modifiedBy;
-    }
-    
-    public void Firmware.setModifiedBy(String modifiedBy) {
-        this.modifiedBy = modifiedBy;
-    }
-    
     public Date Firmware.getCreatedTime() {
         return this.createdTime;
     }
@@ -66,12 +59,36 @@ privileged aspect Firmware_Roo_JavaBean {
         this.createdTime = createdTime;
     }
     
-    public Date Firmware.getModifiedTime() {
-        return this.modifiedTime;
+    public String Firmware.getVersionExt() {
+        return this.versionExt;
     }
     
-    public void Firmware.setModifiedTime(Date modifiedTime) {
-        this.modifiedTime = modifiedTime;
+    public void Firmware.setVersionExt(String versionExt) {
+        this.versionExt = versionExt;
+    }
+    
+    public String Firmware.getVersionInt() {
+        return this.versionInt;
+    }
+    
+    public void Firmware.setVersionInt(String versionInt) {
+        this.versionInt = versionInt;
+    }
+    
+    public String Firmware.getDescription() {
+        return this.description;
+    }
+    
+    public void Firmware.setDescription(String description) {
+        this.description = description;
+    }
+    
+    public Long Firmware.getAcquirerId() {
+        return this.acquirerId;
+    }
+    
+    public void Firmware.setAcquirerId(Long acquirerId) {
+        this.acquirerId = acquirerId;
     }
     
 }

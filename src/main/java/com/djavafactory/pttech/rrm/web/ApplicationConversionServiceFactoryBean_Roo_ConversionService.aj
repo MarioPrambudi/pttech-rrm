@@ -51,7 +51,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     
     static class com.djavafactory.pttech.rrm.web.ApplicationConversionServiceFactoryBean.FirmwareConverter implements Converter<Firmware, String>  {
         public String convert(Firmware firmware) {
-            return new StringBuilder().append(firmware.getName()).append(" ").append(firmware.getCreatedBy()).append(" ").append(firmware.getModifiedBy()).append(" ").append(firmware.getCreatedTime()).toString();
+            return new StringBuilder().append(firmware.getName()).append(" ").append(firmware.getCreatedBy()).append(" ").append(firmware.getCreatedTime()).append(" ").append(firmware.getVersionExt()).toString();
         }
         
     }

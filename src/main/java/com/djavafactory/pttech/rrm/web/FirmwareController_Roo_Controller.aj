@@ -98,7 +98,6 @@ privileged aspect FirmwareController_Roo_Controller {
     
     void FirmwareController.addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("firmware_createdtime_date_format", "dd/MM/yyyy HH:mm:ss");
-        uiModel.addAttribute("firmware_modifiedtime_date_format", "dd/MM/yyyy HH:mm:ss");
     }
     
     String FirmwareController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
