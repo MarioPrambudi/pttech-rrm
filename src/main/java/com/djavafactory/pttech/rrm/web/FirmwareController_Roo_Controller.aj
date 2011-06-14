@@ -30,6 +30,7 @@ privileged aspect FirmwareController_Roo_Controller {
     public String FirmwareController.create(@Valid Firmware firmware, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             uiModel.addAttribute("firmware", firmware);
+            addDateTimeFormatPatterns(uiModel);
             return "firmwares/create";
         }
         uiModel.asMap().clear();
@@ -40,6 +41,7 @@ privileged aspect FirmwareController_Roo_Controller {
     @RequestMapping(params = "form", method = RequestMethod.GET)
     public String FirmwareController.createForm(Model uiModel) {
         uiModel.addAttribute("firmware", new Firmware());
+        addDateTimeFormatPatterns(uiModel);
         List dependencies = new ArrayList();
         if (Acquirer.countAcquirers() == 0) {
             dependencies.add(new String[]{"acquirer", "acquirers"});
@@ -50,28 +52,17 @@ privileged aspect FirmwareController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String FirmwareController.show(@PathVariable("id") Long id, Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("firmware", Firmware.findFirmware(id));
         uiModel.addAttribute("itemId", id);
         return "firmwares/show";
-    }
-    
-    @RequestMapping(method = RequestMethod.GET)
-    public String FirmwareController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            uiModel.addAttribute("firmwares", Firmware.findFirmwareEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
-            float nrOfPages = (float) Firmware.countFirmwares() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("firmwares", Firmware.findAllFirmwares());
-        }
-        return "firmwares/list";
     }
     
     @RequestMapping(method = RequestMethod.PUT)
     public String FirmwareController.update(@Valid Firmware firmware, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             uiModel.addAttribute("firmware", firmware);
+            addDateTimeFormatPatterns(uiModel);
             return "firmwares/update";
         }
         uiModel.asMap().clear();
@@ -82,6 +73,7 @@ privileged aspect FirmwareController_Roo_Controller {
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
     public String FirmwareController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         uiModel.addAttribute("firmware", Firmware.findFirmware(id));
+        addDateTimeFormatPatterns(uiModel);
         return "firmwares/update";
     }
     
@@ -102,6 +94,11 @@ privileged aspect FirmwareController_Roo_Controller {
     @ModelAttribute("firmwares")
     public Collection<Firmware> FirmwareController.populateFirmwares() {
         return Firmware.findAllFirmwares();
+    }
+    
+    void FirmwareController.addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("firmware_createdtime_date_format", "dd/MM/yyyy HH:mm:ss");
+        uiModel.addAttribute("firmware_modifiedtime_date_format", "dd/MM/yyyy HH:mm:ss");
     }
     
     String FirmwareController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

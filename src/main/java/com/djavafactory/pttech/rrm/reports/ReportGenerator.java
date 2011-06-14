@@ -148,37 +148,7 @@ public class ReportGenerator {
 		  calMax.set(calMin.get(Calendar.YEAR), calMin.get(Calendar.MONTH), calMin.get(Calendar.DATE), 23, 59, 59);
 		  return calMax.getTime();
     }
-    
-    /**
-	 * To copy reload request list to report list
-	 * @param listReloadRequest A list of reload request
-	 * @return List<Report> - list of report
-	 */
-    public static List<Report> copyReloadRequestToReport(List<ReloadRequest> listReloadRequest) {
-    	Iterator it = listReloadRequest.iterator();
-        List <Report> listReport = new ArrayList<Report>();
-        while(it.hasNext()) {
-            Report report = null; //
-            try {
-	            report = new Report();
-	            ReloadRequest reloadrequest = (ReloadRequest)it.next();
-//	            BeanUtils.copyProperties(report, reloadrequest);
-//	            if(reloadrequest.getModifiedTime() != null)
-//	            {
-//	            	report.setModifiedDate(reloadrequest.getModifiedTime());
-//	            }
-//	            if(reloadrequest.getTotalCancellationAmt() != null)
-//	            {
-//	            	report.setTotalCancellationRm(reloadrequest.getTotalCancellationAmt().doubleValue());
-//	            }
-	            listReport.add(report);
 
-            } catch (Exception e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            }
-        }
-        return listReport;   	
-    }
     
     /**
 	 * get list of all status

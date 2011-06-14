@@ -27,6 +27,10 @@ privileged aspect FirmwareDataOnDemand_Roo_DataOnDemand {
         setFirmwareFile(obj, index);
         setActive(obj, index);
         setAcquirer(obj, index);
+        setCreatedBy(obj, index);
+        setModifiedBy(obj, index);
+        setCreatedTime(obj, index);
+        setModifiedTime(obj, index);
         return obj;
     }
     
@@ -48,6 +52,26 @@ privileged aspect FirmwareDataOnDemand_Roo_DataOnDemand {
     public void FirmwareDataOnDemand.setAcquirer(Firmware obj, int index) {
         com.djavafactory.pttech.rrm.domain.Acquirer acquirer = acquirerDataOnDemand.getRandomAcquirer();
         obj.setAcquirer(acquirer);
+    }
+    
+    public void FirmwareDataOnDemand.setCreatedBy(Firmware obj, int index) {
+        java.lang.String createdBy = "createdBy_" + index;
+        obj.setCreatedBy(createdBy);
+    }
+    
+    public void FirmwareDataOnDemand.setModifiedBy(Firmware obj, int index) {
+        java.lang.String modifiedBy = "modifiedBy_" + index;
+        obj.setModifiedBy(modifiedBy);
+    }
+    
+    public void FirmwareDataOnDemand.setCreatedTime(Firmware obj, int index) {
+        java.util.Date createdTime = new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY), java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE), java.util.Calendar.getInstance().get(java.util.Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
+        obj.setCreatedTime(createdTime);
+    }
+    
+    public void FirmwareDataOnDemand.setModifiedTime(Firmware obj, int index) {
+        java.util.Date modifiedTime = new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY), java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE), java.util.Calendar.getInstance().get(java.util.Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
+        obj.setModifiedTime(modifiedTime);
     }
     
     public Firmware FirmwareDataOnDemand.getSpecificFirmware(int index) {
