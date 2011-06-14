@@ -1,6 +1,9 @@
 package com.djavafactory.pttech.rrm.web;
 
+import com.djavafactory.pttech.rrm.Constants;
+import com.djavafactory.pttech.rrm.domain.Acquirer;
 import com.djavafactory.pttech.rrm.domain.Firmware;
+import com.djavafactory.pttech.rrm.util.DateUtil;
 
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -40,10 +44,11 @@ public class FirmwareController {
      * @param uiModel            Model
      * @param httpServletRequest HttpServletRequest
      * @return String the page path to redirect
+     * @throws Exception 
      */
 	@RequestMapping(value="savefirmware",  method = RequestMethod.POST)
     public String createFirmware(@Valid Firmware firmware, BindingResult result, Model model,
-    					 	@RequestParam("firmwareFile") MultipartFile firmwareFile, HttpServletRequest request) {    
+    					 	@RequestParam("firmwareFile") MultipartFile firmwareFile, HttpServletRequest request) throws Exception {    
 
         if (result.hasErrors()) {
             model.addAttribute("firmware", firmware);
@@ -51,9 +56,14 @@ public class FirmwareController {
         }
         firmware.setCreatedBy("System");  // TODO Temporary static
         firmware.setCreatedTime(new Date());
+        firmware.setName(firmwareFile.getOriginalFilename());
+        firmware.setVersionExt(DateUtil.getDateNowString() + Constants.FIRMWARE_VERSION_INIT_VALUE);
         firmware.persist();     
         return "redirect:/firmwares/" + encodeUrlPathSegment(firmware.getId().toString(), request);
     }
+	
+	
+
 	
 	/**
      * update new firmware with modifiedTime, modifiedBy and active to false
@@ -62,9 +72,12 @@ public class FirmwareController {
      * @param uiModel            Model
      * @param httpServletRequest HttpServletRequest
      * @return String the page path to redirect
+	 * @throws Exception 
      */
 	@RequestMapping(value="updatefirmware", method = RequestMethod.POST)
-    public String updateFirmware(@Valid Firmware firmware, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+    public String updateFirmware(@Valid Firmware firmware, BindingResult bindingResult, Model uiModel,
+    		@RequestParam("firmwareFile") MultipartFile firmwareFile, HttpServletRequest httpServletRequest) throws Exception {
+		
 		if (bindingResult.hasErrors()) {
 			uiModel.addAttribute("firmware", firmware);
 			addDateTimeFormatPatterns(uiModel);
@@ -72,11 +85,11 @@ public class FirmwareController {
         }
 		uiModel.asMap().clear();
 		// backup old firmware
+		Acquirer newAcquirer = firmware.getAcquirer();
 		firmware.setActive(false);
-		firmware.setModifiedBy("System");  // Temporary Static  
-		firmware.setModifiedTime(new Date());
+		firmware.setAcquirer(Acquirer.findAcquirer(firmware.getAcquirerId()));	
 	    firmware.merge();  
-	    saveUpdateFirmware(firmware);
+	    saveUpdateFirmware(firmware, firmwareFile.getOriginalFilename(), newAcquirer);
 	     
         return "redirect:/firmwares/" + encodeUrlPathSegment(firmware.getId().toString(), httpServletRequest);
     }
@@ -85,17 +98,38 @@ public class FirmwareController {
      * To save updated firmware 
      * @param firmware Firmware
      * @return Long firmware id
+	 * @throws Exception 
      */
-	public Long saveUpdateFirmware(Firmware firmware){		
+	public Long saveUpdateFirmware(Firmware firmware, String filename, Acquirer newAcquirer) throws Exception{	
+		firmware.setVersionExt(formatVersionExt(firmware.getVersionExt()));
 	    firmware.setCreatedBy("System");  // TODO Temporary static
         firmware.setCreatedTime(new Date());
+        firmware.setName(filename);
         firmware.setActive(true);
         firmware.setId(null);
+        firmware.setAcquirer(newAcquirer);
         firmware.persist();     
         return firmware.getId();
 	}
 
-	
+	/**
+     * increase versionExt
+     * @param oriExtVersion String
+     * @return String 
+	 * @throws Exception 
+     */
+	public static String formatVersionExt(String oriExtVersion) throws Exception{
+		String versionStr = oriExtVersion.substring(8);
+		int intVersion = Integer.parseInt(versionStr) + 1;
+		String strVersion;
+		if (intVersion<10)
+		{	strVersion = "0" + Integer.toString(intVersion);}
+		else
+		{	strVersion =  Integer.toString(intVersion);}
+		String newVersion = DateUtil.getDateNowString() + strVersion;
+		return newVersion;
+		
+	}
 	 /**
      * To show the list of firmware with paginate
      * @param page    The page number

@@ -28,9 +28,10 @@ privileged aspect FirmwareDataOnDemand_Roo_DataOnDemand {
         setActive(obj, index);
         setAcquirer(obj, index);
         setCreatedBy(obj, index);
-        setModifiedBy(obj, index);
         setCreatedTime(obj, index);
-        setModifiedTime(obj, index);
+        setVersionExt(obj, index);
+        setVersionInt(obj, index);
+        setDescription(obj, index);
         return obj;
     }
     
@@ -59,19 +60,24 @@ privileged aspect FirmwareDataOnDemand_Roo_DataOnDemand {
         obj.setCreatedBy(createdBy);
     }
     
-    public void FirmwareDataOnDemand.setModifiedBy(Firmware obj, int index) {
-        java.lang.String modifiedBy = "modifiedBy_" + index;
-        obj.setModifiedBy(modifiedBy);
-    }
-    
     public void FirmwareDataOnDemand.setCreatedTime(Firmware obj, int index) {
         java.util.Date createdTime = new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY), java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE), java.util.Calendar.getInstance().get(java.util.Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
         obj.setCreatedTime(createdTime);
     }
     
-    public void FirmwareDataOnDemand.setModifiedTime(Firmware obj, int index) {
-        java.util.Date modifiedTime = new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY), java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE), java.util.Calendar.getInstance().get(java.util.Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
-        obj.setModifiedTime(modifiedTime);
+    public void FirmwareDataOnDemand.setVersionExt(Firmware obj, int index) {
+        java.lang.String versionExt = "versionExt_" + index;
+        obj.setVersionExt(versionExt);
+    }
+    
+    public void FirmwareDataOnDemand.setVersionInt(Firmware obj, int index) {
+        java.lang.String versionInt = "versionInt_" + index;
+        obj.setVersionInt(versionInt);
+    }
+    
+    public void FirmwareDataOnDemand.setDescription(Firmware obj, int index) {
+        java.lang.String description = "description_" + index;
+        obj.setDescription(description);
     }
     
     public Firmware FirmwareDataOnDemand.getSpecificFirmware(int index) {

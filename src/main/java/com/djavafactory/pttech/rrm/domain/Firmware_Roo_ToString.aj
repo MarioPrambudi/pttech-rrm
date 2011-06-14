@@ -10,15 +10,17 @@ privileged aspect Firmware_Roo_ToString {
     public String Firmware.toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Acquirer: ").append(getAcquirer()).append(", ");
+        sb.append("AcquirerId: ").append(getAcquirerId()).append(", ");
         sb.append("Active: ").append(getActive()).append(", ");
         sb.append("CreatedBy: ").append(getCreatedBy()).append(", ");
         sb.append("CreatedTime: ").append(getCreatedTime()).append(", ");
+        sb.append("Description: ").append(getDescription()).append(", ");
         sb.append("FirmwareFile: ").append(java.util.Arrays.toString(getFirmwareFile())).append(", ");
         sb.append("Id: ").append(getId()).append(", ");
-        sb.append("ModifiedBy: ").append(getModifiedBy()).append(", ");
-        sb.append("ModifiedTime: ").append(getModifiedTime()).append(", ");
         sb.append("Name: ").append(getName()).append(", ");
-        sb.append("Version: ").append(getVersion());
+        sb.append("Version: ").append(getVersion()).append(", ");
+        sb.append("VersionExt: ").append(getVersionExt()).append(", ");
+        sb.append("VersionInt: ").append(getVersionInt());
         return sb.toString();
     }
     
