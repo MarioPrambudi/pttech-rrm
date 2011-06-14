@@ -9,7 +9,7 @@
             <table:column id="c_com_djavafactory_pttech_rrm_domain_Firmware_firmwareFile" property="firmwareFile" render="false" z="user-managed"/>
             <table:column id="c_com_djavafactory_pttech_rrm_domain_Firmware_acquirer" property="acquirer" z="veAf3vKTlpJ8Dav3rUVei9oKc1U="/>
             <table:column id="c_com_djavafactory_pttech_rrm_domain_Firmware_createdBy" property="createdBy" z="pnf7/rZacEvgYVLldQfCwesAu5E="/>
-            <table:column id="c_com_djavafactory_pttech_rrm_domain_Firmware_createdTime" property="createdTime" z="eWsNHEJ7asYRY53haDVirgl0qvU="/>
+            <table:column id="c_com_djavafactory_pttech_rrm_domain_Firmware_createdTime" property="createdTime" z="user-managed"/>
         </table:table>
     </page:list>
 </div>
