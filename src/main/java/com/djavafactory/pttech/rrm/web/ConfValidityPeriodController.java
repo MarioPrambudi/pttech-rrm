@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RooWebScaffold(path = "confvalidityperiods", formBackingObject = ConfValidityPeriod.class)
 @RequestMapping("/confvalidityperiods")
@@ -34,7 +35,7 @@ public class ConfValidityPeriodController extends BaseController {
         
         if(confValidityPeriod.getConfigValue().equals(confValidityPeriod.getConfigValueHidden()))
         {
-        	 // no redirect to show page confvalidityperiods/id
+        	
         	redirectPage = "redirect:/confvalidityperiods/" + confValidityPeriod.getId();
         }
         else
@@ -62,5 +63,20 @@ public class ConfValidityPeriodController extends BaseController {
 	        uiModel.addAttribute("confValidityPeriod_startdate_date_format", getResourceText("date_time_display_format"));
 	        uiModel.addAttribute("confValidityPeriod_enddate_date_format", getResourceText("date_time_display_format"));
 	        uiModel.addAttribute("confValidityPeriod_startdatenew_date_format", getResourceText("date_display_format"));
-	    }
+	 }
+	 
+	 
+	@RequestMapping(method = RequestMethod.GET)
+    public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+        if (page != null || size != null) {
+            int sizeNo = size == null ? 10 : size.intValue();
+            uiModel.addAttribute("confvalidityperiods", ConfValidityPeriod.findConfValidityPeriodOrder(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo).getResultList());
+            float nrOfPages = (float) ConfValidityPeriod.countConfValidityPeriods() / sizeNo;
+            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+        } else {
+            uiModel.addAttribute("confvalidityperiods", ConfValidityPeriod.findAllConfValidityPeriods());
+        }
+        addDateTimeFormatPatterns(uiModel);
+        return "confvalidityperiods/list";
+    }
 }

@@ -269,6 +269,7 @@ public class ReportGenerator {
 	 * get the formated start date for summary report finder
 	 * @param dateMinStr String 
 	 * @return Date - dateMin
+	 *  @throws ParseException 
 	 */  
 	  public static Date getSummaryDateMin(String dateMinStr) throws ParseException{
 		  Date dateMin = null;
@@ -288,6 +289,7 @@ public class ReportGenerator {
 	 * @param dateMin Date
 	 * @param dateMaxStr String 
 	 * @return Date - dateMax
+	 *  @throws ParseException 
 	 */
 	  public static Date getSummaryDateMax(Date dateMin, String dateMaxStr) throws ParseException{
 		  Date dateMax = null;

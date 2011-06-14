@@ -365,6 +365,13 @@ public class DateUtil {
 		return days;
 	}
 	
+	/**
+	 * Get date with min time 00:00:00
+	 * 
+	 * @param oriDate Date
+	 * @return Date
+	 * @throws ParseException 
+	 */
 	public static Date getDateMinTime(Date oriDate) throws ParseException{
 		  Calendar calOri = Calendar.getInstance();
 		  Calendar calNew = Calendar.getInstance();
@@ -373,6 +380,13 @@ public class DateUtil {
 		  return calNew.getTime();	  
 	}
 	
+	/**
+	 * Get date with max time 23:59:59
+	 * 
+	 * @param oriDate Date
+	 * @return Date
+	 * @throws ParseException 
+	 */
 	public static Date getDateMaxTime(Date oriDate) throws ParseException{
 		  Calendar calOri = Calendar.getInstance();
 		  Calendar calNew = Calendar.getInstance();
@@ -381,6 +395,14 @@ public class DateUtil {
 		  return calNew.getTime();	  
 	}	
 	
+	/**
+	 * Change date pattern
+	 * 
+	 * @param oriDate Date
+	 * @param pattern String
+	 * @return Date
+	 * @throws ParseException 
+	 */
 	public static Date convertDateToDate(Date oriDate, String pattern) throws ParseException
 	{
 		String newDateStr;
@@ -391,4 +413,18 @@ public class DateUtil {
 		newDate = convertStringToDate(pattern, newDateStr);
 		return newDate;
 	}
+	
+	/**
+	 * To get today date in string yyyyMMdd
+	 * 
+	 * @param none
+	 * @return String 
+	 * @throws Exception 
+	 */
+	public static String getDateNowString()throws Exception{
+		Date dateNow = new Date ();
+        SimpleDateFormat dateformat = new SimpleDateFormat("yyyyMMdd");
+        StringBuilder dateNowStr = new StringBuilder(dateformat.format(dateNow));
+        return dateNowStr.toString();
+   }
 }

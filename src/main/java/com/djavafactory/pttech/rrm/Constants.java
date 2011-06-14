@@ -98,5 +98,8 @@ public final class Constants {
     public static final String REPORT_MONGODB_COLLECTION_NAME = "Report";
     public static final String REPORT_MONGODB_DATE_PATTERN = "EEE d MMM yyyy HH:mm:ss Z";
     
-    
+    /**
+     * Constants for Firmware
+     */
+    public static final String FIRMWARE_VERSION_INIT_VALUE = "00";
 }

@@ -72,4 +72,18 @@ public class ConfValidityPeriod {
     	ConfValidityPeriod config = findConfValidityPeriodByConfigKey(valueName, requestedDate);
           return config.getConfigValue().toString();
     }
+    
+	/**
+     * To get confvalidityperiod order by configkey
+     * @param firstResult int 
+     * @param maxResults int 
+     * @return  TypedQuery<ConfValidityPeriod>
+     */
+    public static TypedQuery <ConfValidityPeriod> findConfValidityPeriodOrder (int firstResult, int maxResults) {
+        EntityManager em = ConfValidityPeriod.entityManager();
+        TypedQuery<ConfValidityPeriod> q = null;
+        String query = "SELECT ConfValidityPeriod FROM ConfValidityPeriod AS confvalidityperiod order by configKey";
+        q = (firstResult > -1 && maxResults > 0) ? em.createQuery(query, ConfValidityPeriod.class).setFirstResult(firstResult).setMaxResults(maxResults) : em.createQuery(query, ConfValidityPeriod.class);    
+        return q;
+    }
 }

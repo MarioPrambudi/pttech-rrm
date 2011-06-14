@@ -2,15 +2,19 @@
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-     <form:multiupdate id="fu_com_djavafactory_pttech_rrm_domain_Firmware" modelAttribute="firmware" path="/firmwares/updatefirmware" z="user-managed">
-        <input type="hidden" name="id" id="id" value="${firmware.id}"/>
-        <field:input field="name" id="c_com_djavafactory_pttech_rrm_domain_Firmware_name" z="4jEm2kFSb73+ErA7z08fAWr7xFE="/>
+    <form:multiupdate id="fu_com_djavafactory_pttech_rrm_domain_Firmware" modelAttribute="firmware" path="/firmwares/updatefirmware" z="user-managed">
+        <input id="id" name="id" type="hidden" value="${firmware.id}"/>
+        <input id="acquirerId" name="acquirerId" type="hidden" value="${firmware.acquirer.id}"/>
+        <input id="versionExt" name="versionExt" type="hidden" value="${firmware.versionExt}"/>
+        <field:input field="name" id="c_com_djavafactory_pttech_rrm_domain_Firmware_name" render="false" z="user-managed"/>
         <field:checkbox field="active" id="c_com_djavafactory_pttech_rrm_domain_Firmware_active" render="false" z="user-managed"/>
         <field:file field="firmwareFile" id="c_com_djavafactory_pttech_rrm_domain_Firmware_firmwareFile" required="true" z="user-managed"/>
         <field:select field="acquirer" id="c_com_djavafactory_pttech_rrm_domain_Firmware_acquirer" itemValue="id" items="${acquirers}" path="/acquirers" required="true" z="vjAEpFu7Wub9v/OFrUpGeGrFnq4="/>
         <field:input field="createdBy" id="c_com_djavafactory_pttech_rrm_domain_Firmware_createdBy" render="false" z="user-managed"/>
-        <field:input field="modifiedBy" id="c_com_djavafactory_pttech_rrm_domain_Firmware_modifiedBy" render="false" z="user-managed"/>
-        <field:datetime dateTimePattern="${firmware_createdtime_date_format}" field="createdTime" id="c_com_djavafactory_pttech_rrm_domain_Firmware_createdTime" render="false" z="user-managed"/>
-        <field:datetime dateTimePattern="${firmware_modifiedtime_date_format}" field="modifiedTime" id="c_com_djavafactory_pttech_rrm_domain_Firmware_modifiedTime" render="false" z="user-managed"/>
+        <field:datetime dateTimePattern="${firmware_createdtime_date_format}" field="createdTime" id="c_com_djavafactory_pttech_rrm_domain_Firmware_createdTime" render="false" z="user-managed"/>     
+        <field:input field="versionExt" id="c_com_djavafactory_pttech_rrm_domain_Firmware_versionExt" render="false" z="user-managed"/>
+        <field:input field="versionInt" id="c_com_djavafactory_pttech_rrm_domain_Firmware_versionInt" z="4paM2OuMfoNT7qVLEISD6V30YTk="/>
+        <field:input field="description" id="c_com_djavafactory_pttech_rrm_domain_Firmware_description" z="HKklMxHNZjfHHWSf++xm+plxKSw="/>
+        <field:input field="acquirerId" id="c_com_djavafactory_pttech_rrm_domain_Firmware_acquirerId" render="false" validationMessageCode="field_invalid_integer" z="user-managed"/>
     </form:multiupdate>
 </div>

@@ -50,20 +50,6 @@ privileged aspect ConfValidityPeriodController_Roo_Controller {
         return "confvalidityperiods/show";
     }
     
-    @RequestMapping(method = RequestMethod.GET)
-    public String ConfValidityPeriodController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            uiModel.addAttribute("confvalidityperiods", ConfValidityPeriod.findConfValidityPeriodEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
-            float nrOfPages = (float) ConfValidityPeriod.countConfValidityPeriods() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("confvalidityperiods", ConfValidityPeriod.findAllConfValidityPeriods());
-        }
-        addDateTimeFormatPatterns(uiModel);
-        return "confvalidityperiods/list";
-    }
-    
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
     public String ConfValidityPeriodController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         uiModel.addAttribute("confValidityPeriod", ConfValidityPeriod.findConfValidityPeriod(id));
