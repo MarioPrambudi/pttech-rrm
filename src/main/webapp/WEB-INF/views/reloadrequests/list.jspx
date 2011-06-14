@@ -42,6 +42,7 @@
         </table:table>
     </page:list>
     <script type="text/javascript">
+
         dojo.addOnLoad(function() {
             var fromdate = dijit.byId('_requestedTimeFrom_id');
             var todate = dijit.byId('_requestedTimeTo_id');

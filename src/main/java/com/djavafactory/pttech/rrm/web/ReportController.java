@@ -49,7 +49,6 @@ public class ReportController extends BaseController {
     
     @RequestMapping(method = RequestMethod.GET)
     public String getReportList(@RequestParam(value = "type") String type, Model uiModel) throws Exception {
-    	reportGenerator.generateDailyReport();
     	List<Configuration> configList = Configuration.findByConfigKeyPrefix(type);
         if (configList != null && !configList.isEmpty()) {
             for (int i = 0; i < configList.size(); i++) {
@@ -101,8 +100,6 @@ public class ReportController extends BaseController {
 		Date dateEnd;
 		List<Report> listReport = new ArrayList<Report>();
 		listReport =  reportGenerator.getDailyDetailsRequestReloadFrmCelcomReport(dateMin, dateMax, -1, -1);
-		System.out.println("-------" + listReport);
-	
 		if(listReport == null  || listReport.size() == 0) {
 			return "emptyReport";
 		} else {
