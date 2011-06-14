@@ -101,5 +101,5 @@ public final class Constants {
     /**
      * Constants for Firmware
      */
-    public static final String FIRMWARE_VERSION_INIT_VALUE = "00";
+    public static final String FIRMWARE_VERSION_INIT_VALUE = "00"; 
 }
