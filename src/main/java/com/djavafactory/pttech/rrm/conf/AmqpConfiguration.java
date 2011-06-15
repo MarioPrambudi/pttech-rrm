@@ -43,9 +43,6 @@ public class AmqpConfiguration {
     @Value("#{amqp['queue.rrm.manualcancel.res']}")
     private String rrmManualCancelResQ;
 
-    @Value("#{amqp['queue.rrm.terminal']}")
-    private String rrmTerminalQ;
-
     @Value("#{amqp['queue.rrm.event']}")
     private String rrmEventQ;
 
@@ -55,8 +52,8 @@ public class AmqpConfiguration {
     @Value("#{amqp['queue.rtm.reload.status']}")
     private String rtmReloadStatusQ;
 
-    @Value("#{amqp['queue.rtm.terminal']}")
-    private String rtmTerminalQ;
+    @Value("#{amqp['queue.rtm.firmware']}")
+    private String rtmFirmwareQ;
 
     @Bean
     public RabbitTemplate rabbitTemplate() {
@@ -118,13 +115,6 @@ public class AmqpConfiguration {
     }
 
     @Bean
-    public Queue rrmTerminalQueue() {
-        Queue q = new Queue(this.rrmTerminalQ);
-        amqpAdmin().declareQueue(q);
-        return q;
-    }
-
-    @Bean
     public Queue rrmEventQueue() {
         Queue q = new Queue(this.rrmEventQ);
         amqpAdmin().declareQueue(q);
@@ -146,8 +136,8 @@ public class AmqpConfiguration {
     }
 
     @Bean
-    public Queue rtmTerminalQueue() {
-        Queue q = new Queue(this.rtmTerminalQ);
+    public Queue rtmFirmwareQueue() {
+        Queue q = new Queue(this.rtmFirmwareQ);
         amqpAdmin().declareQueue(q);
         return q;
     }
@@ -188,13 +178,6 @@ public class AmqpConfiguration {
     }
 
     @Bean
-    public DirectExchange rrmTerminalExchange() {
-        DirectExchange directExchange = new DirectExchange(this.rrmTerminalQ);
-        this.amqpAdmin().declareExchange(directExchange);
-        return directExchange;
-    }
-
-    @Bean
     public DirectExchange rrmEventExchange() {
         DirectExchange directExchange = new DirectExchange(this.rrmEventQ);
         this.amqpAdmin().declareExchange(directExchange);
@@ -216,8 +199,8 @@ public class AmqpConfiguration {
     }
 
     @Bean
-    public DirectExchange rtmTerminalExchange() {
-        DirectExchange directExchange = new DirectExchange(this.rtmTerminalQ);
+    public DirectExchange rtmFirmwareExchange() {
+        DirectExchange directExchange = new DirectExchange(this.rtmFirmwareQ);
         this.amqpAdmin().declareExchange(directExchange);
         return directExchange;
     }
@@ -248,11 +231,6 @@ public class AmqpConfiguration {
     }
 
     @Bean
-    public Binding rrmTerminalDataBinding() {
-        return BindingBuilder.from(rrmTerminalQueue()).to(rrmTerminalExchange()).with(this.rrmTerminalQ);
-    }
-
-    @Bean
     public Binding rrmEventBinding() {
         return BindingBuilder.from(rrmEventQueue()).to(rrmEventExchange()).with(this.rrmEventQ);
     }
@@ -268,8 +246,8 @@ public class AmqpConfiguration {
     }
 
     @Bean
-    public Binding rtmTerminalDataBinding() {
-        return BindingBuilder.from(rtmTerminalQueue()).to(rtmTerminalExchange()).with(this.rtmTerminalQ);
+    public Binding rtmFirmwareDataBinding() {
+        return BindingBuilder.from(rtmFirmwareQueue()).to(rtmFirmwareExchange()).with(this.rtmFirmwareQ);
     }
 
     @Override
@@ -283,11 +261,10 @@ public class AmqpConfiguration {
                 ", rrmRmiReloadReqQ='" + rrmRmiReloadReqQ + '\'' +
                 ", rrmRtmReloadReqQ='" + rrmRtmReloadReqQ + '\'' +
                 ", rrmManualCancelResQ='" + rrmManualCancelResQ + '\'' +
-                ", rrmTerminalQ='" + rrmTerminalQ + '\'' +
                 ", rrmEventQ='" + rrmEventQ + '\'' +
                 ", rtmReloadReqQ='" + rtmReloadReqQ + '\'' +
                 ", rtmReloadStatusQ='" + rtmReloadStatusQ + '\'' +
-                ", rtmTerminalQ='" + rtmTerminalQ + '\'' +
+                ", rtmFirmwareQ='" + rtmFirmwareQ + '\'' +
                 '}';
     }
 }

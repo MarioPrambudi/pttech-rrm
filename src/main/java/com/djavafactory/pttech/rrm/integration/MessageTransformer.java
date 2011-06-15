@@ -2,6 +2,7 @@ package com.djavafactory.pttech.rrm.integration;
 
 
 import com.djavafactory.pttech.rrm.Constants;
+import com.djavafactory.pttech.rrm.domain.FirmwareMessage;
 import com.djavafactory.pttech.rrm.domain.ReloadRequestMessage;
 import com.djavafactory.pttech.rrm.domain.ReloadResponseMessage;
 import com.djavafactory.pttech.rrm.util.DateUtil;
@@ -86,12 +87,15 @@ public class MessageTransformer {
                 ((ReloadRequestMessage) message).setMsgType(Constants.RELOAD_REQUEST_NEW);
             }
             ((ReloadRequestMessage) message).setRequestTime(new Date());
-            logger.info("[transformRtmReloadRequest - New json string] >> " + ((ReloadRequestMessage) message).toJsonString());
+            logger.info("[transformRtmReloadRequest - New ReloadRequestMessage json string] >> " + ((ReloadRequestMessage) message).toJsonString());
             return ((ReloadRequestMessage) message).toJsonString();
         } else if (message != null && message instanceof ReloadResponseMessage) {
             ((ReloadResponseMessage) message).setResponseTime(new Date());
-            logger.info("[transformRtmReloadRequest - New json string] >> " + ((ReloadResponseMessage) message).toJsonString());
+            logger.info("[transformRtmReloadRequest - New ReloadResponseMessage json string] >> " + ((ReloadResponseMessage) message).toJsonString());
             return ((ReloadResponseMessage) message).toJsonString();
+        } else if (message != null && message instanceof FirmwareMessage) {
+            logger.info("[transformRtmReloadRequest - New FirmwareMessage json string] >> " + ((FirmwareMessage) message).toJsonString());
+            return ((FirmwareMessage) message).toJsonString();
         }
         return null;
     }

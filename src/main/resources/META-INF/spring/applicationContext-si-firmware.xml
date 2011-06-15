@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/integration"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+							http://www.springframework.org/schema/integration
+			                http://www.springframework.org/schema/integration/spring-integration-2.0.xsd">
+
+    <gateway id="uploadFirmware" service-interface="com.djavafactory.pttech.rrm.service.UploadFirmware"/>
+
+    <gateway id="uploadParameter" service-interface="com.djavafactory.pttech.rrm.service.UploadParameter"/>
+
+	<channel id="uploadFirmwareChannel">
+            <queue capacity="100"/>
+    </channel>
+    <chain input-channel="uploadFirmwareChannel" output-channel="rtmFirmwareChannel">
+        <transformer ref="mapperBean" method="mapToFirmwareMessage" />
+        <transformer ref="transformerBean" method="transformMessageToJson" />
+    </chain>
+
+
+
+</beans:beans>

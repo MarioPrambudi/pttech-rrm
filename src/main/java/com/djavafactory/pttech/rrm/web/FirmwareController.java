@@ -3,35 +3,32 @@ package com.djavafactory.pttech.rrm.web;
 import com.djavafactory.pttech.rrm.Constants;
 import com.djavafactory.pttech.rrm.domain.Acquirer;
 import com.djavafactory.pttech.rrm.domain.Firmware;
+import com.djavafactory.pttech.rrm.service.UploadFirmware;
 import com.djavafactory.pttech.rrm.util.DateUtil;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.Calendar;
-import java.util.Date;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
+import java.util.Date;
 
 @RooWebScaffold(path = "firmwares", formBackingObject = Firmware.class)
 
 @RequestMapping("/firmwares")
 @Controller
-public class FirmwareController {
-	
+public class FirmwareController extends BaseController {
+
+    @Autowired
+    UploadFirmware uploadFirmware;
+
 	@InitBinder
 	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws ServletException {
 	    binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
@@ -150,4 +147,14 @@ public class FirmwareController {
         addDateTimeFormatPatterns(uiModel);
         return "firmwares/list";
     }
+
+    @RequestMapping(value = "/upload/{id}", method = { RequestMethod.GET })
+	public String manualCancellation(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page,
+			@RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+        Firmware firmware = Firmware.findFirmware(id);
+        uploadFirmware.uploadFirmware(firmware);
+        uiModel.addAttribute("uploadResponse", getResourceText("upload.firmware", new Object[] {firmware.getName()}));
+
+        return list(page, size, uiModel);
+	}
 }

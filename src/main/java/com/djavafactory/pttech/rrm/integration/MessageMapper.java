@@ -1,17 +1,18 @@
 package com.djavafactory.pttech.rrm.integration;
 
 import com.djavafactory.pttech.rrm.Constants;
-import com.djavafactory.pttech.rrm.domain.ReloadRequest;
-import com.djavafactory.pttech.rrm.domain.ReloadRequestMessage;
-import com.djavafactory.pttech.rrm.domain.ReloadResponseMessage;
+import com.djavafactory.pttech.rrm.domain.*;
 import com.djavafactory.pttech.rrm.exception.RrmStatusCode;
+import com.djavafactory.pttech.rrm.util.FileUtil;
 import com.djavafactory.pttech.rrm.ws.KeyRequest;
 import epg.webservice.ReloadRequestResponse;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import javax.xml.bind.JAXBElement;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +24,10 @@ import java.util.List;
  */
 public class MessageMapper {
     private static final Log logger = LogFactory.getLog(MessageMapper.class);
+
+    private static final String paramFilename = "parameter.txt";
+
+    private static final String paramZipFilename = "parameterZip";
 
     /**
      * Method to map the Reload Request Message to List<Object>.
@@ -147,6 +152,39 @@ public class MessageMapper {
         requestMessage.setMsgType(Constants.RELOAD_REQUEST_MANUALCANCEL);
         logger.info("[mapReloadRequestToMessage - New ReloadRequestMessage object] >> " + requestMessage);
         return requestMessage;
+    }
+
+    /**
+     * Method to map the Firmware/Param information to FirmwareMessage.
+     *
+     * @param message Firmware/Param object
+     * @return to FirmwareMessage.
+     */
+    public FirmwareMessage mapToFirmwareMessage(Object message) {
+        FirmwareMessage firmwareMessage = new FirmwareMessage();
+        if (message != null && message instanceof Firmware) {
+            firmwareMessage.setFilename(((Firmware) message).getName());
+            firmwareMessage.setFile(new Base64().encodeToString(((Firmware) message).getFirmwareFile()));
+            firmwareMessage.setInternalVersion(((Firmware) message).getVersionInt());
+            firmwareMessage.setDescription(((Firmware) message).getDescription());
+            firmwareMessage.setAcquirerName(((Firmware) message).getAcquirer().getName());
+            firmwareMessage.setAcquirerRegistrationNo(((Firmware) message).getAcquirer().getRegistrationNo());
+            firmwareMessage.setMsgType(Constants.UPLOAD_FIRMWARE);
+            firmwareMessage.setRequestTime(new Date());
+        } else if (message != null && message instanceof Param) {
+            File file = FileUtil.writeToFile(paramFilename, new String (((Param) message).getParameterFile()));  //todo
+            FileUtil.zipFile(paramZipFilename, new String[] { paramFilename });
+            firmwareMessage.setFilename(paramZipFilename);
+            firmwareMessage.setFile(new Base64().encodeToString(FileUtil.readFromFile(paramZipFilename).getBytes()));
+            firmwareMessage.setMsgType(Constants.UPLOAD_PARAM);
+            firmwareMessage.setRequestTime(new Date());
+            file.delete();
+            new File(paramZipFilename).delete();
+        }
+
+        logger.info("[mapToFirmwareMessage - New FirmwareMessage object] >> " + firmwareMessage);
+        return firmwareMessage;
+
     }
 
     /**
