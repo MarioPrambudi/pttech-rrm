@@ -60,5 +60,13 @@
     <amqp:outbound-channel-adapter channel="rtmReloadStatusChannel" routing-key="#{amqp['queue.rtm.reload.status']}"
                                    amqp-template="rabbitTemplate"/>
 
+    <channel id="rtmFirmwareChannel">
+        <interceptors>
+            <wire-tap channel="logger"/>
+        </interceptors>
+    </channel>
+    <amqp:outbound-channel-adapter channel="rtmFirmwareChannel" routing-key="#{amqp['queue.rtm.firmware']}"
+                                   amqp-template="rabbitTemplate"/>
+
     <logging-channel-adapter id="logger" expression="'[Sending message to queue] >> '.concat(payload)"/>
 </beans:beans>

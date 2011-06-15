@@ -44,6 +44,9 @@
 <jsp:directive.attribute name="reloadStatus" type="java.lang.String" required="false" rtexprvalue="true"
                          description="Reload request status"/>
 
+<jsp:directive.attribute name="upload" type="java.lang.Boolean" required="false" rtexprvalue="true"
+                         description="Show Upload icon"/>
+
 <c:if test="${empty render or render}">
 
 <c:set var="columnProperties" scope="request"/>
@@ -91,6 +94,10 @@
 </c:if>
 <c:if test="${empty manualCancel}">
     <c:set var="manualCancel" value="false"/>
+</c:if>
+
+<c:if test="${empty upload}">
+    <c:set var="upload" value="false"/>
 </c:if>
 
 <c:set var="typeName" value="${fn:split(id,'_')[fn:length(fn:split(id,'_')) - 1]}"/>
@@ -175,6 +182,10 @@
         <spring:eval var="colCounter" expression="colCounter  + 1"/>
     </c:if>
     <c:if test="${manualCancel}">
+        <th></th>
+        <spring:eval var="colCounter" expression="colCounter  + 1"/>
+    </c:if>
+    <c:if test="${upload}">
         <th></th>
         <spring:eval var="colCounter" expression="colCounter  + 1"/>
     </c:if>
@@ -383,6 +394,21 @@
                              title="${fn:escapeXml(cancel_label)}"/>
                     </a>
                 </c:if>
+            </td>
+        </c:if>
+        <c:if test="${upload}">
+            <td class="utilbox">
+                <spring:url value="${path}/upload/${item[typeIdFieldName]}" var="upload_form_url">
+                        <spring:param name="page" value="${empty param.page ? 1 : param.page}"/>
+                        <spring:param name="size" value="${empty param.size ? 10 : param.size}"/>
+                </spring:url>
+                <spring:url value="/resources/images/page_go.png" var="upload_image_url"/>
+                <spring:message arguments="${typeName}" code="entity_upload" var="upload_label" htmlEscape="false"/>
+                <a href="${fn:escapeXml(upload_form_url)}" alt="${fn:escapeXml(upload_label)}"
+                   title="${fn:escapeXml(upload_label)}">
+                    <img alt="${fn:escapeXml(upload_label)}" class="image" src="${fn:escapeXml(upload_image_url)}"
+                         title="${fn:escapeXml(upload_label)}"/>
+                </a>
             </td>
         </c:if>
     </tr>

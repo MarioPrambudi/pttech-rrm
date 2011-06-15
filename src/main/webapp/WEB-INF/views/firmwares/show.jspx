@@ -7,11 +7,11 @@
         <field:display field="firmwareFile" id="s_com_djavafactory_pttech_rrm_domain_Firmware_firmwareFile" object="${firmware}" render="false" z="user-managed"/>
         <field:display field="active" id="s_com_djavafactory_pttech_rrm_domain_Firmware_active" object="${firmware}" render="false" z="user-managed"/>
         <field:display field="acquirer" id="s_com_djavafactory_pttech_rrm_domain_Firmware_acquirer" object="${firmware}" z="RMBuFEpWjdmxldTOIJAKAbADJCI="/>
-        <field:display field="createdBy" id="s_com_djavafactory_pttech_rrm_domain_Firmware_createdBy" object="${firmware}" z="V8/Mnpg7j0KfASbSTnr9VZt3iPY="/>
-        <field:display date="true" dateTimePattern="${firmware_createdtime_date_format}" field="createdTime" id="s_com_djavafactory_pttech_rrm_domain_Firmware_createdTime" object="${firmware}" z="4WcqLPfti1pDtw7UEaJV/0Iu15E="/>
         <field:display field="acquirerId" id="s_com_djavafactory_pttech_rrm_domain_Firmware_acquirerId" object="${firmware}" render="false" z="user-managed"/>
         <field:display field="versionExt" id="s_com_djavafactory_pttech_rrm_domain_Firmware_versionExt" object="${firmware}" z="327ZCSjed2IIQWIqlbQ7wbLWAOU="/>
         <field:display field="versionInt" id="s_com_djavafactory_pttech_rrm_domain_Firmware_versionInt" object="${firmware}" z="x8TbH/QbT3SAPOejwFUma6vCSSo="/>
         <field:display field="description" id="s_com_djavafactory_pttech_rrm_domain_Firmware_description" object="${firmware}" z="rn8gXswFrGS/OCQ6l7yK7qr2SLQ="/>
+        <field:display field="createdBy" id="s_com_djavafactory_pttech_rrm_domain_Firmware_createdBy" object="${firmware}" z="V8/Mnpg7j0KfASbSTnr9VZt3iPY="/>
+        <field:display date="true" dateTimePattern="${firmware_createdtime_date_format}" field="createdTime" id="s_com_djavafactory_pttech_rrm_domain_Firmware_createdTime" object="${firmware}" z="4WcqLPfti1pDtw7UEaJV/0Iu15E="/>
     </page:show>
 </div>

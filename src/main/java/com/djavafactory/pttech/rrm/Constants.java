@@ -19,6 +19,12 @@ public final class Constants {
     public static final String RELOAD_REQUEST_TNG_KEY = "K";
 
     /**
+     * Constants to be used in messaging to identify the type of the message.
+     */
+    public static final String UPLOAD_FIRMWARE = "W";
+    public static final String UPLOAD_PARAM = "P";
+
+    /**
      * Constants to be used in database logging to identify the status of the transaction.
      */
     public static final String RELOAD_STATUS_NEW = "N";
